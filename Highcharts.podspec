@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
                    Objective-C wrapper for the popular Highcharts charting library. Convenient class infrastructure allows one to quickly embed charts in iOS apps, written in Objective-C or Swift. Supports dozens of responsive chart types, with a simple, yet powerful API. Easy to setup. See our Demo App for details.                    
                    DESC
 
-   s.homepage     = "http://www.highcharts.com/mobile"
+   s.homepage     = "https://github.com/highcharts/highcharts-ios"
    s.license   =  { :type =>'MIT', :file => "LICENSE" }
    
    s.author             = "Highsoft"
