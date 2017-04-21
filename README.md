@@ -26,7 +26,13 @@ Here we present how to create basic chart and place it in your project
 
 ## Preparing your project
 
-- First of all download Highcharts framework from here: [Highcharts](https://github.com/highcharts/highcharts-ios) or by using Cocoapods/Carthage
+- First of all download Highcharts framework from here: [Highcharts](https://github.com/highcharts/highcharts-ios) or by using Cocoapods by adding 
+    ```
+    pod 'Highcharts'
+    ```
+    to your Podfile
+
+    or Carthage
 - Now add Highcharts to your project by simply copying it to your project to folder **Frameworks** (create it if necessary) and remeber to check "**Copy items if needed**" option:
 
 ![alt text](http://i67.tinypic.com/x6iey8.png "Files")

@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
    s.license   =  { :type =>'MIT', :file => "LICENSE" }
    
    s.author             = "Highsoft"
-   s.source       = { :git => "https://github.com/highcharts/highcharts-ios.git", tag => "v.1.0.0" }
+   s.source       = { :git => "https://github.com/highcharts/highcharts-ios.git", :tag => "v.1.0.0" }
    s.ios.deployment_target = '8.0'
 
    
