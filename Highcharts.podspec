@@ -10,11 +10,12 @@ Pod::Spec.new do |s|
                    DESC
 
    s.homepage     = "http://www.highcharts.com/mobile"
-   s.license   =  { :file => "LICENSE" }
+   s.license   =  { :type =>'MIT', :file => "LICENSE" }
    
    s.author             = "Highsoft"
+   s.source       = { :git => "https://github.com/highcharts/highcharts-ios.git", tag => "v.1.0.0" }
    s.ios.deployment_target = '8.0'
-   s.source       = { https://github.com/highcharts/highcharts-ios.git }
+
    
    s.ios.vendored_frameworks = 'Highcharts.framework'
  
