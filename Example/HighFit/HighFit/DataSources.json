@@ -12,7 +12,7 @@
         "title": "Calories (Burned)",
         "subtitle": "",
         "source": "DataCaloriesOut",
-        "unit": "cal.",
+        "unit": "kcal",
         "chartType": "column",
         "icon": "ic_whatshot",
         "exporting": false
@@ -21,7 +21,7 @@
          "title": "Calories (Eaten)",
          "subtitle": "",
          "source": "DataCaloriesIn",
-         "unit": "cal.",
+         "unit": "kcal",
          "chartType": "spline",
          "icon": "ic_local_dining",
          "exporting": false

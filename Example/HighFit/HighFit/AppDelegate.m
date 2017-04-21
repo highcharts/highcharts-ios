@@ -11,6 +11,7 @@
 #import "ListDataTableViewController.h"
 #import <Highcharts/Highcharts.h>
 
+
 @interface AppDelegate ()
 
 @end
@@ -46,6 +47,7 @@
     tabBar.viewControllers  = @[navigationDashboard, navigationData];
     
     [self.window setRootViewController:tabBar];
+
     
     return YES;
 }

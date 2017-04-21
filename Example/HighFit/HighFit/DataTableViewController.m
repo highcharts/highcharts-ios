@@ -82,6 +82,13 @@
         NSMutableDictionary *tmpOptions = [NSMutableDictionary dictionaryWithDictionary:self.configuration];
         tmpOptions[@"exporting"] = @YES;
         self.chartView = [[HIGChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.frame.size.width-20, 240.0f)];
+        int sum = 0;
+        for (NSNumber *number in self.data[@"day"]) {
+            sum += number.integerValue;
+        }
+        
+        tmpOptions[@"subtitle"] = [NSString stringWithFormat:@"%d %@", sum, tmpOptions[@"unit"]];
+
         self.chartView.options = [OptionsProvider provideOptionsForChartType:tmpOptions series:self.data[@"day"] type:@"day"];
         self.chartView.viewController = self;
         
@@ -238,6 +245,13 @@
     
     NSMutableDictionary *tmpOptions = [NSMutableDictionary dictionaryWithDictionary:self.configuration];
     tmpOptions[@"exporting"] = @YES;
+    
+    int sum = 0;
+    for (NSNumber *number in self.data[@"day"]) {
+        sum += number.integerValue;
+    }
+    
+    tmpOptions[@"subtitle"] = [NSString stringWithFormat:@"%d %@", sum, tmpOptions[@"unit"]];
     
     self.chartView.options = [OptionsProvider provideOptionsForChartType:tmpOptions series:self.data[dataName] type:dataName];
     

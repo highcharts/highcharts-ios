@@ -43,12 +43,7 @@
         HIOptions *hioptions = [[HIOptions alloc]init];
         
         HIChart *chart = [[HIChart alloc]init];
-        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@{
-                                                                         @"x1": @0,
-                                                                         @"y1": @0,
-                                                                         @"x2": @0,
-                                                                         @"y2": @300
-                                                                         } stops:@[
+        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@300] stops:@[
                                                                                    @[@0, @"rgb(102, 153, 161)"],
                                                                                    @[@1, @"rgb(128, 135, 232)"]
                                                                                    ]];
@@ -68,19 +63,14 @@
         
         HIPlotOptions *plotOptions = [[HIPlotOptions alloc]init];
         plotOptions.area = [[HIPlotOptionsArea alloc]init];
-        plotOptions.area.fillColor = [[HIColor alloc]initWithLinearGradient:@{
-                                                                              @"x1": @0,
-                                                                              @"y1": @0,
-                                                                              @"x2": @0,
-                                                                              @"y2": @150
-                                                                              } stops:@[
+        plotOptions.area.fillColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@150] stops:@[
                                                                                         @[@0, @"rgba(255,255,255, 0.75)"],
                                                                                         @[@1, @"rgba(255,255,255, 0.02)"]
                                                                                         ]];
         hioptions.plotOptions = plotOptions;
         
         HICredits *credits = [[HICredits alloc]init];
-        credits.enabled = false;
+        credits.enabled = @NO;
         hioptions.credits = credits;
         
         HITitle *title = [[HITitle alloc]init];
@@ -96,6 +86,9 @@
         
         HISubtitle *subtitle = [[HISubtitle alloc]init];
         subtitle.text = options[@"subtitle"];
+        if ([subtitle.text length] > 0) {
+            subtitle.text = [subtitle.text stringByAppendingString:@" total"];
+        }
         subtitle.align = @"left";
         subtitle.style = @{
                            @"fontFamily": @"Arial",
@@ -122,11 +115,24 @@
         hioptions.xAxis = @[xaxis];
         
         HIYAxis *yaxis = [[HIYAxis alloc]init];
-        yaxis.visible = false;
+        yaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
+        yaxis.lineWidth = @1;
+        yaxis.gridLineWidth = @0;
+        yaxis.labels = [[HIYAxisLabels alloc]init];
+        yaxis.labels.style = @{
+                               @"color": @"rgb(255, 255, 255)",
+                               @"font": @"10px Arial"
+                               };
+        yaxis.labels.x = @-5;
+        yaxis.title = [[HIYAxisTitle alloc]init];
+        yaxis.title.text = @"";
         hioptions.yAxis = @[yaxis];
         
         HIArea *area = [[HIArea alloc]init];
-        area.showInLegend = false;
+        area.tooltip = [[HIAreaTooltip alloc]init];
+        area.tooltip.headerFormat = @"";
+        area.tooltip.valueSuffix = @" steps";
+        area.showInLegend = @NO;
         area.data = [series copy];
         area.color = [[HIColor alloc]initWithRGB:255 green:255 blue:255];
         area.name = options[@"title"];
@@ -140,12 +146,7 @@
         HIOptions *hioptions = [[HIOptions alloc]init];
         
         HIChart *chart = [[HIChart alloc]init];
-        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@{
-                                                                         @"x1": @0,
-                                                                         @"y1": @0,
-                                                                         @"x2": @0,
-                                                                         @"y2": @300
-                                                                         } stops: @[
+        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@300] stops: @[
                                                                                     @[@0, @"rgb(66, 218, 113)"],
                                                                                     @[@1, @"rgb(80, 140, 200)"]
                                                                                     ]];
@@ -171,7 +172,7 @@
         hioptions.plotOptions = plotOptions;
         
         HICredits *credits = [[HICredits alloc]init];
-        credits.enabled = false;
+        credits.enabled = @NO;
         hioptions.credits = credits;
         
         HITitle *title = [[HITitle alloc]init];
@@ -187,6 +188,9 @@
         
         HISubtitle *subtitle = [[HISubtitle alloc]init];
         subtitle.text = options[@"subtitle"];
+        if ([subtitle.text length] > 0) {
+            subtitle.text = [subtitle.text stringByAppendingString:@" total"];
+        }
         subtitle.align = @"left";
         subtitle.style = @{
                            @"fontFamily": @"Arial",
@@ -213,11 +217,24 @@
         hioptions.xAxis = @[xaxis];
         
         HIYAxis *yaxis = [[HIYAxis alloc]init];
-        yaxis.visible = false;
+        yaxis.lineWidth = @1;
+        yaxis.gridLineWidth = @0;
+        yaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
+        yaxis.labels = [[HIYAxisLabels alloc]init];
+        yaxis.labels.style = @{
+                               @"color": @"rgb(255, 255, 255)",
+                               @"font": @"10px Arial"
+                               };
+        yaxis.labels.x = @-5;
+        yaxis.title = [[HIYAxisTitle alloc]init];
+        yaxis.title.text = @"";
         hioptions.yAxis = @[yaxis];
         
         HIColumn *column = [[HIColumn alloc]init];
-        column.showInLegend = false;
+        column.tooltip = [[HIColumnTooltip alloc]init];
+        column.tooltip.headerFormat = @"";
+        column.tooltip.valueSuffix = @" kcal";
+        column.showInLegend = @NO;
         column.data = [series copy];
         column.name = options[@"title"];
         hioptions.series = @[column];
@@ -230,12 +247,7 @@
         HIOptions *hioptions = [[HIOptions alloc]init];
         
         HIChart *chart = [[HIChart alloc]init];
-        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@{
-                                                                         @"x1": @0,
-                                                                         @"y1": @0,
-                                                                         @"x2": @0,
-                                                                         @"y2": @300
-                                                                         } stops: @[
+        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@300] stops: @[
                                                                                     @[@0, @"rgba(132, 103, 144, 1)"],
                                                                                     @[@1, @"rgba(163, 95, 103, 1)"]
                                                                                     ]];
@@ -259,7 +271,7 @@
         hioptions.plotOptions = plotOptions;
         
         HICredits *credits = [[HICredits alloc]init];
-        credits.enabled = false;
+        credits.enabled = @NO;
         hioptions.credits = credits;
         
         HITitle *title = [[HITitle alloc]init];
@@ -275,6 +287,9 @@
         
         HISubtitle *subtitle = [[HISubtitle alloc]init];
         subtitle.text = options[@"subtitle"];
+        if ([subtitle.text length] > 0) {
+            subtitle.text = [subtitle.text stringByAppendingString:@" total"];
+        }
         subtitle.align = @"left";
         subtitle.style = @{
                            @"fontFamily": @"Arial",
@@ -301,11 +316,24 @@
         hioptions.xAxis = @[xaxis];
         
         HIYAxis *yaxis = [[HIYAxis alloc]init];
-        yaxis.visible = false;
+        yaxis.lineWidth = @1;
+        yaxis.gridLineWidth = @0;
+        yaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
+        yaxis.labels = [[HIYAxisLabels alloc]init];
+        yaxis.labels.style = @{
+                               @"color": @"rgb(255, 255, 255)",
+                               @"font": @"10px Arial"
+                               };
+        yaxis.labels.x = @-5;
+        yaxis.title = [[HIYAxisTitle alloc]init];
+        yaxis.title.text = @"";
         hioptions.yAxis = @[yaxis];
         
         HISpline *spline = [[HISpline alloc]init];
-        spline.showInLegend = false;
+        spline.tooltip = [[HISplineTooltip alloc]init];
+        spline.tooltip.headerFormat = @"";
+        spline.tooltip.valueSuffix = @" kcal";
+        spline.showInLegend = @NO;
         spline.data = [series copy];
         spline.name = options[@"title"];
         hioptions.series = @[spline];
