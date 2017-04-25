@@ -127,11 +127,11 @@ HIColumn *series = [[HIColumn alloc]init];
 ```
 To add data, just create array of our data objects
 ```objc
-series.data = [NSMutableArray arrayWithObjects: @49.9, @71.5, @106.4, @129.2, @144, @176, @135.6, @148.5, @216.4, @194.1, @95.6, @54.4, nil];
+series.data = @[@49.9, @71.5, @106.4, @129.2, @144, @176, @135.6, @148.5, @216.4, @194.1, @95.6, @54.4];
 ```
 Since options can store multiple series, we need to add our series as one-element-array
 ```objc
-options.series = [NSMutableArray arrayWithObject:series];
+options.series = @[series];
 ```
 And at last add our **options** to the chartView
 ```objc
@@ -171,8 +171,8 @@ Your View Controller .m file should look like this
     options.title = title;
     
     HIColumn *series = [[HIColumn alloc]init];
-    series.data = [NSMutableArray arrayWithObjects: @49.9, @71.5, @106.4, @129.2, @144, @176, @135.6, @148.5, @216.4, @194.1, @95.6, @54.4, nil];
-    options.series = [NSMutableArray arrayWithObject:series];
+    series.data = @[@49.9, @71.5, @106.4, @129.2, @144, @176, @135.6, @148.5, @216.4, @194.1, @95.6, @54.4];
+    options.series = @[series];
     self.chartView.options = options;
     
     [self.view addSubview:self.chartView];
