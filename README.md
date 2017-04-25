@@ -43,15 +43,15 @@ or by using Cocoapods by adding
     
 - Now add Highcharts to your project by simply copying it to your project to folder **Frameworks** (create it if necessary) and remeber to check "**Copy items if needed**" option
 
-![alt text](http://i67.tinypic.com/x6iey8.png "Files")
+![alt text](https://github.com/highcharts/highcharts-ios/blob/master/Images/3.png "Files")
 
 - Click on **finish**
 
-![alt text](http://i68.tinypic.com/24gjcbr.png "Copy")
+![alt text](https://github.com/highcharts/highcharts-ios/blob/master/Images/2.png "Copy")
 
 - Then go to your project settings and add Highcharts to **Embedded Binaries**
 
-![alt text](http://i63.tinypic.com/11kb1gy.png "Embedded")
+![alt text](https://github.com/highcharts/highcharts-ios/blob/master/Images/1.png "Embedded")
 
 You are now set to use Highcharts!
 
