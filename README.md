@@ -1,6 +1,7 @@
 <p align="center" >
 <img src="http://www.highcharts.com/media/templates/highsoft_bootstrap/images/logo.svg" alt="Highcharts" title="Highcharts">
 </p>
+
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 [Highcharts iOS](http://www.highcharts.com/blog/mobile/) is a delightful wrapper of HighchartsJS for iOS.
