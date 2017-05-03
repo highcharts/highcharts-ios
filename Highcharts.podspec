@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "Highcharts"
-  s.version      = "1.0.2"
+  s.version      = "1.0.2-beta"
   s.summary      = "Powerful, vast charting library"
 
   s.description  = <<-DESC
