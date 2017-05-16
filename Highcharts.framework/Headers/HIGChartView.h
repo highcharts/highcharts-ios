@@ -50,4 +50,11 @@
 
 - (void)reload;
 
+/**
+ *  Loads chart options into view.
+ *  Use when instantiate from storyboard
+ */
+
+- (void)loadChart;
+
 @end
