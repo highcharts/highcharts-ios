@@ -2,7 +2,7 @@
 * (c) 2009-2017 Highsoft AS
 *
 * License: www.highcharts.com/license
-* Any commercial use of Highcharts iOS wrapper (beta version) is prohibited.
+* For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
 * In case of questions, please contact sales@highsoft.com
 */
 
@@ -85,7 +85,9 @@ In http://www.highcharts.com/docs/chart-design-and-style/style-by-css : styled m
 */
 @property(nonatomic, readwrite) HIColor *symbolFill;
 /**
-* description: The symbol for the button. Points to a definition function in the  Highcharts.Renderer.symbols collection. The default exportIcon function is part of the exporting module.
+* description: The symbol for the button. Points to a definition function in the 
+ Highcharts.Renderer.symbols collection. The default
+ exportIcon function is part of the exporting module.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-symbol/ : Use a circle for symbol
 * accepted values: ["circle", "square", "diamond", "triangle", "triangle-down", "menu"]
 * default: menu
@@ -114,7 +116,12 @@ In http://www.highcharts.com/docs/chart-design-and-style/style-by-css : styled m
 */
 @property(nonatomic, readwrite) NSString /* Function */ *onclick;
 /**
-* description: A collection of config options for the menu items. Each options object consists of a text option which is a string to show in the menu item, as well as an onclick parameter which is a callback function to run on click. By default, there is the "Print" menu item plus one menu item for each of the available export types. Menu items can be customized by defining a new array of items and assigning  null to unwanted positions (see override example below).
+* description: A collection of config options for the menu items. Each options object consists
+ of a text option which is a string to show in the menu item, as
+ well as an onclick parameter which is a callback function to run
+ on click. By default, there is the "Print" menu item plus one menu item for each of the available export types.
+ Menu items can be customized by defining a new array of items and assigning 
+ null to unwanted positions (see override example below).
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-onclick/ : Skip the menu and export the chart directly,
 			http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-menuitems/ : override the menu items
 */

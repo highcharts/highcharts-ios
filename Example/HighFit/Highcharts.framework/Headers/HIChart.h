@@ -2,7 +2,7 @@
 * (c) 2009-2017 Highsoft AS
 *
 * License: www.highcharts.com/license
-* Any commercial use of Highcharts iOS wrapper (beta version) is prohibited.
+* For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
 * In case of questions, please contact sales@highsoft.com
 */
 
@@ -87,7 +87,8 @@ A string reference to an easing function set on the Math object. See http://jsfi
 */
 @property(nonatomic, readwrite) NSNumber *plotBorderWidth;
 /**
-* description: The margin between the left outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also spacingLeft.
+* description: The margin between the left outer edge of the chart and the plot area. Use this to set a fixed
+ pixel value for the margin as opposed to the default dynamic margin. See also spacingLeft.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/marginleft/ : 150px left margin
 */
 @property(nonatomic, readwrite) NSNumber *marginLeft;
@@ -115,7 +116,8 @@ A string reference to an easing function set on the Math object. See http://jsfi
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showAxes;
 /**
-* description: Whether to apply a drop shadow to the outer chart area. Requires that  backgroundColor be set. Since 2.3 the shadow can be an object configuration containing color, offsetX, offsetY, opacity and width.
+* description: Whether to apply a drop shadow to the outer chart area. Requires that 
+ backgroundColor be set. Since 2.3 the shadow can be an object configuration containing color, offsetX, offsetY, opacity and width.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/shadow/ : Shadow
 * default: false
 */
@@ -181,12 +183,14 @@ Inverting the chart doesn't have an effect if there are no cartesian series in t
 */
 @property(nonatomic, readwrite) NSString *pinchType;
 /**
-* description: The margin between the bottom outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also spacingBottom.
+* description: The margin between the bottom outer edge of the chart and the plot area. Use this to set a fixed
+ pixel value for the margin as opposed to the default dynamic margin. See also spacingBottom.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/marginbottom/ : 100px bottom margin
 */
 @property(nonatomic, readwrite) NSNumber *marginBottom;
 /**
-* description: The margin between the right outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also spacingRight.
+* description: The margin between the right outer edge of the chart and the plot area. Use this to set a fixed
+ pixel value for the margin as opposed to the default dynamic margin. See also spacingRight.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/marginright/ : 100px right margin
 */
 @property(nonatomic, readwrite) NSNumber *marginRight;
@@ -253,13 +257,15 @@ This can be prevented by setting alignTicks to false. If the grid lines look mes
 */
 @property(nonatomic, readwrite) NSNumber *spacingTop;
 /**
-* description: The space between the bottom edge of the chart and the content (plot area, axis title and labels, title, subtitle or  legend in top position).
+* description: The space between the bottom edge of the chart and the content (plot area, axis title and labels, title, subtitle or 
+ legend in top position).
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/spacingbottom/ : Spacing bottom set to 100.
 * default: 15
 */
 @property(nonatomic, readwrite) NSNumber *spacingBottom;
 /**
-* description: The space between the right edge of the chart and the content (plot area, axis title and labels, title, subtitle or  legend in top position).
+* description: The space between the right edge of the chart and the content (plot area, axis title and labels, title, subtitle or 
+ legend in top position).
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/spacingright-100/ : Spacing set to 100,
 			http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/spacingright-legend/ : legend in right position with default spacing
 * default: 10
@@ -275,7 +281,8 @@ This can be prevented by setting alignTicks to false. If the grid lines look mes
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-* description: The space between the left edge of the chart and the content (plot area, axis title and labels, title, subtitle or  legend in top position).
+* description: The space between the left edge of the chart and the content (plot area, axis title and labels, title, subtitle or 
+ legend in top position).
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/chart/spacingleft/ : Spacing left set to 100
 * default: 10
 */

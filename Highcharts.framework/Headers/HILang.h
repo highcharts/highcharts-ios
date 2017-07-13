@@ -2,7 +2,7 @@
 * (c) 2009-2017 Highsoft AS
 *
 * License: www.highcharts.com/license
-* Any commercial use of Highcharts iOS wrapper (beta version) is prohibited.
+* For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
 * In case of questions, please contact sales@highsoft.com
 */
 
@@ -90,7 +90,8 @@ Highcharts.setOptions({
 */
 @property(nonatomic, readwrite) NSString *downloadJPEG;
 /**
-* description: An array containing the months names in abbreviated form. Corresponds to the  %b format in Highcharts.dateFormat(). 
+* description: An array containing the months names in abbreviated form. Corresponds to the 
+ %b format in Highcharts.dateFormat(). 
 * default: [ "Jan" , "Feb" , "Mar" , "Apr" , "May" , "Jun" , "Jul" , "Aug" , "Sep" , "Oct" , "Nov" , "Dec"]
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *shortMonths;

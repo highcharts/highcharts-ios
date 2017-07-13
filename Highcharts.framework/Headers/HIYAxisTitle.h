@@ -2,7 +2,7 @@
 * (c) 2009-2017 Highsoft AS
 *
 * License: www.highcharts.com/license
-* Any commercial use of Highcharts iOS wrapper (beta version) is prohibited.
+* For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
 * In case of questions, please contact sales@highsoft.com
 */
 
@@ -15,7 +15,10 @@
 @interface HIYAxisTitle: HIChartsJSONSerializable
 
 /**
-* description: The actual text of the axis title. Horizontal texts can contain HTML,  but rotated texts are painted using vector techniques and must be  clean text. The Y axis title is disabled by setting the text option to null.
+* description: The actual text of the axis title. Horizontal texts can contain HTML, 
+ but rotated texts are painted using vector techniques and must be 
+ clean text. The Y axis title is disabled by setting the text
+ option to null.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/xaxis/title-text/ : Custom HTML title for X axis
 * default: Values
 */

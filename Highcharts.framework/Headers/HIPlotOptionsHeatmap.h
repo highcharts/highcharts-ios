@@ -2,7 +2,7 @@
 * (c) 2009-2017 Highsoft AS
 *
 * License: www.highcharts.com/license
-* Any commercial use of Highcharts iOS wrapper (beta version) is prohibited.
+* For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
 * In case of questions, please contact sales@highsoft.com
 */
 
@@ -113,14 +113,22 @@ A description of the series to add to the screen reader information about the se
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *selected;
 /**
-* description: Sticky tracking of mouse events. When true, the mouseOut event on a series isn't triggered until the mouse moves over another series, or out of the plot area. When false, the mouseOut event on a series is triggered when the mouse leaves the area around the series' graph or markers. This also implies the tooltip. When stickyTracking is false and tooltip.shared is false, the  tooltip will be hidden when moving the mouse between series. Defaults to true for line and area type series, but to false for columns, pies etc.
+* description: Sticky tracking of mouse events. When true, the mouseOut event
+ on a series isn't triggered until the mouse moves over another series, or out
+ of the plot area. When false, the mouseOut event on a series is
+ triggered when the mouse leaves the area around the series' graph or markers.
+ This also implies the tooltip. When stickyTracking is false and tooltip.shared is false, the 
+ tooltip will be hidden when moving the mouse between series. Defaults to true for line and area type series, but to false for columns, pies etc.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stickytracking-true/ : True by default,
 			http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stickytracking-false/ : false
 * default: true
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *stickyTracking;
 /**
-* description: When a series contains a data array that is longer than this, only one dimensional arrays of numbers, or two dimensional arrays with x and y values are allowed. Also, only the first point is tested, and the rest are assumed to be the same format. This saves expensive data checking and indexing in long series. Set it to 0 disable.
+* description: When a series contains a data array that is longer than this, only one dimensional arrays of numbers,
+ or two dimensional arrays with x and y values are allowed. Also, only the first
+ point is tested, and the rest are assumed to be the same format. This saves expensive
+ data checking and indexing in long series. Set it to 0 disable.
 * default: 1000
 */
 @property(nonatomic, readwrite) NSNumber *turboThreshold;
@@ -132,7 +140,9 @@ In http://www.highcharts.com/docs/chart-design-and-style/style-by-css : styled m
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
-* description: When using automatic point colors pulled from the options.colors collection, this option determines whether the chart should receive  one color per series or one color per point.
+* description: When using automatic point colors pulled from the options.colors
+ collection, this option determines whether the chart should receive 
+ one color per series or one color per point.
 * demo: http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-false/ : False by default,
 			http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/ : true
 * default: false
