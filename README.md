@@ -30,7 +30,7 @@ Here we present how to create basic chart and place it in your project.
 - First of all download Highcharts framework from here: [Highcharts](https://github.com/highcharts/highcharts-ios) 
 or by using Cocoapods by adding 
     ```
-    pod 'Highcharts' ~> '1.1'
+    pod 'Highcharts', '~> 1.1'
     ```
     to your Podfile
     
