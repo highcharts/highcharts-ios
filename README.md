@@ -55,9 +55,9 @@ or by using Cocoapods by adding
 
 You are now set to use Highcharts!
 
-Please note that Cocoapods binary framework is designed to allow uploads to the app store. Therefore it does not allow running on iOS Simulator.
+Please note when linking manually that binary framework in the 'release' directory is designed to allow uploads to the AppStore. Therefore it does not allow running on iOS Simulator.
 In order to use simulator, download the repository and use framework that can be found in the 'development' directory.
-The 'release' directory contains stripped framework for use with the app store.
+Cocoapods solve this problem automatically - they introduce a stripping script for AppStore uploads.
 
 ## Using Highcharts (demo app)
 
