@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
    s.ios.deployment_target = '8.0'
 
    
-   s.ios.vendored_frameworks = 'release/Highcharts.framework'
+   s.ios.vendored_frameworks = 'development/Highcharts.framework'
  
 end
