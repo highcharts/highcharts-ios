@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2016 Highsoft AS. All rights reserved.
+//  Copyright © 2016-2017 Highsoft AS. All rights reserved.
 //
 
 #import "DataTableViewController.h"
@@ -12,11 +12,11 @@
 #import "DashboardViewController.h"
 #import "OptionsProvider.h"
 
-@interface DataTableViewController ()
+@interface DataTableViewController () <HIChartViewDelegate>
 @property (strong, nonatomic) NSString *chartType;
 @property (strong, nonatomic) NSDictionary *data;
 @property (strong, nonatomic) UIView *chartViewBase;
-@property (strong, nonatomic) HIGChartView *chartView;
+@property (strong, nonatomic) HIChartView *chartView;
 
 @property (strong, nonatomic) UISwitch *switchView;
 @end
@@ -81,7 +81,8 @@
         self.chartViewBase.backgroundColor = [UIColor whiteColor];
         NSMutableDictionary *tmpOptions = [NSMutableDictionary dictionaryWithDictionary:self.configuration];
         tmpOptions[@"exporting"] = @YES;
-        self.chartView = [[HIGChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.frame.size.width-20, 240.0f)];
+        self.chartView = [[HIChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.frame.size.width-20, 240.0f)];
+        self.chartView.delegate = self;
         int sum = 0;
         for (NSNumber *number in self.data[@"day"]) {
             sum += number.integerValue;
@@ -255,7 +256,6 @@
     
     self.chartView.options = [OptionsProvider provideOptionsForChartType:tmpOptions series:self.data[dataName] type:dataName];
     
-    [self.chartView reload];
 }
 
 - (BOOL)isSwitchOn
@@ -268,5 +268,13 @@
     }
     return NO;
 }
+
+#pragma mark - HIChartViewDelegate
+
+- (void)chartViewDidLoad:(HIChartView *)chart {
+    NSLog(@"Did load chart %p", chart);
+}
+
+
 
 @end

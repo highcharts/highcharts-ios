@@ -30,13 +30,13 @@ Here we present how to create basic chart and place it in your project.
 - First of all download Highcharts framework from here: [Highcharts](https://github.com/highcharts/highcharts-ios) 
 or by using Cocoapods by adding 
     ```
-    pod 'Highcharts'
+    pod 'Highcharts' ~> '1.1'
     ```
     to your Podfile
     
     or Carthage by adding
     ```
-    github "https://github.com/highcharts/highcharts-ios" >= 1.0.2
+    github "https://github.com/highcharts/highcharts-ios" >= 1.1.0
     ```
     to your Cartfile
     
@@ -55,6 +55,10 @@ or by using Cocoapods by adding
 
 You are now set to use Highcharts!
 
+Please note that Cocoapods binary framework is designed to allow uploads to the app store. Therefore it does not allow running on iOS Simulator.
+In order to use simulator, download the repository and use framework that can be found in the 'development' directory.
+The 'release' directory contains stripped framework for use with the app store.
+
 ## Using Highcharts (demo app)
 
 ##### Set AppDelegate
@@ -67,9 +71,9 @@ In your **AppDelegate.m** import Highcharts at the top
 Add this line to your **application:didFinishLaunchingWithOptions**
 
 ```objc
-[HIGChartView preload];
+[HIChartView preload];
 ```
-#### Add HIGChartView to your View Controller
+#### Add HIChartView to your View Controller
 In your View Controller .m file add
 ```objc
 #import <Highcharts/Highcharts.h>
@@ -82,7 +86,7 @@ Then change
 To
 ```objc
 @interface ViewController ()
-@property (strong, nonatomic) HIGChartView *chartView;
+@property (strong, nonatomic) HIChartView *chartView;
 @end
 ```
 #### Creating chart
@@ -92,7 +96,7 @@ For the purpose of this tutorial, we will create a simple column chart using ran
 
 In **viewDidLoad** add following lines
 ```objc
-self.chartView = [[HIGChartView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 20, self.view.bounds.size.width, 300.0f)];
+self.chartView = [[HIChartView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 20, self.view.bounds.size.width, 300.0f)];
 ```
 This will create our chartView with defined origin and size.
 
@@ -149,7 +153,7 @@ Your View Controller .m file should look like this
 #import <Highcharts/Highcharts.h>
 
 @interface ViewController ()
-@property (strong, nonatomic) HIGChartView *chartView;
+@property (strong, nonatomic) HIChartView *chartView;
 @end
 
 @implementation ViewController
@@ -158,7 +162,7 @@ Your View Controller .m file should look like this
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.chartView = [[HIGChartView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 20, self.view.bounds.size.width, 300.0f)];
+    self.chartView = [[HIChartView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 20, self.view.bounds.size.width, 300.0f)];
     
     HIOptions *options = [[HIOptions alloc]init];
     
@@ -176,11 +180,6 @@ Your View Controller .m file should look like this
     self.chartView.options = options;
     
     [self.view addSubview:self.chartView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

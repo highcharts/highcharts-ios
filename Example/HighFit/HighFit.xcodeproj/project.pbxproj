@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		20FB4D441EA8E56700494BEA /* Highcharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FB4D431EA8E56700494BEA /* Highcharts.framework */; };
-		20FB4D461EA8E56C00494BEA /* Highcharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20FB4D431EA8E56700494BEA /* Highcharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		341658331D67310100D6FF2A /* OptionsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 341658321D67310100D6FF2A /* OptionsProvider.m */; };
 		3424054F1D6AFBEA001CD7AF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3424054E1D6AFBEA001CD7AF /* Launch Screen.storyboard */; };
 		342CEC591D63163700661D50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CEC581D63163700661D50 /* main.m */; };
@@ -19,7 +17,6 @@
 		345F5D5B1D64702E007BC569 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 345F5D591D64702E007BC569 /* DataViewController.m */; };
 		345F5D5C1D64702E007BC569 /* DataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 345F5D5A1D64702E007BC569 /* DataViewController.xib */; };
 		3472BC8C1D67598300A71D67 /* DataCaloriesIn.json in Resources */ = {isa = PBXBuildFile; fileRef = 3472BC8B1D67598300A71D67 /* DataCaloriesIn.json */; };
-		349AFD3B1D82FDA000D27CD5 /* dummy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 349AFD3A1D82FDA000D27CD5 /* dummy.txt */; };
 		349F3DF51D65DF4700CC4BFA /* ListDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349F3DF31D65DF4700CC4BFA /* ListDataTableViewController.m */; };
 		349F3DF61D65DF4700CC4BFA /* ListDataTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349F3DF41D65DF4700CC4BFA /* ListDataTableViewController.xib */; };
 		349F3DF91D65E63200CC4BFA /* DataSources.json in Resources */ = {isa = PBXBuildFile; fileRef = 349F3DF81D65E63200CC4BFA /* DataSources.json */; };
@@ -27,16 +24,18 @@
 		349F3DFE1D65F61000CC4BFA /* DataTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349F3DFC1D65F61000CC4BFA /* DataTableViewController.xib */; };
 		34B85FEE1D805115003A9231 /* DataCaloriesOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 34B85FED1D805115003A9231 /* DataCaloriesOut.json */; };
 		34BCB0E11D664A11002C5E96 /* DataSteps.json in Resources */ = {isa = PBXBuildFile; fileRef = 34BCB0DF1D664A11002C5E96 /* DataSteps.json */; };
+		EC9816711F4AFE0C00F7C08E /* Highcharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9816701F4AFE0C00F7C08E /* Highcharts.framework */; };
+		EC9816731F4AFE1400F7C08E /* Highcharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EC9816701F4AFE0C00F7C08E /* Highcharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		345F5D4A1D631B3A007BC569 /* Embed Frameworks */ = {
+		EC1449361F4A759700612B1C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				20FB4D461EA8E56C00494BEA /* Highcharts.framework in Embed Frameworks */,
+				EC9816731F4AFE1400F7C08E /* Highcharts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,7 +43,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		20FB4D431EA8E56700494BEA /* Highcharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Highcharts.framework; sourceTree = "<group>"; };
 		341658311D67310100D6FF2A /* OptionsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsProvider.h; sourceTree = "<group>"; };
 		341658321D67310100D6FF2A /* OptionsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsProvider.m; sourceTree = "<group>"; };
 		3424054E1D6AFBEA001CD7AF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 		345F5D591D64702E007BC569 /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		345F5D5A1D64702E007BC569 /* DataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataViewController.xib; sourceTree = "<group>"; };
 		3472BC8B1D67598300A71D67 /* DataCaloriesIn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataCaloriesIn.json; sourceTree = "<group>"; };
-		349AFD3A1D82FDA000D27CD5 /* dummy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dummy.txt; sourceTree = "<group>"; };
 		349F3DF21D65DF4700CC4BFA /* ListDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListDataTableViewController.h; sourceTree = "<group>"; };
 		349F3DF31D65DF4700CC4BFA /* ListDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListDataTableViewController.m; sourceTree = "<group>"; };
 		349F3DF41D65DF4700CC4BFA /* ListDataTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListDataTableViewController.xib; sourceTree = "<group>"; };
@@ -71,6 +68,7 @@
 		349F3DFC1D65F61000CC4BFA /* DataTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableViewController.xib; sourceTree = "<group>"; };
 		34B85FED1D805115003A9231 /* DataCaloriesOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataCaloriesOut.json; sourceTree = "<group>"; };
 		34BCB0DF1D664A11002C5E96 /* DataSteps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataSteps.json; sourceTree = "<group>"; };
+		EC9816701F4AFE0C00F7C08E /* Highcharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Highcharts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20FB4D441EA8E56700494BEA /* Highcharts.framework in Frameworks */,
+				EC9816711F4AFE0C00F7C08E /* Highcharts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				349F3DF71D65E5D300CC4BFA /* Resources */,
-				345F5D5E1D64706D007BC569 /* Views */,
+				345F5D5E1D64706D007BC569 /* ViewControllers */,
 				345F5D5D1D647065007BC569 /* Models */,
 				342CEC5A1D63163700661D50 /* AppDelegate.h */,
 				342CEC5B1D63163700661D50 /* AppDelegate.m */,
@@ -129,7 +127,7 @@
 		342CEC6E1D63177B00661D50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				20FB4D431EA8E56700494BEA /* Highcharts.framework */,
+				EC9816701F4AFE0C00F7C08E /* Highcharts.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,7 +141,7 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		345F5D5E1D64706D007BC569 /* Views */ = {
+		345F5D5E1D64706D007BC569 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				345F5D531D646F87007BC569 /* DashboardViewController.h */,
@@ -159,7 +157,7 @@
 				345F5D591D64702E007BC569 /* DataViewController.m */,
 				345F5D5A1D64702E007BC569 /* DataViewController.xib */,
 			);
-			name = Views;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		349F3DF71D65E5D300CC4BFA /* Resources */ = {
@@ -169,7 +167,6 @@
 				3472BC8B1D67598300A71D67 /* DataCaloriesIn.json */,
 				34BCB0DF1D664A11002C5E96 /* DataSteps.json */,
 				349F3DF81D65E63200CC4BFA /* DataSources.json */,
-				349AFD3A1D82FDA000D27CD5 /* dummy.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -184,7 +181,7 @@
 				342CEC501D63163700661D50 /* Sources */,
 				342CEC511D63163700661D50 /* Frameworks */,
 				342CEC521D63163700661D50 /* Resources */,
-				345F5D4A1D631B3A007BC569 /* Embed Frameworks */,
+				EC1449361F4A759700612B1C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,7 +238,6 @@
 				342CEC641D63163700661D50 /* Assets.xcassets in Resources */,
 				34BCB0E11D664A11002C5E96 /* DataSteps.json in Resources */,
 				345F5D571D646F87007BC569 /* DashboardViewController.xib in Resources */,
-				349AFD3B1D82FDA000D27CD5 /* dummy.txt in Resources */,
 				349F3DF91D65E63200CC4BFA /* DataSources.json in Resources */,
 				3424054F1D6AFBEA001CD7AF /* Launch Screen.storyboard in Resources */,
 				349F3DFE1D65F61000CC4BFA /* DataTableViewController.xib in Resources */,
@@ -370,9 +366,13 @@
 					"${PROJECT_DIR}/../../Highcharts.framework/Headers",
 				);
 				INFOPLIST_FILE = HighFit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.HighFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.Highfit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "cd8c6ba6-ea33-4683-906d-5bd455e28bfa";
+				PROVISIONING_PROFILE_SPECIFIER = "Marek development";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -394,9 +394,11 @@
 					"${PROJECT_DIR}/../../Highcharts.framework/Headers",
 				);
 				INFOPLIST_FILE = HighFit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.HighFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.Highfit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

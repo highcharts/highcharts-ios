@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2016 Highsoft AS. All rights reserved.
+//  Copyright © 2016-2017 Highsoft AS. All rights reserved.
 //
 
 #import "DashboardViewController.h"
@@ -11,7 +11,7 @@
 #import "OptionsProvider.h"
 #import "DataTableViewController.h"
 
-@interface DashboardViewController ()
+@interface DashboardViewController ()<HIChartViewDelegate>
 @property (strong, nonatomic) NSMutableArray *sources;
 @property (strong, nonatomic) NSArray *data;
 @property (strong, nonatomic) NSString *dataName;
@@ -116,10 +116,11 @@
     
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-        HIGChartView *chartView = [[HIGChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.bounds.size.width-20.0f, 240.0f)];
+        HIChartView *chartView = [[HIChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.bounds.size.width-20.0f, 240.0f)];
     
         chartView.backgroundColor = [UIColor clearColor];
-    
+        chartView.delegate = self;
+        
         NSArray *series = [self.data objectAtIndex:indexPath.row][self.dataName];
         int sum = 0;
         for (NSNumber *number in series) {
@@ -289,5 +290,13 @@
     // Push the view controller.
     [self.navigationController pushViewController:dataView animated:YES];
 }
+
+#pragma mark - HIGChartViewDelegate
+
+- (void)chartViewDidLoad:(HIChartView *)chart {
+    NSLog(@"Did load chart %p", chart);
+}
+
+
 
 @end

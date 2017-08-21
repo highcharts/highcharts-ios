@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2016 Highsoft AS. All rights reserved.
+//  Copyright © 2016-2017 Highsoft AS. All rights reserved.
 //
 
 #import "OptionsProvider.h"
@@ -43,7 +43,7 @@
         HIOptions *hioptions = [[HIOptions alloc]init];
         
         HIChart *chart = [[HIChart alloc]init];
-        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@300] stops:@[
+        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@{@"x1":@0,@"y1":@0,@"x2":@0,@"y2":@1} stops:@[
                                                                                    @[@0, @"rgb(102, 153, 161)"],
                                                                                    @[@1, @"rgb(128, 135, 232)"]
                                                                                    ]];
@@ -63,10 +63,7 @@
         
         HIPlotOptions *plotOptions = [[HIPlotOptions alloc]init];
         plotOptions.area = [[HIPlotOptionsArea alloc]init];
-        plotOptions.area.fillColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@150] stops:@[
-                                                                                        @[@0, @"rgba(255,255,255, 0.75)"],
-                                                                                        @[@1, @"rgba(255,255,255, 0.02)"]
-                                                                                        ]];
+        plotOptions.area.fillColor = [[HIColor alloc]initWithLinearGradient:@{@"x1":@0,@"y1":@0,@"x2":@0,@"y2":@0.5} stops:@[@[@0, @"rgba(255,255,255, 0.75)"],@[@1, @"rgba(255,255,255, 0.02)"]]];
         hioptions.plotOptions = plotOptions;
         
         HICredits *credits = [[HICredits alloc]init];
@@ -146,7 +143,7 @@
         HIOptions *hioptions = [[HIOptions alloc]init];
         
         HIChart *chart = [[HIChart alloc]init];
-        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@300] stops: @[
+        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@{@"x1":@0,@"y1":@0,@"x2":@0,@"y2":@1} stops: @[
                                                                                     @[@0, @"rgb(66, 218, 113)"],
                                                                                     @[@1, @"rgb(80, 140, 200)"]
                                                                                     ]];
@@ -247,7 +244,8 @@
         HIOptions *hioptions = [[HIOptions alloc]init];
         
         HIChart *chart = [[HIChart alloc]init];
-        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@[@0,@0,@0,@300] stops: @[
+        
+        chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@{@"x1":@0,@"y1":@0,@"x2":@0,@"y2":@1}  stops: @[
                                                                                     @[@0, @"rgba(132, 103, 144, 1)"],
                                                                                     @[@1, @"rgba(163, 95, 103, 1)"]
                                                                                     ]];
