@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "HIOptions.h"
 #import "HIGChartViewDelegate.h"
+#import "HILang.h"
+#import "HIGlobal.h"
 
 /**
  *  Highcharts Chart View Class. The view requires options to render.
@@ -24,6 +26,14 @@
  *  Options object that configures the chart.
  */
 @property (strong, nonatomic) HIOptions *options;
+/**
+ *  Language object. The language object is global and it can't be set on each chart initiation.
+ */
+@property (strong, nonatomic) HILang *lang;
+/**
+ *  Global object. Global options that don't apply to each chart.
+ */
+@property (strong, nonatomic) HIGlobal *global;
 
 /**
  *  Theme name to load.

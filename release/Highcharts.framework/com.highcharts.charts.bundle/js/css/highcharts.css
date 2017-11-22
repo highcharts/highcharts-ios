@@ -23,6 +23,18 @@
   stroke-width: 0;
 }
 
+.highcharts-strong {
+  font-weight: bold;
+}
+
+.highcharts-emphasized {
+  font-style: italic;
+}
+
+.highcharts-anchor {
+  cursor: pointer;
+}
+
 .highcharts-background {
   fill: #ffffff;
 }
@@ -135,6 +147,11 @@
   fill-opacity: 0.85;
 }
 
+.highcharts-tooltip-box .highcharts-label-box {
+  fill: #f7f7f7;
+  fill-opacity: 0.85;
+}
+
 .highcharts-selection-marker {
   fill: #335cad;
   fill-opacity: 0.25;
@@ -162,12 +179,17 @@
 }
 
 /* Legend hover affects points and series */
-g.highcharts-series, .highcharts-point {
+g.highcharts-series,
+.highcharts-point,
+.highcharts-markers,
+.highcharts-data-labels {
   transition: opacity 250ms;
 }
 
 .highcharts-legend-series-active g.highcharts-series:not(.highcharts-series-hover),
-.highcharts-legend-point-active .highcharts-point:not(.highcharts-point-hover) {
+.highcharts-legend-point-active .highcharts-point:not(.highcharts-point-hover),
+.highcharts-legend-series-active .highcharts-markers:not(.highcharts-series-hover),
+.highcharts-legend-series-active .highcharts-data-labels:not(.highcharts-series-hover) {
   opacity: 0.2;
 }
 
@@ -264,13 +286,16 @@ g.highcharts-series, .highcharts-point {
   stroke-width: 0;
 }
 
-.highcharts-point-select {
+.highcharts-series:not(.highcharts-pie-series) .highcharts-point-select {
   fill: #cccccc;
   stroke: #000000;
 }
 
-.highcharts-column-series .highcharts-point {
+.highcharts-column-series rect.highcharts-point {
   stroke: #ffffff;
+}
+
+.highcharts-column-series .highcharts-point {
   transition: fill-opacity 250ms;
 }
 
@@ -287,11 +312,6 @@ g.highcharts-series, .highcharts-point {
 .highcharts-pie-series .highcharts-point-hover {
   fill-opacity: 0.75;
   transition: fill-opacity 50ms;
-}
-
-.highcharts-pie-series .highcharts-point-select {
-  fill: inherit;
-  stroke: inherit;
 }
 
 .highcharts-funnel-series .highcharts-point {
@@ -417,7 +437,7 @@ g.highcharts-series, .highcharts-point {
 }
 
 /* Plot bands and polar pane backgrounds */
-.highcharts-plot-band {
+.highcharts-plot-band, .highcharts-pane {
   fill: #000000;
   fill-opacity: 0.05;
 }
@@ -428,7 +448,7 @@ g.highcharts-series, .highcharts-point {
   stroke-width: 1px;
 }
 
-/* Highcharts More */
+/* Highcharts More and modules */
 .highcharts-boxplot-box {
   fill: #ffffff;
 }
@@ -465,11 +485,23 @@ g.highcharts-series, .highcharts-point {
   stroke-dasharray: 1, 3;
 }
 
+.highcharts-sankey-series .highcharts-point {
+  stroke-width: 0;
+}
+
+.highcharts-sankey-series .highcharts-link {
+  transition: fill 250ms, fill-opacity 250ms;
+  fill-opacity: 0.5;
+}
+
+.highcharts-sankey-series .highcharts-point-hover.highcharts-link {
+  transition: fill 50ms, fill-opacity 50ms;
+  fill-opacity: 1;
+}
+
 /* Highstock */
-.highcharts-navigator-mask {
-  fill: #6685c2;
-  /* navigator.maskFill option */
-  fill-opacity: 0.25;
+.highcharts-navigator-mask-outside {
+  fill-opacity: 0;
 }
 
 .highcharts-navigator-mask-inside {
@@ -629,12 +661,13 @@ input.highcharts-range-selector {
   stroke-width: 3px;
 }
 
-.highcharts-flags-series .highcharts-point {
+.highcharts-flags-series .highcharts-point .highcharts-label-box {
   stroke: #999999;
   fill: #ffffff;
+  transition: fill 250ms;
 }
 
-.highcharts-flags-series .highcharts-point-hover {
+.highcharts-flags-series .highcharts-point-hover .highcharts-label-box {
   stroke: #000000;
   fill: #ccd6eb;
 }
@@ -686,11 +719,6 @@ input.highcharts-range-selector {
 /* 3d charts */
 .highcharts-3d-frame {
   fill: transparent;
-}
-
-.highcharts-column-series .highcharts-point {
-  stroke: inherit;
-  /* use point color */
 }
 
 /* Exporting module */
@@ -748,4 +776,27 @@ input.highcharts-range-selector {
   font-weight: bold;
   font-size: 12px;
   fill: #666666;
+}
+
+/* Drag-panes module */
+.highcharts-axis-resizer {
+  cursor: ns-resize;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+/* Bullet type series */
+.highcharts-bullet-target {
+  stroke-width: 0;
+}
+
+/* Lineargauge type series */
+.highcharts-lineargauge-target {
+  stroke-width: 1px;
+  stroke: #333333;
+}
+
+.highcharts-lineargauge-target-line {
+  stroke-width: 1px;
+  stroke: #333333;
 }

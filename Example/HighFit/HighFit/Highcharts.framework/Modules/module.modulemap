@@ -1,0 +1,6 @@
+framework module Highcharts {
+  umbrella header "Highcharts.h"
+
+  export *
+  module * { export * }
+}
