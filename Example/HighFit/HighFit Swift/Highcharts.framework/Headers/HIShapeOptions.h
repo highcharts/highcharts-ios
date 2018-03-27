@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2017 Highsoft AS
+* (c) 2009-2018 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -11,56 +11,70 @@
 
 
 /**
-* description: Options for annotation's shapes. Each shape inherits options
-from the shapeOptions object. An option from the shapeOptions can be
-overwritten by config for a specific shape.
+Options for annotation's shapes. Each shape inherits options from the shapeOptions object. An option from the shapeOptions can be overwritten by config for a specific shape.
 */
 @interface HIShapeOptions: HIChartsJSONSerializable
 
 /**
-* description: The height of the shape.
+The pixel stroke width of the shape.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/ : Basic shape annotation
-*/
-@property(nonatomic, readwrite) NSNumber *height;
-/**
-* description: The type of the shape, e.g. circle or rectangle.
+**Try it**
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/ : Basic shape annotation
-* default: 'rect'
-*/
-@property(nonatomic, readwrite) NSString *type;
-/**
-* description: The width of the shape.
-
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/ : Basic shape annotation
-*/
-@property(nonatomic, readwrite) NSNumber *width;
-/**
-* description: The pixel stroke width of the shape.
-
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/ : Basic shape annotation
-* default: 1
+* [Basic shape annotation
+*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) NSNumber *strokeWidth;
 /**
-* description: The color of the shape's stroke.
+The height of the shape.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/ : Basic shape annotation
-* default: rgba(0, 0, 0, 0.75)
+**Try it**
+
+* [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
+*/
+@property(nonatomic, readwrite) NSNumber *height;
+/**
+The width of the shape.
+
+**Try it**
+
+* [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
+*/
+@property(nonatomic, readwrite) NSNumber *width;
+/**
+The color of the shape's stroke.
+
+**Try it**
+
+* [Basic shape annotation
+*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) HIColor *stroke;
 /**
-* description: The radius of the shape.
+The radius of the shape.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/ : Basic shape annotation
+**Try it**
+
+* [Basic shape annotation
+*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) NSNumber *r;
 /**
-* description: The color of the shape's fill.
+The type of the shape, e.g. circle or rectangle.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/ : Basic shape annotation
-* default: rgba(0, 0, 0, 0.75)
+**Defaults to** `'rect'`.
+
+**Try it**
+
+* [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
+*/
+@property(nonatomic, readwrite) NSString *type;
+/**
+The color of the shape's fill.
+
+**Try it**
+
+* [Basic shape annotation
+*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) HIColor *fill;
 

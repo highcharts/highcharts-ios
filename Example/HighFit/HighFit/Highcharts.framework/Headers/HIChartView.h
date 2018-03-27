@@ -1,5 +1,5 @@
 /**
- * (c) 2009-2017 Highsoft AS
+ * (c) 2009-2018 Highsoft AS
  *
  * License: www.highcharts.com/license
  * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -13,7 +13,8 @@
 #import "HIGlobal.h"
 
 /**
- *  Highcharts Chart View Class. The view requires options to render.
+ *  Highcharts Chart View Class.
+ *  @warning The view requires #options# to render.
  */
 @interface HIChartView : UIView
 
@@ -21,6 +22,11 @@
  *  An optional method to be called when the application starts. Speeds up subsequent chart loads.
  */
 + (void)preload;
+
+/**
+ *  A method for update chart's options manually.
+ */
+- (void)updateOptions;
 
 /**
  *  Options object that configures the chart.

@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2017 Highsoft AS
+* (c) 2009-2018 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -11,31 +11,39 @@
 
 
 /**
-* description: Options for displaying a message like "No data to display". 
-This feature requires the file no-data-to-display.js to be loaded in the page. 
-The actual text to display is set in the lang.noData option.
+Options for displaying a message like "No data to display". This feature requires the file no-data-to-display.js to be loaded in the page. The actual text to display is set in the lang.noData option.
+
+**Try it**
+
+* [Line chart with no-data module](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/no-data-to-display/no-data-line)
+* [Pie chart with no-data module](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/no-data-to-display/no-data-pie)
 */
 @interface HINoData: HIChartsJSONSerializable
 
 /**
-* description: Whether to insert the label as HTML, or as pseudo-HTML rendered with
-SVG.
-* default: false
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
-/**
-* description: The position of the no-data label, relative to the plot area.
-* default: { "x": 0, "y": 0, "align": "center", "verticalAlign": "middle" }
+The position of the no-data label, relative to the plot area.
+
+**Defaults to** `{ "x": 0, "y": 0, "align": "center", "verticalAlign": "middle" }`.
 */
 @property(nonatomic, readwrite) HIPosition *position;
 /**
-* description: An object of additional SVG attributes for the no-data label.
+CSS styles for the no-data label.
+
+**Try it**
+
+* [Styled no-data text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/no-data-to-display/no-data-line)
+*/
+@property(nonatomic, readwrite) HIStyle *style;
+/**
+An object of additional SVG attributes for the no-data label.
 */
 @property(nonatomic, readwrite) id attr;
 /**
-* description: CSS styles for the no-data label.
+Whether to insert the label as HTML, or as pseudo-HTML rendered with SVG.
+
+**Defaults to** `false`.
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 
 -(NSDictionary *)getParams;
 

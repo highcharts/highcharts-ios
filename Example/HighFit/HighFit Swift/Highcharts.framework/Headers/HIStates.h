@@ -1,30 +1,27 @@
 /**
-* (c) 2009-2017 Highsoft AS
+* (c) 2009-2018 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HISelect.h"
 #import "HIHover.h"
+#import "HISelect.h"
+#import "HINormal.h"
 
 
 /**
-* description: States for a single point marker.
+A wrapper object for all the series options in specific states.
 */
 @interface HIStates: HIChartsJSONSerializable
 
-/**
-* description: The appearance of the point marker when selected. In order to
-allow a point to be selected, set the series.allowPointSelect
-option to true.
-*/
+@property(nonatomic, readwrite) HIHover *hover;
 @property(nonatomic, readwrite) HISelect *select;
 /**
-* description: The hover state for a single point marker.
+The normal state of a single point marker. Currently only used for setting animation when returning to normal state from hover.
 */
-@property(nonatomic, readwrite) HIHover *hover;
+@property(nonatomic, readwrite) HINormal *normal;
 
 -(NSDictionary *)getParams;
 

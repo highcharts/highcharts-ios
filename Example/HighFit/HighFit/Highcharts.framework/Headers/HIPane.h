@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2017 Highsoft AS
+* (c) 2009-2018 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -10,48 +10,54 @@
 
 
 /**
-* description: The pane serves as a container for axes and backgrounds for circular 
-gauges and polar charts.
+The pane serves as a container for axes and backgrounds for circular gauges and polar charts.
 */
 @interface HIPane: HIChartsJSONSerializable
 
 /**
-* description: An array of background items for the pane.
+The end angle of the polar X axis or gauge value axis, given in degrees where 0 is north. Defaults to `startAngle` + 360.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-speedometer/ : Speedometer gauge with multiple backgrounds
-*/
-@property(nonatomic, readwrite) NSArray <HIBackground *> *background;
-/**
-* description: The size of the pane, either as a number defining pixels, or a
-percentage defining a percentage of the plot are.
+**Try it**
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/ : Smaller size
-* default: 85%
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
-/**
-* description: The end angle of the polar X axis or gauge value axis, given in degrees
-where 0 is north. Defaults to startAngle + 360.
-
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/ : VU-meter with custom start and end angle
+* [VU-meter with custom start and end angle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/)
 */
 @property(nonatomic, readwrite) NSNumber *endAngle;
 /**
-* description: The center of a polar chart or angular gauge, given as an array
-of [x, y] positions. Positions can be given as integers that transform
-to pixels, or as percentages of the plot area size.
+The start angle of the polar X axis or gauge axis, given in degrees where 0 is north. Defaults to 0.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/ : Two gauges with different center
-* default: ["50%", "50%"]
+**Try it**
+
+* [VU-meter with custom start and end angle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/)
+*/
+@property(nonatomic, readwrite) NSNumber *startAngle;
+/**
+The center of a polar chart or angular gauge, given as an array of [x, y] positions. Positions can be given as integers that transform to pixels, or as percentages of the plot area size.
+
+**Defaults to** `["50%", "50%"]`.
+
+**Try it**
+
+* [Two gauges with different center](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/)
 */
 @property(nonatomic, readwrite) NSArray /* <NSString, NSNumber> */ *center;
 /**
-* description: The start angle of the polar X axis or gauge axis, given in degrees
-where 0 is north. Defaults to 0.
+An array of background items for the pane.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/ : VU-meter with custom start and end angle
+**Try it**
+
+* [Speedometer gauge with multiple backgrounds](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-speedometer/)
 */
-@property(nonatomic, readwrite) NSNumber *startAngle;
+@property(nonatomic, readwrite) NSArray <HIBackground *> *background;
+/**
+The size of the pane, either as a number defining pixels, or a percentage defining a percentage of the plot are.
+
+**Defaults to** `85%`.
+
+**Try it**
+
+* [Smaller size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
 
 -(NSDictionary *)getParams;
 

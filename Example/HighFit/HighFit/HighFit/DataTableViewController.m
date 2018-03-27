@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSString *chartType;
 @property (strong, nonatomic) NSDictionary *data;
 @property (strong, nonatomic) UIView *chartViewBase;
-@property (strong, nonatomic) HIGChartView *chartView;
+@property (strong, nonatomic) HIChartView *chartView;
 
 @property (strong, nonatomic) UISwitch *switchView;
 @end
@@ -81,7 +81,7 @@
         self.chartViewBase.backgroundColor = [UIColor whiteColor];
         NSMutableDictionary *tmpOptions = [NSMutableDictionary dictionaryWithDictionary:self.configuration];
         tmpOptions[@"exporting"] = @YES;
-        self.chartView = [[HIGChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.frame.size.width-20, 240.0f)];
+        self.chartView = [[HIChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.frame.size.width-20, 240.0f)];
         int sum = 0;
         for (NSNumber *number in self.data[@"day"]) {
             sum += number.integerValue;
@@ -254,8 +254,6 @@
     tmpOptions[@"subtitle"] = [NSString stringWithFormat:@"%d %@", sum, tmpOptions[@"unit"]];
     
     self.chartView.options = [OptionsProvider provideOptionsForChartType:tmpOptions series:self.data[dataName] type:dataName];
-    
-    [self.chartView reload];
 }
 
 - (BOOL)isSwitchOn

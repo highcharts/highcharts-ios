@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2017 Highsoft AS
+* (c) 2009-2018 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -11,55 +11,59 @@
 
 
 /**
-* description: A arearange series. If the type option
-is not specified, it is inherited from chart.type.
-For options that apply to multiple series, it is recommended to add
-them to the plotOptions.series options structure.
-To apply to all series of this specific type, apply it to plotOptions.
-arearange.
+A `arearange` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.arearange`.
 */
 @interface HIArearange: HISeries
 
 /**
-* description: Fill opacity for the area. When you set an explicit fillColor,
-the fillOpacity is not applied. Instead, you should define the
-opacity in the fillColor with an rgba color definition. The fillOpacity
-setting, also the default setting, overrides the alpha component
-of the color setting.
+Whether the whole area or just the line should respond to mouseover tooltips and other mouse or touch events.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillopacity/ : Automatic fill color and fill opacity of 0.1
-*/
-@property(nonatomic, readwrite) NSNumber *fillOpacity;
-/**
-* description: A separate color for the negative part of the area.
-*/
-@property(nonatomic, readwrite) HIColor *negativeFillColor;
-/**
-* description: A separate color for the graph line. By default the line takes the
-color of the series, but the lineColor setting allows setting a
-separate color for the line without altering the fillColor.
+**Defaults to** `false`.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-linecolor/ : Dark gray line
-* default: null
-*/
-@property(nonatomic, readwrite) HIColor *lineColor;
-/**
-* description: Whether the whole area or just the line should respond to mouseover
-tooltips and other mouse or touch events.
+**Try it**
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-trackbyarea/ : Display the tooltip when the area is hovered
-* default: true
+* [Display the tooltip when the area is hovered](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-trackbyarea/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *trackByArea;
 /**
-* description: Fill color or gradient for the area. When null, the series' color
-is used with the series' fillOpacity.
+A separate color for the negative part of the area. In styled mode, a negative color is set with the `.highcharts-negative` class name.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillcolor-default/ : Null by default
-https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillcolor-gradient/ : Gradient
-* default: null
+**Try it**
+
+* [Negative color in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-negative-color/)
+*/
+@property(nonatomic, readwrite) HIColor *negativeFillColor;
+/**
+Fill color or gradient for the area. When `null`, the series' `color` is used with the series' `fillOpacity`. In styled mode, the fill color can be set with the `.highcharts-area` class name.
+
+**Defaults to** `null`.
+
+**Try it**
+
+* [Null by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillcolor-default/)
+* [Gradient](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillcolor-gradient/)
 */
 @property(nonatomic, readwrite) HIColor *fillColor;
+/**
+A separate color for the graph line. By default the line takes the `color` of the series, but the lineColor setting allows setting a separate color for the line without altering the `fillColor`. In styled mode, the line stroke can be set with the `.highcharts-graph` class name.
+
+**Defaults to** `null`.
+
+**Try it**
+
+* [Dark gray line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-linecolor/)
+*/
+@property(nonatomic, readwrite) HIColor *lineColor;
+/**
+Fill opacity for the area. When you set an explicit `fillColor`, the `fillOpacity` is not applied. Instead, you should define the opacity in the `fillColor` with an rgba color definition. The `fillOpacity` setting, also the default setting, overrides the alpha component of the `color` setting. In styled mode, the fill opacity can be set with the `.highcharts-area` class name.
+
+**Defaults to** `0.75`.
+
+**Try it**
+
+* [Automatic fill color and fill opacity of 0.1](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillopacity/)
+*/
+@property(nonatomic, readwrite) NSNumber *fillOpacity;
 
 -(NSDictionary *)getParams;
 

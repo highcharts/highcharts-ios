@@ -31,7 +31,7 @@
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     
-    [HIGChartView preload];
+    [HIChartView preload];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];

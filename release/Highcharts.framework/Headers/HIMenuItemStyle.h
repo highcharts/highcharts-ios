@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2017 Highsoft AS
+* (c) 2009-2018 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -10,23 +10,23 @@
 
 
 /**
-* description: CSS styles for the individual items within the popup menu appearing
-by default when the export icon is clicked. The menu items are rendered
-in HTML.
+CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
 
-* demo: https://jsfiddle.net/gh/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemstyle/ : Add a grey stripe to the left
+**Defaults to** `{ "padding": "0.5em 1em", "color": "#333333", "background": "none" }`.
 
-* default: { "padding": "0.5em 1em", "color": "#333333", "background": "none" }
+**Try it**
+
+* [Add a grey stripe to the left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemstyle/)
 */
 @interface HIMenuItemStyle: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) NSString *padding;
+@property(nonatomic, readwrite) NSString *color;
+@property(nonatomic, readwrite) NSString *transition;
 /**
-* description: Defaults to 14px on touch devices and 11px on desktop.
+Defaults to `14px` on touch devices and `11px` on desktop.
 */
 @property(nonatomic, readwrite) NSString *fontSize;
-@property(nonatomic, readwrite) NSString *transition;
-@property(nonatomic, readwrite) NSString *color;
-@property(nonatomic, readwrite) NSString *padding;
 @property(nonatomic, readwrite) NSString *background;
 
 -(NSDictionary *)getParams;

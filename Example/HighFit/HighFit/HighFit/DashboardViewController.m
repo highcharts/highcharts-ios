@@ -116,7 +116,7 @@
     
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-        HIGChartView *chartView = [[HIGChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.bounds.size.width-20.0f, 240.0f)];
+        HIChartView *chartView = [[HIChartView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.bounds.size.width-20.0f, 240.0f)];
     
         chartView.backgroundColor = [UIColor clearColor];
     
@@ -242,7 +242,7 @@
 - (void) updateCellButtonTag: (UITableViewCell*) cell newIndex:(NSInteger) index
 {
     for (UIView *view in [cell subviews]) {
-        if([view isKindOfClass:[HIGChartView class]]) {
+        if([view isKindOfClass:[HIChartView class]]) {
             for (UIView *subview in [view subviews]) {
                 if([subview isKindOfClass:[UIButton class]]) {
                     subview.tag = index;

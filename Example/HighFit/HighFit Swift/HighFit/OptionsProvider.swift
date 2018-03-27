@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2016-2017 Highsoft AS. All rights reserved.
+//  Copyright © 2018 Highsoft AS. All rights reserved.
 //
 
 import UIKit
@@ -75,7 +75,7 @@ class OptionsProvider {
             
             let subtitle = HISubtitle()
             subtitle.text = options["subtitle"] as! String
-            if subtitle.text.count > 0 {
+            if subtitle.text.characters.count > 0 {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
@@ -168,7 +168,7 @@ class OptionsProvider {
             
             let subtitle = HISubtitle()
             subtitle.text = options["subtitle"] as! String
-            if subtitle.text.count > 0 {
+            if subtitle.text.characters.count > 0 {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
@@ -257,7 +257,7 @@ class OptionsProvider {
             
             let subtitle = HISubtitle()
             subtitle.text = options["subtitle"] as! String
-            if subtitle.text.count > 0 {
+            if subtitle.text.characters.count > 0 {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
