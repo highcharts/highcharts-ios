@@ -1,0 +1,6 @@
+# Version 6.0.7
+
+1. Chart update feature: changing any object from the chart's options causes the chart to be updated automatically. 
+   Also added a method `updateOptions` for updating the chart options manually.
+2. Functions feature: added support for Objective-C/Swift blocks in HIFunction. 
+3. New api reference(documentation).
