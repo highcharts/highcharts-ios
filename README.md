@@ -36,14 +36,12 @@ or by using Cocoapods by adding
     
     or Carthage by adding
     ```
-    github "https://github.com/highcharts/highcharts-ios" >= 6.1.0.1
+    github "https://github.com/highcharts/highcharts-ios" >= 6.1.0
     ```
-    to your Cartfile. You can add 
-    ```
-    github "https://github.com/highcharts/highcharts-ios" == 6.1.0.0
-    ```
-    if you need a build that can be run on iOS simulator but cannot be uploaded to AppStore (contains x86_64 architecture)
-        
+    to your Cartfile. Please be advised that this is a development framework which contains intel architectures. 
+    In order to submit a build to the app store you either need to remove those architectures using lipo,
+    attach the version found in "release" folder manually or use CocoaPods.
+    
     
 - Now add Highcharts to your project by simply copying it to your project to folder **Frameworks** (create it if necessary) and remeber to check "**Copy items if needed**" option
 
