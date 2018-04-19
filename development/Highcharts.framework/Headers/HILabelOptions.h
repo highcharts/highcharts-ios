@@ -41,7 +41,7 @@ Styles for the annotation's label.
 */
 @property(nonatomic, readwrite) HIStyle *style;
 /**
-When either the borderWidth or the backgroundColor is set, this	is the padding within the box.
+When either the borderWidth or the backgroundColor is set, this  is the padding within the box.
 
 **Try it**
 
@@ -55,8 +55,7 @@ The vertical alignment of the annotation's label.
 
 **Try it**
 
-* [Set labels position
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
+* [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
@@ -118,8 +117,7 @@ Whether to hide the annotation's label that is outside the plot area.
 /**
 Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the annotation's label.
 
-**Defaults to** `false
-*`.
+**Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
@@ -135,8 +133,7 @@ The name of a symbol to use for the border around the label. Symbols are predefi
 
 **Try it**
 
-* [Available shapes for labels
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shapes/)
+* [Available shapes for labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shapes/)
 */
 @property(nonatomic, readwrite) NSString *shape;
 /**
@@ -160,8 +157,7 @@ The y position offset of the label relative to the point. Note that if a `distan
 
 **Try it**
 
-* [Set labels position
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
+* [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
@@ -169,8 +165,7 @@ The x position offset of the label relative to the point. Note that if a `distan
 
 **Try it**
 
-* [Set labels position
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
+* [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
@@ -188,9 +183,8 @@ How to handle the annotation's label that flow outside the plot area. The justif
 Callback JavaScript function to format the annotation's label. Note that if a `format` or `text` are defined, the format or text take precedence and the formatter is ignored. `This` refers to a point object.
 
 **Defaults to** `function () {
-	return defined(this.y) ? this.y : 'Annotation label';
-}
-*`.
+    return defined(this.y) ? this.y : 'Annotation label';
+}`.
 
 **Try it**
 

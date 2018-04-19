@@ -20,8 +20,7 @@ The pixel stroke width of the shape.
 
 **Try it**
 
-* [Basic shape annotation
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
+* [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) NSNumber *strokeWidth;
 /**
@@ -45,8 +44,7 @@ The color of the shape's stroke.
 
 **Try it**
 
-* [Basic shape annotation
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
+* [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) HIColor *stroke;
 /**
@@ -54,8 +52,7 @@ The radius of the shape.
 
 **Try it**
 
-* [Basic shape annotation
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
+* [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) NSNumber *r;
 /**
@@ -73,8 +70,7 @@ The color of the shape's fill.
 
 **Try it**
 
-* [Basic shape annotation
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
+* [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) HIColor *fill;
 

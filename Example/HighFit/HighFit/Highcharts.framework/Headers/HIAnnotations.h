@@ -38,8 +38,7 @@ Options for annotation's labels. Each label inherits options from the labelOptio
 /**
 The Z index of the annotation.
 
-**Defaults to** `6
-*`.
+**Defaults to** `6`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**

@@ -236,7 +236,7 @@ Callback to format data labels for _nodes_ in the sankey diagram. The `nodeForma
 */
 @property(nonatomic, readwrite) HIFunction *nodeFormatter;
 /**
-The [format string](http://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting) specifying what to show for _nodes_ in the sankey diagram. By default the `nodeFormatter` returns `{point.name}`.
+The [format string](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) specifying what to show for _nodes_ in the sankey diagram. By default the `nodeFormatter` returns `{point.name}`.
 */
 @property(nonatomic, readwrite) NSString *nodeFormat;
 /**

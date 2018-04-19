@@ -82,7 +82,7 @@ Whether to reserve space for the labels. By default, space is reserved for the l
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reserveSpace;
 /**
-A [format string](http://www.highcharts.com/docs/chart- concepts/labels-and-string-formatting) for the axis label.
+A [format string](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for the axis label.
 
 **Defaults to** `{value}`.
 
@@ -122,7 +122,7 @@ Horizontal axes only. The number of lines to spread the labels over to make room
 */
 @property(nonatomic, readwrite) NSNumber *staggerLines;
 /**
-Defines how the labels are be repositioned according to the 3D chart orientation. - `'offset'`: Maintain a fixed horizontal/vertical distance from the 	 tick marks, despite the chart orientation. This is the backwards 	 compatible behavior, and causes skewing of X and Z axes. - `'chart'`: Preserve 3D position relative to the chart. This looks nice, but hard to read if the text isn't  forward-facing. - `'flap'`: Rotated text along the axis to compensate for the chart 	 orientation. This tries to maintain text as legible as possible on 	 all orientations. - `'ortho'`: Rotated text along the axis direction so that the labels 	 are orthogonal to the axis. This is very similar to `'flap'`, but 	 prevents skewing the labels (X and Y scaling are still present).
+Defines how the labels are be repositioned according to the 3D chart orientation. - `'offset'`: Maintain a fixed horizontal/vertical distance from the   tick marks, despite the chart orientation. This is the backwards   compatible behavior, and causes skewing of X and Z axes. - `'chart'`: Preserve 3D position relative to the chart. This looks nice, but hard to read if the text isn't  forward-facing. - `'flap'`: Rotated text along the axis to compensate for the chart   orientation. This tries to maintain text as legible as possible   on all orientations. - `'ortho'`: Rotated text along the axis direction so that the labels   are orthogonal to the axis. This is very similar to `'flap'`,   but prevents skewing the labels (X and Y scaling are still   present).
 
 **Accepted values:** `['offset', 'chart', 'flap', 'ortho']`.
 
@@ -223,8 +223,7 @@ The vertical alignment of the annotation's label.
 
 **Try it**
 
-* [Set labels position
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
+* [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
@@ -266,8 +265,7 @@ The name of a symbol to use for the border around the label. Symbols are predefi
 
 **Try it**
 
-* [Available shapes for labels
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shapes/)
+* [Available shapes for labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shapes/)
 */
 @property(nonatomic, readwrite) NSString *shape;
 /**

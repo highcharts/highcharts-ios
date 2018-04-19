@@ -11,7 +11,32 @@
 
 
 /**
-A `windbarb` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.windbarb`.
+A `windbarb` series. If the `type` option is not specified, it is inherited from `chart.type`.
+
+Configuration options for the series are given in three levels:
+ 
+1. Options for all series in a chart are defined in the `plotOptions.series` object.
+
+2. Options for all `windbarb` series are defined in `plotOptions.windbarb`.
+
+3. Options for one single series are given in `the series instance array`.
+ 
+<pre>
+ Highcharts.chart('container', {
+    plotOptions: {
+        series: {
+            // general options for all series
+        },
+        windbarb: {
+            // shared options for all windbarb series
+        }
+    },
+    series: [{
+        // specific options for this series instance
+        type: 'windbarb'
+    }]
+ });
+<pre>
 */
 @interface HIWindbarb: HISeries
 
@@ -31,6 +56,10 @@ Pixel length of the stems.
 Vertical offset from the cartesian position, in pixels. The default value makes sure the symbols don't overlap the X axis when `onSeries` is `null`, and that they don't overlap the linked series when `onSeries` is given.
 */
 @property(nonatomic, readwrite) NSNumber *yOffset;
+/**
+Horizontal offset from the cartesian position, in pixels. When the chart is inverted, this option allows translation like `yOffset` in non inverted charts.
+*/
+@property(nonatomic, readwrite) NSNumber *xOffset;
 /**
 The corner radius of the border surrounding each column or bar.
 
@@ -68,7 +97,6 @@ The spacing between columns on the Z Axis in a 3D chart. Requires `highcharts-3d
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *startFromThreshold;
 /**
 The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
 

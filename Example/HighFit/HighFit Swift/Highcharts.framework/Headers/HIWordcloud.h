@@ -13,7 +13,32 @@
 
 
 /**
-A `wordcloud` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.wordcloud`.
+A `wordcloud` series. If the `type` option is not specified, it is inherited from `chart.type`.
+
+Configuration options for the series are given in three levels:
+ 
+1. Options for all series in a chart are defined in the `plotOptions.series` object.
+
+2. Options for all `wordcloud` series are defined in `plotOptions.wordcloud`.
+
+3. Options for one single series are given in `the series instance array`.
+ 
+<pre>
+ Highcharts.chart('container', {
+    plotOptions: {
+        series: {
+            // general options for all series
+        },
+        wordcloud: {
+            // shared options for all wordcloud series
+        }
+    },
+    series: [{
+        // specific options for this series instance
+        type: 'wordcloud'
+    }]
+ });
+<pre>
 */
 @interface HIWordcloud: HISeries
 
@@ -34,6 +59,14 @@ CSS styles for the words.
 **Defaults to** `{"fontFamily":"sans-serif", "fontWeight": "900"}`.
 */
 @property(nonatomic, readwrite) HIStyle *style;
+/**
+A threshold determining the minimum font size that can be applied to a word.
+*/
+@property(nonatomic, readwrite) NSNumber *minFontSize;
+/**
+The word with the largest weight will have a font size equal to this value. The font size of a word is the ratio between its weight and the largest occuring weight, multiplied with the value of maxFontSize.
+*/
+@property(nonatomic, readwrite) NSNumber *maxFontSize;
 /**
 Spiral used for placing a word after the inital position experienced a collision with either another word or the borders. It is possible for users to add their own custom spiralling algorithms for use in word cloud. Read more about it in our [documentation](https://www.highcharts.com/docs/chart-and-series-types/word-cloud-series#custom-spiralling-algorithm)
 */
@@ -74,7 +107,6 @@ The corner radius of the border surrounding each column or bar.
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *startFromThreshold;
 /**
 The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
 

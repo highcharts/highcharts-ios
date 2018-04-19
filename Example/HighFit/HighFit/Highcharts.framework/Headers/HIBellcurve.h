@@ -11,7 +11,35 @@
 
 
 /**
-A `bellcurve` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.bellcurve`.
+A `bellcurve` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.bellcurve`. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the `plotOptions.series` object. 2. Options for all `bellcurve` series are defined in `plotOptions.bellcurve`. 3. Options for one single series are given in `the series instance array`.  Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     bellcurve: {       // shared options for all bellcurve series     }   },   series: [{     // specific options for this series instance     type: 'bellcurve'   }] });  
+*/
+/**
+A `bellcurve` series. If the `type` option is not specified, it is inherited from `chart.type`.
+
+Configuration options for the series are given in three levels:
+ 
+1. Options for all series in a chart are defined in the `plotOptions.series` object.
+
+2. Options for all `bellcurve` series are defined in `plotOptions.bellcurve`.
+
+3. Options for one single series are given in `the series instance array`.
+ 
+<pre>
+ Highcharts.chart('container', {
+    plotOptions: {
+        series: {
+            // general options for all series
+        },
+        bellcurve: {
+            // shared options for all bellcurve series
+        }
+    },
+    series: [{
+        // specific options for this series instance
+        type: 'bellcurve'
+    }]
+ });
+<pre>
 */
 @interface HIBellcurve: HISeries
 

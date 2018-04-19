@@ -66,7 +66,7 @@ The class name of the menu appearing from the button.
 */
 @property(nonatomic, readwrite) NSString *menuClassName;
 /**
-A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "Print" menu item plus one menu item for each of the available export types. Defaults to  [ 	'printChart', 	'separator', 	'downloadPNG', 	'downloadJPEG', 	'downloadPDF', 	'downloadSVG' ] 
+A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "Print" menu item plus one menu item for each of the available export types. Defaults to  [  'printChart',  'separator',  'downloadPNG',  'downloadJPEG',  'downloadPDF',  'downloadSVG' ] 
 
 **Try it**
 

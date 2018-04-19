@@ -66,13 +66,11 @@ Whether axis, including axis title, line, ticks and labels, should be visible.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
-A soft maximum for the axis. If the series data maximum is less than this, the axis will stay at this maximum, but if the series data maximum is higher, the axis will flex to show all data.
+When using multiple axis, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in an Axis options are set to false, then the `alignTicks ` will be disabled for the Axis. Disabled for logarithmic axes.
 
-**Try it**
-
-* [Soft min and max](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/softmin-softmax/)
+**Defaults to** `true`.
 */
-@property(nonatomic, readwrite) NSNumber *softMax;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
 Refers to the index in the `panes` array. Used for circular gauges and polar charts. When the option is not set then first pane will be used.
 
@@ -211,7 +209,7 @@ An array of colored bands stretching across the plot area marking an interval on
 */
 @property(nonatomic, readwrite) NSArray <HIPlotBands *> *plotBands;
 /**
-The dash or dot style of the minor grid lines. For possible values, see [this demonstration](http://jsfiddle.net/gh/get/library/pure/ highcharts/highcharts/tree/master/samples/highcharts/plotoptions/ series-dashstyle-all/).
+The dash or dot style of the minor grid lines. For possible values, see [this demonstration](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
 **Accepted values:** `["Solid", "ShortDash", "ShortDot", "ShortDashDot",
              "ShortDashDotDot", "Dot", "Dash" ,"LongDash",
@@ -298,7 +296,7 @@ The axis labels show the number or category for each tick.
 */
 @property(nonatomic, readwrite) HILabels *labels;
 /**
-The dash or dot style of the grid lines. For possible values, see [this demonstration](http://jsfiddle.net/gh/get/library/pure/ highcharts/highcharts/tree/master/samples/highcharts/plotoptions/ series-dashstyle-all/).
+The dash or dot style of the grid lines. For possible values, see [this demonstration](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
 **Accepted values:** `["Solid", "ShortDash", "ShortDot", "ShortDashDot",
              "ShortDashDotDot", "Dot", "Dash" ,"LongDash",
@@ -608,6 +606,14 @@ The width of the line marking the axis itself. In styled mode, the stroke width 
 * [Axes in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/axis/)
 */
 @property(nonatomic, readwrite) NSNumber *lineWidth;
+/**
+A soft maximum for the axis. If the series data maximum is less than this, the axis will stay at this maximum, but if the series data maximum is higher, the axis will flex to show all data.
+
+**Try it**
+
+* [Soft min and max](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/softmin-softmax/)
+*/
+@property(nonatomic, readwrite) NSNumber *softMax;
 
 -(NSDictionary *)getParams;
 

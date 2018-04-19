@@ -67,11 +67,11 @@ The loading text that appears when the chart is set into the loading state follo
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *numericSymbols;
 /**
-Exporting module only. The text for the menu item to print the chart.
+Exporting module only. The text for the SVG download menu item.
 
-**Defaults to** `Print chart`.
+**Defaults to** `Download SVG vector image`.
 */
-@property(nonatomic, readwrite) NSString *printChart;
+@property(nonatomic, readwrite) NSString *downloadSVG;
 /**
 The magnitude of `numericSymbols` replacements. Use 10000 for Japanese, Korean and various Chinese locales, which use symbols for 10^4, 10^8 and 10^12.
 
@@ -90,11 +90,11 @@ An array containing the weekday names.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *weekdays;
 /**
-Exporting module only. The text for the SVG download menu item.
+Exporting module only. The text for the menu item to print the chart.
 
-**Defaults to** `Download SVG vector image`.
+**Defaults to** `Print chart`.
 */
-@property(nonatomic, readwrite) NSString *downloadSVG;
+@property(nonatomic, readwrite) NSString *printChart;
 /**
 The text for the button that appears when drilling down, linking back to the parent series. The parent series' name is inserted for `{series.name}`.
 
@@ -127,6 +127,10 @@ Exporting module only. The text for the PDF download menu item.
 **Defaults to** `Download PDF document`.
 */
 @property(nonatomic, readwrite) NSString *downloadPDF;
+/**
+Export-data module only. The text for the menu item.
+*/
+@property(nonatomic, readwrite) NSString *openInCloud;
 /**
 An array containing the months names. Corresponds to the `%B` format in `Highcharts.dateFormat()`.
 

@@ -10,7 +10,32 @@
 
 
 /**
-A `bubble` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.bubble`.
+A `bubble` series. If the `type` option is not specified, it is inherited from `chart.type`.
+
+Configuration options for the series are given in three levels:
+ 
+1. Options for all series in a chart are defined in the `plotOptions.series` object.
+
+2. Options for all `bubble` series are defined in `plotOptions.bubble`.
+
+3. Options for one single series are given in `the series instance array`.
+ 
+<pre>
+ Highcharts.chart('container', {
+    plotOptions: {
+        series: {
+            // general options for all series
+        },
+        bubble: {
+            // shared options for all bubble series
+        }
+    },
+    series: [{
+        // specific options for this series instance
+        type: 'bubble'
+    }]
+ });
+<pre>
 */
 @interface HIBubble: HISeries
 
@@ -73,16 +98,6 @@ When `displayNegative` is `false`, bubbles with lower Z values are skipped. When
 */
 @property(nonatomic, readwrite) NSNumber *zThreshold;
 /**
-When this is true, the absolute value of z determines the size of the bubble. This means that with the default `zThreshold` of 0, a bubble of value -1 will have the same size as a bubble of value 1, while a bubble of value 0 will have a smaller size according to `minSize`.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Size by absolute value, various thresholds](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-sizebyabsolutevalue/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *sizeByAbsoluteValue;
-/**
 Whether to display negative sized bubbles. The threshold is given by the `zThreshold` option, and negative bubbles can be visualized by setting `negativeColor`.
 
 **Defaults to** `true`.
@@ -92,6 +107,16 @@ Whether to display negative sized bubbles. The threshold is given by the `zThres
 * [Negative bubbles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-negative/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *displayNegative;
+/**
+When this is true, the absolute value of z determines the size of the bubble. This means that with the default `zThreshold` of 0, a bubble of value -1 will have the same size as a bubble of value 1, while a bubble of value 0 will have a smaller size according to `minSize`.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Size by absolute value, various thresholds](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-sizebyabsolutevalue/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *sizeByAbsoluteValue;
 
 -(NSDictionary *)getParams;
 

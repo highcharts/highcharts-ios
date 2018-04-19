@@ -18,7 +18,7 @@
 
 
 /**
-The legend is a box containing a symbol and name for each series item or point item in the chart. Each series (or points in case of pie charts) is represented by a symbol and its name in the legend. It is possible to override the symbol creator function and create [custom legend symbols](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/studies/legend- custom-symbol/).
+The legend is a box containing a symbol and name for each series item or point item in the chart. Each series (or points in case of pie charts) is represented by a symbol and its name in the legend. It is possible to override the symbol creator function and create [custom legend symbols](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/studies/legend-custom-symbol/).
 */
 @interface HILegend: HIChartsJSONSerializable
 
@@ -58,7 +58,7 @@ When this is true, the legend symbol width will be the same as the symbol height
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *squareSymbol;
 /**
-The width for each legend item. This is useful in a horizontal layout with many items when you want the items to align vertically. .
+The width for each legend item. By default the items are laid out successively. In a `horizontal layout`, if the items are laid out across two rows or more, they will be vertically aligned depending on the `legend.alignColumns` option.
 
 **Defaults to** `null`.
 
@@ -187,7 +187,7 @@ Default styling for the checkbox next to a legend item when `showCheckbox` is tr
 */
 @property(nonatomic, readwrite) HIItemCheckboxStyle *itemCheckboxStyle;
 /**
-A [format string](http://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting) for each legend label. Available variables relates to properties on the series, or the point in case of pies.
+A [format string](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for each legend label. Available variables relates to properties on the series, or the point in case of pies.
 
 **Defaults to** `{name}`.
 */
@@ -314,6 +314,10 @@ CSS styles for each legend item when the corresponding series or point is hidden
 */
 @property(nonatomic, readwrite) HIItemHiddenStyle *itemHiddenStyle;
 /**
+If the `layout` is `horizontal` and the legend items span over two lines or more, whether to align the items into vertical columns. Setting this to `false` makes room for more items, but will look more messy.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *alignColumns;
+/**
 The pixel height of the symbol for series types that use a rectangle in the legend. Defaults to the font size of legend items.
 */
 @property(nonatomic, readwrite) NSNumber *symbolHeight;
@@ -356,7 +360,7 @@ The x offset of the legend relative to its horizontal alignment `align` within c
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Options for the paging or navigation appearing when the legend is overflown. Navigation works well on screen, but not in static exported images. One way of working around that is to [increase the chart height in export](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation- enabled-false/).
+Options for the paging or navigation appearing when the legend is overflown. Navigation works well on screen, but not in static exported images. One way of working around that is to [increase the chart height in export](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation-enabled-false/).
 */
 @property(nonatomic, readwrite) HINavigation *navigation;
 

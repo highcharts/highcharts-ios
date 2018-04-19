@@ -39,7 +39,7 @@ CSS styles for the individual items within the popup menu appearing by default w
 */
 @property(nonatomic, readwrite) HIMenuItemStyle *menuItemStyle;
 /**
-A collection of options for buttons appearing in the exporting module. In styled mode, the buttons are styled with the `.highcharts-contextbutton` and `.highcharts-button-symbol` class.
+A collection of options for buttons appearing in the exporting module. In styled mode, the buttons are styled with the `.highcharts-contextbutton` and `.highcharts-button-symbol` classes.
 */
 @property(nonatomic, readwrite) HIButtonOptions *buttonOptions;
 /**
@@ -71,7 +71,7 @@ The pixel size of the up and down arrows in the legend paging navigation.
 */
 @property(nonatomic, readwrite) NSNumber *arrowSize;
 /**
-Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the [adapt chart to legend](http://www.highcharts.com/plugin- registry/single/8/Adapt-Chart-To-Legend) plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
+Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the [adapt chart to legend](http://www.highcharts.com/plugin-registry/single/8/Adapt-Chart-To-Legend) plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
 
 **Defaults to** `true`.
 */

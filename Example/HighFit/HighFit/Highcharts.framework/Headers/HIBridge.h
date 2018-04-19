@@ -78,6 +78,7 @@
 #import "HIGlobal.h"
 #import "HINoData.h"
 #import "HIBoxplot.h"
+#import "HIScrollablePlotArea.h"
 #import "HIAttributes.h"
 #import "HIVector.h"
 #import "HIColorVariation.h"

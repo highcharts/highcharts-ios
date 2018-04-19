@@ -31,7 +31,6 @@ The outer radius of the circular pane background. Can be either numeric (pixels)
 **Defaults to** `105%`.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ outerRadius;
-@property(nonatomic, readwrite) NSNumber *from;
 /**
 The inner radius of the pane background. Can be either numeric (pixels) or a percentage string.
 

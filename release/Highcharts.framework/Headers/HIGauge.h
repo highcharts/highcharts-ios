@@ -12,7 +12,32 @@
 
 
 /**
-A `gauge` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.gauge`.
+A `gauge` series. If the `type` option is not specified, it is inherited from `chart.type`.
+
+Configuration options for the series are given in three levels:
+ 
+1. Options for all series in a chart are defined in the `plotOptions.series` object.
+
+2. Options for all `gauge` series are defined in `plotOptions.gauge`.
+
+3. Options for one single series are given in `the series instance array`.
+ 
+<pre>
+ Highcharts.chart('container', {
+    plotOptions: {
+        series: {
+            // general options for all series
+        },
+        gauge: {
+            // shared options for all gauge series
+        }
+    },
+    series: [{
+        // specific options for this series instance
+        type: 'gauge'
+    }]
+ });
+<pre>
 */
 @interface HIGauge: HISeries
 

@@ -11,7 +11,32 @@
 
 
 /**
-A `columnrange` series. If the `type` option is not specified, it is inherited from `chart.type`. For options that apply to multiple series, it is recommended to add them to the `plotOptions.series` options structure. To apply to all series of this specific type, apply it to `plotOptions.columnrange`.
+A `columnrange` series. If the `type` option is not specified, it is inherited from `chart.type`.
+
+Configuration options for the series are given in three levels:
+ 
+1. Options for all series in a chart are defined in the `plotOptions.series` object.
+
+2. Options for all `columnrange` series are defined in `plotOptions.columnrange`.
+
+3. Options for one single series are given in `the series instance array`.
+ 
+<pre>
+ Highcharts.chart('container', {
+    plotOptions: {
+        series: {
+            // general options for all series
+        },
+        columnrange: {
+            // shared options for all columnrange series
+        }
+    },
+    series: [{
+        // specific options for this series instance
+        type: 'columnrange'
+    }]
+ });
+<pre>
 */
 @interface HIColumnrange: HISeries
 
@@ -52,7 +77,6 @@ The spacing between columns on the Z Axis in a 3D chart. Requires `highcharts-3d
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *startFromThreshold;
 /**
 The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
 

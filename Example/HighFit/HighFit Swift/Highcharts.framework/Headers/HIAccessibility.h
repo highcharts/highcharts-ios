@@ -7,10 +7,10 @@
 */
 
 #import "HIKeyboardNavigation.h"
-#import "HIAxis.h"
 #import "HIChartTypes.h"
-#import "HIExporting.h"
+#import "HIAxis.h"
 #import "HISeries.h"
+#import "HIExporting.h"
 #import "HISeriesTypeDescriptions.h"
 #import "HIFunction.h"
 
@@ -66,42 +66,46 @@ Function to run upon clicking the "View as Data Table" link in the screen reader
 Formatter function to determine the date/time format used with points on datetime axes when describing them to screen reader users. Receives one argument, `point`, referring to the point to describe. Should return a date format string compatible with `dateFormat`.
 */
 @property(nonatomic, readwrite) HIFunction *pointDateFormatter;
-@property(nonatomic, readwrite) NSString *defaultChartTitle;
-@property(nonatomic, readwrite) NSString *screenReaderRegionLabel;
-@property(nonatomic, readwrite) NSString *mapZoomIn;
-/**
-Axis description format strings.
-*/
-@property(nonatomic, readwrite) HIAxis *axis;
-@property(nonatomic, readwrite) NSString *rangeSelectorMinInput;
 /**
 Chart type description strings. This is added to the chart information region. If there is only a single series type used in the chart, we use the format string for the series type, or default if missing. There is one format string for cases where there is only a single series in the chart, and one for multiple series of the same type.
 */
 @property(nonatomic, readwrite) HIChartTypes *chartTypes;
-@property(nonatomic, readwrite) NSString *rangeSelectorButton;
 @property(nonatomic, readwrite) NSString *longDescriptionHeading;
-/**
-Exporting menu format strings for accessibility module.
-*/
-@property(nonatomic, readwrite) HIExporting *exporting;
-@property(nonatomic, readwrite) NSString *chartHeading;
 @property(nonatomic, readwrite) NSString *rangeSelectorMaxInput;
+@property(nonatomic, readwrite) NSString *structureHeading;
+@property(nonatomic, readwrite) NSString *chartContainerLabel;
+/**
+Axis description format strings.
+*/
+@property(nonatomic, readwrite) HIAxis *axis;
 /**
 Lang configuration for different series types. For more dynamic control over the series element descriptions, see `accessibility.seriesDescriptionFormatter`.
 */
 @property(nonatomic, readwrite) HISeries *series;
 /**
+Exporting menu format strings for accessibility module.
+*/
+@property(nonatomic, readwrite) HIExporting *exporting;
+@property(nonatomic, readwrite) NSString *mapZoomOut;
+@property(nonatomic, readwrite) NSString *rangeSelectorMinInput;
+@property(nonatomic, readwrite) NSString *rangeSelectorButton;
+@property(nonatomic, readwrite) NSString *legendItem;
+@property(nonatomic, readwrite) NSString *tableSummary;
+@property(nonatomic, readwrite) NSString *noDescription;
+@property(nonatomic, readwrite) NSString *viewAsDataTable;
+@property(nonatomic, readwrite) NSString *defaultChartTitle;
+@property(nonatomic, readwrite) NSString *screenReaderRegionLabel;
+@property(nonatomic, readwrite) NSString *mapZoomIn;
+@property(nonatomic, readwrite) NSString *chartHeading;
+/**
+Title element text for the chart SVG element. Leave this empty to disable adding the title element. Browsers will display this content when hovering over elements in the chart. Assistive technology may use this element to label the chart.
+*/
+@property(nonatomic, readwrite) NSString *svgContainerTitle;
+@property(nonatomic, readwrite) NSString *navigationHint;
+/**
 Descriptions of lesser known series types. The relevant description is added to the screen reader information region when these series types are used.
 */
 @property(nonatomic, readwrite) HISeriesTypeDescriptions *seriesTypeDescriptions;
-@property(nonatomic, readwrite) NSString *legendItem;
-@property(nonatomic, readwrite) NSString *chartContainerLabel;
-@property(nonatomic, readwrite) NSString *structureHeading;
-@property(nonatomic, readwrite) NSString *tableSummary;
-@property(nonatomic, readwrite) NSString *navigationHint;
-@property(nonatomic, readwrite) NSString *noDescription;
-@property(nonatomic, readwrite) NSString *viewAsDataTable;
-@property(nonatomic, readwrite) NSString *mapZoomOut;
 
 -(NSDictionary *)getParams;
 

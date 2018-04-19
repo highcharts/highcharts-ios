@@ -33,7 +33,7 @@
             var chart = new Highcharts.Chart({{options}});
             
             function updateOptions(options) {
-                chart.update(options);
+                chart.update(options, true, true, false);
             }
         
             function iOSEventHandler(event) {

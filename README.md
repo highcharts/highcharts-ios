@@ -30,16 +30,20 @@ Here we present how to create basic chart and place it in your project.
 - First of all download Highcharts framework from here: [Highcharts](https://github.com/highcharts/highcharts-ios) 
 or by using Cocoapods by adding 
     ```
-    pod 'Highcharts', '~> 6.0.7'
+    pod 'Highcharts', '~> 6.1.0'
     ```
     to your Podfile
     
     or Carthage by adding
     ```
-    github "https://github.com/highcharts/highcharts-ios" >= 6.0.7
+    github "https://github.com/highcharts/highcharts-ios" >= 6.1.0r
     ```
-    to your Cartfile
-    
+    to your Cartfile. You can add 
+    ```
+    github "https://github.com/highcharts/highcharts-ios" >= 6.1.0d
+    ```
+    if you need a build that can be run on iOS simulator but cannot be uploaded to AppStore (contains x86_64 architecture)
+        
     
 - Now add Highcharts to your project by simply copying it to your project to folder **Frameworks** (create it if necessary) and remeber to check "**Copy items if needed**" option
 
