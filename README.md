@@ -36,11 +36,11 @@ or by using Cocoapods by adding
     
     or Carthage by adding
     ```
-    github "https://github.com/highcharts/highcharts-ios" >= 6.1.0r
+    github "https://github.com/highcharts/highcharts-ios" >= 6.1.0.1
     ```
     to your Cartfile. You can add 
     ```
-    github "https://github.com/highcharts/highcharts-ios" >= 6.1.0d
+    github "https://github.com/highcharts/highcharts-ios" == 6.1.0.0
     ```
     if you need a build that can be run on iOS simulator but cannot be uploaded to AppStore (contains x86_64 architecture)
         
