@@ -154,6 +154,9 @@ HTML labels that can be positioned anywhere in the chart area.
 */
 @property(nonatomic, readwrite) HILabels *labels;
 
+/**
+General options for the chart.
+ */
 @property(nonatomic, readwrite) HIChart *chart;
 
 /**

@@ -16,7 +16,7 @@ The loading options control the appearance of the loading screen that covers the
 @interface HILoading: HIChartsJSONSerializable
 
 /**
-CSS styles for the loading screen that covers the plot area.
+CSS styles for the loading screen that covers the plot area. In styled mode, the loading label is styled with the `.highcharts-loading` class.
 
 **Defaults to** `{ "position": "absolute", "backgroundColor": "#ffffff", "opacity": 0.5, "textAlign": "center" }`.
 

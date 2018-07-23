@@ -16,6 +16,8 @@ Language object. The language object is global and it can't be set on each chart
 
 /**
 Export-data module only. The text for the menu item.
+ 
+**Defaults to** `Share CSV`.
 */
 @property(nonatomic, readwrite) NSString *downloadCSV;
 /**
@@ -25,7 +27,7 @@ Export-data module only. The text for the menu item.
 /**
 Exporting module only. The text for the PNG download menu item.
 
-**Defaults to** `Download PNG image`.
+**Defaults to** `Share image`.
 */
 @property(nonatomic, readwrite) NSString *downloadPNG;
 /**
@@ -112,6 +114,12 @@ Exporting module menu. The tooltip title for the context menu holding print and 
 */
 @property(nonatomic, readwrite) NSString *contextButtonTitle;
 /**
+ Exporting module only. The text for the disabling menu button.
+ 
+ **Defaults to** `Cancel`.
+ */
+@property(nonatomic, readwrite) NSString *cancelButtonTitle;
+/**
 What to show in a date field for invalid dates. Defaults to an empty string.
 */
 @property(nonatomic, readwrite) NSString *invalidDate;
@@ -124,7 +132,7 @@ The text for the label appearing when a chart is zoomed.
 /**
 Exporting module only. The text for the PDF download menu item.
 
-**Defaults to** `Download PDF document`.
+**Defaults to** `Share PDF`.
 */
 @property(nonatomic, readwrite) NSString *downloadPDF;
 /**
@@ -149,7 +157,7 @@ An array containing the months names in abbreviated form. Corresponds to the `%b
 /**
 Exporting module only. The text for the JPEG download menu item.
 
-**Defaults to** `Download JPEG image`.
+**Defaults to** `Share image`.
 */
 @property(nonatomic, readwrite) NSString *downloadJPEG;
 /**

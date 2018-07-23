@@ -63,7 +63,7 @@ Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels- and-
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
-The y position of the subtitle relative to the alignment within chart. spacingTop and chart.spacingBottom. By default the subtitle is laid out below the title unless the title is floating.
+The y position of the subtitle relative to the alignment within `chart.spacingTop` and `chart.spacingBottom`. By default the subtitle is laid out below the title unless the title is floating.
 
 **Defaults to** `null`.
 
@@ -73,7 +73,7 @@ The y position of the subtitle relative to the alignment within chart. spacingTo
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The x position of the subtitle relative to the alignment within chart. spacingLeft and chart.spacingRight.
+The x position of the subtitle relative to the alignment within `chart.spacingLeft` and `chart.spacingRight`.
 
 **Defaults to** `0`.
 

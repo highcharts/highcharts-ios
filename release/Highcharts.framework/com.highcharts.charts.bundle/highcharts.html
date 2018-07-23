@@ -22,7 +22,7 @@
                         contextButton: {
                             menuItems: null,
                             onclick: function(){
-                                this.exportChartLocal();
+                                iOSExportHandler("exportButtonPressed");
                             }
                         }
                     }
@@ -38,6 +38,27 @@
         
             function iOSEventHandler(event) {
                 window.webkit.messageHandlers.observe.postMessage(event);
+            }
+        
+            function iOSExportHandler(event) {
+                window.webkit.messageHandlers.exporting.postMessage(event);
+            }
+        
+            function shareChart(type) {
+                switch (type) {
+                    case "image":
+                        chart.exportChartLocal({type: 'image/png'});
+                        break;
+                    case "pdf":
+                        chart.exportChartLocal({type: 'application/pdf'});
+                        break;
+                    case "csv":
+                        var csvText = "data:text/csv;charset=utf-8," + chart.getCSV();
+                        iOSExportHandler(csvText);
+                        break;
+                    default:
+                        break;
+                }
             }
             
             function modifySize(width, height) {

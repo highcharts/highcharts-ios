@@ -46,7 +46,7 @@ The class name for this background.
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-Tha shape of the pane background. When `solid`, the background is circular. When `arc`, the background extends only from the min to the max of the value axis.
+The shape of the pane background. When `solid`, the background is circular. When `arc`, the background extends only from the min to the max of the value axis.
 
 **Accepted values:** `["solid", "arc"]`.
 

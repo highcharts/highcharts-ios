@@ -114,9 +114,9 @@ The color of the drawn border around the legend.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
-The layout of the legend items. Can be one of "horizontal" or "vertical".
+The layout of the legend items. Can be one of `horizontal` or `vertical` or `proximate`. When `proximate`, the legend items will be placed as close as possible to the graphs they're representing, except in inverted charts or when the legend position doesn't allow it.
 
-**Accepted values:** `["horizontal", "vertical"]`.
+**Accepted values:** `["horizontal", "vertical", "proximate"]`.
 
 **Defaults to** `horizontal`.
 
@@ -124,6 +124,7 @@ The layout of the legend items. Can be one of "horizontal" or "vertical".
 
 * [Horizontal by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-horizontal/)
 * [Vertical](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-vertical/)
+* [Labels proximate to the data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-proximate)
 */
 @property(nonatomic, readwrite) NSString *layout;
 /**
@@ -163,7 +164,7 @@ The background color of the legend.
 */
 @property(nonatomic, readwrite) HIColor *backgroundColor;
 /**
-Line height for the legend items. Deprecated as of 2.1\. Instead, the line height for each item can be set using itemStyle.lineHeight, and the padding between items using itemMarginTop and itemMarginBottom.
+Line height for the legend items. Deprecated as of 2.1\. Instead, the line height for each item can be set using itemStyle.lineHeight, and the padding between items using `itemMarginTop` and `itemMarginBottom`.
 
 **Defaults to** `16`.
 
@@ -253,7 +254,7 @@ CSS styles for each legend item in hover mode. Only a subset of CSS is supported
 */
 @property(nonatomic, readwrite) HIItemHoverStyle *itemHoverStyle;
 /**
-The vertical alignment of the legend box. Can be one of `top`, `middle` or `bottom`. Vertical position can be further determined by the `y` option. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area.
+The vertical alignment of the legend box. Can be one of `top`, `middle` or `bottom`. Vertical position can be further determined by the `y` option. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area. When the `layout` option is `proximate`, the `verticalAlign` option doesn't apply.
 
 **Accepted values:** `["top", "middle", "bottom"]`.
 

@@ -29,7 +29,7 @@ See `navigation.buttonOptions.symbolFill`.
 /**
 The symbol for the button. Points to a definition function in the `Highcharts.Renderer.symbols` collection. The default `exportIcon` function is part of the exporting module.
 
-**Accepted values:** `["circle", "square", "diamond", "triangle", "triangle-down", "menu"]`.
+**Accepted values:** `["exportIcon", "circle", "square", "diamond", "triangle", "triangle-down", "menu"]`.
 
 **Defaults to** `menu`.
 

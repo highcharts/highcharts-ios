@@ -191,7 +191,7 @@ Fires when a drilldown point is clicked, before the new series is added. This ev
 */
 @property(nonatomic, readwrite) HIFunction *drilldown;
 /**
-Fires when the chart is redrawn, either after a call to chart.redraw() or after an axis, series or point is modified with the `redraw` option set to true. One parameter, `event`, is passed to the function, containing common event information.
+Fires when the chart is redrawn, either after a call to `chart.redraw()` or after an axis, series or point is modified with the `redraw` option set to true. One parameter, `event`, is passed to the function, containing common event information.
 
 **Try it**
 

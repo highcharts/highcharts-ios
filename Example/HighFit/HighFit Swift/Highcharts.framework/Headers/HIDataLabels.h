@@ -112,7 +112,7 @@ The border color for the data label. Defaults to `undefined`.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
-A declarative filter for which data labels to display. The declarative filter is designed for use when callback functions are not available, like when the chart options require a pure JSON structure or for use with graphical editors. For programmatic control, use the `formatter` instead, and return `false` to disable a single data label.
+A declarative filter for which data labels to display. The declarative filter is designed for use when callback functions are not available, like when the chart options require a pure JSON structure or for use with graphical editors. For programmatic control, use the `formatter` instead, and return `undefined` to disable a single data label.
 
 **Try it**
 
@@ -216,13 +216,13 @@ The border width in pixels for the data label.
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
-Decides how the data label will be rotated according to the perimeter of the sunburst. It can either be parallel or perpendicular to the perimeter. `series.rotation` takes precedence over `rotationMode`.
+Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `auto`, `parallel` and `perpendicular`. When `auto`, the best fit will be computed for the point. The `series.rotation` option takes precedence over `rotationMode`.
 
-**Accepted values:** `["perpendicular", "parallel"]`.
+**Accepted values:** `["auto", "perpendicular", "parallel"]`.
 */
 @property(nonatomic, readwrite) NSString *rotationMode;
 /**
-The y position offset of the label relative to the point.
+The y position offset of the label relative to the point in pixels.
 
 **Defaults to** `-6`.
 
@@ -239,17 +239,6 @@ Callback to format data labels for _nodes_ in the sankey diagram. The `nodeForma
 The [format string](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) specifying what to show for _nodes_ in the sankey diagram. By default the `nodeFormatter` returns `{point.name}`.
 */
 @property(nonatomic, readwrite) NSString *nodeFormat;
-/**
-The color of the line connecting the data label to the pie slice. The default color is the same as the point's color. In styled mode, the connector stroke is given in the `.highcharts-data-label-connector` class.
-
-**Defaults to** `{point.color}`.
-
-**Try it**
-
-* [Blue connectors](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-connectorcolor/)
-* [Styled connectors](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/pie-point/)
-*/
-@property(nonatomic, readwrite) NSString *connectorColor;
 /**
 The distance of the data label from the pie's edge. Negative numbers put the data label on top of the pie slices. Connectors are only shown for data labels outside the pie.
 
@@ -290,6 +279,17 @@ The distance from the data label to the connector.
 * [No padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-connectorpadding/)
 */
 @property(nonatomic, readwrite) NSNumber *connectorPadding;
+/**
+The color of the line connecting the data label to the pie slice. The default color is the same as the point's color. In styled mode, the connector stroke is given in the `.highcharts-data-label-connector` class.
+
+**Defaults to** `{point.color}`.
+
+**Try it**
+
+* [Blue connectors](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-connectorcolor/)
+* [Styled connectors](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/pie-point/)
+*/
+@property(nonatomic, readwrite) NSString *connectorColor;
 
 -(NSDictionary *)getParams;
 

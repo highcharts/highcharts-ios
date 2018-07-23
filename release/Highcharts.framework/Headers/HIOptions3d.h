@@ -28,8 +28,6 @@ Provides the option to draw a frame around the charts by defining a bottom, fron
 Set it to `"auto"` to automatically move the labels to the best edge.
 
 **Accepted values:** `[null, "auto"]`.
-
-**Defaults to** `null`.
 */
 @property(nonatomic, readwrite) NSString *axisLabelPosition;
 /**

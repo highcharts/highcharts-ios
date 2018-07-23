@@ -68,7 +68,7 @@ The word with the largest weight will have a font size equal to this value. The 
 */
 @property(nonatomic, readwrite) NSNumber *maxFontSize;
 /**
-Spiral used for placing a word after the inital position experienced a collision with either another word or the borders. It is possible for users to add their own custom spiralling algorithms for use in word cloud. Read more about it in our [documentation](https://www.highcharts.com/docs/chart-and-series-types/word-cloud-series#custom-spiralling-algorithm)
+Spiral used for placing a word after the initial position experienced a collision with either another word or the borders. It is possible for users to add their own custom spiralling algorithms for use in word cloud. Read more about it in our [documentation](https://www.highcharts.com/docs/chart-and-series-types/word-cloud-series#custom-spiralling-algorithm)
 */
 @property(nonatomic, readwrite) NSString *spiral;
 /**

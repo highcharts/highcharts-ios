@@ -35,7 +35,7 @@ The radius of the rounded border corners.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
-The HTML of the tooltip header line. Variables are enclosed by curly brackets. Available variables are `point.key`, `series.name`, `series.color` and other members from the `point` and `series` objects. The `point.key` variable contains the category name, x value or datetime string depending on the type of axis. For datetime axes, the `point.key` date format can be set using tooltip.xDateFormat.
+The HTML of the tooltip header line. Variables are enclosed by curly brackets. Available variables are `point.key`, `series.name`, `series.color` and other members from the `point` and `series` objects. The `point.key` variable contains the category name, x value or datetime string depending on the type of axis. For datetime axes, the `point.key` date format can be set using `tooltip.xDateFormat`.
 
 **Try it**
 
@@ -119,7 +119,17 @@ A string to append to the tooltip format.
 */
 @property(nonatomic, readwrite) NSString *footerFormat;
 /**
-Enable or disable animation of the tooltip. In slow legacy IE browsers the animation is disabled by default.
+Whether to allow the tooltip to render outside the chart's SVG element box. By default (`false`), the tooltip is rendered within the chart's SVG element, which results in the tooltip being aligned inside the chart area. For small charts, this may result in clipping or overlapping. When `true`, a separate SVG element is created and overlaid on the page, allowing the tooltip to be aligned inside the page itself.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Small charts with tooltips outside](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/outside)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *outside;
+/**
+Enable or disable animation of the tooltip.
 
 **Defaults to** `true`.
 */
@@ -171,7 +181,7 @@ When the tooltip is shared, the entire plot area will capture mouse movement or 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *shared;
 /**
-Callback function to format the text of the tooltip from scratch. Return `false` to disable tooltip for a specific point on series. A subset of HTML is supported. Unless `useHTML` is true, the HTML of the tooltip is parsed and converted to SVG, therefore this isn't a complete HTML renderer. The following tags are supported: `<b>`, `<strong>`, `<i>`, `<em>`, `<br/>`, `<span>`. Spans can be styled with a `style` attribute, but only text-related CSS that is shared with SVG is handled. Since version 2.1 the tooltip can be shared between multiple series through the `shared` option. The available data in the formatter differ a bit depending on whether the tooltip is shared or not. In a shared tooltip, all properties except `x`, which is common for all points, are kept in an array, `this.points`. Available data are:  this.percentage (not shared) / this.points[i].percentage (shared) Stacked series and pies only. The point's percentage of the total.  this.point (not shared) / this.points[i].point (shared) The point object. The point name, if defined, is available through `this.point.name`. this.points In a shared tooltip, this is an array containing all other properties for each point. this.series (not shared) / this.points[i].series (shared) The series object. The series name is available through `this.series.name`. this.total (not shared) / this.points[i].total (shared) Stacked series only. The total value at this point's x value.  this.x The x value. This property is the same regardless of the tooltip being shared or not. this.y (not shared) / this.points[i].y (shared) The y value. 
+Callback function to format the text of the tooltip from scratch. Return `false` to disable tooltip for a specific point on series. A subset of HTML is supported. Unless `useHTML` is true, the HTML of the tooltip is parsed and converted to SVG, therefore this isn't a complete HTML renderer. The following tags are supported: `<b>`, `<strong>`, `<i>`, `<em>`, `<br/>`, `<span>`. Spans can be styled with a `style` attribute, but only text-related CSS that is shared with SVG is handled. Since version 2.1 the tooltip can be shared between multiple series through the `shared` option. The available data in the formatter differ a bit depending on whether the tooltip is shared or not. In a shared tooltip, all properties except `x`, which is common for all points, are kept in an array, `this.points`. Available data are:  this.percentage (not shared) / this.points[i].percentage (shared)  Stacked series and pies only. The point's percentage of the total.  this.point (not shared) / this.points[i].point (shared) The point object. The point name, if defined, is available through `this.point.name`. this.points In a shared tooltip, this is an array containing all other properties for each point. this.series (not shared) / this.points[i].series (shared) The series object. The series name is available through `this.series.name`. this.total (not shared) / this.points[i].total (shared) Stacked series only. The total value at this point's x value.  this.x The x value. This property is the same regardless of the tooltip being shared or not. this.y (not shared) / this.points[i].y (shared) The y value. 
 
 **Try it**
 
@@ -180,7 +190,7 @@ Callback function to format the text of the tooltip from scratch. Return `false`
 */
 @property(nonatomic, readwrite) HIFunction *formatter;
 /**
-The HTML of the point's line in the tooltip. Variables are enclosed by curly brackets. Available variables are point.x, point.y, series. name and series.color and other properties on the same form. Furthermore, point.y can be extended by the `tooltip.valuePrefix` and `tooltip.valueSuffix` variables. This can also be overridden for each series, which makes it a good hook for displaying units. In styled mode, the dot is colored by a class name rather than the point color.
+The HTML of the point's line in the tooltip. Variables are enclosed by curly brackets. Available variables are point.x, point.y, series. name and series.color and other properties on the same form. Furthermore, `point.y` can be extended by the `tooltip.valuePrefix` and `tooltip.valueSuffix` variables. This can also be overridden for each series, which makes it a good hook for displaying units. In styled mode, the dot is colored by a class name rather than the point color.
 
 **Defaults to** `<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>`.
 

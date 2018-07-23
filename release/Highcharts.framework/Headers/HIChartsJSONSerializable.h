@@ -11,5 +11,5 @@
 /**
 * The parent class for all Highcharts objects.
 */
-@interface HIChartsJSONSerializable : NSObject
+@interface HIChartsJSONSerializable : NSObject <NSCopying>
 @end

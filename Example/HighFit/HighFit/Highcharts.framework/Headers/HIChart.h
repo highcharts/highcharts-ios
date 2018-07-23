@@ -15,13 +15,21 @@
 
 
 /**
- */
+General options for the chart.
+*/
 @interface HIChart: HIChartsJSONSerializable
 
 /**
 When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. Requires `highcharts-more.js`.
 
 **Defaults to** `false`.
+
+**Try it**
+
+* [Polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar/)
+* [Wind rose, stacked polar column chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-wind-rose/)
+* [Spider web chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
+* [Star plot, multivariate data in a polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/polar/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *polar;
 /**
@@ -167,6 +175,8 @@ Whether to apply a drop shadow to the plot area. Requires that plotBackgroundCol
 Decides in what dimensions the user can zoom by dragging the mouse. Can be one of `x`, `y` or `xy`.
 
 **Accepted values:** `[null, "x", "y", "xy"]`.
+
+**Defaults to** `null`.
 
 **Try it**
 
@@ -376,7 +386,7 @@ The URL for an image to use as the plot background. To set an image as the backg
 /**
 Equivalent to `zoomType`, but for multitouch gestures only. By default, the `pinchType` is the same as the `zoomType` setting. However, pinching can be enabled separately in some cases, for example in stock charts where a mouse drag pans the chart, while pinching is enabled. When `tooltip.followTouchMove` is true, pinchType only applies to two-finger touches.
 
-**Accepted values:** `["x", "y", "xy"]`.
+**Accepted values:** `[null, "x", "y", "xy"]`.
 
 **Defaults to** `null`.
 */
@@ -391,6 +401,7 @@ Flag to render charts as a parallel coordinates plot. In a parallel coordinates 
 **Try it**
 
 * [Parallel coordinates demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples//highcharts/demo/parallel-coordinates/)
+* [Star plot, multivariate data in a polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/polar/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *parallelCoordinates;
 /**
@@ -439,7 +450,7 @@ The margin between the outer edge of the chart and the plot area. The numbers in
 
 * [Zero margins](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/margins-zero/)
 */
-@property(nonatomic, readwrite) NSArray *margin;
+@property(nonatomic, readwrite) NSArray<NSNumber *> *margin;
 
 -(NSDictionary *)getParams;
 

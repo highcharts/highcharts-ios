@@ -14,10 +14,6 @@
  */
 @interface HIColor : HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *string;
-
-@property(nonatomic, readwrite) NSDictionary *dictionary;
-
 /** 
  * Standard hex color value, for example FFFFFF for black and 000000 for white
  */

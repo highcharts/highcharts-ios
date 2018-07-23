@@ -72,6 +72,7 @@ The pixel size of the up and down arrows in the legend paging navigation.
 @property(nonatomic, readwrite) NSNumber *arrowSize;
 /**
 Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the [adapt chart to legend](http://www.highcharts.com/plugin-registry/single/8/Adapt-Chart-To-Legend) plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
+Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the `adapt chart to legend` plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
 
 **Defaults to** `true`.
 */
@@ -87,7 +88,7 @@ The color of the inactive up or down arrow in the legend page navigation. .
 */
 @property(nonatomic, readwrite) HIColor *inactiveColor;
 /**
-How to animate the pages when navigating up or down. A value of `true` applies the default navigation given in the chart.animation option. Additional options can be given as an object containing values for easing and duration.
+How to animate the pages when navigating up or down. A value of `true` applies the default navigation given in the `chart.animation` option. Additional options can be given as an object containing values for easing and duration.
 
 **Defaults to** `true`.
 

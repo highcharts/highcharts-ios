@@ -24,9 +24,14 @@
 + (void)preload;
 
 /**
- *  A method for update chart's options manually.
+ *  A method for update the chart options manually.
  */
 - (void)updateOptions;
+
+/**
+ *  A method to load the chart options from JSON.
+ */
+- (void)loadJSONOptions:(NSDictionary*)options;
 
 /**
  *  Options object that configures the chart.
@@ -59,7 +64,6 @@
 /**
  *  A delegate that notifies on chart state changes.
  */
-
 @property (weak, nonatomic) id<HIChartViewDelegate> delegate;
 
 /** 

@@ -11,7 +11,7 @@
 /**
  *  The chart's context class. The class contains the current chart context that can be used in closures.
  */
-@interface HIChartContext : NSObject
+@interface HIChartContext : NSObject <NSCopying>
 
 -(instancetype)initWithContext:(NSDictionary *)context;
 

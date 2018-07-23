@@ -1,10 +1,10 @@
 /**
-* (c) 2009-2018 Highsoft AS
-*
-* License: www.highcharts.com/license
-* For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
-* In case of questions, please contact sales@highsoft.com
-*/
+ * (c) 2009-2018 Highsoft AS
+ *
+ * License: www.highcharts.com/license
+ * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
+ * In case of questions, please contact sales@highsoft.com
+ */
 
 #import "HISummary.h"
 #import "HIPoint.h"
@@ -42,9 +42,9 @@
  Example:
  <pre>
  data: [
-    [0, 9],
-    [1, 2],
-    [2, 8]
+     [0, 9],
+     [1, 2],
+     [2, 8]
  ]
  </pre>
  </br>3. An array of objects with named values. In this case the objects are
@@ -52,15 +52,15 @@
  Example:
  <pre>
  data: [{
-    x: 1,
-    y: 9,
-    name: "Point2",
-    color: "#00FF00"
+     x: 1,
+     y: 9,
+     name: "Point2",
+     color: "#00FF00"
  }, {
-    x: 1,
-    y: 0,
-    name: "Point1",
-    color: "#FF00FF"
+     x: 1,
+     y: 0,
+     name: "Point1",
+     color: "#FF00FF"
  }]
  </pre>Note that line series and derived types like spline and area, require data to be sorted by X because it interpolates mouse coordinates for the tooltip. Column and scatter series, where each point has its own mouse event, does not require sorting.
  

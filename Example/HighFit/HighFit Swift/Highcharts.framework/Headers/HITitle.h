@@ -72,7 +72,7 @@ The y position of the title relative to the alignment within `chart.spacingTop` 
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The x position of the title relative to the alignment within chart. spacingLeft and chart.spacingRight.
+The x position of the title relative to the alignment within `chart.spacingLeft` and `chart.spacingRight`.
 
 **Defaults to** `0`.
 

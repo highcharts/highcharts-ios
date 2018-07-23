@@ -246,6 +246,7 @@ A waterfall chart displays sequentially introduced positive or negative values i
 **Try it**
 
 * [Waterfall chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/waterfall/)
+* [Horizontal (inverted) waterfall](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/waterfall-inverted/)
 * [Stacked waterfall chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/waterfall-stacked/)
 */
 @property(nonatomic, readwrite) HIWaterfall *waterfall;
@@ -279,6 +280,7 @@ A variwide chart (related to marimekko chart) is a column chart with a variable 
 **Try it**
 
 * [Variwide chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/variwide/)
+* [Inverted variwide chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-variwide/inverted/)
 */
 @property(nonatomic, readwrite) HIVariwide *variwide;
 /**
