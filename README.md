@@ -55,6 +55,8 @@ or by using Cocoapods by adding
 
 ![alt text](https://github.com/highcharts/highcharts-ios/blob/master/Images/1.png "Embedded")
 
+- If your project is leveraging Xcode UI testing, make sure you add the Highcharts framework to Embedded Binaries for the UITests target as well as the main project target
+
 You are now set to use Highcharts!
 
 Please note when linking manually that binary framework in the 'release' directory is designed to allow uploads to the AppStore. Therefore it does not allow running on iOS Simulator.
