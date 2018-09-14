@@ -1,3 +1,54 @@
+# Version 6.1.2
+
+## Framework:
+
+1. Added parameter to xAxis.labels.formatter in addition to scope, allowing arrow functions as formatters. Closes #8580.
+2. Adjusted the threshold for when a contrasted data label turns white or black.
+
+## Framework bug fixes:
+
+1. Fixed #3589, inconsistent data label position in the waterfall series.
+2. Fixed #7097, rendering problem when animating 3D pie charts while hovering.
+3. Fixed #7484, update tooltip position when dragging and followTouchMove is enabled.
+4. Fixed #7649, error on 3d pie drilldown and drill up.
+5. Fixed #8024, empty gap in connector line in place of a null value.
+6. Fixed #8284, multiple markers did not follow points' positions when adding new points.
+7. Fixed #8355, error on running Series.setData on boosted series with the updatePoints parameter.
+8. Fixed #8506, refactored mapping data to appropriate bins in histograms. Closes #8646.
+9. Fixed #8529, not defining series in options for a 3D chart threw an error.
+10. Fixed #8532, hover color was ignored in sankey diagrams.
+11. Fixed #8561, legend keyboard navigation with useHTML.
+12. Fixed #8621, conditions extended in getSlotWidth wrap function.
+13. Fixed #8627, demo for legend navigation was not working correctly on Windows.
+14. Fixed #8633, implemented support for standard marker symbols in boost.
+15. Fixed #8638, legend with proximate layout was misplaced when all points were nulls.
+16. Fixed #8641, error on updating 3D chart when created empty.
+17. Fixed #8659, treemap child nodes were not clickable due to wrong animation of fill attribute to none.
+18. Fixed #8662, series names were random when seriesMapping object property had values more than 10.
+19. Fixed #8666, error in styled mode when trying to read a dataLabel style property.
+20. Fixed #8682, old sankey nodes were not destroyed when updating the series data.
+21. Fixed #8690, plotOptions.vector.rotationOrigin not working properly.
+22. Fixed #8699, flags were missing in current time frame.
+23. Fixed #8704, the useHTML option did not take effect on rotated data labels, specifically on the sunburst series.
+24. Fixed #8708, print chart sometimes showed empty chart in Chrome when Boost was enabled.
+25. Fixed #8713, setting cropThreshold on a windbarb series broke the chart.
+26. Fixed #8731, boosted area displayed beyond pane when threshold was outside pane.
+27. Fixed #8742, glitch in stack label overlapping detection.
+28. Fixed #8768, missing ticks at the end of datetime axes if local system was in a half-hour time zone.
+29. Fixed #8773, background color of scrollable plot are was not extended, caused page background to bleed through.
+30. Fixed #8777, IE7 didn't display pie chart due to badly named some function.
+31. Fixed #8789, a regression causing the axis labels to take up too much space in some cases when using HTML.
+32. Fixed #8791, solid gauge didn't respect updating colorIndex on points.
+33. Fixed #8795, console errors when zoomed in and using Series.setData with redraw set to false.
+34. Fixed #8797, scrolling not available when scrollablePlotArea was combined with responsive options.
+35. Fixed #8809, a regression causing misplaced HTML axis labels after drilling down and up.
+36. Fixed #8818, shared tooltip in boost mode didn't always pick up all points.
+37. Fixed #8820, chart.scrollablePlotArea option didn't play well with title.useHTML and other useHTML cases.
+38. Fixed #8824, make sure checkboxes stay fixed with chart.scrollablePlotArea enabled.
+39. Fixed #8830, orphaned data labels on points outside Y axis range on xrange series.
+40. Fixed #8834, exceptions on rendering stack labels on out-of-scale axis.
+41. Fixed #6794, 'cursor: pointer' wasn't working for data labels with 'useHTML: true'.
+
 # Version 6.1.1
 
 ## iOS:
