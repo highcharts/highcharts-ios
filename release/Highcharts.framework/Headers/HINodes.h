@@ -20,13 +20,9 @@ A collection of options for the individual nodes. The nodes in a sankey diagram 
 @interface HINodes: HIChartsJSONSerializable
 
 /**
-The name to display for the node in data labels and tooltips. Use this when the name is different from the `id`. Where the id must be unique for each node, this is not necessary for the name.
-
-**Try it**
-
-* [Sankey diagram with node options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/sankey/)
+The color index of the auto generated node, especially for use in styled mode.
 */
-@property(nonatomic, readwrite) NSString *name;
+@property(nonatomic, readwrite) NSNumber *colorIndex;
 /**
 The color of the auto generated node.
 */
@@ -56,9 +52,13 @@ The id of the auto-generated node, refering to the `from` or `to` setting of the
 */
 @property(nonatomic, readwrite) NSString *id;
 /**
-The color index of the auto generated node, especially for use in styled mode.
+The name to display for the node in data labels and tooltips. Use this when the name is different from the `id`. Where the id must be unique for each node, this is not necessary for the name.
+
+**Try it**
+
+* [Sankey diagram with node options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/sankey/)
 */
-@property(nonatomic, readwrite) NSNumber *colorIndex;
+@property(nonatomic, readwrite) NSString *name;
 
 -(NSDictionary *)getParams;
 

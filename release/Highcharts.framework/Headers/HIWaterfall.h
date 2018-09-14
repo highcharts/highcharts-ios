@@ -65,6 +65,16 @@ The color of the line that connects columns in a waterfall series. In styled mod
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
+Padding between each column or bar, in x axis units.
+
+**Try it**
+
+* [0.1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointpadding-default/)
+* [0.25](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointpadding-025/)
+* [0 for tightly packed columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointpadding-none/)
+*/
+@property(nonatomic, readwrite) NSNumber *pointPadding;
+/**
 The corner radius of the border surrounding each column or bar.
 
 **Defaults to** `0`.
@@ -106,17 +116,6 @@ A series specific or series type specific color set to apply instead of the glob
 */
 @property(nonatomic, readwrite) HIColor *edgeColor;
 /**
-When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-false/)
-* [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
-/**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
 **Defaults to** `null`.
@@ -137,15 +136,16 @@ A pixel value specifying a fixed width for each column or bar. When `null`, the 
 */
 @property(nonatomic, readwrite) NSNumber *pointWidth;
 /**
-Padding between each column or bar, in x axis units.
+When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
+
+**Defaults to** `false`.
 
 **Try it**
 
-* [0.1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointpadding-default/)
-* [0.25](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointpadding-025/)
-* [0 for tightly packed columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointpadding-none/)
+* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-false/)
+* [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
 */
-@property(nonatomic, readwrite) NSNumber *pointPadding;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 Padding between each value groups, in x axis units.
 
@@ -175,16 +175,6 @@ Depth of the columns in a 3D column chart. Requires `highcharts-3d.js`.
 **Defaults to** `25`.
 */
 @property(nonatomic, readwrite) NSNumber *depth;
-/**
-The width of the border surrounding each column or bar. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
-
-**Defaults to** `1`.
-
-**Try it**
-
-* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
-*/
-@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Whether to group non-stacked columns or to let them render independent of each other. Non-grouped columns will be laid out individually and overlap each other.
 

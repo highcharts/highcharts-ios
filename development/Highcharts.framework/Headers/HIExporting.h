@@ -12,7 +12,7 @@
 
 
 /**
-Options for the exporting module. For an overview on the matter, see [the docs](http://www.highcharts.com/docs/export-module/export-module-overview).
+Options for the exporting module. For an overview on the matter, see [the docs](https://www.highcharts.com/docs/export-module/export-module-overview).
 */
 @interface HIExporting: HIChartsJSONSerializable
 
@@ -83,12 +83,13 @@ When printing the chart from the menu item in the burger menu, if the on-screen 
 */
 @property(nonatomic, readwrite) NSNumber *printMaxWidth;
 /**
-Options for exporting data to CSV or ExCel, or displaying the data in a HTML table or a JavaScript structure. Requires the `export-data.js` module. This module adds data export options to the export menu and provides functions like `Chart.getCSV`, `Chart.getTable`, `Chart.getDataRows` and `Chart.viewData`.
+Options for exporting data to CSV or ExCel, or displaying the data in a HTML table or a JavaScript structure. Requires the `export-data.js` module. This module adds data export options to the export menu and provides functions like `Chart.getCSV`, `Chart.getTable`, `Chart.getDataRows` and `Chart.viewData`. The XLS converter is limited and only creates a HTML string that is passed for download, which works but creates a warning before opening. The workaround for this is to use a third party XLSX converter, as demonstrated in the sample below.
 
 **Try it**
 
 * [Categorized data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/categorized/)
 * [Highstock time axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/stock-timeaxis/)
+* [Using a third party XLSX converter](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/xlsx/)
 */
 @property(nonatomic, readwrite) HICsv *csv;
 /**
@@ -98,25 +99,27 @@ Default MIME type for exporting if `chart.exportChart()` is called without speci
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
-Additional chart options to be merged into an exported chart. For example, a common use case is to add data labels to improve readability of the exported chart, or to add a printer-friendly color scheme.
+Export-data module required. Caption for the data table. Same as chart title by default. Set to `false` to disable.
 
-**Defaults to** `null`.
+**Defaults to** `undefined`.
 
 **Try it**
 
-* [Added data labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/chartoptions-data-labels/)
+* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
 */
-@property(nonatomic, readwrite) id chartOptions;
+@property(nonatomic, readwrite) id /* Bool, NSString */ tableCaption;
 /**
 An object containing additional attributes for the POST form that sends the SVG to the export server. For example, a `target` can be set to make sure the generated image is received in another frame, or a custom `enctype` or `encoding` can be set.
 */
 @property(nonatomic, readwrite) id formAttributes;
 /**
-Whether or not to fall back to the export server if the offline-exporting module is unable to export the chart on the client side. This happens for certain browsers, and certain features (e.g. `allowHTML`), depending on the image type exporting to. For very complex charts, it is possible that export can fail in browsers that don't support Blob objects, due to data URL length limits. It is recommended to define the `exporting.error` handler if disabling fallback, in order to notify users in case export fails.
+Export-data module required. Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
 
-**Defaults to** `true`.
+**Try it**
+
+* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *fallbackToExportServer;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useMultiLevelHeaders;
 /**
 Export-data module required. If using multi level table headers, use rowspans for headers that have only one level.
 
@@ -126,13 +129,11 @@ Export-data module required. If using multi level table headers, use rowspans fo
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useRowspanHeaders;
 /**
-Export-data module required. Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
+Whether or not to fall back to the export server if the offline-exporting module is unable to export the chart on the client side. This happens for certain browsers, and certain features (e.g. `allowHTML`), depending on the image type exporting to. For very complex charts, it is possible that export can fail in browsers that don't support Blob objects, due to data URL length limits. It is recommended to define the `exporting.error` handler if disabling fallback, in order to notify users in case export fails.
 
-**Try it**
-
-* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
+**Defaults to** `true`.
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useMultiLevelHeaders;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *fallbackToExportServer;
 /**
 The URL for the server module converting the SVG string to an image format. By default this points to Highchart's free web service.
 */
@@ -154,15 +155,15 @@ Experimental setting to allow HTML inside the chart (added through the `useHTML`
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowHTML;
 /**
-Export-data module required. Caption for the data table. Same as chart title by default. Set to `false` to disable.
+Additional chart options to be merged into an exported chart. For example, a common use case is to add data labels to improve readability of the exported chart, or to add a printer-friendly color scheme.
 
-**Defaults to** `undefined`.
+**Defaults to** `null`.
 
 **Try it**
 
-* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
+* [Added data labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/chartoptions-data-labels/)
 */
-@property(nonatomic, readwrite) id /* Bool, NSString */ tableCaption;
+@property(nonatomic, readwrite) id chartOptions;
 /**
 Function to call if the offline-exporting module fails to export a chart on the client side, and `fallbackToExportServer` is disabled. If left undefined, an exception is thrown instead. Receives two parameters, the exporting options, and the error from the module.
 

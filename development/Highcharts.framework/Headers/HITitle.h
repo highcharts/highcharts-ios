@@ -14,6 +14,7 @@ The chart's main title.
 */
 @interface HITitle: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) NSNumber *widthAdjust;
 /**
 CSS styles for the title. Use this for font styling, but use `align`, `x` and `y` for text alignment. In styled mode, the title style is given in the `.highcharts-title` class.
 
@@ -36,7 +37,7 @@ The vertical alignment of the title. Can be one of `"top"`, `"middle"` and `"bot
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
-The title of the chart. To disable the title, set the `text` to `null`.
+The title of the chart. To disable the title, set the `text` to `undefined`.
 
 **Defaults to** `Chart title`.
 
@@ -58,12 +59,6 @@ The horizontal alignment of the title. Can be one of "left", "center" and "right
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting#html) to render the text.
-
-**Defaults to** `false`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
-/**
 The y position of the title relative to the alignment within `chart.spacingTop` and `chart.spacingBottom`. By default it depends on the font size.
 
 **Try it**
@@ -82,27 +77,6 @@ The x position of the title relative to the alignment within `chart.spacingLeft`
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Adjustment made to the title width, normally to reserve space for the exporting burger menu.
-
-**Defaults to** `-44`.
-
-**Try it**
-
-* [Wider menu, greater padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust/)
-*/
-@property(nonatomic, readwrite) NSNumber *widthAdjust;
-/**
-The margin between the title and the plot area, or if a subtitle is present, the margin between the subtitle and the plot area.
-
-**Defaults to** `15`.
-
-**Try it**
-
-* [A chart title margin of 50](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/margin-50/)
-* [The same margin applied with a subtitle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/margin-subtitle/)
-*/
-@property(nonatomic, readwrite) NSNumber *margin;
-/**
 When the title is floating, the plot area will not move to make space for it.
 
 **Defaults to** `false`.
@@ -114,9 +88,25 @@ When the title is floating, the plot area will not move to make space for it.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
 /**
+Adjustment made to the title width, normally to reserve space for the exporting burger menu.
+
+**Defaults to** `-44`.
+
+**Try it**
+
+* [Wider menu, greater padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust/)
+*/
+@property(nonatomic, readwrite) NSNumber *margin;
+/**
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the text.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
+/**
 The rotation of the text in degrees. 0 is horizontal, 270 is vertical reading from bottom to top.
 
-**Defaults to** `0`.
+**Defaults to** `270`.
 
 **Try it**
 
@@ -157,6 +147,10 @@ The distance of the axis title from the axis line. By default, this distance is 
 * [Place the axis title on top of the axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/title-offset/)
 */
 @property(nonatomic, readwrite) NSNumber *offset;
+/**
+Alignment of the text, can be `"left"`, `"right"` or `"center"`. Default alignment depends on the `title.align`: Horizontal axes: - for `align` = `"low"`, `textAlign` is set to `left` - for `align` = `"middle"`, `textAlign` is set to `center` - for `align` = `"high"`, `textAlign` is set to `right` Vertical axes: - for `align` = `"low"` and `opposite` = `true`, `textAlign` is  set to `right` - for `align` = `"low"` and `opposite` = `false`, `textAlign` is  set to `left` - for `align` = `"middle"`, `textAlign` is set to `center` - for `align` = `"high"` and `opposite` = `true` `textAlign` is  set to `left` - for `align` = `"high"` and `opposite` = `false` `textAlign` is  set to `right`
+*/
+@property(nonatomic, readwrite) NSString *textAlign;
 
 -(NSDictionary *)getParams;
 

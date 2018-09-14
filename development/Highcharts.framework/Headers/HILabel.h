@@ -41,6 +41,8 @@ The text itself. A subset of HTML is supported.
 /**
 Horizontal alignment of the label. Can be one of "left", "center" or "right".
 
+**Accepted values:** `["center", "left", "right"]`.
+
 **Defaults to** `left`.
 
 **Try it**
@@ -81,7 +83,7 @@ Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines a
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**
-Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting#html) to render the labels.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting#html) to render the labels.
 
 **Defaults to** `false`.
 */

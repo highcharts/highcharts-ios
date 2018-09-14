@@ -6,9 +6,9 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIShapes.h"
 #import "HILabels.h"
 #import "HILabelOptions.h"
+#import "HIShapes.h"
 #import "HIShapeOptions.h"
 
 
@@ -24,9 +24,11 @@ Options for configuring annotations, for example labels, arrows or shapes. Annot
 @interface HIAnnotations: HIChartsJSONSerializable
 
 /**
-An array of shapes for the annotation. For options that apply to multiple shapes, then can be added to the `shapeOptions`.
+The Z index of the annotation.
+
+**Defaults to** `6`.
 */
-@property(nonatomic, readwrite) NSArray <HIShapes *> *shapes;
+@property(nonatomic, readwrite) NSNumber *zIndex;
 /**
 An array of labels for the annotation. For options that apply to multiple labels, they can be added to the `labelOptions`.
 */
@@ -36,11 +38,9 @@ Options for annotation's labels. Each label inherits options from the labelOptio
 */
 @property(nonatomic, readwrite) HILabelOptions *labelOptions;
 /**
-The Z index of the annotation.
-
-**Defaults to** `6`.
+An array of shapes for the annotation. For options that apply to multiple shapes, then can be added to the `shapeOptions`.
 */
-@property(nonatomic, readwrite) NSNumber *zIndex;
+@property(nonatomic, readwrite) NSArray <HIShapes *> *shapes;
 /**
 Whether the annotation is visible.
 

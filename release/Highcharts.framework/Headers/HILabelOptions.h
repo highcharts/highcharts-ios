@@ -115,7 +115,7 @@ Whether to hide the annotation's label that is outside the plot area.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
 /**
-Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the annotation's label.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the annotation's label.
 
 **Defaults to** `false`.
 */

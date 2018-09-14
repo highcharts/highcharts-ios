@@ -61,7 +61,7 @@ The loading text that appears when the chart is set into the loading state follo
 /**
 [Metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix) used to shorten high numbers in axis labels. Replacing any of the positions with `null` causes the full number to be written. Setting `numericSymbols` to `null` disables shortening altogether.
 
-**Defaults to** `[ "k" , "M" , "G" , "T" , "P" , "E"]`.
+**Defaults to** `["k", "M", "G", "T", "P", "E"]`.
 
 **Try it**
 
@@ -69,11 +69,11 @@ The loading text that appears when the chart is set into the loading state follo
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *numericSymbols;
 /**
-Exporting module only. The text for the SVG download menu item.
+Exporting module only. The text for the menu item to print the chart.
 
-**Defaults to** `Download SVG vector image`.
+**Defaults to** `Print chart`.
 */
-@property(nonatomic, readwrite) NSString *downloadSVG;
+@property(nonatomic, readwrite) NSString *printChart;
 /**
 The magnitude of `numericSymbols` replacements. Use 10000 for Japanese, Korean and various Chinese locales, which use symbols for 10^4, 10^8 and 10^12.
 
@@ -88,15 +88,15 @@ The magnitude of `numericSymbols` replacements. Use 10000 for Japanese, Korean a
 An array containing the weekday names.
 
 **Defaults to** `["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-         "Friday", "Saturday"]`.
+            "Friday", "Saturday"]`.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *weekdays;
 /**
-Exporting module only. The text for the menu item to print the chart.
+Exporting module only. The text for the SVG download menu item.
 
-**Defaults to** `Print chart`.
+**Defaults to** `Download SVG vector image`.
 */
-@property(nonatomic, readwrite) NSString *printChart;
+@property(nonatomic, readwrite) NSString *downloadSVG;
 /**
 The text for the button that appears when drilling down, linking back to the parent series. The parent series' name is inserted for `{series.name}`.
 
@@ -142,16 +142,16 @@ Export-data module only. The text for the menu item.
 /**
 An array containing the months names. Corresponds to the `%B` format in `Highcharts.dateFormat()`.
 
-**Defaults to** `[ "January" , "February" , "March" , "April" , "May" ,
-         "June" , "July" , "August" , "September" , "October" ,
-         "November" , "December"]`.
+**Defaults to** `["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November",
+            "December"]`.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *months;
 /**
 An array containing the months names in abbreviated form. Corresponds to the `%b` format in `Highcharts.dateFormat()`.
 
-**Defaults to** `[ "Jan" , "Feb" , "Mar" , "Apr" , "May" , "Jun" ,
-         "Jul" , "Aug" , "Sep" , "Oct" , "Nov" , "Dec"]`.
+**Defaults to** `["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]`.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *shortMonths;
 /**
@@ -174,6 +174,8 @@ The tooltip title for the label appearing when a chart is zoomed.
 @property(nonatomic, readwrite) NSString *resetZoomTitle;
 /**
 The default thousands separator used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments. Since Highcharts 4.1 it defaults to a single space character, which is compatible with ISO and works across Anglo-American and continental European languages. The default is a single space.
+
+**Defaults to** `\u0020`.
 */
 @property(nonatomic, readwrite) NSString *thousandsSep;
 

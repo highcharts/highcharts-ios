@@ -38,8 +38,6 @@ Animation setting for hovering the graph in line-type series.
 /**
 Pixel width of the graph line. By default this property is undefined, and the `lineWidthPlus` property dictates how much to increase the linewidth from normal state.
 
-**Defaults to** `undefined`.
-
 **Try it**
 
 * [5px line on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-linewidth/)
@@ -64,22 +62,6 @@ Options for the halo appearing around the hovered point in line- type series as 
 */
 @property(nonatomic, readwrite) HIHalo *halo;
 /**
-The fill color of the marker in hover state. When `null`, the series' or point's fillColor for normal state is used.
-
-**Defaults to** `null`.
-*/
-@property(nonatomic, readwrite) HIColor *fillColor;
-/**
-The color of the point marker's outline. When `null`, the series' or point's lineColor for normal state is used.
-
-**Defaults to** `null`.
-
-**Try it**
-
-* [White fill color, black line color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-linecolor/)
-*/
-@property(nonatomic, readwrite) HIColor *lineColor;
-/**
 The radius of the point marker. In hover state, it defaults to the normal state's radius + 2 as per the `radiusPlus` option.
 
 **Try it**
@@ -87,6 +69,18 @@ The radius of the point marker. In hover state, it defaults to the normal state'
 * [10px radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-radius/)
 */
 @property(nonatomic, readwrite) NSNumber *radius;
+/**
+The fill color of the marker in hover state. When `undefined`, the series' or point's fillColor for normal state is used.
+*/
+@property(nonatomic, readwrite) HIColor *fillColor;
+/**
+The color of the point marker's outline. When `undefined`, the series' or point's lineColor for normal state is used.
+
+**Try it**
+
+* [White fill color, black line color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-linecolor/)
+*/
+@property(nonatomic, readwrite) HIColor *lineColor;
 /**
 How much to brighten the point on interaction. Requires the main color to be defined in hex or rgb(a) format. In styled mode, the hover brightening is by default replaced with a fill-opacity set in the `.highcharts-point:hover` rule.
 */

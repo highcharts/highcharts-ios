@@ -14,10 +14,7 @@ The normal state of a single point marker. Currently only used for setting anima
 */
 @interface HINormal: HIChartsJSONSerializable
 
-/**
-Animation when returning to normal state after hovering.
-*/
-@property(nonatomic, readwrite) id /* Bool, id */ animation;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *animation;
 
 -(NSDictionary *)getParams;
 

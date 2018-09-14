@@ -10,15 +10,15 @@
 #import "HIItemCheckboxStyle.h"
 #import "HIItemStyle.h"
 #import "HIItemHoverStyle.h"
+#import "HINavigation.h"
 #import "HIKeyboardNavigation.h"
 #import "HIItemHiddenStyle.h"
-#import "HINavigation.h"
 #import "HIColor.h"
 #import "HIFunction.h"
 
 
 /**
-The legend is a box containing a symbol and name for each series item or point item in the chart. Each series (or points in case of pie charts) is represented by a symbol and its name in the legend. It is possible to override the symbol creator function and create [custom legend symbols](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/studies/legend-custom-symbol/).
+Options for the tooltip that appears when the user hovers over a series or point.
 */
 @interface HILegend: HIChartsJSONSerializable
 
@@ -32,8 +32,6 @@ The border radius of the symbol for series types that use a rectangle in the leg
 @property(nonatomic, readwrite) NSNumber *symbolRadius;
 /**
 The border corner radius of the legend.
-
-**Defaults to** `0`.
 
 **Try it**
 
@@ -60,11 +58,9 @@ When this is true, the legend symbol width will be the same as the symbol height
 /**
 The width for each legend item. By default the items are laid out successively. In a `horizontal layout`, if the items are laid out across two rows or more, they will be vertically aligned depending on the `legend.alignColumns` option.
 
-**Defaults to** `null`.
-
 **Try it**
 
-* [Null by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/itemwidth-default/)
+* [Undefined by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/itemwidth-default/)
 * [80 for aligned legend items](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/itemwidth-80/)
 */
 @property(nonatomic, readwrite) NSNumber *itemWidth;
@@ -79,16 +75,19 @@ The pixel padding between the legend item symbol and the legend item text.
 */
 @property(nonatomic, readwrite) NSNumber *symbolPadding;
 /**
-When the legend is floating, the plot area ignores it and is allowed to be placed below it.
+The layout of the legend items. Can be one of `horizontal` or `vertical` or `proximate`. When `proximate`, the legend items will be placed as close as possible to the graphs they're representing, except in inverted charts or when the legend position doesn't allow it.
 
-**Defaults to** `false`.
+**Accepted values:** `["horizontal", "vertical", "proximate"]`.
+
+**Defaults to** `horizontal`.
 
 **Try it**
 
-* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/floating-false/)
-* [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/floating-true/)
+* [Horizontal by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-horizontal/)
+* [Vertical](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-vertical/)
+* [Labels proximate to the data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-proximate)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
+@property(nonatomic, readwrite) NSString *floating;
 /**
 The pixel width of the legend item symbol. When the `squareSymbol` option is set, this defaults to the `symbolHeight`, otherwise 16.
 
@@ -98,7 +97,7 @@ The pixel width of the legend item symbol. When the `squareSymbol` option is set
 */
 @property(nonatomic, readwrite) NSNumber *symbolWidth;
 /**
-Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting#html) to render the legend item texts. Prior to 4.1.7, when using HTML, `legend.navigation` was disabled.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/ labels-and-string-formatting#html) to render the legend item texts. Prior to 4.1.7, when using HTML, `legend.navigation` was disabled.
 
 **Defaults to** `false`.
 */
@@ -113,19 +112,6 @@ The color of the drawn border around the legend.
 * [Brown border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/bordercolor/)
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
-/**
-The layout of the legend items. Can be one of `horizontal` or `vertical` or `proximate`. When `proximate`, the legend items will be placed as close as possible to the graphs they're representing, except in inverted charts or when the legend position doesn't allow it.
-
-**Accepted values:** `["horizontal", "vertical", "proximate"]`.
-
-**Defaults to** `horizontal`.
-
-**Try it**
-
-* [Horizontal by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-horizontal/)
-* [Vertical](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-vertical/)
-* [Labels proximate to the data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-proximate)
-*/
 @property(nonatomic, readwrite) NSString *layout;
 /**
 A title to be added on top of the legend.
@@ -137,8 +123,6 @@ A title to be added on top of the legend.
 @property(nonatomic, readwrite) HITitle *title;
 /**
 The width of the legend box.
-
-**Defaults to** `null`.
 
 **Try it**
 
@@ -188,15 +172,15 @@ Default styling for the checkbox next to a legend item when `showCheckbox` is tr
 */
 @property(nonatomic, readwrite) HIItemCheckboxStyle *itemCheckboxStyle;
 /**
-A [format string](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for each legend label. Available variables relates to properties on the series, or the point in case of pies.
+A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for each legend label. Available variables relates to properties on the series, or the point in case of pies.
 
 **Defaults to** `{name}`.
 */
 @property(nonatomic, readwrite) NSString *labelFormat;
 /**
-CSS styles for each legend item. Only a subset of CSS is supported, notably those options related to text. The default `textOverflow` property makes long texts truncate. Set it to `null` to wrap text instead. A `width` property can be added to control the text width.
+CSS styles for each legend item. Only a subset of CSS is supported, notably those options related to text. The default `textOverflow` property makes long texts truncate. Set it to `undefined` to wrap text instead. A `width` property can be added to control the text width.
 
-**Defaults to** `{ "color": "#333333", "cursor": "pointer", "fontSize": "12px", "fontWeight": "bold", "textOverflow": "ellipsis" }`.
+**Defaults to** `{"color": "#333333", "cursor": "pointer", "fontSize": "12px", "fontWeight": "bold", "textOverflow": "ellipsis"}`.
 
 **Try it**
 
@@ -224,36 +208,6 @@ The inner padding of the legend box.
 */
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
-In a legend with horizontal layout, the itemDistance defines the pixel distance between each item.
-
-**Defaults to** `20`.
-
-**Try it**
-
-* [50px item distance](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-horizontal/)
-*/
-@property(nonatomic, readwrite) NSNumber *itemDistance;
-/**
-Whether to apply a drop shadow to the legend. A `backgroundColor` also needs to be applied for this to take effect. The shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [White background and drop shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/shadow/)
-*/
-@property(nonatomic, readwrite) id /* Bool, id */ shadow;
-/**
-CSS styles for each legend item in hover mode. Only a subset of CSS is supported, notably those options related to text. Properties are inherited from `style` unless overridden here.
-
-**Defaults to** `{ "color": "#000000" }`.
-
-**Try it**
-
-* [Red on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/itemhoverstyle/)
-*/
-@property(nonatomic, readwrite) HIItemHoverStyle *itemHoverStyle;
-/**
 The vertical alignment of the legend box. Can be one of `top`, `middle` or `bottom`. Vertical position can be further determined by the `y` option. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area. When the `layout` option is `proximate`, the `verticalAlign` option doesn't apply.
 
 **Accepted values:** `["top", "middle", "bottom"]`.
@@ -266,16 +220,39 @@ The vertical alignment of the legend box. Can be one of `top`, `middle` or `bott
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
-If the plot area sized is calculated automatically and the legend is not floating, the legend margin is the space between the legend and the axis labels or plot area.
+Whether to apply a drop shadow to the legend. A `backgroundColor` also needs to be applied for this to take effect. The shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
 
-**Defaults to** `12`.
+**Defaults to** `false`.
 
 **Try it**
 
-* [12 pixels by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/margin-default/)
-* [30 pixels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/margin-30/)
+* [White background and drop shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/shadow/)
 */
-@property(nonatomic, readwrite) NSNumber *margin;
+@property(nonatomic, readwrite) id shadow;
+/**
+CSS styles for each legend item in hover mode. Only a subset of CSS is supported, notably those options related to text. Properties are inherited from `style` unless overridden here.
+
+**Defaults to** `{"color": "#000000"}`.
+
+**Try it**
+
+* [Red on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/itemhoverstyle/)
+*/
+@property(nonatomic, readwrite) HIItemHoverStyle *itemHoverStyle;
+/**
+In a legend with horizontal layout, the itemDistance defines the pixel distance between each item.
+
+**Defaults to** `20`.
+
+**Try it**
+
+* [50px item distance](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/layout-horizontal/)
+*/
+@property(nonatomic, readwrite) NSNumber *itemDistance;
+/**
+Options for the paging or navigation appearing when the legend is overflown. Navigation works well on screen, but not in static exported images. One way of working around that is to [increase the chart height in export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation-enabled-false/).
+*/
+@property(nonatomic, readwrite) HINavigation *navigation;
 /**
 The horizontal alignment of the legend box within the chart area. Valid values are `left`, `center` and `right`. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area.
 
@@ -300,14 +277,12 @@ Enable or disable the legend.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 Maximum pixel height for the legend. When the maximum height is extended, navigation will show.
-
-**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSNumber *maxHeight;
 /**
 CSS styles for each legend item when the corresponding series or point is hidden. Only a subset of CSS is supported, notably those options related to text. Properties are inherited from `style` unless overridden here.
 
-**Defaults to** `{ "color": "#cccccc" }`.
+**Defaults to** `{"color": "#cccccc"}`.
 
 **Try it**
 
@@ -361,9 +336,16 @@ The x offset of the legend relative to its horizontal alignment `align` within c
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Options for the paging or navigation appearing when the legend is overflown. Navigation works well on screen, but not in static exported images. One way of working around that is to [increase the chart height in export](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation-enabled-false/).
+If the plot area sized is calculated automatically and the legend is not floating, the legend margin is the space between the legend and the axis labels or plot area.
+
+**Defaults to** `12`.
+
+**Try it**
+
+* [12 pixels by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/margin-default/)
+* [30 pixels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/margin-30/)
 */
-@property(nonatomic, readwrite) HINavigation *navigation;
+@property(nonatomic, readwrite) NSNumber *margin;
 
 -(NSDictionary *)getParams;
 

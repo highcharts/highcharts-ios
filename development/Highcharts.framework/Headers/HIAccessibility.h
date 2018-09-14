@@ -7,9 +7,9 @@
 */
 
 #import "HIKeyboardNavigation.h"
+#import "HISeries.h"
 #import "HIChartTypes.h"
 #import "HIAxis.h"
-#import "HISeries.h"
 #import "HIExporting.h"
 #import "HISeriesTypeDescriptions.h"
 #import "HIFunction.h"
@@ -67,28 +67,28 @@ Formatter function to determine the date/time format used with points on datetim
 */
 @property(nonatomic, readwrite) HIFunction *pointDateFormatter;
 /**
-Chart type description strings. This is added to the chart information region. If there is only a single series type used in the chart, we use the format string for the series type, or default if missing. There is one format string for cases where there is only a single series in the chart, and one for multiple series of the same type.
+Lang configuration for different series types. For more dynamic control over the series element descriptions, see `accessibility.seriesDescriptionFormatter`.
 */
-@property(nonatomic, readwrite) HIChartTypes *chartTypes;
+@property(nonatomic, readwrite) HISeries *series;
 @property(nonatomic, readwrite) NSString *longDescriptionHeading;
 @property(nonatomic, readwrite) NSString *rangeSelectorMaxInput;
 @property(nonatomic, readwrite) NSString *structureHeading;
 @property(nonatomic, readwrite) NSString *chartContainerLabel;
+@property(nonatomic, readwrite) NSString *mapZoomOut;
+/**
+Chart type description strings. This is added to the chart information region. If there is only a single series type used in the chart, we use the format string for the series type, or default if missing. There is one format string for cases where there is only a single series in the chart, and one for multiple series of the same type.
+*/
+@property(nonatomic, readwrite) HIChartTypes *chartTypes;
 /**
 Axis description format strings.
 */
 @property(nonatomic, readwrite) HIAxis *axis;
-/**
-Lang configuration for different series types. For more dynamic control over the series element descriptions, see `accessibility.seriesDescriptionFormatter`.
-*/
-@property(nonatomic, readwrite) HISeries *series;
+@property(nonatomic, readwrite) NSString *rangeSelectorMinInput;
+@property(nonatomic, readwrite) NSString *rangeSelectorButton;
 /**
 Exporting menu format strings for accessibility module.
 */
 @property(nonatomic, readwrite) HIExporting *exporting;
-@property(nonatomic, readwrite) NSString *mapZoomOut;
-@property(nonatomic, readwrite) NSString *rangeSelectorMinInput;
-@property(nonatomic, readwrite) NSString *rangeSelectorButton;
 @property(nonatomic, readwrite) NSString *legendItem;
 @property(nonatomic, readwrite) NSString *tableSummary;
 @property(nonatomic, readwrite) NSString *noDescription;

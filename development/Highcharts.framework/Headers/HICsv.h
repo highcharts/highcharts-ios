@@ -11,12 +11,13 @@
 
 
 /**
-Options for exporting data to CSV or ExCel, or displaying the data in a HTML table or a JavaScript structure. Requires the `export-data.js` module. This module adds data export options to the export menu and provides functions like `Chart.getCSV`, `Chart.getTable`, `Chart.getDataRows` and `Chart.viewData`.
+Options for exporting data to CSV or ExCel, or displaying the data in a HTML table or a JavaScript structure. Requires the `export-data.js` module. This module adds data export options to the export menu and provides functions like `Chart.getCSV`, `Chart.getTable`, `Chart.getDataRows` and `Chart.viewData`. The XLS converter is limited and only creates a HTML string that is passed for download, which works but creates a warning before opening. The workaround for this is to use a third party XLSX converter, as demonstrated in the sample below.
 
 **Try it**
 
 * [Categorized data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/categorized/)
 * [Highstock time axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/stock-timeaxis/)
+* [Using a third party XLSX converter](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/xlsx/)
 */
 @interface HICsv: HIChartsJSONSerializable
 

@@ -18,7 +18,7 @@ The loading options control the appearance of the loading screen that covers the
 /**
 CSS styles for the loading screen that covers the plot area. In styled mode, the loading label is styled with the `.highcharts-loading` class.
 
-**Defaults to** `{ "position": "absolute", "backgroundColor": "#ffffff", "opacity": 0.5, "textAlign": "center" }`.
+**Defaults to** `{"position": "absolute", "backgroundColor": "#ffffff", "opacity": 0.5, "textAlign": "center"}`.
 
 **Try it**
 
@@ -28,7 +28,7 @@ CSS styles for the loading screen that covers the plot area. In styled mode, the
 /**
 CSS styles for the loading label `span`.
 
-**Defaults to** `{ "fontWeight": "bold", "position": "relative", "top": "45%" }`.
+**Defaults to** `{"fontWeight": "bold", "position": "relative", "top": "45%"}`.
 
 **Try it**
 

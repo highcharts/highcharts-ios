@@ -17,7 +17,7 @@ The chart's subtitle. This can be used both to display a subtitle below the main
 /**
 CSS styles for the title. In styled mode, the subtitle style is given in the `.highcharts-subtitle` class.
 
-**Defaults to** `{ "color": "#666666" }`.
+**Defaults to** `{"color": "#666666"}`.
 
 **Try it**
 
@@ -57,15 +57,7 @@ The horizontal alignment of the subtitle. Can be one of "left", "center" and "ri
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting#html) to render the text.
-
-**Defaults to** `false`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
-/**
 The y position of the subtitle relative to the alignment within `chart.spacingTop` and `chart.spacingBottom`. By default the subtitle is laid out below the title unless the title is floating.
-
-**Defaults to** `null`.
 
 **Try it**
 
@@ -83,6 +75,16 @@ The x position of the subtitle relative to the alignment within `chart.spacingLe
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
+When the subtitle is floating, the plot area will not move to make space for it.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Floating title and subtitle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/subtitle/floating/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
+/**
 Adjustment made to the subtitle width, normally to reserve space for the exporting burger menu.
 
 **Defaults to** `-44`.
@@ -93,15 +95,11 @@ Adjustment made to the subtitle width, normally to reserve space for the exporti
 */
 @property(nonatomic, readwrite) NSNumber *widthAdjust;
 /**
-When the subtitle is floating, the plot area will not move to make space for it.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the text.
 
 **Defaults to** `false`.
-
-**Try it**
-
-* [Floating title and subtitle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/subtitle/floating/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 
 -(NSDictionary *)getParams;
 
