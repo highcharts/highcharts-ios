@@ -19,13 +19,13 @@ HTML labels that can be positioned anywhere in the chart area.
 @interface HILabels: HIChartsJSONSerializable
 
 /**
-A HTML label that can be positioned anywhere in the chart area.
+An HTML label that can be positioned anywhere in the chart area.
 */
 @property(nonatomic, readwrite) NSArray <HIItems *> *items;
 /**
 Shared CSS styles for all labels.
 
-**Defaults to** `{ "color": "#333333" }`.
+**Defaults to** `{"color": "#333333"}`.
 */
 @property(nonatomic, readwrite) HIStyle *style;
 /**
@@ -39,13 +39,11 @@ The y position offset of the label relative to the tick position on the axis.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The x position offset of the label relative to the tick position on the axis. Defaults to -15 for left axis, 15 for right axis.
+Angular gauges and solid gauges only. The label's pixel distance from the perimeter of the plot area.
 
-**Try it**
-
-* [Y axis labels placed on grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-x/)
+**Defaults to** `-25`.
 */
-@property(nonatomic, readwrite) NSNumber *x;
+@property(nonatomic, readwrite) NSNumber *distance;
 /**
 What part of the string the given position is anchored to. Can be one of `"left"`, `"center"` or `"right"`. The exact position also depends on the `labels.x` setting. Angular gauges and solid gauges defaults to `center`.
 
@@ -59,11 +57,23 @@ What part of the string the given position is anchored to. Can be one of `"left"
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-Angular gauges and solid gauges only. The label's pixel distance from the perimeter of the plot area.
+The x position offset of the label relative to the tick position on the axis. Defaults to -15 for left axis, 15 for right axis.
 
-**Defaults to** `-25`.
+**Defaults to** `-8`.
+
+**Try it**
+
+* [Y axis labels placed on grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-x/)
 */
-@property(nonatomic, readwrite) NSNumber *distance;
+@property(nonatomic, readwrite) NSNumber *x;
+/**
+Horizontal axes only. The number of lines to spread the labels over to make room or tighter labels.
+
+**Try it**
+
+* [Show labels over two lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-staggerlines/)
+*/
+@property(nonatomic, readwrite) NSNumber *staggerLines;
 /**
 The Z index for the axis labels.
 
@@ -73,8 +83,6 @@ The Z index for the axis labels.
 /**
 Whether to reserve space for the labels. By default, space is reserved for the labels in these cases: * On all horizontal axes. * On vertical axes if `label.align` is `right` on a left-side axis or `left` on a right-side axis. * On vertical axes if `label.align` is `center`. This can be turned off when for example the labels are rendered inside the plot area instead of outside.
 
-**Defaults to** `null`.
-
 **Try it**
 
 * [No reserved space, labels inside plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-reservespace/)
@@ -82,7 +90,7 @@ Whether to reserve space for the labels. By default, space is reserved for the l
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reserveSpace;
 /**
-A [format string](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for the axis label.
+A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for the axis label.
 
 **Defaults to** `{value}`.
 
@@ -112,16 +120,6 @@ Enable or disable the axis labels.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-Horizontal axes only. The number of lines to spread the labels over to make room or tighter labels.
-
-**Defaults to** `null`.
-
-**Try it**
-
-* [Show labels over two lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-staggerlines/)
-*/
-@property(nonatomic, readwrite) NSNumber *staggerLines;
-/**
 Defines how the labels are be repositioned according to the 3D chart orientation. - `'offset'`: Maintain a fixed horizontal/vertical distance from the   tick marks, despite the chart orientation. This is the backwards   compatible behavior, and causes skewing of X and Z axes. - `'chart'`: Preserve 3D position relative to the chart. This looks nice, but hard to read if the text isn't  forward-facing. - `'flap'`: Rotated text along the axis to compensate for the chart   orientation. This tries to maintain text as legible as possible   on all orientations. - `'ortho'`: Rotated text along the axis direction so that the labels   are orthogonal to the axis. This is very similar to `'flap'`,   but prevents skewing the labels (X and Y scaling are still   present).
 
 **Accepted values:** `['offset', 'chart', 'flap', 'ortho']`.
@@ -132,25 +130,17 @@ Defines how the labels are be repositioned according to the 3D chart orientation
 */
 @property(nonatomic, readwrite) NSString *position3d;
 /**
-Whether to [use HTML](http://www.highcharts.com/docs/chart- concepts/labels-and-string-formatting#html) to render the labels.
-
-**Defaults to** `false`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
-/**
 The pixel padding for axis labels, to ensure white space between them.
 
 **Defaults to** `5`.
 */
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
-To show only every _n_'th label on the axis, set the step to _n_. Setting the step to 2 shows every other label. By default, the step is calculated automatically to avoid overlap. To prevent this, set it to 1\. This usually only happens on a category axis, and is often a sign that you have chosen the wrong axis type. Read more at [Axis docs](http://www.highcharts.com/docs/chart-concepts/axes) => What axis should I use?
-
-**Defaults to** `null`.
+To show only every _n_'th label on the axis, set the step to _n_. Setting the step to 2 shows every other label. By default, the step is calculated automatically to avoid overlap. To prevent this, set it to 1\. This usually only happens on a category axis, and is often a sign that you have chosen the wrong axis type. Read more at [Axis docs](https://www.highcharts.com/docs/chart-concepts/axes) => What axis should I use?
 
 **Try it**
 
-* [Showing only every other axis label on a categorized x axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-step/)
+* [Showing only every other axis label on a categorized x-axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-step/)
 * [Auto steps on a category axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-step-auto/)
 */
 @property(nonatomic, readwrite) NSNumber *step;
@@ -181,6 +171,12 @@ Rotation of the labels in degrees.
 * [X axis labels rotated 90Â°](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-rotation/)
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
+/**
+Whether to [use HTML](https://www.highcharts.com/docs/chart- concepts/labels-and-string-formatting#html) to render the labels.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
 For horizontal axes, the allowed degrees of label rotation to prevent overlapping labels. If there is enough space, labels are not rotated. As the chart gets narrower, it will start rotating the labels -45 degrees, then remove every second label and try again with rotations 0 and -45 etc. Set it to `false` to disable rotation, which will cause the labels to word-wrap if possible.
 

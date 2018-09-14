@@ -16,15 +16,13 @@ The appearance of the point marker when selected. In order to allow a point to b
 @interface HISelect: HIChartsJSONSerializable
 
 /**
-Enable or disable visible feedback for selection.
-
-**Defaults to** `true`.
+The radius of the point marker. In hover state, it defaults to the normal state's radius + 2.
 
 **Try it**
 
-* [Disabled select state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-select-enabled/)
+* [10px radius for selected points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-select-radius/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
+@property(nonatomic, readwrite) NSNumber *radius;
 /**
 The width of the point marker's outline.
 
@@ -34,13 +32,15 @@ The width of the point marker's outline.
 */
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
-The radius of the point marker. In hover state, it defaults to the normal state's radius + 2.
+Enable or disable visible feedback for selection.
+
+**Defaults to** `true`.
 
 **Try it**
 
-* [10px radius for selected points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-select-radius/)
+* [Disabled select state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-select-enabled/)
 */
-@property(nonatomic, readwrite) NSNumber *radius;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The fill color of the point marker.
 
@@ -52,7 +52,7 @@ The fill color of the point marker.
 */
 @property(nonatomic, readwrite) HIColor *fillColor;
 /**
-The color of the point marker's outline. When `null`, the series' or point's color is used.
+The color of the point marker's outline. When `undefined`, the series' or point's color is used.
 
 **Defaults to** `#000000`.
 
@@ -62,17 +62,17 @@ The color of the point marker's outline. When `null`, the series' or point's col
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
-A specific color for the selected point.
-
-**Defaults to** `#cccccc`.
-*/
-@property(nonatomic, readwrite) HIColor *color;
-/**
 A specific border color for the selected point.
 
 **Defaults to** `#000000`.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
+/**
+A specific color for the selected point.
+
+**Defaults to** `#cccccc`.
+*/
+@property(nonatomic, readwrite) HIColor *color;
 
 -(NSDictionary *)getParams;
 

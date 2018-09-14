@@ -80,8 +80,6 @@ Whether the whole area or just the line should respond to mouseover tooltips and
 /**
 Fill color or gradient for the area. When `null`, the series' `color` is used with the series' `fillOpacity`. In styled mode, the fill color can be set with the `.highcharts-area` class name.
 
-**Defaults to** `null`.
-
 **Try it**
 
 * [Null by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillcolor-default/)
@@ -90,8 +88,6 @@ Fill color or gradient for the area. When `null`, the series' `color` is used wi
 @property(nonatomic, readwrite) HIColor *fillColor;
 /**
 A separate color for the graph line. By default the line takes the `color` of the series, but the lineColor setting allows setting a separate color for the line without altering the `fillColor`. In styled mode, the line stroke can be set with the `.highcharts-graph` class name.
-
-**Defaults to** `null`.
 
 **Try it**
 

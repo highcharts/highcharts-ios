@@ -88,16 +88,6 @@ Maximum bubble size. Bubbles will automatically size between the `minSize` and `
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ maxSize;
 /**
-When `displayNegative` is `false`, bubbles with lower Z values are skipped. When `displayNegative` is `true` and a `negativeColor` is given, points with lower Z is colored.
-
-**Defaults to** `0`.
-
-**Try it**
-
-* [Negative bubbles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-negative/)
-*/
-@property(nonatomic, readwrite) NSNumber *zThreshold;
-/**
 Whether to display negative sized bubbles. The threshold is given by the `zThreshold` option, and negative bubbles can be visualized by setting `negativeColor`.
 
 **Defaults to** `true`.
@@ -107,6 +97,16 @@ Whether to display negative sized bubbles. The threshold is given by the `zThres
 * [Negative bubbles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-negative/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *displayNegative;
+/**
+When `displayNegative` is `false`, bubbles with lower Z values are skipped. When `displayNegative` is `true` and a `negativeColor` is given, points with lower Z is colored.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [Negative bubbles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-negative/)
+*/
+@property(nonatomic, readwrite) NSNumber *zThreshold;
 /**
 When this is true, the absolute value of z determines the size of the bubble. This means that with the default `zThreshold` of 0, a bubble of value -1 will have the same size as a bubble of value 1, while a bubble of value 0 will have a smaller size according to `minSize`.
 

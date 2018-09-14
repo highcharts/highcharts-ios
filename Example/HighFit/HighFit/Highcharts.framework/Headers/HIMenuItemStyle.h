@@ -20,8 +20,8 @@ CSS styles for the individual items within the popup menu appearing by default w
 */
 @interface HIMenuItemStyle: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *padding;
 @property(nonatomic, readwrite) NSString *color;
+@property(nonatomic, readwrite) NSString *padding;
 @property(nonatomic, readwrite) NSString *transition;
 /**
 Defaults to `14px` on touch devices and `11px` on desktop.

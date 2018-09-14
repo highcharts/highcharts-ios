@@ -18,7 +18,7 @@ Highchart by default puts a credits label in the lower right corner of the chart
 /**
 CSS styles for the credits label.
 
-**Defaults to** `{ "cursor": "pointer", "color": "#999999", "fontSize": "10px" }`.
+**Defaults to** `{"cursor": "pointer", "color": "#999999", "fontSize": "10px"}`.
 */
 @property(nonatomic, readwrite) HIStyle *style;
 /**
@@ -34,8 +34,6 @@ The text for the credits label.
 /**
 Whether to show the credits text.
 
-**Defaults to** `true`.
-
 **Try it**
 
 * [Credits disabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/credits/enabled-false/)
@@ -43,8 +41,6 @@ Whether to show the credits text.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The URL for the credits label.
-
-**Defaults to** `http://www.highcharts.com`.
 
 **Try it**
 

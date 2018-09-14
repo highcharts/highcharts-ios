@@ -65,7 +65,7 @@ A preferable number of bins. It is a suggestion, so a histogram may have a diffe
 
 **Accepted values:** `["square-root", "sturges", "rice"]`.
 */
-@property(nonatomic, readwrite) id /* NSString, NSNumber, Function */ binsNumber;
+@property(nonatomic, readwrite) id /* NSNumber, NSString, Function */ binsNumber;
 /**
 Padding between each value groups, in x axis units.
 
@@ -123,30 +123,9 @@ A series specific or series type specific color set to apply instead of the glob
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 /**
-The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
-
-**Defaults to** `#ffffff`.
-
-**Try it**
-
-* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
-*/
-@property(nonatomic, readwrite) HIColor *borderColor;
-/**
 3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
 */
 @property(nonatomic, readwrite) HIColor *edgeColor;
-/**
-When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-false/)
-* [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
@@ -168,6 +147,17 @@ A pixel value specifying a fixed width for each column or bar. When `null`, the 
 */
 @property(nonatomic, readwrite) NSNumber *pointWidth;
 /**
+When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-false/)
+* [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
+/**
 3D columns only. The width of the colored edges.
 
 **Defaults to** `1`.
@@ -187,16 +177,6 @@ Depth of the columns in a 3D column chart. Requires `highcharts-3d.js`.
 **Defaults to** `25`.
 */
 @property(nonatomic, readwrite) NSNumber *depth;
-/**
-The width of the border surrounding each column or bar. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
-
-**Defaults to** `1`.
-
-**Try it**
-
-* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
-*/
-@property(nonatomic, readwrite) NSNumber *borderWidth;
 
 -(NSDictionary *)getParams;
 

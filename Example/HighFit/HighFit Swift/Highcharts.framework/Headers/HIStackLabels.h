@@ -38,9 +38,9 @@ Defines the vertical alignment of the stack total label. Can be one of `"top"`, 
 
 **Try it**
 
-* ["Vertically aligned top"](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-verticalalign-top/)
-* ["Vertically aligned middle"](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-verticalalign-middle/)
-* ["Vertically aligned bottom"](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-verticalalign-bottom/)
+* [Vertically aligned top](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-verticalalign-top/)
+* [Vertically aligned middle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-verticalalign-middle/)
+* [Vertically aligned bottom](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-verticalalign-bottom/)
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
@@ -70,7 +70,7 @@ Enable or disable the stack total labels.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the labels.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/ labels-and-string-formatting#html) to render the labels.
 
 **Defaults to** `false`.
 */
@@ -104,7 +104,7 @@ Rotation of the labels in degrees.
 /**
 Callback JavaScript function to format the label. The value is given by `this.total`.
 
-**Defaults to** `function() { return this.total; }`.
+**Defaults to** `function() { return H.numberFormat(this.total, -1); }`.
 
 **Try it**
 

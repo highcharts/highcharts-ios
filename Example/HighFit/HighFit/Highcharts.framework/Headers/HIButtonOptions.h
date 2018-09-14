@@ -16,17 +16,15 @@ A collection of options for buttons appearing in the exporting module. In styled
 @interface HIButtonOptions: HIChartsJSONSerializable
 
 /**
-The vertical alignment of the buttons. Can be one of "top", "middle" or "bottom".
+The color of the symbol's stroke or line.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
-**Defaults to** `top`.
+**Defaults to** `#666666`.
 
 **Try it**
 
-* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
+* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
 */
-@property(nonatomic, readwrite) NSString *verticalAlign;
+@property(nonatomic, readwrite) HIColor *symbolStroke;
 /**
 Fill color for the symbol within the button.
 
@@ -125,15 +123,17 @@ The vertical offset of the button's position relative to its `verticalAlign`.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The color of the symbol's stroke or line.
+The vertical alignment of the buttons. Can be one of "top", "middle" or "bottom".
 
-**Defaults to** `#666666`.
+**Accepted values:** `["top", "middle", "bottom"]`.
+
+**Defaults to** `top`.
 
 **Try it**
 
-* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
+* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
 */
-@property(nonatomic, readwrite) HIColor *symbolStroke;
+@property(nonatomic, readwrite) NSString *verticalAlign;
 /**
 The y position of the center of the symbol inside the button.
 

@@ -12,7 +12,7 @@
 /**
 CSS styles for the loading label `span`.
 
-**Defaults to** `{ "fontWeight": "bold", "position": "relative", "top": "45%" }`.
+**Defaults to** `{"fontWeight": "bold", "position": "relative", "top": "45%"}`.
 
 **Try it**
 
