@@ -20,8 +20,8 @@ Additional styles to apply to the data label of a point that has drilldown data.
 */
 @interface HIActiveDataLabelStyle: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *color;
 @property(nonatomic, readwrite) NSString *cursor;
+@property(nonatomic, readwrite) NSString *color;
 @property(nonatomic, readwrite) NSString *textDecoration;
 @property(nonatomic, readwrite) NSString *fontWeight;
 

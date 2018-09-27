@@ -25,7 +25,7 @@ An HTML label that can be positioned anywhere in the chart area.
 /**
 Shared CSS styles for all labels.
 
-**Defaults to** `{"color": "#333333"}`.
+**Defaults to** `{"color": "#333333", "position": "absolute"}`.
 */
 @property(nonatomic, readwrite) HIStyle *style;
 /**
@@ -39,11 +39,13 @@ The y position offset of the label relative to the tick position on the axis.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-Angular gauges and solid gauges only. The label's pixel distance from the perimeter of the plot area.
+The x position offset of the label relative to the tick position on the axis. Defaults to -15 for left axis, 15 for right axis.
 
-**Defaults to** `-25`.
+**Try it**
+
+* [Y axis labels placed on grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-x/)
 */
-@property(nonatomic, readwrite) NSNumber *distance;
+@property(nonatomic, readwrite) NSNumber *x;
 /**
 What part of the string the given position is anchored to. Can be one of `"left"`, `"center"` or `"right"`. The exact position also depends on the `labels.x` setting. Angular gauges and solid gauges defaults to `center`.
 
@@ -57,23 +59,11 @@ What part of the string the given position is anchored to. Can be one of `"left"
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-The x position offset of the label relative to the tick position on the axis. Defaults to -15 for left axis, 15 for right axis.
+Angular gauges and solid gauges only. The label's pixel distance from the perimeter of the plot area.
 
-**Defaults to** `-8`.
-
-**Try it**
-
-* [Y axis labels placed on grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-x/)
+**Defaults to** `-25`.
 */
-@property(nonatomic, readwrite) NSNumber *x;
-/**
-Horizontal axes only. The number of lines to spread the labels over to make room or tighter labels.
-
-**Try it**
-
-* [Show labels over two lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-staggerlines/)
-*/
-@property(nonatomic, readwrite) NSNumber *staggerLines;
+@property(nonatomic, readwrite) NSNumber *distance;
 /**
 The Z index for the axis labels.
 
@@ -120,6 +110,14 @@ Enable or disable the axis labels.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
+Horizontal axes only. The number of lines to spread the labels over to make room or tighter labels.
+
+**Try it**
+
+* [Show labels over two lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-staggerlines/)
+*/
+@property(nonatomic, readwrite) NSNumber *staggerLines;
+/**
 Defines how the labels are be repositioned according to the 3D chart orientation. - `'offset'`: Maintain a fixed horizontal/vertical distance from the   tick marks, despite the chart orientation. This is the backwards   compatible behavior, and causes skewing of X and Z axes. - `'chart'`: Preserve 3D position relative to the chart. This looks nice, but hard to read if the text isn't  forward-facing. - `'flap'`: Rotated text along the axis to compensate for the chart   orientation. This tries to maintain text as legible as possible   on all orientations. - `'ortho'`: Rotated text along the axis direction so that the labels   are orthogonal to the axis. This is very similar to `'flap'`,   but prevents skewing the labels (X and Y scaling are still   present).
 
 **Accepted values:** `['offset', 'chart', 'flap', 'ortho']`.
@@ -152,6 +150,14 @@ If enabled, the axis labels will skewed to follow the perspective. This will fix
 * [Skewed labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/3d/skewed-labels/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *skew3d;
+/**
+How to handle overflowing labels on horizontal axis. If set to `"allow"`, it will not be aligned at all. By default it `"justify"` labels inside the chart area. If there is room to move it, it will be aligned to the edge, else it will be removed.
+
+**Accepted values:** `["allow", "justify"]`.
+
+**Defaults to** `justify`.
+*/
+@property(nonatomic, readwrite) id /* Bool, NSString */ overflow;
 /**
 Callback JavaScript function to format the label. The value is given by `this.value`. Additional properties for `this` are `axis`, `chart`, `isFirst` and `isLast`. The value of the default label formatter can be retrieved by calling `this.axis.defaultLabelFormatter.call(this)` within the function. Defaults to: function() {   return this.value; }
 
@@ -280,17 +286,6 @@ The background color or gradient for the annotation's label.
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
 */
 @property(nonatomic, readwrite) HIColor *backgroundColor;
-/**
-How to handle the annotation's label that flow outside the plot area. The justify option aligns the label inside the plot area.
-
-**Accepted values:** `["none", "justify"]`.
-
-**Try it**
-
-* [Crop or justify labels
-*](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-crop-overflow/)
-*/
-@property(nonatomic, readwrite) NSString *overflow;
 /**
 The shadow of the box. The shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
 

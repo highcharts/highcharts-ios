@@ -37,17 +37,17 @@ Wether to render the chart using the 3D functionality.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-The total depth of the chart.
-
-**Defaults to** `100`.
-*/
-@property(nonatomic, readwrite) NSNumber *depth;
-/**
 One of the two rotation angles for the chart.
 
 **Defaults to** `0`.
 */
 @property(nonatomic, readwrite) NSNumber *beta;
+/**
+The total depth of the chart.
+
+**Defaults to** `100`.
+*/
+@property(nonatomic, readwrite) NSNumber *depth;
 /**
 Whether the 3d box should automatically adjust to the chart plot area.
 

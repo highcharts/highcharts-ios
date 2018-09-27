@@ -59,15 +59,13 @@ A separate color for the negative part of the area. In styled mode, a negative c
 */
 @property(nonatomic, readwrite) HIColor *negativeFillColor;
 /**
-Whether the whole area or just the line should respond to mouseover tooltips and other mouse or touch events.
-
-**Defaults to** `false`.
+A separate color for the graph line. By default the line takes the `color` of the series, but the lineColor setting allows setting a separate color for the line without altering the `fillColor`. In styled mode, the line stroke can be set with the `.highcharts-graph` class name.
 
 **Try it**
 
-* [Display the tooltip when the area is hovered](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-trackbyarea/)
+* [Dark gray line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-linecolor/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *trackByArea;
+@property(nonatomic, readwrite) HIColor *lineColor;
 /**
 Fill color or gradient for the area. When `null`, the series' `color` is used with the series' `fillOpacity`. In styled mode, the fill color can be set with the `.highcharts-area` class name.
 
@@ -78,13 +76,15 @@ Fill color or gradient for the area. When `null`, the series' `color` is used wi
 */
 @property(nonatomic, readwrite) HIColor *fillColor;
 /**
-A separate color for the graph line. By default the line takes the `color` of the series, but the lineColor setting allows setting a separate color for the line without altering the `fillColor`. In styled mode, the line stroke can be set with the `.highcharts-graph` class name.
+Whether the whole area or just the line should respond to mouseover tooltips and other mouse or touch events.
+
+**Defaults to** `false`.
 
 **Try it**
 
-* [Dark gray line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-linecolor/)
+* [Display the tooltip when the area is hovered](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-trackbyarea/)
 */
-@property(nonatomic, readwrite) HIColor *lineColor;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *trackByArea;
 
 -(NSDictionary *)getParams;
 

@@ -62,14 +62,6 @@ Options for the halo appearing around the hovered point in line- type series as 
 */
 @property(nonatomic, readwrite) HIHalo *halo;
 /**
-The radius of the point marker. In hover state, it defaults to the normal state's radius + 2 as per the `radiusPlus` option.
-
-**Try it**
-
-* [10px radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-radius/)
-*/
-@property(nonatomic, readwrite) NSNumber *radius;
-/**
 The fill color of the marker in hover state. When `undefined`, the series' or point's fillColor for normal state is used.
 */
 @property(nonatomic, readwrite) HIColor *fillColor;
@@ -81,6 +73,14 @@ The color of the point marker's outline. When `undefined`, the series' or point'
 * [White fill color, black line color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-linecolor/)
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
+/**
+The radius of the point marker. In hover state, it defaults to the normal state's radius + 2 as per the `radiusPlus` option.
+
+**Try it**
+
+* [10px radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-radius/)
+*/
+@property(nonatomic, readwrite) NSNumber *radius;
 /**
 How much to brighten the point on interaction. Requires the main color to be defined in hex or rgb(a) format. In styled mode, the hover brightening is by default replaced with a fill-opacity set in the `.highcharts-point:hover` rule.
 */

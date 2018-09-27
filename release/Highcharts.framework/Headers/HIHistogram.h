@@ -65,7 +65,7 @@ A preferable number of bins. It is a suggestion, so a histogram may have a diffe
 
 **Accepted values:** `["square-root", "sturges", "rice"]`.
 */
-@property(nonatomic, readwrite) id /* NSNumber, NSString, Function */ binsNumber;
+@property(nonatomic, readwrite) id /* NSString, NSNumber, Function */ binsNumber;
 /**
 Padding between each value groups, in x axis units.
 
@@ -127,6 +127,17 @@ A series specific or series type specific color set to apply instead of the glob
 */
 @property(nonatomic, readwrite) HIColor *edgeColor;
 /**
+When using automatic point colors pulled from the global `colors` or series-specific `plotOptions.column.colors` collections, this option determines whether the chart should receive one color per series or one color per point. In styled mode, the `colors` or `series.colors` arrays are not supported, and instead this option gives the points individual color class names on the form `highcharts-color-{n}`.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-false/)
+* [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
+/**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
 **Defaults to** `null`.
@@ -146,17 +157,6 @@ A pixel value specifying a fixed width for each column or bar. When `null`, the 
 * [20px wide columns regardless of chart width or the amount of data points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointwidth-20/)
 */
 @property(nonatomic, readwrite) NSNumber *pointWidth;
-/**
-When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-false/)
-* [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 3D columns only. The width of the colored edges.
 

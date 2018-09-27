@@ -27,40 +27,6 @@ See `navigation.buttonOptions.symbolFill`.
 */
 @property(nonatomic, readwrite) HIColor *symbolFill;
 /**
-A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "Print" menu item plus one menu item for each of the available export types. Defaults to  [  'printChart',  'separator',  'downloadPNG',  'downloadJPEG',  'downloadPDF',  'downloadSVG' ] 
-
-**Try it**
-
-* [Menu item definitions](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/menuitemdefinitions/)
-*/
-@property(nonatomic, readwrite) NSArray *menuItems;
-/**
-The class name of the context button.
-*/
-@property(nonatomic, readwrite) NSString *className;
-/**
-The key to a `lang` option setting that is used for the button's title tooltip. When the key is `contextButtonTitle`, it refers to `lang.contextButtonTitle` that defaults to "Chart context menu".
-*/
-@property(nonatomic, readwrite) NSString *_titleKey;
-/**
-A click handler callback to use on the button directly instead of the popup menu.
-
-**Try it**
-
-* [Skip the menu and export the chart directly](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-onclick/)
-*/
-@property(nonatomic, readwrite) HIFunction *onclick;
-/**
-The horizontal position of the button relative to the `align` option.
-
-**Defaults to** `-10`.
-*/
-@property(nonatomic, readwrite) NSNumber *x;
-/**
-The class name of the menu appearing from the button.
-*/
-@property(nonatomic, readwrite) NSString *menuClassName;
-/**
 The symbol for the button. Points to a definition function in the `Highcharts.Renderer.symbols` collection. The default `exportIcon` function is part of the exporting module.
 
 **Accepted values:** `["exportIcon", "circle", "square", "diamond", "triangle", "triangle-down", "menu"]`.
@@ -74,15 +40,51 @@ The symbol for the button. Points to a definition function in the `Highcharts.Re
 */
 @property(nonatomic, readwrite) NSString *symbol;
 /**
-The color of the symbol's stroke or line.
-
-**Defaults to** `#666666`.
+The class name of the context button.
+*/
+@property(nonatomic, readwrite) NSString *className;
+/**
+A click handler callback to use on the button directly instead of the popup menu.
 
 **Try it**
 
-* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
+* [Skip the menu and export the chart directly](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-onclick/)
 */
-@property(nonatomic, readwrite) HIColor *symbolStroke;
+@property(nonatomic, readwrite) HIFunction *onclick;
+/**
+The key to a `lang` option setting that is used for the button's title tooltip. When the key is `contextButtonTitle`, it refers to `lang.contextButtonTitle` that defaults to "Chart context menu".
+*/
+@property(nonatomic, readwrite) NSString *titleKey;
+/**
+The horizontal position of the button relative to the `align` option.
+
+**Defaults to** `-10`.
+*/
+@property(nonatomic, readwrite) NSNumber *x;
+/**
+The class name of the menu appearing from the button.
+*/
+@property(nonatomic, readwrite) NSString *menuClassName;
+/**
+A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "Print" menu item plus one menu item for each of the available export types. Defaults to  [  'printChart',  'separator',  'downloadPNG',  'downloadJPEG',  'downloadPDF',  'downloadSVG' ] 
+
+**Try it**
+
+* [Menu item definitions](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/menuitemdefinitions/)
+*/
+@property(nonatomic, readwrite) NSArray *menuItems;
+/**
+The vertical alignment of the buttons. Can be one of "top", "middle" or "bottom".
+
+**Accepted values:** `["top", "middle", "bottom"]`.
+
+**Defaults to** `top`.
+
+**Try it**
+
+* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
+*/
+@property(nonatomic, readwrite) NSString *verticalAlign;
 /**
 A text string to add to the individual button.
 
@@ -171,17 +173,15 @@ The vertical offset of the button's position relative to its `verticalAlign`.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The vertical alignment of the buttons. Can be one of "top", "middle" or "bottom".
+The color of the symbol's stroke or line.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
-**Defaults to** `top`.
+**Defaults to** `#666666`.
 
 **Try it**
 
-* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
+* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
 */
-@property(nonatomic, readwrite) NSString *verticalAlign;
+@property(nonatomic, readwrite) HIColor *symbolStroke;
 /**
 The y position of the center of the symbol inside the button.
 

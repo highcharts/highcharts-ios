@@ -124,7 +124,7 @@ The diameter of the pie relative to the plot area. Can be a percentage or pixel 
 
 * [Smaller pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-size/)
 */
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
+@property(nonatomic, readwrite) id /* NSString, NSNumber */ size;
 
 -(NSDictionary *)getParams;
 

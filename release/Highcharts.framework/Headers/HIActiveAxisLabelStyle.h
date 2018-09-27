@@ -20,8 +20,8 @@ Additional styles to apply to the X axis label for a point that has drilldown da
 */
 @interface HIActiveAxisLabelStyle: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *color;
 @property(nonatomic, readwrite) NSString *cursor;
+@property(nonatomic, readwrite) NSString *color;
 @property(nonatomic, readwrite) NSString *textDecoration;
 @property(nonatomic, readwrite) NSString *fontWeight;
 

@@ -83,7 +83,7 @@ Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines a
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels- and-string-formatting#html) to render the labels.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts /labels-and-string-formatting#html) to render the labels.
 
 **Defaults to** `false`.
 */

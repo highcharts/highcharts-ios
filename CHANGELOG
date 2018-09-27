@@ -1,3 +1,29 @@
+# Version 6.1.4
+
+## Framework:
+
+1. Better polyfill for forEach in oldIE. See #8865.
+
+## Framework bug fixes:
+
+1. Fixed #2165, legend.labelFormatter was not called when series' visiblity changed.
+2. Fixed #3495, export menu click was wrongly triggering chart's click event.
+3. Fixed #3739, changed rounding method to Math.foor for milliseconds dateFormat to match other date and time formats.
+4. Fixed #5009, performance problem with long text strings and word-wrap.
+5. Fixed #6405, Highcharts crashed when using category axis, small labels.step option and a large data range. Re-introduced error 19.
+6. Fixed #7484, followTouchMove didn't work properly on column series on mobile.
+7. Fixed #7815, data labels were visible even when points were hidden.
+8. Fixed #8652, replace max/min safe integer with max/min value in wordcloud to support IE11.
+9. Fixed #8865, wrong links in sankey chart if the columns didn't start from 0.
+10. Fixed #8874 and #8346, Highcharts.indexOfPolyfill wasn't supporting all required arguments.
+11. Fixed #8901, bubble chart calculated wrong extremes when either xAxis.min or xAxis.max was set.
+12. Fixed #8933, minPointLength squished all ranges to minimum length when xAxis was reversed.
+13. Fixed #8960, animation didn't run on Series.update() with new data.
+14. Fixed #8972, improved a way of assigning data to specific bins in histograms.
+15. Fixed #8994, a regression causing cropped legend items to become long after hover when useHTML was true. Regression since #8809.
+16. Fixed #8995, added support for duplicated x values for Series.setData.
+17. Fixed issue with tooltip header placement when scrollable plot area was activated.
+
 # Version 6.1.3
 
 ## Framework bug fixes:

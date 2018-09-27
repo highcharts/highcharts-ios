@@ -171,7 +171,7 @@ The x position offset of the label relative to the point. Note that if a `distan
 /**
 How to handle the annotation's label that flow outside the plot area. The justify option aligns the label inside the plot area.
 
-**Accepted values:** `["none", "justify"]`.
+**Accepted values:** `["allow", "justify"]`.
 
 **Try it**
 

@@ -31,8 +31,8 @@ The Z index of the crosshair. Higher Z indices allow drawing the crosshair on to
 The dash style for the crosshair. See `series.dashStyle` for possible values.
 
 **Accepted values:** `["Solid", "ShortDash", "ShortDot", "ShortDashDot",
-             "ShortDashDotDot", "Dot", "Dash" ,"LongDash",
-             "DashDot", "LongDashDot", "LongDashDotDot"]`.
+            "ShortDashDotDot", "Dot", "Dash" ,"LongDash", "DashDot",
+            "LongDashDot", "LongDashDotDot"]`.
 
 **Defaults to** `Solid`.
 

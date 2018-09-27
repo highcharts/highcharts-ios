@@ -61,22 +61,6 @@ Text styles for the legend page navigation.
 */
 @property(nonatomic, readwrite) NSDictionary /* <NSString, NSString> */ *style;
 /**
-The color of the inactive up or down arrow in the legend page navigation. .
-
-**Defaults to** `#cccccc`.
-
-**Try it**
-
-* [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
-*/
-@property(nonatomic, readwrite) HIColor *inactiveColor;
-/**
-Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the `adapt chart to legend` plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
-
-**Defaults to** `true`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
-/**
 The pixel size of the up and down arrows in the legend paging navigation.
 
 **Defaults to** `12`.
@@ -86,6 +70,20 @@ The pixel size of the up and down arrows in the legend paging navigation.
 * [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
 */
 @property(nonatomic, readwrite) NSNumber *arrowSize;
+/**
+Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the `adapt chart to legend` plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
+
+**Defaults to** `true`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
+/**
+The color of the inactive up or down arrow in the legend page navigation. .
+
+**Try it**
+
+* [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
+*/
+@property(nonatomic, readwrite) HIColor *inactiveColor;
 /**
 How to animate the pages when navigating up or down. A value of `true` applies the default navigation given in the `chart.animation` option. Additional options can be given as an object containing values for easing and duration.
 
@@ -98,8 +96,6 @@ How to animate the pages when navigating up or down. A value of `true` applies t
 @property(nonatomic, readwrite) id animation;
 /**
 The color for the active up or down arrow in the legend page navigation.
-
-**Defaults to** `#003399`.
 
 **Try it**
 
