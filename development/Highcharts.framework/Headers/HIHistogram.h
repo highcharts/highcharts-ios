@@ -11,17 +11,17 @@
 
 
 /**
-A `histogram` series. If the `type` option is not specified, it is inherited from `chart.type`.
-
-Configuration options for the series are given in three levels:
+ A `histogram` series. If the `type` option is not specified, it is inherited from `chart.type`.
  
-1. Options for all series in a chart are defined in the `plotOptions.series` object.
-
-2. Options for all `histogram` series are defined in `plotOptions.histogram`.
-
-3. Options for one single series are given in `the series instance array`.
+ Configuration options for the series are given in three levels:
  
-<pre>
+ 1. Options for all series in a chart are defined in the `plotOptions.series` object.
+ 
+ 2. Options for all `histogram` series are defined in `plotOptions.histogram`.
+ 
+ 3. Options for one single series are given in `the series instance array`.
+ 
+ <pre>
  Highcharts.chart('container', {
     plotOptions: {
         series: {
@@ -36,8 +36,8 @@ Configuration options for the series are given in three levels:
         type: 'histogram'
     }]
  });
-<pre>
-*/
+ <pre>
+ */
 @interface HIHistogram: HISeries
 
 /**
@@ -88,8 +88,6 @@ Whether to group non-stacked columns or to let them render independent of each o
 /**
 The corner radius of the border surrounding each column or bar.
 
-**Defaults to** `0`.
-
 **Try it**
 
 * [Rounded columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderradius/)
@@ -121,7 +119,7 @@ The spacing between columns on the Z Axis in a 3D chart. Requires `highcharts-3d
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
+@property(nonatomic, readwrite) NSArray<NSString *> *colors;
 /**
 3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
 */
@@ -140,8 +138,6 @@ When using automatic point colors pulled from the global `colors` or series-spec
 /**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
-**Defaults to** `null`.
-
 **Try it**
 
 * [Limited to 50](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-maxpointwidth-20/)
@@ -149,8 +145,6 @@ The maximum allowed pixel width for a column, translated to the height of a bar 
 @property(nonatomic, readwrite) NSNumber *maxPointWidth;
 /**
 A pixel value specifying a fixed width for each column or bar. When `null`, the width is calculated from the `pointPadding` and `groupPadding`.
-
-**Defaults to** `null`.
 
 **Try it**
 

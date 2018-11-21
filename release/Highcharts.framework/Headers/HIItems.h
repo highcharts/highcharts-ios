@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HICSSObject.h"
 
 
 /**
@@ -17,7 +17,7 @@ An HTML label that can be positioned anywhere in the chart area.
 /**
 CSS styles for each label. To position the label, use left and top like this: style: {   left: '100px',   top: '100px' }
 */
-@property(nonatomic, readwrite) NSDictionary /* <NSString, NSString> */ *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 Inner HTML or text for the label.
 */

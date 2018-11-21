@@ -7,7 +7,9 @@
 */
 
 #import "HIEvents.h"
+#import "HIDragDrop.h"
 #import "HIMarker.h"
+#import "HIPartialFill.h"
 #import "HITargetOptions.h"
 #import "HIColor.h"
 #import "HIFunction.h"
@@ -61,7 +63,7 @@ An HTML table or the id of such to be parsed as input data. Related options are 
 
 * [Parsed table](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/column-parsed/)
 */
-@property(nonatomic, readwrite) id table;
+@property(nonatomic, readwrite) NSString *table;
 /**
 A callback function to access the parsed columns, the two-dimentional input data array directly, before they are interpreted into series data and categories. Return `false` to stop completion, or call `this.complete()` to continue async.
 
@@ -273,9 +275,9 @@ The rank for this point's data label in case of collision. If two data labels ar
 */
 @property(nonatomic, readwrite) NSNumber *labelrank;
 /**
-A description of the point to add to the screen reader information about the point. Requires the Accessibility module.
+A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color by is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
 */
-@property(nonatomic, readwrite) NSString *definition;
+@property(nonatomic, readwrite) NSNumber *colorIndex;
 /**
 The name of the point as shown in the legend, tooltip, dataLabel etc.
 
@@ -315,6 +317,10 @@ Individual point events
 */
 @property(nonatomic, readwrite) HIEvents *events;
 /**
+Point specific options for the draggable-points module. Overrides options on `series.dragDrop`. Requires the `draggable-points` module.
+*/
+@property(nonatomic, readwrite) HIDragDrop *dragDrop;
+/**
 The y value of the point.
 */
 @property(nonatomic, readwrite) NSNumber *y;
@@ -339,9 +345,9 @@ An id for the point. This can be used after render time to get a pointer to the 
 */
 @property(nonatomic, readwrite) NSString *id;
 /**
-A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color by is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
+A description of the point to add to the screen reader information about the point. Requires the Accessibility module.
 */
-@property(nonatomic, readwrite) NSNumber *colorIndex;
+@property(nonatomic, readwrite) NSString *definition;
 /**
 The sequential index of the data point in the legend.
 */
@@ -355,34 +361,6 @@ The length of the vector. The rendered length will relate to the `vectorLength` 
 The vector direction in degrees, where 0 is north (pointing towards south).
 */
 @property(nonatomic, readwrite) NSNumber *direction;
-/**
-The target value of a point.
-*/
-@property(nonatomic, readwrite) NSNumber *target;
-/**
-Individual target options for each point.
-*/
-@property(nonatomic, readwrite) HITargetOptions *targetOptions;
-/**
-The color of the border surrounding the column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
-
-**Defaults to** `undefined`.
-
-**Try it**
-
-* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
-*/
-@property(nonatomic, readwrite) HIColor *borderColor;
-/**
-The width of the border surrounding the column or bar. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
-
-**Defaults to** `undefined`.
-
-**Try it**
-
-* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
-*/
-@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 The value of the point, resulting in a color controled by options as set in the `colorAxis` configuration.
 */
@@ -423,6 +401,28 @@ Whether to display a slice offset from the center.
 * [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
+/**
+The color of the border surrounding the column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
+
+**Try it**
+
+* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
+/**
+A pixel value specifying a fixed width for the column or bar. Overrides pointWidth on the series.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSNumber *pointWidth;
+/**
+The width of the border surrounding the column or bar. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
+
+**Try it**
+
+* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
 
@@ -466,6 +466,22 @@ The size value for each bubble. The bubbles' diameters are computed based on the
 */
 @property(nonatomic, readwrite) NSNumber *z;
 /**
+The ending X value of the range point.
+
+**Try it**
+
+* [X-range](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/x-range)
+*/
+@property(nonatomic, readwrite) NSNumber *x2;
+/**
+A partial fill for each point, typically used to visualize how much of a task is performed. The partial fill object can be set either on series or point level.
+
+**Try it**
+
+* [X-range with partial fill](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/x-range)
+*/
+@property(nonatomic, readwrite) HIPartialFill *partialFill;
+/**
 Serves a purpose only if a `colorAxis` object is defined in the chart options. This value will decide which color the point gets from the scale of the colorAxis.
 
 **Defaults to** `undefined`.
@@ -482,6 +498,14 @@ Only for treemap. Use this option to build a tree structure. The value should be
 * [Example where parent id is not matching](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/treemap-with-levels/)
 */
 @property(nonatomic, readwrite) NSString *parent;
+/**
+The target value of a point.
+*/
+@property(nonatomic, readwrite) NSNumber *target;
+/**
+Individual target options for each point.
+*/
+@property(nonatomic, readwrite) HITargetOptions *targetOptions;
 
 -(NSDictionary *)getParams;
 

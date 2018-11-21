@@ -11,17 +11,17 @@
 
 
 /**
-A `errorbar` series. If the `type` option is not specified, it is inherited from `chart.type`.
-
-Configuration options for the series are given in three levels:
+ A `errorbar` series. If the `type` option is not specified, it is inherited from `chart.type`.
  
-1. Options for all series in a chart are defined in the `plotOptions.series` object.
-
-2. Options for all `errorbar` series are defined in `plotOptions.errorbar`.
-
-3. Options for one single series are given in `the series instance array`.
+ Configuration options for the series are given in three levels:
  
-<pre>
+ 1. Options for all series in a chart are defined in the `plotOptions.series` object.
+ 
+ 2. Options for all `errorbar` series are defined in `plotOptions.errorbar`.
+ 
+ 3. Options for one single series are given in `the series instance array`.
+ 
+ <pre>
  Highcharts.chart('container', {
     plotOptions: {
         series: {
@@ -36,8 +36,8 @@ Configuration options for the series are given in three levels:
         type: 'errorbar'
     }]
  });
-<pre>
-*/
+ <pre>
+ */
 @interface HIErrorbar: HISeries
 
 /**
@@ -127,16 +127,6 @@ The dash style of the stem, the vertical line extending from the box to the whis
 */
 @property(nonatomic, readwrite) NSString *stemDashStyle;
 /**
-The fill color of the box. In styled mode, the fill color can be set with the `.highcharts-boxplot-box` class.
-
-**Defaults to** `#ffffff`.
-
-**Try it**
-
-* [Box plot styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/box-plot-styling/)
-*/
-@property(nonatomic, readwrite) HIColor *fillColor;
-/**
 The width of the stem, the vertical line extending from the box to the whiskers. If `null`, the width is inherited from the `lineWidth` option. In styled mode, the stem stroke width can be set with the `.highcharts-boxplot-stem` class.
 
 **Defaults to** `null`.
@@ -148,6 +138,16 @@ The width of the stem, the vertical line extending from the box to the whiskers.
 * [Error bar styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/error-bar-styling/)
 */
 @property(nonatomic, readwrite) NSNumber *stemWidth;
+/**
+The fill color of the box. In styled mode, the fill color can be set with the `.highcharts-boxplot-box` class.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Box plot styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/box-plot-styling/)
+*/
+@property(nonatomic, readwrite) HIColor *fillColor;
 /**
 The X axis range that each point is valid for. This determines the width of the column. On a categorized axis, the range will be 1 by default (one category unit). On linear and datetime axes, the range will be computed as the distance between the two closest data points. The default `null` means it is computed automatically, but this option can be used to override the automatic value.
 
@@ -168,7 +168,7 @@ The minimal height for a column or width for a bar. By default, 0 values are not
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
+@property(nonatomic, readwrite) NSArray<NSString *> *colors;
 /**
 3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
 */
@@ -187,8 +187,6 @@ When using automatic point colors pulled from the global `colors` or series-spec
 /**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
-**Defaults to** `null`.
-
 **Try it**
 
 * [Limited to 50](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-maxpointwidth-20/)
@@ -196,8 +194,6 @@ The maximum allowed pixel width for a column, translated to the height of a bar 
 @property(nonatomic, readwrite) NSNumber *maxPointWidth;
 /**
 A pixel value specifying a fixed width for each column or bar. When `null`, the width is calculated from the `pointPadding` and `groupPadding`.
-
-**Defaults to** `null`.
 
 **Try it**
 

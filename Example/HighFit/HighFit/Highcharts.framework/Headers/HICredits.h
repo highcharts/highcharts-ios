@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIStyle.h"
 #import "HIPosition.h"
+#import "HICSSObject.h"
 
 
 /**
@@ -20,11 +20,9 @@ CSS styles for the credits label.
 
 **Defaults to** `{"cursor": "pointer", "color": "#999999", "fontSize": "10px"}`.
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 The text for the credits label.
-
-**Defaults to** `Highcharts.com`.
 
 **Try it**
 

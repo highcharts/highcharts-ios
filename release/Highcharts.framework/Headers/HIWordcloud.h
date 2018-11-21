@@ -9,21 +9,20 @@
 #import "HISeries.h"
 #import "HIStyle.h"
 #import "HIRotation.h"
-#import "HIColor.h"
 
 
 /**
-A `wordcloud` series. If the `type` option is not specified, it is inherited from `chart.type`.
-
-Configuration options for the series are given in three levels:
+ A `wordcloud` series. If the `type` option is not specified, it is inherited from `chart.type`.
  
-1. Options for all series in a chart are defined in the `plotOptions.series` object.
-
-2. Options for all `wordcloud` series are defined in `plotOptions.wordcloud`.
-
-3. Options for one single series are given in `the series instance array`.
+ Configuration options for the series are given in three levels:
  
-<pre>
+ 1. Options for all series in a chart are defined in the `plotOptions.series` object.
+ 
+ 2. Options for all `wordcloud` series are defined in `plotOptions.wordcloud`.
+ 
+ 3. Options for one single series are given in `the series instance array`.
+ 
+ <pre>
  Highcharts.chart('container', {
     plotOptions: {
         series: {
@@ -38,12 +37,12 @@ Configuration options for the series are given in three levels:
         type: 'wordcloud'
     }]
  });
-<pre>
-*/
+ <pre>
+ */
 @interface HIWordcloud: HISeries
 
 /**
-When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
+When using automatic point colors pulled from the global `colors` or series-specific `plotOptions.column.colors` collections, this option determines whether the chart should receive one color per series or one color per point. In styled mode, the `colors` or `series.colors` arrays are not supported, and instead this option gives the points individual color class names on the form `highcharts-color-{n}`.
 
 **Defaults to** `false`.
 
@@ -90,8 +89,6 @@ This option decides which algorithm is used for placement, and rotation of a wor
 /**
 The corner radius of the border surrounding each column or bar.
 
-**Defaults to** `0`.
-
 **Try it**
 
 * [Rounded columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderradius/)
@@ -100,7 +97,7 @@ The corner radius of the border surrounding each column or bar.
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
+@property(nonatomic, readwrite) NSArray<NSString *> *colors;
 /**
 3D columns only. The width of the colored edges.
 

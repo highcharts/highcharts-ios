@@ -6,7 +6,14 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIMillisecond.h"
+#import "HIWeek.h"
+#import "HIHour.h"
+#import "HIMonth.h"
+#import "HISecond.h"
+#import "HIYear.h"
+#import "HIDay.h"
+#import "HIMinute.h"
 
 
 /**
@@ -18,14 +25,14 @@ For a datetime axis, the scale will automatically adjust to the appropriate unit
 */
 @interface HIDateTimeLabelFormats: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *millisecond;
-@property(nonatomic, readwrite) NSString *week;
-@property(nonatomic, readwrite) NSString *hour;
-@property(nonatomic, readwrite) NSString *month;
-@property(nonatomic, readwrite) NSString *second;
-@property(nonatomic, readwrite) NSString *year;
-@property(nonatomic, readwrite) NSString *day;
-@property(nonatomic, readwrite) NSString *minute;
+@property(nonatomic, readwrite) HIMillisecond *millisecond;
+@property(nonatomic, readwrite) HIWeek *week;
+@property(nonatomic, readwrite) HIHour *hour;
+@property(nonatomic, readwrite) HIMonth *month;
+@property(nonatomic, readwrite) HISecond *second;
+@property(nonatomic, readwrite) HIYear *year;
+@property(nonatomic, readwrite) HIDay *day;
+@property(nonatomic, readwrite) HIMinute *minute;
 
 -(NSDictionary *)getParams;
 

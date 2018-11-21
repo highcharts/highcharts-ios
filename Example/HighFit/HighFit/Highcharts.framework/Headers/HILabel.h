@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIStyle.h"
+#import "HICSSObject.h"
 
 
 /**
@@ -21,7 +21,7 @@ CSS styles for the text label. In styled mode, the labels are styled by the `.hi
 
 * [Blue and bold label](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-label-style/)
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 Vertical alignment of the label relative to the plot line. Can be one of "top", "middle" or "bottom".
 

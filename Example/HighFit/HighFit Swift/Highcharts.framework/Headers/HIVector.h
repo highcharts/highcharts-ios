@@ -10,17 +10,17 @@
 
 
 /**
-A `vector` series. If the `type` option is not specified, it is inherited from `chart.type`.
-
-Configuration options for the series are given in three levels:
+ A `vector` series. If the `type` option is not specified, it is inherited from `chart.type`.
  
-1. Options for all series in a chart are defined in the `plotOptions.series` object.
-
-2. Options for all `vector` series are defined in `plotOptions.vector`.
-
-3. Options for one single series are given in `the series instance array`.
+ Configuration options for the series are given in three levels:
  
-<pre>
+ 1. Options for all series in a chart are defined in the `plotOptions.series` object.
+ 
+ 2. Options for all `vector` series are defined in `plotOptions.vector`.
+ 
+ 3. Options for one single series are given in `the series instance array`.
+ 
+ <pre>
  Highcharts.chart('container', {
     plotOptions: {
         series: {
@@ -35,8 +35,8 @@ Configuration options for the series are given in three levels:
         type: 'vector'
     }]
  });
-<pre>
-*/
+ <pre>
+ */
 @interface HIVector: HISeries
 
 /**

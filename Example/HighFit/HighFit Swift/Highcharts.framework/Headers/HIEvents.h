@@ -142,6 +142,14 @@ Fires when the point is unselected either programmatically or following a click 
 */
 @property(nonatomic, readwrite) HIFunction *unselect;
 /**
+Callback that fires when the point is dropped. The parameters passed are the same as for `drag`. To stop the default drop action, return false. See `drag and drop options`. Requires the `draggable-points` module.
+
+**Try it**
+
+* [Drag events](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
+*/
+@property(nonatomic, readwrite) HIFunction *drop;
+/**
 Fires when the point is updated programmatically through the `.update()` method. One parameter, `event`, is passed to the function. The new point options can be accessed through `event.options`. Returning `false` cancels the operation.
 
 **Try it**
@@ -157,6 +165,14 @@ Fires when the point is removed using the `.remove()` method. One parameter, `ev
 * [Remove point and confirm](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-point-events-remove/)
 */
 @property(nonatomic, readwrite) HIFunction *remove;
+/**
+Callback that fires while dragging a point. The mouse event is passed in as parameter. The original data can be accessed from `e.origin`, and the new point values can be accessed from `e.newPoints`. If there is only a single point being updated, it can be accessed from `e.newPoint` for simplicity, and its ID can be accessed from `e.newPointId`. The `this` context is the point being dragged. To stop the default drag action, return false. See `drag and drop options`. Requires the `draggable-points` module.
+
+**Try it**
+
+* [Drag events](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
+*/
+@property(nonatomic, readwrite) HIFunction *drag;
 /**
 Fires when the mouse leaves the area close to the point. One parameter, `event`, is passed to the function, containing common event information.
 
@@ -181,6 +197,14 @@ Fires when the point is selected either programmatically or following a click on
 * [Report the last selected point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-point-events-select/)
 */
 @property(nonatomic, readwrite) HIFunction *select;
+/**
+Callback that fires when starting to drag a point. The mouse event object is passed in as an argument. If a drag handle is used, `e.updateProp` is set to the data property being dragged. The `this` context is the point. See `drag and drop options`. Requires the `draggable-points` module.
+
+**Try it**
+
+* [Drag events](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
+*/
+@property(nonatomic, readwrite) HIFunction *dragStart;
 /**
 Fires when the series is hidden after chart generation time, either by clicking the legend item or by calling `.hide()`.
 

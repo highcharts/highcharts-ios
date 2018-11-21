@@ -7,21 +7,20 @@
 */
 
 #import "HISeries.h"
-#import "HIColor.h"
 
 
 /**
-A `variwide` series. If the `type` option is not specified, it is inherited from `chart.type`.
-
-Configuration options for the series are given in three levels:
+ A `variwide` series. If the `type` option is not specified, it is inherited from `chart.type`.
  
-1. Options for all series in a chart are defined in the `plotOptions.series` object.
-
-2. Options for all `variwide` series are defined in `plotOptions.variwide`.
-
-3. Options for one single series are given in `the series instance array`.
+ Configuration options for the series are given in three levels:
  
-<pre>
+ 1. Options for all series in a chart are defined in the `plotOptions.series` object.
+ 
+ 2. Options for all `variwide` series are defined in `plotOptions.variwide`.
+ 
+ 3. Options for one single series are given in `the series instance array`.
+ 
+ <pre>
  Highcharts.chart('container', {
     plotOptions: {
         series: {
@@ -36,8 +35,8 @@ Configuration options for the series are given in three levels:
         type: 'variwide'
     }]
  });
-<pre>
-*/
+ <pre>
+ */
 @interface HIVariwide: HISeries
 
 /**
@@ -61,8 +60,6 @@ In a variwide chart, the group padding is 0 in order to express the horizontal s
 @property(nonatomic, readwrite) NSNumber *groupPadding;
 /**
 The corner radius of the border surrounding each column or bar.
-
-**Defaults to** `0`.
 
 **Try it**
 
@@ -89,7 +86,7 @@ The minimal height for a column or width for a bar. By default, 0 values are not
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
+@property(nonatomic, readwrite) NSArray<NSString *> *colors;
 /**
 When using automatic point colors pulled from the global `colors` or series-specific `plotOptions.column.colors` collections, this option determines whether the chart should receive one color per series or one color per point. In styled mode, the `colors` or `series.colors` arrays are not supported, and instead this option gives the points individual color class names on the form `highcharts-color-{n}`.
 
@@ -104,8 +101,6 @@ When using automatic point colors pulled from the global `colors` or series-spec
 /**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
-**Defaults to** `null`.
-
 **Try it**
 
 * [Limited to 50](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-maxpointwidth-20/)
@@ -113,8 +108,6 @@ The maximum allowed pixel width for a column, translated to the height of a bar 
 @property(nonatomic, readwrite) NSNumber *maxPointWidth;
 /**
 A pixel value specifying a fixed width for each column or bar. When `null`, the width is calculated from the `pointPadding` and `groupPadding`.
-
-**Defaults to** `null`.
 
 **Try it**
 

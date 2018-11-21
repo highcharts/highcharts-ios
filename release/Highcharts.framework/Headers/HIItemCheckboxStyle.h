@@ -11,11 +11,11 @@
 
 /**
 Default styling for the checkbox next to a legend item when `showCheckbox` is true.
+
+**Defaults to** `{"width": "13px", "height": "13px", "position":"absolute"}`.
 */
 @interface HIItemCheckboxStyle: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *position;
-@property(nonatomic, readwrite) NSString *width;
 @property(nonatomic, readwrite) NSString *height;
 
 -(NSDictionary *)getParams;

@@ -7,21 +7,20 @@
 */
 
 #import "HISeries.h"
-#import "HIColor.h"
 
 
 /**
-A `pie` series. If the `type` option is not specified, it is inherited from `chart.type`.
-
-Configuration options for the series are given in three levels:
+ A `pie` series. If the `type` option is not specified, it is inherited from `chart.type`.
  
-1. Options for all series in a chart are defined in the `plotOptions.series` object.
-
-2. Options for all `pie` series are defined in `plotOptions.pie`.
-
-3. Options for one single series are given in `the series instance array`.
+ Configuration options for the series are given in three levels:
  
-<pre>
+ 1. Options for all series in a chart are defined in the `plotOptions.series` object.
+ 
+ 2. Options for all `pie` series are defined in `plotOptions.pie`.
+ 
+ 3. Options for one single series are given in `the series instance array`.
+ 
+ <pre>
  Highcharts.chart('container', {
     plotOptions: {
         series: {
@@ -36,16 +35,18 @@ Configuration options for the series are given in three levels:
         type: 'pie'
     }]
  });
-<pre>
-*/
+ <pre>
+ */
 @interface HIPie: HISeries
 
 /**
-The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
+The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to `startAngle` plus 360.
 
-**Defaults to** `80`.
+**Try it**
+
+* [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
 */
-@property(nonatomic, readwrite) NSNumber *minSize;
+@property(nonatomic, readwrite) NSNumber *endAngle;
 /**
 The size of the inner diameter for the pie. A size greater than 0 renders a donut chart. Can be a percentage or pixel value. Percentages are relative to the pie size. Pixel values are given as integers. Note: in Highcharts < 4.1.2, the percentage was relative to the plot area, not the pie size.
 
@@ -67,11 +68,9 @@ The center of the pie chart relative to the plot area. Can be percentages or pix
 
 * [Centered at 100, 100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-center/)
 */
-@property(nonatomic, readwrite) NSArray /* <NSString, NSNumber> */ *center;
+@property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
 /**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
-
-**Defaults to** `10`.
 
 **Try it**
 
@@ -85,23 +84,20 @@ The thickness of a 3D pie. Requires `highcharts-3d.js`
 */
 @property(nonatomic, readwrite) NSNumber *depth;
 /**
-The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to `startAngle` plus 360.
-
-**Defaults to** `null`.
-
-**Try it**
-
-* [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
-*/
-@property(nonatomic, readwrite) NSNumber *endAngle;
-/**
 A series specific or series type specific color set to use instead of the global `colors`.
 
 **Try it**
 
 * [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
 */
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
+@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+/**
+The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
+
+**Defaults to** `80`.
+*/
+@property(nonatomic, readwrite) NSNumber *minSize;
+@property(nonatomic, readwrite) NSString *legendType;
 /**
 The start angle of the pie slices in degrees where 0 is top and 90 right.
 
@@ -122,8 +118,6 @@ The diameter of the pie relative to the plot area. Can be a percentage or pixel 
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
 /**
 Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
-
-**Defaults to** `true`.
 
 **Try it**
 

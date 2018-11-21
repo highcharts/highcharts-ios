@@ -31,7 +31,7 @@ A full set of chart options to apply as overrides to the general chart options. 
 * [Legend](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/responsive/legend/)
 * [Class name](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/responsive/classname/)
 */
-@property(nonatomic, readwrite) id chartOptions;
+@property(nonatomic, readwrite) NSDictionary *chartOptions;
 
 -(NSDictionary *)getParams;
 

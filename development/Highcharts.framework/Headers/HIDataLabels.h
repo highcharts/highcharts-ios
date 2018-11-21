@@ -7,13 +7,18 @@
 */
 
 #import "HIFilter.h"
-#import "HIStyle.h"
 #import "HIColor.h"
 #import "HIFunction.h"
+#import "HICSSObject.h"
 
 
 /**
-Options for the series data labels, appearing next to each data point. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-datalabels)).
+Options for the series data labels, appearing next to each data point. Since v6.2.0, multiple data labels can be applied to each single point by defining them as an array of configs. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-datalabels)).
+
+**Try it**
+
+* [Data labels enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-enabled)
+* [Multiple data labels on a bar series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-multiple)
 */
 @interface HIDataLabels: HIChartsJSONSerializable
 
@@ -45,6 +50,7 @@ Alignment of the data label relative to the data point.
 * [Data labels inside the bar](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bar-datalabels-align-inside-bar/)
 */
 @property(nonatomic, readwrite) NSString *align;
+@property(nonatomic, readwrite) NSNumber *y;
 /**
 Y offset of the higher data labels relative to the point value.
 
@@ -126,7 +132,7 @@ Styles for the label. The default `color` setting is `"contrast"`, which is a ps
 
 * [Bold labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-style/)
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 Text rotation in degrees. Note that due to a more complex structure, backgrounds, borders and padding will be lost on a rotated data label.
 
@@ -188,7 +194,7 @@ The shadow of the box. Works best with `borderWidth` or `backgroundColor`. Since
 
 * [Data labels box options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-box/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+@property(nonatomic, readwrite) id /* Bool, id */ shadow;
 /**
 The Z index of the data labels. The default Z index puts it above the series. Use a Z index of 2 to display it behind the series.
 
@@ -220,14 +226,6 @@ Decides how the data label will be rotated relative to the perimeter of the sunb
 */
 @property(nonatomic, readwrite) NSString *rotationMode;
 /**
-The y position offset of the label relative to the point in pixels.
-
-**Try it**
-
-* [Vertical and positioned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-rotation/)
-*/
-@property(nonatomic, readwrite) NSNumber *y;
-/**
 Callback to format data labels for _nodes_ in the sankey diagram. The `nodeFormat` option takes precedence over the `nodeFormatter`.
 */
 @property(nonatomic, readwrite) HIFunction *nodeFormatter;
@@ -237,8 +235,6 @@ The [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-st
 @property(nonatomic, readwrite) NSString *nodeFormat;
 /**
 The distance of the data label from the pie's edge. Negative numbers put the data label on top of the pie slices. Connectors are only shown for data labels outside the pie.
-
-**Defaults to** `30`.
 
 **Try it**
 
@@ -278,14 +274,12 @@ The distance from the data label to the connector.
 /**
 The color of the line connecting the data label to the pie slice. The default color is the same as the point's color. In styled mode, the connector stroke is given in the `.highcharts-data-label-connector` class.
 
-**Defaults to** `{point.color}`.
-
 **Try it**
 
 * [Blue connectors](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-connectorcolor/)
 * [Styled connectors](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/pie-point/)
 */
-@property(nonatomic, readwrite) NSString *connectorColor;
+@property(nonatomic, readwrite) HIColor *connectorColor;
 
 -(NSDictionary *)getParams;
 

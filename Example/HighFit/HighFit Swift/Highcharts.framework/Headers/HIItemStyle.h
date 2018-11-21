@@ -20,10 +20,7 @@ CSS styles for each legend item. Only a subset of CSS is supported, notably thos
 */
 @interface HIItemStyle: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *color;
-@property(nonatomic, readwrite) NSString *fontWeight;
-@property(nonatomic, readwrite) NSString *textOverflow;
-@property(nonatomic, readwrite) NSString *fontSize;
+@property(nonatomic, readwrite) NSString *cursor;
 
 -(NSDictionary *)getParams;
 

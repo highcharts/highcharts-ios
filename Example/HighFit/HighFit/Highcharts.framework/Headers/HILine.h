@@ -10,17 +10,17 @@
 
 
 /**
-A `line` series. If the `type` option is not specified, it is inherited from `chart.type`.
-
-Configuration options for the series are given in three levels:
+ A `line` series. If the `type` option is not specified, it is inherited from `chart.type`.
  
-1. Options for all series in a chart are defined in the `plotOptions.series` object.
-
-2. Options for all `line` series are defined in `plotOptions.line`.
-
-3. Options for one single series are given in `the series instance array`.
+ Configuration options for the series are given in three levels:
  
-<pre>
+ 1. Options for all series in a chart are defined in the `plotOptions.series` object.
+ 
+ 2. Options for all `line` series are defined in `plotOptions.line`.
+ 
+ 3. Options for one single series are given in `the series instance array`.
+ 
+ <pre>
  Highcharts.chart('container', {
     plotOptions: {
         series: {
@@ -35,8 +35,8 @@ Configuration options for the series are given in three levels:
         type: 'line'
     }]
  });
-<pre>
-*/
+ <pre>
+ */
 @interface HILine: HISeries
 
 

@@ -1,3 +1,30 @@
+# Version 6.2.0
+
+## iOS:
+
+1. All style options are of type HICSSObject.
+
+## Framework:
+
+1. Added support for multiple data labels on each single point.
+2. Added draggable points plugin as module.
+3. Added support for pointPlacement in X range charts, affecting the category Y axis. Closed #7419.
+
+## Framework bug fixes:
+
+1. Fixed #2366, improved polar chart yAxis plotLines resize and animation.
+2. Fixed #4281, added information about point in tooltip's headerFormat.
+3. Fixed #6169. cropShoulder was inherited by column series, which set it to 0. Fixed by overriding to 1.
+4. Fixed #6370, category axis with breaks was rendered incorrectly.
+5. Fixed #9049, issue with lines to culled points in boost.
+6. Fixed #9052, conflict between settings boost.enabled and seriesThreshold.
+7. Fixed #9058, error when running chart tests in jsdom.
+8. Fixed #9088, updating a point in a pie chart threw errors when another slice was hovered.
+9. Fixed #9091, showCheckbox didn't work with layout proximate.
+10. Fixed #9097, chart.update error when removing axes and series.
+11. Fixed #9119, dataLabels sometimes overlapped stackLabels.
+12. Fixed animation of grid lines when changing axis extremes. Follow tick marks.
+
 # Version 6.1.4
 
 ## Framework:

@@ -6,8 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIStyle.h"
-#import "HILabelStyle.h"
+#import "HICSSObject.h"
 
 
 /**
@@ -24,7 +23,7 @@ CSS styles for the loading screen that covers the plot area. In styled mode, the
 
 * [Gray plot area, white text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/loading/style/)
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 CSS styles for the loading label `span`.
 
@@ -34,7 +33,7 @@ CSS styles for the loading label `span`.
 
 * [Vertically centered](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/loading/labelstyle/)
 */
-@property(nonatomic, readwrite) HILabelStyle *labelStyle;
+@property(nonatomic, readwrite) HICSSObject *labelStyle;
 /**
 The duration in milliseconds of the fade out effect.
 

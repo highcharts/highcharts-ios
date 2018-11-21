@@ -66,7 +66,7 @@ class OptionsProvider {
             let title = HITitle()
             title.text = options["title"] as! String
             title.align = "left"
-            title.style = HIStyle()
+            title.style = HICSSObject()
             title.style.fontFamily = "Arial"
             title.style.fontSize = "14px"
             title.style.color = "rgba(255, 255, 255, 0.6)"
@@ -79,7 +79,10 @@ class OptionsProvider {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
-            subtitle.style = ["fontFamily": "Arial", "fontSize": "10px", "color": "rgba(255, 255, 255, 0.6)"]
+            subtitle.style = HICSSObject()
+            subtitle.style.fontFamily = "Arial"
+            subtitle.style.fontSize = "10px"
+            subtitle.style.color = "rgba(255, 255, 255, 0.6)"
             subtitle.y = 28
             hioptions.subtitle = subtitle
             
@@ -91,7 +94,7 @@ class OptionsProvider {
             xaxis.tickColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.0)
             xaxis.lineColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.3)
             xaxis.labels = HILabels()
-            xaxis.labels.style = HIStyle()
+            xaxis.labels.style = HICSSObject()
             xaxis.labels.style.color = "rgb(255, 255, 255)"
             xaxis.labels.style.textOutline = "10px Arial"
             xaxis.labels.step = step
@@ -103,7 +106,7 @@ class OptionsProvider {
             yaxis.lineWidth = 1
             yaxis.gridLineWidth = 0
             yaxis.labels = HILabels()
-            yaxis.labels.style = HIStyle()
+            yaxis.labels.style = HICSSObject()
             yaxis.labels.style.color = "rgb(255, 255, 255)"
             yaxis.labels.style.textOutline = "10px Arial"
             yaxis.labels.x = -5
@@ -159,7 +162,7 @@ class OptionsProvider {
             let title = HITitle()
             title.text = options["title"] as! String
             title.align = "left"
-            title.style = HIStyle()
+            title.style = HICSSObject()
             title.style.fontFamily = "Arial"
             title.style.fontSize = "14px"
             title.style.color = "rgba(255, 255, 255, 0.6)"
@@ -172,7 +175,10 @@ class OptionsProvider {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
-            subtitle.style = ["fontFamily": "Arial", "fontSize": "10px", "color": "rgba(255, 255, 255, 0.6)"]
+            subtitle.style = HICSSObject()
+            subtitle.style.fontFamily = "Arial"
+            subtitle.style.fontSize = "10px"
+            subtitle.style.color = "rgba(255, 255, 255, 0.6)"
             subtitle.y = 28
             hioptions.subtitle = subtitle
             
@@ -184,7 +190,7 @@ class OptionsProvider {
             xaxis.tickColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.0)
             xaxis.lineColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.3)
             xaxis.labels = HILabels()
-            xaxis.labels.style = HIStyle()
+            xaxis.labels.style = HICSSObject()
             xaxis.labels.style.color = "rgb(255, 255, 255)"
             xaxis.labels.style.textOutline = "10px Arial"
             xaxis.labels.step = step
@@ -196,7 +202,7 @@ class OptionsProvider {
             yaxis.gridLineWidth = 0
             yaxis.lineColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.3)
             yaxis.labels = HILabels()
-            yaxis.labels.style = HIStyle()
+            yaxis.labels.style = HICSSObject()
             yaxis.labels.style.color = "rgb(255, 255, 255)"
             yaxis.labels.style.textOutline = "10px Arial"
             yaxis.labels.x = -5
@@ -248,7 +254,7 @@ class OptionsProvider {
             let title = HITitle()
             title.text = options["title"] as! String
             title.align = "left"
-            title.style = HIStyle()
+            title.style = HICSSObject()
             title.style.fontFamily = "Arial"
             title.style.fontSize = "14px"
             title.style.color = "rgba(255, 255, 255, 0.6)"
@@ -261,7 +267,10 @@ class OptionsProvider {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
-            subtitle.style = ["fontFamily": "Arial", "fontSize": "10px", "color": "rgba(255, 255, 255, 0.6)"]
+            subtitle.style = HICSSObject()
+            subtitle.style.fontFamily = "Arial"
+            subtitle.style.fontSize = "10px"
+            subtitle.style.color = "rgba(255, 255, 255, 0.6)"
             subtitle.y = 28
             hioptions.subtitle = subtitle
             
@@ -273,7 +282,7 @@ class OptionsProvider {
             xaxis.tickColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.0)
             xaxis.lineColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.3)
             xaxis.labels = HILabels()
-            xaxis.labels.style = HIStyle()
+            xaxis.labels.style = HICSSObject()
             xaxis.labels.style.color = "rgb(255, 255, 255)"
             xaxis.labels.style.textOutline = "10px Arial"
             xaxis.labels.step = step
@@ -286,7 +295,7 @@ class OptionsProvider {
             yaxis.lineColor = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.3)
             yaxis.labels = HILabels()
             yaxis.labels = HILabels()
-            yaxis.labels.style = HIStyle()
+            yaxis.labels.style = HICSSObject()
             yaxis.labels.style.color = "rgb(255, 255, 255)"
             yaxis.labels.style.textOutline = "10px Arial"
             yaxis.labels.x = -5

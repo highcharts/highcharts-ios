@@ -20,6 +20,10 @@ A partial fill for each point, typically used to visualize how much of a task is
 @interface HIPartialFill: HIChartsJSONSerializable
 
 /**
+The amount of the X-range point to be filled. Values can be 0-1 and are converted to percentages in the default data label formatter.
+*/
+@property(nonatomic, readwrite) NSNumber *amount;
+/**
 The fill color to be used for partial fills. Defaults to a darker shade of the point color.
 */
 @property(nonatomic, readwrite) HIColor *fill;

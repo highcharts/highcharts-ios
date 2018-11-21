@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIAnimationOptionsObject.h"
 
 
 /**
@@ -17,7 +17,7 @@ The normal state of a single point marker. Currently only used for setting anima
 /**
 Animation when returning to normal state after hovering.
 */
-@property(nonatomic, readwrite) id animation;
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 
 -(NSDictionary *)getParams;
 

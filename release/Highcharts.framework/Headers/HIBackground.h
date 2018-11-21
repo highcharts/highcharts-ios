@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIBackgroundColor.h"
+#import "HIChartsJSONSerializable.h"
 #import "HIColor.h"
 
 
@@ -62,7 +62,7 @@ The pixel border width of the pane background.
 /**
 The background color or gradient for the pane.
 */
-@property(nonatomic, readwrite) HIBackgroundColor *backgroundColor;
+@property(nonatomic, readwrite) HIColor *backgroundColor;
 
 -(NSDictionary *)getParams;
 

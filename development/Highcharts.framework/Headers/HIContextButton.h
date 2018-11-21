@@ -72,7 +72,7 @@ A collection of strings pointing to config options for the menu items. The confi
 
 * [Menu item definitions](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/menuitemdefinitions/)
 */
-@property(nonatomic, readwrite) NSArray *menuItems;
+@property(nonatomic, readwrite) NSArray /* <NSString, id> */ *menuItems;
 /**
 The vertical alignment of the buttons. Can be one of "top", "middle" or "bottom".
 

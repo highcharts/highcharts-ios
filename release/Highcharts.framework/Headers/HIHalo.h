@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIAttributes.h"
+#import "HISVGAttributes.h"
 
 
 /**
@@ -14,7 +14,7 @@
 @interface HIHalo: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSNumber *opacity;
-@property(nonatomic, readwrite) HIAttributes *attributes;
+@property(nonatomic, readwrite) HISVGAttributes *attributes;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 @property(nonatomic, readwrite) NSNumber *size;
 

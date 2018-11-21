@@ -14,8 +14,8 @@ Definition of the gradient, similar to SVG: object literal holds start position 
 */
 @interface HILinearGradient: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSNumber *x2;
 @property(nonatomic, readwrite) NSNumber *y1;
+@property(nonatomic, readwrite) NSNumber *x2;
 @property(nonatomic, readwrite) NSNumber *x1;
 @property(nonatomic, readwrite) NSNumber *y2;
 

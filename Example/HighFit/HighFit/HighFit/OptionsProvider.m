@@ -18,7 +18,7 @@
 {
     NSArray *categories = nil;
     
-     id step = [NSNull null];
+    id step = [NSNull null];
     
     if ([type isEqualToString:@"day"]) {
         categories = @[ @"12AM", @"", @"3AM", @"", @"6AM", @"", @"9AM", @"", @"12PM", @"", @"3PM", @"", @"6PM", @"", @"9PM", @"", @"12AM"];
@@ -77,7 +77,7 @@
         HITitle *title = [[HITitle alloc]init];
         title.text = options[@"title"];
         title.align = @"left";
-        title.style = [[HIStyle alloc] init];
+        title.style = [[HICSSObject alloc] init];
         title.style.fontFamily = @"Arial";
         title.style.fontSize = @"14px";
         title.style.color = @"rgba(255, 255, 255, 0.6)";
@@ -90,11 +90,10 @@
             subtitle.text = [subtitle.text stringByAppendingString:@" total"];
         }
         subtitle.align = @"left";
-        subtitle.style = @{
-                           @"fontFamily": @"Arial",
-                           @"fontSize": @"10px",
-                           @"color": @"rgba(255, 255, 255, 0.6)"
-                           };
+        subtitle.style = [[HICSSObject alloc] init];
+        subtitle.style.fontFamily = @"Arial";
+        subtitle.style.fontSize = @"10px";
+        subtitle.style.color = @"rgba(255, 255, 255, 0.6)";
         subtitle.y = @28;
         hioptions.subtitle = subtitle;
         
@@ -106,7 +105,7 @@
         xaxis.tickColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.0];
         xaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
         xaxis.labels = [[HILabels alloc]init];
-        xaxis.labels.style = [[HIStyle alloc] init];
+        xaxis.labels.style = [[HICSSObject alloc] init];
         xaxis.labels.style.textOutline = @"10px Arial";
         xaxis.labels.style.color = @"rgb(255, 255, 255)";
         xaxis.labels.step = step;
@@ -118,7 +117,7 @@
         yaxis.lineWidth = @1;
         yaxis.gridLineWidth = @0;
         yaxis.labels = [[HILabels alloc]init];
-        yaxis.labels.style = [[HIStyle alloc] init];
+        yaxis.labels.style = [[HICSSObject alloc] init];
         yaxis.labels.style.textOutline = @"10px Arial";
         yaxis.labels.style.color = @"rgb(255, 255, 255)";
         yaxis.labels.x = @-5;
@@ -138,7 +137,7 @@
         
         return hioptions;
     }
-
+    
     if ([options[@"chartType"] isEqualToString:@"column"]) {
         
         HIOptions *hioptions = [[HIOptions alloc]init];
@@ -177,7 +176,7 @@
         HITitle *title = [[HITitle alloc]init];
         title.text = options[@"title"];
         title.align = @"left";
-        title.style = [[HIStyle alloc] init];
+        title.style = [[HICSSObject alloc] init];
         title.style.fontFamily = @"Arial";
         title.style.fontSize = @"14px";
         title.style.color = @"rgba(255, 255, 255, 0.6)";
@@ -190,11 +189,10 @@
             subtitle.text = [subtitle.text stringByAppendingString:@" total"];
         }
         subtitle.align = @"left";
-        subtitle.style = @{
-                           @"fontFamily": @"Arial",
-                           @"fontSize": @"10px",
-                           @"color": @"rgba(255, 255, 255, 0.6)"
-                           };
+        subtitle.style = [[HICSSObject alloc] init];
+        subtitle.style.fontFamily = @"Arial";
+        subtitle.style.fontSize = @"10px";
+        subtitle.style.color = @"rgba(255, 255, 255, 0.6)";
         subtitle.y = @28;
         hioptions.subtitle = subtitle;
         
@@ -206,7 +204,7 @@
         xaxis.tickColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.0];
         xaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
         xaxis.labels = [[HILabels alloc]init];
-        xaxis.labels.style = [[HIStyle alloc] init];
+        xaxis.labels.style = [[HICSSObject alloc] init];
         xaxis.labels.style.color = @"rgb(255, 255, 255)";
         xaxis.labels.style.textOutline = @"10px Arial";
         xaxis.labels.step = step;
@@ -218,7 +216,7 @@
         yaxis.gridLineWidth = @0;
         yaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
         yaxis.labels = [[HILabels alloc]init];
-        yaxis.labels.style = [[HIStyle alloc] init];
+        yaxis.labels.style = [[HICSSObject alloc] init];
         yaxis.labels.style.color = @"rgb(255, 255, 255)";
         yaxis.labels.style.textOutline = @"10px Arial";
         yaxis.labels.x = @-5;
@@ -237,7 +235,7 @@
         
         return hioptions;
     }
-
+    
     if ([options[@"chartType"] isEqualToString:@"spline"]) {
         
         HIOptions *hioptions = [[HIOptions alloc]init];
@@ -274,7 +272,7 @@
         HITitle *title = [[HITitle alloc]init];
         title.text = options[@"title"];
         title.align = @"left";
-        title.style = [[HIStyle alloc] init];
+        title.style = [[HICSSObject alloc] init];
         title.style.fontFamily = @"Arial";
         title.style.fontSize = @"14px";
         title.style.color = @"rgba(255, 255, 255, 0.6)";
@@ -287,11 +285,10 @@
             subtitle.text = [subtitle.text stringByAppendingString:@" total"];
         }
         subtitle.align = @"left";
-        subtitle.style = @{
-                           @"fontFamily": @"Arial",
-                           @"fontSize": @"10px",
-                           @"color": @"rgba(255, 255, 255, 0.6)"
-                           };
+        subtitle.style = [[HICSSObject alloc] init];
+        subtitle.style.fontFamily = @"Arial";
+        subtitle.style.fontSize = @"10px";
+        subtitle.style.color = @"rgba(255, 255, 255, 0.6)";
         subtitle.y = @28;
         hioptions.subtitle = subtitle;
         
@@ -303,7 +300,7 @@
         xaxis.tickColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.0];
         xaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
         xaxis.labels = [[HILabels alloc]init];
-        xaxis.labels.style = [[HIStyle alloc] init];
+        xaxis.labels.style = [[HICSSObject alloc] init];
         xaxis.labels.style.color = @"rgb(255, 255, 255)";
         xaxis.labels.style.textOutline = @"10px Arial";
         xaxis.labels.step = step;
@@ -315,7 +312,7 @@
         yaxis.gridLineWidth = @0;
         yaxis.lineColor = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.3];
         yaxis.labels = [[HILabels alloc]init];
-        yaxis.labels.style = [[HIStyle alloc] init];
+        yaxis.labels.style = [[HICSSObject alloc] init];
         yaxis.labels.style.color = @"rgb(255, 255, 255)";
         yaxis.labels.style.textOutline = @"10px Arial";
         yaxis.labels.x = @-5;
