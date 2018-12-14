@@ -7,6 +7,7 @@
 */
 
 #import "HIChartsJSONSerializable.h"
+#import "HIColor.h"
 
 
 /**
@@ -22,12 +23,18 @@ A collection of attributes for the button. The object takes SVG attributes like 
 The Z index for the reset zoom button. The default value places it below the tooltip that has Z index 7.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
+/**
+Padding for the button.
+*/
 @property(nonatomic, readwrite) NSNumber *padding;
-@property(nonatomic, readwrite) NSString *stroke;
+/**
+Default stroke for the buttons.
+*/
+@property(nonatomic, readwrite) HIColor *stroke;
 /**
 The default fill exists only to capture hover events.
 */
-@property(nonatomic, readwrite) NSString *fill;
+@property(nonatomic, readwrite) HIColor *fill;
 
 -(NSDictionary *)getParams;
 

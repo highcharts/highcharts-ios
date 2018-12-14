@@ -22,13 +22,13 @@ General options for the chart.
 @interface HIChart: HIChartsJSONSerializable
 
 /**
-The URL for an image to use as the plot background. To set an image as the background for the entire chart, set a CSS background image to the container element. Note that for the image to be applied to exported charts, its URL needs to be accessible by the export server.
+Common options for all yAxes rendered in a parallel coordinates plot. This feature requires `modules/parallel-coordinates.js`. The default options are:  parallelAxes: {  lineWidth: 1,    // classic mode only  gridlinesWidth: 0, // classic mode only  title: {    text: '',    reserveSpace: false  },  labels: {    x: 0,    y: 0,    align: 'center',    reserveSpace: false  },  offset: 0 }
 
 **Try it**
 
-* [Skies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/plotbackgroundimage/)
+* [Set the same tickAmount for all yAxes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/parallelaxes/)
 */
-@property(nonatomic, readwrite) NSString *plotBackgroundImage;
+@property(nonatomic, readwrite) HIParallelAxes *parallelAxes;
 /**
 The corner radius of the outer chart border.
 
@@ -48,6 +48,16 @@ The space between the bottom edge of the chart and the content (plot area, axis 
 */
 @property(nonatomic, readwrite) NSNumber *spacingBottom;
 /**
+Whether to apply a drop shadow to the plot area. Requires that plotBackgroundColor be set. The shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Plot shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/plotshadow/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *plotShadow;
+/**
 An explicit height for the chart. If a _number_, the height is given in pixels. If given a _percentage string_ (for example `'56%'`), the height is given as the percentage of the actual chart width. This allows for preserving the aspect ratio across responsive sizes. By default (when `null`) the height is calculated from the offset height of the containing element, or 400 pixels if the containing element's height is 0.
 
 **Try it**
@@ -56,17 +66,6 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 * [Highcharts with percentage height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/height-percent/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
-/**
-Additional CSS styles to apply inline to the container `div`. Note that since the default font styles are applied in the renderer, it is ignorant of the individual chart options and must be set globally.
-
-**Defaults to** `{"fontFamily": "\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","fontSize":"12px"}`.
-
-**Try it**
-
-* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
-* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
-*/
-@property(nonatomic, readwrite) HICSSObject *style;
 /**
 When using multiple axis, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in an Axis options are set to false, then the `alignTicks ` will be disabled for the Axis. Disabled for logarithmic axes.
 
@@ -79,13 +78,13 @@ When using multiple axis, the ticks of two or more opposite axes will automatica
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
-Common options for all yAxes rendered in a parallel coordinates plot. This feature requires `modules/parallel-coordinates.js`. The default options are:  parallelAxes: {  lineWidth: 1,    // classic mode only  gridlinesWidth: 0, // classic mode only  title: {    text: '',    reserveSpace: false  },  labels: {    x: 0,    y: 0,    align: 'center',    reserveSpace: false  },  offset: 0 }
+Whether to display errors on the chart. When `false`, the errors will be shown only in the console. Requires `debugger.js` module.
 
 **Try it**
 
-* [Set the same tickAmount for all yAxes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/parallelaxes/)
+* [Show errors on chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/display-errors/)
 */
-@property(nonatomic, readwrite) HIParallelAxes *parallelAxes;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *displayErrors;
 /**
 The margin between the right outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also `spacingRight`.
 
@@ -122,11 +121,11 @@ The color of the outer chart border.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
-In styled mode, this sets how many colors the class names should rotate between. With ten colors, series (or points) are given class names like `highcharts-color-0`, `highcharts-color-0` `...] `highcharts-color-9`. The equivalent in non-styled mode is to set colors using the [colors` setting.
+A CSS class name to apply to the charts container `div`, allowing unique CSS styling for each chart.
 */
-@property(nonatomic, readwrite) NSNumber *colorCount;
+@property(nonatomic, readwrite) NSString *className;
 /**
-When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. Requires `highcharts-more.js`.
+When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. This produces _polar charts_, also known as _radar charts_. Requires `highcharts-more.js`.
 
 **Defaults to** `false`.
 
@@ -200,17 +199,13 @@ An explicit width for the chart. By default (when `null`) the width is calculate
 */
 @property(nonatomic, readwrite) NSNumber *width;
 /**
-Set the overall animation for all chart updating. Animation can be disabled throughout the chart by setting it to false here. It can be overridden for each individual API method as a function parameter. The only animation not affected by this option is the initial series animation, see `plotOptions.series.animation`. The animation can either be set as a boolean or a configuration object. If `true`, it will use the 'swing' jQuery easing and a duration of 500 ms. If used as a configuration object, the following properties are supported:  duration The duration of the animation in milliseconds. easing A string reference to an easing function set on the `Math` object. See [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/).  
-
-**Defaults to** `true`.
+The margin between the left outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also `spacingLeft`.
 
 **Try it**
 
-* [Updating with no animation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-none/)
-* [With a longer duration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-duration/)
-* [With a jQuery UI easing](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-easing/)
+* [150px left margin](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/marginleft/)
 */
-@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+@property(nonatomic, readwrite) NSNumber *marginLeft;
 /**
 The background color or gradient for the plot area.
 
@@ -275,16 +270,8 @@ The space between the left edge of the chart and the content (plot area, axis ti
 @property(nonatomic, readwrite) NSNumber *spacingLeft;
 /**
 A text description of the chart. If the Accessibility module is loaded, this is included by default as a long description of the chart and its contents in the hidden screen reader information region.
-
-**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *definition;
-/**
-Allows setting a key to switch between zooming and panning. Can be one of `alt`, `ctrl`, `meta` (the command key on Mac and Windows key on Windows) or `shift`. The keys are mapped directly to the key properties of the click event argument (`event.altKey`, `event.ctrlKey`, `event.metaKey` and `event.shiftKey`).
-
-**Accepted values:** `["alt", "ctrl", "meta", "shift"]`.
-*/
-@property(nonatomic, readwrite) NSString *panKey;
 /**
 The distance between the outer edge of the chart and the content, like title or legend, or axis title and labels if present. The numbers in the array designate top, right, bottom and left respectively. Use the options spacingTop, spacingRight, spacingBottom and spacingLeft options for shorthand setting of one option.
 
@@ -292,13 +279,22 @@ The distance between the outer edge of the chart and the content, like title or 
 */
 @property(nonatomic, readwrite) NSArray<NSNumber *> *spacing;
 /**
-The margin between the left outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also `spacingLeft`.
+Allows setting a key to switch between zooming and panning. Can be one of `alt`, `ctrl`, `meta` (the command key on Mac and Windows key on Windows) or `shift`. The keys are mapped directly to the key properties of the click event argument (`event.altKey`, `event.ctrlKey`, `event.metaKey` and `event.shiftKey`).
+
+**Accepted values:** `["alt", "ctrl", "meta", "shift"]`.
+*/
+@property(nonatomic, readwrite) NSString *panKey;
+/**
+Additional CSS styles to apply inline to the container `div`. Note that since the default font styles are applied in the renderer, it is ignorant of the individual chart options and must be set globally.
+
+**Defaults to** `{"fontFamily": "\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","fontSize":"12px"}`.
 
 **Try it**
 
-* [150px left margin](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/marginleft/)
+* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
+* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
 */
-@property(nonatomic, readwrite) NSNumber *marginLeft;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 Options for a scrollable plot area. This feature provides a minimum width for the plot area of the chart. If the width gets smaller than this, typically on mobile devices, a native browser scrollbar is presented below the chart. This scrollbar provides smooth scrolling for the contents of the plot area, whereas the title, legend and axes are fixed.
 
@@ -327,6 +323,18 @@ Whether to invert the axes so that the x axis is vertical and y axis is horizont
 * [Inverted line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/inverted/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inverted;
+/**
+Set the overall animation for all chart updating. Animation can be disabled throughout the chart by setting it to false here. It can be overridden for each individual API method as a function parameter. The only animation not affected by this option is the initial series animation, see `plotOptions.series.animation`. The animation can either be set as a boolean or a configuration object. If `true`, it will use the 'swing' jQuery easing and a duration of 500 ms. If used as a configuration object, the following properties are supported:  duration The duration of the animation in milliseconds. easing A string reference to an easing function set on the `Math` object. See [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/).  
+
+**Defaults to** `true`.
+
+**Try it**
+
+* [Updating with no animation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-none/)
+* [With a longer duration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-duration/)
+* [With a jQuery UI easing](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-easing/)
+*/
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
 The pixel width of the plot area border.
 
@@ -360,15 +368,13 @@ The background color of the marker square when selecting (zooming in on) an area
 */
 @property(nonatomic, readwrite) HIColor *selectionMarkerFill;
 /**
-Whether to apply a drop shadow to the plot area. Requires that plotBackgroundColor be set. The shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
-
-**Defaults to** `false`.
+The URL for an image to use as the plot background. To set an image as the background for the entire chart, set a CSS background image to the container element. Note that for the image to be applied to exported charts, its URL needs to be accessible by the export server.
 
 **Try it**
 
-* [Plot shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/plotshadow/)
+* [Skies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/plotbackgroundimage/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *plotShadow;
+@property(nonatomic, readwrite) NSString *plotBackgroundImage;
 /**
 Equivalent to `zoomType`, but for multitouch gestures only. By default, the `pinchType` is the same as the `zoomType` setting. However, pinching can be enabled separately in some cases, for example in stock charts where a mouse drag pans the chart, while pinching is enabled. When `tooltip.followTouchMove` is true, pinchType only applies to two-finger touches.
 
@@ -378,9 +384,9 @@ Equivalent to `zoomType`, but for multitouch gestures only. By default, the `pin
 */
 @property(nonatomic, readwrite) NSString *pinchType;
 /**
-A CSS class name to apply to the charts container `div`, allowing unique CSS styling for each chart.
+In styled mode, this sets how many colors the class names should rotate between. With ten colors, series (or points) are given class names like `highcharts-color-0`, `highcharts-color-0` `...] `highcharts-color-9`. The equivalent in non-styled mode is to set colors using the [colors` setting.
 */
-@property(nonatomic, readwrite) NSString *className;
+@property(nonatomic, readwrite) NSNumber *colorCount;
 /**
 Flag to render charts as a parallel coordinates plot. In a parallel coordinates plot (||-coords) by default all required yAxes are generated and the legend is disabled. This feature requires `modules/parallel-coordinates.js`.
 
@@ -415,8 +421,6 @@ The pixel width of the outer chart border.
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 A text description of the chart type. If the Accessibility module is loaded, this will be included in the description of the chart in the screen reader information region. Highcharts will by default attempt to guess the chart type, but for more complex charts it is recommended to specify this property for clarity.
-
-**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *typeDescription;
 /**
@@ -435,6 +439,12 @@ The margin between the outer edge of the chart and the plot area. The numbers in
 * [Zero margins](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/margins-zero/)
 */
 @property(nonatomic, readwrite) NSArray<NSNumber *> *margin;
+/**
+Whether to apply styled mode. When in styled mode, no presentational attributes or CSS are applied to the chart SVG. Instead, CSS rules are required to style the chart. The default style sheet is available from `https://code.highcharts.com/css/highcharts.css`.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *styledMode;
 
 -(NSDictionary *)getParams;
 

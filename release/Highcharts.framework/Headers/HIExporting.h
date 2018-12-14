@@ -17,7 +17,9 @@ Options for the exporting module. For an overview on the matter, see [the docs](
 @interface HIExporting: HIChartsJSONSerializable
 
 /**
-An object consisting of definitions for the menu items in the context menu. Each key value pair has a `key` that is referenced in the `menuItems` setting, and a `value`, which is an object with the following properties:  onclick The click handler for the menu item text The text for the menu item textKey If internationalization is required, the key to a language string  
+An object consisting of definitions for the menu items in the context menu. Each key value pair has a `key` that is referenced in the `menuItems` setting, and a `value`, which is an object with the following properties: - **onclick:** The click handler for the menu item - **text:** The text for the menu item - **textKey:** If internationalization is required, the key to a language  string
+
+**Defaults to** `{"printChart": {}, "separator": {}, "downloadPNG": {}, "downloadJPEG": {}, "downloadPDF": {}, "downloadSVG": {}}`.
 
 **Try it**
 
@@ -29,7 +31,7 @@ Analogous to `sourceWidth`.
 */
 @property(nonatomic, readwrite) NSNumber *sourceHeight;
 /**
-The width of the original chart when exported, unless an explicit `chart.width` is set. The width exported raster image is then multiplied by `scale`.
+The width of the original chart when exported, unless an explicit `chart.width` is set, or a pixel width is set on the container. The width exported raster image is then multiplied by `scale`.
 
 **Try it**
 
@@ -70,8 +72,6 @@ Options for the export related buttons, print and export. In addition to the def
 /**
 The pixel width of charts exported to PNG or JPG. As of Highcharts 3.0, the default pixel width is a function of the `chart.width` or `exporting.sourceWidth` and the `exporting.scale`.
 
-**Defaults to** `undefined`.
-
 **Try it**
 
 * [Export to 200px wide images](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/width/)
@@ -79,8 +79,6 @@ The pixel width of charts exported to PNG or JPG. As of Highcharts 3.0, the defa
 @property(nonatomic, readwrite) NSNumber *width;
 /**
 When printing the chart from the menu item in the burger menu, if the on-screen chart exceeds this width, it is resized. After printing or cancelled, it is restored. The default width makes the chart fit into typical paper format. Note that this does not affect the chart when printing the web page as a whole.
-
-**Defaults to** `780`.
 */
 @property(nonatomic, readwrite) NSNumber *printMaxWidth;
 /**
@@ -100,25 +98,25 @@ Default MIME type for exporting if `chart.exportChart()` is called without speci
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
-Additional chart options to be merged into an exported chart. For example, a common use case is to add data labels to improve readability of the exported chart, or to add a printer-friendly color scheme.
-
-**Defaults to** `null`.
+Export-data module required. Caption for the data table. Same as chart title by default. Set to `false` to disable.
 
 **Try it**
 
-* [Added data labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/chartoptions-data-labels/)
+* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
 */
-@property(nonatomic, readwrite) id chartOptions;
+@property(nonatomic, readwrite) id /* Bool, NSString */ tableCaption;
 /**
-An object containing additional attributes for the POST form that sends the SVG to the export server. For example, a `target` can be set to make sure the generated image is received in another frame, or a custom `enctype` or `encoding` can be set.
+An object containing additional key value data for the POST form that sends the SVG to the export server. For example, a `target` can be set to make sure the generated image is received in another frame, or a custom `enctype` or `encoding` can be set.
 */
 @property(nonatomic, readwrite) id formAttributes;
 /**
-Whether or not to fall back to the export server if the offline-exporting module is unable to export the chart on the client side. This happens for certain browsers, and certain features (e.g. `allowHTML`), depending on the image type exporting to. For very complex charts, it is possible that export can fail in browsers that don't support Blob objects, due to data URL length limits. It is recommended to define the `exporting.error` handler if disabling fallback, in order to notify users in case export fails.
+Export-data module required. Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
 
-**Defaults to** `true`.
+**Try it**
+
+* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *fallbackToExportServer;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useMultiLevelHeaders;
 /**
 Export-data module required. If using multi level table headers, use rowspans for headers that have only one level.
 
@@ -128,13 +126,11 @@ Export-data module required. If using multi level table headers, use rowspans fo
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useRowspanHeaders;
 /**
-Export-data module required. Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
+Whether or not to fall back to the export server if the offline-exporting module is unable to export the chart on the client side. This happens for certain browsers, and certain features (e.g. `allowHTML`), depending on the image type exporting to. For very complex charts, it is possible that export can fail in browsers that don't support Blob objects, due to data URL length limits. It is recommended to define the `exporting.error` handler if disabling fallback, in order to notify users in case export fails.
 
-**Try it**
-
-* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
+**Defaults to** `true`.
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useMultiLevelHeaders;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *fallbackToExportServer;
 /**
 The URL for the server module converting the SVG string to an image format. By default this points to Highchart's free web service.
 */
@@ -156,19 +152,15 @@ Experimental setting to allow HTML inside the chart (added through the `useHTML`
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowHTML;
 /**
-Export-data module required. Caption for the data table. Same as chart title by default. Set to `false` to disable.
-
-**Defaults to** `undefined`.
+Additional chart options to be merged into an exported chart. For example, a common use case is to add data labels to improve readability of the exported chart, or to add a printer-friendly color scheme.
 
 **Try it**
 
-* [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)
+* [Added data labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/chartoptions-data-labels/)
 */
-@property(nonatomic, readwrite) id /* Bool, NSString */ tableCaption;
+@property(nonatomic, readwrite) NSDictionary *chartOptions;
 /**
 Function to call if the offline-exporting module fails to export a chart on the client side, and `fallbackToExportServer` is disabled. If left undefined, an exception is thrown instead. Receives two parameters, the exporting options, and the error from the module.
-
-**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HIFunction *error;
 /**

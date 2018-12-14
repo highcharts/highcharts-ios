@@ -17,12 +17,12 @@ An object of key-value pairs for SVG attributes. Attributes in Highcharts elemen
 @property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *d;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inverted;
 @property(nonatomic, readwrite) NSArray<NSNumber *> *matrix;
-@property(nonatomic, readwrite) NSString *stroke;
 @property(nonatomic, readwrite) NSString *rotation;
 @property(nonatomic, readwrite) NSNumber *rotationOriginX;
 @property(nonatomic, readwrite) NSNumber *rotationOriginY;
 @property(nonatomic, readwrite) NSNumber *scaleX;
 @property(nonatomic, readwrite) NSNumber *scaleY;
+@property(nonatomic, readwrite) NSString *stroke;
 @property(nonatomic, readwrite) NSNumber *translateX;
 @property(nonatomic, readwrite) NSNumber *translateY;
 @property(nonatomic, readwrite) NSNumber *zIndex;

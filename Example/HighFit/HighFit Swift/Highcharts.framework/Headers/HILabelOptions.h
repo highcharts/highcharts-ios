@@ -41,7 +41,7 @@ Styles for the annotation's label.
 */
 @property(nonatomic, readwrite) HIStyle *style;
 /**
-When either the borderWidth or the backgroundColor is set, this  is the padding within the box.
+When either the borderWidth or the backgroundColor is set, this is the padding within the box.
 
 **Try it**
 
@@ -115,7 +115,7 @@ Whether to hide the annotation's label that is outside the plot area.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
 /**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the annotation's label.
+Whether to [use HTML](http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the annotation's label.
 
 **Defaults to** `false`.
 */
@@ -171,7 +171,7 @@ The x position offset of the label relative to the point. Note that if a `distan
 /**
 How to handle the annotation's label that flow outside the plot area. The justify option aligns the label inside the plot area.
 
-**Accepted values:** `["allow", "justify"]`.
+**Accepted values:** `["none", "justify"]`.
 
 **Try it**
 
@@ -180,10 +180,10 @@ How to handle the annotation's label that flow outside the plot area. The justif
 */
 @property(nonatomic, readwrite) NSString *overflow;
 /**
-Callback JavaScript function to format the annotation's label. Note that if a `format` or `text` are defined, the format or text take precedence and the formatter is ignored. `This` refers to a point object.
+Callback JavaScript function to format the annotation's label. Note that if a `format` or `text` are defined, the format or text take precedence and the formatter is ignored. `This` refers to a * point object.
 
 **Defaults to** `function () {
-    return defined(this.y) ? this.y : 'Annotation label';
+ return defined(this.y) ? this.y : 'Annotation label';
 }`.
 
 **Try it**

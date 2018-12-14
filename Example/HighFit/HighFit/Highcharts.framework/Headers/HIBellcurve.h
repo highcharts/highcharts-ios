@@ -42,8 +42,6 @@
 
 /**
 An integer identifying the index to use for the base series, or a string representing the id of the series.
-
-**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ baseSeries;
 /**

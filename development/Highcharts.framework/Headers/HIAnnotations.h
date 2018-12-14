@@ -6,9 +6,10 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIShapes.h"
-#import "HILabels.h"
 #import "HILabelOptions.h"
+#import "HILabels.h"
+#import "HIShapes.h"
+#import "HIBase.h"
 #import "HIShapeOptions.h"
 
 
@@ -24,21 +25,7 @@ Options for configuring annotations, for example labels, arrows or shapes. Annot
 @interface HIAnnotations: HIChartsJSONSerializable
 
 /**
-An array of shapes for the annotation. For options that apply to multiple shapes, then can be added to the `shapeOptions`.
-*/
-@property(nonatomic, readwrite) NSArray <HIShapes *> *shapes;
-/**
-An array of labels for the annotation. For options that apply to multiple labels, they can be added to the `labelOptions`.
-*/
-@property(nonatomic, readwrite) NSArray <HILabels *> *labels;
-/**
-Options for annotation's labels. Each label inherits options from the labelOptions object. An option from the labelOptions can be overwritten by config for a specific label.
-*/
-@property(nonatomic, readwrite) HILabelOptions *labelOptions;
-/**
 The Z index of the annotation.
-
-**Defaults to** `6`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
@@ -50,9 +37,36 @@ Whether the annotation is visible.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
+Options for annotation's labels. Each label inherits options from the labelOptions object. An option from the labelOptions can be overwritten by config for a specific label.
+*/
+@property(nonatomic, readwrite) HILabelOptions *labelOptions;
+/**
+An array of labels for the annotation. For options that apply to multiple labels, they can be added to the `labelOptions`.
+*/
+@property(nonatomic, readwrite) NSArray <HILabels *> *labels;
+/**
+An array of shapes for the annotation. For options that apply to multiple shapes, then can be added to the `shapeOptions`.
+*/
+@property(nonatomic, readwrite) NSArray <HIShapes *> *shapes;
+/**
+A basic type of an annotation. It allows to add custom labels or shapes. The items can be tied to points, axis coordinates or chart pixel coordinates.
+
+**Try it**
+
+* [Basic annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/basic/)
+* [Advanced annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/annotations/)
+* [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/annotations)
+* [Controllable items](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations-advanced/controllable)
+*/
+@property(nonatomic, readwrite) HIBase *base;
+/**
 Options for annotation's shapes. Each shape inherits options from the shapeOptions object. An option from the shapeOptions can be overwritten by config for a specific shape.
 */
 @property(nonatomic, readwrite) HIShapeOptions *shapeOptions;
+/**
+Sets an ID for an annotation. Can be user later when removing an annotation in `Chart#removeAnnotation(id)` method.
+*/
+@property(nonatomic, readwrite) NSString *id;
 
 -(NSDictionary *)getParams;
 

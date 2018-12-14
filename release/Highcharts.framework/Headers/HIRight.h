@@ -24,8 +24,6 @@ The color of the panel.
 /**
 Whether to display the frame. Possible values are `true`, `false`, `"auto"` to display only the frames behind the data, and `"default"` to display faces behind the data based on the axis layout, ignoring the point of view.
 
-**Accepted values:** `["default", "auto", true, false]`.
-
 **Defaults to** `default`.
 
 **Try it**

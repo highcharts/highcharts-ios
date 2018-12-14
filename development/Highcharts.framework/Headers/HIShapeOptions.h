@@ -73,6 +73,10 @@ The color of the shape's fill.
 * [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) HIColor *fill;
+/**
+Defines additional snapping area around an annotation making this annotation to focus. Defined in pixels.
+*/
+@property(nonatomic, readwrite) NSNumber *snap;
 
 -(NSDictionary *)getParams;
 

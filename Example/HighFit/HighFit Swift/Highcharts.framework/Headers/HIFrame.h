@@ -11,7 +11,6 @@
 #import "HITop.h"
 #import "HIBack.h"
 #import "HIFront.h"
-#import "HISide.h"
 #import "HILeft.h"
 
 
@@ -48,10 +47,6 @@ The front of the frame around a 3D chart.
 General pixel thickness for the frame faces.
 */
 @property(nonatomic, readwrite) NSNumber *size;
-/**
-Note: As of v5.0.12, `frame.left` or `frame.right` should be used instead. The side for the frame around a 3D chart.
-*/
-@property(nonatomic, readwrite) HISide *side;
 /**
 The left side of the frame around a 3D chart.
 */

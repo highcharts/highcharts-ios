@@ -79,25 +79,25 @@ Alignment of the element text.
 */
 @property(nonatomic, readwrite) NSString *textAlign;
 /**
-Outline style of the element text.
-*/
-@property(nonatomic, readwrite) NSString *textOutline;
-/**
 Additional decoration of the element text.
 */
 @property(nonatomic, readwrite) NSString *textDecoration;
+/**
+Outline style of the element text.
+*/
+@property(nonatomic, readwrite) NSString *textOutline;
 /**
 Line break style of the element text. Highcharts SVG elements support `ellipsis` when a `width` is set.
 */
 @property(nonatomic, readwrite) NSString *textOverflow;
 /**
-Animated transition of selected element properties.
-*/
-@property(nonatomic, readwrite) NSString *transition;
-/**
 Top spacing of the element relative to the parent element.
 */
 @property(nonatomic, readwrite) NSString *top;
+/**
+Animated transition of selected element properties.
+*/
+@property(nonatomic, readwrite) NSString *transition;
 /**
 Line break style of the element text.
 */

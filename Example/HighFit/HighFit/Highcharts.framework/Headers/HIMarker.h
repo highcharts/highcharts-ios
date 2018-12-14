@@ -12,21 +12,21 @@
 
 
 /**
-The triangular marker on a scalar color axis that points to the value of the hovered area. To disable the marker, set `marker: null`.
+Options for the point markers of line-like series. Properties like `fillColor`, `lineColor` and `lineWidth` define the visual appearance of the markers. Other series types, like column series, don't have markers, but have visual options on the series level instead. In styled mode, the markers can be styled with the `.highcharts-point`, `.highcharts-point-hover` and `.highcharts-point-select` class names.
 */
 @interface HIMarker: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The color of the marker.
-
-**Defaults to** `#999999`.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
 Animation for the marker as it moves between values. Set to `false` to disable animation. Defaults to `{ duration: 50 }`.
+
+**Defaults to** `{"duration": 50}`.
 */
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 A predefined shape or symbol for the marker. When undefined, the symbol is pulled from options.symbols. Other possible values are "circle", "square", "diamond", "triangle" and "triangle-down". Additionally, the URL to a graphic can be given on this form: "url(graphic.png)". Note that for the image to be applied to exported charts, its URL needs to be accessible by the export server. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols`. The callback is then used by its method name, as shown in the demo.
 

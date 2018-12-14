@@ -44,8 +44,6 @@
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 Which point to use as a root in the visualization.
-
-**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *rootId;
 /**
@@ -59,13 +57,13 @@ Determines the width of the ring per level.
 /**
 The center of the sunburst chart relative to the plot area. Can be percentages or pixel values.
 
-**Defaults to** `[null, null]`.
+**Defaults to** `["50%", "50%"]`.
 
 **Try it**
 
 * [Centered at 100, 100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-center/)
 */
-@property(nonatomic, readwrite) NSArray /* <NSString, NSNumber> */ *center;
+@property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
 /**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
 

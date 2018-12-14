@@ -10,7 +10,7 @@
 
 
 /**
-Lang configuration for the series main summary. Each series type has two modes:   1. This series type is the only series type used in the    chart  2. This is a combination chart with multiple series types If a definition does not exist for the specific series type and mode, the 'default' lang definitions are used.
+Lang configuration for the series main summary. Each series type has two modes: 1. This series type is the only series type used in the  chart 2. This is a combination chart with multiple series types If a definition does not exist for the specific series type and mode, the 'default' lang definitions are used.
 */
 @interface HISummary: HIChartsJSONSerializable
 

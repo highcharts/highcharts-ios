@@ -17,6 +17,9 @@ Options for the hovered series. These settings override the normal state options
 @interface HIHover: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSNumber *radiusPlus;
+@property(nonatomic, readwrite) NSString *borderColor;
+@property(nonatomic, readwrite) NSNumber *opacity;
+@property(nonatomic, readwrite) HIHalo *halo;
 /**
 Enable separate styles for the hovered series to visualize that the user hovers either the series itself or the legend. .
 
@@ -50,13 +53,13 @@ The additional line width for the graph of a hovered series.
 */
 @property(nonatomic, readwrite) NSNumber *lineWidthPlus;
 /**
-Options for the halo appearing around the hovered point in line- type series as well as outside the hovered slice in pie charts. By default the halo is filled by the current point or series color with an opacity of 0.25\. The halo can be disabled by setting the `halo` option to `false`. In styled mode, the halo is styled with the `.highcharts-halo` class, with colors inherited from `.highcharts-color-{n}`.
+The radius of the point marker. In hover state, it defaults to the normal state's radius + 2 as per the `radiusPlus` option.
 
 **Try it**
 
-* [Halo options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/halo/)
+* [10px radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-radius/)
 */
-@property(nonatomic, readwrite) HIHalo *halo;
+@property(nonatomic, readwrite) NSNumber *radius;
 /**
 The fill color of the marker in hover state. When `undefined`, the series' or point's fillColor for normal state is used.
 */
@@ -70,14 +73,6 @@ The color of the point marker's outline. When `undefined`, the series' or point'
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
-The radius of the point marker. In hover state, it defaults to the normal state's radius + 2 as per the `radiusPlus` option.
-
-**Try it**
-
-* [10px radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-radius/)
-*/
-@property(nonatomic, readwrite) NSNumber *radius;
-/**
 How much to brighten the point on interaction. Requires the main color to be defined in hex or rgb(a) format. In styled mode, the hover brightening is by default replaced with a fill-opacity set in the `.highcharts-point:hover` rule.
 */
 @property(nonatomic, readwrite) NSNumber *brightness;
@@ -85,16 +80,6 @@ How much to brighten the point on interaction. Requires the main color to be def
 Opacity for the links between nodes in the sankey diagram in hover mode.
 */
 @property(nonatomic, readwrite) NSNumber *linkOpacity;
-/**
-The border color for the hovered state.
-*/
-@property(nonatomic, readwrite) NSString *borderColor;
-/**
-The opacity of a point in treemap. When a point has children, the visibility of the children is determined by the opacity.
-
-**Defaults to** `0.75`.
-*/
-@property(nonatomic, readwrite) NSNumber *opacity;
 /**
 The shadow option for hovered state.
 */

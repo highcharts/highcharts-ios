@@ -7,8 +7,8 @@
 */
 
 #import "HISeries.h"
-#import "HIStyle.h"
 #import "HIRotation.h"
+#import "HICSSObject.h"
 
 
 /**
@@ -57,7 +57,7 @@ CSS styles for the words.
 
 **Defaults to** `{"fontFamily":"sans-serif", "fontWeight": "900"}`.
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 A threshold determining the minimum font size that can be applied to a word.
 */

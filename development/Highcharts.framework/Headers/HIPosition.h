@@ -20,8 +20,6 @@ Vertical offset of the button.
 @property(nonatomic, readwrite) NSNumber *y;
 /**
 Horizontal offset of the button.
-
-**Defaults to** `-10`.
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**

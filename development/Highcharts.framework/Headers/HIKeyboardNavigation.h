@@ -38,8 +38,6 @@ Set the keyboard navigation mode for the chart. Can be "normal" or "serialize". 
 @property(nonatomic, readwrite) NSString *mode;
 /**
 Skip null points when navigating through points with the keyboard.
-
-**Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *skipNullPoints;
 

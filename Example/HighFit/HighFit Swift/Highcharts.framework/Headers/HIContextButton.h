@@ -27,18 +27,15 @@ See `navigation.buttonOptions.symbolFill`.
 */
 @property(nonatomic, readwrite) HIColor *symbolFill;
 /**
-The symbol for the button. Points to a definition function in the `Highcharts.Renderer.symbols` collection. The default `exportIcon` function is part of the exporting module.
+A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "Print" menu item plus one menu item for each of the available export types.
 
-**Accepted values:** `["exportIcon", "circle", "square", "diamond", "triangle", "triangle-down", "menu"]`.
-
-**Defaults to** `menu`.
+**Defaults to** `["printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"]`.
 
 **Try it**
 
-* [Use a circle for symbol](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-symbol/)
-* [Custom shape as symbol](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-symbol-custom/)
+* [Menu item definitions](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/menuitemdefinitions/)
 */
-@property(nonatomic, readwrite) NSString *symbol;
+@property(nonatomic, readwrite) NSArray<NSString *> *menuItems;
 /**
 The class name of the context button.
 */
@@ -66,25 +63,24 @@ The class name of the menu appearing from the button.
 */
 @property(nonatomic, readwrite) NSString *menuClassName;
 /**
-A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "Print" menu item plus one menu item for each of the available export types. Defaults to  [  'printChart',  'separator',  'downloadPNG',  'downloadJPEG',  'downloadPDF',  'downloadSVG' ] 
+The symbol for the button. Points to a definition function in the `Highcharts.Renderer.symbols` collection. The default `exportIcon` function is part of the exporting module. Possible values are "circle", "square", "diamond", "triangle", "triangle-down", "menu", "menuball" or custom shape.
+
+**Accepted values:** `["menu", "menuball", "exportIcon", "circle", "square", "diamond", "triangle", "triangle-down"]`.
 
 **Try it**
 
-* [Menu item definitions](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/menuitemdefinitions/)
+* [Use a circle for symbol](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-symbol/)
+* [Custom shape as symbol](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-contextbutton-symbol-custom/)
 */
-@property(nonatomic, readwrite) NSArray /* <NSString, id> */ *menuItems;
+@property(nonatomic, readwrite) NSString *symbol;
 /**
-The vertical alignment of the buttons. Can be one of "top", "middle" or "bottom".
-
-**Accepted values:** `["top", "middle", "bottom"]`.
-
-**Defaults to** `top`.
+The color of the symbol's stroke or line.
 
 **Try it**
 
-* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
+* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
 */
-@property(nonatomic, readwrite) NSString *verticalAlign;
+@property(nonatomic, readwrite) HIColor *symbolStroke;
 /**
 A text string to add to the individual button.
 
@@ -96,18 +92,6 @@ A text string to add to the individual button.
 * [Combined symbol and text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-text-symbol/)
 */
 @property(nonatomic, readwrite) NSString *text;
-/**
-Alignment for the buttons.
-
-**Accepted values:** `["left", "center", "right"]`.
-
-**Defaults to** `right`.
-
-**Try it**
-
-* [Center aligned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-align/)
-*/
-@property(nonatomic, readwrite) NSString *align;
 /**
 Whether to enable buttons.
 
@@ -127,42 +111,6 @@ A configuration object for the button theme. The object accepts SVG properties l
 */
 @property(nonatomic, readwrite) HITheme *theme;
 /**
-Pixel height of the buttons.
-
-**Defaults to** `22`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *height;
-/**
-The pixel width of the button.
-
-**Defaults to** `24`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *width;
-/**
-The pixel spacing between buttons.
-
-**Defaults to** `3`.
-*/
-@property(nonatomic, readwrite) NSNumber *buttonSpacing;
-/**
-The pixel size of the symbol on the button.
-
-**Defaults to** `14`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolSize;
-/**
 The vertical offset of the button's position relative to its `verticalAlign`.
 
 **Defaults to** `0`.
@@ -173,39 +121,7 @@ The vertical offset of the button's position relative to its `verticalAlign`.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The color of the symbol's stroke or line.
-
-**Defaults to** `#666666`.
-
-**Try it**
-
-* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
-*/
-@property(nonatomic, readwrite) HIColor *symbolStroke;
-/**
-The y position of the center of the symbol inside the button.
-
-**Defaults to** `10.5`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolY;
-/**
-The x position of the center of the symbol inside the button.
-
-**Defaults to** `12.5`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolX;
-/**
 The pixel stroke width of the symbol on the button.
-
-**Defaults to** `1`.
 
 **Try it**
 

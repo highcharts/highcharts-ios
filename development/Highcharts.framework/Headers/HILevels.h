@@ -40,7 +40,7 @@ Can set a `color` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
-Can set a `dataLabels` on all points which lies on the same level.
+Can set `dataLabels` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) id dataLabels;
 /**

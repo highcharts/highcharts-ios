@@ -10,30 +10,19 @@
 
 
 /**
-CSS styles for the no-data label.
+Styles for the annotation's label.
 
 **Try it**
 
-* [Styled no-data text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/no-data-to-display/no-data-line)
+* [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
 */
 @interface HIStyle: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSString *color;
 @property(nonatomic, readwrite) NSString *fontWeight;
 @property(nonatomic, readwrite) NSString *fontSize;
-@property(nonatomic, readwrite) NSString *fontFamily;
-/**
-Border radius of the focus border.
-
-**Defaults to** `3`.
-*/
-@property(nonatomic, readwrite) NSNumber *borderRadius;
-/**
-Line width of the focus border.
-
-**Defaults to** `2`.
-*/
-@property(nonatomic, readwrite) NSNumber *lineWidth;
+@property(nonatomic, readwrite) NSString *stroke;
+@property(nonatomic, readwrite) NSString *fill;
 @property(nonatomic, readwrite) NSString *textOverflow;
 @property(nonatomic, readwrite) NSString *whiteSpace;
 

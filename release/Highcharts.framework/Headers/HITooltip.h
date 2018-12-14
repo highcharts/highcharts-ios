@@ -33,7 +33,7 @@ The radius of the rounded border corners.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
-The HTML of the tooltip header line. Variables are enclosed by curly brackets. Available variables are `point.key`, `series.name`, `series.color` and other members from the `point` and `series` objects. The `point.key` variable contains the category name, x value or datetime string depending on the type of axis. For datetime axes, the `point.key` date format can be set using `tooltip.xDateFormat`. To access the original point use `point.point`.
+The HTML of the tooltip header line. Variables are enclosed by curly brackets. Available variables are `point.key`, `series.name`, `series.color` and other members from the `point` and `series` objects. The `point.key` variable contains the category name, x value or datetime string depending on the type of axis. For datetime axes, the `point.key` date format can be set using `tooltip.xDateFormat`.
 
 **Try it**
 
@@ -57,19 +57,7 @@ A string to prepend to each series' y value. Overridable in each series' tooltip
 */
 @property(nonatomic, readwrite) NSString *valuePrefix;
 /**
-For series on a datetime axes, the date format in the tooltip's header will by default be guessed based on the closest data points. This member gives the default string representations used for each unit. For an overview of the replacement codes, see `dateFormat`.
-*/
-@property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
-/**
-The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"` or `"square"`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
-
-**Accepted values:** `["callout", "square"]`.
-
-**Defaults to** `callout`.
-*/
-@property(nonatomic, readwrite) NSString *shape;
-/**
-A callback function to place the tooltip in a default position. The callback receives three parameters: `labelWidth`, `labelHeight` and `point`, where point contains values for `plotX` and `plotY` telling where the reference point is in the plot area. Add `chart.plotLeft` and `chart.plotTop` to get the full coordinates. The return should be an object containing x and y values, for example `{ x: 100, y: 100 }`.
+A callback function to place the tooltip in a default position. The callback receives three parameters: `labelWidth`, `labelHeight` and `point`, where point contains values for `plotX` and `plotY` telling where the reference point is in the plot area. Add `chart.plotLeft` and `chart.plotTop` to get the full coordinates. Since v7, when `tooltip.split` option is enabled, positioner is called for each of the boxes separately, including xAxis header. xAxis header is not a point, instead `point` argument contains info: `{ plotX: Number, plotY: Number, isHeader: Boolean }`  The return should be an object containing x and y values, for example `{ x: 100, y: 100 }`.
 
 **Try it**
 
@@ -106,6 +94,14 @@ CSS styles for the tooltip. The tooltip can also be styled through the CSS class
 * [Greater padding, bold text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/style/)
 */
 @property(nonatomic, readwrite) HICSSObject *style;
+/**
+The name of a symbol to use for the border around the tooltip header. Applies only when `tooltip.split` is enabled. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
+
+**Accepted values:** `["callout", "square"]`.
+
+**Defaults to** `callout`.
+*/
+@property(nonatomic, readwrite) NSString *headerShape;
 /**
 A string to append to the tooltip format.
 
@@ -186,6 +182,8 @@ Callback function to format the text of the tooltip from scratch. Return `false`
 /**
 The HTML of the point's line in the tooltip. Variables are enclosed by curly brackets. Available variables are point.x, point.y, series. name and series.color and other properties on the same form. Furthermore, `point.y` can be extended by the `tooltip.valuePrefix` and `tooltip.valueSuffix` variables. This can also be overridden for each series, which makes it a good hook for displaying units. In styled mode, the dot is colored by a class name rather than the point color.
 
+**Defaults to** `<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>`.
+
 **Try it**
 
 * [A different point format with value suffix](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/pointformat/)
@@ -199,6 +197,10 @@ The format for the date in the tooltip header if the X axis is a datetime axis. 
 * [A different format](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/xdateformat/)
 */
 @property(nonatomic, readwrite) NSString *xDateFormat;
+/**
+For series on a datetime axes, the date format in the tooltip's header will by default be guessed based on the closest data points. This member gives the default string representations used for each unit. For an overview of the replacement codes, see `dateFormat`.
+*/
+@property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**
 Padding inside the tooltip, in pixels.
 */
@@ -221,6 +223,14 @@ Enable or disable the tooltip.
 * [Disable tooltip and show values on chart instead](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-point-events-mouseover/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
+/**
+The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"` or `"square"`. When `tooltip.split` option is enabled, shape is applied to all boxes except header, which is controlled by `tooltip.headerShape`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
+
+**Accepted values:** `["callout", "square"]`.
+
+**Defaults to** `callout`.
+*/
+@property(nonatomic, readwrite) NSString *shape;
 /**
 A callback function for formatting the HTML output for a single point in the tooltip. Like the `pointFormat` string, but with more flexibility.
 */

@@ -7,6 +7,7 @@
 */
 
 #import "HIAccessibility.h"
+#import "HINavigation.h"
 
 
 /**
@@ -26,8 +27,6 @@ Export-data module only. The text for the menu item.
 @property(nonatomic, readwrite) NSString *downloadXLS;
 /**
 Exporting module only. The text for the PNG download menu item.
-
-**Defaults to** `Share image`.
 */
 @property(nonatomic, readwrite) NSString *downloadPNG;
 /**
@@ -44,8 +43,6 @@ Short week days, starting Sunday. If not specified, Highcharts uses the first th
 @property(nonatomic, readwrite) NSArray<NSString *> *shortWeekdays;
 /**
 The text to display when the chart contains no data. Requires the no-data module, see `noData`.
-
-**Defaults to** `No data to display`.
 
 **Try it**
 
@@ -67,11 +64,9 @@ The loading text that appears when the chart is set into the loading state follo
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *numericSymbols;
 /**
-Exporting module only. The text for the SVG download menu item.
-
-**Defaults to** `Download SVG vector image`.
+Exporting module only. The text for the menu item to print the chart.
 */
-@property(nonatomic, readwrite) NSString *downloadSVG;
+@property(nonatomic, readwrite) NSString *printChart;
 /**
 The magnitude of `numericSymbols` replacements. Use 10000 for Japanese, Korean and various Chinese locales, which use symbols for 10^4, 10^8 and 10^12.
 
@@ -90,15 +85,11 @@ An array containing the weekday names.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *weekdays;
 /**
-Exporting module only. The text for the menu item to print the chart.
-
-**Defaults to** `Print chart`.
+Exporting module only. The text for the SVG download menu item.
 */
-@property(nonatomic, readwrite) NSString *printChart;
+@property(nonatomic, readwrite) NSString *downloadSVG;
 /**
 The text for the button that appears when drilling down, linking back to the parent series. The parent series' name is inserted for `{series.name}`.
-
-**Defaults to** `Back to {series.name}`.
 */
 @property(nonatomic, readwrite) NSString *drillUpText;
 /**
@@ -107,8 +98,6 @@ Export-data module only. The text for the menu item.
 @property(nonatomic, readwrite) NSString *viewData;
 /**
 Exporting module menu. The tooltip title for the context menu holding print and export menu items.
-
-**Defaults to** `Chart context menu`.
 */
 @property(nonatomic, readwrite) NSString *contextButtonTitle;
 /**
@@ -127,14 +116,16 @@ The text for the label appearing when a chart is zoomed.
 @property(nonatomic, readwrite) NSString *resetZoom;
 /**
 Exporting module only. The text for the PDF download menu item.
-
-**Defaults to** `Share PDF`.
 */
 @property(nonatomic, readwrite) NSString *downloadPDF;
 /**
 Export-data module only. The text for the menu item.
 */
 @property(nonatomic, readwrite) NSString *openInCloud;
+/**
+The tooltip title for the label appearing when a chart is zoomed.
+*/
+@property(nonatomic, readwrite) NSString *resetZoomTitle;
 /**
 An array containing the months names. Corresponds to the `%B` format in `Highcharts.dateFormat()`.
 
@@ -152,8 +143,6 @@ An array containing the months names in abbreviated form. Corresponds to the `%b
 @property(nonatomic, readwrite) NSArray<NSString *> *shortMonths;
 /**
 Exporting module only. The text for the JPEG download menu item.
-
-**Defaults to** `Share image`.
 */
 @property(nonatomic, readwrite) NSString *downloadJPEG;
 /**
@@ -161,11 +150,11 @@ The default decimal point used in the `Highcharts.numberFormat` method unless ot
 */
 @property(nonatomic, readwrite) NSString *decimalPoint;
 /**
-The tooltip title for the label appearing when a chart is zoomed.
+Configure the Popup strings in the chart. Requires the `annotations.js` or `annotations-advanced.src.js` module to be loaded.
 */
-@property(nonatomic, readwrite) NSString *resetZoomTitle;
+@property(nonatomic, readwrite) HINavigation *navigation;
 /**
-The default thousands separator used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments. Since Highcharts 4.1 it defaults to a single space character, which is compatible with ISO and works across Anglo-American and continental European languages. The default is a single space.
+The default thousands separator used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments. Defaults to a single space character, which is recommended in [ISO 31-0](https://en.wikipedia.org/wiki/ISO_31-0#Numbers) and works across Anglo-American and continental European languages.
 
 **Defaults to** `\u0020`.
 */

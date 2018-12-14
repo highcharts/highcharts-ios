@@ -64,7 +64,7 @@ Fires when the chart is finished loading. Since v4.2.2, it also waits for images
 */
 @property(nonatomic, readwrite) HIFunction *load;
 /**
-Fires when an area of the chart has been selected. Selection is enabled by setting the chart's zoomType. One parameter, `event`, is passed to the function, containing common event information. The default action for the selection event is to zoom the chart to the selected area. It can be prevented by calling `event.preventDefault()`. Information on the selected area can be found through `event.xAxis` and `event.yAxis`, which are arrays containing the axes of each dimension and each axis' min and max values. The primary axes are `event.xAxis[0]` and `event.yAxis[0]`. Remember the unit of a datetime axis is milliseconds since 1970-01-01 00:00:00. selection: function(event) {   // log the min and max of the primary, datetime x-axis   console.log(     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].min     ),     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].max     )   );   // log the min and max of the y axis   console.log(event.yAxis[0].min, event.yAxis[0].max); }
+Fires when an area of the chart has been selected. Selection is enabled by setting the chart's zoomType. One parameter, `event`, is passed to the function, containing common event information. The default action for the selection event is to zoom the chart to the selected area. It can be prevented by calling `event.preventDefault()` or return false. Information on the selected area can be found through `event.xAxis` and `event.yAxis`, which are arrays containing the axes of each dimension and each axis' min and max values. The primary axes are `event.xAxis[0]` and `event.yAxis[0]`. Remember the unit of a datetime axis is milliseconds since 1970-01-01 00:00:00. selection: function(event) {   // log the min and max of the primary, datetime x-axis   console.log(     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].min     ),     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].max     )   );   // log the min and max of the y axis   console.log(event.yAxis[0].min, event.yAxis[0].max); }
 
 **Try it**
 
@@ -101,7 +101,7 @@ In a chart with multiple drilldown series, this event fires after all the series
 */
 @property(nonatomic, readwrite) HIFunction *drillupall;
 /**
-Fires when a drilldown point is clicked, before the new series is added. This event is also utilized for async drilldown, where the seriesOptions are not added by option, but rather loaded async. Note that when clicking a category label to trigger multiple series drilldown, one `drilldown` event is triggered per point in the category. Event arguments:   If a category label was clicked, which index.  The originating point.  The original browser event (usually click) that triggered the drilldown.  If a category label was clicked, this array holds all points corresponing to the category.  Options for the new series 
+Fires when a drilldown point is clicked, before the new series is added. This event is also utilized for async drilldown, where the seriesOptions are not added by option, but rather loaded async. Note that when clicking a category label to trigger multiple series drilldown, one `drilldown` event is triggered per point in the category. Event arguments: - `category`: If a category label was clicked, which index. - `originalEvent`: The original browser event (usually click) that triggered  the drilldown. - `point`: The originating point. - `points`: If a category label was clicked, this array holds all points  corresponing to the category. - `seriesOptions`: Options for the new series.
 
 **Try it**
 
@@ -205,6 +205,32 @@ Callback that fires when starting to drag a point. The mouse event object is pas
 * [Drag events](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
 */
 @property(nonatomic, readwrite) HIFunction *dragStart;
+/**
+Event fired on a button click.
+
+**Try it**
+
+* [Change icon in a dropddown on event](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/gui/)
+* [Change button class on event](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/gui-buttons/)
+*/
+@property(nonatomic, readwrite) HIFunction *selectButton;
+/**
+A `showPopup` event. Fired when selecting for example an annotation.
+*/
+@property(nonatomic, readwrite) HIFunction *showPopup;
+/**
+A `hidePopop` event. Fired when Popup should be hidden, for exampole when clicking on an annotation again.
+*/
+@property(nonatomic, readwrite) HIFunction *hidePopup;
+/**
+Event fired when button state should change, for example after adding an annotation.
+
+**Try it**
+
+* [Change icon in a dropddown on event](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/gui/)
+* [Change button class on event](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/gui-buttons/)
+*/
+@property(nonatomic, readwrite) HIFunction *deselectButton;
 /**
 Fires when the series is hidden after chart generation time, either by clicking the legend item or by calling `.hide()`.
 

@@ -72,7 +72,7 @@ Enable or disable the stack total labels.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/ labels-and-string-formatting#html) to render the labels.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the labels.
 
 **Defaults to** `false`.
 */

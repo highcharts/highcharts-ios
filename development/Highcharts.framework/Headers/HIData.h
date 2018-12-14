@@ -6,11 +6,11 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIEvents.h"
 #import "HIDragDrop.h"
+#import "HIEvents.h"
 #import "HIMarker.h"
-#import "HIPartialFill.h"
 #import "HITargetOptions.h"
+#import "HIPartialFill.h"
 #import "HIColor.h"
 #import "HIFunction.h"
 
@@ -65,19 +65,19 @@ An HTML table or the id of such to be parsed as input data. Related options are 
 */
 @property(nonatomic, readwrite) NSString *table;
 /**
-A callback function to access the parsed columns, the two-dimentional input data array directly, before they are interpreted into series data and categories. Return `false` to stop completion, or call `this.complete()` to continue async.
+A URL to a remote JSON dataset, structured as a row array. Will be fetched when the chart is created using Ajax.
 
 **Try it**
 
-* [Modify data after parse](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/parsed/)
+* [Rows with live polling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/livedata-rows)
 */
-@property(nonatomic, readwrite) HIFunction *parsed;
+@property(nonatomic, readwrite) NSString *rowsURL;
 /**
 A callback function to parse string representations of dates into JavaScript timestamps. Should return an integer timestamp on success.
 */
 @property(nonatomic, readwrite) HIFunction *parseDate;
 /**
-An array containing object with Point property names along with what column id the property should be taken from.
+An array containing dictionaries for each series. A dictionary exists of Point property names as the key and the CSV column index as the value.
 
 **Try it**
 
@@ -93,7 +93,7 @@ The same as the columns input option, but defining rows intead of columns.
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> *rows;
 /**
-A URL to a remote CSV dataset. Will be fetched when the chart is created using Ajax.
+An URL to a remote CSV dataset. Will be fetched when the chart is created using Ajax.
 
 **Try it**
 
@@ -102,10 +102,10 @@ A URL to a remote CSV dataset. Will be fetched when the chart is created using A
 */
 @property(nonatomic, readwrite) NSString *csvURL;
 /**
-Which of the predefined date formats in Date.prototype.dateFormats to use to parse date values. Defaults to a best guess based on what format gives valid and ordered dates. Valid options include: *  `YYYY/mm/dd` *  `dd/mm/YYYY` *  `mm/dd/YYYY` *  `dd/mm/YY` *  `mm/dd/YY`
+Which of the predefined date formats in Date.prototype.dateFormats to use to parse date values. Defaults to a best guess based on what format gives valid and ordered dates. Valid options include: `YYYY/mm/dd`, `dd/mm/YYYY`, `mm/dd/YYYY`, `dd/mm/YY`, `mm/dd/YY`.
 
-**Accepted values:** `[undefined, "YYYY/mm/dd", "dd/mm/YYYY", "mm/dd/YYYY",
-            "dd/mm/YYYY", "dd/mm/YY", "mm/dd/YY"]`.
+**Accepted values:** `["YYYY/mm/dd", "dd/mm/YYYY", "mm/dd/YYYY", "dd/mm/YYYY",
+            "dd/mm/YY", "mm/dd/YY"]`.
 
 **Try it**
 
@@ -131,13 +131,13 @@ Sets the refresh rate for data polling when importing remote dataset by setting 
 */
 @property(nonatomic, readwrite) NSNumber *dataRefreshRate;
 /**
-A URL to a remote JSON dataset, structured as a row array. Will be fetched when the chart is created using Ajax.
+A callback function to access the parsed columns, the two-dimentional input data array directly, before they are interpreted into series data and categories. Return `false` to stop completion, or call `this.complete()` to continue async.
 
 **Try it**
 
-* [Rows with live polling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/livedata-rows)
+* [Modify data after parse](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/parsed/)
 */
-@property(nonatomic, readwrite) NSString *rowsURL;
+@property(nonatomic, readwrite) HIFunction *parsed;
 /**
 In tabular input data, the first row (indexed by 0) to use.
 
@@ -233,7 +233,7 @@ Switch rows and columns of the input data, so that `this.columns` effectively be
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *switchRowsAndColumns;
 /**
-The decimal point used for parsing numbers in the CSV. If both this and data.delimiter is set to false, the parser will attempt to deduce the decimal point automatically.
+The decimal point used for parsing numbers in the CSV. If both this and data.delimiter is set to `undefined`, the parser will attempt to deduce the decimal point automatically.
 
 **Defaults to** `.`.
 
@@ -275,9 +275,13 @@ The rank for this point's data label in case of collision. If two data labels ar
 */
 @property(nonatomic, readwrite) NSNumber *labelrank;
 /**
-A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color by is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
+The y value of the point.
 */
-@property(nonatomic, readwrite) NSNumber *colorIndex;
+@property(nonatomic, readwrite) NSNumber *y;
+/**
+A description of the point to add to the screen reader information about the point. Requires the Accessibility module.
+*/
+@property(nonatomic, readwrite) NSString *definition;
 /**
 The name of the point as shown in the legend, tooltip, dataLabel etc.
 
@@ -313,17 +317,17 @@ An additional, individual class name for the data point's graphic representation
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-Individual point events
-*/
-@property(nonatomic, readwrite) HIEvents *events;
-/**
 Point specific options for the draggable-points module. Overrides options on `series.dragDrop`. Requires the `draggable-points` module.
 */
 @property(nonatomic, readwrite) HIDragDrop *dragDrop;
 /**
-The y value of the point.
+An id for the point. This can be used after render time to get a pointer to the point object through `chart.get()`.
+
+**Try it**
+
+* [Remove an id'd point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/id/)
 */
-@property(nonatomic, readwrite) NSNumber *y;
+@property(nonatomic, readwrite) NSString *id;
 /**
 The x value of the point. For datetime axes, the X value is the timestamp in milliseconds since 1970.
 */
@@ -337,34 +341,56 @@ The `id` of a series in the `drilldown.series` array to use for a drilldown for 
 */
 @property(nonatomic, readwrite) NSString *drilldown;
 /**
-An id for the point. This can be used after render time to get a pointer to the point object through `chart.get()`.
-
-**Try it**
-
-* [Remove an id'd point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/id/)
+Individual point events
 */
-@property(nonatomic, readwrite) NSString *id;
+@property(nonatomic, readwrite) HIEvents *events;
 /**
-A description of the point to add to the screen reader information about the point. Requires the Accessibility module.
+A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color by is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
 */
-@property(nonatomic, readwrite) NSString *definition;
+@property(nonatomic, readwrite) NSNumber *colorIndex;
 /**
 The sequential index of the data point in the legend.
 */
 @property(nonatomic, readwrite) NSNumber *legendIndex;
 @property(nonatomic, readwrite) HIMarker *marker;
 /**
-The length of the vector. The rendered length will relate to the `vectorLength` setting.
-*/
-@property(nonatomic, readwrite) NSNumber *length;
-/**
 The vector direction in degrees, where 0 is north (pointing towards south).
 */
 @property(nonatomic, readwrite) NSNumber *direction;
 /**
-The value of the point, resulting in a color controled by options as set in the `colorAxis` configuration.
+The length of the vector. The rendered length will relate to the `vectorLength` setting.
 */
-@property(nonatomic, readwrite) NSNumber *value;
+@property(nonatomic, readwrite) NSNumber *length;
+/**
+The target value of a point.
+*/
+@property(nonatomic, readwrite) NSNumber *target;
+/**
+Individual target options for each point.
+*/
+@property(nonatomic, readwrite) HITargetOptions *targetOptions;
+/**
+The color of the border surrounding the column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
+
+**Try it**
+
+* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
+/**
+A pixel value specifying a fixed width for the column or bar. Overrides pointWidth on the series.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSNumber *pointWidth;
+/**
+The width of the border surrounding the column or bar. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
+
+**Try it**
+
+* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Point padding for a single point.
 
@@ -373,6 +399,10 @@ Point padding for a single point.
 * [Point padding on tiles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/tilemap-pointpadding)
 */
 @property(nonatomic, readwrite) NSNumber *pointPadding;
+/**
+The value of the point, resulting in a color controled by options as set in the `colorAxis` configuration.
+*/
+@property(nonatomic, readwrite) NSNumber *value;
 /**
 When this property is true, the points acts as a summary column for the values added or substracted since the last intermediate sum, or since the start of the series. The `y` value is ignored.
 
@@ -402,27 +432,17 @@ Whether to display a slice offset from the center.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
 /**
-The color of the border surrounding the column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
-
-**Try it**
-
-* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+The node that the link runs to.
 */
-@property(nonatomic, readwrite) HIColor *borderColor;
+@property(nonatomic, readwrite) NSString *to;
 /**
-A pixel value specifying a fixed width for the column or bar. Overrides pointWidth on the series.
-
-**Defaults to** `undefined`.
+The node that the link runs from.
 */
-@property(nonatomic, readwrite) NSNumber *pointWidth;
+@property(nonatomic, readwrite) NSString *from;
 /**
-The width of the border surrounding the column or bar. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
-
-**Try it**
-
-* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+The weight of the link.
 */
-@property(nonatomic, readwrite) NSNumber *borderWidth;
+@property(nonatomic, readwrite) NSNumber *weight;
 /**
 The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
 
@@ -440,10 +460,6 @@ The outer radius of an individual point in a solid gauge. Can be given as a numb
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ radius;
 /**
-The node that the link runs to.
-*/
-@property(nonatomic, readwrite) NSString *to;
-/**
 Whether the link goes out of the system.
 
 **Defaults to** `false`.
@@ -453,14 +469,6 @@ Whether the link goes out of the system.
 * [Sankey chart with outgoing links](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-outgoing)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *outgoing;
-/**
-The node that the link runs from.
-*/
-@property(nonatomic, readwrite) NSString *from;
-/**
-The weight of the link.
-*/
-@property(nonatomic, readwrite) NSNumber *weight;
 /**
 The size value for each bubble. The bubbles' diameters are computed based on the `z`, and controlled by series options like `minSize`, `maxSize`, `sizeBy`, `zMin` and `zMax`.
 */
@@ -482,15 +490,7 @@ A partial fill for each point, typically used to visualize how much of a task is
 */
 @property(nonatomic, readwrite) HIPartialFill *partialFill;
 /**
-Serves a purpose only if a `colorAxis` object is defined in the chart options. This value will decide which color the point gets from the scale of the colorAxis.
-
-**Defaults to** `undefined`.
-*/
-@property(nonatomic, readwrite) NSNumber *colorValue;
-/**
 Only for treemap. Use this option to build a tree structure. The value should be the id of the point which is the parent. If no points has a matching id, or this option is undefined, then the parent will be set to the root.
-
-**Defaults to** `undefined`.
 
 **Try it**
 
@@ -499,13 +499,18 @@ Only for treemap. Use this option to build a tree structure. The value should be
 */
 @property(nonatomic, readwrite) NSString *parent;
 /**
-The target value of a point.
+Serves a purpose only if a `colorAxis` object is defined in the chart options. This value will decide which color the point gets from the scale of the colorAxis.
 */
-@property(nonatomic, readwrite) NSNumber *target;
+@property(nonatomic, readwrite) NSNumber *colorValue;
 /**
-Individual target options for each point.
+The set or sets the options will be applied to. If a single entry is defined, then it will create a new set. If more than one entry is defined, then it will define the overlap between the sets in the array.
+
+**Try it**
+
+* [Venn diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/venn-diagram/)
+* [Euler diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/euler-diagram/)
 */
-@property(nonatomic, readwrite) HITargetOptions *targetOptions;
+@property(nonatomic, readwrite) NSArray<NSString *> *sets;
 
 -(NSDictionary *)getParams;
 

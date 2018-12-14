@@ -41,6 +41,16 @@
 @interface HITilemap: HISeries
 
 /**
+The row size - how many Y axis units each tilemap row should span. Analogous to `colsize`.
+
+**Defaults to** `1`.
+
+**Try it**
+
+* [1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/heatmap/)
+*/
+@property(nonatomic, readwrite) NSNumber *rowsize;
+/**
 The padding between points in the tilemap.
 
 **Defaults to** `0`.
@@ -61,16 +71,6 @@ The shape of the tiles in the tilemap. Possible values are `hexagon`, `circle`, 
 * [Diamond tile shapes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/diamondmap)
 */
 @property(nonatomic, readwrite) NSString *tileShape;
-/**
-The row size - how many Y axis units each tilemap row should span. Analogous to `colsize`.
-
-**Defaults to** `1`.
-
-**Try it**
-
-* [1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/heatmap/)
-*/
-@property(nonatomic, readwrite) NSNumber *rowsize;
 /**
 The column size - how many X axis units each column in the tilemap should span. Works as in `Heatmaps`.
 

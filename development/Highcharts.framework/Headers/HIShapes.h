@@ -6,6 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIPoints.h"
 #import "HIPoint.h"
 #import "HIColor.h"
 
@@ -18,7 +19,7 @@ An array of shapes for the annotation. For options that apply to multiple shapes
 /**
 An array of points for the shape. This option is available for shapes which can use multiple points such as path. A point can be either a point object or a point's id.
 */
-@property(nonatomic, readwrite) NSArray *points;
+@property(nonatomic, readwrite) NSArray <HIPoints *> *points;
 /**
 Id of the marker which will be drawn at the final vertex of the path. Custom markers can be defined in defs property.
 
@@ -97,6 +98,10 @@ The color of the shape's fill.
 * [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
 */
 @property(nonatomic, readwrite) HIColor *fill;
+/**
+Defines additional snapping area around an annotation making this annotation to focus. Defined in pixels.
+*/
+@property(nonatomic, readwrite) NSNumber *snap;
 
 -(NSDictionary *)getParams;
 

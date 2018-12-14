@@ -6,10 +6,10 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIMenuStyle.h"
-#import "HIMenuItemStyle.h"
 #import "HIButtonOptions.h"
-#import "HIMenuItemHoverStyle.h"
+#import "HIEvents.h"
+#import "HIBindings.h"
+#import "HIPopup.h"
 #import "HIColor.h"
 #import "HIAnimationOptionsObject.h"
 #import "HICSSObject.h"
@@ -23,37 +23,53 @@ A collection of options for buttons and menus appearing in the exporting module.
 /**
 CSS styles for the popup menu appearing by default when the export icon is clicked. This menu is rendered in HTML.
 
-**Defaults to** `{ "border": "1px solid #999999", "background": "#ffffff", "padding": "5px 0" }`.
+**Defaults to** `{"border": "1px solid #999999", "background": "#ffffff", "padding": "5px 0"}`.
 
 **Try it**
 
 * [Light gray menu background](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menustyle/)
 */
-@property(nonatomic, readwrite) HIMenuStyle *menuStyle;
-/**
-CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
-
-**Defaults to** `{ "padding": "0.5em 1em", "color": "#333333", "background": "none" }`.
-
-**Try it**
-
-* [Add a grey stripe to the left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemstyle/)
-*/
-@property(nonatomic, readwrite) HIMenuItemStyle *menuItemStyle;
+@property(nonatomic, readwrite) HICSSObject *menuStyle;
 /**
 A collection of options for buttons appearing in the exporting module. In styled mode, the buttons are styled with the `.highcharts-contextbutton` and `.highcharts-button-symbol` classes.
 */
 @property(nonatomic, readwrite) HIButtonOptions *buttonOptions;
 /**
+A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events.
+*/
+@property(nonatomic, readwrite) NSString *bindingsClassName;
+/**
+Events to communicate between Stock Tools and custom GUI.
+*/
+@property(nonatomic, readwrite) HIEvents *events;
+/**
+CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML. Font size defaults to `11px` on desktop and `14px` on touch devices.
+
+**Defaults to** `{"padding": "0.5em 1em", "color": "#333333", "background": "none", "fontSize": "11px/14px", "transition": "background 250ms, color 250ms"}`.
+
+**Try it**
+
+* [Add a grey stripe to the left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemstyle/)
+*/
+@property(nonatomic, readwrite) HICSSObject *menuItemStyle;
+/**
 CSS styles for the hover state of the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
 
-**Defaults to** `{ "background": "#335cad", "color": "#ffffff" }`.
+**Defaults to** `{"background": "#335cad", "color": "#ffffff"}`.
 
 **Try it**
 
 * [Bold text on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemhoverstyle/)
 */
-@property(nonatomic, readwrite) HIMenuItemHoverStyle *menuItemHoverStyle;
+@property(nonatomic, readwrite) HICSSObject *menuItemHoverStyle;
+/**
+Bindings definitions for custom HTML buttons. Each binding implements simple event-driven interface: - `className`: classname used to bind event to - `init`: initial event, fired on button click - `start`: fired on first click on a chart - `steps`: array of sequential events fired one after another on each  of users clicks - `end`: last event to be called after last step event
+
+**Try it**
+
+* [Custom bindings in Highstock](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/stocktools-thresholds)
+*/
+@property(nonatomic, readwrite) HIBindings *bindings;
 /**
 Text styles for the legend page navigation.
 
@@ -62,6 +78,20 @@ Text styles for the legend page navigation.
 * [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
 */
 @property(nonatomic, readwrite) HICSSObject *style;
+/**
+The color of the inactive up or down arrow in the legend page navigation. .
+
+**Try it**
+
+* [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
+*/
+@property(nonatomic, readwrite) HIColor *inactiveColor;
+/**
+Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the [adapt chart to legend](https://www.highcharts.com/products/plugin-registry/single/8/Adapt-Chart-To-Legend) plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
+
+**Defaults to** `true`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The pixel size of the up and down arrows in the legend paging navigation.
 
@@ -72,20 +102,6 @@ The pixel size of the up and down arrows in the legend paging navigation.
 * [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
 */
 @property(nonatomic, readwrite) NSNumber *arrowSize;
-/**
-Whether to enable the legend navigation. In most cases, disabling the navigation results in an unwanted overflow. See also the `adapt chart to legend` plugin for a solution to extend the chart height to make room for the legend, optionally in exported charts only.
-
-**Defaults to** `true`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
-/**
-The color of the inactive up or down arrow in the legend page navigation. .
-
-**Try it**
-
-* [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
-*/
-@property(nonatomic, readwrite) HIColor *inactiveColor;
 /**
 How to animate the pages when navigating up or down. A value of `true` applies the default navigation given in the `chart.animation` option. Additional options can be given as an object containing values for easing and duration.
 
@@ -104,6 +120,10 @@ The color for the active up or down arrow in the legend page navigation.
 * [Legend page navigation demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation/)
 */
 @property(nonatomic, readwrite) HIColor *activeColor;
+/**
+Translations for all field names used in popup.
+*/
+@property(nonatomic, readwrite) HIPopup *popup;
 
 -(NSDictionary *)getParams;
 

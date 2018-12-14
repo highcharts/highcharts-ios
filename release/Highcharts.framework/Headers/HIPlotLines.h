@@ -56,13 +56,9 @@ The position of the line in axis units.
 */
 @property(nonatomic, readwrite) NSNumber *value;
 /**
-An id used for identifying the plot line in Axis.removePlotLine.
-
-**Try it**
-
-* [Remove plot line by id](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-id/)
+Text labels for the plot bands
 */
-@property(nonatomic, readwrite) NSString *id;
+@property(nonatomic, readwrite) HILabel *label;
 /**
 A custom class name, in addition to the default `highcharts-plot-line`, to apply to each individual line.
 */
@@ -76,9 +72,13 @@ The width or thickness of the plot line.
 */
 @property(nonatomic, readwrite) NSNumber *width;
 /**
-Text labels for the plot bands
+An id used for identifying the plot line in Axis.removePlotLine.
+
+**Try it**
+
+* [Remove plot line by id](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-id/)
 */
-@property(nonatomic, readwrite) HILabel *label;
+@property(nonatomic, readwrite) NSString *id;
 /**
 An object defining mouse events for the plot line. Supported properties are `click`, `mouseover`, `mouseout`, `mousemove`.
 

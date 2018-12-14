@@ -2,6 +2,7 @@
 #import "HISubtitle.h"
 #import "HIYAxis.h"
 #import "HISeries.h"
+#import "HILabels.h"
 #import "HIAccessibility.h"
 #import "HIPane.h"
 #import "HIResponsive.h"
@@ -13,7 +14,6 @@
 #import "HIExporting.h"
 #import "HIBoost.h"
 #import "HIAnnotations.h"
-#import "HILabels.h"
 #import "HIChart.h"
 #import "HICredits.h"
 #import "HIZAxis.h"
@@ -44,6 +44,11 @@ The Y axis or value axis. Normally this is the vertical axis, though if the char
 Series options for specific data and the data itself. In TypeScript you have to cast the series options to specific series types, to get all possible options for a series.
 */
 @property(nonatomic, readwrite) NSArray<HISeries *> *series;
+
+/**
+HTML labels that can be positioned anywhere in the chart area.
+*/
+@property(nonatomic, readwrite) HILabels *labels;
 
 /**
 Options for configuring accessibility for the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](http://www.highcharts.com/docs/chart-concepts/accessibility).
@@ -114,7 +119,7 @@ Options for the exporting module. For an overview on the matter, see [the docs](
 @property(nonatomic, readwrite) HIExporting *exporting;
 
 /**
-Options for the Boost module. The Boost module allows certain series types to be rendered by WebGL instead of the default SVG. This allows hundreds of thousands of data points to be rendered in milliseconds. In addition to the WebGL rendering it saves time by skipping processing and inspection of the data wherever possible. This introduces some limitations to what features are available in Boost mode. See `the docs` for details. In addition to the global `boost` option, each series has a `boostThreshold` that defines when the boost should kick in. Requires the `modules/boost.js` module.
+Options for the Boost module. The Boost module allows certain series types to be rendered by WebGL instead of the default SVG. This allows hundreds of thousands of data points to be rendered in milliseconds. In addition to the WebGL rendering it saves time by skipping processing and inspection of the data wherever possible. This introduces some limitations to what features are available in Boost mode. See [the docs](https://www.highcharts.com/docs/advanced-chart-features/boost-module) for details. In addition to the global `boost` option, each series has a `boostThreshold` that defines when the boost should kick in. Requires the `modules/boost.js` module.
 
 **Try it**
 
@@ -153,11 +158,6 @@ Styled mode only. Configuration object for adding SVG definitions for reusable e
 @property(nonatomic, readwrite) id defs;
 
 /**
-HTML labels that can be positioned anywhere in the chart area.
-*/
-@property(nonatomic, readwrite) HILabels *labels;
-
-/**
 General options for the chart.
 */
 @property(nonatomic, readwrite) HIChart *chart;
@@ -168,22 +168,22 @@ Highchart by default puts a credits label in the lower right corner of the chart
 @property(nonatomic, readwrite) HICredits *credits;
 
 /**
-The Z axis or depth axis for 3D plots. See `the Axis object` for programmatic access to the axis.
+The Z axis or depth axis for 3D plots. See the `Axis class` for programmatic access to the axis.
 
 **Try it**
 
 * [Z-Axis with Categories](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/3d/scatter-zaxis-categories/)
 * [Z-Axis with styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/3d/scatter-zaxis-grid/)
 */
-@property(nonatomic, readwrite) HIZAxis *zAxis;
+@property(nonatomic, readwrite) NSArray<HIZAxis *> *zAxis;
 
 /**
-The X axis or category axis. Normally this is the horizontal axis, though if the chart is inverted this is the vertical axis. In case of multiple axes, the xAxis node is an array of configuration objects. See `the Axis object` for programmatic access to the axis.
+The X axis or category axis. Normally this is the horizontal axis, though if the chart is inverted this is the vertical axis. In case of multiple axes, the xAxis node is an array of configuration objects. See the `Axis class` for programmatic access to the axis.
 */
 @property(nonatomic, readwrite) NSArray<HIXAxis *> *xAxis;
 
 /**
-Options for drill down, the concept of inspecting increasingly high resolution data through clicking on chart items like columns or pie slices. The drilldown feature requires the drilldown.js file to be loaded, found in the modules directory of the download package, or online at `https://code.highcharts.com/modules/drilldown.js `.
+Options for drill down, the concept of inspecting increasingly high resolution data through clicking on chart items like columns or pie slices. The drilldown feature requires the drilldown.js file to be loaded, found in the modules directory of the download package, or online at `https://code.highcharts.com/modules/drilldown.js`.
 */
 @property(nonatomic, readwrite) HIDrilldown *drilldown;
 

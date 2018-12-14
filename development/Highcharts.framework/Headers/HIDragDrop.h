@@ -16,6 +16,7 @@ The draggable-points module allows points to be moved around or modified in the 
 **Try it**
 
 * [Draggable column and line series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/resize-column)
+* [Draggable bar](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/bar-series)
 * [Draggable bubbles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-bubble)
 * [Draggable X range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
 */
@@ -64,7 +65,7 @@ Allow target value to be dragged individually. Requires `draggable-points` modul
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableTarget;
 /**
-Style options for the guide box. The guide box has one state by default, the "default" state.
+Style options for the guide box. The guide box has one state by default, the `default` state.
 */
 @property(nonatomic, readwrite) HIGuideBox *guideBox;
 /**

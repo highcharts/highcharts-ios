@@ -51,8 +51,6 @@ An array of background items for the pane.
 /**
 The size of the pane, either as a number defining pixels, or a percentage defining a percentage of the plot are.
 
-**Defaults to** `85%`.
-
 **Try it**
 
 * [Smaller size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/)

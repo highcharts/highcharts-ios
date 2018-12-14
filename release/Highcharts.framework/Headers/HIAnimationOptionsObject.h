@@ -16,6 +16,10 @@ An animation configuration. Animation configurations can also be defined as bool
 @interface HIAnimationOptionsObject: HIChartsJSONSerializable
 
 /**
+A callback function to exectute when the animation finishes.
+*/
+@property(nonatomic, readwrite) HIFunction *complete;
+/**
 The animation duration in milliseconds.
 */
 @property(nonatomic, readwrite) NSNumber *duration;
@@ -23,10 +27,6 @@ The animation duration in milliseconds.
 The name of an easing function as defined on the `Math` object.
 */
 @property(nonatomic, readwrite) NSString *easing;
-/**
-A callback function to exectute when the animation finishes.
-*/
-@property(nonatomic, readwrite) HIFunction *complete;
 /**
 A callback function to execute on each step of each attribute or CSS property that's being animated. The first argument contains information about the animation and progress.
 */

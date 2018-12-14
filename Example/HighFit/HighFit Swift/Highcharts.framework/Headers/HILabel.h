@@ -6,6 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HILabelIntersectBoxObject.h"
 #import "HICSSObject.h"
 
 
@@ -83,7 +84,7 @@ Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines a
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts /labels-and-string-formatting#html) to render the labels.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the labels.
 
 **Defaults to** `false`.
 */
@@ -111,7 +112,7 @@ Draw the label on the area of an area series. By default it is drawn on the area
 /**
 An array of boxes to avoid when laying out the labels. Each item has a `left`, `right`, `top` and `bottom` property.
 */
-@property(nonatomic, readwrite) NSArray *boxesToAvoid;
+@property(nonatomic, readwrite) NSArray<HILabelIntersectBoxObject *> *boxesToAvoid;
 /**
 Allow labels to be placed distant to the graph if necessary, and draw a connector line to the graph. Setting this option to true may decrease the performance significantly, since the algorithm with systematically search for open spaces in the while plot area. Visually, it may also result in a more cluttered chart, though more of the series will be labeled.
 */

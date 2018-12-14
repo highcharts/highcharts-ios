@@ -10,7 +10,7 @@
 
 
 /**
-Additional styles to apply to the data label of a point that has drilldown data. By default it is underlined and blue to invite to interaction.
+Additional styles to apply to the data label of a point that has drilldown data. By default it is underlined and blue to invite to interaction. In styled mode, active data label styles can be applied with the `.highcharts-drilldown-data-label` class.
 
 **Defaults to** `{ "cursor": "pointer", "color": "#003399", "fontWeight": "bold", "textDecoration": "underline" }`.
 
@@ -20,8 +20,8 @@ Additional styles to apply to the data label of a point that has drilldown data.
 */
 @interface HIActiveDataLabelStyle: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *cursor;
 @property(nonatomic, readwrite) NSString *color;
+@property(nonatomic, readwrite) NSString *cursor;
 @property(nonatomic, readwrite) NSString *textDecoration;
 @property(nonatomic, readwrite) NSString *fontWeight;
 

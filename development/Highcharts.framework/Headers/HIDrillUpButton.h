@@ -23,7 +23,7 @@ Positioning options for the button within the `relativeTo` box. Available proper
 */
 @property(nonatomic, readwrite) HIPosition *position;
 /**
-A collection of attributes for the button. The object takes SVG attributes like `fill`, `stroke`, `stroke-width` or `r`, the border radius. The theme also supports `style`, a collection of CSS properties for the text. Equivalent attributes for the hover state are given in `theme.states.hover`.
+A collection of attributes for the button. The object takes SVG attributes like `fill`, `stroke`, `stroke-width` or `r`, the border radius. The theme also supports `style`, a collection of CSS properties for the text. Equivalent attributes for the hover state are given in `theme.states.hover`. In styled mode, drill-up button styles can be applied with the `.highcharts-drillup-button` class.
 
 **Try it**
 

@@ -10,7 +10,7 @@
 
 
 /**
-Style options for the guide box. The guide box has one state by default, the "default" state.
+Style options for the guide box. The guide box has one state by default, the `default` state.
 */
 @interface HIGuideBox: HIChartsJSONSerializable
 

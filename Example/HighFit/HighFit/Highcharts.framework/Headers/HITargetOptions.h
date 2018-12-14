@@ -12,10 +12,6 @@
 
 /**
 All options related with look and positiong of targets.
-
-**Try it**
-
-* [Target options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bullet-targetoptions/)
 */
 @interface HITargetOptions: HIChartsJSONSerializable
 
@@ -24,6 +20,10 @@ The border color of the rectangle representing the target. When not set, the poi
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+The color of the rectangle representing the target. When not set, point's color (if set in point's options - ``color``) or zone of the target value (if ``zones`` or ``negativeColor`` are set) or the same color as the point has is used. In styled mode, use class `highcharts-bullet-target` instead.
+*/
+@property(nonatomic, readwrite) HIColor *color;
+/**
 The width of the rectangle representing the target. Could be set as a pixel value or as a percentage of a column width.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
@@ -31,10 +31,6 @@ The width of the rectangle representing the target. Could be set as a pixel valu
 The border width of the rectangle representing the target. In styled mode, use class `highcharts-bullet-target` instead.
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
-/**
-The color of the rectangle representing the target. When not set, point's color (if set in point's options - ``color``) or zone of the target value (if ``zones`` or ``negativeColor`` are set) or the same color as the point has is used. In styled mode, use class `highcharts-bullet-target` instead.
-*/
-@property(nonatomic, readwrite) HIColor *color;
 /**
 The height of the rectangle representing the target.
 */

@@ -16,21 +16,15 @@ A collection of options for buttons appearing in the exporting module. In styled
 @interface HIButtonOptions: HIChartsJSONSerializable
 
 /**
-The vertical alignment of the buttons. Can be one of "top", "middle" or "bottom".
-
-**Accepted values:** `["top", "middle", "bottom"]`.
-
-**Defaults to** `top`.
+The color of the symbol's stroke or line.
 
 **Try it**
 
-* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
+* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
 */
-@property(nonatomic, readwrite) NSString *verticalAlign;
+@property(nonatomic, readwrite) HIColor *symbolStroke;
 /**
 Fill color for the symbol within the button.
-
-**Defaults to** `#666666`.
 
 **Try it**
 
@@ -48,18 +42,6 @@ A text string to add to the individual button.
 * [Combined symbol and text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-text-symbol/)
 */
 @property(nonatomic, readwrite) NSString *text;
-/**
-Alignment for the buttons.
-
-**Accepted values:** `["left", "center", "right"]`.
-
-**Defaults to** `right`.
-
-**Try it**
-
-* [Center aligned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-align/)
-*/
-@property(nonatomic, readwrite) NSString *align;
 /**
 Whether to enable buttons.
 
@@ -79,42 +61,6 @@ A configuration object for the button theme. The object accepts SVG properties l
 */
 @property(nonatomic, readwrite) HITheme *theme;
 /**
-Pixel height of the buttons.
-
-**Defaults to** `22`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *height;
-/**
-The pixel width of the button.
-
-**Defaults to** `24`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *width;
-/**
-The pixel spacing between buttons.
-
-**Defaults to** `3`.
-*/
-@property(nonatomic, readwrite) NSNumber *buttonSpacing;
-/**
-The pixel size of the symbol on the button.
-
-**Defaults to** `14`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolSize;
-/**
 The vertical offset of the button's position relative to its `verticalAlign`.
 
 **Defaults to** `0`.
@@ -125,39 +71,7 @@ The vertical offset of the button's position relative to its `verticalAlign`.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The color of the symbol's stroke or line.
-
-**Defaults to** `#666666`.
-
-**Try it**
-
-* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
-*/
-@property(nonatomic, readwrite) HIColor *symbolStroke;
-/**
-The y position of the center of the symbol inside the button.
-
-**Defaults to** `10.5`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolY;
-/**
-The x position of the center of the symbol inside the button.
-
-**Defaults to** `12.5`.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolX;
-/**
 The pixel stroke width of the symbol on the button.
-
-**Defaults to** `1`.
 
 **Try it**
 

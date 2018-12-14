@@ -55,12 +55,6 @@ The horizontal alignment of the subtitle. Can be one of "left", "center" and "ri
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the text.
-
-**Defaults to** `false`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
-/**
 The y position of the subtitle relative to the alignment within `chart.spacingTop` and `chart.spacingBottom`. By default the subtitle is laid out below the title unless the title is floating.
 
 **Try it**
@@ -79,14 +73,6 @@ The x position of the subtitle relative to the alignment within `chart.spacingLe
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Adjustment made to the subtitle width, normally to reserve space for the exporting burger menu.
-
-**Try it**
-
-* [Wider menu, greater padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust/)
-*/
-@property(nonatomic, readwrite) NSNumber *widthAdjust;
-/**
 When the subtitle is floating, the plot area will not move to make space for it.
 
 **Defaults to** `false`.
@@ -96,6 +82,20 @@ When the subtitle is floating, the plot area will not move to make space for it.
 * [Floating title and subtitle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/subtitle/floating/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
+/**
+Adjustment made to the subtitle width, normally to reserve space for the exporting burger menu.
+
+**Try it**
+
+* [Wider menu, greater padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust/)
+*/
+@property(nonatomic, readwrite) NSNumber *widthAdjust;
+/**
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the text.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 
 -(NSDictionary *)getParams;
 

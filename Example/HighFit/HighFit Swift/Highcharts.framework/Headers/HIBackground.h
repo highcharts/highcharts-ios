@@ -21,20 +21,14 @@ An array of background items for the pane.
 
 /**
 The pane background border color.
-
-**Defaults to** `#cccccc`.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
 The outer radius of the circular pane background. Can be either numeric (pixels) or a percentage string.
-
-**Defaults to** `105%`.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ outerRadius;
 /**
 The inner radius of the pane background. Can be either numeric (pixels) or a percentage string.
-
-**Defaults to** `0`.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ innerRadius;
 /**
@@ -48,19 +42,17 @@ The class name for this background.
 /**
 The shape of the pane background. When `solid`, the background is circular. When `arc`, the background extends only from the min to the max of the value axis.
 
-**Accepted values:** `["solid", "arc"]`.
-
-**Defaults to** `solid`.
+**Accepted values:** `["arc", "circle", "solid"]`.
 */
 @property(nonatomic, readwrite) NSString *shape;
 /**
 The pixel border width of the pane background.
-
-**Defaults to** `1`.
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 The background color or gradient for the pane.
+
+**Defaults to** `{ linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 }, stops: [[0, #ffffff], [1, #e6e6e6]] }`.
 */
 @property(nonatomic, readwrite) HIColor *backgroundColor;
 

@@ -40,13 +40,11 @@
 @interface HIPie: HISeries
 
 /**
-The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to `startAngle` plus 360.
+The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
 
-**Try it**
-
-* [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
+**Defaults to** `80`.
 */
-@property(nonatomic, readwrite) NSNumber *endAngle;
+@property(nonatomic, readwrite) NSNumber *minSize;
 /**
 The size of the inner diameter for the pie. A size greater than 0 renders a donut chart. Can be a percentage or pixel value. Percentages are relative to the pie size. Pixel values are given as integers. Note: in Highcharts < 4.1.2, the percentage was relative to the plot area, not the pie size.
 
@@ -84,6 +82,14 @@ The thickness of a 3D pie. Requires `highcharts-3d.js`
 */
 @property(nonatomic, readwrite) NSNumber *depth;
 /**
+The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to `startAngle` plus 360.
+
+**Try it**
+
+* [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
+*/
+@property(nonatomic, readwrite) NSNumber *endAngle;
+/**
 A series specific or series type specific color set to use instead of the global `colors`.
 
 **Try it**
@@ -91,13 +97,6 @@ A series specific or series type specific color set to use instead of the global
 * [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *colors;
-/**
-The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
-
-**Defaults to** `80`.
-*/
-@property(nonatomic, readwrite) NSNumber *minSize;
-@property(nonatomic, readwrite) NSString *legendType;
 /**
 The start angle of the pie slices in degrees where 0 is top and 90 right.
 
@@ -108,6 +107,7 @@ The start angle of the pie slices in degrees where 0 is top and 90 right.
 * [Start from right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-startangle-90/)
 */
 @property(nonatomic, readwrite) NSNumber *startAngle;
+@property(nonatomic, readwrite) NSString *legendType;
 /**
 The diameter of the pie relative to the plot area. Can be a percentage or pixel value. Pixel values are given as integers. The default behaviour (as of 3.0) is to scale to the plot area and give room for data labels within the plot area. `slicedOffset` is also included in the default size calculation. As a consequence, the size of the pie may vary when points are updated and data labels more around. In that case it is best to set a fixed value, for example `"75%"`.
 

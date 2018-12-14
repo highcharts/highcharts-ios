@@ -51,7 +51,7 @@ class OptionsProvider {
             navigation.buttonOptions = HIButtonOptions()
             navigation.buttonOptions.symbolStroke = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.4)
             navigation.buttonOptions.theme = HITheme()
-            navigation.buttonOptions.theme.fill = "rgba(0,0,0,0.0)"
+            navigation.buttonOptions.theme.fill = HIColor(rgba: 0, green: 0, blue: 0, alpha: 0.0)
             hioptions.navigation = navigation
             
             let plotOptions = HIPlotOptions()
@@ -145,7 +145,7 @@ class OptionsProvider {
             navigation.buttonOptions = HIButtonOptions()
             navigation.buttonOptions.symbolStroke = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.4)
             navigation.buttonOptions.theme = HITheme()
-            navigation.buttonOptions.theme.fill = "rgba(0,0,0,0.0)"
+            navigation.buttonOptions.theme.fill = HIColor(rgba: 0, green: 0, blue: 0, alpha: 0.0)
             hioptions.navigation = navigation
             
             let plotOptions = HIPlotOptions()
@@ -239,7 +239,7 @@ class OptionsProvider {
             navigation.buttonOptions = HIButtonOptions()
             navigation.buttonOptions.symbolStroke = HIColor(rgba: 255, green: 255, blue: 255, alpha: 0.4)
             navigation.buttonOptions.theme = HITheme()
-            navigation.buttonOptions.theme.fill = "rgba(0,0,0,0.0)"
+            navigation.buttonOptions.theme.fill = HIColor(rgba: 0, green: 0, blue: 0, alpha: 0.0)
             hioptions.navigation = navigation
             
             let plotOptions = HIPlotOptions()

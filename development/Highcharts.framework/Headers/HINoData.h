@@ -7,7 +7,8 @@
 */
 
 #import "HIPosition.h"
-#import "HIStyle.h"
+#import "HISVGAttributes.h"
+#import "HICSSObject.h"
 
 
 /**
@@ -22,8 +23,6 @@ Options for displaying a message like "No data to display". This feature require
 
 /**
 The position of the no-data label, relative to the plot area.
-
-**Defaults to** `{ "x": 0, "y": 0, "align": "center", "verticalAlign": "middle" }`.
 */
 @property(nonatomic, readwrite) HIPosition *position;
 /**
@@ -33,11 +32,11 @@ CSS styles for the no-data label.
 
 * [Styled no-data text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/no-data-to-display/no-data-line)
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 An object of additional SVG attributes for the no-data label.
 */
-@property(nonatomic, readwrite) id attr;
+@property(nonatomic, readwrite) HISVGAttributes *attr;
 /**
 Whether to insert the label as HTML, or as pseudo-HTML rendered with SVG.
 

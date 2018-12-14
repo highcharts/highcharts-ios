@@ -9,7 +9,6 @@
 #import "HISeries.h"
 #import "HILevels.h"
 #import "HIDrillUpButton.h"
-#import "HIColor.h"
 
 
 /**
@@ -50,26 +49,12 @@ When using automatic point colors pulled from the `options.colors` collection, t
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 The opacity of a point in treemap. When a point has children, the visibility of the children is determined by the opacity.
-
-**Defaults to** `0.15`.
 */
 @property(nonatomic, readwrite) NSNumber *opacity;
 /**
 Whether to ignore hidden points when the layout algorithm runs. If `false`, hidden points will leave open spaces.
-
-**Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
-/**
-When enabled the user can click on a point which is a parent and zoom in on its children.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-allowdrilltonode/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *allowDrillToNode;
 /**
 The sort index of the point inside the treemap level.
 
@@ -79,24 +64,9 @@ The sort index of the point inside the treemap level.
 */
 @property(nonatomic, readwrite) NSNumber *sortIndex;
 /**
-This option decides if the user can interact with the parent nodes or just the leaf nodes. When this option is undefined, it will be true by default. However when allowDrillToNode is true, then it will be false by default.
-
-**Try it**
-
-* [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-interactbyleaf-false/)
-* [InteractByLeaf and allowDrillToNode is true](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-interactbyleaf-true-and-allowdrilltonode/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *interactByLeaf;
-/**
-A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
-*/
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
-/**
-This option decides which algorithm is used for setting position and dimensions of the points. Can be one of `sliceAndDice`, `stripes`, `squarified` or `strip`.
+This option decides which algorithm is used for setting position and dimensions of the points.
 
 **Accepted values:** `["sliceAndDice", "stripes", "squarified", "strip"]`.
-
-**Defaults to** `sliceAndDice`.
 
 **Try it**
 
@@ -107,19 +77,19 @@ This option decides which algorithm is used for setting position and dimensions 
 */
 @property(nonatomic, readwrite) NSString *layoutAlgorithm;
 /**
-Used together with the levels and allowDrillToNode options. When set to false the first level visible when drilling is considered to be level one. Otherwise the level will be the same as the tree structure.
+Defines which direction the layout algorithm will start drawing.
 
-**Defaults to** `true`.
+**Accepted values:** `["vertical", "horizontal"]`.
+*/
+@property(nonatomic, readwrite) NSString *layoutStartingDirection;
+/**
+Used together with the levels and allowDrillToNode options. When set to false the first level visible when drilling is considered to be level one. Otherwise the level will be the same as the tree structure.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *levelIsConstant;
 /**
-Defines which direction the layout algorithm will start drawing. Possible values are "vertical" and "horizontal".
-
-**Accepted values:** `["vertical", "horizontal"]`.
-
-**Defaults to** `vertical`.
+A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSString *layoutStartingDirection;
+@property(nonatomic, readwrite) NSArray<NSString *> *colors;
 /**
 Set options on specific levels. Takes precedence over series options, but not point options.
 
@@ -134,9 +104,26 @@ Options for the button appearing when drilling down in a treemap.
 */
 @property(nonatomic, readwrite) HIDrillUpButton *drillUpButton;
 /**
-Enabling this option will make the treemap alternate the drawing direction between vertical and horizontal. The next levels starting direction will always be the opposite of the previous.
+This option decides if the user can interact with the parent nodes or just the leaf nodes. When this option is undefined, it will be true by default. However when allowDrillToNode is true, then it will be false by default.
+
+**Try it**
+
+* [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-interactbyleaf-false/)
+* [InteractByLeaf and allowDrillToNode is true](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-interactbyleaf-true-and-allowdrilltonode/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *interactByLeaf;
+/**
+When enabled the user can click on a point which is a parent and zoom in on its children.
 
 **Defaults to** `false`.
+
+**Try it**
+
+* [Enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-allowdrilltonode/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *allowDrillToNode;
+/**
+Enabling this option will make the treemap alternate the drawing direction between vertical and horizontal. The next levels starting direction will always be the opposite of the previous.
 
 **Try it**
 
