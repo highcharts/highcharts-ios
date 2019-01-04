@@ -8,6 +8,7 @@
 
 #import "HISeries.h"
 #import "HIRotation.h"
+#import "HIColor.h"
 #import "HICSSObject.h"
 
 
@@ -75,6 +76,16 @@ Spiral used for placing a word after the initial position experienced a collisio
 */
 @property(nonatomic, readwrite) NSString *spiral;
 /**
+The width of the border surrounding each column or bar. Defaults to `1` when there is room for a border, but to `0` when the columns are so dense that a border would cover the next column. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
+/**
 Rotation options for the words in the wordcloud.
 
 **Try it**
@@ -98,6 +109,16 @@ The corner radius of the border surrounding each column or bar.
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *colors;
+/**
+The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
 /**
 3D columns only. The width of the colored edges.
 

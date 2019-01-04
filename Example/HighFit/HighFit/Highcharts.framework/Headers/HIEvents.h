@@ -16,10 +16,6 @@ General event handlers for the series items. These event hooks can also be attac
 @interface HIEvents: HIChartsJSONSerializable
 
 /**
-Not applicable to pies, as the legend item is per point. See point. events.
-*/
-@property(nonatomic, readwrite) HIFunction *legendItemClick;
-/**
 Fires when the checkbox next to the point name in the legend is clicked. One parameter, event, is passed to the function. The state of the checkbox is found by event.checked. The checked item is found by event.item. Return false to prevent the default action which is to toggle the select state of the series.
 
 **Try it**
@@ -231,6 +227,10 @@ Event fired when button state should change, for example after adding an annotat
 * [Change button class on event](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/gui-buttons/)
 */
 @property(nonatomic, readwrite) HIFunction *deselectButton;
+/**
+Fires when the legend item belonging to the colorAxis is clicked. One parameter, `event`, is passed to the function.
+*/
+@property(nonatomic, readwrite) HIFunction *legendItemClick;
 /**
 Fires when the series is hidden after chart generation time, either by clicking the legend item or by calling `.hide()`.
 

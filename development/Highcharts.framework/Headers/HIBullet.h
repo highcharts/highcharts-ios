@@ -91,6 +91,16 @@ A series specific or series type specific color set to apply instead of the glob
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *colors;
 /**
+The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
+/**
 3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
 */
 @property(nonatomic, readwrite) HIColor *edgeColor;
@@ -150,6 +160,16 @@ Depth of the columns in a 3D column chart. Requires `highcharts-3d.js`.
 **Defaults to** `25`.
 */
 @property(nonatomic, readwrite) NSNumber *depth;
+/**
+The width of the border surrounding each column or bar. Defaults to `1` when there is room for a border, but to `0` when the columns are so dense that a border would cover the next column. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Whether to group non-stacked columns or to let them render independent of each other. Non-grouped columns will be laid out individually and overlap each other.
 

@@ -354,6 +354,10 @@ The sequential index of the data point in the legend.
 @property(nonatomic, readwrite) NSNumber *legendIndex;
 @property(nonatomic, readwrite) HIMarker *marker;
 /**
+The value of a bubble. The bubble's size proportional to its `value`.
+*/
+@property(nonatomic, readwrite) NSNumber *weight;
+/**
 The vector direction in degrees, where 0 is north (pointing towards south).
 */
 @property(nonatomic, readwrite) NSNumber *direction;
@@ -439,10 +443,6 @@ The node that the link runs to.
 The node that the link runs from.
 */
 @property(nonatomic, readwrite) NSString *from;
-/**
-The weight of the link.
-*/
-@property(nonatomic, readwrite) NSNumber *weight;
 /**
 The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
 

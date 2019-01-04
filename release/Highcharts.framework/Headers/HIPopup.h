@@ -23,6 +23,7 @@ Translations for all field names used in popup.
 @property(nonatomic, readwrite) NSString *verticalCounter;
 @property(nonatomic, readwrite) NSString *stroke;
 @property(nonatomic, readwrite) NSString *fibonacci;
+@property(nonatomic, readwrite) NSString *measure;
 @property(nonatomic, readwrite) NSString *removeButton;
 @property(nonatomic, readwrite) NSString *verticalArrow;
 @property(nonatomic, readwrite) NSString *fill;

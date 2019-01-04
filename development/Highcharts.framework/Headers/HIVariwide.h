@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HIColor.h"
 
 
 /**
@@ -88,6 +89,16 @@ A series specific or series type specific color set to apply instead of the glob
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *colors;
 /**
+The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
+/**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
 **Try it**
@@ -114,6 +125,16 @@ When using automatic point colors pulled from the global `colors` or series-spec
 * [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
+/**
+The width of the border surrounding each column or bar. Defaults to `1` when there is room for a border, but to `0` when the columns are so dense that a border would cover the next column. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Whether to group non-stacked columns or to let them render independent of each other. Non-grouped columns will be laid out individually and overlap each other.
 

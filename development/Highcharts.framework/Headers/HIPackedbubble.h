@@ -40,6 +40,34 @@
 @interface HIPackedbubble: HISeries
 
 /**
+Minimum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height.
+
+**Try it**
+
+* [Bubble size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-size/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
+/**
+Maximum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height.
+
+**Try it**
+
+* [Bubble size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-size/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ maxSize;
+/**
+Whether the bubble's value should be represented by the area or the width of the bubble. The default, `area`, corresponds best to the human perception of the size of each bubble.
+
+**Accepted values:** `["area", "width"]`.
+
+**Defaults to** `area`.
+
+**Try it**
+
+* [Comparison of area and size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-sizeby/)
+*/
+@property(nonatomic, readwrite) NSString *sizeBy;
+/**
 Whether to display negative sized bubbles. The threshold is given by the `zThreshold` option, and negative bubbles can be visualized by setting `negativeColor`.
 
 **Defaults to** `true`.

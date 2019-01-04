@@ -9,6 +9,7 @@
 #import "HISeries.h"
 #import "HILevelSize.h"
 #import "HILevels.h"
+#import "HIColor.h"
 
 
 /**
@@ -95,6 +96,16 @@ When enabled the user can click on a point which is a parent and zoom in on its 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowDrillToNode;
 /**
+The color of the border surrounding each slice. When `null`, the border takes the same color as the slice fill. This can be used together with a `borderWidth` to fill drawing gaps created by antialiazing artefacts in borderless pies. In styled mode, the border stroke is given in the `.highcharts-point` class.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-bordercolor-black/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
+/**
 A series specific or series type specific color set to use instead of the global `colors`.
 
 **Try it**
@@ -102,6 +113,14 @@ A series specific or series type specific color set to use instead of the global
 * [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *colors;
+/**
+The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
+
+**Try it**
+
+* [3px border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 The start angle of the pie slices in degrees where 0 is top and 90 right.
 

@@ -41,6 +41,16 @@
 @interface HIWaterfall: HISeries
 
 /**
+The color of the border of each waterfall column. In styled mode, the border stroke can be set with the `.highcharts-point` class.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
+/**
 The color used specifically for positive point columns. When not specified, the general series color is used. In styled mode, the waterfall colors can be set with the `.highcharts-point-negative`, `.highcharts-sum` and `.highcharts-intermediate-sum` classes.
 
 **Try it**
@@ -157,6 +167,16 @@ Depth of the columns in a 3D column chart. Requires `highcharts-3d.js`.
 **Defaults to** `25`.
 */
 @property(nonatomic, readwrite) NSNumber *depth;
+/**
+The width of the border surrounding each column or bar. Defaults to `1` when there is room for a border, but to `0` when the columns are so dense that a border would cover the next column. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Whether to group non-stacked columns or to let them render independent of each other. Non-grouped columns will be laid out individually and overlap each other.
 

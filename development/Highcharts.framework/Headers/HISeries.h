@@ -245,12 +245,6 @@ Same as `accessibility.pointDescriptionFormatter`, but for an individual series.
 */
 @property(nonatomic, readwrite) HIFunction *pointDescriptionFormatter;
 /**
-The border color of the map areas. In styled mode, the border stroke is given in the `.highcharts-point` class.
-
-**Defaults to** `'#cccccc'`.
-*/
-@property(nonatomic, readwrite) HIColor *borderColor;
-/**
 An additional class name to apply to the series' graphical elements. This option does not replace default class names of the graphical element.
 */
 @property(nonatomic, readwrite) NSString *className;
@@ -528,14 +522,6 @@ If no x values are given for the points in a series, pointStart defines on what 
 * [Datetime](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-pointstart-datetime/)
 */
 @property(nonatomic, readwrite) NSNumber *pointStart;
-/**
-The border width of each map area. In styled mode, the border stroke width is given in the `.highcharts-point` class.
-
-**Try it**
-
-* [Borders demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/series-border/)
-*/
-@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 The line cap used for line ends and line joins on the graph.
 
