@@ -30,13 +30,13 @@ Here we present how to create basic chart and place it in your project.
 - First of all download Highcharts framework from here: [Highcharts](https://github.com/highcharts/highcharts-ios) 
 or by using Cocoapods by adding 
     ```
-    pod 'Highcharts', '~> 7.0.1'
+    pod 'Highcharts', '~> 7.0.2'
     ```
     to your Podfile
     
     or Carthage by adding
     ```
-    github "https://github.com/highcharts/highcharts-ios" >= 7.0.1
+    github "https://github.com/highcharts/highcharts-ios" >= 7.0.2
     ```
     to your Cartfile. Please be advised that this is a development framework which contains intel architectures. 
     In order to submit a build to the app store you either need to remove those architectures using lipo,
@@ -191,3 +191,71 @@ Your View Controller .m file should look like this
 
 ## ***Press "Run" in XCode.***
 #### For more complex solutions see demo app [HighFit](https://github.com/highcharts/highcharts-ios/tree/master/Example/HighFit) provided by Highcharts or read the following [documentation](http://api.highcharts.com/highcharts-ios/)!
+
+# Additional info
+#### Additional modules
+
+In case of enabling additional module, add it to `plugins` of `HIChartView` object before assign your chart options, e.g.
+
+```objc
+self.chartView.plugins = @[ @"annotations" ];
+...
+self.chartView.options = options;
+```
+
+#### HIColor example
+Highcharts iOS wrapper provides its own colors implementation. As you can notice, some options are of `HIColor` type. You can instantiate the desired color in few ways which are described in the [API documentation](https://api.highcharts.com/ios/highcharts/). In here, we will show the most complex case which is gradient usage. For example, you can instantiate a color for chart background:
+```objc
+HIChart *chart = [[HIChart alloc]init];
+chart.backgroundColor = [[HIColor alloc]initWithLinearGradient:@{ @"x1": @0, @"x2": @0, @"y1": @0, @"y2": @300 } stops:@[
+                                                                                                                            @[@0, @"rgb(102, 153, 161)"],
+                                                                                                                            @[@1, @"rgb(128, 135, 232)"]
+                                                                                                                        ]];
+```
+
+#### HIFunction example
+Thanks to Highcharts iOS wrapper you can now assign native iOS closures to events for specific chart elements. We will show you a small taste of such usage. For these purpose we will let appear a simple alert with point coordinates when it's clicked but keep in mind that you can achieve much more with `HIFunction` mechanism! 
+
+First of all, you need to create a `plotOptions` object for your series type:
+```objc
+HIPlotOptions *plotOptions = [[HIPlotOptions alloc] init];
+plotOptions.series = [[HISeries alloc] init];
+```
+Now, you can refer to the point event and add on click closure like this:
+```objc
+plotOptions.series.point = [[HIPoint alloc] init];
+plotOptions.series.point.events = [[HIEvents alloc] init];
+    
+HIClosure closure = ^(HIChartContext *context) {
+    NSString *alertMessage = [NSString stringWithFormat:@"Category: %@, value: %@", [context getProperty:@"this.category"], [context getProperty:@"this.y"]];
+        
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+};
+    
+plotOptions.series.point.events.click = [[HIFunction alloc] initWithClosure:closure properties:@[@"this.category", @"this.y"]];
+```
+As you can see in the above code snippet first argument of the `HIFunction` is the actual closure. Second argument is simple string array of chart elements. We need to put them here to let wrapper pull them for us during `HIFunction` instantiation. Thanks to this, we can refer to these elements corresponding values by `getProperty:` method. You can pull any data from chart like this. Depending on the current needs you can just run some code, withdraw data from chart, return a String to the chart (e.g. in HITooltip formatter) and even put pure Javascript function in the constructor in the String format. For more information feel free to check the [API documentation](https://api.highcharts.com/ios/highcharts/).
+
+#### Custom fonts
+Highcharts iOS wrapper allows you to add custom fonts. If you have your own font and want to use that in your chart, follow next steps:
+
+- Add a font file to your project. Select **File** -> **Add Files to “Your Project Name”** from the menu bar or drag and drop the file into your Xcode project, check **Copy items if needed** option and add the font to your app target. 
+
+![alt text](https://github.com/highcharts/highcharts-ios/blob/master/Images/4.png "AddFont")
+
+![alt text](https://github.com/highcharts/highcharts-ios/blob/master/Images/5.png "Fonts")
+
+- Add your font to `HIChartView`. To do this, firstly, you need to get an absolute path pointing to the location of the font and then call `addFont:` method:
+```objc
+NSString *fontPath = [[NSBundle mainBundle] pathForResource:@"Windsong" ofType:@"ttf"];
+[HIChartView addFont:fontPath];
+```
+
+So, now you can use a custom font in your chart. For example, let's change the chart title font. You only need to create a style object for the title and set its font family to the font file name:
+```objc
+title.style = [[HICSSObject alloc] init];
+title.style.fontFamily = @"Windsong";
+```

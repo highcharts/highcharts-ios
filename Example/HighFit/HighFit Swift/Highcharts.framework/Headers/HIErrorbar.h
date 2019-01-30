@@ -99,10 +99,6 @@ The color of the median line. If `undefined`, the general series color applies. 
 /**
 The dash style of the stem, the vertical line extending from the box to the whiskers.
 
-**Accepted values:** `["Solid", "ShortDash", "ShortDot", "ShortDashDot",
-             "ShortDashDotDot", "Dot", "Dash" ,"LongDash", "DashDot",
-             "LongDashDot", "LongDashDotDot"]`.
-
 **Defaults to** `Solid`.
 
 **Try it**

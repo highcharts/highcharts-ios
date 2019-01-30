@@ -29,10 +29,14 @@ Padding for the button.
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
 Default stroke for the buttons.
+
+**Defaults to** `none`.
 */
 @property(nonatomic, readwrite) HIColor *stroke;
 /**
 The default fill exists only to capture hover events.
+
+**Defaults to** `#ffffff`.
 */
 @property(nonatomic, readwrite) HIColor *fill;
 

@@ -126,7 +126,6 @@ The start angle of the pie slices in degrees where 0 is top and 90 right.
 * [Start from right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-startangle-90/)
 */
 @property(nonatomic, readwrite) NSNumber *startAngle;
-@property(nonatomic, readwrite) NSString *legendType;
 /**
 The diameter of the pie relative to the plot area. Can be a percentage or pixel value. Pixel values are given as integers. The default behaviour (as of 3.0) is to scale to the plot area and give room for data labels within the plot area. `slicedOffset` is also included in the default size calculation. As a consequence, the size of the pie may vary when points are updated and data labels more around. In that case it is best to set a fixed value, for example `"75%"`.
 

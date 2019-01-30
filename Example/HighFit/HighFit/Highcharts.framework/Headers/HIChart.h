@@ -239,7 +239,7 @@ Options to render charts in 3 dimensions. This feature requires `highcharts-3d.j
 */
 @property(nonatomic, readwrite) HIOptions3d *options3d;
 /**
-The default series type for the chart. Can be any of the chart types listed under `plotOptions`.
+The default series type for the chart. Can be any of the chart types listed under `plotOptions`. In TypeScript instead the `type` option must always be set in the series.
 
 **Accepted values:** `["line", "spline", "column", "bar", "area", "areaspline",
             "pie", "arearange", "areasplinerange", "boxplot",

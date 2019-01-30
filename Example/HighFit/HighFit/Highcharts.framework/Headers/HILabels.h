@@ -221,8 +221,6 @@ The border color for the annotation's label.
 /**
 The vertical alignment of the annotation's label.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
 **Try it**
 
 * [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)

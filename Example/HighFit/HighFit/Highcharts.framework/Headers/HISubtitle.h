@@ -28,8 +28,6 @@ CSS styles for the title. In styled mode, the subtitle style is given in the `.h
 /**
 The vertical alignment of the title. Can be one of "top", "middle" and "bottom". When a value is given, the title behaves as floating.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
 **Try it**
 
 * [Footnote at the bottom right of plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/subtitle/verticalalign/)
@@ -46,8 +44,6 @@ The subtitle of the chart.
 @property(nonatomic, readwrite) NSString *text;
 /**
 The horizontal alignment of the subtitle. Can be one of "left", "center" and "right".
-
-**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 

@@ -21,7 +21,7 @@ Options for the hovered series. These settings override the normal state options
 @property(nonatomic, readwrite) NSNumber *opacity;
 @property(nonatomic, readwrite) HIHalo *halo;
 /**
-Enable separate styles for the hovered series to visualize that the user hovers either the series itself or the legend. .
+Enable separate styles for the hovered series to visualize that the user hovers either the series itself or the legend.
 
 **Defaults to** `true`.
 

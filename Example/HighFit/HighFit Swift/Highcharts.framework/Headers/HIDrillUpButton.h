@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIPosition.h"
+#import "HIAlignObject.h"
 
 
 /**
@@ -21,7 +21,7 @@ Options for the drill up button that appears when drilling down on a series. The
 /**
 Positioning options for the button within the `relativeTo` box. Available properties are `x`, `y`, `align` and `verticalAlign`.
 */
-@property(nonatomic, readwrite) HIPosition *position;
+@property(nonatomic, readwrite) HIAlignObject *position;
 /**
 A collection of attributes for the button. The object takes SVG attributes like `fill`, `stroke`, `stroke-width` or `r`, the border radius. The theme also supports `style`, a collection of CSS properties for the text. Equivalent attributes for the hover state are given in `theme.states.hover`. In styled mode, drill-up button styles can be applied with the `.highcharts-drillup-button` class.
 

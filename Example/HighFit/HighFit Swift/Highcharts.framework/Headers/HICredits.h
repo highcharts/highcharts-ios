@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIPosition.h"
+#import "HIAlignObject.h"
 #import "HICSSObject.h"
 
 
@@ -53,7 +53,7 @@ Position configuration for the credits label.
 * [Left aligned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/credits/position-left/)
 * [Left aligned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/credits/position-left/)
 */
-@property(nonatomic, readwrite) HIPosition *position;
+@property(nonatomic, readwrite) HIAlignObject *position;
 
 -(NSDictionary *)getParams;
 

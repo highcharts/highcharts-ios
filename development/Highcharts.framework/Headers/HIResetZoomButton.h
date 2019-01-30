@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIPosition.h"
 #import "HITheme.h"
+#import "HIAlignObject.h"
 
 
 /**
@@ -22,7 +22,7 @@ The position of the button.
 
 * [Above the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/resetzoombutton-position/)
 */
-@property(nonatomic, readwrite) HIPosition *position;
+@property(nonatomic, readwrite) HIAlignObject *position;
 /**
 A collection of attributes for the button. The object takes SVG attributes like `fill`, `stroke`, `stroke-width` or `r`, the border radius. The theme also supports `style`, a collection of CSS properties for the text. Equivalent attributes for the hover state are given in `theme.states.hover`.
 

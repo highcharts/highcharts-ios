@@ -36,8 +36,6 @@ CSS styles for the label. In styled mode, the styles are set in the `.highcharts
 /**
 Defines the vertical alignment of the stack total label. Can be one of `"top"`, `"middle"` or `"bottom"`. The default value is calculated at runtime and depends on orientation and whether the stack is positive or negative.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
 **Try it**
 
 * [Vertically aligned top](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-verticalalign-top/)
@@ -53,8 +51,6 @@ A [format string](http://docs.highcharts.com/#formatting) for the data label. Av
 @property(nonatomic, readwrite) NSString *format;
 /**
 Defines the horizontal alignment of the stack total label. Can be one of `"left"`, `"center"` or `"right"`. The default value is calculated at runtime and depends on orientation and whether the stack is positive or negative.
-
-**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 
@@ -113,8 +109,6 @@ Callback JavaScript function to format the label. The value is given by `this.to
 @property(nonatomic, readwrite) HIFunction *formatter;
 /**
 The text alignment for the label. While `align` determines where the texts anchor point is placed with regards to the stack, `textAlign` determines how the text is aligned against its anchor point. Possible values are `"left"`, `"center"` and `"right"`. The default value is calculated at runtime and depends on orientation and whether the stack is positive or negative.
-
-**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 

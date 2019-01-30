@@ -73,7 +73,7 @@ Fires after initial load of the chart (directly after the `load` event), and aft
 */
 @property(nonatomic, readwrite) HIFunction *render;
 /**
-Fires when a series is added to the chart after load time, using the `addSeries` method. One parameter, `event`, is passed to the function, containing common event information. Through `event.options` you can access the series options that was passed to the `addSeries` method. Returning false prevents the series from being added.
+Fires when a series is added to the chart after load time, using the `addSeries` method. One parameter, `event`, is passed to the function, containing common event information. Through `event.options` you can access the series options that were passed to the `addSeries` method. Returning false prevents the series from being added.
 
 **Try it**
 
@@ -105,7 +105,7 @@ Fires when a drilldown point is clicked, before the new series is added. This ev
 */
 @property(nonatomic, readwrite) HIFunction *drilldown;
 /**
-Fires when the chart is redrawn, either after a call to `chart.redraw()` or after an axis, series or point is modified with the `redraw` option set to true. One parameter, `event`, is passed to the function, containing common event information.
+Fires when the chart is redrawn, either after a call to `chart.redraw()` or after an axis, series or point is modified with the `redraw` option set to `true`. One parameter, `event`, is passed to the function, containing common event information.
 
 **Try it**
 

@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HINodes.h"
 #import "HILayoutAlgorithm.h"
 #import "HILink.h"
 
@@ -41,6 +42,14 @@
  */
 @interface HINetworkgraph: HISeries
 
+/**
+A collection of options for the individual nodes. The nodes in a networkgraph diagram are auto-generated instances of `Highcharts.Point`, but options can be applied here and linked by the `id`.
+
+**Try it**
+
+* [Networkgraph diagram with node options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/data-options/)
+*/
+@property(nonatomic, readwrite) NSArray <HINodes *> *nodes;
 @property(nonatomic, readwrite) HILayoutAlgorithm *layoutAlgorithm;
 /**
 Flag to determine if nodes are draggable or not.

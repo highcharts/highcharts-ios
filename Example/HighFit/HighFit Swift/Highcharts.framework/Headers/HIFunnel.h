@@ -154,7 +154,6 @@ The start angle of the pie slices in degrees where 0 is top and 90 right.
 * [Start from right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-startangle-90/)
 */
 @property(nonatomic, readwrite) NSNumber *startAngle;
-@property(nonatomic, readwrite) NSString *legendType;
 /**
 Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
 

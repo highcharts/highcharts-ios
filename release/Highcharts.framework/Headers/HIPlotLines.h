@@ -28,10 +28,6 @@ The z index of the plot line within the chart.
 /**
 The dashing or dot style for the plot line. For possible values see [this overview](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
-**Accepted values:** `["Solid", "ShortDash", "ShortDot", "ShortDashDot",
-            "ShortDashDotDot", "Dot", "Dash" ,"LongDash", "DashDot",
-            "LongDashDot", "LongDashDotDot"]`.
-
 **Defaults to** `Solid`.
 
 **Try it**
@@ -89,5 +85,10 @@ An object defining mouse events for the plot line. Supported properties are `cli
 @property(nonatomic, readwrite) id events;
 
 -(NSDictionary *)getParams;
+
+/**
+ Remove the plot line.
+ */
+-(void)destroy;
 
 @end

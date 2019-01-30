@@ -42,8 +42,6 @@ The text itself. A subset of HTML is supported.
 /**
 Horizontal alignment of the label. Can be one of "left", "center" or "right".
 
-**Accepted values:** `["center", "left", "right"]`.
-
 **Defaults to** `left`.
 
 **Try it**
@@ -114,7 +112,7 @@ An array of boxes to avoid when laying out the labels. Each item has a `left`, `
 */
 @property(nonatomic, readwrite) NSArray<HILabelIntersectBoxObject *> *boxesToAvoid;
 /**
-Allow labels to be placed distant to the graph if necessary, and draw a connector line to the graph. Setting this option to true may decrease the performance significantly, since the algorithm with systematically search for open spaces in the while plot area. Visually, it may also result in a more cluttered chart, though more of the series will be labeled.
+Allow labels to be placed distant to the graph if necessary, and draw a connector line to the graph. Setting this option to true may decrease the performance significantly, since the algorithm with systematically search for open spaces in the whole plot area. Visually, it may also result in a more cluttered chart, though more of the series will be labeled.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *connectorAllowed;
 

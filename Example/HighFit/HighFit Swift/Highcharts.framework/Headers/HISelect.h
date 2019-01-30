@@ -6,9 +6,9 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIAnimation.h"
 #import "HIHalo.h"
 #import "HIColor.h"
-#import "HIAnimationOptionsObject.h"
 
 
 /**
@@ -73,7 +73,7 @@ A specific color for the selected point.
 /**
 Animation setting for hovering the graph in line-type series.
 */
-@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+@property(nonatomic, readwrite) HIAnimation *animation;
 /**
 The additional line width for the graph of a hovered series.
 
@@ -83,7 +83,7 @@ The additional line width for the graph of a hovered series.
 */
 @property(nonatomic, readwrite) NSNumber *lineWidthPlus;
 /**
-Options for the halo appearing around the hovered point in line- type series as well as outside the hovered slice in pie charts. By default the halo is filled by the current point or series color with an opacity of 0.25\. The halo can be disabled by setting the `halo` option to `false`. In styled mode, the halo is styled with the `.highcharts-halo` class, with colors inherited from `.highcharts-color-{n}`.
+Options for the halo appearing around the hovered point in line-type series as well as outside the hovered slice in pie charts. By default the halo is filled by the current point or series color with an opacity of 0.25\. The halo can be disabled by setting the `halo` option to `false`. In styled mode, the halo is styled with the `.highcharts-halo` class, with colors inherited from `.highcharts-color-{n}`.
 
 **Try it**
 

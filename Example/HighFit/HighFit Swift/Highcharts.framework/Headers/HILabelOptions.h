@@ -51,8 +51,6 @@ When either the borderWidth or the backgroundColor is set, this  is the padding 
 /**
 The vertical alignment of the annotation's label.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
 **Try it**
 
 * [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
@@ -84,8 +82,6 @@ Alias for the format option.
 @property(nonatomic, readwrite) NSString *text;
 /**
 The alignment of the annotation's label. If right, the right side of the label should be touching the point.
-
-**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 

@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIPosition.h"
+#import "HIAlignObject.h"
 #import "HISVGAttributes.h"
 #import "HICSSObject.h"
 
@@ -24,7 +24,7 @@ Options for displaying a message like "No data to display". This feature require
 /**
 The position of the no-data label, relative to the plot area.
 */
-@property(nonatomic, readwrite) HIPosition *position;
+@property(nonatomic, readwrite) HIAlignObject *position;
 /**
 CSS styles for the no-data label.
 

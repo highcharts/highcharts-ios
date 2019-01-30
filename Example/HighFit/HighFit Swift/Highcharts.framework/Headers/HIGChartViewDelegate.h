@@ -21,4 +21,3 @@
 - (void) chartViewDidLoad: (HIChartView *) chart;
 
 @end
-

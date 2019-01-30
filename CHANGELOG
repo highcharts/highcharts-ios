@@ -1,3 +1,52 @@
+# Version 7.0.2
+
+## iOS:
+
+1. Chart update feature for arrays: changing any object from the chart's options inside an array causes the chart to be updated automatically.
+2. Added methods from Highcharts JS for classes: `HIChartView`, `HIAnnotations`, `HIXAxis`, `HIYAxis`, `HIZAxis`, `HILegend`, `HIPlotLines`, `HIPlotBands`, `HIPoint`, `HISeries`.
+3. Added possibility to add custom fonts.
+4. Added an optional property `synced` to 'synchronously' render the chart.
+
+## Framework:
+
+1. Added jitter feature to scatter plots.
+2. Added feature to set legend.width as a percentage, and restrain the default width to 50% for legends at the sides of the chart.
+3. Added overlap stacking to waterfall charts.
+4. Fixed #143, borderWidth not functioning properly.
+
+## Framework bug fixes:
+
+1. Fixed #6817, point click event didn't fire on the first touch.
+2. Fixed #7253, long legend titles were not wrapped, pushing the legend out of the chart.
+3. Fixed #7860, pointPlacement was not implemented for heatmap.
+4. Fixed #8160, treemap data labels overflowed on long words.
+5. Fixed #9617, chart update in responsive mode caused some of the responisve options noneffective.
+6. Fixed #9685, maximum call stack exceeded in venn diagrams in certain cases.
+7. Fixed #9694, tooltip was clipped when using the outside option and different series types.
+8. Fixed #9709, missing values when exporting data in venn.
+9. Fixed #9718 and #9768, incorrect overlap calculations in venn diagrams in some cases.
+10. Fixed #9728, incorrect handling of negative Z values in bubble chart styled mode.
+11. Fixed #9747, a regression causing upper area range data labels to get stuck after redrawing.
+12. Fixed #9749, memory building up and animation deferred on hidden pages.
+13. Fixed #9758, no-data module was ignoring boost points.
+14. Fixed #9761, X axis labels overlapped on polar chart with dense categories.
+15. Fixed #9762, series was referencing public object for userOptions and some updates were working in an unexpected way.
+16. Fixed #9779, rendering bug in svg2pdf.js caused filled rectangles in offline-exported PDF.
+17. Fixed #9794, wordcloud series didn't support state options.
+18. Fixed #9798, added ability to change options for particular link and improved nodes docs for networkgraph series.
+19. Fixed #9801, networkgraph was not compatible with no-data module.
+20. Fixed #9803, networkgraph throwing maximum call stack error with cyclical links.
+21. Fixed #9815, performance problem with series labels.
+22. Fixed #9818, bad rendering of sankey chart with unordered data.
+23. Fixed #9835, axis disappeared on rotating labels 180 degrees.
+24. Fixed #9841, a regression causing the Y axis to shrink in certain cases when setting xAxis.tickAmount.
+25. Fixed #9841, tickAmount axis option wasn't properly supporting false values for startOnTick and endOnTick.
+26. Fixed #9849, improved line height handling with non-pixel font-size units.
+27. Fixed #9861, error when updating the X value of data points that had an ID.
+28. Fixed #9869, tooltip on xrange series type was having misplaced point anchor due to some xAxis options. Closes #9727.
+29. Fixed #9871, a regression causing the chart width to be miscalculated when the container had a transform.
+30. Fixed an issue in series-label placement logic, labels gravitated to the right.
+
 # Version 7.0.1
 
 ## Framework bug fixes:

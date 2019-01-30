@@ -28,21 +28,11 @@ Options for the Boost module. The Boost module allows certain series types to be
 @interface HIBoost: HIChartsJSONSerializable
 
 /**
-Debugging options for boost. Useful for benchmarking, and general timing.
-*/
-@property(nonatomic, readwrite) HIDebug *debug;
-/**
 If set to true, the whole chart will be boosted if one of the series crosses its threshold, and all the series can be boosted.
 
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowForce;
-/**
-Enable or disable GPU translations. GPU translations are faster than doing the translation in JavaScript. This option may cause rendering issues with certain datasets. Namely, if your dataset has large numbers with small increments (such as timestamps), it won't work correctly. This is due to floating point precission.
-
-**Defaults to** `false`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useGPUTranslations;
 /**
 Enable or disable boost on a chart.
 
@@ -55,6 +45,22 @@ Set the series threshold for when the boost should kick in globally. Setting to 
 **Defaults to** `null`.
 */
 @property(nonatomic, readwrite) NSNumber *seriesThreshold;
+/**
+Enable or disable pre-allocation of vertex buffers. Enabling this will make it so that the binary data arrays required for storing the series data will be allocated prior to transforming the data to a WebGL-compatible format. This saves a copy operation on the order of O(n) and so is significantly more performant. However, this is currently an experimental option, and may cause visual artifacts with some datasets. As such, care should be taken when using this setting to make sure that it doesn't cause any rendering glitches with the given use-case.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *usePreallocated;
+/**
+Enable or disable GPU translations. GPU translations are faster than doing the translation in JavaScript. This option may cause rendering issues with certain datasets. Namely, if your dataset has large numbers with small increments (such as timestamps), it won't work correctly. This is due to floating point precission.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useGPUTranslations;
+/**
+Debugging options for boost. Useful for benchmarking, and general timing.
+*/
+@property(nonatomic, readwrite) HIDebug *debug;
 
 -(NSDictionary *)getParams;
 

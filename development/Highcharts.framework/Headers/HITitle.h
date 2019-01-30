@@ -36,8 +36,6 @@ CSS styles for the title. Use this for font styling, but use `align`, `x` and `y
 /**
 The vertical alignment of the title. Can be one of `"top"`, `"middle"` and `"bottom"`. When a value is given, the title behaves as if `floating` were `true`.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
 **Try it**
 
 * [Chart title in bottom right corner](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/verticalalign/)
@@ -55,8 +53,6 @@ The title of the chart. To disable the title, set the `text` to `undefined`.
 @property(nonatomic, readwrite) NSString *text;
 /**
 The horizontal alignment of the title. Can be one of "left", "center" and "right".
-
-**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 

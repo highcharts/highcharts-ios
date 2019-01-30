@@ -12,6 +12,7 @@
 #import "HIKeyboardNavigation.h"
 #import "HIColor.h"
 #import "HICSSObject.h"
+#import "HISeries.h"
 
 
 /**
@@ -121,13 +122,14 @@ A title to be added on top of the legend.
 */
 @property(nonatomic, readwrite) HITitle *title;
 /**
-The width of the legend box.
+The width of the legend box. If a number is set, it translates to pixels. Since v7.0.2 it allows setting a percent string of the full chart width, for example `40%`. Defaults to the full chart width from legends below or above the chart, half the chart width for legends to the left and right.
 
 **Try it**
 
 * [Aligned to the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/width/)
+* [A percent of the chart width](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/width-percent/)
 */
-@property(nonatomic, readwrite) NSNumber *width;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**
 The pixel bottom margin for each legend item.
 
@@ -205,8 +207,6 @@ The inner padding of the legend box.
 /**
 The vertical alignment of the legend box. Can be one of `top`, `middle` or `bottom`. Vertical position can be further determined by the `y` option. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area. When the `layout` option is `proximate`, the `verticalAlign` option doesn't apply.
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
 **Try it**
 
 * [Legend 100px from the top of the chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/verticalalign/)
@@ -246,8 +246,6 @@ Options for the paging or navigation appearing when the legend is overflown. Nav
 @property(nonatomic, readwrite) HINavigation *navigation;
 /**
 The horizontal alignment of the legend box within the chart area. Valid values are `left`, `center` and `right`. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area.
-
-**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 
@@ -335,5 +333,48 @@ If the plot area sized is calculated automatically and the legend is not floatin
 @property(nonatomic, readwrite) NSNumber *margin;
 
 -(NSDictionary *)getParams;
+
+/**
+ Set the legend item text.
+ @param item The item for which to update the text in the legend.
+ */
+-(void)setPointText:(HIPoint *)item;
+
+/**
+ Set the legend item text.
+ @param item The item for which to update the text in the legend.
+ */
+-(void)setSeriesText:(HISeries *)item;
+
+/**
+ Update the legend with new options. Equivalent to running `chart.update` with a legend configuration option.
+ 
+ **Fires:**
+ 
+ * Highcharts.Legends#event:afterUpdate
+ 
+ **Try it**
+ 
+ * [Legend update](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/legend-update/)
+ 
+ @param options Legend options.
+ */
+-(void)update:(HILegend *)options;
+
+/**
+ Update the legend with new options. Equivalent to running `chart.update` with a legend configuration option.
+ 
+ **Fires:**
+ 
+ * Highcharts.Legends#event:afterUpdate
+ 
+ **Try it**
+ 
+ * [Legend update](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/legend-update/)
+ 
+ @param options Legend options.
+ @param redraw Whether to redraw the chart after the axis is altered. If doing more operations on the chart, it is a good idea to set redraw to false and call [Highcharts.Chart#redraw](https://api.highcharts.com/class-reference/Highcharts.Chart.html#redraw) after. Whether to redraw the chart.
+ */
+-(void)update:(HILegend *)options redraw:(NSNumber /* Bool */ *)redraw;
 
 @end
