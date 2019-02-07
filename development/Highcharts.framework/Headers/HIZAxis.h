@@ -543,6 +543,10 @@ Specific tick interval in axis units for the minor ticks. On a linear axis, if `
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minorTickInterval;
 /**
+If there are multiple axes on the same side of the chart, the pixel margin between the axes. Defaults to 0 on vertical axes, 15 on horizontal axes.
+*/
+@property(nonatomic, readwrite) NSNumber *margin;
+/**
 An array of colored bands stretching across the plot area marking an interval on the axis. In styled mode, the plot bands are styled by the `.highcharts-plot-band` class in addition to the `className` option.
 */
 @property(nonatomic, readwrite) NSArray <HIPlotBands *> *plotBands;

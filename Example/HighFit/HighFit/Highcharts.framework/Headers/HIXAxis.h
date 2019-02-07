@@ -591,6 +591,10 @@ The width of the line marking the axis itself. In styled mode, the stroke width 
 */
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
+If there are multiple axes on the same side of the chart, the pixel margin between the axes. Defaults to 0 on vertical axes, 15 on horizontal axes.
+*/
+@property(nonatomic, readwrite) NSNumber *margin;
+/**
 An array of colored bands stretching across the plot area marking an interval on the axis. In styled mode, the plot bands are styled by the `.highcharts-plot-band` class in addition to the `className` option.
 */
 @property(nonatomic, readwrite) NSArray <HIPlotBands *> *plotBands;

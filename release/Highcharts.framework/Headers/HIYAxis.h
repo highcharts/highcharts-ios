@@ -665,6 +665,10 @@ Specific tick interval in axis units for the minor ticks. On a linear axis, if `
 * [0.1](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickinterval-log/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minorTickInterval;
+/**
+If there are multiple axes on the same side of the chart, the pixel margin between the axes. Defaults to 0 on vertical axes, 15 on horizontal axes.
+*/
+@property(nonatomic, readwrite) NSNumber *margin;
 
 -(NSDictionary *)getParams;
 

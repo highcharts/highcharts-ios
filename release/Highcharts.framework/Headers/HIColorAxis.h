@@ -495,6 +495,10 @@ Specific tick interval in axis units for the minor ticks. On a linear axis, if `
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minorTickInterval;
 /**
+If there are multiple axes on the same side of the chart, the pixel margin between the axes. Defaults to 0 on vertical axes, 15 on horizontal axes.
+*/
+@property(nonatomic, readwrite) NSNumber *margin;
+/**
 A soft maximum for the axis. If the series data maximum is less than this, the axis will stay at this maximum, but if the series data maximum is higher, the axis will flex to show all data.
 
 **Try it**

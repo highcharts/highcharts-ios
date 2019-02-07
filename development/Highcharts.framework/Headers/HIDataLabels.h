@@ -227,6 +227,10 @@ Callback to format data labels for _nodes_ in the sankey diagram. The `nodeForma
 @property(nonatomic, readwrite) HIFunction *nodeFormatter;
 /**
 The [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) specifying what to show for _nodes_ in the sankey diagram. By default the `nodeFormatter` returns `{point.name}`.
+
+**Try it**
+
+* [Node and link data labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-link-datalabels)
 */
 @property(nonatomic, readwrite) NSString *nodeFormat;
 /**

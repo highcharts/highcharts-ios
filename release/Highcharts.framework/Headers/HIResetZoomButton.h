@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HITheme.h"
 #import "HIAlignObject.h"
+#import "HISVGAttributes.h"
 
 
 /**
@@ -30,7 +30,7 @@ A collection of attributes for the button. The object takes SVG attributes like 
 
 * [Theming the button](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/resetzoombutton-theme/)
 */
-@property(nonatomic, readwrite) HITheme *theme;
+@property(nonatomic, readwrite) HISVGAttributes *theme;
 /**
 What frame the button should be placed related to. Can be either `plot` or `chart`
 

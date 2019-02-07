@@ -21,7 +21,6 @@ Styles for the label. The default `color` setting is `"contrast"`, which is a ps
 @interface HIStyle: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSString *textOverflow;
-@property(nonatomic, readwrite) NSString *whiteSpace;
 
 -(NSDictionary *)getParams;
 

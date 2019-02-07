@@ -8,6 +8,7 @@
 
 #import "HISeries.h"
 #import "HILevelSize.h"
+#import "HITraverseUpButton.h"
 #import "HILevels.h"
 #import "HIColor.h"
 
@@ -66,6 +67,10 @@ The center of the sunburst chart relative to the plot area. Can be percentages o
 */
 @property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
 /**
+Options for the button appearing when traversing down in a treemap.
+*/
+@property(nonatomic, readwrite) HITraverseUpButton *traverseUpButton;
+/**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
 
 **Try it**
@@ -73,10 +78,6 @@ If a point is sliced, moved out from the center, how many pixels should it be mo
 * [Sliced sunburst](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sunburst-sliced)
 */
 @property(nonatomic, readwrite) NSNumber *slicedOffset;
-/**
-Used together with the levels and `allowDrillToNode` options. When set to false the first level visible when drilling is considered to be level one. Otherwise the level will be the same as the tree structure.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *levelIsConstant;
 /**
 Set options on specific levels. Takes precedence over series options, but not point options.
 
@@ -86,15 +87,15 @@ Set options on specific levels. Takes precedence over series options, but not po
 */
 @property(nonatomic, readwrite) NSArray <HILevels *> *levels;
 /**
+Used together with the levels and `allowDrillToNode` options. When set to false the first level visible when drilling is considered to be level one. Otherwise the level will be the same as the tree structure.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *levelIsConstant;
+/**
 When enabled the user can click on a point which is a parent and zoom in on its children.
 
 **Defaults to** `false`.
-
-**Try it**
-
-* [Allow drill to node](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sunburst)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *allowDrillToNode;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *allowTraversingTree;
 /**
 The color of the border surrounding each slice. When `null`, the border takes the same color as the slice fill. This can be used together with a `borderWidth` to fill drawing gaps created by antialiazing artefacts in borderless pies. In styled mode, the border stroke is given in the `.highcharts-point` class.
 

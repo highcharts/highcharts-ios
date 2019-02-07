@@ -1,3 +1,34 @@
+# Version 7.0.3
+
+## iOS:
+1. Fixed #156, `HIColor` outputs the wrong color.
+2. Fixed `HIFunction` bug.
+
+## Framework:
+1. Added option treemap.events.setRootNode.
+2. Added option xAxis.margin to ensure a distance between multiple axes on the same side.
+
+## Framework upgrade notes:
+1. Renamed plotOptions.treemap.allowDrillToNode to allowTraversingTree to avoid confusion with the drilldown module that has a different behaviour.
+
+## Framework bug fixes:
+
+1. Fixed #10006, wrong intersection position in venn.
+2. Fixed #10038, series labels didn't fit on area series when rendered on data extreme.
+3. Fixed #3417, label text-anchor with empty align attribute was set to undefined.
+4. Fixed #7048, tooltips didn't appear on null values in heatmap when in boost mode.
+5. Fixed #7872, pass proper parameters to animation step when animation is skipped. Resolved issue with wrong column chart placement when rendered in a hidden tab.
+6. Fixed #9823, disabled draggable triggered drop event.
+7. Fixed #9838, dissappearing traverseUpButton.
+8. Fixed #9930, warnings of deprecated e.returnValue in Chrome console.
+9. Fixed #9944, incorrect Y axis extremes after zooming X axis with a column series.
+10. Fixed #9964, title top margin applied when text was empty.
+11. Fixed #9978, horizontal scrollbar on RTL charts with a11y module.
+12. Fixed ARIA for show/hide legend items.
+13. Fixed draggable points capturing click events.
+14. Fixed endless recursion in sankey charts on circular data. See #8218.
+15. Fixed issue with series event handlers not surviving series.update. Partial fix for #10010.
+
 # Version 7.0.2
 
 ## iOS:

@@ -6,9 +6,9 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HILabels.h"
-#import "HILabelOptions.h"
 #import "HIShapes.h"
+#import "HILabelOptions.h"
+#import "HILabels.h"
 #import "HIShapeOptions.h"
 
 
@@ -24,6 +24,10 @@ Options for configuring annotations, for example labels, arrows or shapes. Annot
 @interface HIAnnotations: HIChartsJSONSerializable
 
 /**
+An array of shapes for the annotation. For options that apply to multiple shapes, then can be added to the `shapeOptions`.
+*/
+@property(nonatomic, readwrite) NSArray <HIShapes *> *shapes;
+/**
 The Z index of the annotation.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
@@ -36,17 +40,21 @@ Whether the annotation is visible.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
-An array of labels for the annotation. For options that apply to multiple labels, they can be added to the `labelOptions`.
-*/
-@property(nonatomic, readwrite) NSArray <HILabels *> *labels;
-/**
 Options for annotation's labels. Each label inherits options from the labelOptions object. An option from the labelOptions can be overwritten by config for a specific label.
 */
 @property(nonatomic, readwrite) HILabelOptions *labelOptions;
 /**
-An array of shapes for the annotation. For options that apply to multiple shapes, then can be added to the `shapeOptions`.
+An array of labels for the annotation. For options that apply to multiple labels, they can be added to the `labelOptions`.
 */
-@property(nonatomic, readwrite) NSArray <HIShapes *> *shapes;
+@property(nonatomic, readwrite) NSArray <HILabels *> *labels;
+/**
+Allow an annotation to be draggable by a user. Possible values are `"x"`, `"xy"`, `"y"` and `""` (disabled).
+
+**Try it**
+
+* [Annotations draggable: 'xy'](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/draggable/)
+*/
+@property(nonatomic, readwrite) NSString *draggable;
 /**
 Options for annotation's shapes. Each shape inherits options from the shapeOptions object. An option from the shapeOptions can be overwritten by config for a specific shape.
 */

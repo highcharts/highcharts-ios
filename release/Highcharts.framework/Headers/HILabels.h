@@ -183,7 +183,7 @@ How to handle overflowing labels on horizontal axis. If set to `"allow"`, it wil
 
 **Defaults to** `justify`.
 */
-@property(nonatomic, readwrite) id /* Bool, NSString */ overflow;
+@property(nonatomic, readwrite) NSString *overflow;
 /**
 Enable or disable the axis labels.
 

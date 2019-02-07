@@ -202,6 +202,16 @@ Callback that fires when starting to drag a point. The mouse event object is pas
 */
 @property(nonatomic, readwrite) HIFunction *dragStart;
 /**
+Fires on a request for change of root node for the tree, before the update is made. An event object is passed to the function, containing additional properties `newRootId`, `previousRootId`, `redraw` and `trigger`.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [Alert update information on setRootNode event.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-events-setrootnode/)
+*/
+@property(nonatomic, readwrite) HIFunction *setRootNode;
+/**
 Event fired on a button click.
 
 **Try it**

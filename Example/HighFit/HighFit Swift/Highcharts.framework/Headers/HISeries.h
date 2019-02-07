@@ -104,7 +104,9 @@ This option allows grouping series in a stacked chart. The stack option can be a
 <a href="http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/series/stack/" target="_blank">Stacked and grouped columns</a>*/
 @property(nonatomic, readwrite) NSString *stack;
 /**
-The type of series. Can be one of area, areaspline, bar, column, line, pie, scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
+The type of series. Can be one of area, areaspline,
+ bar, column, line, pie,
+ scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
 
 **Accepted values:** `[null, "line", "spline", "column", "area", "areaspline", "pie", "arearange", "areasplinerange", "boxplot", "bubble", "columnrange", "errorbar", "funnel", "gauge", "scatter", "waterfall"]`.
 
@@ -356,6 +358,14 @@ If true, a checkbox is displayed next to the legend item to allow selecting the 
 * [Show select box](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-showcheckbox-true/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showCheckbox;
+/**
+Sets the color blending in the boost module.
+
+**Accepted values:** `["add", "multiply", "darken"]`.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSString *boostBlending;
 /**
 General event handlers for the series items. These event hooks can also be attached to the series at run time using the `Highcharts.addEvent` function.
 */
