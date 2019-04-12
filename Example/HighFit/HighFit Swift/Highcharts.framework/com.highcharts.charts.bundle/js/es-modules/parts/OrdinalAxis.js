@@ -1,4 +1,4 @@
-/**
+/* *
  * (c) 2010-2019 Torstein Honsi
  *
  * License: www.highcharts.com/license
@@ -11,6 +11,8 @@ import './Axis.js';
 import './Utilities.js';
 import './Chart.js';
 import './Series.js';
+// Has a dependency on Navigator due to the use of Axis.toFixedRange
+import './Navigator.js';
 
 var addEvent = H.addEvent,
     Axis = H.Axis,
@@ -23,9 +25,9 @@ var addEvent = H.addEvent,
     Series = H.Series,
     timeUnits = H.timeUnits;
 
-/* ****************************************************************************
+/* ************************************************************************** *
  * Start ordinal axis logic                                                   *
- *****************************************************************************/
+ * ************************************************************************** */
 addEvent(Series, 'updatedData', function () {
     var xAxis = this.xAxis;
 
@@ -35,13 +37,14 @@ addEvent(Series, 'updatedData', function () {
     }
 });
 
-/* *
+/**
  * In an ordinal axis, there might be areas with dense consentrations of points,
  * then large gaps between some. Creating equally distributed ticks over this
  * entire range may lead to a huge number of ticks that will later be removed.
  * So instead, break the positions up in segments, find the tick positions for
  * each segment then concatenize them. This method is used from both data
  * grouping logic and X axis tick position logic.
+ * @private
  */
 Axis.prototype.getTimeTicks = function (
     normalizedInterval,
@@ -957,6 +960,6 @@ addEvent(Axis, 'foundExtremes', function () {
     }
 });
 
-/* ****************************************************************************
- * End ordinal axis logic                                                   *
- *****************************************************************************/
+/* ************************************************************************** *
+ * End ordinal axis logic                                                     *
+ * ************************************************************************** */

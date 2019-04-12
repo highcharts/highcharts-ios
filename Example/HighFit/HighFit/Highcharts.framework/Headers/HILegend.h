@@ -6,10 +6,10 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIAccessibility.h"
 #import "HITitle.h"
 #import "HIBubbleLegend.h"
 #import "HINavigation.h"
-#import "HIKeyboardNavigation.h"
 #import "HIColor.h"
 #import "HICSSObject.h"
 #import "HISeries.h"
@@ -47,6 +47,10 @@ Whether to show the symbol on the right side of the text rather than the left si
 * [Symbol to the right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/rtl/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *rtl;
+/**
+Accessibility options for the legend. Requires the Accessibility module.
+*/
+@property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 When this is true, the legend symbol width will be the same as the symbol height, which in turn defaults to the font size of the legend items.
 */
@@ -252,10 +256,6 @@ The horizontal alignment of the legend box within the chart area. Valid values a
 * [Legend at the right of the chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/align/)
 */
 @property(nonatomic, readwrite) NSString *align;
-/**
-Keyboard navigation for the legend. Requires the Accessibility module.
-*/
-@property(nonatomic, readwrite) HIKeyboardNavigation *keyboardNavigation;
 /**
 Enable or disable the legend. There is also a series-specific option, `showInLegend`, that can hide the series from the legend. In some series types this is `false` by default, so it must set to `true` in order to show the legend for the series.
 

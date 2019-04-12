@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HILayoutAlgorithm.h"
 
 
 /**
@@ -40,7 +41,7 @@
 @interface HIPackedbubble: HISeries
 
 /**
-Minimum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height.
+Minimum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the `z` value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height, divided by the square root of total number of points.
 
 **Try it**
 
@@ -48,17 +49,7 @@ Minimum bubble size. Bubbles will automatically size between the `minSize` and `
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
 /**
-Maximum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height.
-
-**Try it**
-
-* [Bubble size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-size/)
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ maxSize;
-/**
 Whether the bubble's value should be represented by the area or the width of the bubble. The default, `area`, corresponds best to the human perception of the size of each bubble.
-
-**Accepted values:** `["area", "width"]`.
 
 **Defaults to** `area`.
 
@@ -67,6 +58,30 @@ Whether the bubble's value should be represented by the area or the width of the
 * [Comparison of area and size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-sizeby/)
 */
 @property(nonatomic, readwrite) NSString *sizeBy;
+/**
+Options for layout algorithm when simulation is enabled. Inside there are options to change the speed, padding, initial bubbles positions and more.
+*/
+@property(nonatomic, readwrite) HILayoutAlgorithm *layoutAlgorithm;
+/**
+Flag to determine if nodes are draggable or not. Available for graph with useSimulation set to true only.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *draggable;
+/**
+Maximum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the `z` value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height, divided by the square root of total number of points.
+
+**Try it**
+
+* [Bubble size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-size/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ maxSize;
+/**
+An option is giving a possibility to choose between using simulation for calculating bubble positions. These reflects in both animation and final position of bubbles. Simulation is also adding options to the series graph based on used layout. In case of big data sets, with any performance issues, it is possible to disable animation and pack bubble in a simple circular way.
+
+**Try it**
+
+* [useSimulation set to false](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-packedbubble/spiral/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useSimulation;
 /**
 Whether to display negative sized bubbles. The threshold is given by the `zThreshold` option, and negative bubbles can be visualized by setting `negativeColor`.
 

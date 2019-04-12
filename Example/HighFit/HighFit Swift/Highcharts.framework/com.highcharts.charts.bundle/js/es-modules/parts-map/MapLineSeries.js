@@ -1,8 +1,10 @@
-/**
- * (c) 2010-2019 Torstein Honsi
+/* *
  *
- * License: www.highcharts.com/license
- */
+ *  (c) 2010-2019 Torstein Honsi
+ *
+ *  License: www.highcharts.com/license
+ *
+ * */
 
 'use strict';
 
@@ -58,17 +60,17 @@ seriesType('mapline', 'map'
         },
 
         /**
-     * Get presentational attributes
-     *
-     * @private
-     * @function Highcharts.seriesTypes.mapline#pointAttribs
-     *
-     * @param {Highcharts.Point} point
-     *
-     * @param {string} state
-     *
-     * @return {Highcharts.Dictionary<*>}
-     */
+         * Get presentational attributes
+         *
+         * @private
+         * @function Highcharts.seriesTypes.mapline#pointAttribs
+         *
+         * @param {Highcharts.Point} point
+         *
+         * @param {string} state
+         *
+         * @return {Highcharts.Dictionary<*>}
+         */
         pointAttribs: function (point, state) {
             var attr = seriesTypes.map.prototype.pointAttribs.call(
                 this,
@@ -137,7 +139,7 @@ seriesType('mapline', 'map'
  *     }]
  *  ```
  *
- * @type      {Array<number|Array<string,number>|object>}
+ * @type      {Array<number|Array<string,(number|null)>|null|*>}
  * @product   highmaps
  * @apioption series.mapline.data
  */

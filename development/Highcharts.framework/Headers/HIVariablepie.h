@@ -60,8 +60,6 @@ The minimum size of the points' radius related to chart's `plotArea`. If a numbe
 /**
 Whether the pie slice's value should be represented by the area or the radius of the slice. Can be either `area` or `radius`. The default, `area`, corresponds best to the human perception of the size of each pie slice.
 
-**Accepted values:** `["area", "radius"]`.
-
 **Try it**
 
 * [Difference between area and radius sizeBy](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/variable-radius-pie/sizeby/)

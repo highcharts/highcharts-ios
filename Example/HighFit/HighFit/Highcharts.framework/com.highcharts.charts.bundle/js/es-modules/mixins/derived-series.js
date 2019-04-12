@@ -22,6 +22,8 @@ var Series = H.Series,
  * @mixin derivedSeriesMixin
  */
 var derivedSeriesMixin = {
+
+    hasDerivedData: true,
     /**
      * Initialise series
      *
@@ -61,9 +63,13 @@ var derivedSeriesMixin = {
     setBaseSeries: function () {
         var chart = this.chart,
             baseSeriesOptions = this.options.baseSeries,
-            baseSeries =
-        baseSeriesOptions &&
-        (chart.series[baseSeriesOptions] || chart.get(baseSeriesOptions));
+            baseSeries = (
+                H.defined(baseSeriesOptions) &&
+                (
+                    chart.series[baseSeriesOptions] ||
+                    chart.get(baseSeriesOptions)
+                )
+            );
 
         this.baseSeries = baseSeries || null;
     },

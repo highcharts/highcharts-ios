@@ -21,7 +21,9 @@ var seriesType = H.seriesType;
  *
  * @augments Highcharts.Series
  */
-seriesType('bar', 'column',
+seriesType(
+    'bar',
+    'column',
 
     /**
      * A bar series is a special type of column series where the columns are
@@ -36,37 +38,13 @@ seriesType('bar', 'column',
      */
 
     /**
-     * Alignment of the data label relative to the data point.
-     *
-     * @sample {highcharts} highcharts/plotoptions/bar-datalabels-align-inside-bar/
-     *         Data labels inside the bar
-     *
-     * @type      {string}
-     * @default   left
-     * @product   highcharts
-     * @apioption plotOptions.bar.dataLabels.align
-     */
-
-    /**
-     * The x position of the data label relative to the data point.
-     *
-     * @sample {highcharts} highcharts/plotoptions/bar-datalabels-align-inside-bar/
-     *         Data labels inside the bar
-     *
-     * @type      {number}
-     * @default   5
-     * @product   highcharts
-     * @apioption plotOptions.bar.dataLabels.x
-     */
-
-    /**
      * @ignore
      */
-    null
-
-    , {
+    null,
+    {
         inverted: true
-    });
+    }
+);
 
 
 /**
@@ -134,7 +112,7 @@ seriesType('bar', 'column',
  * @sample {highcharts} highcharts/series/data-array-of-objects/
  *         Config objects
  *
- * @type      {Array<number|Array<(number|string),number>|*>}
+ * @type      {Array<number|Array<(number|string),(number|null)>|null|*>}
  * @extends   series.column.data
  * @product   highcharts
  * @apioption series.bar.data

@@ -265,6 +265,14 @@ Fires after the series has finished its initial animation, or in case animation 
 * [Show label after animate](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-events-afteranimate/)
 */
 @property(nonatomic, readwrite) HIFunction *afterAnimate;
+/**
+Event callback when annotation is added to the chart.
+*/
+@property(nonatomic, readwrite) HIFunction *add;
+/**
+Event callback when annotation is updated (e.g.draganddropppedorresizedbycontrolpoints).
+*/
+@property(nonatomic, readwrite) HIFunction *afterUpdate;
 
 -(NSDictionary *)getParams;
 

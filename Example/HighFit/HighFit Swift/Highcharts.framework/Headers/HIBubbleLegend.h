@@ -36,8 +36,6 @@ Define the visual z index of the bubble legend.
 /**
 Whether the bubble legend range value should be represented by the area or the width of the bubble. The default, area, corresponds best to the human perception of the size of each bubble.
 
-**Accepted values:** `["area", "width"]`.
-
 **Try it**
 
 * [Size by width](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/ranges/)

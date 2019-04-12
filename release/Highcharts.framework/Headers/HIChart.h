@@ -263,10 +263,6 @@ The space between the left edge of the chart and the content (plot area, axis ti
 */
 @property(nonatomic, readwrite) NSNumber *spacingLeft;
 /**
-A text description of the chart. If the Accessibility module is loaded, this is included by default as a long description of the chart and its contents in the hidden screen reader information region.
-*/
-@property(nonatomic, readwrite) NSString *definition;
-/**
 The distance between the outer edge of the chart and the content, like title or legend, or axis title and labels if present. The numbers in the array designate top, right, bottom and left respectively. Use the options spacingTop, spacingRight, spacingBottom and spacingLeft options for shorthand setting of one option.
 
 **Defaults to** `[10, 10, 15, 10]`.
@@ -413,10 +409,6 @@ The pixel width of the outer chart border.
 * [5px border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/borderwidth/)
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
-/**
-A text description of the chart type. If the Accessibility module is loaded, this will be included in the description of the chart in the screen reader information region. Highcharts will by default attempt to guess the chart type, but for more complex charts it is recommended to specify this property for clarity.
-*/
-@property(nonatomic, readwrite) NSString *typeDescription;
 /**
 The margin between the top outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also `spacingTop`.
 

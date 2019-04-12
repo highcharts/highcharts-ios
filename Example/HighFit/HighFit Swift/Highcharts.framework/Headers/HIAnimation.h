@@ -10,13 +10,10 @@
 
 
 /**
-Animation setting for hovering the graph in line-type series.
+Animation when not hovering over the marker.
 */
 @interface HIAnimation: HIChartsJSONSerializable
 
-/**
-The duration of the hover animation in milliseconds. By default the hover state animates quickly in, and slowly back to normal.
-*/
 @property(nonatomic, readwrite) NSNumber *duration;
 
 -(NSDictionary *)getParams;

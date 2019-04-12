@@ -16,6 +16,7 @@ Options for the point markers of line-like series. Properties like `fillColor`, 
 */
 @interface HIMarker: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) HIStates *states;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The color of the marker.
@@ -36,26 +37,6 @@ A predefined shape or symbol for the marker. When undefined, the symbol is pulle
 */
 @property(nonatomic, readwrite) NSString *symbol;
 /**
-States for a single point marker.
-*/
-@property(nonatomic, readwrite) HIStates *states;
-/**
-The fill color of the point marker. When `undefined`, the series' or point's color is used.
-
-**Try it**
-
-* [White fill](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
-*/
-@property(nonatomic, readwrite) HIColor *fillColor;
-/**
-The color of the point marker's outline. When `undefined`, the series' or point's color is used.
-
-**Try it**
-
-* [Inherit from series color (undefined)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
-*/
-@property(nonatomic, readwrite) HIColor *lineColor;
-/**
 The width of the point marker's outline.
 
 **Try it**
@@ -64,8 +45,21 @@ The width of the point marker's outline.
 */
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
-The fill opacity of the bubble markers.
+The fill color of the point marker. When `undefined`, the series' or point's color is used.
+
+**Try it**
+
+* [White fill](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
 */
+@property(nonatomic, readwrite) id fillColor;
+/**
+The color of the point marker's outline. When `undefined`, the series' or point's color is used.
+
+**Try it**
+
+* [Inherit from series color (undefined)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
+*/
+@property(nonatomic, readwrite) NSString *lineColor;
 @property(nonatomic, readwrite) NSNumber *fillOpacity;
 /**
 Image markers only. Set the image width explicitly. When using this option, a `width` must also be set.

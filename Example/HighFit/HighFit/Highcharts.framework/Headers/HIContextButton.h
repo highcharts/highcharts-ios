@@ -27,9 +27,9 @@ See `navigation.buttonOptions.symbolFill`.
 */
 @property(nonatomic, readwrite) HIColor *symbolFill;
 /**
-A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "Print" menu item plus one menu item for each of the available export types.
+A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "View in full screen" and "Print" menu items, plus one menu item for each of the available export types.
 
-**Defaults to** `["printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"]`.
+**Defaults to** `["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"]`.
 
 **Try it**
 
@@ -64,8 +64,6 @@ The class name of the menu appearing from the button.
 @property(nonatomic, readwrite) NSString *menuClassName;
 /**
 The symbol for the button. Points to a definition function in the `Highcharts.Renderer.symbols` collection. The default `exportIcon` function is part of the exporting module. Possible values are "circle", "square", "diamond", "triangle", "triangle-down", "menu", "menuball" or custom shape.
-
-**Accepted values:** `["menu", "menuball", "exportIcon", "circle", "square", "diamond", "triangle", "triangle-down"]`.
 
 **Try it**
 

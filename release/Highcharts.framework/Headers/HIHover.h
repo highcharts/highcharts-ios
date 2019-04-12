@@ -12,7 +12,7 @@
 
 
 /**
-Options for the hovered series. These settings override the normal state options when a series is moused over or touched.
+The hover state for a single point marker.
 */
 @interface HIHover: HIChartsJSONSerializable
 
@@ -21,35 +21,19 @@ Options for the hovered series. These settings override the normal state options
 @property(nonatomic, readwrite) NSNumber *opacity;
 @property(nonatomic, readwrite) HIHalo *halo;
 /**
-Enable separate styles for the hovered series to visualize that the user hovers either the series itself or the legend.
-
-**Defaults to** `true`.
+Enable or disable the point marker.
 
 **Try it**
 
-* [Line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-enabled/)
-* [Column](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-enabled-column/)
-* [Pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-enabled-pie/)
+* [Disabled hover state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-enabled/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-Animation setting for hovering the graph in line-type series.
-*/
-@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
-/**
-Pixel width of the graph line. By default this property is undefined, and the `lineWidthPlus` property dictates how much to increase the linewidth from normal state.
+The additional line width for a hovered point.
 
 **Try it**
 
-* [5px line on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-linewidth/)
-*/
-@property(nonatomic, readwrite) NSNumber *lineWidth;
-/**
-The additional line width for the graph of a hovered series.
-
-**Try it**
-
-* [5 pixels wider](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-linewidthplus/)
+* [2 pixels wider on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-linewidthplus/)
 */
 @property(nonatomic, readwrite) NSNumber *lineWidthPlus;
 /**
@@ -72,6 +56,18 @@ The color of the point marker's outline. When `undefined`, the series' or point'
 * [White fill color, black line color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-linecolor/)
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
+/**
+The width of the point marker's outline. When `undefined`, the series' or point's lineWidth for normal state is used.
+
+**Try it**
+
+* [3px line width](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-linewidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *lineWidth;
+/**
+Animation when hovering over the marker.
+*/
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
 How much to brighten the point on interaction. Requires the main color to be defined in hex or rgb(a) format. In styled mode, the hover brightening is by default replaced with a fill-opacity set in the `.highcharts-point:hover` rule.
 */

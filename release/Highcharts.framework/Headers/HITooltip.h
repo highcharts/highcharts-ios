@@ -24,6 +24,14 @@ Whether the tooltip should update as the finger moves on a touch device. If this
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *followTouchMove;
 /**
+Callback function to format the text of the tooltip for visible null points. Works analogously to `formatter`.
+
+**Try it**
+
+* [Format data label and tooltip for null point.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-nullformat)
+*/
+@property(nonatomic, readwrite) HIFunction *nullFormatter;
+/**
 The radius of the rounded border corners.
 
 **Try it**
@@ -183,6 +191,14 @@ Callback function to format the text of the tooltip from scratch. In case of sin
 */
 @property(nonatomic, readwrite) HIFunction *formatter;
 /**
+The HTML of the null point's line in the tooltip. Works analogously to `pointFormat`.
+
+**Try it**
+
+* [Format data label and tooltip for null point.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-nullformat)
+*/
+@property(nonatomic, readwrite) NSString *nullFormat;
+/**
 The HTML of the point's line in the tooltip. Variables are enclosed by curly brackets. Available variables are point.x, point.y, series. name and series.color and other properties on the same form. Furthermore, `point.y` can be extended by the `tooltip.valuePrefix` and `tooltip.valueSuffix` variables. This can also be overridden for each series, which makes it a good hook for displaying units. In styled mode, the dot is colored by a class name rather than the point color.
 
 **Defaults to** `<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>`.
@@ -227,9 +243,7 @@ Enable or disable the tooltip.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"` or `"square"`. When `tooltip.split` option is enabled, shape is applied to all boxes except header, which is controlled by `tooltip.headerShape`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
-
-**Accepted values:** `["callout", "square"]`.
+The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"`, or `"square"`. When `tooltip.split` option is enabled, shape is applied to all boxes except header, which is controlled by `tooltip.headerShape`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
 
 **Defaults to** `callout`.
 */
@@ -249,7 +263,7 @@ The pixel width of the tooltip border. In styled mode, the stroke width is set i
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
-Whether the tooltip should follow the mouse as it moves across columns, pie slices and other point types with an extent. By default it behaves this way for scatter, bubble and pie series by override in the `plotOptions` for those series types. For touch moves to behave the same way, `followTouchMove` must be `true` also.
+Whether the tooltip should follow the mouse as it moves across columns, pie slices and other point types with an extent. By default it behaves this way for pie, polygon, map, sankey and wordcloud series by override in the `plotOptions` for those series types. For touch moves to behave the same way, `followTouchMove` must be `true` also.
 
 **Defaults to** `false`.
 */
@@ -268,14 +282,11 @@ How many decimals to show in each series' y value. This is overridable in each s
 * [Set decimals, prefix and suffix for the value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/valuedecimals/)
 */
 @property(nonatomic, readwrite) NSNumber *valueDecimals;
+@property(nonatomic, readwrite) NSString *nodeFormat;
 /**
-A callback for defining the format for _nodes_ in the sankey chart's tooltip, as opposed to links.
+A callback for defining the format for _nodes_ in the chart's tooltip, as opposed to links.
 */
 @property(nonatomic, readwrite) HIFunction *nodeFormatter;
-/**
-The [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) specifying what to show for _nodes_ in tooltip of a sankey diagram series, as opposed to links.
-*/
-@property(nonatomic, readwrite) NSString *nodeFormat;
 @property(nonatomic, readwrite) NSNumber *distance;
 
 -(NSDictionary *)getParams;

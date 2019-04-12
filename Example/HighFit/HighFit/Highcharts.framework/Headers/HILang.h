@@ -11,7 +11,7 @@
 
 
 /**
-Language object. The language object is global and it can't be set on each chart initiation. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. Highcharts.setOptions({   lang: {     months: [       'Janvier', 'FĂŠvrier', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'AoĂťt',       'Septembre', 'Octobre', 'Novembre', 'DĂŠcembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } });
+Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. Highcharts.setOptions({   lang: {     months: [       'Janvier', 'FĂŠvrier', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'AoĂťt',       'Septembre', 'Octobre', 'Novembre', 'DĂŠcembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } });
 */
 @interface HILang: HIChartsJSONSerializable
 
@@ -30,7 +30,7 @@ Exporting module only. The text for the PNG download menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadPNG;
 /**
-Configure the accessibility strings in the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](http://www.highcharts.com/docs/chart-concepts/accessibility). For more dynamic control over the accessibility functionality, see `accessibility.pointDescriptionFormatter`, `accessibility.seriesDescriptionFormatter`, and `accessibility.screenReaderSectionFormatter`.
+Configure the accessibility strings in the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility). For more dynamic control over the accessibility functionality, see `accessibility.pointDescriptionFormatter`, `accessibility.seriesDescriptionFormatter`, and `accessibility.screenReaderSectionFormatter`.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
@@ -41,6 +41,10 @@ Short week days, starting Sunday. If not specified, Highcharts uses the first th
 * [Finnish two-letter abbreviations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/lang/shortweekdays/)
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *shortWeekdays;
+/**
+Exporting module only. View the chart in full screen.
+*/
+@property(nonatomic, readwrite) NSString *viewFullscreen;
 /**
 The text to display when the chart contains no data. Requires the no-data module, see `noData`.
 

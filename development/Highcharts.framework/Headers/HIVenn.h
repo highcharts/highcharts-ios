@@ -40,7 +40,6 @@
 @interface HIVenn: HISeries
 
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
-@property(nonatomic, readwrite) NSNumber *opacity;
 @property(nonatomic, readwrite) NSString *borderDashStyle;
 @property(nonatomic, readwrite) NSNumber *brighten;
 

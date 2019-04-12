@@ -23,6 +23,16 @@ The minimum width for the plot area. If it gets smaller than this, the plot area
 */
 @property(nonatomic, readwrite) NSNumber *minWidth;
 /**
+The opacity of mask applied on one of the sides of the plot area.
+
+**Defaults to** `0.85`.
+
+**Try it**
+
+* [Disabled opacity for the mask](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/scrollable-plotarea-opacity)
+*/
+@property(nonatomic, readwrite) NSNumber *opacity;
+/**
 The initial scrolling position of the scrollable plot area. Ranges from 0 to 1, where 0 aligns the plot area to the left and 1 aligns it to the right. Typically we would use 1 if the chart has right aligned Y axes.
 */
 @property(nonatomic, readwrite) NSNumber *scrollPositionX;

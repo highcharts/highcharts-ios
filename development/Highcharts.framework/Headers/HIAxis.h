@@ -15,8 +15,14 @@ Axis description format strings.
 @interface HIAxis: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSString *xAxisDescriptionSingular;
-@property(nonatomic, readwrite) NSString *xAxisDescriptionPlural;
+@property(nonatomic, readwrite) NSString *timeRangeMinutes;
+@property(nonatomic, readwrite) NSString *timeRangeHours;
+@property(nonatomic, readwrite) NSString *rangeCategories;
+@property(nonatomic, readwrite) NSString *timeRangeSeconds;
 @property(nonatomic, readwrite) NSString *yAxisDescriptionPlural;
+@property(nonatomic, readwrite) NSString *rangeFromTo;
+@property(nonatomic, readwrite) NSString *timeRangeDays;
+@property(nonatomic, readwrite) NSString *xAxisDescriptionPlural;
 @property(nonatomic, readwrite) NSString *yAxisDescriptionSingular;
 
 -(NSDictionary *)getParams;

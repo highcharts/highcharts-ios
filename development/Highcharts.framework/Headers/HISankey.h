@@ -7,7 +7,9 @@
 */
 
 #import "HISeries.h"
+#import "HILevels.h"
 #import "HINodes.h"
+#import "HIColor.h"
 
 
 /**
@@ -52,17 +54,35 @@ When using automatic point colors pulled from the global `colors` or series-spec
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
-Higher numbers makes the links in a sankey diagram render more curved. A `curveFactor` of 0 makes the lines straight.
+Higher numbers makes the links in a sankey diagram or dependency wheelrender more curved. A `curveFactor` of 0 makes the lines straight.
 */
 @property(nonatomic, readwrite) NSNumber *curveFactor;
 /**
-The padding between nodes in a sankey diagram, in pixels.
+The padding between nodes in a sankey diagram or dependency wheel, in pixels.
 */
 @property(nonatomic, readwrite) NSNumber *nodePadding;
 /**
-The pixel width of each node in a sankey diagram, or the height in case the chart is inverted.
+The pixel width of each node in a sankey diagram or dependency wheel, or the height in case the chart is inverted.
 */
 @property(nonatomic, readwrite) NSNumber *nodeWidth;
+/**
+Set options on specific levels. Takes precedence over series options, but not point options.
+
+**Try it**
+
+* [Sunburst chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sunburst)
+*/
+@property(nonatomic, readwrite) NSArray <HILevels *> *levels;
+/**
+The width of the border surrounding each column or bar. Defaults to `1` when there is room for a border, but to `0` when the columns are so dense that a border would cover the next column. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Opacity for the links between nodes in the sankey diagram.
 */
@@ -80,6 +100,16 @@ The minimal height for a column or width for a bar. By default, 0 values are not
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *colors;
+/**
+The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
 /**
 A collection of options for the individual nodes. The nodes in a sankey diagram are auto-generated instances of `Highcharts.Point`, but options can be applied here and linked by the `id`.
 

@@ -63,8 +63,6 @@ The padding between points in the tilemap.
 /**
 The shape of the tiles in the tilemap. Possible values are `hexagon`, `circle`, `diamond`, and `square`.
 
-**Accepted values:** `["circle", "diamond", "hexagon", "square"]`.
-
 **Try it**
 
 * [Circular tile shapes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/circlemap-africa)

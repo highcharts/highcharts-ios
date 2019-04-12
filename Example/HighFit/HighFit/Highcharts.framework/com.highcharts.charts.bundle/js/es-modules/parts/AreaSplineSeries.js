@@ -26,7 +26,9 @@ var areaProto = H.seriesTypes.area.prototype,
  *
  * @augments Highcharts.Series
  */
-seriesType('areaspline', 'spline',
+seriesType(
+    'areaspline',
+    'spline',
 
     /**
      * The area spline series is an area series where the graph between the
@@ -48,7 +50,8 @@ seriesType('areaspline', 'spline',
         getGraphPath: areaProto.getGraphPath,
         drawGraph: areaProto.drawGraph,
         drawLegendSymbol: LegendSymbolMixin.drawRectangle
-    });
+    }
+);
 
 /**
  * A `areaspline` series. If the [type](#series.areaspline.type) option
@@ -115,7 +118,7 @@ seriesType('areaspline', 'spline',
  * @sample {highcharts} highcharts/series/data-array-of-objects/
  *         Config objects
  *
- * @type      {Array<number|Array<(number|string),number>|*>}
+ * @type      {Array<number|Array<(number|string),(number|null)>|null|*>}
  * @extends   series.line.data
  * @product   highcharts highstock
  * @apioption series.areaspline.data

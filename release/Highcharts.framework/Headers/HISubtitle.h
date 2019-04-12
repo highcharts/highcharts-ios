@@ -26,7 +26,7 @@ CSS styles for the title. In styled mode, the subtitle style is given in the `.h
 */
 @property(nonatomic, readwrite) HICSSObject *style;
 /**
-The vertical alignment of the title. Can be one of "top", "middle" and "bottom". When a value is given, the title behaves as floating.
+The vertical alignment of the title. Can be one of `"top"`, `"middle"` and `"bottom"`. When a value is given, the title behaves as floating.
 
 **Try it**
 

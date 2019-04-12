@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HIDataGrouping.h"
 #import "HIColor.h"
 
 
@@ -56,6 +57,14 @@ Pixel length of the stems.
 Vertical offset from the cartesian position, in pixels. The default value makes sure the symbols don't overlap the X axis when `onSeries` is `null`, and that they don't overlap the linked series when `onSeries` is given.
 */
 @property(nonatomic, readwrite) NSNumber *yOffset;
+/**
+Data grouping options for the wind barbs. In Highcharts, this requires the `modules/datagrouping.js` module to be loaded. In Highstock, data grouping is included.
+
+**Try it**
+
+* [Wind barb with data grouping](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/windbarb-datagrouping)
+*/
+@property(nonatomic, readwrite) HIDataGrouping *dataGrouping;
 /**
 Horizontal offset from the cartesian position, in pixels. When the chart is inverted, this option allows translation like `yOffset` in non inverted charts.
 */

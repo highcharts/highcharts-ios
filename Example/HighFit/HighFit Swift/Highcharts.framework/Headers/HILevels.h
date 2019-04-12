@@ -75,6 +75,18 @@ Can set the layoutStartingDirection option on a specific level.
 **Accepted values:** `["vertical", "horizontal"]`.
 */
 @property(nonatomic, readwrite) NSString *layoutStartingDirection;
+/**
+Can set `colorByPoint` on all points which lies on the same level.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
+/**
+Can set `states` on all points which lies on the same level.
+*/
+@property(nonatomic, readwrite) id states;
+/**
+Can set `linkOpacity` on all points which lies on the same level.
+*/
+@property(nonatomic, readwrite) NSNumber *linkOpacity;
 
 -(NSDictionary *)getParams;
 

@@ -6,6 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIExportingAccessibility.h"
 #import "HIButtons.h"
 #import "HICsv.h"
 #import "HIFunction.h"
@@ -17,9 +18,13 @@ Options for the exporting module. For an overview on the matter, see [the docs](
 @interface HIExporting: HIChartsJSONSerializable
 
 /**
+Accessibility options for the exporting menu. Requires the Accessibility module.
+*/
+@property(nonatomic, readwrite) HIExportingAccessibility *accessibility;
+/**
 An object consisting of definitions for the menu items in the context menu. Each key value pair has a `key` that is referenced in the `menuItems` setting, and a `value`, which is an object with the following properties: - **onclick:** The click handler for the menu item - **text:** The text for the menu item - **textKey:** If internationalization is required, the key to a language  string
 
-**Defaults to** `{"printChart": {}, "separator": {}, "downloadPNG": {}, "downloadJPEG": {}, "downloadPDF": {}, "downloadSVG": {}}`.
+**Defaults to** `{"viewFullscreen": {}, "printChart": {}, "separator": {}, "downloadPNG": {}, "downloadJPEG": {}, "downloadPDF": {}, "downloadSVG": {}}`.
 
 **Try it**
 
@@ -93,8 +98,6 @@ Options for exporting data to CSV or ExCel, or displaying the data in a HTML tab
 @property(nonatomic, readwrite) HICsv *csv;
 /**
 Default MIME type for exporting if `chart.exportChart()` is called without specifying a `type` option. Possible values are `image/png`, `image/jpeg`, `application/pdf` and `image/svg+xml`.
-
-**Accepted values:** `["image/png", "image/jpeg", "application/pdf", "image/svg+xml"]`.
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
@@ -152,7 +155,7 @@ Experimental setting to allow HTML inside the chart (added through the `useHTML`
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowHTML;
 /**
-Additional chart options to be merged into an exported chart. For example, a common use case is to add data labels to improve readability of the exported chart, or to add a printer-friendly color scheme.
+Additional chart options to be merged into the chart before exporting to an image format. This does not apply to printing the chart via the export menu. For example, a common use case is to add data labels to improve readability of the exported chart, or to add a printer-friendly color scheme to exported PDFs.
 
 **Try it**
 

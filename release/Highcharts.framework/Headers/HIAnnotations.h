@@ -7,9 +7,10 @@
 */
 
 #import "HIShapes.h"
-#import "HILabelOptions.h"
-#import "HILabels.h"
 #import "HIShapeOptions.h"
+#import "HILabels.h"
+#import "HILabelOptions.h"
+#import "HIEvents.h"
 
 
 /**
@@ -28,6 +29,10 @@ An array of shapes for the annotation. For options that apply to multiple shapes
 */
 @property(nonatomic, readwrite) NSArray <HIShapes *> *shapes;
 /**
+Options for annotation's shapes. Each shape inherits options from the shapeOptions object. An option from the shapeOptions can be overwritten by config for a specific shape.
+*/
+@property(nonatomic, readwrite) HIShapeOptions *shapeOptions;
+/**
 The Z index of the annotation.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
@@ -40,13 +45,14 @@ Whether the annotation is visible.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
-Options for annotation's labels. Each label inherits options from the labelOptions object. An option from the labelOptions can be overwritten by config for a specific label.
-*/
-@property(nonatomic, readwrite) HILabelOptions *labelOptions;
-/**
 An array of labels for the annotation. For options that apply to multiple labels, they can be added to the `labelOptions`.
 */
 @property(nonatomic, readwrite) NSArray <HILabels *> *labels;
+/**
+Options for annotation's labels. Each label inherits options from the labelOptions object. An option from the labelOptions can be overwritten by config for a specific label.
+*/
+@property(nonatomic, readwrite) HILabelOptions *labelOptions;
+@property(nonatomic, readwrite) HIEvents *events;
 /**
 Allow an annotation to be draggable by a user. Possible values are `"x"`, `"xy"`, `"y"` and `""` (disabled).
 
@@ -55,10 +61,6 @@ Allow an annotation to be draggable by a user. Possible values are `"x"`, `"xy"`
 * [Annotations draggable: 'xy'](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/draggable/)
 */
 @property(nonatomic, readwrite) NSString *draggable;
-/**
-Options for annotation's shapes. Each shape inherits options from the shapeOptions object. An option from the shapeOptions can be overwritten by config for a specific shape.
-*/
-@property(nonatomic, readwrite) HIShapeOptions *shapeOptions;
 /**
 Sets an ID for an annotation. Can be user later when removing an annotation in `Chart#removeAnnotation(id)` method.
 */

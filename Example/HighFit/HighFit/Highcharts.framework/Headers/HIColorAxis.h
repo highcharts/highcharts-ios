@@ -10,6 +10,7 @@
 #import "HIMarker.h"
 #import "HIEvents.h"
 #import "HILabels.h"
+#import "HIAccessibility.h"
 #import "HIColor.h"
 #import "HIFunction.h"
 
@@ -81,8 +82,6 @@ Whether to force the axis to end on a tick. Use this option with the `maxPadding
 @property(nonatomic, readwrite) NSNumber /* Bool */ *endOnTick;
 /**
 The type of interpolation to use for the color axis. Can be `linear` or `logarithmic`.
-
-**Accepted values:** `["linear", "logarithmic"]`.
 
 **Defaults to** `linear`.
 
@@ -198,6 +197,14 @@ Color for the minor tick marks.
 */
 @property(nonatomic, readwrite) HIColor *minorTickColor;
 /**
+Refers to the index in the `panes` array. Used for circular gauges and polar charts. When the option is not set then first pane will be used.
+
+**Try it**
+
+* [Two gauges with different center](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter)
+*/
+@property(nonatomic, readwrite) NSNumber *pane;
+/**
 The Z index of the grid lines.
 
 **Defaults to** `1`.
@@ -207,6 +214,10 @@ The Z index of the grid lines.
 * [A Z index of 4 renders the grid above the graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/gridzindex/)
 */
 @property(nonatomic, readwrite) NSNumber *gridZIndex;
+/**
+Accessibility options for an axis. Requires the accessibility module.
+*/
+@property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Whether axis, including axis title, line, ticks and labels, should be visible.
 
@@ -220,17 +231,7 @@ When using multiple axis, the ticks of two or more opposite axes will automatica
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
-Refers to the index in the `panes` array. Used for circular gauges and polar charts. When the option is not set then first pane will be used.
-
-**Try it**
-
-* [Two gauges with different center](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter)
-*/
-@property(nonatomic, readwrite) NSNumber *pane;
-/**
-The pixel width of the major tick marks. In styled mode, the stroke width is given in the `.highcharts-tick` class.
-
-**Defaults to** `1`.
+The pixel width of the major tick marks. Defaults to 0 on category axes, otherwise 1. In styled mode, the stroke width is given in the `.highcharts-tick` class.
 
 **Try it**
 
@@ -359,10 +360,6 @@ The dash or dot style of the grid lines. For possible values, see [this demonstr
 * [Long dashes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/gridlinedashstyle/)
 */
 @property(nonatomic, readwrite) NSString *gridLineDashStyle;
-/**
-_Requires Accessibility module_ Description of the axis to screen reader users.
-*/
-@property(nonatomic, readwrite) NSString *definition;
 /**
 The position of the minor tick marks relative to the axis line. Can be one of `inside` and `outside`.
 

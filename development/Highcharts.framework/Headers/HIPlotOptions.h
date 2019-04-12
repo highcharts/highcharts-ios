@@ -13,17 +13,23 @@
 #import "HIBar.h"
 #import "HIVariwide.h"
 #import "HIAreasplinerange.h"
+#import "HIItem.h"
 #import "HIVector.h"
 #import "HIColumnpyramid.h"
 #import "HIArearange.h"
 #import "HIBellcurve.h"
 #import "HISeries.h"
+#import "HIPyramid3d.h"
 #import "HISankey.h"
 #import "HIPareto.h"
+#import "HIDependencywheel.h"
 #import "HIHeatmap.h"
 #import "HISolidgauge.h"
+#import "HITimeline.h"
+#import "HIFunnel3d.h"
 #import "HIColumn.h"
 #import "HITreemap.h"
+#import "HIWaterfall.h"
 #import "HIColumnrange.h"
 #import "HIVenn.h"
 #import "HISpline.h"
@@ -46,9 +52,9 @@
 #import "HIScatter3d.h"
 #import "HIBoxplot.h"
 #import "HIErrorbar.h"
-#import "HIWaterfall.h"
 #import "HIWindbarb.h"
 #import "HIBullet.h"
+#import "HIOrganization.h"
 
 
 /**
@@ -111,6 +117,16 @@ The area spline range is a cartesian series type with higher and lower Y values 
 */
 @property(nonatomic, readwrite) HIAreasplinerange *areasplinerange;
 /**
+An item chart is an infographic chart where a number of items are laid out in either a rectangular or circular pattern. It can be used to visualize counts within a group, or for the circular pattern, typically a parliament. The circular layout has much in common with a pie chart. Many of the item series options, like `center`, `size` and data label positioning, are inherited from the pie series and don't apply for rectangular layouts. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `item` series are defined in  `plotOptions.item`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     item: {       // shared options for all item series     }   },   series: [{     // specific options for this series instance     type: 'item'   }] }); ```       
+
+**Try it**
+
+* [Parliament chart (circular item chart)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/parliament-chart)
+* [Rectangular item chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-item/rectangular)
+* [Infographic with symbols](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-item/symbols)
+*/
+@property(nonatomic, readwrite) HIItem *item;
+/**
 A vector plot is a type of cartesian chart where each point has an X and Y position, a length and a direction. Vectors are drawn as arrows. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `vector` series are defined in  `plotOptions.vector`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     vector: {       // shared options for all vector series     }   },   series: [{     // specific options for this series instance     type: 'vector'   }] }); ```       
 
 **Try it**
@@ -149,6 +165,14 @@ General options for all series types. In TypeScript the `type` option must alway
 */
 @property(nonatomic, readwrite) HISeries *series;
 /**
+A pyramid3d is a 3d version of pyramid series type. Pyramid charts are a type of chart often used to visualize stages in a sales project, where the top are the initial stages with the most clients. It requires that the `highcharts-3d.js`, `cylinder.js`, `funnel3d.js` and `pyramid3d` modules are loaded. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `pyramid3d` series are defined in  `plotOptions.pyramid3d`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     pyramid3d: {       // shared options for all pyramid3d series     }   },   series: [{     // specific options for this series instance     type: 'pyramid3d'   }] }); ```       
+
+**Try it**
+
+* [Pyramid3d](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pyramid3d/)
+*/
+@property(nonatomic, readwrite) HIPyramid3d *pyramid3d;
+/**
 A sankey diagram is a type of flow diagram, in which the width of the link between two nodes is shown proportionally to the flow quantity. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `sankey` series are defined in  `plotOptions.sankey`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     sankey: {       // shared options for all sankey series     }   },   series: [{     // specific options for this series instance     type: 'sankey'   }] }); ```       
 
 **Try it**
@@ -167,6 +191,14 @@ A pareto diagram is a type of chart that contains both bars and a line graph, wh
 */
 @property(nonatomic, readwrite) HIPareto *pareto;
 /**
+A dependency wheel chart is a type of flow diagram, where all nodes are laid out in a circle, and the flow between the are drawn as link bands. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `dependencywheel` series are defined in  `plotOptions.dependencywheel`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     dependencywheel: {       // shared options for all dependencywheel series     }   },   series: [{     // specific options for this series instance     type: 'dependencywheel'   }] }); ```       
+
+**Try it**
+
+* [Dependency wheel](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/dependency-wheel/)
+*/
+@property(nonatomic, readwrite) HIDependencywheel *dependencywheel;
+/**
 A heatmap is a graphical representation of data where the individual values contained in a matrix are represented as colors. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `heatmap` series are defined in  `plotOptions.heatmap`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     heatmap: {       // shared options for all heatmap series     }   },   series: [{     // specific options for this series instance     type: 'heatmap'   }] }); ```       
 
 **Try it**
@@ -184,6 +216,24 @@ A solid gauge is a circular gauge where the value is indicated by a filled arc, 
 */
 @property(nonatomic, readwrite) HISolidgauge *solidgauge;
 /**
+The timeline series presents given events along a drawn line. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `timeline` series are defined in  `plotOptions.timeline`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     timeline: {       // shared options for all timeline series     }   },   series: [{     // specific options for this series instance     type: 'timeline'   }] }); ```       
+
+**Try it**
+
+* [Timeline series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-timeline/alternate-labels)
+* [Inverted timeline](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-timeline/inverted)
+* [With true datetime axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-timeline/datetime-axis)
+*/
+@property(nonatomic, readwrite) HITimeline *timeline;
+/**
+A funnel3d is a 3d version of funnel series type. Funnel charts are a type of chart often used to visualize stages in a sales project, where the top are the initial stages with the most clients. It requires that the `highcharts-3d.js`, `cylinder.js` and `funnel3d.js` module are loaded. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `funnel3d` series are defined in  `plotOptions.funnel3d`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     funnel3d: {       // shared options for all funnel3d series     }   },   series: [{     // specific options for this series instance     type: 'funnel3d'   }] }); ```       
+
+**Try it**
+
+* [Funnel3d](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/funnel3d/)
+*/
+@property(nonatomic, readwrite) HIFunnel3d *funnel3d;
+/**
 Column series display one column per value along an X axis. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `column` series are defined in  `plotOptions.column`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     column: {       // shared options for all column series     }   },   series: [{     // specific options for this series instance     type: 'column'   }] }); ```       
 
 **Try it**
@@ -199,6 +249,16 @@ A treemap displays hierarchical data using nested rectangles. The data can be la
 * [Treemap](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/treemap-large-dataset/)
 */
 @property(nonatomic, readwrite) HITreemap *treemap;
+/**
+A waterfall chart displays sequentially introduced positive or negative values in cumulative columns. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `waterfall` series are defined in  `plotOptions.waterfall`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     waterfall: {       // shared options for all waterfall series     }   },   series: [{     // specific options for this series instance     type: 'waterfall'   }] }); ```       
+
+**Try it**
+
+* [Waterfall chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/waterfall/)
+* [Horizontal (inverted) waterfall](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/waterfall-inverted/)
+* [Stacked waterfall chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/waterfall-stacked/)
+*/
+@property(nonatomic, readwrite) HIWaterfall *waterfall;
 /**
 The column range is a cartesian series type with higher and lower Y values along an X axis. Requires `highcharts-more.js`. To display horizontal bars, set `chart.inverted` to `true`. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `columnrange` series are defined in  `plotOptions.columnrange`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     columnrange: {       // shared options for all columnrange series     }   },   series: [{     // specific options for this series instance     type: 'columnrange'   }] }); ```       
 
@@ -352,11 +412,12 @@ A polygon series can be used to draw any freeform shape in the cartesian coordin
 */
 @property(nonatomic, readwrite) HIPolygon *polygon;
 /**
-A packed bubble series is a two dimensional series type, where each point renders a value in X, Y position. Each point is drawn as a bubble where the bubbles don't overlap with each other and the radius of the bubble related to the value. Requires `highcharts-more.js`. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `packedbubble` series are defined in  `plotOptions.packedbubble`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     packedbubble: {       // shared options for all packedbubble series     }   },   series: [{     // specific options for this series instance     type: 'packedbubble'   }] }); ```       
+A packed bubble series is a two dimensional series type, where each point renders a value in X, Y position. Each point is drawn as a bubble where the bubbles don't overlap with each other and the radius of the bubble relates to the value. Requires `highcharts-more.js`. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `packedbubble` series are defined in  `plotOptions.packedbubble`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     packedbubble: {       // shared options for all packedbubble series     }   },   series: [{     // specific options for this series instance     type: 'packedbubble'   }] }); ```       
 
 **Try it**
 
-* [Packed-bubble chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/packed-bubble/)
+* [Packed bubble chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/packed-bubble/)
+* [Split packed bubble chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/packed-bubble-split/)
 */
 @property(nonatomic, readwrite) HIPackedbubble *packedbubble;
 /**
@@ -386,16 +447,6 @@ Error bars are a graphical representation of the variability of data and are use
 */
 @property(nonatomic, readwrite) HIErrorbar *errorbar;
 /**
-A waterfall chart displays sequentially introduced positive or negative values in cumulative columns. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `waterfall` series are defined in  `plotOptions.waterfall`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     waterfall: {       // shared options for all waterfall series     }   },   series: [{     // specific options for this series instance     type: 'waterfall'   }] }); ```       
-
-**Try it**
-
-* [Waterfall chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/waterfall/)
-* [Horizontal (inverted) waterfall](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/waterfall-inverted/)
-* [Stacked waterfall chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/waterfall-stacked/)
-*/
-@property(nonatomic, readwrite) HIWaterfall *waterfall;
-/**
 Wind barbs are a convenient way to represent wind speed and direction in one graphical form. Wind direction is given by the stem direction, and wind speed by the number and shape of barbs. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `windbarb` series are defined in  `plotOptions.windbarb`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     windbarb: {       // shared options for all windbarb series     }   },   series: [{     // specific options for this series instance     type: 'windbarb'   }] }); ```       
 
 **Try it**
@@ -411,6 +462,17 @@ A bullet graph is a variation of a bar graph. The bullet graph features a single
 * [Bullet graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bullet-graph/)
 */
 @property(nonatomic, readwrite) HIBullet *bullet;
+/**
+An organization chart is a diagram that shows the structure of an organization and the relationships and relative ranks of its parts and positions. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `organization` series are defined in  `plotOptions.organization`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     organization: {       // shared options for all organization series     }   },   series: [{     // specific options for this series instance     type: 'organization'   }] }); ```       
+
+**Try it**
+
+* [Organization chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/organization-chart/)
+* [Horizontal organization chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/horizontal/)
+* [Borderless design](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/borderless)
+* [Centered layout](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/center-layout)
+*/
+@property(nonatomic, readwrite) HIOrganization *organization;
 
 -(NSDictionary *)getParams;
 

@@ -6,6 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIDataAccessibility.h"
 #import "HIDragDrop.h"
 #import "HIEvents.h"
 #import "HIMarker.h"
@@ -13,6 +14,7 @@
 #import "HIPartialFill.h"
 #import "HIColor.h"
 #import "HIFunction.h"
+#import "HIDataLabelsOptionsObject.h"
 
 
 /**
@@ -283,7 +285,7 @@ A description of the point to add to the screen reader information about the poi
 */
 @property(nonatomic, readwrite) NSString *definition;
 /**
-The name of the point as shown in the legend, tooltip, dataLabel etc.
+The name of the point as shown in the legend, tooltip, dataLabels etc.
 
 **Try it**
 
@@ -304,6 +306,7 @@ Whether the data point is selected initially.
 **Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *selected;
+@property(nonatomic, readwrite) HIDataAccessibility *accessibility;
 /**
 Individual data label for each point. The options are the same as the ones for `plotOptions.series.dataLabels`.
 
@@ -311,7 +314,7 @@ Individual data label for each point. The options are the same as the ones for `
 
 * [Show a label for the last value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/datalabels/)
 */
-@property(nonatomic, readwrite) id dataLabels;
+@property(nonatomic, readwrite) HIDataLabelsOptionsObject *dataLabels;
 /**
 An additional, individual class name for the data point's graphic representation.
 */
@@ -354,9 +357,9 @@ The sequential index of the data point in the legend.
 @property(nonatomic, readwrite) NSNumber *legendIndex;
 @property(nonatomic, readwrite) HIMarker *marker;
 /**
-The value of a bubble. The bubble's size proportional to its `value`.
+The label of event.
 */
-@property(nonatomic, readwrite) NSNumber *weight;
+@property(nonatomic, readwrite) NSString *label;
 /**
 The vector direction in degrees, where 0 is north (pointing towards south).
 */
@@ -396,6 +399,14 @@ The width of the border surrounding the column or bar. In styled mode, the strok
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
+Whether to display a slice offset from the center.
+
+**Try it**
+
+* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
+/**
 Point padding for a single point.
 
 **Try it**
@@ -428,14 +439,6 @@ When this property is true, the point display the total sum across the entire se
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *isSum;
 /**
-Whether to display a slice offset from the center.
-
-**Try it**
-
-* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
-/**
 The node that the link runs to.
 */
 @property(nonatomic, readwrite) NSString *to;
@@ -443,6 +446,10 @@ The node that the link runs to.
 The node that the link runs from.
 */
 @property(nonatomic, readwrite) NSString *from;
+/**
+The weight of the link.
+*/
+@property(nonatomic, readwrite) NSNumber *weight;
 /**
 The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
 
@@ -511,6 +518,10 @@ The set or sets the options will be applied to. If a single entry is defined, th
 * [Euler diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/euler-diagram/)
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *sets;
+/**
+By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
 
 -(NSDictionary *)getParams;
 

@@ -10,30 +10,24 @@
 
 
 /**
-The position of the button.
+The position of the no-data label, relative to the plot area.
 */
 @interface HIPosition: HIChartsJSONSerializable
 
 /**
-Vertical offset of the button.
+Vertical offset of the label, in pixels.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-Horizontal offset of the button.
+Horizontal offset of the label, in pixels.
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Horizontal alignment of the button.
-
-**Accepted values:** `["left", "center", "right"]`.
+Horizontal alignment of the label.
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-Vertical alignment of the button.
-
-**Accepted values:** `["top", "middle", "bottom"]`.
-
-**Defaults to** `top`.
+Vertical alignment of the label.
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 

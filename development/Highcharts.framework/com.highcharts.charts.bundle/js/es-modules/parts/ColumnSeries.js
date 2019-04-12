@@ -1,8 +1,10 @@
 /* *
- * (c) 2010-2019 Torstein Honsi
  *
- * License: www.highcharts.com/license
- */
+ *  (c) 2010-2019 Torstein Honsi
+ *
+ *  License: www.highcharts.com/license
+ *
+ * */
 
 /**
  * Adjusted width and x offset of the columns for grouping.
@@ -52,7 +54,9 @@ var animObject = H.animObject,
  *
  * @augments Highcharts.Series
  */
-seriesType('column', 'line'
+seriesType(
+    'column',
+    'line',
 
     /**
      * Column series display one column per value along an X axis.
@@ -68,7 +72,7 @@ seriesType('column', 'line'
      * @product      highcharts highstock
      * @optionparent plotOptions.column
      */
-    , {
+    {
 
         /**
          * The corner radius of the border surrounding each column or bar.
@@ -358,20 +362,17 @@ seriesType('column', 'line'
         },
 
         dataLabels: {
-
             /**
-             * @type {Highcharts.AlignType|null}
+             * @ignore-option
+             * auto
              */
-            align: null, // auto
-
+            align: null,
             /**
-             * @type {Highcharts.VerticalAlignType|null}
+             * @ignore-option
+             * auto
              */
-            verticalAlign: null, // auto
-
-            /**
-             * @type {number|null}
-             */
+            verticalAlign: null,
+            /** @ignore-option */
             y: null
         },
 
@@ -442,7 +443,11 @@ seriesType('column', 'line'
          */
         borderColor: '#ffffff'
 
-    }, /** @lends seriesTypes.column.prototype */ {
+    },
+    /**
+     * @lends seriesTypes.column.prototype
+     */
+    {
         cropShoulder: 0,
         // When tooltip is not shared, this series (and derivatives) requires
         // direct touch/hover. KD-tree does not apply.
@@ -740,7 +745,8 @@ seriesType('column', 'line'
 
                 // Register shape type and arguments to be used in drawPoints
                 // Allow shapeType defined on pointClass level
-                point.shapeType = point.shapeType || 'rect';
+                point.shapeType =
+                    series.pointClass.prototype.shapeType || 'rect';
                 point.shapeArgs = series.crispCol.apply(
                     series,
                     point.isNull ?
@@ -812,7 +818,8 @@ seriesType('column', 'line'
                 ),
                 strokeWidth = (point && point[strokeWidthOption]) ||
                 options[strokeWidthOption] || this[strokeWidthOption] || 0,
-                dashstyle = options.dashStyle,
+                dashstyle = (point && point.dashStyle) || options.dashStyle,
+                opacity = pick(options.opacity, 1),
                 zone,
                 brightness;
 
@@ -824,6 +831,12 @@ seriesType('column', 'line'
                 fill = (
                     point.options.color || (zone && zone.color) || this.color
                 );
+
+                if (zone) {
+                    stroke = zone.borderColor || stroke;
+                    dashstyle = zone.dashStyle || dashstyle;
+                    strokeWidth = zone.borderWidth || strokeWidth;
+                }
             }
 
             // Select or hover states
@@ -843,12 +856,14 @@ seriesType('column', 'line'
                 stroke = stateOptions[strokeOption] || stroke;
                 strokeWidth = stateOptions[strokeWidthOption] || strokeWidth;
                 dashstyle = stateOptions.dashStyle || dashstyle;
+                opacity = pick(stateOptions.opacity, opacity);
             }
 
             ret = {
                 'fill': fill,
                 'stroke': stroke,
-                'stroke-width': strokeWidth
+                'stroke-width': strokeWidth,
+                'opacity': opacity
             };
 
             if (dashstyle) {
@@ -884,6 +899,15 @@ seriesType('column', 'line'
                 if (isNumber(plotY) && point.y !== null) {
                     shapeArgs = point.shapeArgs;
 
+                    // When updating a series between 2d and 3d or cartesian and
+                    // polar, the shape type changes.
+                    if (
+                        graphic &&
+                        graphic.element.nodeName !== point.shapeType
+                    ) {
+                        graphic = graphic.destroy();
+                    }
+
                     if (graphic) { // update
                         graphic[verb](
                             merge(shapeArgs)
@@ -897,7 +921,7 @@ seriesType('column', 'line'
 
                     // Border radius is not stylable (#6900)
                     if (options.borderRadius) {
-                        graphic.attr({
+                        graphic[verb]({
                             r: options.borderRadius
                         });
                     }
@@ -909,7 +933,7 @@ seriesType('column', 'line'
                             point.selected && 'select'
                         ))
                             .shadow(
-                                options.shadow,
+                                point.allowShadow !== false && options.shadow,
                                 null,
                                 options.stacking && !options.borderRadius
                             );
@@ -1009,7 +1033,8 @@ seriesType('column', 'line'
 
             Series.prototype.remove.apply(series, arguments);
         }
-    });
+    }
+);
 
 
 /**
@@ -1017,8 +1042,8 @@ seriesType('column', 'line'
  * not specified, it is inherited from [chart.type](#chart.type).
  *
  * @extends   series,plotOptions.column
- * @excluding connectNulls, dashStyle, dataParser, dataURL, gapSize, gapUnit,
- *            linecap, lineWidth, marker, connectEnds, step
+ * @excluding connectNulls, dataParser, dataURL, gapSize, gapUnit, linecap,
+ *            lineWidth, marker, connectEnds, step
  * @product   highcharts highstock
  * @apioption series.column
  */
@@ -1077,7 +1102,7 @@ seriesType('column', 'line'
  * @sample {highcharts} highcharts/series/data-array-of-objects/
  *         Config objects
  *
- * @type      {Array<number|Array<(number|string),number>|*>}
+ * @type      {Array<number|Array<(number|string),(number|null)>|null|*>}
  * @extends   series.line.data
  * @excluding marker
  * @product   highcharts highstock

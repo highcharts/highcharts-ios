@@ -33,8 +33,6 @@ A collection of attributes for the button. The object takes SVG attributes like 
 /**
 What box to align the button to. Can be either `plotBox` or `spacingBox`.
 
-**Accepted values:** `["plotBox", "spacingBox"]`.
-
 **Defaults to** `plotBox`.
 */
 @property(nonatomic, readwrite) NSString *relativeTo;

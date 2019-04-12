@@ -7,8 +7,9 @@
 */
 
 #import "HIButtonOptions.h"
-#import "HIEvents.h"
+#import "HIAnnotationsOptions.h"
 #import "HIBindings.h"
+#import "HIEvents.h"
 #import "HIPopup.h"
 #import "HIColor.h"
 #import "HIAnimationOptionsObject.h"
@@ -35,23 +36,17 @@ A collection of options for buttons appearing in the exporting module. In styled
 */
 @property(nonatomic, readwrite) HIButtonOptions *buttonOptions;
 /**
-A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events.
-*/
-@property(nonatomic, readwrite) NSString *bindingsClassName;
-/**
-Events to communicate between Stock Tools and custom GUI.
-*/
-@property(nonatomic, readwrite) HIEvents *events;
-/**
-CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML. Font size defaults to `11px` on desktop and `14px` on touch devices.
-
-**Defaults to** `{"padding": "0.5em 1em", "color": "#333333", "background": "none", "fontSize": "11px/14px", "transition": "background 250ms, color 250ms"}`.
+Additional options to be merged into all annotations.
 
 **Try it**
 
-* [Add a grey stripe to the left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemstyle/)
+* [Set red color of all line annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/navigation-annotation-options)
 */
-@property(nonatomic, readwrite) HICSSObject *menuItemStyle;
+@property(nonatomic, readwrite) HIAnnotationsOptions *annotationsOptions;
+/**
+A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events. Default value of versions < 7.0.4 `highcharts-bindings-wrapper`
+*/
+@property(nonatomic, readwrite) NSString *bindingsClassName;
 /**
 CSS styles for the hover state of the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
 
@@ -63,6 +58,16 @@ CSS styles for the hover state of the individual items within the popup menu app
 */
 @property(nonatomic, readwrite) HICSSObject *menuItemHoverStyle;
 /**
+CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML. Font size defaults to `11px` on desktop and `14px` on touch devices.
+
+**Defaults to** `{"padding": "0.5em 1em", "color": "#333333", "background": "none", "fontSize": "11px/14px", "transition": "background 250ms, color 250ms"}`.
+
+**Try it**
+
+* [Add a grey stripe to the left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemstyle/)
+*/
+@property(nonatomic, readwrite) HICSSObject *menuItemStyle;
+/**
 Bindings definitions for custom HTML buttons. Each binding implements simple event-driven interface: - `className`: classname used to bind event to - `init`: initial event, fired on button click - `start`: fired on first click on a chart - `steps`: array of sequential events fired one after another on each  of users clicks - `end`: last event to be called after last step event
 
 **Try it**
@@ -70,6 +75,10 @@ Bindings definitions for custom HTML buttons. Each binding implements simple eve
 * [Custom bindings in Highstock](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/stocktools-thresholds)
 */
 @property(nonatomic, readwrite) HIBindings *bindings;
+/**
+Events to communicate between Stock Tools and custom GUI.
+*/
+@property(nonatomic, readwrite) HIEvents *events;
 /**
 Text styles for the legend page navigation.
 

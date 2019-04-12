@@ -58,6 +58,12 @@ The sort index of the point inside the treemap level.
 */
 @property(nonatomic, readwrite) NSNumber *sortIndex;
 /**
+When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
+/**
 When enabled the user can click on a point which is a parent and zoom in on its children.
 
 **Try it**
@@ -65,16 +71,6 @@ When enabled the user can click on a point which is a parent and zoom in on its 
 * [Enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-allowtraversingtree/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowTraversingTree;
-/**
-The opacity of a point in treemap. When a point has children, the visibility of the children is determined by the opacity.
-*/
-@property(nonatomic, readwrite) NSNumber *opacity;
-/**
-When using automatic point colors pulled from the `options.colors` collection, this option determines whether the chart should receive one color per series or one color per point.
-
-**Defaults to** `false`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 Defines which direction the layout algorithm will start drawing.
 

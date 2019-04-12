@@ -35,9 +35,7 @@ Angular gauges and solid gauges only. The label's pixel distance from the perime
 */
 @property(nonatomic, readwrite) NSNumber *distance;
 /**
-What part of the string the given position is anchored to. Can be one of `"left"`, `"center"` or `"right"`. The exact position also depends on the `labels.x` setting. Angular gauges and solid gauges defaults to `center`.
-
-**Accepted values:** `["left", "center", "right"]`.
+What part of the string the given position is anchored to. Can be one of `"left"`, `"center"` or `"right"`. The exact position also depends on the `labels.x` setting. Angular gauges and solid gauges defaults to `"center"`.
 
 **Defaults to** `right`.
 

@@ -1,3 +1,101 @@
+# Version 7.1.1
+
+## iOS:
+
+1. Added external JS dependencies: `svg2pdf`, `jspdf`, `rgbColor`, `export-csv`, `moment`, `moment-timezone-with-data`.
+
+## Framework:
+
+1. Added Organization Chart series type.
+2. Added Item Chart series type for visualizing item counts and parliaments.
+3. Added Dependency Wheel series type.
+4. Added Timeline series type.
+5. Added 3D Pyramid and 3D Funnel series types.
+6. Accessibility - improved experience for screen reader users, support for dynamic data and drilldown, as well as support for voice input software.
+7. Added inactive states to series and points, allowing other series to be dimmed when the user is hovering the data or legend.
+8. Added levels to sankey series.
+9. Added annotation.events: add, afterUpdate and remove.
+10. Added full screen capabilities to exporting module.
+11. Added option treemap.events.setRootNode.
+12. Added option xAxis.margin to ensure a distance between multiple axes on the same side.
+13. Added options plotOptions.sankey.borderWidth and sankey.borderColor for sankey nodes.
+14. Added force directed algorithm for improved packing of packed bubble charts.
+15. Added support for nested packed bubbles.
+16. Added Verlet integration for network graphs. Generally improved network graph algorithms.
+17. Added data labels to links in network graphs.
+18. Added new option, chart.scrollablePlotArea.opacity, to control opacity of the scrollable mask. See #10416.
+
+## Framework upgrade notes:
+
+1. Changed default X axis tickWidth option. Now tick marks are not rendered by default on category axes. Set the tickWidth to 1 to bring back the old behaviour.
+2. Renamed plotOptions.treemap.drillUpButton to traverseUpButton.
+3. Changed default states.inactive.opacity for map and mapline series to prevent dimming map shapes.
+
+## Framework bug fixes:
+
+1. Fixed #10009, wrong tooltip size with useHTML and varying text lengths.
+2. Fixed #10010, series.update destroyed points and lost their event handlers.
+3. Fixed #10031, long dataLabels for pie with useHTML: true, were generated with width less than 0.
+4. Fixed #10052, chart printing failed with error on IE11.
+5. Fixed #10055, exporting custom annotation did not work for other types than SVG.
+6. Fixed #10063, proximate legend layout did not account for axis top setting.
+7. Fixed #10081, chart with parallelCoordinates was not resizing properly after update.
+8. Fixed #10082, points below Y axis min in polar charts were drawn incorrectly.
+9. Fixed #10101, bubble legend was duplicated with map module.
+10. Fixed #10106, issue with the showEmpty feature.
+11. Fixed #10107, legend navigation required overly precise clicks/touches.
+12. Fixed #10115, vector and wind barb series didn't handle the clip option.
+13. Fixed #10127, treemap removed old classNames on update.
+14. Fixed #10131, error in draggable points after updating series.
+15. Fixed #10160, stacking null points from the same series threw unhandled exception.
+16. Fixed #10163, series.setData() did not remove old nodes for a networkgraph.
+17. Fixed #10167, a regression causing unwanted padding on top of legends in some cases.
+18. Fixed #10187, setData didn't update data when old data had null values and the same length.
+19. Fixed #10213, relative chart height didn't apply in responsive chart.
+20. Fixed #10220, visible parts on charts inside an element with visibility: hidden.
+21. Fixed #10225, histogram produced additional bin on the end.
+22. Fixed #10232, solid gauge series had wrong legend symbol.
+23. Fixed #10243, offline export failed with boost and hidden series.
+24. Fixed #10246, boost culling issue.
+25. Fixed #10265, class names were applied multiple times to elements, causing selected pies not to unselect after redraw.
+26. Fixed #10273, changing live data settings dynamically didn't take effect.
+27. Fixed #10282, overlap larger than smallest circle in venn diagrams.
+28. Fixed #10283, click events were not applied on scatter points with base tag present in Firefox.
+29. Fixed #10286, responsive setting of showInLegend failed.
+30. Fixed #10302, plot line events did not fire if the lines were initially outside visible range.
+31. Fixed #10312, keyboard navigation with no data.
+32. Fixed #10342, HTML split tooltip did not fade after series update if formatter returned a string.
+33. Fixed #10347, annotation-bindings were not compatible with IE11.
+34. Fixed #10352, replaced Math.sign() in networkgraph source code for IE compatibility.
+35. Fixed #10417, simulation for packed bubble series did not stop when exporting chart.
+36. Fixed #6234, some presentational options were not settable in zones in column series.
+37. Fixed #6404, plot band labels were not aligned correctly in gauge chart.
+38. Fixed #6894, yAxis.softMax didn't take effect on the other side of the zero plane.
+39. Fixed #7048, tooltips didn't appear on null values in heatmap when in boost mode.
+40. Fixed #7895, renamed and documented option in export-data module responsible for series data visibility in exported chart data - includeInDataExport.
+41. Fixed #8766, chart crashed when misconfiguring plotOptions.
+42. Fixed #8864, connectorColor didn't work for individual points.
+43. Fixed #9087, malformed exported SVG when SVG elements were added inside useHTML labels.
+44. Fixed #9128, #10025, histogram series had incorrect amount of free space between points.
+45. Fixed #9233, data labels and tooltip formatting was not supported for null points in heatmap.
+46. Fixed #9880, hover animation on xrange points was incorrect.
+47. Fixed #9917, chart.update with initial pane options did not change the pane.
+48. Fixed #9962, line series was not rendered in the boost mode, when all points were outside the extremes.
+49. Fixed #9978, horizontal scrollbar on RTL charts with a11y module.
+50. Fixed #10161, wrong extremes in single category axis.
+51. Fixed #10432, missing category name in tooltip when using boost module.
+52. Fixed #10466, reset zoom button moved offscreen when using scrollablePlotArea.
+53. Fixed #10471, pareto series wasn't rendering when baseSeries was set to first series by 0 number.
+54. Fixed #10496, data labels animated when series animation was turned off.
+55. Fixed #10504, after deselecting a column, inactive state was used instead of normal state.
+56. Fixed #10506, named colors did not work in boost mode.
+57. Fixed #4608, boost module highlighted wrong point on hover when chart was inverted. Added support for reversed axes in boost.
+58. Fixed #5268, series.threshold = null was ignored in boost mode.
+59. Fixed #6963, boost with enabled useGPUTranslations rendered incrorrectly when yAxis was logarithmic type.
+60. Fixed #9795, updating chart.spacing didn't reflow all elements.
+61. Fixed issue with range selector and time zones, test results were different depending on time zone.
+62. Fixed performance issue with sankey chart.
+
 # Version 7.0.3
 
 ## iOS:

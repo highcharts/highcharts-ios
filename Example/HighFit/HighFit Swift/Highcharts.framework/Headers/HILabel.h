@@ -26,8 +26,6 @@ CSS styles for the text label. In styled mode, the labels are styled by the `.hi
 /**
 Vertical alignment of the label relative to the plot line. Can be one of "top", "middle" or "bottom".
 
-**Accepted values:** `["top", "middle", "bottom"]`.
-
 **Defaults to** `top`.
 
 **Try it**

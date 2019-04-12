@@ -7,18 +7,19 @@
 */
 
 #import "HISummary.h"
-#import "HIPoint.h"
 #import "HIStates.h"
 #import "HIDragDrop.h"
+#import "HIPoint.h"
 #import "HIMarker.h"
 #import "HITooltip.h"
 #import "HILabel.h"
 #import "HIEvents.h"
+#import "HISeriesAccessibility.h"
 #import "HIZones.h"
-#import "HIDataLabels.h"
 #import "HIColor.h"
 #import "HIFunction.h"
 #import "HIAnimationOptionsObject.h"
+#import "HIDataLabelsOptionsObject.h"
 #import "HIData.h"
 
 
@@ -154,9 +155,9 @@ Lang configuration for the series main summary. Each series type has two modes: 
 */
 @property(nonatomic, readwrite) HISummary *summary;
 /**
-Properties for each single point.
+Export-data module required. When set to `false` will prevent the series data from being included in any form of data export. Since version 6.0.0 until 7.1.0 the option was existing undocumented as `includeInCSVExport`.
 */
-@property(nonatomic, readwrite) HIPoint *point;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
 Whether to select the series initially. If `showCheckbox` is true, the checkbox next to the series name in the legend will be checked for a selected series.
 
@@ -216,9 +217,6 @@ If no x values are given for the points in a series, `pointInterval` defines the
 When the series contains less points than the crop threshold, all points are drawn, even if the points fall outside the visible plot area at the current zoom. The advantage of drawing all points (including markers and columns), is that animation is performed on updates. On the other hand, when the series contains more points than the crop threshold, the series data is cropped to only contain points that fall within the plot area. The advantage of cropping away invisible points is to increase performance on large series.
 */
 @property(nonatomic, readwrite) NSNumber *cropThreshold;
-/**
-A wrapper object for all the series options in specific states.
-*/
 @property(nonatomic, readwrite) HIStates *states;
 /**
 When this is true, the series will not cause the Y axis to cross the zero plane (or `threshold` option) unless the data actually crosses the plane. For example, if `softThreshold` is `false`, a series of 0, 1, 2, 3 will make the Y axis show negative values according to the `minPadding` option. If `softThreshold` is `true`, the Y axis starts at 0.
@@ -235,6 +233,10 @@ The draggable-points module allows points to be moved around or modified in the 
 * [Draggable X range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
 */
 @property(nonatomic, readwrite) HIDragDrop *dragDrop;
+/**
+Properties for each single point.
+*/
+@property(nonatomic, readwrite) HIPoint *point;
 /**
 Options for the point markers of line-like series. Properties like `fillColor`, `lineColor` and `lineWidth` define the visual appearance of the markers. Other series types, like column series, don't have markers, but have visual options on the series level instead. In styled mode, the markers can be styled with the `.highcharts-point`, `.highcharts-point-hover` and `.highcharts-point-select` class names.
 */
@@ -371,6 +373,10 @@ General event handlers for the series items. These event hooks can also be attac
 */
 @property(nonatomic, readwrite) HIEvents *events;
 /**
+Opacity of a series parts: line, fill (e.g.area) and dataLabels.
+*/
+@property(nonatomic, readwrite) NSNumber *opacity;
+/**
 For some series, there is a limit that shuts down initial animation by default when the total number of points in the chart is too high. For example, for a column chart and its derivatives, animation does not run if there is more than 250 points totally. To disable this cap, set `animationLimit` to `Infinity`.
 */
 @property(nonatomic, readwrite) NSNumber *animationLimit;
@@ -392,15 +398,9 @@ If set to `true`, the accessibility module will skip past the points in this ser
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *skipKeyboardNavigation;
 /**
-Allow this series' points to be selected by clicking on the graphic (columns, point markers, pie slices, map areas etc).
-
-**Try it**
-
-* [Line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-allowpointselect-line/)
-* [Column](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-allowpointselect-column/)
-* [Pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-allowpointselect-pie/)
+Accessibility options for a series. Requires the accessibility module.
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *allowPointSelect;
+@property(nonatomic, readwrite) HISeriesAccessibility *accessibility;
 /**
 Whether to apply steps to the line. Possible values are `left`, `center` and `right`.
 
@@ -436,6 +436,17 @@ Whether to apply a drop shadow to the graph line. Since 2.3 the shadow can be an
 * [Shadow enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-shadow/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+/**
+Allow this series' points to be selected by clicking on the graphic (columns, point markers, pie slices, map areas etc). The selected points can be handled by point select and unselect events, or collectively by the `getSelectedPoints` function. And alternative way of selecting points is through dragging.
+
+**Try it**
+
+* [Line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-allowpointselect-line/)
+* [Column](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-allowpointselect-column/)
+* [Pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-allowpointselect-pie/)
+* [Select a range of points through a drag selection](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-selection-points/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *allowPointSelect;
 /**
 Defines the Axis on which the zones are applied.
 
@@ -503,14 +514,14 @@ Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *stickyTracking;
 /**
-Options for the series data labels, appearing next to each data point. Since v6.2.0, multiple data labels can be applied to each single point by defining them as an array of configs. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-datalabels)).
+Options for the series data labels, appearing next to each data point. Since v6.2.0, multiple data labels can be applied to each single point by defining them as an array of configs. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://www.highcharts.com/samples/highcharts/css/series-datalabels)).
 
 **Try it**
 
 * [Data labels enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-enabled)
 * [Multiple data labels on a bar series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-multiple)
 */
-@property(nonatomic, readwrite) HIDataLabels *dataLabels;
+@property(nonatomic, readwrite) HIDataLabelsOptionsObject *dataLabels;
 /**
 You can set the cursor to "pointer" if you have click events attached to the series, to signal to the user that the points and lines can be clicked. In styled mode, the series cursor can be set with the same classes as listed under `series.color`.
 
@@ -534,8 +545,6 @@ If no x values are given for the points in a series, pointStart defines on what 
 @property(nonatomic, readwrite) NSNumber *pointStart;
 /**
 The line cap used for line ends and line joins on the graph.
-
-**Accepted values:** `["round", "square"]`.
 
 **Defaults to** `round`.
 */

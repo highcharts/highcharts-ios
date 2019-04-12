@@ -1,7 +1,11 @@
-/**
+/* *
  * (c) 2010-2019 Torstein Honsi
  *
  * License: www.highcharts.com/license
+ */
+
+/**
+ * @typedef {"plotBox"|"spacingBox"} Highcharts.ButtonRelativeToValue
  */
 
 /**
@@ -178,37 +182,6 @@
  * @type {number}
  */
 
-/**
- * @interface Highcharts.TooltipFormatterContextObject
- *//**
- * @name Highcharts.TooltipFormatterContextObject#color
- * @type {Highcharts.ColorString}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#colorIndex
- * @type {number|undefined}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#key
- * @type {number}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#percentage
- * @type {number|undefined}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#point
- * @type {Highcharts.Point}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#series
- * @type {Highcharts.Series}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#total
- * @type {number|undefined}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#x
- * @type {number}
- *//**
- * @name Highcharts.TooltipFormatterContextObject#y
- * @type {number}
- */
-
 'use strict';
 
 import H from './Globals.js';
@@ -221,9 +194,10 @@ var color = H.color,
     merge = H.merge,
     svg = H.svg;
 
-/* ****************************************************************************
+/* ************************************************************************** *
  * Handle the options                                                         *
- *****************************************************************************/
+ * ************************************************************************** */
+
 /**
  * Global default settings.
  *
@@ -562,9 +536,14 @@ H.defaultOptions = {
         /**
          * Default `mapData` for all series. If set to a string, it functions
          * as an index into the `Highcharts.maps` array. Otherwise it is
-         * interpreted s map data.
+         * interpreted as map data.
          *
          * @see [mapData](#series.map.mapData)
+         *
+         * @sample    maps/demo/geojson
+         *            Loading geoJSON data
+         * @sample    maps/chart/topojson
+         *            Loading topoJSON converted to geoJSON
          *
          * @type      {string|Array<*>}
          * @since     5.0.0
@@ -1076,18 +1055,17 @@ H.defaultOptions = {
         resetZoomButton: {
 
             /**
-             * What frame the button should be placed related to. Can be either
-             * `plot` or `chart`
+             * What frame the button placement should be related to. Can be
+             * either `plotBox` or `spacingBox`.
              *
              * @sample {highcharts} highcharts/chart/resetzoombutton-relativeto/
              *         Relative to the chart
              * @sample {highstock} highcharts/chart/resetzoombutton-relativeto/
              *         Relative to the chart
              *
-             * @type       {string}
+             * @type       {Highcharts.ButtonRelativeToValue}
              * @default    plot
              * @since      2.2
-             * @validvalue ["plot", "chart"]
              * @apioption  chart.resetZoomButton.relativeTo
              */
 
@@ -1104,14 +1082,11 @@ H.defaultOptions = {
              *         Theming the button
              *
              * @type {Highcharts.SVGAttributes}
+             * @default {"zIndex":6}
              * @since 2.2
              */
             theme: {
-
-                /**
-                 * The Z index for the reset zoom button. The default value
-                 * places it below the tooltip that has Z index 7.
-                 */
+                /** @ignore-option */
                 zIndex: 6
             },
 
@@ -1143,7 +1118,7 @@ H.defaultOptions = {
                 /**
                  * The vertical alignment of the button.
                  *
-                 * @type       {Highcharts.VerticalAlignType}
+                 * @type       {Highcharts.VerticalAlignValue}
                  * @default    top
                  * @apioption  chart.resetZoomButton.position.verticalAlign
                  */
@@ -1676,7 +1651,7 @@ H.defaultOptions = {
          * @sample {highstock} stock/chart/title-verticalalign/
          *         Chart title in bottom right corner
          *
-         * @type      {Highcharts.VerticalAlignType}
+         * @type      {Highcharts.VerticalAlignValue}
          * @since     2.1
          * @apioption title.verticalAlign
          */
@@ -1738,7 +1713,7 @@ H.defaultOptions = {
          *         Aligned to the plot area (x = 50px = margin left - spacing
          *         left)
          *
-         * @type  {Highcharts.AlignType}
+         * @type  {Highcharts.AlignValue}
          * @since 2.0
          */
         align: 'center',
@@ -1830,15 +1805,16 @@ H.defaultOptions = {
          */
 
         /**
-         * The vertical alignment of the title. Can be one of "top", "middle"
-         * and "bottom". When a value is given, the title behaves as floating.
+         * The vertical alignment of the title. Can be one of `"top"`,
+         * `"middle"` and `"bottom"`. When a value is given, the title behaves
+         * as floating.
          *
          * @sample {highcharts} highcharts/subtitle/verticalalign/
          *         Footnote at the bottom right of plot area
          * @sample {highstock} stock/chart/subtitle-footnote
          *         Footnote at the bottom right of plot area
          *
-         * @type      {Highcharts.VerticalAlignType}
+         * @type      {Highcharts.VerticalAlignValue}
          * @since     2.1
          * @apioption subtitle.verticalAlign
          */
@@ -1892,7 +1868,7 @@ H.defaultOptions = {
          * @sample {highstock} stock/chart/subtitle-footnote
          *         Footnote at bottom right of plot area
          *
-         * @type  {Highcharts.AlignType}
+         * @type  {Highcharts.AlignValue}
          * @since 2.0
          */
         align: 'center',
@@ -2057,7 +2033,7 @@ H.defaultOptions = {
          * @sample {highmaps} maps/legend/alignment/
          *         Legend alignment
          *
-         * @type  {Highcharts.AlignType}
+         * @type  {Highcharts.AlignValue}
          * @since 2.0
          */
         align: 'center',
@@ -2187,8 +2163,8 @@ H.defaultOptions = {
 
         /**
          * Callback function to format each of the series' labels. The `this`
-         * keyword refers to the series object, or the point object in case
-         * of pie charts. By default the series or point name is printed.
+         * keyword refers to the series object, or the point object in case of
+         * pie charts. By default the series or point name is printed.
          *
          * @productdesc {highmaps}
          * In Highmaps the context can also be a data class in case of a
@@ -2224,9 +2200,9 @@ H.defaultOptions = {
          */
 
         /**
-         * If the plot area sized is calculated automatically and the legend
-         * is not floating, the legend margin is the space between the legend
-         * and the axis labels or plot area.
+         * If the plot area sized is calculated automatically and the legend is
+         * not floating, the legend margin is the space between the legend and
+         * the axis labels or plot area.
          *
          * @sample {highcharts} highcharts/legend/margin-default/
          *         12 pixels by default
@@ -2278,8 +2254,8 @@ H.defaultOptions = {
         borderRadius: 0,
 
         /**
-         * Options for the paging or navigation appearing when the legend
-         * is overflown. Navigation works well on screen, but not in static
+         * Options for the paging or navigation appearing when the legend is
+         * overflown. Navigation works well on screen, but not in static
          * exported images. One way of working around that is to
          * [increase the chart height in
          * export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation-enabled-false/).
@@ -2686,7 +2662,7 @@ H.defaultOptions = {
          * @sample {highmaps} maps/legend/alignment/
          *         Legend alignment
          *
-         * @type  {Highcharts.VerticalAlignType}
+         * @type  {Highcharts.VerticalAlignValue}
          * @since 2.0
          */
         verticalAlign: 'bottom',
@@ -2902,9 +2878,10 @@ H.defaultOptions = {
 
         /**
          * Whether the tooltip should follow the mouse as it moves across
-         * columns, pie slices and other point types with an extent. By default
-         * it behaves this way for scatter, bubble and pie series by override
-         * in the `plotOptions` for those series types.
+         * columns, pie slices and other point types with an extent.
+         * By default it behaves this way for pie, polygon, map, sankey
+         * and wordcloud series by override in the `plotOptions`
+         * for those series types.
          *
          * For touch moves to behave the same way, [followTouchMove](
          * #tooltip.followTouchMove) must be `true` also.
@@ -3012,9 +2989,23 @@ H.defaultOptions = {
          * @sample {highmaps} maps/tooltip/formatter/
          *         String formatting
          *
-         * @type      {Highcharts.FormatterCallbackFunction<Highcharts.TooltipFormatterContextObject>}
+         * @type      {Highcharts.TooltipFormatterCallbackFunction}
          * @apioption tooltip.formatter
          */
+
+
+        /**
+         * Callback function to format the text of the tooltip for
+         * visible null points.
+         * Works analogously to [formatter](#tooltip.formatter).
+         *
+         * @sample highcharts/plotoptions/series-nullformat
+         *         Format data label and tooltip for null point.
+         *
+         * @type      {Highcharts.TooltipFormatterCallbackFunction}
+         * @apioption tooltip.nullFormatter
+         */
+
 
         /**
          * The number of milliseconds to wait until the tooltip is hidden when
@@ -3049,7 +3040,7 @@ H.defaultOptions = {
          * in the tooltip. Like the `pointFormat` string, but with more
          * flexibility.
          *
-         * @type      {Function}
+         * @type      {Highcharts.FormatterCallbackFunction<Highcharts.Point>}
          * @since     4.1.0
          * @context   Highcharts.Point
          * @apioption tooltip.pointFormatter
@@ -3088,20 +3079,20 @@ H.defaultOptions = {
 
         /**
          * The name of a symbol to use for the border around the tooltip. Can
-         * be one of: `"callout"`, `"circle"` or `"square"`. When
-         * [tooltip.split](#tooltip.split) option is enabled, shape is applied
-         * to all boxes except header, which is controlled by
+         * be one of: `"callout"`, `"circle"`, or `"square"`. When
+         * [tooltip.split](#tooltip.split)
+         * option is enabled, shape is applied to all boxes except header, which
+         * is controlled by
          * [tooltip.headerShape](#tooltip.headerShape).
          *
          * Custom callbacks for symbol path generation can also be added to
          * `Highcharts.SVGRenderer.prototype.symbols` the same way as for
          * [series.marker.symbol](plotOptions.line.marker.symbol).
          *
-         * @type       {string}
-         * @default    callout
-         * @since      4.0
-         * @validvalue ["callout", "square"]
-         * @apioption  tooltip.shape
+         * @type      {Highcharts.TooltipShapeValue}
+         * @default   callout
+         * @since     4.0
+         * @apioption tooltip.shape
          */
 
         /**
@@ -3376,6 +3367,16 @@ H.defaultOptions = {
         headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>',
 
         /**
+         * The HTML of the null point's line in the tooltip. Works analogously
+         * to [pointFormat](#tooltip.pointFormat).
+         *
+         * @type {string}
+         * @sample {highcharts} highcharts/plotoptions/series-nullformat
+         *         Format data label and tooltip for null point.
+         * @apioption tooltip.nullFormat
+         */
+
+        /**
          * The HTML of the point's line in the tooltip. Variables are enclosed
          * by curly brackets. Available variables are point.x, point.y, series.
          * name and series.color and other properties on the same form.
@@ -3576,7 +3577,7 @@ H.defaultOptions = {
             /**
              * Horizontal alignment of the credits.
              *
-             * @type {Highcharts.AlignType}
+             * @type {Highcharts.AlignValue}
              */
             align: 'right',
 
@@ -3588,7 +3589,7 @@ H.defaultOptions = {
             /**
              * Vertical alignment of the credits.
              *
-             * @type {Highcharts.VerticalAlignType}
+             * @type {Highcharts.VerticalAlignValue}
              */
             verticalAlign: 'bottom',
 

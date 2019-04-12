@@ -7,8 +7,9 @@
 */
 
 #import "HIKeyboardNavigation.h"
-#import "HISeries.h"
+#import "HIAnnounceNewData.h"
 #import "HIChartTypes.h"
+#import "HISeries.h"
 #import "HIAxis.h"
 #import "HIExporting.h"
 #import "HISeriesTypeDescriptions.h"
@@ -21,31 +22,63 @@ Options for configuring accessibility for the chart. Requires the [accessibility
 @interface HIAccessibility: HIChartsJSONSerializable
 
 /**
-A formatter function to create the HTML contents of the hidden screen reader information region. Receives one argument, `chart`, referring to the chart object. Should return a String with the HTML content of the region. The link to view the chart as a data table will be added automatically after the custom HTML content.
+Whether or not to add a shortcut button in the screen reader information region to show the data table.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *addTableShortcut;
+/**
+Amount of landmarks/regions to create for screen reader users. More landmarks can make navigation with screen readers easier, but can be distracting if there are lots of charts on the page. Three modes are available: - `all`: Adds regions for all series, legend, menu, information   region. - `one`: Adds a single landmark per chart. - `disabled`: No landmarks are added.
+
+**Accepted values:** `["all", "one", "disabled"]`.
+*/
+@property(nonatomic, readwrite) NSString *landmarkVerbosity;
+/**
+A hook for adding custom components to the accessibility module. Should be an object mapping component names to instances of classes inheriting from the Highcharts.AccessibilityComponent base class. Remember to add the component to the `keyboardNavigation.order` for the keyboard navigation to be usable.
+
+**Try it**
+
+* [Custom accessibility component](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/accessibility/custom-component)
+*/
+@property(nonatomic, readwrite) id customComponents;
+/**
+Decimals to use for the values in the point descriptions. Uses `tooltip.valueDecimals` if not defined.
+*/
+@property(nonatomic, readwrite) NSString *pointValueDecimals;
+/**
+A formatter function to create the HTML contents of the hidden screen reader information region. Receives one argument, `chart`, referring to the chart object. Should return a string with the HTML content of the region. By default this returns an automatic description of the chart. The button to view the chart as a data table will be added automatically after the custom HTML content if enabled.
 
 **Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HIFunction *screenReaderSectionFormatter;
 /**
-Whether or not to add series descriptions to charts with a single series.
-
-**Defaults to** `false`.
+Function to run upon clicking the "View as Data Table" link in the screen reader region. By default Highcharts will insert and set focus to a data table representation of the chart.
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *describeSingleSeries;
+@property(nonatomic, readwrite) HIFunction *onTableAnchorClick;
+/**
+Formatter function to use instead of the default for series descriptions. Receives one argument, `series`, referring to the series to describe. Should return a string with the description of the series for a screen reader user. If `false` is returned, the default formatter will be used for that series.
+*/
+@property(nonatomic, readwrite) HIFunction *seriesDescriptionFormatter;
 /**
 Options for keyboard navigation.
 */
 @property(nonatomic, readwrite) HIKeyboardNavigation *keyboardNavigation;
 /**
-Enable accessibility features for the chart.
+Enable accessibility functionality for the chart.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-When a series contains more points than this, we no longer expose information about individual points to screen readers. Set to `false` to disable.
+Suffix to add to the values in the point descriptions. Uses `tooltip.valueSuffix` if not defined.
 */
-@property(nonatomic, readwrite) NSNumber *pointDescriptionThreshold;
+@property(nonatomic, readwrite) NSString *pointValueSuffix;
 /**
-Formatter function to use instead of the default for point descriptions. Receives one argument, `point`, referring to the point to describe. Should return a String with the description of the point for a screen reader user.
+Date format to use to describe range of datetime axes. For an overview of the replacement codes, see `dateFormat`.
+*/
+@property(nonatomic, readwrite) NSString *axisRangeDateFormat;
+/**
+Prefix to add to the values in the point descriptions. Uses `tooltip.valuePrefix` if not defined.
+*/
+@property(nonatomic, readwrite) NSString *pointValuePrefix;
+/**
+Formatter function to use instead of the default for point descriptions. Receives one argument, `point`, referring to the point to describe. Should return a string with the description of the point for a screen reader user. If `false` is returned, the default formatter will be used for that point.
 */
 @property(nonatomic, readwrite) HIFunction *pointDescriptionFormatter;
 /**
@@ -53,34 +86,59 @@ Date format to use for points on datetime axes when describing them to screen re
 */
 @property(nonatomic, readwrite) NSString *pointDateFormat;
 /**
-Formatter function to use instead of the default for series descriptions. Receives one argument, `series`, referring to the series to describe. Should return a String with the description of the series for a screen reader user.
+Options for announcing new data to screen reader users. Useful for dynamic data applications and drilldown. Keep in mind that frequent announcements will not be useful to users, as they won't have time to explore the new data. For these applications, consider making snapshots of the data accessible, and do the announcements in batches.
 */
-@property(nonatomic, readwrite) HIFunction *seriesDescriptionFormatter;
+@property(nonatomic, readwrite) HIAnnounceNewData *announceNewData;
 /**
-Function to run upon clicking the "View as Data Table" link in the screen reader region. By default Highcharts will insert and set focus to a data table representation of the chart.
+When a series contains more points than this, we no longer expose information about individual points to screen readers. Set to `false` to disable.
 */
-@property(nonatomic, readwrite) HIFunction *onTableAnchorClick;
+@property(nonatomic, readwrite) NSNumber *pointDescriptionThreshold;
+/**
+A text description of the chart type. If the Accessibility module is loaded, this will be included in the description of the chart in the screen reader information region. Highcharts will by default attempt to guess the chart type, but for more complex charts it is recommended to specify this property for clarity.
+*/
+@property(nonatomic, readwrite) NSString *typeDescription;
+/**
+Whether or not to add series descriptions to charts with a single series.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *describeSingleSeries;
 /**
 Formatter function to determine the date/time format used with points on datetime axes when describing them to screen reader users. Receives one argument, `point`, referring to the point to describe. Should return a date format string compatible with `dateFormat`.
 */
 @property(nonatomic, readwrite) HIFunction *pointDateFormatter;
 /**
-Lang configuration for different series types. For more dynamic control over the series element descriptions, see `accessibility.seriesDescriptionFormatter`.
+A text description of the chart. If the Accessibility module is loaded, this is included by default as a long description of the chart in the hidden screen reader information region. Note: It is considered a best practice to make the description of the chart visible to all users, so consider if this can be placed in text around the chart instead.
 */
-@property(nonatomic, readwrite) HISeries *series;
-@property(nonatomic, readwrite) NSString *longDescriptionHeading;
-@property(nonatomic, readwrite) NSString *rangeSelectorMaxInput;
-@property(nonatomic, readwrite) NSString *structureHeading;
-@property(nonatomic, readwrite) NSString *chartContainerLabel;
-@property(nonatomic, readwrite) NSString *mapZoomOut;
+@property(nonatomic, readwrite) NSString *definition;
+/**
+Expose only the series element to screen readers, not its points.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *exposeAsGroupOnly;
+/**
+Range description for an axis. Overrides the default range description. Set to empty to disable range description for this axis.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSString *rangeDescription;
+@property(nonatomic, readwrite) NSString *legendLabel;
 /**
 Chart type description strings. This is added to the chart information region. If there is only a single series type used in the chart, we use the format string for the series type, or default if missing. There is one format string for cases where there is only a single series in the chart, and one for multiple series of the same type.
 */
 @property(nonatomic, readwrite) HIChartTypes *chartTypes;
+@property(nonatomic, readwrite) NSString *rangeSelectorMaxInput;
+@property(nonatomic, readwrite) NSString *drillUpButton;
+@property(nonatomic, readwrite) NSString *chartContainerLabel;
+@property(nonatomic, readwrite) NSString *mapZoomOut;
+/**
+Lang configuration for different series types. For more dynamic control over the series element descriptions, see `accessibility.seriesDescriptionFormatter`.
+*/
+@property(nonatomic, readwrite) HISeries *series;
 /**
 Axis description format strings.
 */
 @property(nonatomic, readwrite) HIAxis *axis;
+@property(nonatomic, readwrite) NSString *svgContainerLabel;
 @property(nonatomic, readwrite) NSString *rangeSelectorMinInput;
 @property(nonatomic, readwrite) NSString *rangeSelectorButton;
 /**
@@ -89,21 +147,28 @@ Exporting menu format strings for accessibility module.
 @property(nonatomic, readwrite) HIExporting *exporting;
 @property(nonatomic, readwrite) NSString *legendItem;
 @property(nonatomic, readwrite) NSString *tableSummary;
-@property(nonatomic, readwrite) NSString *noDescription;
 @property(nonatomic, readwrite) NSString *viewAsDataTable;
 @property(nonatomic, readwrite) NSString *defaultChartTitle;
 @property(nonatomic, readwrite) NSString *screenReaderRegionLabel;
 @property(nonatomic, readwrite) NSString *mapZoomIn;
 @property(nonatomic, readwrite) NSString *chartHeading;
+@property(nonatomic, readwrite) NSString *resetZoomButton;
+/**
+Label for the end of the chart. Announced by screen readers.
+*/
+@property(nonatomic, readwrite) NSString *svgContainerEnd;
 /**
 Title element text for the chart SVG element. Leave this empty to disable adding the title element. Browsers will display this content when hovering over elements in the chart. Assistive technology may use this element to label the chart.
 */
 @property(nonatomic, readwrite) NSString *svgContainerTitle;
-@property(nonatomic, readwrite) NSString *navigationHint;
 /**
 Descriptions of lesser known series types. The relevant description is added to the screen reader information region when these series types are used.
 */
 @property(nonatomic, readwrite) HISeriesTypeDescriptions *seriesTypeDescriptions;
+/**
+Thousands separator to use when formatting numbers for screen readers. Note that many screen readers will not handle space as a thousands separator, and will consider "11 700" as two numbers. Set to `null` to use the separator defined in `lang.thousandsSep`.
+*/
+@property(nonatomic, readwrite) NSString *thousandsSep;
 
 -(NSDictionary *)getParams;
 

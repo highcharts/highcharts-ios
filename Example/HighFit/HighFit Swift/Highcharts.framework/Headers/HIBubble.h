@@ -51,8 +51,6 @@ The minimum for the Z value range. Defaults to the highest Z value in the data.
 /**
 Whether the bubble's value should be represented by the area or the width of the bubble. The default, `area`, corresponds best to the human perception of the size of each bubble.
 
-**Accepted values:** `["area", "width"]`.
-
 **Defaults to** `area`.
 
 **Try it**

@@ -7,9 +7,10 @@
 */
 
 #import "HILabels.h"
-#import "HIDateTimeLabelFormats.h"
+#import "HIAccessibility.h"
 #import "HIPlotLines.h"
 #import "HIEvents.h"
+#import "HIDateTimeLabelFormats.h"
 #import "HITitle.h"
 #import "HIPlotBands.h"
 #import "HIColor.h"
@@ -37,6 +38,14 @@ Color for the minor tick marks.
 */
 @property(nonatomic, readwrite) HIColor *minorTickColor;
 /**
+Refers to the index in the `panes` array. Used for circular gauges and polar charts. When the option is not set then first pane will be used.
+
+**Try it**
+
+* [Two gauges with different center](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter)
+*/
+@property(nonatomic, readwrite) NSNumber *pane;
+/**
 Padding of the min value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the lowest data value to appear on the edge of the plot area. When the axis' `min` option is set or a min extreme is set using `axis.setExtremes()`, the minPadding will be ignored.
 
 **Defaults to** `0.01`.
@@ -61,13 +70,9 @@ The Z index of the grid lines.
 */
 @property(nonatomic, readwrite) NSNumber *gridZIndex;
 /**
-For a datetime axis, the scale will automatically adjust to the appropriate unit. This member gives the default string representations used for each unit. For intermediate values, different units may be used, for example the `day` unit can be used on midnight and `hour` unit be used for intermediate values on the same axis. For an overview of the replacement codes, see `dateFormat`. Defaults to: {   millisecond: '%H:%M:%S.%L',   second: '%H:%M:%S',   minute: '%H:%M',   hour: '%H:%M',   day: '%e. %b',   week: '%e. %b',   month: '%b \'%y',   year: '%Y' }
-
-**Try it**
-
-* [Different day format on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/datetimelabelformats/)
+Accessibility options for an axis. Requires the accessibility module.
 */
-@property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
+@property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Whether axis, including axis title, line, ticks and labels, should be visible.
 
@@ -81,17 +86,11 @@ When using multiple axis, the ticks of two or more opposite axes will automatica
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
-Refers to the index in the `panes` array. Used for circular gauges and polar charts. When the option is not set then first pane will be used.
-
-**Try it**
-
-* [Two gauges with different center](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter)
+The minimum tick interval allowed in axis values. For example on zooming in on an axis with daily data, this can be used to prevent the axis from showing hours. Defaults to the closest distance between two points on the axis.
 */
-@property(nonatomic, readwrite) NSNumber *pane;
+@property(nonatomic, readwrite) NSNumber *minTickInterval;
 /**
-The pixel width of the major tick marks. In styled mode, the stroke width is given in the `.highcharts-tick` class.
-
-**Defaults to** `1`.
+The pixel width of the major tick marks. Defaults to 0 on category axes, otherwise 1. In styled mode, the stroke width is given in the `.highcharts-tick` class.
 
 **Try it**
 
@@ -247,8 +246,6 @@ A soft minimum for the axis. If the series data minimum is greater than this, th
 /**
 The type of axis. Can be one of `linear`, `logarithmic`, `datetime` or `category`. In a datetime axis, the numbers are given in milliseconds, and tick marks are placed on appropriate values like full hours or days. In a category axis, the `point names` of the chart's series are used for categories, if not a `categories` array is defined.
 
-**Accepted values:** `["linear", "logarithmic", "datetime", "category"]`.
-
 **Try it**
 
 * [Linear](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/type-linear/)
@@ -289,10 +286,6 @@ The dash or dot style of the grid lines. For possible values, see [this demonstr
 */
 @property(nonatomic, readwrite) NSString *gridLineDashStyle;
 /**
-_Requires Accessibility module_ Description of the axis to screen reader users.
-*/
-@property(nonatomic, readwrite) NSString *definition;
-/**
 Whether to display the axis on the opposite side of the normal. The normal is on the left side for vertical axes and bottom for horizontal, so the opposite sides will be right and top respectively. This is typically used with dual or multiple axes.
 
 **Defaults to** `false`.
@@ -323,16 +316,13 @@ The maximum value of the axis. If `null`, the max value is automatically calcula
 */
 @property(nonatomic, readwrite) NSNumber *max;
 /**
-The width of the grid lines extending the ticks across the plot area. In styled mode, the stroke width is given in the `.highcharts-grid-line` class.
-
-**Defaults to** `0`.
+For a datetime axis, the scale will automatically adjust to the appropriate unit. This member gives the default string representations used for each unit. For intermediate values, different units may be used, for example the `day` unit can be used on midnight and `hour` unit be used for intermediate values on the same axis. For an overview of the replacement codes, see `dateFormat`. Defaults to: {   millisecond: '%H:%M:%S.%L',   second: '%H:%M:%S',   minute: '%H:%M',   hour: '%H:%M',   day: '%e. %b',   week: '%e. %b',   month: '%b \'%y',   year: '%Y' }
 
 **Try it**
 
-* [2px lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/gridlinewidth/)
-* [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/axis-grid/)
+* [Different day format on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/datetimelabelformats/)
 */
-@property(nonatomic, readwrite) NSNumber *gridLineWidth;
+@property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**
 Enable or disable minor ticks. Unless `minorTickInterval` is set, the tick interval is calculated as a fifth of the `tickInterval`. On a logarithmic axis, minor ticks are laid out based on a best guess, attempting to enter approximately 5 minor ticks between each major tick. Prior to v6.0.0, ticks were unabled in auto layout by setting `minorTickInterval` to `"auto"`.
 
@@ -385,9 +375,16 @@ Color for the main tick marks. In styled mode, the stroke is given in the `.high
 */
 @property(nonatomic, readwrite) HIColor *tickColor;
 /**
-The minimum tick interval allowed in axis values. For example on zooming in on an axis with daily data, this can be used to prevent the axis from showing hours. Defaults to the closest distance between two points on the axis.
+The width of the grid lines extending the ticks across the plot area. In styled mode, the stroke width is given in the `.highcharts-grid-line` class.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [2px lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/gridlinewidth/)
+* [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/axis-grid/)
 */
-@property(nonatomic, readwrite) NSNumber *minTickInterval;
+@property(nonatomic, readwrite) NSNumber *gridLineWidth;
 /**
 The interval of the tick marks in axis units. When `undefined`, the tick interval is computed to approximately follow the `tickPixelInterval` on linear and datetime axes. On categorized axes, a `undefined` tickInterval will default to 1, one category. Note that datetime axes are based on milliseconds, so for example an interval of one day is expressed as `24 * 3600 * 1000`. On logarithmic axes, the tickInterval is based on powers, so a tickInterval of 1 means one tick on each of 0.1, 1, 10, 100 etc. A tickInterval of 2 means a tick of 0.1, 10, 1000 etc. A tickInterval of 0.2 puts a tick on 0.1, 0.2, 0.4, 0.6, 0.8, 1, 2, 4, 6, 8, 10, 20, 40 etc. If the tickInterval is too dense for labels to be drawn, Highcharts may remove ticks. If the chart has multiple axes, the `alignTicks` option may interfere with the `tickInterval` setting.
 

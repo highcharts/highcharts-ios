@@ -10,16 +10,22 @@
 
 
 /**
-Keyboard navigation for the legend. Requires the Accessibility module.
+Options for keyboard navigation.
 */
 @interface HIKeyboardNavigation: HIChartsJSONSerializable
 
 /**
-Enable/disable keyboard navigation for the legend. Requires the Accessibility module.
-
-**Defaults to** `true`.
+Skip null points when navigating through points with the keyboard.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *skipNullPoints;
+/**
+Enable keyboard navigation for the chart.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
+/**
+Whether or not to wrap around when reaching the end of arrow-key navigation for an element in the chart.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *wrapAround;
 /**
 Options for the focus border drawn around elements while navigating through them.
 
@@ -29,17 +35,17 @@ Options for the focus border drawn around elements while navigating through them
 */
 @property(nonatomic, readwrite) HIFocusBorder *focusBorder;
 /**
-Set the keyboard navigation mode for the chart. Can be "normal" or "serialize". In normal mode, left/right arrow keys move between points in a series, while up/down arrow keys move between series. Up/down navigation acts intelligently to figure out which series makes sense to move to from any given point. In "serialize" mode, points are instead navigated as a single list. Left/right behaves as in "normal" mode. Up/down arrow keys will behave like left/right. This is useful for unifying navigation behavior with/without screen readers enabled.
+Order of tab navigation in the chart. Determines which elements are tabbed to first. Available elements are: `series`, `zoom`, `rangeSelector`, `chartMenu`, `legend`. In addition, any custom components can be added here.
+*/
+@property(nonatomic, readwrite) id order;
+/**
+Set the keyboard navigation mode for the chart. Can be "normal" or "serialize". In normal mode, left/right arrow keys move between points in a series, while up/down arrow keys move between series. Up/down navigation acts intelligently to figure out which series makes sense to move to from any given point. In "serialize" mode, points are instead navigated as a single list. Left/right behaves as in "normal" mode. Up/down arrow keys will behave like left/right. This can be useful for unifying navigation behavior with/without screen readers enabled.
 
 **Accepted values:** `["normal", "serialize"]`.
 
 **Defaults to** `normal`.
 */
 @property(nonatomic, readwrite) NSString *mode;
-/**
-Skip null points when navigating through points with the keyboard.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *skipNullPoints;
 
 -(NSDictionary *)getParams;
 
