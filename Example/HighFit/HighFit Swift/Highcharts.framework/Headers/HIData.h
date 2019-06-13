@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIDataAccessibility.h"
+#import "HIAccessibility.h"
 #import "HIDragDrop.h"
 #import "HIEvents.h"
 #import "HIMarker.h"
@@ -18,7 +18,7 @@
 
 
 /**
-The Data module provides a simplified interface for adding data to a chart from sources like CVS, HTML tables or grid views. See also the [tutorial article on the Data module](https://www.highcharts.com/docs/working-with-data/data-module). It requires the `modules/data.js` file to be loaded. Please note that the default way of adding data in Highcharts, without the need of a module, is through the `series.data` option.
+The Data module provides a simplified interface for adding data to a chart from sources like CVS, HTML tables or grid views. See also the [tutorial article on the Data module](https://www.highcharts.com/docs/working-with-data/data-module). It requires the `modules/data.js` file to be loaded. Please note that the default way of adding data in Highcharts, without the need of a module, is through the `series._type_.data` option.
 
 **Try it**
 
@@ -306,7 +306,7 @@ Whether the data point is selected initially.
 **Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *selected;
-@property(nonatomic, readwrite) HIDataAccessibility *accessibility;
+@property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Individual data label for each point. The options are the same as the ones for `plotOptions.series.dataLabels`.
 
@@ -314,7 +314,7 @@ Individual data label for each point. The options are the same as the ones for `
 
 * [Show a label for the last value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/datalabels/)
 */
-@property(nonatomic, readwrite) HIDataLabelsOptionsObject *dataLabels;
+@property(nonatomic, readwrite) NSArray<HIDataLabelsOptionsObject *> *dataLabels;
 /**
 An additional, individual class name for the data point's graphic representation.
 */
@@ -451,6 +451,10 @@ The weight of the link.
 */
 @property(nonatomic, readwrite) NSNumber *weight;
 /**
+By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
+/**
 The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
 
 **Try it**
@@ -518,10 +522,6 @@ The set or sets the options will be applied to. If a single entry is defined, th
 * [Euler diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/euler-diagram/)
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *sets;
-/**
-By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
 
 -(NSDictionary *)getParams;
 

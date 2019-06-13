@@ -6,7 +6,6 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
 #import "HICSSObject.h"
 
 
@@ -19,7 +18,7 @@ An object of key-value pairs for SVG attributes. Attributes in Highcharts elemen
 @property(nonatomic, readwrite) NSString *fill;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inverted;
 @property(nonatomic, readwrite) NSArray<NSNumber *> *matrix;
-@property(nonatomic, readwrite) NSString *rotation;
+@property(nonatomic, readwrite) NSNumber *rotation;
 @property(nonatomic, readwrite) NSNumber *rotationOriginX;
 @property(nonatomic, readwrite) NSNumber *rotationOriginY;
 @property(nonatomic, readwrite) NSNumber *scaleX;

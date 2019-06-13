@@ -8,10 +8,13 @@
 
 #import "HIStyle.h"
 #import "HIFunction.h"
+#import "HICSSObject.h"
 
 
 /**
 Options for the series data labels, appearing next to each data point. Since v6.2.0, multiple data labels can be applied to each single point by defining them as an array of configs. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://www.highcharts.com/samples/highcharts/css/series-datalabels)).
+
+**Defaults to** `{"align": "right", "crop": false, "inside": false, "overflow": "allow"}`.
 
 **Try it**
 
@@ -52,25 +55,13 @@ The color of the line connecting the data label to the point. The default color 
 /**
 Shadow options for the data label.
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+@property(nonatomic, readwrite) HICSSObject *shadow;
 @property(nonatomic, readwrite) HIFunction *formatter;
 /**
 A pixel value defining the distance between the data label and the point. Negative numbers puts the label on top of the point.
 */
 @property(nonatomic, readwrite) NSNumber *distance;
-/**
-A callback for defining the format for _nodes_ in the organization chart. The `nodeFormat` option takes precedence over `nodeFormatter`. In an organization chart, the `nodeFormatter` is a quite complex function of the available options, striving for a good default layout of cards with or without images. In organization chart, the data labels come with `useHTML` set to true, meaning they will be rendered as true HTML above the SVG.
-
-**Try it**
-
-* [Modify the default label format output](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/datalabels-nodeformatter)
-*/
-@property(nonatomic, readwrite) HIFunction *nodeFormatter;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
-@property(nonatomic, readwrite) NSString *align;
-@property(nonatomic, readwrite) NSString *overflow;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *inside;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
+@property(nonatomic, readwrite) NSNumber *y;
 
 -(NSDictionary *)getParams;
 

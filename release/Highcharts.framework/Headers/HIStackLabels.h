@@ -65,6 +65,7 @@ Enable or disable the stack total labels.
 **Try it**
 
 * [Enabled stack total labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-enabled/)
+* [Enabled stack labels in waterfall chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-enabled-waterfall/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**

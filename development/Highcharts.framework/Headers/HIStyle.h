@@ -14,8 +14,11 @@
 @interface HIStyle: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSString *fontWeight;
-@property(nonatomic, readwrite) NSString *fontSize;
 @property(nonatomic, readwrite) NSString *textOutline;
+@property(nonatomic, readwrite) NSString *fontSize;
+@property(nonatomic, readwrite) NSString *stroke;
+@property(nonatomic, readwrite) NSNumber *strokeWidth;
+@property(nonatomic, readwrite) NSString *fill;
 
 -(NSDictionary *)getParams;
 

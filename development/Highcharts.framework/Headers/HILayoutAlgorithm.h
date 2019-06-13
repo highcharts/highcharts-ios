@@ -102,12 +102,6 @@ Integration type. Available options are `'euler'` and `'verlet'`. Integration de
 */
 @property(nonatomic, readwrite) NSString *integration;
 /**
-Type of the algorithm used when positioning nodes.
-
-**Accepted values:** `["reingold-fruchterman"]`.
-*/
-@property(nonatomic, readwrite) NSString *type;
-/**
 Ideal length (px) of the link between two nodes. When not defined, length is calculated as: `Math.pow(availableWidth * availableHeight / nodesLength, 0.4);` Note: Because of the algorithm specification, length of each link might be not exactly as specified.
 
 **Try it**
@@ -115,6 +109,12 @@ Ideal length (px) of the link between two nodes. When not defined, length is cal
 * [Numerical values](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/styled-links/)
 */
 @property(nonatomic, readwrite) NSNumber *linkLength;
+/**
+Type of the algorithm used when positioning nodes.
+
+**Accepted values:** `["reingold-fruchterman"]`.
+*/
+@property(nonatomic, readwrite) NSString *type;
 /**
 Approximation used to calculate repulsive forces affecting nodes. By default, when calculateing net force, nodes are compared against each other, which gives O(N^2) complexity. Using Barnes-Hut approximation, we decrease this to O(N log N), but the resulting graph will have different layout. Barnes-Hut approximation divides space into rectangles via quad tree, where forces exerted on nodes are calculated directly for nearby cells, and for all others, cells are treated as a separate node with center of mass.
 

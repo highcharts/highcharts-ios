@@ -56,6 +56,10 @@ The radius of the shape.
 */
 @property(nonatomic, readwrite) NSNumber *r;
 /**
+Defines additional snapping area around an annotation making this annotation to focus. Defined in pixels.
+*/
+@property(nonatomic, readwrite) NSNumber *snap;
+/**
 The type of the shape, e.g. circle or rectangle.
 
 **Defaults to** `'rect'`.

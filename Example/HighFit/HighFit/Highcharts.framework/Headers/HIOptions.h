@@ -2,7 +2,6 @@
 #import "HISubtitle.h"
 #import "HIYAxis.h"
 #import "HISeries.h"
-#import "HILabels.h"
 #import "HIAccessibility.h"
 #import "HIPane.h"
 #import "HIResponsive.h"
@@ -44,11 +43,6 @@ The Y axis or value axis. Normally this is the vertical axis, though if the char
 Series options for specific data and the data itself. In TypeScript you have to cast the series options to specific series types, to get all possible options for a series.
 */
 @property(nonatomic, readwrite) NSArray<HISeries *> *series;
-
-/**
-HTML labels that can be positioned anywhere in the chart area.
-*/
-@property(nonatomic, readwrite) HILabels *labels;
 
 /**
 Options for configuring accessibility for the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](http://www.highcharts.com/docs/chart-concepts/accessibility).
@@ -121,13 +115,14 @@ Options for the exporting module. For an overview on the matter, see [the docs](
 @property(nonatomic, readwrite) HIBoost *boost;
 
 /**
-Options for configuring annotations, for example labels, arrows or shapes. Annotations can be tied to points, axis coordinates or chart pixel coordinates.
+A basic type of an annotation. It allows to add custom labels or shapes. The items can be tied to points, axis coordinates or chart pixel coordinates.
 
 **Try it**
 
 * [Basic annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/basic/)
 * [Advanced annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/annotations/)
 * [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/annotations)
+* [Controllable items](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations-advanced/controllable)
 */
 @property(nonatomic, readwrite) NSArray<HIAnnotations *> *annotations;
 
@@ -172,7 +167,7 @@ Options for drill down, the concept of inspecting increasingly high resolution d
 @property(nonatomic, readwrite) HIDrilldown *drilldown;
 
 /**
-The Data module provides a simplified interface for adding data to a chart from sources like CVS, HTML tables or grid views. See also the [tutorial article on the Data module](https://www.highcharts.com/docs/working-with-data/data-module). It requires the `modules/data.js` file to be loaded. Please note that the default way of adding data in Highcharts, without the need of a module, is through the `series.data` option.
+The Data module provides a simplified interface for adding data to a chart from sources like CVS, HTML tables or grid views. See also the [tutorial article on the Data module](https://www.highcharts.com/docs/working-with-data/data-module). It requires the `modules/data.js` file to be loaded. Please note that the default way of adding data in Highcharts, without the need of a module, is through the `series._type_.data` option.
 
 **Try it**
 

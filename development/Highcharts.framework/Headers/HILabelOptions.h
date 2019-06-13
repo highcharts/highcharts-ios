@@ -9,6 +9,7 @@
 #import "HIColor.h"
 #import "HIFunction.h"
 #import "HICSSObject.h"
+#import "HIShadowOptionsObject.h"
 
 
 /**
@@ -183,7 +184,7 @@ The shadow of the box. The shadow can be an object configuration containing `col
 
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+@property(nonatomic, readwrite) HIShadowOptionsObject *shadow;
 
 -(NSDictionary *)getParams;
 

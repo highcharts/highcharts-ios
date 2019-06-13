@@ -6,23 +6,19 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIAnimation.h"
+#import "HIAnimationOptionsObject.h"
 
 
 /**
-The opposite state of a hover for series.
-
-**Try it**
-
-* [Disabled inactive state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/windbarb-series/)
+The opposite state of a hover for a single point node. Applied to all not connected nodes to the hovered one.
 */
 @interface HIInactive: HIChartsJSONSerializable
 
-/**
-Opacity of series elements (dataLabels, line, area).
-*/
 @property(nonatomic, readwrite) NSNumber *opacity;
-@property(nonatomic, readwrite) HIAnimation *animation;
+/**
+Animation when not hovering over the node.
+*/
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
 Opacity for the links between nodes in the sankey diagram in inactive mode.
 */

@@ -75,14 +75,6 @@ The color of the plot band.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
-An id used for identifying the plot band in Axis.removePlotBand.
-
-**Try it**
-
-* [Remove plot band by id](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-id/)
-*/
-@property(nonatomic, readwrite) NSString *id;
-/**
 A custom class name, in addition to the default `highcharts-plot-band`, to apply to each individual band.
 */
 @property(nonatomic, readwrite) NSString *className;
@@ -101,6 +93,14 @@ Border width for the plot band. Also requires `borderColor` to be set.
 **Defaults to** `0`.
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
+/**
+An id used for identifying the plot band in Axis.removePlotBand.
+
+**Try it**
+
+* [Remove plot band by id](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-id/)
+*/
+@property(nonatomic, readwrite) NSString *id;
 /**
 Text labels for the plot bands
 */

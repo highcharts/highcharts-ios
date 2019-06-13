@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIExportingAccessibility.h"
+#import "HIAccessibility.h"
 #import "HIButtons.h"
 #import "HICsv.h"
 #import "HIFunction.h"
@@ -20,7 +20,7 @@ Options for the exporting module. For an overview on the matter, see [the docs](
 /**
 Accessibility options for the exporting menu. Requires the Accessibility module.
 */
-@property(nonatomic, readwrite) HIExportingAccessibility *accessibility;
+@property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 An object consisting of definitions for the menu items in the context menu. Each key value pair has a `key` that is referenced in the `menuItems` setting, and a `value`, which is an object with the following properties: - **onclick:** The click handler for the menu item - **text:** The text for the menu item - **textKey:** If internationalization is required, the key to a language  string
 

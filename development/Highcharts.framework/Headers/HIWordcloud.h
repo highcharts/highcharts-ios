@@ -108,7 +108,7 @@ The corner radius of the border surrounding each column or bar.
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 /**
 The color of the border surrounding each column or bar. In styled mode, the border stroke can be set with the `.highcharts-point` rule.
 

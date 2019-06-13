@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HIColor.h"
 
 
 /**
@@ -110,7 +111,7 @@ A series specific or series type specific color set to use instead of the global
 
 * [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
 */
-@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 /**
 The diameter of the pie relative to the plot area. Can be a percentage or pixel value. Pixel values are given as integers. The default behaviour (as of 3.0) is to scale to the plot area and give room for data labels within the plot area. `slicedOffset` is also included in the default size calculation. As a consequence, the size of the pie may vary when points are updated and data labels more around. In that case it is best to set a fixed value, for example `"75%"`.
 

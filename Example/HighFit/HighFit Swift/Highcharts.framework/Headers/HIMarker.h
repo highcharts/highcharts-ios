@@ -59,7 +59,7 @@ The color of the point marker's outline. When `undefined`, the series' or point'
 
 * [Inherit from series color (undefined)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
 */
-@property(nonatomic, readwrite) NSString *lineColor;
+@property(nonatomic, readwrite) id lineColor;
 @property(nonatomic, readwrite) NSNumber *fillOpacity;
 /**
 Image markers only. Set the image width explicitly. When using this option, a `width` must also be set.

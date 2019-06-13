@@ -1,3 +1,64 @@
+# Version 7.1.2
+
+## iOS:
+
+1. Fixed #180, added `DataLabelsOptionsObject` options for the series data labels.
+2. Fixed #181, `HIChartView` update method crash.
+3. Fixed #182, Warning: Umbrella header for module 'Highcharts' does not include headers.
+4. Fixed #186, `HIChartView` crash.
+5. Fixed #194, Memory Leaks in `HIChartView`.
+6. Fixed #200, typo in docs.
+
+## Framework:
+
+1. Added new feature, vertically scrollable plot area. This adds native scrolling features vertically, and is enabled using the `chart.scrollablePlotArea.minHeight` setting.
+2. Deprecated the `labels` option in favor of `annotations`, see #10429.
+3. Added stack labels feature to waterfall series (#3165).
+4. Added auto alignment for solid gauges with two labels, see #10635.
+5. Improved performance for exporting packedbubble series.
+6. Added `series.nodes[index].remove()` method to networkgraph series to remove a node with all connected links. See #10565.
+7. Added support for percentage value in `yAxis.labels.distance` option for gauge series. See #10587.
+
+## Framework bug fixes:
+
+1. Fixed #9269, problems with grid axis update. Modified the columns logic in `GridAxis` to only add one column (the master) to the public axes array, and the remaining to an internal columns array.
+2. Fixed issue with wrong clipping of inverted scrollable plot area (see #10786).
+3. Fixed #8607, tooltip was masked at the edges of the chart when chart.scrollablePlotArea was active. Changed the tooltip.outside option to default to true when using scrollable plot area.
+4. Fixed #10741, overlapping networkgraph points were dissappearing.
+5. Fixed #8417, stacked columns were overlapping after update to 3D.
+6. Fixed #9396, could not disable series label animation. Animation is now set to 20% of series.options.animation duration initially, and equal to `chart.options.animation` on updates.
+7. Fixed issue with sorting of events when `addEvent` was called with parameter options.order value of undefined.
+8. Fixed #3881, plotOptions.series trumped `plotOptions[type]` in chart instance options.
+9. Fixed #10669, sunburst didn´t show error when duplicate point id's were used.
+10. Fixed #8897, 3D columns were not visible when first series was initially hidden.
+11. Fixed #10491, responsive rules were ignored when `colorAxis` updated.
+12. Fixed #10737, exporting sunburst's data to CSV did not include points with the same name.
+13. Fixed #10713, initializing annotations in responsive rules didn't work.
+14. Fixed #9198, zones and negative color were not applied after `series.setData`.
+15. Fixed #10712, solid gauge data labels rendered below center by default. They are now vertically centered. Changed dataLabels.y default to 0.
+16. Fixed #10715, column collapsed after drilldown when the X axis labels became longer.
+17. Fixed issue with accessibility features not working for series without markers.
+18. Fixed #10696, sometimes series animation was missing when updating points via `Series.setData()`.
+19. Fixed #10361, a regression causing clipping of the export menu below the chart.
+20. Fixed #10646, plotOptions.column.minPointLength drew zero points as negative.
+21. Fixed #10062, packed bubble series ignored `lang.thousandsSep`.
+22. Fixed #10630, null point was drawn in solid gauge.
+23. Fixed issue where accessible proxy buttons were wrongly positioned in some browsers.
+24. Fixed #10625, `setData()` in networkgraph series caused simulation to run from the initial state.
+25. Fixed #10637, the accessibility module increased the chart size.
+26. Fixed #10624, updating sankey while hovering a link caused errors.
+27. Fixed #10633, panning on mobile devices did not work when xAxis.max or xAxis.min options were set.
+28. Fixed #10628, adding annotations in chart's callback threw errors.
+29. Fixed #10572, `dataRefreshRate` didn't work properly for Google Spreadsheets.
+30. Fixed #10574, `connectNulls` could not be disabled in area with `percent` stacking.
+31. Fixed #10536, setting time on a chart instance altered global time.
+32. Fixed #10571, split tooltip didn't change stroke color while hovering when points in a single series had different colors.
+33. Fixed #10569, regression that caused missing series line after removing zones.
+34. Fixed #10516, extreme large zoom in Chrome did not render yAxis labels after zooming out.
+35. Fixed #10482, enhancement demo to adding points and lines.
+36. Fixed #10540, pie series did not animate slices when toggling legend items.
+37. Fixed #10545, `networkgraph.dataLabels.linkTextPath` did not remove artifical border around label.
+
 # Version 7.1.1
 
 ## iOS:

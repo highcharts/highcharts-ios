@@ -6,42 +6,37 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIItems.h"
 #import "HIPoint.h"
 #import "HIColor.h"
 #import "HIFunction.h"
 #import "HICSSObject.h"
+#import "HIShadowOptionsObject.h"
 
 
 /**
-HTML labels that can be positioned anywhere in the chart area.
+The axis labels show the number or category for each tick.
 */
 @interface HILabels: HIChartsJSONSerializable
 
 /**
-An HTML label that can be positioned anywhere in the chart area.
-*/
-@property(nonatomic, readwrite) NSArray <HIItems *> *items;
-/**
-Shared CSS styles for all labels.
-
-**Defaults to** `{"color": "#333333", "position": "absolute"}`.
-*/
-@property(nonatomic, readwrite) HICSSObject *style;
-/**
-Angular gauges and solid gauges only. The label's pixel distance from the perimeter of the plot area.
+Angular gauges and solid gauges only. The label's pixel distance from the perimeter of the plot area. Since v7.1.2: If it's a percentage string, it is interpreted the same as `series.radius`, so label can be aligned under the gauge's shape.
 
 **Defaults to** `-25`.
+
+**Try it**
+
+* [Labels centered under the arc](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/labels-distance/)
 */
-@property(nonatomic, readwrite) NSNumber *distance;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ distance;
 /**
-What part of the string the given position is anchored to. Can be one of `"left"`, `"center"` or `"right"`. The exact position also depends on the `labels.x` setting. Angular gauges and solid gauges defaults to `"center"`.
+What part of the string the given position is anchored to. Can be one of `"left"`, `"center"` or `"right"`. The exact position also depends on the `labels.x` setting. Angular gauges and solid gauges defaults to `"center"`. Solid gauges with two labels have additional option `"auto"` for automatic horizontal and vertical alignment.
 
 **Defaults to** `right`.
 
 **Try it**
 
 * [Left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/labels-align-left/)
+* [Solid gauge labels auto aligned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-solidgauge/labels-auto-aligned/)
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
@@ -100,6 +95,16 @@ Rotation of the labels in degrees.
 * [X axis labels rotated 90Â°](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-rotation/)
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
+/**
+CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of category labels. Use `textOverflow: 'none'` to prevent ellipsis (dots). In styled mode, the labels are styled with the `.highcharts-axis-labels` class.
+
+**Defaults to** `{"color": "#666666", "cursor": "default", "fontSize": "11px"}`.
+
+**Try it**
+
+* [Red X axis labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-style/)
+*/
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 Whether to reserve space for the labels. By default, space is reserved for the labels in these cases: * On all horizontal axes. * On vertical axes if `label.align` is `right` on a left-side axis or `left` on a right-side axis. * On vertical axes if `label.align` is `center`. This can be turned off when for example the labels are rendered inside the plot area instead of outside.
 
@@ -193,7 +198,7 @@ Enable or disable the axis labels.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-This option defines the point to which the label will be connected. It can be either the point which exists in the series - it is referenced by the point's id - or a new point with defined x, y properies and optionally axes.
+This option defines the point to which the label will be connected. It can be either the point which exists in the series - it is referenced by the point's id - or a new point with defined x, y properties and optionally axes.
 
 **Try it**
 
@@ -287,7 +292,7 @@ The shadow of the box. The shadow can be an object configuration containing `col
 
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+@property(nonatomic, readwrite) HIShadowOptionsObject *shadow;
 
 -(NSDictionary *)getParams;
 

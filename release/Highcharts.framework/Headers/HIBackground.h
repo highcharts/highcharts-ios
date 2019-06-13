@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
 #import "HIColor.h"
+#import "HIGradientColorObject.h"
 
 
 /**
@@ -52,7 +52,7 @@ The background color or gradient for the pane.
 
 **Defaults to** `{ linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 }, stops: [[0, #ffffff], [1, #e6e6e6]] }`.
 */
-@property(nonatomic, readwrite) HIColor *backgroundColor;
+@property(nonatomic, readwrite) HIGradientColorObject *backgroundColor;
 
 -(NSDictionary *)getParams;
 

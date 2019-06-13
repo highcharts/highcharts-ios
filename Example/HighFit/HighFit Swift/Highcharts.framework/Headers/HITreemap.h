@@ -9,6 +9,7 @@
 #import "HISeries.h"
 #import "HILevels.h"
 #import "HITraverseUpButton.h"
+#import "HIColor.h"
 
 
 /**
@@ -48,7 +49,7 @@ Whether to ignore hidden points when the layout algorithm runs. If `false`, hidd
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 /**
 The sort index of the point inside the treemap level.
 

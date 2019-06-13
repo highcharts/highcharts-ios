@@ -6,7 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIPatternOptionsObject.h"
+#import "HIAnimationOptionsObject.h"
 
 
 /**
@@ -17,11 +18,11 @@ Holds a pattern definition.
 /**
 Animation options for the image pattern loading.
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *animation;
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
 Pattern options
 */
-@property(nonatomic, readwrite) id pattern;
+@property(nonatomic, readwrite) HIPatternOptionsObject *pattern;
 
 -(NSDictionary *)getParams;
 

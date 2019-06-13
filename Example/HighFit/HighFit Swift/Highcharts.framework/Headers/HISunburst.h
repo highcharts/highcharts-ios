@@ -113,7 +113,7 @@ A series specific or series type specific color set to use instead of the global
 
 * [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
 */
-@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 /**
 The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
 

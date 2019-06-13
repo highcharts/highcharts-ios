@@ -106,7 +106,7 @@ The spacing between columns on the Z Axis in a 3D chart. Requires `highcharts-3d
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 /**
 3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
 */

@@ -56,7 +56,7 @@ Whether to apply a drop shadow to the plot area. Requires that plotBackgroundCol
 
 * [Plot shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/plotshadow/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *plotShadow;
+@property(nonatomic, readwrite) HICSSObject *plotShadow;
 /**
 An explicit height for the chart. If a _number_, the height is given in pixels. If given a _percentage string_ (for example `'56%'`), the height is given as the percentage of the actual chart width. This allows for preserving the aspect ratio across responsive sizes. By default (when `null`) the height is calculated from the offset height of the containing element, or 400 pixels if the containing element's height is 0.
 
@@ -197,7 +197,7 @@ An explicit width for the chart. By default (when `null`) the width is calculate
 
 * [800px wide](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/width/)
 */
-@property(nonatomic, readwrite) NSNumber *width;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**
 The margin between the left outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also `spacingLeft`.
 
@@ -286,11 +286,12 @@ Additional CSS styles to apply inline to the container `div`. Note that since th
 */
 @property(nonatomic, readwrite) HICSSObject *style;
 /**
-Options for a scrollable plot area. This feature provides a minimum width for the plot area of the chart. If the width gets smaller than this, typically on mobile devices, a native browser scrollbar is presented below the chart. This scrollbar provides smooth scrolling for the contents of the plot area, whereas the title, legend and axes are fixed.
+Options for a scrollable plot area. This feature provides a minimum size for the plot area of the chart. If the size gets smaller than this, typically on mobile devices, a native browser scrollbar is presented. This scrollbar provides smooth scrolling for the contents of the plot area, whereas the title, legend and unaffected axes are fixed. Since v7.1.2, a scrollable plot area can be defined for either horizontal or vertical scrolling, depending on whether the `minWidth` or `minHeight` option is set.
 
 **Try it**
 
 * [Scrollable plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/scrollable-plotarea)
+* [Vertically scrollable plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/scrollable-plotarea-vertical)
 */
 @property(nonatomic, readwrite) HIScrollablePlotArea *scrollablePlotArea;
 /**
@@ -302,7 +303,7 @@ Whether to apply a drop shadow to the outer chart area. Requires that background
 
 * [Shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/shadow/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+@property(nonatomic, readwrite) HICSSObject *shadow;
 /**
 Whether to invert the axes so that the x axis is vertical and y axis is horizontal. When `true`, the x axis is `reversed` by default.
 

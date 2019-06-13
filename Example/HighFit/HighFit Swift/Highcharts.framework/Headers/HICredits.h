@@ -48,6 +48,8 @@ The URL for the credits label.
 /**
 Position configuration for the credits label.
 
+**Defaults to** `{"align": "right", "verticalAlign": "bottom", "x": -10, "y": -5}`.
+
 **Try it**
 
 * [Left aligned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/credits/position-left/)

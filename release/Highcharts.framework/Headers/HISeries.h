@@ -14,13 +14,14 @@
 #import "HITooltip.h"
 #import "HILabel.h"
 #import "HIEvents.h"
-#import "HISeriesAccessibility.h"
+#import "HIAccessibility.h"
 #import "HIZones.h"
 #import "HIColor.h"
+#import "HIShadowOptionsObject.h"
 #import "HIFunction.h"
-#import "HIAnimationOptionsObject.h"
-#import "HIDataLabelsOptionsObject.h"
 #import "HIData.h"
+#import "HIDataLabelsOptionsObject.h"
+#import "HIAnimationOptionsObject.h"
 
 
 /**
@@ -105,9 +106,7 @@ This option allows grouping series in a stacked chart. The stack option can be a
 <a href="http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/series/stack/" target="_blank">Stacked and grouped columns</a>*/
 @property(nonatomic, readwrite) NSString *stack;
 /**
-The type of series. Can be one of area, areaspline,
- bar, column, line, pie,
- scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
+The type of series. Can be one of area, areaspline, bar, column, line, pie, scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
 
 **Accepted values:** `[null, "line", "spline", "column", "area", "areaspline", "pie", "arearange", "areasplinerange", "boxplot", "bubble", "columnrange", "errorbar", "funnel", "gauge", "scatter", "waterfall"]`.
 
@@ -400,7 +399,7 @@ If set to `true`, the accessibility module will skip past the points in this ser
 /**
 Accessibility options for a series. Requires the accessibility module.
 */
-@property(nonatomic, readwrite) HISeriesAccessibility *accessibility;
+@property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Whether to apply steps to the line. Possible values are `left`, `center` and `right`.
 
@@ -435,7 +434,7 @@ Whether to apply a drop shadow to the graph line. Since 2.3 the shadow can be an
 
 * [Shadow enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-shadow/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+@property(nonatomic, readwrite) HIShadowOptionsObject *shadow;
 /**
 Allow this series' points to be selected by clicking on the graphic (columns, point markers, pie slices, map areas etc). The selected points can be handled by point select and unselect events, or collectively by the `getSelectedPoints` function. And alternative way of selecting points is through dragging.
 
@@ -516,12 +515,14 @@ Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn
 /**
 Options for the series data labels, appearing next to each data point. Since v6.2.0, multiple data labels can be applied to each single point by defining them as an array of configs. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://www.highcharts.com/samples/highcharts/css/series-datalabels)).
 
+**Defaults to** `{"align": "center", "formatter": function () { return H.numberFormat(this.y, -1); }, "padding": 5, "style": {"fontSize": "11px", "fontWeight": "bold", "color": "contrast", "textOutline": "1px contrast"}, "verticalAlign": "bottom", "x":0, "y": 0}`.
+
 **Try it**
 
 * [Data labels enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-enabled)
 * [Multiple data labels on a bar series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-multiple)
 */
-@property(nonatomic, readwrite) HIDataLabelsOptionsObject *dataLabels;
+@property(nonatomic, readwrite) NSArray<HIDataLabelsOptionsObject *> *dataLabels;
 /**
 You can set the cursor to "pointer" if you have click events attached to the series, to signal to the user that the points and lines can be clicked. In styled mode, the series cursor can be set with the same classes as listed under `series.color`.
 

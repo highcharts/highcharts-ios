@@ -31,7 +31,7 @@ Radius of the element border.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
-Color used in the element. The "contrast" option is a Highcharts custom property that results in black or white, depending on the background of the element.
+Color used in the element. The 'contrast' option is a Highcharts custom property that results in black or white, depending on the background of the element.
 */
 @property(nonatomic, readwrite) NSString *color;
 /**

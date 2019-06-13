@@ -156,7 +156,7 @@ The minimal height for a column or width for a bar. By default, 0 values are not
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
-@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 /**
 3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
 */

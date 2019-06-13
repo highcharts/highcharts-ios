@@ -9,9 +9,9 @@
 #import "HIKeyboardNavigation.h"
 #import "HIAnnounceNewData.h"
 #import "HIChartTypes.h"
-#import "HISeries.h"
+#import "HIAccessibilitySeries.h"
 #import "HIAxis.h"
-#import "HIExporting.h"
+#import "HIAccessibilityExporting.h"
 #import "HISeriesTypeDescriptions.h"
 #import "HIFunction.h"
 
@@ -133,7 +133,7 @@ Chart type description strings. This is added to the chart information region. I
 /**
 Lang configuration for different series types. For more dynamic control over the series element descriptions, see `accessibility.seriesDescriptionFormatter`.
 */
-@property(nonatomic, readwrite) HISeries *series;
+@property(nonatomic, readwrite) HIAccessibilitySeries *series;
 /**
 Axis description format strings.
 */
@@ -144,7 +144,7 @@ Axis description format strings.
 /**
 Exporting menu format strings for accessibility module.
 */
-@property(nonatomic, readwrite) HIExporting *exporting;
+@property(nonatomic, readwrite) HIAccessibilityExporting *exporting;
 @property(nonatomic, readwrite) NSString *legendItem;
 @property(nonatomic, readwrite) NSString *tableSummary;
 @property(nonatomic, readwrite) NSString *viewAsDataTable;

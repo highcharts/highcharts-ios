@@ -68,6 +68,14 @@ Integration type. Available options are `'euler'` and `'verlet'`. Integration de
 */
 @property(nonatomic, readwrite) NSString *integration;
 /**
+Ideal length (px) of the link between two nodes. When not defined, length is calculated as: `Math.pow(availableWidth * availableHeight / nodesLength, 0.4);` Note: Because of the algorithm specification, length of each link might be not exactly as specified.
+
+**Try it**
+
+* [Numerical values](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/styled-links/)
+*/
+@property(nonatomic, readwrite) NSNumber *linkLength;
+/**
 Type of the algorithm used when positioning nodes.
 
 **Accepted values:** `["reingold-fruchterman"]`.
