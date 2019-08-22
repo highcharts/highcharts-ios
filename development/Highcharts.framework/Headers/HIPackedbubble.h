@@ -41,7 +41,7 @@
 @interface HIPackedbubble: HISeries
 
 /**
-Minimum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the `z` value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height, divided by the square root of total number of points.
+Minimum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height, divided by the square root of total number of points.
 
 **Try it**
 
@@ -67,7 +67,7 @@ Flag to determine if nodes are draggable or not. Available for graph with useSim
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggable;
 /**
-Maximum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the `z` value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height, divided by the square root of total number of points.
+Maximum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height, divided by the square root of total number of points.
 
 **Try it**
 

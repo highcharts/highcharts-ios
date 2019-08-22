@@ -307,7 +307,7 @@ Series labels are placed as close to the series as possible in a natural way, se
 /**
 Whether to stack the values of each series on top of each other. Possible values are `undefined` to disable, `"normal"` to stack by value or `"percent"`. When stacking is enabled, data must be sorted in ascending X order. A special stacking option is with the streamgraph series type, where the stacking option is set to `"stream"`. The second one is `"overlap"`, which only applies to waterfall series.
 
-**Accepted values:** `["normal", "percent"]`.
+**Accepted values:** `["normal", "overlap", "percent", "stream"]`.
 
 **Try it**
 
@@ -418,14 +418,6 @@ Whether to use the Y extremes of the total chart width or only the zoomed area w
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *getExtremesFromAll;
 /**
-By default, series are exposed to screen readers as regions. By enabling this option, the series element itself will be exposed in the same way as the data points. This is useful if the series is not used as a grouping entity in the chart, but you still want to attach a description to the series. Requires the Accessibility module.
-
-**Try it**
-
-* [Accessible data visualization](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/accessibility/art-grants/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *exposeElementToA11y;
-/**
 Whether to apply a drop shadow to the graph line. Since 2.3 the shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
 
 **Defaults to** `false`.
@@ -514,8 +506,6 @@ Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn
 @property(nonatomic, readwrite) NSNumber /* Bool */ *stickyTracking;
 /**
 Options for the series data labels, appearing next to each data point. Since v6.2.0, multiple data labels can be applied to each single point by defining them as an array of configs. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://www.highcharts.com/samples/highcharts/css/series-datalabels)).
-
-**Defaults to** `{"align": "center", "formatter": function () { return H.numberFormat(this.y, -1); }, "padding": 5, "style": {"fontSize": "11px", "fontWeight": "bold", "color": "contrast", "textOutline": "1px contrast"}, "verticalAlign": "bottom", "x":0, "y": 0}`.
 
 **Try it**
 

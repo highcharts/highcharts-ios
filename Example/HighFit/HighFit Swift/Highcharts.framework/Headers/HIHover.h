@@ -19,7 +19,6 @@ The hover state for a single point marker.
 @property(nonatomic, readwrite) NSNumber *radiusPlus;
 @property(nonatomic, readwrite) NSString *borderColor;
 @property(nonatomic, readwrite) NSNumber *opacity;
-@property(nonatomic, readwrite) HIHalo *halo;
 /**
 Enable or disable the point marker.
 
@@ -66,8 +65,11 @@ The width of the point marker's outline. When `undefined`, the series' or point'
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
 Animation when hovering over the marker.
+
+**Defaults to** `{"duration": 50}`.
 */
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+@property(nonatomic, readwrite) HIHalo *halo;
 /**
 How much to brighten the point on interaction. Requires the main color to be defined in hex or rgb(a) format. In styled mode, the hover brightening is by default replaced with a fill-opacity set in the `.highcharts-point:hover` rule.
 */

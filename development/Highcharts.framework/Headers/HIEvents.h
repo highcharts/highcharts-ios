@@ -52,6 +52,22 @@ As opposed to the `setExtremes` event, this event fires after the final min and 
 */
 @property(nonatomic, readwrite) HIFunction *afterSetExtremes;
 /**
+Mouse over event on a plot band.
+*/
+@property(nonatomic, readwrite) HIFunction *mouseover;
+/**
+Mouse out event on the corner of a plot band.
+*/
+@property(nonatomic, readwrite) HIFunction *mouseout;
+/**
+Click event on a plot band.
+*/
+@property(nonatomic, readwrite) HIFunction *click;
+/**
+Mouse move event on a plot band.
+*/
+@property(nonatomic, readwrite) HIFunction *mousemove;
+/**
 Fires when the chart is finished loading. Since v4.2.2, it also waits for images to be loaded, for example from point markers. One parameter, `event`, is passed to the function, containing common event information. There is also a second parameter to the chart constructor where a callback function can be passed to be executed on chart.load.
 
 **Try it**
@@ -112,15 +128,6 @@ Fires when the chart is redrawn, either after a call to `chart.redraw()` or afte
 * [Alert on chart redraw](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-redraw/)
 */
 @property(nonatomic, readwrite) HIFunction *redraw;
-/**
-Fires when clicking on the plot background. One parameter, `event`, is passed to the function, containing common event information. Information on the clicked spot can be found through `event.xAxis` and `event.yAxis`, which are arrays containing the axes of each dimension and each axis' value at the clicked spot. The primary axes are `event.xAxis[0]` and `event.yAxis[0]`. Remember the unit of a datetime axis is milliseconds since 1970-01-01 00:00:00. click: function(e) {   console.log(     Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', e.xAxis[0].value),     e.yAxis[0].value   ) }
-
-**Try it**
-
-* [Alert coordinates on click](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-click/)
-* [Alternatively, attach event to container](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-container/)
-*/
-@property(nonatomic, readwrite) HIFunction *click;
 /**
 Fires after a chart is printed through the context menu item or the `Chart.print` method. Requires the exporting module.
 

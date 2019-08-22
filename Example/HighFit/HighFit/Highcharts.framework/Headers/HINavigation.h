@@ -36,6 +36,14 @@ A collection of options for buttons appearing in the exporting module. In styled
 */
 @property(nonatomic, readwrite) HIButtonOptions *buttonOptions;
 /**
+Path where Highcharts will look for icons. Change this to use icons from a different server.
+*/
+@property(nonatomic, readwrite) id iconsURL;
+/**
+A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events. Default value of versions < 7.0.4 `highcharts-bindings-wrapper`
+*/
+@property(nonatomic, readwrite) NSString *bindingsClassName;
+/**
 Additional options to be merged into all annotations.
 
 **Try it**
@@ -43,20 +51,6 @@ Additional options to be merged into all annotations.
 * [Set red color of all line annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/navigation-annotation-options)
 */
 @property(nonatomic, readwrite) HIAnnotationsOptions *annotationsOptions;
-/**
-A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events. Default value of versions < 7.0.4 `highcharts-bindings-wrapper`
-*/
-@property(nonatomic, readwrite) NSString *bindingsClassName;
-/**
-CSS styles for the hover state of the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
-
-**Defaults to** `{"background": "#335cad", "color": "#ffffff"}`.
-
-**Try it**
-
-* [Bold text on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemhoverstyle/)
-*/
-@property(nonatomic, readwrite) HICSSObject *menuItemHoverStyle;
 /**
 CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML. Font size defaults to `11px` on desktop and `14px` on touch devices.
 
@@ -75,6 +69,16 @@ Bindings definitions for custom HTML buttons. Each binding implements simple eve
 * [Custom bindings in Highstock](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/stocktools-thresholds)
 */
 @property(nonatomic, readwrite) HIBindings *bindings;
+/**
+CSS styles for the hover state of the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
+
+**Defaults to** `{"background": "#335cad", "color": "#ffffff"}`.
+
+**Try it**
+
+* [Bold text on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemhoverstyle/)
+*/
+@property(nonatomic, readwrite) HICSSObject *menuItemHoverStyle;
 /**
 Events to communicate between Stock Tools and custom GUI.
 */

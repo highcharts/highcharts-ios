@@ -12,7 +12,7 @@
 /**
 **Note:** Only SVG-based renderer supports this option.
 */
-@interface HISeriesPackedBubbleDataLabelsTextPath: HIChartsJSONSerializable
+@interface HISeriesPackedBubbleDataLabelsTextPathOptionsObject: HIChartsJSONSerializable
 
 /**
 Presentation attributes for the text path.

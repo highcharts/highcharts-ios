@@ -11,6 +11,7 @@
 #import "HIBubbleLegend.h"
 #import "HINavigation.h"
 #import "HIColor.h"
+#import "HIFunction.h"
 #import "HICSSObject.h"
 #import "HISeries.h"
 
@@ -303,7 +304,7 @@ Callback function to format each of the series' labels. The `this` keyword refer
 
 * [Add text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/labelformatter/)
 */
-@property(nonatomic, readwrite) id labelFormatter;
+@property(nonatomic, readwrite) HIFunction *labelFormatter;
 /**
 The vertical offset of the legend relative to it's vertical alignment `verticalAlign` within chart.spacingTop and chart.spacingBottom. Negative y moves it up, positive y moves it down.
 

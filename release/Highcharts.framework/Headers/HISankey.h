@@ -54,6 +54,16 @@ When using automatic point colors pulled from the global `colors` or series-spec
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
+The minimal width for a line of a sankey. By default, 0 values are not shown.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [Sankey diagram with minimal link height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-minlinkwidth)
+*/
+@property(nonatomic, readwrite) NSNumber *minLinkWidth;
+/**
 Higher numbers makes the links in a sankey diagram or dependency wheelrender more curved. A `curveFactor` of 0 makes the lines straight.
 */
 @property(nonatomic, readwrite) NSNumber *curveFactor;
@@ -66,7 +76,7 @@ The pixel width of each node in a sankey diagram or dependency wheel, or the hei
 */
 @property(nonatomic, readwrite) NSNumber *nodeWidth;
 /**
-Set options on specific levels. Takes precedence over series options, but not point options.
+Set options on specific levels. Takes precedence over series options, but not node and link options.
 
 **Try it**
 
@@ -87,15 +97,6 @@ The width of the border surrounding each column or bar. Defaults to `1` when the
 Opacity for the links between nodes in the sankey diagram.
 */
 @property(nonatomic, readwrite) NSNumber *linkOpacity;
-/**
-The minimal height for a column or width for a bar. By default, 0 values are not shown. To visualize a 0 (or close to zero) point, set the minimal point length to a pixel value like 3\. In stacked column charts, minPointLength might not be respected for tightly packed values.
-
-**Try it**
-
-* [Zero base value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-minpointlength/)
-* [Positive and negative close to zero values](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-minpointlength-pos-and-neg/)
-*/
-@property(nonatomic, readwrite) NSNumber *minPointLength;
 /**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */

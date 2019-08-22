@@ -28,6 +28,16 @@ The Z axis or depth axis for 3D plots. See the `Axis class` for programmatic acc
 @interface HIZAxis: HIChartsJSONSerializable
 
 /**
+Whether to zoom axis. If `chart.zoomType` is set, the option allows to disable zooming on an individual axis.
+
+**Defaults to** `enabled`.
+
+**Try it**
+
+* [Zoom enabled is false](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/zoomenabled/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *zoomEnabled;
+/**
 Color for the minor tick marks.
 
 **Defaults to** `#999999`.

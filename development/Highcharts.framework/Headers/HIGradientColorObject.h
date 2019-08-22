@@ -26,7 +26,7 @@ Holds an object that defines the center position and the radius.
 /**
 The first item in each tuple is the position in the gradient, where 0 is the start of the gradient and 1 is the end of the gradient. Multiple stops can be applied. The second item is the color for each stop. This color can also be given in the rgba format.
 */
-@property(nonatomic, readwrite) NSArray<NSArray *> *stops;
+@property(nonatomic, readwrite) NSArray *stops;
 
 -(NSDictionary *)getParams;
 

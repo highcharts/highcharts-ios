@@ -55,7 +55,7 @@ The width of the line marking the axis itself. In styled mode, the stroke width 
 */
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
-Padding of the min value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the lowest data value to appear on the edge of the plot area. When the axis' `min` option is set or a max extreme is set using `axis.setExtremes()`, the maxPadding will be ignored.
+Padding of the min value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the lowest data value to appear on the edge of the plot area. When the axis' `min` option is set or a max extreme is set using `axis.setExtremes()`, the maxPadding will be ignored. Also the `softThreshold` option takes precedence over `minPadding`, so if the data is tangent to the threshold, `minPadding` may not apply unless `softThreshold` is set to false.
 
 **Defaults to** `0.01`.
 
@@ -196,7 +196,7 @@ Whether to force the axis to start on a tick. Use this option with the `maxPaddi
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *startOnTick;
 /**
-Padding of the max value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the highest data value to appear on the edge of the plot area. When the axis' `max` option is set or a max extreme is set using `axis.setExtremes()`, the maxPadding will be ignored.
+Padding of the max value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the highest data value to appear on the edge of the plot area. When the axis' `max` option is set or a max extreme is set using `axis.setExtremes()`, the maxPadding will be ignored. Also the `softThreshold` option takes precedence over `maxPadding`, so if the data is tangent to the threshold, `maxPadding` may not apply unless `softThreshold` is set to false.
 
 **Defaults to** `0.01`.
 
@@ -216,6 +216,16 @@ The color of the line marking the axis itself. In styled mode, the line stroke i
 * [Axes in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/axis/)
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
+/**
+Whether to zoom axis. If `chart.zoomType` is set, the option allows to disable zooming on an individual axis.
+
+**Defaults to** `enabled`.
+
+**Try it**
+
+* [Zoom enabled is false](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/zoomenabled/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *zoomEnabled;
 /**
 Color for the minor tick marks.
 

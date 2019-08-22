@@ -7,8 +7,7 @@
 */
 
 #import "HISeries.h"
-#import "HIDial.h"
-#import "HIPivot.h"
+#import "HICSSObject.h"
 
 
 /**
@@ -48,7 +47,7 @@ Options for the dial or arrow pointer of the gauge. In styled mode, the dial is 
 
 * [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/gauge/)
 */
-@property(nonatomic, readwrite) HIDial *dial;
+@property(nonatomic, readwrite) HICSSObject *dial;
 /**
 Allow the dial to overshoot the end of the perimeter axis by this many degrees. Say if the gauge axis goes from 0 to 60, a value of 100, or 1000, will show 5 degrees beyond the end of the axis when this option is set to 5.
 
@@ -72,7 +71,7 @@ Options for the pivot or the center point of the gauge. In styled mode, the pivo
 
 * [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/gauge/)
 */
-@property(nonatomic, readwrite) HIPivot *pivot;
+@property(nonatomic, readwrite) HICSSObject *pivot;
 
 -(NSDictionary *)getParams;
 

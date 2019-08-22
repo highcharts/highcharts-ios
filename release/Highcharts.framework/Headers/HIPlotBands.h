@@ -7,6 +7,7 @@
 */
 
 #import "HILabel.h"
+#import "HIEvents.h"
 #import "HIColor.h"
 
 
@@ -69,6 +70,8 @@ The start position of the plot band in axis units.
 /**
 The color of the plot band.
 
+**Defaults to** `#e6ebf5`.
+
 **Try it**
 
 * [Color band](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-color/)
@@ -112,7 +115,7 @@ An object defining mouse events for the plot band. Supported properties are `cli
 
 * [Mouse events demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-events/)
 */
-@property(nonatomic, readwrite) id events;
+@property(nonatomic, readwrite) HIEvents *events;
 
 -(NSDictionary *)getParams;
 

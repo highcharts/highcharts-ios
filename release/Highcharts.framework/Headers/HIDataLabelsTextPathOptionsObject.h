@@ -12,7 +12,7 @@
 /**
 Options for a label text which should follow marker's shape. **Note:** Only SVG-based renderer supports this option.
 */
-@interface HIDataLabelsTextPath: HIChartsJSONSerializable
+@interface HIDataLabelsTextPathOptionsObject: HIChartsJSONSerializable
 
 /**
 Presentation attributes for the text path.

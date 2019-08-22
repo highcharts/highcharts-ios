@@ -8,6 +8,7 @@
 
 #import "HIColorVariation.h"
 #import "HIColor.h"
+#import "HIPointStatesOptionsObject.h"
 
 
 /**
@@ -76,15 +77,19 @@ Can set the layoutStartingDirection option on a specific level.
 */
 @property(nonatomic, readwrite) NSString *layoutStartingDirection;
 /**
-Can set `colorByPoint` on all points which lies on the same level.
+Can set `colorByPoint` on all nodes which lay on the same level.
+
+**Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
-Can set `states` on all points which lies on the same level.
+Can set `states` on all nodes and points which lay on the same level.
 */
-@property(nonatomic, readwrite) id states;
+@property(nonatomic, readwrite) HIPointStatesOptionsObject *states;
 /**
-Can set `linkOpacity` on all points which lies on the same level.
+Can set `linkOpacity` on all points which lay on the same level.
+
+**Defaults to** `0.5`.
 */
 @property(nonatomic, readwrite) NSNumber *linkOpacity;
 

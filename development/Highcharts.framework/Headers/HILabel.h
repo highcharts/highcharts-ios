@@ -7,6 +7,7 @@
 */
 
 #import "HILabelIntersectBoxObject.h"
+#import "HIFunction.h"
 #import "HICSSObject.h"
 
 
@@ -48,13 +49,11 @@ Horizontal alignment of the label. Can be one of "left", "center" or "right".
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-The text alignment for the label. While `align` determines where the texts anchor point is placed within the plot band, `textAlign` determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right". Defaults to the same as the `align` option.
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the labels.
 
-**Try it**
-
-* [Text label in bottom position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-label-textalign/)
+**Defaults to** `false`.
 */
-@property(nonatomic, readwrite) NSString *textAlign;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
 Vertical position of the text baseline relative to the alignment. Default varies by orientation.
 
@@ -80,11 +79,21 @@ Rotation of the text label in degrees. Defaults to 0 for horizontal plot lines a
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the labels.
+Callback JavaScript function to format the label. Useful properties like the value of plot line or the range of plot band (`from` & `to` properties) can be found in `this.options` object.
 
-**Defaults to** `false`.
+**Try it**
+
+* [Label formatters for plot line and plot band.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-plotbands-label-formatter)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
+@property(nonatomic, readwrite) HIFunction *formatter;
+/**
+The text alignment for the label. While `align` determines where the texts anchor point is placed within the plot band, `textAlign` determines how the text is aligned against its anchor point. Possible values are "left", "center" and "right". Defaults to the same as the `align` option.
+
+**Try it**
+
+* [Text label in bottom position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-label-textalign/)
+*/
+@property(nonatomic, readwrite) NSString *textAlign;
 /**
 For area-like series, allow the font size to vary so that small areas get a smaller font size. The default applies this effect to area-like series but not line-like series.
 */

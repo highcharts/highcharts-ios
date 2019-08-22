@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
 #import "HIColor.h"
+#import "HIDataLabelsOptionsObject.h"
 
 
 /**
@@ -31,6 +31,10 @@ An optional level index of where to place the node. The default behaviour is to 
 The color of the auto generated node.
 */
 @property(nonatomic, readwrite) HIColor *color;
+/**
+Individual data label for each node. The options are the same as the ones for `series.sankey.dataLabels`.
+*/
+@property(nonatomic, readwrite) NSArray<HIDataLabelsOptionsObject *> *dataLabels;
 /**
 An optional column index of where to place the node. The default behaviour is to place it next to the preceding node. Note that this option name is counter intuitive in inverted charts, like for example an organization chart rendered top down. In this case the "columns" are horizontal.
 
@@ -70,6 +74,14 @@ An image for the node card, will be inserted by the default `dataLabel.nodeForma
 */
 @property(nonatomic, readwrite) NSString *image;
 /**
+The job title for the node card, will be inserted by the default `dataLabel.nodeFormatter`.
+
+**Try it**
+
+* [Org chart with job titles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/organization-chart)
+*/
+@property(nonatomic, readwrite) NSString *title;
+/**
 Layout for the node's children. If `hanging`, this node's children will hang below their parent, allowing a tighter packing of nodes in the diagram.
 
 **Defaults to** `normal`.
@@ -87,14 +99,6 @@ The job description for the node card, will be inserted by the default `dataLabe
 * [Org chart with job descriptions](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/organization-chart)
 */
 @property(nonatomic, readwrite) NSString *definition;
-/**
-The job title for the node card, will be inserted by the default `dataLabel.nodeFormatter`.
-
-**Try it**
-
-* [Org chart with job titles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/organization-chart)
-*/
-@property(nonatomic, readwrite) NSString *title;
 /**
 Mass of the node. By default, each node has mass equal to it's marker radius . Mass is used to determine how two connected nodes should affect each other: Attractive force is multiplied by the ratio of two connected nodes; if a big node has weights twice as the small one, then the small one will move towards the big one twice faster than the big one to the small one .
 

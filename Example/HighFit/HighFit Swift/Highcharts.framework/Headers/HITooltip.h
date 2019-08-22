@@ -10,6 +10,7 @@
 #import "HIColor.h"
 #import "HIFunction.h"
 #import "HICSSObject.h"
+#import "HIShadowOptionsObject.h"
 
 
 /**
@@ -232,7 +233,7 @@ Whether to apply a drop shadow to the tooltip.
 * [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/bordercolor-default/)
 * [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/shadow/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *shadow;
+@property(nonatomic, readwrite) HIShadowOptionsObject *shadow;
 /**
 Enable or disable the tooltip.
 
@@ -252,6 +253,10 @@ The name of a symbol to use for the border around the tooltip. Can be one of: `"
 A callback function for formatting the HTML output for a single point in the tooltip. Like the `pointFormat` string, but with more flexibility.
 */
 @property(nonatomic, readwrite) HIFunction *pointFormatter;
+/**
+A CSS class name to apply to the tooltip's container div, allowing unique CSS styling for each chart.
+*/
+@property(nonatomic, readwrite) NSString *className;
 /**
 The pixel width of the tooltip border. In styled mode, the stroke width is set in the `.highcharts-tooltip-box` class.
 

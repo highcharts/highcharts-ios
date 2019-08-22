@@ -10,22 +10,13 @@
 
 
 /**
-Map data object.
-*/
-@interface HIMapDataObject: HIChartsJSONSerializable
+ */
+@interface HIPointStatesInactiveOptionsObject: HIChartsJSONSerializable
 
 /**
-The name of the data.
+Opacity of inactive markers.
 */
-@property(nonatomic, readwrite) NSString *name;
-/**
-The SVG path.
-*/
-@property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *path;
-/**
-The GeoJSON meta data.
-*/
-@property(nonatomic, readwrite) id properties;
+@property(nonatomic, readwrite) NSNumber *opacity;
 
 -(NSDictionary *)getParams;
 

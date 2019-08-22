@@ -7,6 +7,7 @@
 */
 
 #import "HILabel.h"
+#import "HIEvents.h"
 #import "HIColor.h"
 
 
@@ -38,6 +39,8 @@ The dashing or dot style for the plot line. For possible values see [this overvi
 /**
 The color of the line.
 
+**Defaults to** `#999999`.
+
 **Try it**
 
 * [A red line from X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-color/)
@@ -62,13 +65,15 @@ An object defining mouse events for the plot line. Supported properties are `cli
 
 * [Mouse events demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-events/)
 */
-@property(nonatomic, readwrite) id events;
+@property(nonatomic, readwrite) HIEvents *events;
 /**
 A custom class name, in addition to the default `highcharts-plot-line`, to apply to each individual line.
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
 The width or thickness of the plot line.
+
+**Defaults to** `2`.
 
 **Try it**
 

@@ -385,6 +385,10 @@ The color of the border surrounding the column or bar. In styled mode, the borde
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+A name for the dash style to use for the column or bar. Overrides dashStyle on the series. In styled mode, the stroke dash-array can be set with the same classes as listed under `data.color`.
+*/
+@property(nonatomic, readwrite) NSString *dashStyle;
+/**
 A pixel value specifying a fixed width for the column or bar. Overrides pointWidth on the series.
 
 **Defaults to** `undefined`.
@@ -447,13 +451,13 @@ The node that the link runs from.
 */
 @property(nonatomic, readwrite) NSString *from;
 /**
-The weight of the link.
-*/
-@property(nonatomic, readwrite) NSNumber *weight;
-/**
 By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
+/**
+The weight of the link.
+*/
+@property(nonatomic, readwrite) NSNumber *weight;
 /**
 The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
 

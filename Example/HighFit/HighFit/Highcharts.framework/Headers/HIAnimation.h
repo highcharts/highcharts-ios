@@ -10,8 +10,7 @@
 
 
 /**
-Animation when not hovering over the marker.
-*/
+ */
 @interface HIAnimation: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSNumber *duration;
