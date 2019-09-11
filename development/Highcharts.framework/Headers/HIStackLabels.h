@@ -117,7 +117,7 @@ Rotation of the labels in degrees.
 
 **Try it**
 
-* [Labels rotated 45Â°](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-rotation/)
+* [Labels rotated 45В°](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-rotation/)
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**

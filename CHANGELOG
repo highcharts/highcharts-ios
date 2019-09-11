@@ -1,3 +1,32 @@
+# Version 7.2.0
+
+## iOS:
+
+1. Fixed #213, PDF export.
+2. Added support of `exporting.buttons.contextButton.menuItems` to limit sharing options.
+3. Added HIExporting `filename` support for all sharing options.
+4. Added `exportToPNG`, `exportToPDF` and `exportToCSV` methods to `HIChartView`.
+5. Added a workaround for #233, `HIPie` dataLabels.
+
+## Framework:
+
+1. Added new top-level option, caption. The caption has similar structure to title and subtitle. It renders a chart description below the chart contents, supports reponsiveness and is part of exported charts.
+2. Added support for multiple color axes for almost all series.
+3. Added `high-contrast-light` and `high-contrast-dark` themes with 3:1 contrast against background.
+
+## Framework bug fixes:
+
+1. Fixed #11792, error and invalid attributes in organization chart with one point.
+2. Fixed #11783, tooltip border and background disappeared when combining tooltip.outside and chart.styledMode.
+3. Fixed #7911, `axis.reversed` should not take effect on a linked axis if the parent axis had a different setting.
+4. Fixed #10962, stack labels were misaligned in variwide series.
+5. Fixed #11702, error in organization chart with certain relations, plus color was not always applied to nodes.
+6. Fixed #11717, loading network graph as ES6 module threw errors.
+7. Fixed #11609, prevented reflow of destroyed charts in IE and Edge.
+8. Fixed #11546, in packed bubble series `parentNodes` were missing after chart and series update.
+9. Fixed #11199, a regression causing wrong grid line placement in a single-item category axis.
+10. Fixed #11469, `Series.remove()` function didn't work properly with networkgraph and packedbubble series.
+
 # Version 7.1.4
 
 ## Upgrade notes:

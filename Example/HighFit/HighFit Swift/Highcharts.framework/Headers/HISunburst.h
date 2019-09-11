@@ -97,6 +97,22 @@ When enabled the user can click on a point which is a parent and zoom in on its 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowTraversingTree;
 /**
+A series specific or series type specific color set to use instead of the global `colors`.
+
+**Try it**
+
+* [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
+*/
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
+/**
+The diameter of the pie relative to the plot area. Can be a percentage or pixel value. Pixel values are given as integers. The default behaviour (as of 3.0) is to scale to the plot area and give room for data labels within the plot area. `slicedOffset` is also included in the default size calculation. As a consequence, the size of the pie may vary when points are updated and data labels more around. In that case it is best to set a fixed value, for example `"75%"`.
+
+**Try it**
+
+* [Smaller pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-size/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
+/**
 The color of the border surrounding each slice. When `null`, the border takes the same color as the slice fill. This can be used together with a `borderWidth` to fill drawing gaps created by antialiazing artefacts in borderless pies. In styled mode, the border stroke is given in the `.highcharts-point` class.
 
 **Defaults to** `#ffffff`.
@@ -107,21 +123,13 @@ The color of the border surrounding each slice. When `null`, the border takes th
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
-A series specific or series type specific color set to use instead of the global `colors`.
+If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
 
 **Try it**
 
-* [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
+* [Empty pie series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-emptyseries/)
 */
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
-/**
-The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
-
-**Try it**
-
-* [3px border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-borderwidth/)
-*/
-@property(nonatomic, readwrite) NSNumber *borderWidth;
+@property(nonatomic, readwrite) HIColor *fillColor;
 /**
 The start angle of the pie slices in degrees where 0 is top and 90 right.
 
@@ -133,13 +141,13 @@ The start angle of the pie slices in degrees where 0 is top and 90 right.
 */
 @property(nonatomic, readwrite) NSNumber *startAngle;
 /**
-The diameter of the pie relative to the plot area. Can be a percentage or pixel value. Pixel values are given as integers. The default behaviour (as of 3.0) is to scale to the plot area and give room for data labels within the plot area. `slicedOffset` is also included in the default size calculation. As a consequence, the size of the pie may vary when points are updated and data labels more around. In that case it is best to set a fixed value, for example `"75%"`.
+The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
 
 **Try it**
 
-* [Smaller pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-size/)
+* [3px border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-borderwidth/)
 */
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
+@property(nonatomic, readwrite) NSNumber *borderWidth;
 
 -(NSDictionary *)getParams;
 

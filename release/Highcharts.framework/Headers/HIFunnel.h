@@ -79,6 +79,22 @@ The height of the neck, the lower part of the funnel. A number defines pixel wid
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ neckHeight;
 /**
+Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
+
+**Try it**
+
+* [True, the hiddden point is ignored](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-ignorehiddenpoint/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
+/**
+A series specific or series type specific color set to use instead of the global `colors`.
+
+**Try it**
+
+* [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
+*/
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
+/**
 The color of the border surrounding each slice. When `null`, the border takes the same color as the slice fill. This can be used together with a `borderWidth` to fill drawing gaps created by antialiazing artefacts in borderless pies. In styled mode, the border stroke is given in the `.highcharts-point` class.
 
 **Defaults to** `#ffffff`.
@@ -95,6 +111,32 @@ The minimum size for a pie in response to auto margins. The pie will try to shri
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
 /**
+If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
+
+**Try it**
+
+* [Empty pie series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-emptyseries/)
+*/
+@property(nonatomic, readwrite) HIColor *fillColor;
+/**
+The start angle of the pie slices in degrees where 0 is top and 90 right.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [Start from right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-startangle-90/)
+*/
+@property(nonatomic, readwrite) NSNumber *startAngle;
+/**
+The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to `startAngle` plus 360.
+
+**Try it**
+
+* [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
+*/
+@property(nonatomic, readwrite) NSNumber *endAngle;
+/**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
 
 **Try it**
@@ -109,22 +151,6 @@ The thickness of a 3D pie. Requires `highcharts-3d.js`
 */
 @property(nonatomic, readwrite) NSNumber *depth;
 /**
-The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to `startAngle` plus 360.
-
-**Try it**
-
-* [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
-*/
-@property(nonatomic, readwrite) NSNumber *endAngle;
-/**
-A series specific or series type specific color set to use instead of the global `colors`.
-
-**Try it**
-
-* [Set default colors for all pies](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-monochrome/)
-*/
-@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
-/**
 The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
 
 **Try it**
@@ -132,24 +158,6 @@ The width of the border surrounding each slice. When setting the border width to
 * [3px border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-borderwidth/)
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
-/**
-The start angle of the pie slices in degrees where 0 is top and 90 right.
-
-**Defaults to** `0`.
-
-**Try it**
-
-* [Start from right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-startangle-90/)
-*/
-@property(nonatomic, readwrite) NSNumber *startAngle;
-/**
-Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
-
-**Try it**
-
-* [True, the hiddden point is ignored](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-ignorehiddenpoint/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
 
 -(NSDictionary *)getParams;
 

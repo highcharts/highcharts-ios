@@ -89,21 +89,13 @@ In circular view, the start angle of the item layout, in degrees where 0 is up.
 */
 @property(nonatomic, readwrite) NSNumber *startAngle;
 /**
-The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
-
-**Defaults to** `80`.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
-/**
-The center of the pie chart relative to the plot area. Can be percentages or pixel values. The default behaviour (as of 3.0) is to center the pie so that all slices and data labels are within the plot area. As a consequence, the pie may actually jump around in a chart with dynamic values, as the data labels move. In that case, the center should be explicitly set, for example to `["50%", "50%"]`.
-
-**Defaults to** `[null, null]`.
+Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
 
 **Try it**
 
-* [Centered at 100, 100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-center/)
+* [True, the hiddden point is ignored](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-ignorehiddenpoint/)
 */
-@property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
 /**
 A series specific or series type specific color set to use instead of the global `colors`.
 
@@ -121,13 +113,29 @@ The diameter of the pie relative to the plot area. Can be a percentage or pixel 
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
 /**
-Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
+The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
+
+**Defaults to** `80`.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
+/**
+If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
 
 **Try it**
 
-* [True, the hiddden point is ignored](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-ignorehiddenpoint/)
+* [Empty pie series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-emptyseries/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
+@property(nonatomic, readwrite) HIColor *fillColor;
+/**
+The center of the pie chart relative to the plot area. Can be percentages or pixel values. The default behaviour (as of 3.0) is to center the pie so that all slices and data labels are within the plot area. As a consequence, the pie may actually jump around in a chart with dynamic values, as the data labels move. In that case, the center should be explicitly set, for example to `["50%", "50%"]`.
+
+**Defaults to** `[null, null]`.
+
+**Try it**
+
+* [Centered at 100, 100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-center/)
+*/
+@property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
 
 -(NSDictionary *)getParams;
 

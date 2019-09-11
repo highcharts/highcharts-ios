@@ -111,7 +111,7 @@ Export-data module required. Caption for the data table. Same as chart title by 
 /**
 An object containing additional key value data for the POST form that sends the SVG to the export server. For example, a `target` can be set to make sure the generated image is received in another frame, or a custom `enctype` or `encoding` can be set.
 */
-@property(nonatomic, readwrite) id formAttributes;
+@property(nonatomic, readwrite) NSDictionary *formAttributes;
 /**
 Export-data module required. Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
 

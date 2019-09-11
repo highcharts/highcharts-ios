@@ -22,7 +22,7 @@ The responsive rule applies if the chart width is greater than this.
 */
 @property(nonatomic, readwrite) NSNumber *minWidth;
 /**
-A callback function to gain complete control on when the responsive rule applies. Return `true` if it applies. This opens for checking against other metrics than the chart size, or example the document size or other elements.
+A callback function to gain complete control on when the responsive rule applies. Return `true` if it applies. This opens for checking against other metrics than the chart size, for example the document size or other elements.
 */
 @property(nonatomic, readwrite) HIFunction *callback;
 /**

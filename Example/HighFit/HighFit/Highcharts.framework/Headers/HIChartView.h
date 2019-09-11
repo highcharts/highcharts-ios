@@ -91,6 +91,21 @@
 @property (class, nonatomic) NSNumber /* Bool */ *synced;
 
 /**
+ * A method to share the chart in PNG format.
+ */
+- (void)exportToPNG;
+
+/**
+ * A method to share the chart in PDF format.
+ */
+- (void)exportToPDF;
+
+/**
+ * A method to share the chart in CSV format.
+ */
+- (void)exportToCSV;
+
+/**
  Add an annotation to the chart after render time.
  @param options The annotation options for the new, detailed annotation.
  */

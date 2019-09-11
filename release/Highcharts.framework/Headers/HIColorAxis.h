@@ -7,16 +7,21 @@
 */
 
 #import "HIDataClasses.h"
+#import "HILabels.h"
 #import "HIMarker.h"
 #import "HIEvents.h"
-#import "HILabels.h"
 #import "HIAccessibility.h"
 #import "HIColor.h"
 #import "HIFunction.h"
 
 
 /**
-A color axis for choropleth maps and heat maps. Visually, the color axis will appear as a gradient or as separate items inside the legend, depending on whether the axis is scalar or based on data classes. For supported color formats, see the [docs article about colors](https://www.highcharts.com/docs/chart-design-and-style/colors). A scalar color axis is represented by a gradient. The colors either range between the `minColor` and the `maxColor`, or for more fine grained control the colors can be defined in `stops`. Often times, the color axis needs to be adjusted to get the right color spread for the data. In addition to stops, consider using a logarithmic `axis type`, or setting `min` and `max` to avoid the colors being determined by outliers. When `dataClasses` are used, the ranges are subdivided into separate classes like categories based on their values. This can be used for ranges between two values, but also for a true category. However, when your data is categorized, it may be as convenient to add each category to a separate series. See `the Axis object` for programmatic access to the axis.
+A color axis for series. Visually, the color axis will appear as a gradient or as separate items inside the legend, depending on whether the axis is scalar or based on data classes. For supported color formats, see the [docs article about colors](https://www.highcharts.com/docs/chart-design-and-style/colors). A scalar color axis is represented by a gradient. The colors either range between the `minColor` and the `maxColor`, or for more fine grained control the colors can be defined in `stops`. Often times, the color axis needs to be adjusted to get the right color spread for the data. In addition to stops, consider using a logarithmic `axis type`, or setting `min` and `max` to avoid the colors being determined by outliers. When `dataClasses` are used, the ranges are subdivided into separate classes like categories based on their values. This can be used for ranges between two values, but also for a true category. However, when your data is categorized, it may be as convenient to add each category to a separate series. Color axis does not work with: `sankey`, `sunburst`, `dependencywheel`, `networkgraph`, `wordcloud`, `venn`, `gauge` and `solidgauge` series types. Since v7.2.0 `colorAxis` can also be an array of options objects. See `the Axis object` for programmatic access to the axis.
+
+**Try it**
+
+* [Column chart with color axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/custom-color-key)
+* [Horizontal layout](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/horizontal-layout)
 */
 @interface HIColorAxis: HIChartsJSONSerializable
 
@@ -35,13 +40,9 @@ Padding of the min value relative to the length of the axis. A padding of 0.05 w
 */
 @property(nonatomic, readwrite) NSNumber *minPadding;
 /**
-If `tickInterval` is `null` this option sets the approximate pixel interval of the tick marks.
-
-**Try it**
-
-* [50 px on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/tickpixelinterval-50/)
+The axis labels show the number for each tick. For more live examples on label options, see `xAxis.labels in the Highcharts API.`
 */
-@property(nonatomic, readwrite) NSNumber *tickPixelInterval;
+@property(nonatomic, readwrite) HILabels *labels;
 /**
 The color to represent the maximum of the color axis. Unless `dataClasses` or `stops` are set, the gradient ends at this value. If dataClasses are set, the color is based on minColor and maxColor unless a color is set for each data class, or the `dataClassColor` is set.
 */
@@ -50,6 +51,14 @@ The color to represent the maximum of the color axis. Unless `dataClasses` or `s
 The triangular marker on a scalar color axis that points to the value of the hovered area. To disable the marker, set `marker: null`.
 */
 @property(nonatomic, readwrite) HIMarker *marker;
+/**
+The layout of the color axis. Can be `'horizontal'` or `'vertical'`. If none given, the color axis has the same layout as the legend.
+
+**Try it**
+
+* [Horizontal color axis layout with vertical legend](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/horizontal-layout/)
+*/
+@property(nonatomic, readwrite) NSString *layout;
 /**
 Whether to force the axis to start on a tick. Use this option with the `maxPadding` option to control the axis start.
 
@@ -87,11 +96,7 @@ The type of interpolation to use for the color axis. Can be `linear` or `logarit
 
 **Try it**
 
-* [Linear](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/type-linear/)
-* [Logarithmic](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/type-log/)
-* [Logarithmic with minor grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/type-log-minorgrid/)
-* [Logarithmic on two axes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/type-log-both/)
-* [Logarithmic with extension to emulate negative values](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/type-log-negative/)
+* [Logarithmic color axis with extension to emulate negative values](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/logarithmic-with-emulate-negative-values/)
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
@@ -99,9 +104,13 @@ Event handlers for the axis.
 */
 @property(nonatomic, readwrite) HIEvents *events;
 /**
-The axis labels show the number for each tick. For more live examples on label options, see `xAxis.labels in the Highcharts API.`
+If `tickInterval` is `null` this option sets the approximate pixel interval of the tick marks.
+
+**Try it**
+
+* [50 px on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/tickpixelinterval-50/)
 */
-@property(nonatomic, readwrite) HILabels *labels;
+@property(nonatomic, readwrite) NSNumber *tickPixelInterval;
 /**
 The maximum value of the axis in terms of map point values. If `null`, the max value is automatically calculated. If the `endOnTick` option is true, the max value might be rounded up.
 
@@ -184,18 +193,12 @@ The pixel length of the main tick marks on the color axis.
 @property(nonatomic, readwrite) NSNumber *tickLength;
 /**
 Whether to display the colorAxis in the legend.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *showInLegend;
-/**
-Whether to zoom axis. If `chart.zoomType` is set, the option allows to disable zooming on an individual axis.
-
-**Defaults to** `enabled`.
 
 **Try it**
 
-* [Zoom enabled is false](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/zoomenabled/)
+* [Hidden color axis with 3d chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/hidden-coloraxis-with-3d-chart/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *zoomEnabled;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *showInLegend;
 /**
 Color for the minor tick marks.
 
@@ -206,14 +209,6 @@ Color for the minor tick marks.
 * [Black tick marks on Y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickcolor/)
 */
 @property(nonatomic, readwrite) HIColor *minorTickColor;
-/**
-Refers to the index in the `panes` array. Used for circular gauges and polar charts. When the option is not set then first pane will be used.
-
-**Try it**
-
-* [Two gauges with different center](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter)
-*/
-@property(nonatomic, readwrite) NSNumber *pane;
 /**
 The Z index of the grid lines.
 
@@ -234,12 +229,6 @@ Whether axis, including axis title, line, ticks and labels, should be visible.
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
-/**
-When using multiple axis, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in an Axis options are set to false, then the `alignTicks ` will be disabled for the Axis. Disabled for logarithmic axes.
-
-**Defaults to** `true`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
 The pixel width of the major tick marks. Defaults to 0 on category axes, otherwise 1. In styled mode, the stroke width is given in the `.highcharts-tick` class, but in order for the element to be generated on category axes, the option must be explicitly set to 1.
 
@@ -423,16 +412,6 @@ The position of the major tick marks relative to the axis line. Can be one of `i
 * ["inside"](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/tickposition-inside/)
 */
 @property(nonatomic, readwrite) NSString *tickPosition;
-/**
-This option determines how stacks should be ordered within a group. For example reversed xAxis also reverses stacks, so first series comes last in a group. To keep order like for non-reversed xAxis enable this option.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Reversed stacks comparison](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/reversedstacks/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *reversedStacks;
 /**
 Whether to show the last tick label. Defaults to `true` on cartesian charts, and `false` on polar charts.
 

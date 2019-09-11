@@ -38,7 +38,7 @@ A collection of options for buttons appearing in the exporting module. In styled
 /**
 Path where Highcharts will look for icons. Change this to use icons from a different server.
 */
-@property(nonatomic, readwrite) id iconsURL;
+@property(nonatomic, readwrite) NSString *iconsURL;
 /**
 A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events. Default value of versions < 7.0.4 `highcharts-bindings-wrapper`
 */

@@ -218,6 +218,17 @@ When the series contains less points than the crop threshold, all points are dra
 @property(nonatomic, readwrite) NSNumber *cropThreshold;
 @property(nonatomic, readwrite) HIStates *states;
 /**
+Determines what data value should be used to calculate point color if `colorAxis` is used. Requires to set `min` and `max` if some custom point property is used or if approximation for data grouping is set to `'sum'`.
+
+**Defaults to** `y`.
+
+**Try it**
+
+* [Custom color key](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/custom-color-key/)
+* [Changed default color key](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/changed-default-color-key/)
+*/
+@property(nonatomic, readwrite) NSString *colorKey;
+/**
 When this is true, the series will not cause the Y axis to cross the zero plane (or `threshold` option) unless the data actually crosses the plane. For example, if `softThreshold` is `false`, a series of 0, 1, 2, 3 will make the Y axis show negative values according to the `minPadding` option. If `softThreshold` is `true`, the Y axis starts at 0.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *softThreshold;
@@ -249,9 +260,15 @@ Same as `accessibility.pointDescriptionFormatter`, but for an individual series.
 */
 @property(nonatomic, readwrite) HIFunction *pointDescriptionFormatter;
 /**
-An additional class name to apply to the series' graphical elements. This option does not replace default class names of the graphical element.
+You can set the cursor to "pointer" if you have click events attached to the series, to signal to the user that the points and lines can be clicked. In styled mode, the series cursor can be set with the same classes as listed under `series.color`.
+
+**Try it**
+
+* [On line graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-cursor-line/)
+* [On columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-cursor-column/)
+* [On scatter markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-cursor-scatter/)
 */
-@property(nonatomic, readwrite) NSString *className;
+@property(nonatomic, readwrite) NSString *cursor;
 /**
 A name for the dash style to use for the graph, or for some series types the outline of each shape. In styled mode, the [stroke dash-array](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-dashstyle/) can be set with the same classes as listed under `series.color`.
 
@@ -439,6 +456,17 @@ Allow this series' points to be selected by clicking on the graphic (columns, po
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowPointSelect;
 /**
+When using dual or multiple color axes, this number defines which colorAxis the particular series is connected to. It refers to either the {@link #colorAxis.id|axis id} or the index of the axis in the colorAxis array, with 0 being the first. Set this option to false to prevent a series from connecting to the default color axis. Since v7.2.0 the option can also be an axis id or an axis index instead of a boolean flag.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [Color axis with pie series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/coloraxis-with-pie/)
+* [Multiple color axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/multiple-coloraxis/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ colorAxis;
+/**
 Defines the Axis on which the zones are applied.
 
 **Defaults to** `y`.
@@ -514,15 +542,9 @@ Options for the series data labels, appearing next to each data point. Since v6.
 */
 @property(nonatomic, readwrite) NSArray<HIDataLabelsOptionsObject *> *dataLabels;
 /**
-You can set the cursor to "pointer" if you have click events attached to the series, to signal to the user that the points and lines can be clicked. In styled mode, the series cursor can be set with the same classes as listed under `series.color`.
-
-**Try it**
-
-* [On line graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-cursor-line/)
-* [On columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-cursor-column/)
-* [On scatter markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-cursor-scatter/)
+An additional class name to apply to the series' graphical elements. This option does not replace default class names of the graphical element.
 */
-@property(nonatomic, readwrite) NSString *cursor;
+@property(nonatomic, readwrite) NSString *className;
 /**
 If no x values are given for the points in a series, pointStart defines on what value to start. For example, if a series contains one yearly value starting from 1945, set pointStart to 1945.
 
@@ -555,9 +577,7 @@ Set the point threshold for when a series should enter boost mode. Setting it to
 */
 @property(nonatomic, readwrite) NSNumber *boostThreshold;
 /**
-Whether to display this particular series or series type in the legend. The default value is `true` for standalone series, `false` for linked series.
-
-**Defaults to** `true`.
+Whether to display this particular series or series type in the legend. Standalone series are shown in legend by default, and linked series are not. Since v7.2.0 it is possible to show series that use colorAxis by setting this option to `true`.
 
 **Try it**
 
