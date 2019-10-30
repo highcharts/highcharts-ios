@@ -32,7 +32,7 @@ class DataTableViewController: UITableViewController, HIChartViewDelegate {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.chartType = self.configuration["chartType"] as! String
+		self.chartType = (self.configuration["chartType"] as! String)
         
         self.tableView = UITableView(frame: self.view.bounds, style: .grouped)
         
@@ -199,7 +199,7 @@ class DataTableViewController: UITableViewController, HIChartViewDelegate {
         
         // Pass the selected object to the new view controller.
         detailViewController.unit = self.configuration["unit"] as? String
-        detailViewController.data = self.data["all"] as! [Any]
+		detailViewController.data = (self.data["all"] as! [Any])
         
         // Push the view controller.
         self.navigationController?.pushViewController(detailViewController, animated: true)
