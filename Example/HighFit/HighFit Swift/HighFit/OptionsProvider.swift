@@ -75,7 +75,7 @@ class OptionsProvider {
             
             let subtitle = HISubtitle()
 			subtitle.text = (options["subtitle"] as! String)
-            if subtitle.text.characters.count > 0 {
+            if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
@@ -171,7 +171,7 @@ class OptionsProvider {
             
             let subtitle = HISubtitle()
 			subtitle.text = (options["subtitle"] as! String)
-            if subtitle.text.characters.count > 0 {
+            if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
@@ -263,7 +263,7 @@ class OptionsProvider {
             
             let subtitle = HISubtitle()
 			subtitle.text = (options["subtitle"] as! String)
-            if subtitle.text.characters.count > 0 {
+            if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
