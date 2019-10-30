@@ -197,10 +197,9 @@
 			};
 			buildConfigurationList = 45DAC0891F56A5680004F0B1 /* Build configuration list for PBXProject "HighFit" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
