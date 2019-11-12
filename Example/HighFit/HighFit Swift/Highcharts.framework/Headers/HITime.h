@@ -53,8 +53,6 @@ The timezone offset in minutes. Positive values are west, negative values are ea
 /**
 Whether to use UTC time for axis scaling, tickmark placement and time display in `Highcharts.dateFormat`. Advantages of using UTC is that the time displays equally regardless of the user agent's time zone settings. Local time can be used when the data is loaded in real time or when correct Daylight Saving Time transitions are required.
 
-**Defaults to** `true`.
-
 **Try it**
 
 * [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/time/useutc-true/)

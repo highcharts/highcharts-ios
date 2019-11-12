@@ -13,6 +13,11 @@
 
 /**
 An array of objects representing plot lines on the X axis
+
+**Try it**
+
+* [Basic plot line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-color/)
+* [Solid gauge plot line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-solidgauge/labels-auto-aligned/)
 */
 @interface HIPlotLines: HIChartsJSONSerializable
 

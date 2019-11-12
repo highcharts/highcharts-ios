@@ -11,7 +11,7 @@
 
 
 /**
-The draggable-points module allows points to be moved around or modified in the chart. In addition to the options mentioned under the `dragDrop` API structure, the module fires three events, `point.dragStart`, `point.drag` and `point.drop`. It requires the `modules/draggable-points.js` file to be loaded.
+The draggable-points module allows points to be moved around or modified in the chart. In addition to the options mentioned under the `dragDrop` API structure, the module fires three events, `point.dragStart`, `point.drag` and `point.drop`.
 
 **Try it**
 
@@ -23,43 +23,43 @@ The draggable-points module allows points to be moved around or modified in the 
 @interface HIDragDrop: HIChartsJSONSerializable
 
 /**
-Allow high value to be dragged individually. Requires `draggable-points` module.
+Allow high value to be dragged individually.
 
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableHigh;
 /**
-Allow low value to be dragged individually. Requires `draggable-points` module.
+Allow low value to be dragged individually.
 
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableLow;
 /**
-Allow x2 value to be dragged individually. Requires `draggable-points` module.
+Allow x2 value to be dragged individually.
 
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableX2;
 /**
-Allow x value to be dragged individually. Requires `draggable-points` module.
+Allow x value to be dragged individually.
 
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableX1;
 /**
-Allow Q1 value to be dragged individually. Requires `draggable-points` module.
+Allow Q1 value to be dragged individually.
 
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableQ1;
 /**
-Allow Q3 value to be dragged individually. Requires `draggable-points` module.
+Allow Q3 value to be dragged individually.
 
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableQ3;
 /**
-Allow target value to be dragged individually. Requires `draggable-points` module.
+Allow target value to be dragged individually.
 
 **Defaults to** `true`.
 */

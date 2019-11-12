@@ -89,7 +89,7 @@ class DashboardViewController: UITableViewController, HIChartViewDelegate {
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseIdentifier)
             
-            cell!.selectionStyle = UITableViewCellSelectionStyle.none
+            cell!.selectionStyle = UITableViewCell.SelectionStyle.none
             
             let chartView = HIChartView(frame: CGRect(x: 5.0, y: 5.0, width: self.view.bounds.size.width - 20, height: 240.0))
             chartView.backgroundColor = UIColor.clear
@@ -190,7 +190,7 @@ class DashboardViewController: UITableViewController, HIChartViewDelegate {
     }
     
     func dataSourceRem(_ dataSource: [String: Any]) {
-        if let index = self.sources.index(where: { $0["source"] as! String == dataSource["source"] as! String } ) {
+        if let index = self.sources.firstIndex(where: { $0["source"] as! String == dataSource["source"] as! String } ) {
             var tmp = self.sources!
             tmp.remove(at: index)
             self.sources = tmp
@@ -219,7 +219,7 @@ class DashboardViewController: UITableViewController, HIChartViewDelegate {
         
         self.charts = [HIChartView]()
         
-        self.sources = UserDefaults.standard.value(forKey: "sources") as! [[String:Any]]
+        self.sources = (UserDefaults.standard.value(forKey: "sources") as! [[String: Any]])
         
         var tmpData = [Any]()
         for source in self.sources {

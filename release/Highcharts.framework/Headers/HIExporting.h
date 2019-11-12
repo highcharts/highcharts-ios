@@ -52,7 +52,7 @@ Defines the scale or zoom factor for the exported image compared to the on-scree
 */
 @property(nonatomic, readwrite) NSNumber *scale;
 /**
-Export-data module required. Show a HTML table below the chart with the chart's current data.
+Show a HTML table below the chart with the chart's current data.
 
 **Try it**
 
@@ -87,7 +87,7 @@ When printing the chart from the menu item in the burger menu, if the on-screen 
 */
 @property(nonatomic, readwrite) NSNumber *printMaxWidth;
 /**
-Options for exporting data to CSV or ExCel, or displaying the data in a HTML table or a JavaScript structure. Requires the `export-data.js` module. This module adds data export options to the export menu and provides functions like `Chart.getCSV`, `Chart.getTable`, `Chart.getDataRows` and `Chart.viewData`. The XLS converter is limited and only creates a HTML string that is passed for download, which works but creates a warning before opening. The workaround for this is to use a third party XLSX converter, as demonstrated in the sample below.
+Options for exporting data to CSV or ExCel, or displaying the data in a HTML table or a JavaScript structure. This module adds data export options to the export menu and provides functions like `Chart.getCSV`, `Chart.getTable`, `Chart.getDataRows` and `Chart.viewData`. The XLS converter is limited and only creates a HTML string that is passed for download, which works but creates a warning before opening. The workaround for this is to use a third party XLSX converter, as demonstrated in the sample below.
 
 **Try it**
 
@@ -101,7 +101,7 @@ Default MIME type for exporting if `chart.exportChart()` is called without speci
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
-Export-data module required. Caption for the data table. Same as chart title by default. Set to `false` to disable.
+Caption for the data table. Same as chart title by default. Set to `false` to disable.
 
 **Try it**
 
@@ -113,7 +113,7 @@ An object containing additional key value data for the POST form that sends the 
 */
 @property(nonatomic, readwrite) NSDictionary *formAttributes;
 /**
-Export-data module required. Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
+Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
 
 **Try it**
 
@@ -121,7 +121,7 @@ Export-data module required. Use multi level headers in data table. If `csv.colu
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useMultiLevelHeaders;
 /**
-Export-data module required. If using multi level table headers, use rowspans for headers that have only one level.
+If using multi level table headers, use rowspans for headers that have only one level.
 
 **Try it**
 

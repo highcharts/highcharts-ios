@@ -13,7 +13,8 @@
 
 
 /**
- */
+States for a single point marker.
+*/
 @interface HIStates: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) HIHover *hover;

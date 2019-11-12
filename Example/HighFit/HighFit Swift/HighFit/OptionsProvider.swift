@@ -40,11 +40,11 @@ class OptionsProvider {
             let chart = HIChart()
             chart.backgroundColor = HIColor(linearGradient: ["x1": 0, "y1": 0, "x2": 0, "y2": 300], stops: [[0, "rgb(102, 153, 161)"], [1, "rgb(128, 135, 232)"]])
             chart.borderRadius = 6
-            chart.type = options["chartType"] as! String
+            chart.type = (options["chartType"] as! String)
             hioptions.chart = chart
             
             let exporting = HIExporting()
-            exporting.enabled = options["exporting"] as! NSNumber
+            exporting.enabled = (options["exporting"] as! NSNumber)
             hioptions.exporting = exporting
             
             let navigation = HINavigation()
@@ -64,7 +64,7 @@ class OptionsProvider {
             hioptions.credits = credits
             
             let title = HITitle()
-            title.text = options["title"] as! String
+            title.text = (options["title"] as! String)
             title.align = "left"
             title.style = HICSSObject()
             title.style.fontFamily = "Arial"
@@ -74,8 +74,8 @@ class OptionsProvider {
             hioptions.title = title
             
             let subtitle = HISubtitle()
-            subtitle.text = options["subtitle"] as! String
-            if subtitle.text.characters.count > 0 {
+            subtitle.text = (options["subtitle"] as! String)
+            if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
@@ -121,7 +121,7 @@ class OptionsProvider {
             area.showInLegend = false
             area.data = series
             area.color = HIColor(rgb: 255, green: 255, blue: 255)
-            area.name = options["title"] as! String
+            area.name = (options["title"] as! String)
             hioptions.series = [area]
             
             return hioptions
@@ -134,11 +134,11 @@ class OptionsProvider {
             let chart = HIChart()
             chart.backgroundColor = HIColor(linearGradient: ["x1": 0, "y1": 0, "x2": 0, "y2": 1], stops: [[0, "rgb(66, 218, 113)"], [1, "rgb(80, 140, 200)"]])
             chart.borderRadius = 6
-            chart.type = options["chartType"] as! String
+            chart.type = (options["chartType"] as! String)
             hioptions.chart = chart
             
             let exporting = HIExporting()
-            exporting.enabled = options["exporting"] as! NSNumber
+            exporting.enabled = (options["exporting"] as! NSNumber)
             hioptions.exporting = exporting
             
             let navigation = HINavigation()
@@ -160,7 +160,7 @@ class OptionsProvider {
             hioptions.credits = credits
             
             let title = HITitle()
-            title.text = options["title"] as! String
+            title.text = (options["title"] as! String)
             title.align = "left"
             title.style = HICSSObject()
             title.style.fontFamily = "Arial"
@@ -170,8 +170,8 @@ class OptionsProvider {
             hioptions.title = title
             
             let subtitle = HISubtitle()
-            subtitle.text = options["subtitle"] as! String
-            if subtitle.text.characters.count > 0 {
+            subtitle.text = (options["subtitle"] as! String)
+            if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
@@ -216,7 +216,7 @@ class OptionsProvider {
             column.tooltip.valueSuffix = " kcal"
             column.showInLegend = false
             column.data = series
-            column.name = options["title"] as! String
+            column.name = (options["title"] as! String)
             hioptions.series = [column]
             
             return hioptions
@@ -228,11 +228,11 @@ class OptionsProvider {
             let chart = HIChart()
             chart.backgroundColor = HIColor(linearGradient: ["x1": 0, "y1": 0, "x2": 0, "y2": 1], stops: [[0, "rgba(132, 103, 144, 1)"], [1, "rgba(163, 95, 103, 1)"]])
             chart.borderRadius = 6
-            chart.type = options["chartType"] as! String
+            chart.type = (options["chartType"] as! String)
             hioptions.chart = chart
             
             let exporting = HIExporting()
-            exporting.enabled = options["exporting"] as! NSNumber
+            exporting.enabled = (options["exporting"] as! NSNumber)
             hioptions.exporting = exporting
             
             let navigation = HINavigation()
@@ -252,7 +252,7 @@ class OptionsProvider {
             hioptions.credits = credits
             
             let title = HITitle()
-            title.text = options["title"] as! String
+            title.text = (options["title"] as! String)
             title.align = "left"
             title.style = HICSSObject()
             title.style.fontFamily = "Arial"
@@ -262,8 +262,8 @@ class OptionsProvider {
             hioptions.title = title
             
             let subtitle = HISubtitle()
-            subtitle.text = options["subtitle"] as! String
-            if subtitle.text.characters.count > 0 {
+            subtitle.text = (options["subtitle"] as! String)
+            if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
             subtitle.align = "left"
@@ -309,7 +309,7 @@ class OptionsProvider {
             spline.tooltip.valueSuffix = " kcal"
             spline.showInLegend = false
             spline.data = series
-            spline.name = options["title"] as! String
+            spline.name = (options["title"] as! String)
             hioptions.series = [spline]
             
             return hioptions

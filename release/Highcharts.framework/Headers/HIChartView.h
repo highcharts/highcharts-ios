@@ -191,6 +191,42 @@
 -(void)addYAxis:(HIYAxis *)options redraw:(NSNumber /* Bool */ *)redraw animation:(HIAnimationOptionsObject *)animation;
 
 /**
+ Add a color axis to the chart after render time. Note that this method should never be used when adding data synchronously at chart render time, as it adds expense to the calculations and rendering. When adding data at the same time as the chart is initialized, add the axis as a configuration option instead.
+
+ **Try it**
+
+ * [Add and remove axes](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-addaxis/)
+
+ @param options The axis options.
+ */
+-(void)addColorAxis:(HIColorAxis *)options;
+
+/**
+Add a color axis to the chart after render time. Note that this method should never be used when adding data synchronously at chart render time, as it adds expense to the calculations and rendering. When adding data at the same time as the chart is initialized, add the axis as a configuration option instead.
+
+**Try it**
+
+* [Add and remove axes](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-addaxis/)
+
+@param options The axis options.
+@param redraw Whether to redraw the chart after adding.
+*/
+-(void)addColorAxis:(HIColorAxis *)options redraw:(NSNumber /* Bool */ *)redraw;
+
+/**
+Add a color axis to the chart after render time. Note that this method should never be used when adding data synchronously at chart render time, as it adds expense to the calculations and rendering. When adding data at the same time as the chart is initialized, add the axis as a configuration option instead.
+
+**Try it**
+
+* [Add and remove axes](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-addaxis/)
+
+@param options The axis options.
+@param redraw Whether to redraw the chart after adding.
+@param animation Whether and how to apply animation in the redraw.
+*/
+-(void)addColorAxis:(HIColorAxis *)options redraw:(NSNumber /* Bool */ *)redraw animation:(HIAnimationOptionsObject *)animation;
+
+/**
  Set a new credits label for the chart.
  
  **Try it**
@@ -408,6 +444,23 @@
  * module:modules/sonification
  */
 -(void)resetSonifyCursorEnd;
+
+/**
+ Set the caption options. This can also be done from Highcharts.Chart#update.
+ @param options New caption options. The caption text itself is set by the options.text property.
+ */
+-(void)setCaption:(HICaption *)options;
+
+/**
+ Set the chart container's class name, in addition to highcharts-container.
+ */
+-(void)setClassName;
+
+/**
+ Set the chart container's class name, in addition to highcharts-container.
+ @param className Class name.
+ */
+-(void)setClassName:(NSString *)className;
 
 /**
  Set the cursor to a point in different series.

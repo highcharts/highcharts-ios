@@ -19,6 +19,10 @@ For automatically calculated width and height on images, it is possible to set a
 */
 @property(nonatomic, readwrite) NSNumber *aspectRatio;
 /**
+Background color for the pattern if a `path` is set (not images).
+*/
+@property(nonatomic, readwrite) NSString *backgroundColor;
+/**
 Pattern color, used as default path stroke.
 */
 @property(nonatomic, readwrite) NSString *color;

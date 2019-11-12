@@ -281,7 +281,7 @@ The y value of the point.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-A description of the point to add to the screen reader information about the point. Requires the Accessibility module.
+A description of the point to add to the screen reader information about the point.
 */
 @property(nonatomic, readwrite) NSString *definition;
 /**
@@ -320,7 +320,7 @@ An additional, individual class name for the data point's graphic representation
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-Point specific options for the draggable-points module. Overrides options on `series.dragDrop`. Requires the `draggable-points` module.
+Point specific options for the draggable-points module. Overrides options on `series.dragDrop`.
 */
 @property(nonatomic, readwrite) HIDragDrop *dragDrop;
 /**
@@ -505,18 +505,9 @@ A partial fill for each point, typically used to visualize how much of a task is
 */
 @property(nonatomic, readwrite) HIPartialFill *partialFill;
 /**
-Only for treemap. Use this option to build a tree structure. The value should be the id of the point which is the parent. If no points has a matching id, or this option is undefined, then the parent will be set to the root.
-
-**Try it**
-
-* [Point parent](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/parent/)
-* [Example where parent id is not matching](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/treemap-with-levels/)
+Use this option to build a tree structure. The value should be the id of the point which is the parent. If no points has a matching id, or this option is undefined, then the parent will be set to the root.
 */
 @property(nonatomic, readwrite) NSString *parent;
-/**
-Serves a purpose only if a `colorAxis` object is defined in the chart options. This value will decide which color the point gets from the scale of the colorAxis.
-*/
-@property(nonatomic, readwrite) NSNumber *colorValue;
 /**
 The set or sets the options will be applied to. If a single entry is defined, then it will create a new set. If more than one entry is defined, then it will define the overlap between the sets in the array.
 

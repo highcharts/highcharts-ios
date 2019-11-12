@@ -107,7 +107,7 @@ The minimal height for a column or width for a bar. By default, 0 values are not
 */
 @property(nonatomic, readwrite) NSNumber *minPointLength;
 /**
-The spacing between columns on the Z Axis in a 3D chart. Requires `highcharts-3d.js`.
+The spacing between columns on the Z Axis in a 3D chart.
 
 **Defaults to** `1`.
 */
@@ -172,7 +172,7 @@ When true, each column edge is rounded to its nearest pixel in order to render s
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crisp;
 /**
-Depth of the columns in a 3D column chart. Requires `highcharts-3d.js`.
+Depth of the columns in a 3D column chart.
 
 **Defaults to** `25`.
 */

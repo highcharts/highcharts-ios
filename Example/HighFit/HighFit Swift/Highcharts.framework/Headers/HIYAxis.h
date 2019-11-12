@@ -18,6 +18,7 @@
 #import "HICrosshair.h"
 #import "HIColor.h"
 #import "HIFunction.h"
+#import "HIGradientColorStopObject.h"
 
 
 /**
@@ -87,7 +88,7 @@ Solid gauge series only. Color stops for the solid gauge. Use this in cases wher
 
 * [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-solid/)
 */
-@property(nonatomic, readwrite) NSArray<NSArray *> /* <NSNumber, NSString> */ *stops;
+@property(nonatomic, readwrite) NSArray<HIGradientColorStopObject *> *stops;
 /**
 Whether to force the axis to end on a tick. Use this option with the `maxPadding` option to control the axis end.
 
@@ -176,6 +177,11 @@ Whether to reverse the axis so that the highest number is closest to the origin.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
 /**
 An array of objects representing plot lines on the X axis
+
+**Try it**
+
+* [Basic plot line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-color/)
+* [Solid gauge plot line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-solidgauge/labels-auto-aligned/)
 */
 @property(nonatomic, readwrite) NSArray <HIPlotLines *> *plotLines;
 /**

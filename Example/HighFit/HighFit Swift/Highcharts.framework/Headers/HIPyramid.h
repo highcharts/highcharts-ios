@@ -145,7 +145,7 @@ If a point is sliced, moved out from the center, how many pixels should it be mo
 */
 @property(nonatomic, readwrite) NSNumber *slicedOffset;
 /**
-The thickness of a 3D pie. Requires `highcharts-3d.js`
+The thickness of a 3D pie.
 
 **Defaults to** `0`.
 */

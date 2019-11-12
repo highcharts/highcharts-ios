@@ -78,7 +78,7 @@ When using multiple axis, the ticks of two or more opposite axes will automatica
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
-Whether to display errors on the chart. When `false`, the errors will be shown only in the console. Requires `debugger.js` module.
+Whether to display errors on the chart. When `false`, the errors will be shown only in the console.
 
 **Try it**
 
@@ -125,7 +125,7 @@ A CSS class name to apply to the charts container `div`, allowing unique CSS sty
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. This produces _polar charts_, also known as _radar charts_. Requires `highcharts-more.js`.
+When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. This produces _polar charts_, also known as _radar charts_.
 
 **Defaults to** `false`.
 
@@ -337,7 +337,7 @@ The pixel width of the plot area border.
 */
 @property(nonatomic, readwrite) NSNumber *plotBorderWidth;
 /**
-Set a key to hold when dragging to zoom the chart. Requires the draggable-points module. This is useful to avoid zooming while moving points. Should be set different than `chart.panKey`.
+Set a key to hold when dragging to zoom the chart. This is useful to avoid zooming while moving points. Should be set different than `chart.panKey`.
 
 **Accepted values:** `["alt", "ctrl", "meta", "shift"]`.
 */

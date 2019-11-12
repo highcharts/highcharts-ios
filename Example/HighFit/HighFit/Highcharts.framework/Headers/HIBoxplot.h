@@ -203,7 +203,7 @@ When true, each column edge is rounded to its nearest pixel in order to render s
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crisp;
 /**
-Depth of the columns in a 3D column chart. Requires `highcharts-3d.js`.
+Depth of the columns in a 3D column chart.
 
 **Defaults to** `25`.
 */

@@ -101,7 +101,7 @@ Fires when drilling up from a drilldown series.
 */
 @property(nonatomic, readwrite) HIFunction *drillup;
 /**
-Fires before a chart is printed through the context menu item or the `Chart.print` method. Requires the exporting module.
+Fires before a chart is printed through the context menu item or the `Chart.print` method.
 
 **Try it**
 
@@ -113,7 +113,7 @@ In a chart with multiple drilldown series, this event fires after all the series
 */
 @property(nonatomic, readwrite) HIFunction *drillupall;
 /**
-Callback that fires while exporting data. This allows the modification of data rows before processed into the final format. Requires the `export-data` module.
+Callback that fires while exporting data. This allows the modification of data rows before processed into the final format.
 */
 @property(nonatomic, readwrite) HIFunction *exportData;
 /**
@@ -133,7 +133,7 @@ Fires when the chart is redrawn, either after a call to `chart.redraw()` or afte
 */
 @property(nonatomic, readwrite) HIFunction *redraw;
 /**
-Fires after a chart is printed through the context menu item or the `Chart.print` method. Requires the exporting module.
+Fires after a chart is printed through the context menu item or the `Chart.print` method.
 
 **Try it**
 
@@ -149,7 +149,7 @@ Fires when the point is unselected either programmatically or following a click 
 */
 @property(nonatomic, readwrite) HIFunction *unselect;
 /**
-Callback that fires when the point is dropped. The parameters passed are the same as for `drag`. To stop the default drop action, return false. See `drag and drop options`. Requires the `draggable-points` module.
+Callback that fires when the point is dropped. The parameters passed are the same as for `drag`. To stop the default drop action, return false. See `drag and drop options`.
 
 **Try it**
 
@@ -173,7 +173,7 @@ Fires when the point is removed using the `.remove()` method. One parameter, `ev
 */
 @property(nonatomic, readwrite) HIFunction *remove;
 /**
-Callback that fires while dragging a point. The mouse event is passed in as parameter. The original data can be accessed from `e.origin`, and the new point values can be accessed from `e.newPoints`. If there is only a single point being updated, it can be accessed from `e.newPoint` for simplicity, and its ID can be accessed from `e.newPointId`. The `this` context is the point being dragged. To stop the default drag action, return false. See `drag and drop options`. Requires the `draggable-points` module.
+Callback that fires while dragging a point. The mouse event is passed in as parameter. The original data can be accessed from `e.origin`, and the new point values can be accessed from `e.newPoints`. If there is only a single point being updated, it can be accessed from `e.newPoint` for simplicity, and its ID can be accessed from `e.newPointId`. The `this` context is the point being dragged. To stop the default drag action, return false. See `drag and drop options`.
 
 **Try it**
 
@@ -205,7 +205,7 @@ Fires when the point is selected either programmatically or following a click on
 */
 @property(nonatomic, readwrite) HIFunction *select;
 /**
-Callback that fires when starting to drag a point. The mouse event object is passed in as an argument. If a drag handle is used, `e.updateProp` is set to the data property being dragged. The `this` context is the point. See `drag and drop options`. Requires the `draggable-points` module.
+Callback that fires when starting to drag a point. The mouse event object is passed in as an argument. If a drag handle is used, `e.updateProp` is set to the data property being dragged. The `this` context is the point. See `drag and drop options`.
 
 **Try it**
 

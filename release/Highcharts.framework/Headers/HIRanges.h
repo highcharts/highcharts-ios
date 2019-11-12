@@ -35,7 +35,7 @@ The color of the connector for individual range.
 /**
 Range size value, similar to bubble Z data.
 */
-@property(nonatomic, readwrite) id value;
+@property(nonatomic, readwrite) NSNumber *value;
 
 -(NSDictionary *)getParams;
 

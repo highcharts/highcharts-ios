@@ -92,7 +92,7 @@ Rotation of the labels in degrees.
 
 **Try it**
 
-* [X axis labels rotated 90В°](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-rotation/)
+* [X axis labels rotated 90Â°](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-rotation/)
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**

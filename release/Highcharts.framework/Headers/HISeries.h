@@ -106,7 +106,9 @@ This option allows grouping series in a stacked chart. The stack option can be a
 <a href="http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/series/stack/" target="_blank">Stacked and grouped columns</a>*/
 @property(nonatomic, readwrite) NSString *stack;
 /**
-The type of series. Can be one of area, areaspline, bar, column, line, pie, scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
+The type of series. Can be one of area, areaspline,
+ bar, column, line, pie,
+ scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
 
 **Accepted values:** `[null, "line", "spline", "column", "area", "areaspline", "pie", "arearange", "areasplinerange", "boxplot", "bubble", "columnrange", "errorbar", "funnel", "gauge", "scatter", "waterfall"]`.
 
@@ -154,7 +156,7 @@ Lang configuration for the series main summary. Each series type has two modes: 
 */
 @property(nonatomic, readwrite) HISummary *summary;
 /**
-Export-data module required. When set to `false` will prevent the series data from being included in any form of data export. Since version 6.0.0 until 7.1.0 the option was existing undocumented as `includeInCSVExport`.
+When set to `false` will prevent the series data from being included in any form of data export. Since version 6.0.0 until 7.1.0 the option was existing undocumented as `includeInCSVExport`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
@@ -233,7 +235,7 @@ When this is true, the series will not cause the Y axis to cross the zero plane 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *softThreshold;
 /**
-The draggable-points module allows points to be moved around or modified in the chart. In addition to the options mentioned under the `dragDrop` API structure, the module fires three events, `point.dragStart`, `point.drag` and `point.drop`. It requires the `modules/draggable-points.js` file to be loaded.
+The draggable-points module allows points to be moved around or modified in the chart. In addition to the options mentioned under the `dragDrop` API structure, the module fires three events, `point.dragStart`, `point.drag` and `point.drop`.
 
 **Try it**
 
@@ -312,7 +314,7 @@ Enable or disable the mouse tracking for a specific series. This includes point 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enableMouseTracking;
 /**
-Series labels are placed as close to the series as possible in a natural way, seeking to avoid other series. The goal of this feature is to make the chart more easily readable, like if a human designer placed the labels in the optimal position. The series labels currently work with series types having a `graph` or an `area`. Requires the `series-label.js` module.
+Series labels are placed as close to the series as possible in a natural way, seeking to avoid other series. The goal of this feature is to make the chart more easily readable, like if a human designer placed the labels in the optimal position. The series labels currently work with series types having a `graph` or an `area`.
 
 **Try it**
 
@@ -406,7 +408,7 @@ An array specifying which option maps to which key in the data point array. This
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *keys;
 /**
-When a series contains a data array that is longer than this, only one dimensional arrays of numbers, or two dimensional arrays with x and y values are allowed. Also, only the first point is tested, and the rest are assumed to be the same format. This saves expensive data checking and indexing in long series. Set it to `0` disable.
+When a series contains a data array that is longer than this, only one dimensional arrays of numbers, or two dimensional arrays with x and y values are allowed. Also, only the first point is tested, and the rest are assumed to be the same format. This saves expensive data checking and indexing in long series. Set it to `0` disable. Note: In boost mode turbo threshold is forced. Only array of numbers or two dimensional arrays are allowed.
 */
 @property(nonatomic, readwrite) NSNumber *turboThreshold;
 /**
@@ -522,7 +524,7 @@ The `id` of another series to link to. Additionally, the value can be ":previous
 */
 @property(nonatomic, readwrite) NSString *linkedTo;
 /**
-Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn't triggered until the mouse moves over another series, or out of the plot area. When false, the `mouseOut` event on a series is triggered when the mouse leaves the area around the series' graph or markers. This also implies the tooltip when not shared. When `stickyTracking` is false and `tooltip.shared` is false, the tooltip will be hidden when moving the mouse between series. Defaults to true for line and area type series, but to false for columns, pies etc.
+Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn't triggered until the mouse moves over another series, or out of the plot area. When false, the `mouseOut` event on a series is triggered when the mouse leaves the area around the series' graph or markers. This also implies the tooltip when not shared. When `stickyTracking` is false and `tooltip.shared` is false, the tooltip will be hidden when moving the mouse between series. Defaults to true for line and area type series, but to false for columns, pies etc. **Note:** The boost module will force this option because of technical limitations.
 
 **Defaults to** `true`.
 
@@ -571,7 +573,7 @@ Polar charts only. Whether to connect the ends of a line series plot across the 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *connectEnds;
 /**
-Set the point threshold for when a series should enter boost mode. Setting it to e.g. 2000 will cause the series to enter boost mode when there are 2000 or more points in the series. To disable boosting on the series, set the `boostThreshold` to 0. Setting it to 1 will force boosting. Note that the `cropThreshold` also affects this setting. When zooming in on a series that has fewer points than the `cropThreshold`, all points are rendered although outside the visible plot area, and the `boostThreshold` won't take effect. Requires `modules/boost.js`.
+Set the point threshold for when a series should enter boost mode. Setting it to e.g. 2000 will cause the series to enter boost mode when there are 2000 or more points in the series. To disable boosting on the series, set the `boostThreshold` to 0. Setting it to 1 will force boosting. Note that the `cropThreshold` also affects this setting. When zooming in on a series that has fewer points than the `cropThreshold`, all points are rendered although outside the visible plot area, and the `boostThreshold` won't take effect.
 
 **Defaults to** `5000`.
 */

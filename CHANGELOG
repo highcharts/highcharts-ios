@@ -1,3 +1,47 @@
+# Version 7.2.1
+
+## iOS:
+
+1. Fixed #231, added `symbolSize`, `symbolX` and `symbolY` to `HIContextButton`.
+2. Fixed #238, warnings about `JS` files.
+3. Added Highcharts JS methods to `HITooltip`. Updated Highcharts JS methods for `HIChartView` and `HIPoint` classes.
+4. Updated the `HighFit Swift` app to Swift 5.
+
+## Framework:
+
+1. Added feature to draw plot lines on radial axes from the inner to the outer radius of the main pane.
+2. Added support for combining tooltip.split and tooltip.outside.
+
+## Framework bug fixes:
+
+1. Fixed #12222, empty pie series showing lineWidth after hover.
+2. Fixed #12223, animating halo for a slice in pie series used to throw errors.
+3. Fixed #12243, fill property on pattern fills was applied to the wrong element. Introduced new option, pattern.backgroundColor.
+4. Fixed #11644, extremes in color axis were incorrect when using tilemap series with very small values.
+5. Fixed #11738, updating treemap series with the same amount of points caused cells to disappear.
+6. Fixed #11650, added missing highcharts-tooltip-header classname to the tooltip's header.
+7. Fixed #12073, dragging an annotation used to change points' values too.
+8. Fixed #7559, error when updating a waterfall with first data value as sum or intermediate sum.
+9. Fixed #11776, data labels were not visible in 3D Column series.
+10. Fixed #12055, overlapping legend items when combining layout: 'proximate' and useHTML: true.
+11. Fixed #12064, redundant spaces separating class names in SVG class attributes.
+12. Fixed #12033, error when toggling stacking on area series with nulls.
+13. Improved screen reader compatibility for chart export menu.
+14. Fixed #11727, logarithmic yAxis with just one label sometimes was rendered with numerical errors.
+15. Fixed #11956, pointPlacement did not work for columns with just one category.
+16. Fixed #11955, incorrect point positions on inverted chart, when series.pointPlacement was set to between.
+17. Fixed #11966, using chart.setTitle() on a chart with scrollablePlotArea misplaced the title.
+18. Fixed #11510, points with a relatively very small z value were not displayed in a variwide chart.
+19. Fixed #11970, annotation's drag event was not fired.
+20. Fixed #11753, invalid label placement broke venn diagrams in certain scenarios.
+21. Fixed #11100, 3D columns were not animated on data update.
+22. Fixed #11476, inverted variwide chart with disabled X axis labels threw an error.
+23. Fixed #11801, dragging annotations did not prevent zooming in.
+24. Fixed #11897, combination of pie series and polar chart with panes threw an error.
+25. Fixed #11405, plotLines were rendered outside the bottom and left chart edge if the value was the same as the axis extreme.
+26. Fixed #11690, removed use of undefined global variable that broke support for ES modules.
+27. Fixed #11812, point colors were not changed if colorAxis was added in update.
+
 # Version 7.2.0
 
 ## iOS:
