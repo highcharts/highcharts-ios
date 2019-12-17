@@ -1,3 +1,52 @@
+# Version 8.0.0
+
+## iOS:
+
+1. Replaced `HIDataLabelsOptionsObject` object with `HIDataLabels`.
+
+## Framework:
+
+1. Added new series type, radial bar chart. Under the hood, this is a column series in an inverted and polar chart.
+2. Added data sorting with animations on update.
+3. Added marker clusters for scatter and map point series.
+4. Added new option accessibility.linkedDescription.
+5. Added new accessibility options with more flexibility for customizing the hidden screen reader regions. See #12095.
+6. Added flame chart demo.
+
+## Framework bug fixes:
+
+1. Fixed #12053 and #12152, pattern fill issues. Introduced color.patternIndex option.
+2. Fixed #7255, trying to printing chart again, after cancelling in Safari, elements other than chart were not hidden.
+3. Fixed #12488, selection zoomed to wrong area in the Treemap series.
+4. Fixed issue with wrong extremes for bubble series when xAxis.max set, see #12543.
+5. Fixed #12549, disabling keyboard nav still added container tabindex.
+6. Fixed #12438, a regression causing the reset zoom button not to work with the a11y module on mobile.
+7. Fixed #12462, filename with forward slash (/) not being replaced with safe character when exported. Now replaced with -.
+8. Fixed issue with data labels visible despite point placed outside the plot area, see #12370.
+9. Fixed #12343, noData message was not visible with gauge series. Added 1 as default zIndex to render the message in front.
+10. Fixed #12500, updating dataLabel color from contrast to a different one was not working.
+11. Fixed #12459, annotation's control points were not draggable.
+12. Fixed #12425, updating sunburst series used to disable traversing.
+13. Fixed compatibility issues with menu navigation for screen readers.
+14. Fixed #12161, legend textDecoration hidden style not working on IE11 with accessibility module enabled.
+15. Improved handling of null point accessibility.
+16. Fixed #12090, a11y module broke legend navigation.
+17. Fixed minor bugs with keyboard navigation.
+18. Fixed #12434 and #12097, regression in venn series label positioning causing JavaScript error.
+19. Fixed #12445, updating borderColor and borderWidth didn't work for solid gauge series.
+20. Fixed #12421, high contrast mode used to throw errors when the colorAxis module was not loaded.
+21. Fixed #12390, not overlapping dataLabels after zoom in and zoom out were hidden.
+22. Fixed #12262, Sunburst did not use 100% of the plot area.
+23. Fixed #12374, sankey nodes were rearranged after redraw where the nodes.level option was used.
+24. Fixed #12295, null was used as event listener in drilldown module, which caused a JavaScript error when called.
+25. Fixed #12335, memory leaks in polar series after updating data set.
+26. Fixed #12333, setting data in treemap series with points with the same ID's did not render new points.
+27. Fixed #12289, sonification timeline issues with multiple charts.
+28. Fixed #11617, support tooltip.split with chart.scrollablePlotArea.
+29. Fixed #12267, error in waterfall chart when the series was invisible and the first value was below 0.
+30. Fixed #12248, the Y axis' range was disturbed on stacked (overlapping) waterfall chart.
+31. Fixed #11758, stackLabels in styled mode used to throw errors.
+
 # Version 7.2.1
 
 ## iOS:

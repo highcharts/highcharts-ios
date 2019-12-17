@@ -7,7 +7,6 @@
 */
 
 #import "HIChartsJSONSerializable.h"
-#import "HIFunction.h"
 
 
 /**
@@ -39,11 +38,9 @@ A callback to return the time zone offset for a given datetime. It takes the tim
 
 * [Use moment.js to draw Oslo time regardless of browser locale](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/time/gettimezoneoffset/)
 */
-@property(nonatomic, readwrite) HIFunction *getTimezoneOffset;
+@property(nonatomic, readwrite) NSString *getTimezoneOffset;
 /**
 The timezone offset in minutes. Positive values are west, negative values are east of UTC, as in the ECMAScript [getTimezoneOffset](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset) method. Use this to display UTC based data in a predefined time zone.
-
-**Defaults to** `0`.
 
 **Try it**
 

@@ -9,9 +9,9 @@
 #import "HILabels.h"
 #import "HIAccessibility.h"
 #import "HIPlotLines.h"
-#import "HIEvents.h"
 #import "HIBreaks.h"
 #import "HIDateTimeLabelFormats.h"
+#import "HIEvents.h"
 #import "HICrosshair.h"
 #import "HITitle.h"
 #import "HIPlotBands.h"
@@ -53,6 +53,17 @@ Refers to the index in the `panes` array. Used for circular gauges and polar cha
 */
 @property(nonatomic, readwrite) NSNumber *pane;
 /**
+For categorized axes only. If `on` the tick mark is placed in the center of the category, if `between` the tick mark is placed between categories. The default is `between` if the `tickInterval` is 1, else `on`.
+
+**Accepted values:** `["on", "between"]`.
+
+**Try it**
+
+* ["between" by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/tickmarkplacement-between/)
+* ["on"](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/tickmarkplacement-on/)
+*/
+@property(nonatomic, readwrite) NSString *tickmarkPlacement;
+/**
 Padding of the min value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the lowest data value to appear on the edge of the plot area. When the axis' `min` option is set or a min extreme is set using `axis.setExtremes()`, the minPadding will be ignored.
 
 **Defaults to** `0.01`.
@@ -63,7 +74,7 @@ Padding of the min value relative to the length of the axis. A padding of 0.05 w
 */
 @property(nonatomic, readwrite) NSNumber *minPadding;
 /**
-The axis labels show the number or category for each tick.
+The axis labels show the number or category for each tick. Since v8.0.0: Labels are animated in categorized x-axis with updating data if `tickInterval` and `step` is set to 1.
 */
 @property(nonatomic, readwrite) HILabels *labels;
 /**
@@ -80,6 +91,14 @@ The Z index of the grid lines.
 Accessibility options for an axis. Requires the accessibility module.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
+/**
+The height as the vertical axis. If it's a number, it is interpreted as pixels. Since Highcharts 2: If it's a percentage string, it is interpreted as percentages of the total plot height.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
+/**
+The top position as the vertical axis. If it's a number, it is interpreted as pixel position relative to the chart. Since Highcharts 2: If it's a percentage string, it is interpreted as percentages of the plot height, offset from plot area top.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ top;
 /**
 Whether axis, including axis title, line, ticks and labels, should be visible.
 
@@ -116,15 +135,15 @@ Whether to show the first tick label.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showFirstLabel;
 /**
-Whether to reverse the axis so that the highest number is closest to the origin. If the chart is inverted, the x axis is reversed by default.
+Padding of the max value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the highest data value to appear on the edge of the plot area. When the axis' `max` option is set or a max extreme is set using `axis.setExtremes()`, the maxPadding will be ignored.
 
-**Defaults to** `false`.
+**Defaults to** `0.01`.
 
 **Try it**
 
-* [Reversed Y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/reversed/)
+* [Max padding of 0.25 on y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/maxpadding/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
+@property(nonatomic, readwrite) NSNumber *maxPadding;
 /**
 For datetime axes, this decides where to put the tick between weeks. 0 = Sunday, 1 = Monday.
 
@@ -159,16 +178,16 @@ The minimum range to display on this axis. The entire axis will not be allowed t
 */
 @property(nonatomic, readwrite) NSNumber *minRange;
 /**
-For categorized axes only. If `on` the tick mark is placed in the center of the category, if `between` the tick mark is placed between categories. The default is `between` if the `tickInterval` is 1, else `on`.
+In a polar chart, this is the angle of the Y axis in degrees, where 0 is up and 90 is right. The angle determines the position of the axis line and the labels, though the coordinate system is unaffected. Since v8.0.0 this option is also applicable for X axis (inverted polar).
 
-**Accepted values:** `["on", "between"]`.
+**Defaults to** `0`.
 
 **Try it**
 
-* ["between" by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/tickmarkplacement-between/)
-* ["on"](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/tickmarkplacement-on/)
+* [Custom X axis' angle on inverted polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/angle/)
+* [Dual axis polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/angle/)
 */
-@property(nonatomic, readwrite) NSString *tickmarkPlacement;
+@property(nonatomic, readwrite) NSNumber *angle;
 /**
 Whether to allow decimals in this axis' ticks. When counting integers, like persons or hits on a web page, decimals should be avoided in the labels.
 
@@ -208,6 +227,16 @@ A callback function returning array defining where the ticks are laid out on the
 */
 @property(nonatomic, readwrite) HIFunction *tickPositioner;
 /**
+Whether to reverse the axis so that the highest number is closest to the origin. If the chart is inverted, the x axis is reversed by default.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Reversed Y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/reversed/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
+/**
 The dash or dot style of the minor grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
 **Defaults to** `Solid`.
@@ -217,6 +246,10 @@ The dash or dot style of the minor grid lines. For possible values, see [this de
 * [Long dashes on minor grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minorgridlinedashstyle/)
 */
 @property(nonatomic, readwrite) NSString *minorGridLineDashStyle;
+/**
+The width as the horizontal axis. If it's a number, it is interpreted as pixels. Since Highcharts v5.0.13: If it's a percentage string, it is interpreted as percentages of the total plot width.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**
 The pixel length of the minor tick marks.
 
@@ -239,7 +272,7 @@ An array of lines stretching across the plot area, marking a specific value on o
 */
 @property(nonatomic, readwrite) NSArray <HIPlotLines *> *plotLines;
 /**
-Datetime axis only. An array determining what time intervals the ticks are allowed to fall on. Each array item is an array where the first value is the time unit and the second value another array of allowed multiples. Defaults to: units: [[   'millisecond', // unit name   [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples ], [   'second',   [1, 2, 5, 10, 15, 30] ], [   'minute',   [1, 2, 5, 10, 15, 30] ], [   'hour',   [1, 2, 3, 4, 6, 8, 12] ], [   'day',   [1] ], [   'week',   [1] ], [   'month',   [1, 3, 6] ], [   'year',   null ]]
+Datetime axis only. An array determining what time intervals the ticks are allowed to fall on. Each array item is an array where the first value is the time unit and the second value another array of allowed multiples. Defaults to: ```js units: [[   'millisecond', // unit name   [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples ], [   'second',   [1, 2, 5, 10, 15, 30] ], [   'minute',   [1, 2, 5, 10, 15, 30] ], [   'hour',   [1, 2, 3, 4, 6, 8, 12] ], [   'day',   [1] ], [   'week',   [1] ], [   'month',   [1, 3, 6] ], [   'year',   null ]] ```
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> *units;
 /**
@@ -263,9 +296,17 @@ The type of axis. Can be one of `linear`, `logarithmic`, `datetime` or `category
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
-Event handlers for the axis.
+Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
+
+**Accepted values:** `["circle", "polygon"]`.
+
+**Try it**
+
+* [Polygon grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
+* [Circle and polygon on inverted polar](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/gridlineinterpolation/)
+* [Circle and polygon](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/gridlineinterpolation/)
 */
-@property(nonatomic, readwrite) HIEvents *events;
+@property(nonatomic, readwrite) NSString *gridLineInterpolation;
 /**
 The pixel length of the main tick marks.
 
@@ -340,7 +381,7 @@ An array defining breaks in the axis, the sections defined will be left out and 
 */
 @property(nonatomic, readwrite) NSArray <HIBreaks *> *breaks;
 /**
-For a datetime axis, the scale will automatically adjust to the appropriate unit. This member gives the default string representations used for each unit. For intermediate values, different units may be used, for example the `day` unit can be used on midnight and `hour` unit be used for intermediate values on the same axis. For an overview of the replacement codes, see `dateFormat`. Defaults to: {   millisecond: '%H:%M:%S.%L',   second: '%H:%M:%S',   minute: '%H:%M',   hour: '%H:%M',   day: '%e. %b',   week: '%e. %b',   month: '%b \'%y',   year: '%Y' }
+For a datetime axis, the scale will automatically adjust to the appropriate unit. This member gives the default string representations used for each unit. For intermediate values, different units may be used, for example the `day` unit can be used on midnight and `hour` unit be used for intermediate values on the same axis. For an overview of the replacement codes, see `dateFormat`. Defaults to: ```js {   millisecond: '%H:%M:%S.%L',   second: '%H:%M:%S',   minute: '%H:%M',   hour: '%H:%M',   day: '%e. %b',   week: '%e. %b',   month: '%b \'%y',   year: '%Y' } ```
 
 **Try it**
 
@@ -388,6 +429,14 @@ The distance in pixels from the plot area to the axis line. A positive offset mo
 */
 @property(nonatomic, readwrite) NSNumber *offset;
 /**
+A soft maximum for the axis. If the series data maximum is less than this, the axis will stay at this maximum, but if the series data maximum is higher, the axis will flex to show all data.
+
+**Try it**
+
+* [Soft min and max](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/softmin-softmax/)
+*/
+@property(nonatomic, readwrite) NSNumber *softMax;
+/**
 Color for the main tick marks. In styled mode, the stroke is given in the `.highcharts-tick` class.
 
 **Defaults to** `#ccd6eb`.
@@ -429,7 +478,7 @@ The position of the major tick marks relative to the axis line. Can be one of `i
 */
 @property(nonatomic, readwrite) NSString *tickPosition;
 /**
-If categories are present for the xAxis, names are used instead of numbers for that axis. Since Highcharts 3.0, categories can also be extracted by giving each point a `name` and setting axis `type` to `category`. However, if you have multiple series, best practice remains defining the `categories` array. Example: categories: ['Apples', 'Bananas', 'Oranges']
+If categories are present for the xAxis, names are used instead of numbers for that axis. Since Highcharts 3.0, categories can also be extracted by giving each point a `name` and setting axis `type` to `category`. However, if you have multiple series, best practice remains defining the `categories` array. Example: `categories: ['Apples', 'Bananas', 'Oranges']`
 
 **Try it**
 
@@ -514,15 +563,9 @@ Applies only when the axis `type` is `category`. When `uniqueNames` is true, poi
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *uniqueNames;
 /**
-Padding of the max value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the highest data value to appear on the edge of the plot area. When the axis' `max` option is set or a max extreme is set using `axis.setExtremes()`, the maxPadding will be ignored.
-
-**Defaults to** `0.01`.
-
-**Try it**
-
-* [Max padding of 0.25 on y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/maxpadding/)
+Event handlers for the axis.
 */
-@property(nonatomic, readwrite) NSNumber *maxPadding;
+@property(nonatomic, readwrite) HIEvents *events;
 /**
 A class name that opens for styling the axis by CSS, especially in Highcharts styled mode. The class name is applied to group elements for the grid, axis elements and labels.
 
@@ -604,13 +647,9 @@ An array of colored bands stretching across the plot area marking an interval on
 */
 @property(nonatomic, readwrite) NSArray <HIPlotBands *> *plotBands;
 /**
-A soft maximum for the axis. If the series data maximum is less than this, the axis will stay at this maximum, but if the series data maximum is higher, the axis will flex to show all data.
-
-**Try it**
-
-* [Soft min and max](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/softmin-softmax/)
+The left position as the horizontal axis. If it's a number, it is interpreted as pixel position relative to the chart. Since Highcharts v5.0.13: If it's a percentage string, it is interpreted as percentages of the plot width, offset from plot area left.
 */
-@property(nonatomic, readwrite) NSNumber *softMax;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ left;
 
 -(NSDictionary *)getParams;
 

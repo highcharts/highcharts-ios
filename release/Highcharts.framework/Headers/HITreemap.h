@@ -9,6 +9,7 @@
 #import "HISeries.h"
 #import "HILevels.h"
 #import "HITraverseUpButton.h"
+#import "HICluster.h"
 #import "HIColor.h"
 
 
@@ -123,6 +124,16 @@ This option decides which algorithm is used for setting position and dimensions 
 Used together with the levels and allowTraversingTree options. When set to false the first level visible to be level one, which is dynamic when traversing the tree. Otherwise the level will be the same as the tree structure.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *levelIsConstant;
+/**
+Options for marker clusters, the concept of sampling the data values into larger blocks in order to ease readability and increase performance of the JavaScript charts. Note: marker clusters module is not working with `boost` and `draggable-points` modules. The marker clusters feature requires the marker-clusters.js file to be loaded, found in the modules directory of the download package, or online at `https://code.highcharts.com/modules/marker-clusters.js`.
+
+**Try it**
+
+* [Maps marker clusters](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/marker-clusters/europe)
+* [Scatter marker clusters](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/marker-clusters/basic)
+* [Marker clusters with colorAxis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/marker-clusters/optimized-kmeans)
+*/
+@property(nonatomic, readwrite) HICluster *cluster;
 
 -(NSDictionary *)getParams;
 

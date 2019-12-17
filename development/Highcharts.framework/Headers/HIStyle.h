@@ -19,10 +19,15 @@ CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of cate
 @interface HIStyle: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSString *fontWeight;
-@property(nonatomic, readwrite) NSString *textOutline;
 @property(nonatomic, readwrite) NSString *fontSize;
+@property(nonatomic, readwrite) NSString *textOutline;
 @property(nonatomic, readwrite) NSString *color;
 @property(nonatomic, readwrite) NSString *cursor;
+@property(nonatomic, readwrite) NSNumber *borderRadius;
+@property(nonatomic, readwrite) NSNumber *lineWidth;
+@property(nonatomic, readwrite) NSString *textOverflow;
+@property(nonatomic, readwrite) NSString *pointerEvents;
+@property(nonatomic, readwrite) NSString *whiteSpace;
 @property(nonatomic, readwrite) NSString *stroke;
 @property(nonatomic, readwrite) NSNumber *strokeWidth;
 @property(nonatomic, readwrite) NSString *fill;

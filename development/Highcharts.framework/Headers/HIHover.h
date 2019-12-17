@@ -65,8 +65,6 @@ The width of the point marker's outline. When `undefined`, the series' or point'
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
 Animation when hovering over the marker.
-
-**Defaults to** `{"duration": 50}`.
 */
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 @property(nonatomic, readwrite) HIHalo *halo;
@@ -86,6 +84,10 @@ The shadow option for hovered state.
 A specific color for the hovered point.
 */
 @property(nonatomic, readwrite) HIColor *color;
+/**
+The additional connector line width for a hovered point.
+*/
+@property(nonatomic, readwrite) NSNumber *connectorWidthPlus;
 
 -(NSDictionary *)getParams;
 

@@ -17,8 +17,6 @@ Highchart by default puts a credits label in the lower right corner of the chart
 
 /**
 CSS styles for the credits label.
-
-**Defaults to** `{"cursor": "pointer", "color": "#999999", "fontSize": "10px"}`.
 */
 @property(nonatomic, readwrite) HICSSObject *style;
 /**

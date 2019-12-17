@@ -332,6 +332,8 @@ If the plot area sized is calculated automatically and the legend is not floatin
 * [30 pixels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/margin-30/)
 */
 @property(nonatomic, readwrite) NSNumber *margin;
+@property(nonatomic, readwrite) NSString *legendLabel;
+@property(nonatomic, readwrite) NSString *legendItem;
 
 -(NSDictionary *)getParams;
 

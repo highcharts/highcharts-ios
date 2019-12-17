@@ -7,6 +7,7 @@
 */
 
 #import "HIAccessibility.h"
+#import "HIDataLabels.h"
 #import "HIDragDrop.h"
 #import "HIEvents.h"
 #import "HIMarker.h"
@@ -14,7 +15,6 @@
 #import "HIPartialFill.h"
 #import "HIColor.h"
 #import "HIFunction.h"
-#import "HIDataLabelsOptionsObject.h"
 
 
 /**
@@ -285,7 +285,7 @@ A description of the point to add to the screen reader information about the poi
 */
 @property(nonatomic, readwrite) NSString *definition;
 /**
-The name of the point as shown in the legend, tooltip, dataLabels etc.
+The name of the point as shown in the legend, tooltip, dataLabels, etc.
 
 **Try it**
 
@@ -306,6 +306,9 @@ Whether the data point is selected initially.
 **Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *selected;
+/**
+Accessibility options for a data point.
+*/
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Individual data label for each point. The options are the same as the ones for `plotOptions.series.dataLabels`.
@@ -314,7 +317,7 @@ Individual data label for each point. The options are the same as the ones for `
 
 * [Show a label for the last value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/datalabels/)
 */
-@property(nonatomic, readwrite) NSArray<HIDataLabelsOptionsObject *> *dataLabels;
+@property(nonatomic, readwrite) HIDataLabels *dataLabels;
 /**
 An additional, individual class name for the data point's graphic representation.
 */
@@ -344,7 +347,7 @@ The `id` of a series in the `drilldown.series` array to use for a drilldown for 
 */
 @property(nonatomic, readwrite) NSString *drilldown;
 /**
-Individual point events
+The individual point events.
 */
 @property(nonatomic, readwrite) HIEvents *events;
 /**
@@ -355,6 +358,9 @@ A specific color index to use for the point, so its graphic representations are 
 The sequential index of the data point in the legend.
 */
 @property(nonatomic, readwrite) NSNumber *legendIndex;
+/**
+Options for the point markers of line-like series.
+*/
 @property(nonatomic, readwrite) HIMarker *marker;
 /**
 The label of event.
@@ -505,9 +511,18 @@ A partial fill for each point, typically used to visualize how much of a task is
 */
 @property(nonatomic, readwrite) HIPartialFill *partialFill;
 /**
-Use this option to build a tree structure. The value should be the id of the point which is the parent. If no points has a matching id, or this option is undefined, then the parent will be set to the root.
+Only for treemap. Use this option to build a tree structure. The value should be the id of the point which is the parent. If no points has a matching id, or this option is undefined, then the parent will be set to the root.
+
+**Try it**
+
+* [Point parent](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/parent/)
+* [Example where parent id is not matching](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/treemap-with-levels/)
 */
 @property(nonatomic, readwrite) NSString *parent;
+/**
+Serves a purpose only if a `colorAxis` object is defined in the chart options. This value will decide which color the point gets from the scale of the colorAxis.
+*/
+@property(nonatomic, readwrite) NSNumber *colorValue;
 /**
 The set or sets the options will be applied to. If a single entry is defined, then it will create a new set. If more than one entry is defined, then it will define the overlap between the sets in the array.
 

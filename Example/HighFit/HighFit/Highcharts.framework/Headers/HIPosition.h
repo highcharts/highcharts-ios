@@ -10,24 +10,30 @@
 
 
 /**
-The position of the no-data label, relative to the plot area.
+The position of the button.
+
+**Try it**
+
+* [Above the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/resetzoombutton-position/)
 */
 @interface HIPosition: HIChartsJSONSerializable
 
 /**
-Vertical offset of the label, in pixels.
+The vertical offset of the button.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-Horizontal offset of the label, in pixels.
+The horizontal offset of the button.
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Horizontal alignment of the label.
+The horizontal alignment of the button.
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-Vertical alignment of the label.
+The vertical alignment of the button.
+
+**Defaults to** `top`.
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 

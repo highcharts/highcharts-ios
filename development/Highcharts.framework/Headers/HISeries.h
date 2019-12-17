@@ -16,11 +16,12 @@
 #import "HIEvents.h"
 #import "HIAccessibility.h"
 #import "HIZones.h"
+#import "HIDataLabels.h"
 #import "HIColor.h"
+#import "HIDataSortingOptionsObject.h"
 #import "HIShadowOptionsObject.h"
 #import "HIFunction.h"
 #import "HIData.h"
-#import "HIDataLabelsOptionsObject.h"
 #import "HIAnimationOptionsObject.h"
 
 
@@ -106,9 +107,7 @@ This option allows grouping series in a stacked chart. The stack option can be a
 <a href="http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/series/stack/" target="_blank">Stacked and grouped columns</a>*/
 @property(nonatomic, readwrite) NSString *stack;
 /**
-The type of series. Can be one of area, areaspline,
- bar, column, line, pie,
- scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
+The type of series. Can be one of area, areaspline, bar, column, line, pie, scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
 
 **Accepted values:** `[null, "line", "spline", "column", "area", "areaspline", "pie", "arearange", "areasplinerange", "boxplot", "bubble", "columnrange", "errorbar", "funnel", "gauge", "scatter", "waterfall"]`.
 
@@ -140,6 +139,18 @@ Define the visual z index of the series.
 			<a href="http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-zindex/" target="_blank">with a z index, the series with the highest z index is on top</a>.*/
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
+Formatter function to use instead of the default for series descriptions. Receives one argument, `series`, referring to the series to describe. Should return a string with the description of the series for a screen reader user. If `false` is returned, the default formatter will be used for that series.
+*/
+@property(nonatomic, readwrite) HIFunction *descriptionFormatter;
+/**
+When a series contains more points than this, we no longer expose information about individual points to screen readers. Set to `false` to disable.
+*/
+@property(nonatomic, readwrite) NSNumber *pointDescriptionEnabledThreshold;
+/**
+Whether or not to add series descriptions to charts with a single series.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *describeSingleSeries;
+/**
 yAxis description for series if there are multiple yAxes in the chart.
 */
 @property(nonatomic, readwrite) NSString *yAxisDescription;
@@ -147,6 +158,10 @@ yAxis description for series if there are multiple yAxes in the chart.
 xAxis description for series if there are multiple xAxes in the chart.
 */
 @property(nonatomic, readwrite) NSString *xAxisDescription;
+/**
+Description for the value of null points.
+*/
+@property(nonatomic, readwrite) NSString *nullPointValue;
 /**
 User supplied description text. This is added after the main summary if present.
 */
@@ -184,7 +199,7 @@ Disable this option to allow series rendering in the whole plotting area. **Note
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *clip;
 /**
-The color for the parts of the graph or points that are below the `threshold`.
+The color for the parts of the graph or points that are below the `threshold`. Note that `zones` takes precedence over the negative color. Using `negativeColor` is equivalent to applying a zone with value of 0.
 
 **Try it**
 
@@ -249,6 +264,10 @@ The draggable-points module allows points to be moved around or modified in the 
 Properties for each single point.
 */
 @property(nonatomic, readwrite) HIPoint *point;
+/**
+Options for the series data sorting.
+*/
+@property(nonatomic, readwrite) HIDataSortingOptionsObject *dataSorting;
 /**
 Options for the point markers of line-like series. Properties like `fillColor`, `lineColor` and `lineWidth` define the visual appearance of the markers. Other series types, like column series, don't have markers, but have visual options on the series level instead. In styled mode, the markers can be styled with the `.highcharts-point`, `.highcharts-point-hover` and `.highcharts-point-select` class names.
 */
@@ -416,7 +435,7 @@ If set to `true`, the accessibility module will skip past the points in this ser
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *skipKeyboardNavigation;
 /**
-Accessibility options for a series. Requires the accessibility module.
+Accessibility options for a series.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
@@ -516,7 +535,7 @@ Set the initial visibility of the series.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
-The `id` of another series to link to. Additionally, the value can be ":previous" to link to the previous series. When two series are linked, only the first one appears in the legend. Toggling the visibility of this also toggles the linked series.
+The `id` of another series to link to. Additionally, the value can be ":previous" to link to the previous series. When two series are linked, only the first one appears in the legend. Toggling the visibility of this also toggles the linked series. If master series uses data sorting and linked series does not have its own sorting definition, the linked series will be sorted in the same order as the master one.
 
 **Try it**
 
@@ -541,8 +560,9 @@ Options for the series data labels, appearing next to each data point. Since v6.
 
 * [Data labels enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-enabled)
 * [Multiple data labels on a bar series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-multiple)
+* [Style mode example](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-datalabels)
 */
-@property(nonatomic, readwrite) NSArray<HIDataLabelsOptionsObject *> *dataLabels;
+@property(nonatomic, readwrite) NSArray <HIDataLabels *> *dataLabels;
 /**
 An additional class name to apply to the series' graphical elements. This option does not replace default class names of the graphical element.
 */

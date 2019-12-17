@@ -10,7 +10,8 @@
 
 
 /**
- */
+Animation for the marker as it moves between values. Set to `false` to disable animation. Defaults to `{ duration: 50 }`.
+*/
 @interface HIAnimation: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSNumber *duration;

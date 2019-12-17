@@ -11,18 +11,18 @@
 
 
 /**
-Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. Highcharts.setOptions({   lang: {     months: [       'Janvier', 'FГ©vrier', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'AoГ»t',       'Septembre', 'Octobre', 'Novembre', 'DГ©cembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } });
+Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. ```js Highcharts.setOptions({   lang: {     months: [       'Janvier', 'FĂŠvrier', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'AoĂťt',       'Septembre', 'Octobre', 'Novembre', 'DĂŠcembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } }); ```
 */
 @interface HILang: HIChartsJSONSerializable
 
 /**
-Export-data module only. The text for the menu item.
+The text for the menu item.
 
 **Defaults to** `Share CSV`.
 */
 @property(nonatomic, readwrite) NSString *downloadCSV;
 /**
-Export-data module only. The text for the menu item.
+The text for the menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadXLS;
 /**
@@ -46,7 +46,7 @@ Exporting module only. View the chart in full screen.
 */
 @property(nonatomic, readwrite) NSString *viewFullscreen;
 /**
-The text to display when the chart contains no data. Requires the no-data module, see `noData`.
+The text to display when the chart contains no data.
 
 **Try it**
 
@@ -97,7 +97,7 @@ The text for the button that appears when drilling down, linking back to the par
 */
 @property(nonatomic, readwrite) NSString *drillUpText;
 /**
-Export-data module only. The text for the menu item.
+The text for the menu item.
 */
 @property(nonatomic, readwrite) NSString *viewData;
 /**
@@ -123,7 +123,7 @@ Exporting module only. The text for the PDF download menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadPDF;
 /**
-Export-data module only. The text for the menu item.
+The text for the menu item.
 */
 @property(nonatomic, readwrite) NSString *openInCloud;
 /**

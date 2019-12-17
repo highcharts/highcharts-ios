@@ -76,7 +76,7 @@ Fires when the chart is finished loading. Since v4.2.2, it also waits for images
 */
 @property(nonatomic, readwrite) HIFunction *load;
 /**
-Fires when an area of the chart has been selected. Selection is enabled by setting the chart's zoomType. One parameter, `event`, is passed to the function, containing common event information. The default action for the selection event is to zoom the chart to the selected area. It can be prevented by calling `event.preventDefault()` or return false. Information on the selected area can be found through `event.xAxis` and `event.yAxis`, which are arrays containing the axes of each dimension and each axis' min and max values. The primary axes are `event.xAxis[0]` and `event.yAxis[0]`. Remember the unit of a datetime axis is milliseconds since 1970-01-01 00:00:00. selection: function(event) {   // log the min and max of the primary, datetime x-axis   console.log(     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].min     ),     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].max     )   );   // log the min and max of the y axis   console.log(event.yAxis[0].min, event.yAxis[0].max); }
+Fires when an area of the chart has been selected. Selection is enabled by setting the chart's zoomType. One parameter, `event`, is passed to the function, containing common event information. The default action for the selection event is to zoom the chart to the selected area. It can be prevented by calling `event.preventDefault()` or return false. Information on the selected area can be found through `event.xAxis` and `event.yAxis`, which are arrays containing the axes of each dimension and each axis' min and max values. The primary axes are `event.xAxis[0]` and `event.yAxis[0]`. Remember the unit of a datetime axis is milliseconds since 1970-01-01 00:00:00. ```js selection: function(event) {   // log the min and max of the primary, datetime x-axis   console.log(     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].min     ),     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].max     )   );   // log the min and max of the y axis   console.log(event.yAxis[0].min, event.yAxis[0].max); } ```
 
 **Try it**
 
@@ -140,6 +140,10 @@ Fires after a chart is printed through the context menu item or the `Chart.print
 * [Rescale the chart to print](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-beforeprint-afterprint/)
 */
 @property(nonatomic, readwrite) HIFunction *afterPrint;
+/**
+Fires when the cluster point is clicked and `drillToCluster` is enabled. One parameter, `event`, is passed to the function. The default action is to zoom to the cluster points range. This can be prevented by calling `event.preventDefault()`.
+*/
+@property(nonatomic, readwrite) HIFunction *drillToCluster;
 /**
 Fires when the point is unselected either programmatically or following a click on the point. One parameter, `event`, is passed to the function. Returning `false` cancels the operation.
 
@@ -223,6 +227,10 @@ Fires on a request for change of root node for the tree, before the update is ma
 */
 @property(nonatomic, readwrite) HIFunction *setRootNode;
 /**
+A `closePopup` event. Fired when Popup should be hidden, for example when clicking on an annotation again.
+*/
+@property(nonatomic, readwrite) HIFunction *closePopup;
+/**
 Event fired on a button click.
 
 **Try it**
@@ -235,10 +243,6 @@ Event fired on a button click.
 A `showPopup` event. Fired when selecting for example an annotation.
 */
 @property(nonatomic, readwrite) HIFunction *showPopup;
-/**
-A `hidePopop` event. Fired when Popup should be hidden, for exampole when clicking on an annotation again.
-*/
-@property(nonatomic, readwrite) HIFunction *hidePopup;
 /**
 Event fired when button state should change, for example after adding an annotation.
 

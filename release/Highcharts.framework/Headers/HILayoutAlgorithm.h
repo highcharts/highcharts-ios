@@ -116,6 +116,22 @@ Type of the algorithm used when positioning nodes.
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
+When `type` is set to `kmeans`, `distance` is a maximum distance between point and cluster center so that this point will be inside the cluster. The distance is either a number defining pixels or a percentage defining a percentage of the plot area width.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ distance;
+/**
+When `type` is set to the `grid`, `gridSize` is a size of a grid square element either as a number defining pixels, or a percentage defining a percentage of the plot area width.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ gridSize;
+/**
+When `type` is set to `undefined` and there are more visible points than the kmeansThreshold the `grid` algorithm is used to find clusters, otherwise `kmeans`. It ensures good performance on large datasets and better clusters arrangement after the zoom.
+*/
+@property(nonatomic, readwrite) NSNumber *kmeansThreshold;
+/**
+When `type` is set to `kmeans`, `iterations` are the number of iterations that this algorithm will be repeated to find clusters positions.
+*/
+@property(nonatomic, readwrite) NSNumber *iterations;
+/**
 Approximation used to calculate repulsive forces affecting nodes. By default, when calculateing net force, nodes are compared against each other, which gives O(N^2) complexity. Using Barnes-Hut approximation, we decrease this to O(N log N), but the resulting graph will have different layout. Barnes-Hut approximation divides space into rectangles via quad tree, where forces exerted on nodes are calculated directly for nearby cells, and for all others, cells are treated as a separate node with center of mass.
 
 **Accepted values:** `["barnes-hut", "none"]`.

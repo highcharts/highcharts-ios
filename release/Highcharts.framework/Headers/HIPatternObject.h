@@ -23,6 +23,10 @@ Animation options for the image pattern loading.
 Pattern options
 */
 @property(nonatomic, readwrite) HIPatternOptionsObject *pattern;
+/**
+Optionally an index referencing which pattern to use. Highcharts adds 10 default patterns to the `Highcharts.patterns` array. Additional pattern definitions can be pushed to this array if desired. This option is an index into this array.
+*/
+@property(nonatomic, readwrite) NSNumber *patternIndex;
 
 -(NSDictionary *)getParams;
 

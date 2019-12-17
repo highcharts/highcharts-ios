@@ -31,8 +31,6 @@ Enable announcing new data to screen reader users
 /**
 Optional formatter callback for the announcement. Receives up to three arguments. The first argument is always an array of all series that received updates. If an announcement is already queued, the series that received updates for that announcement are also included in this array. The second argument is provided if `chart.addSeries` was called, and there is a new series. In that case, this argument is a reference to the new series. The third argument, similarly, is provided if `series.addPoint` was called, and there is a new point. In that case, this argument is a reference to the new point. The function should return a string with the text to announce to the user. Return empty string to not announce anything. Return `false` to use the default announcement format.
 
-**Defaults to** `undefined`.
-
 **Try it**
 
 * [High priority live alerts](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/accessibility/custom-dynamic)

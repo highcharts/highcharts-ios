@@ -7,9 +7,9 @@
 */
 
 #import "HIColorVariation.h"
+#import "HIDataLabels.h"
+#import "HIStates.h"
 #import "HIColor.h"
-#import "HIPointStatesOptionsObject.h"
-#import "HIDataLabelsOptionsObject.h"
 
 
 /**
@@ -44,7 +44,7 @@ Can set a `color` on all points which lies on the same level.
 /**
 Can set `dataLabels` on all points which lies on the same level.
 */
-@property(nonatomic, readwrite) HIDataLabelsOptionsObject *dataLabels;
+@property(nonatomic, readwrite) HIDataLabels *dataLabels;
 /**
 Can set a `rotationMode` on all points which lies on the same level.
 */
@@ -86,7 +86,7 @@ Can set `colorByPoint` on all nodes which lay on the same level.
 /**
 Can set `states` on all nodes and points which lay on the same level.
 */
-@property(nonatomic, readwrite) HIPointStatesOptionsObject *states;
+@property(nonatomic, readwrite) HIStates *states;
 /**
 Can set `linkOpacity` on all points which lay on the same level.
 

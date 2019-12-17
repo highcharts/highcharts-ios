@@ -14,7 +14,7 @@
 
 
 /**
-The axis labels show the number or category for each tick.
+The axis labels show the number or category for each tick. Since v8.0.0: Labels are animated in categorized x-axis with updating data if `tickInterval` and `step` is set to 1.
 */
 @interface HILabels: HIChartsJSONSerializable
 
@@ -127,7 +127,7 @@ If enabled, the axis labels will skewed to follow the perspective. This will fix
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *skew3d;
 /**
-Callback JavaScript function to format the label. The value is given by `this.value`. Additional properties for `this` are `axis`, `chart`, `isFirst` and `isLast`. The value of the default label formatter can be retrieved by calling `this.axis.defaultLabelFormatter.call(this)` within the function. Defaults to: function() {   return this.value; }
+Callback JavaScript function to format the label. The value is given by `this.value`. Additional properties for `this` are `axis`, `chart`, `isFirst` and `isLast`. The value of the default label formatter can be retrieved by calling `this.axis.defaultLabelFormatter.call(this)` within the function. Defaults to: ```js function() {   return this.value; } ```
 
 **Try it**
 

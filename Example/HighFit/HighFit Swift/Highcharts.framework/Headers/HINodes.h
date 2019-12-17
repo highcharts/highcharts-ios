@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIDataLabels.h"
 #import "HIColor.h"
-#import "HIDataLabelsOptionsObject.h"
 
 
 /**
@@ -34,7 +34,7 @@ The color of the auto generated node.
 /**
 Individual data label for each node. The options are the same as the ones for `series.sankey.dataLabels`.
 */
-@property(nonatomic, readwrite) NSArray<HIDataLabelsOptionsObject *> *dataLabels;
+@property(nonatomic, readwrite) NSArray <HIDataLabels *> *dataLabels;
 /**
 An optional column index of where to place the node. The default behaviour is to place it next to the preceding node. Note that this option name is counter intuitive in inverted charts, like for example an organization chart rendered top down. In this case the "columns" are horizontal.
 

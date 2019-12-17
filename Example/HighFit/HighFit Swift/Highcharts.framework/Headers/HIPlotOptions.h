@@ -8,6 +8,7 @@
 
 #import "HIGauge.h"
 #import "HIVariablepie.h"
+#import "HIDumbbell.h"
 #import "HIStreamgraph.h"
 #import "HINetworkgraph.h"
 #import "HIBar.h"
@@ -20,17 +21,18 @@
 #import "HIBellcurve.h"
 #import "HISeries.h"
 #import "HIPyramid3d.h"
-#import "HISankey.h"
 #import "HIPareto.h"
 #import "HIDependencywheel.h"
 #import "HIHeatmap.h"
 #import "HISolidgauge.h"
 #import "HITimeline.h"
 #import "HIFunnel3d.h"
+#import "HILollipop.h"
 #import "HIColumn.h"
 #import "HITreemap.h"
 #import "HIWaterfall.h"
 #import "HIColumnrange.h"
+#import "HIPackedBubble.h"
 #import "HIVenn.h"
 #import "HISpline.h"
 #import "HIArea.h"
@@ -42,13 +44,14 @@
 #import "HISunburst.h"
 #import "HIWordcloud.h"
 #import "HIScatter.h"
+#import "HISankey.h"
 #import "HICylinder.h"
 #import "HIPyramid.h"
 #import "HITilemap.h"
 #import "HIPie.h"
 #import "HIAreaspline.h"
 #import "HIPolygon.h"
-#import "HIPackedbubble.h"
+#import "HIPackedBubble.h"
 #import "HIScatter3d.h"
 #import "HIBoxplot.h"
 #import "HIErrorbar.h"
@@ -78,6 +81,15 @@ A variable pie series is a two dimensional series type, where each point renders
 * [Variable-radius pie chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/variable-radius-pie/)
 */
 @property(nonatomic, readwrite) HIVariablepie *variablepie;
+/**
+The dumbbell series is a cartesian series with higher and lower values for each point along an X axis, connected with a line between the values. Requires `highcharts-more.js` and `modules/dumbbell.js`. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `dumbbell` series are defined in  `plotOptions.dumbbell`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     dumbbell: {       // shared options for all dumbbell series     }   },   series: [{     // specific options for this series instance     type: 'dumbbell'   }] }); ```       
+
+**Try it**
+
+* [Dumbbell chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/dumbbell/)
+* [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-dumbbell/styled-mode-dumbbell/)
+*/
+@property(nonatomic, readwrite) HIDumbbell *dumbbell;
 /**
 A streamgraph is a type of stacked area graph which is displaced around a central axis, resulting in a flowing, organic shape. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `streamgraph` series are defined in  `plotOptions.streamgraph`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     streamgraph: {       // shared options for all streamgraph series     }   },   series: [{     // specific options for this series instance     type: 'streamgraph'   }] }); ```       
 
@@ -173,16 +185,6 @@ A pyramid3d is a 3d version of pyramid series type. Pyramid charts are a type of
 */
 @property(nonatomic, readwrite) HIPyramid3d *pyramid3d;
 /**
-A sankey diagram is a type of flow diagram, in which the width of the link between two nodes is shown proportionally to the flow quantity. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `sankey` series are defined in  `plotOptions.sankey`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     sankey: {       // shared options for all sankey series     }   },   series: [{     // specific options for this series instance     type: 'sankey'   }] }); ```       
-
-**Try it**
-
-* [Sankey diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sankey-diagram/)
-* [Inverted sankey diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-inverted/)
-* [Sankey diagram with outgoing links](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-outgoing)
-*/
-@property(nonatomic, readwrite) HISankey *sankey;
-/**
 A pareto diagram is a type of chart that contains both bars and a line graph, where individual values are represented in descending order by bars, and the cumulative total is represented by the line. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `pareto` series are defined in  `plotOptions.pareto`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     pareto: {       // shared options for all pareto series     }   },   series: [{     // specific options for this series instance     type: 'pareto'   }] }); ```       
 
 **Try it**
@@ -234,6 +236,15 @@ A funnel3d is a 3d version of funnel series type. Funnel charts are a type of ch
 */
 @property(nonatomic, readwrite) HIFunnel3d *funnel3d;
 /**
+The lollipop series is a carteseian series with a line anchored from the x axis and a dot at the end to mark the value. Requires `highcharts-more.js`, `modules/dumbbell.js` and `modules/lollipop.js`. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `lollipop` series are defined in  `plotOptions.lollipop`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     lollipop: {       // shared options for all lollipop series     }   },   series: [{     // specific options for this series instance     type: 'lollipop'   }] }); ```       
+
+**Try it**
+
+* [Lollipop chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/lollipop/)
+* [Styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-dumbbell/styled-mode-dumbbell/)
+*/
+@property(nonatomic, readwrite) HILollipop *lollipop;
+/**
 Column series display one column per value along an X axis. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `column` series are defined in  `plotOptions.column`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     column: {       // shared options for all column series     }   },   series: [{     // specific options for this series instance     type: 'column'   }] }); ```       
 
 **Try it**
@@ -267,6 +278,7 @@ The column range is a cartesian series type with higher and lower Y values along
 * [Inverted column range](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/columnrange/)
 */
 @property(nonatomic, readwrite) HIColumnrange *columnrange;
+@property(nonatomic, readwrite) HIPackedbubble *packedBubble;
 /**
 A Venn diagram displays all possible logical relations between a collection of different sets. The sets are represented by circles, and the relation between the sets are displayed by the overlap or lack of overlap between them. The venn diagram is a special case of Euler diagrams, which can also be displayed by this series type. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `venn` series are defined in  `plotOptions.venn`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     venn: {       // shared options for all venn series     }   },   series: [{     // specific options for this series instance     type: 'venn'   }] }); ```       
 
@@ -358,6 +370,16 @@ A scatter plot uses cartesian coordinates to display values for two variables fo
 * [Scatter plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/scatter/)
 */
 @property(nonatomic, readwrite) HIScatter *scatter;
+/**
+A sankey diagram is a type of flow diagram, in which the width of the link between two nodes is shown proportionally to the flow quantity. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `sankey` series are defined in  `plotOptions.sankey`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     sankey: {       // shared options for all sankey series     }   },   series: [{     // specific options for this series instance     type: 'sankey'   }] }); ```       
+
+**Try it**
+
+* [Sankey diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sankey-diagram/)
+* [Inverted sankey diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-inverted/)
+* [Sankey diagram with outgoing links](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-outgoing)
+*/
+@property(nonatomic, readwrite) HISankey *sankey;
 /**
 A cylinder graph is a variation of a 3d column graph. The cylinder graph features cylindrical points. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `cylinder` series are defined in  `plotOptions.cylinder`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     cylinder: {       // shared options for all cylinder series     }   },   series: [{     // specific options for this series instance     type: 'cylinder'   }] }); ```       
 
