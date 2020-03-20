@@ -10,7 +10,7 @@
 
 
 /**
-Options to render charts in 3 dimensions. This feature requires `highcharts-3d.js`, found in the download package or online at [https://code.highcharts.com/highcharts-3d.js](http://code.highcharts.com/highcharts-3d.js).
+Options to render charts in 3 dimensions. This feature requires `highcharts-3d.js`, found in the download package or online at [https://code.highcharts.com/highcharts-3d.js](https://code.highcharts.com/highcharts-3d.js).
 */
 @interface HIOptions3d: HIChartsJSONSerializable
 

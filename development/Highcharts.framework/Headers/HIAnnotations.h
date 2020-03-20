@@ -76,6 +76,10 @@ Allow an annotation to be draggable by a user. Possible values are `"x"`, `"xy"`
 Events available in annotations.
 */
 @property(nonatomic, readwrite) HIEvents *events;
+@property(nonatomic, readwrite) NSString *descriptionMultiplePoints;
+@property(nonatomic, readwrite) NSString *descriptionSinglePoint;
+@property(nonatomic, readwrite) NSString *descriptionNoPoints;
+@property(nonatomic, readwrite) NSString *heading;
 
 -(NSDictionary *)getParams;
 

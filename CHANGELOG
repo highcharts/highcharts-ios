@@ -1,3 +1,76 @@
+# Version 8.0.4
+
+## iOS:
+
+1. Fixed the double import of `HIPackedBubble.h` and other warnings.
+2. Removed 32-bit architecture.
+3. Updated demos.
+
+## Framework:
+
+1. Added new option for polar charts, `pane.innerSize`.
+2. Removed the experimental "Open in Highcharts Cloud" menu item of the export-data module.
+3. Added pie series `dataLabel` x and y position per point, see #12985.
+4. Added new option `annotations.labelOptions.accessibility.description`.
+5. Added accessibility functionality for annotations. Also added new option `accessibility.point.valueDescriptionFormat`.
+6. Added support for `useHTML` property to rotated data labels.
+7. Changed the default `inactive.opacity` for venn diagrams to ease perception, see #10663.
+8. Added new option `pattern.patternTransform` that allows SVG `patternTransform` functions on a pattern.
+9. Fullscreen module added. Allows using the `chart.toggleFullscreen()` method.
+10. Automatically dismiss popup content, such as tooltips, when user presses ESC key.
+11. Changed the behavior of keyboard navigation. It no longer opens export menu automatically, but sets focus to the button.
+12. Improvements to sonification.
+13. Introduced the new options `plotOptions.series.custom`, `series.custom`, and `series.data.custom` to store additional data for custom formatters and custom event callbacks.
+14. Added new option, `tooltip.stickOnContact`, to allow the tooltip to stick when hovering it with the mouse or when touched.
+
+## Framework upgrade notes
+
+1. The `Highcharts.Color` constructor will not work without the `new` keyword. Use either `new Highcharts.Color` or the `Highcharts.color` factory.
+
+## Framework bug fixes:
+
+1. Fixed wrong `x-range` drag handles issue with multiple series, see #12878.
+2. Fixed #12934, responsive rules didn't work for drill-up button initially.
+3. Fixed #12949, using multiple drilldown with data sorting threw an error.
+4. Fixed tooltip position on sankey diagram links and nodes when `tooltip.followPointer` was `false`.
+5. Fixed #12926, dumbbell marker was incorrectly colored after mouse out when `series.marker.fillColor` was defined.
+6. Fixed #11917, errors and failed rendering of sankey chart if the number of nodes was too great. Fixed by reducing the `nodePadding` below its setting to allocate space for all nodes.
+7. Added new option, `annotations.shapes.src`, see #12890.
+8. Fixed issues with tooltips and scrollable plot area. See #12416 and #12498.
+9. Fixed #11993, wordcloud looked incorrect after running `setData()`.
+10. Fixed #12566, in the data module, empty points should be parsed to `null` instead of `undefined`.
+11. Fixed #12812, high contrast mode not detected in new Edge.
+12. Fixed #12666, node render to null increase the sum by set weight.
+13. Fixed #12514, data label position for column pyramid with 0 value.
+14. Fixed issue with wrong axis options after `drilldown` to treemap series, see #12326.
+15. Fixed #10162, RTL text was covered when using a text outline.
+16. Fixed issue with updating legend's font-size, see #12705.
+17. Fixed issue with pie series update to 3d, see #12714.
+18. Fixed #11148, a point should not be trackable when is out of his pane. Also, isInsidePlot() works for panes now.
+19. Fixed #12718, markers invisible on chart update from null points with a11y module.
+20. Fixed #12690, a11y module caused render issues for 3D funnel.
+21. Fixed issue with not visible column data label when a point has a small value, see #12688.
+22. Fixed #12711, missing border and background for split tooltip's header in styled mode.
+23. Fixed #12513, deselecting previously selected nodes did not work for networkgraph series.
+24. Fixed #12156, added `series.inactive.enabled` option to disable inactive state.
+25. Fixed #12453, node with 0 value was rendered on the Sankey and dependency wheel.
+26. Fixed #12424, enabling network graph series in legend used to throw errors.
+27. Fixed #12515, updating depth in 3D pie chart did not work.
+28. Fixed #4369, 3D columns had wrong zIndex with long charts.
+29. Fixed issue with disabled animation for empty pie, see #12619.
+30. Fixed issue with tooltip wrong position on a bar chart when `xAxis` top or height set, see #12589.
+31. Fixed #12648, datetime axis ticks were wrong in Indian time zone when close to the DST crossover.
+32. Fixed #12627, legend items in pie chart overlapped on drilldown.
+33. Fixed #5508, data labels were wrongly positioned on inverted 3D charts.
+34. Fixed #12484, drag markers for columns were not showing when `highcharts-3d` and `draggable-points` were loaded.
+35. Fixed #13056, the `highcharts-3d.js` file was not compiled and distributed to code.highcharts.com and npm.
+36. Fixed #13053, a regression that removed the compatibility feature of calling `Highcharts.Color` without the `new` keyword.
+37. Fixed issue with wrong clipping during series animation when the chart was subject to responsive rules.
+38. Fixed #13042, `getTimezoneOffset` callback passed inconsistent value type.
+39. Fixed #13018, the vertical axis line and labels were incorrectly positioned when the `pane.startAngle`, `xAxis.angle` (inverted chart) or `yAxis.angle` (non-inverted chart) were set.
+40. Fixed #9682, touching legend prevented page scroll.
+41. Fixed #12870, hover point is not displayed when boost module is enabled.
+
 # Version 8.0.0
 
 ## iOS:

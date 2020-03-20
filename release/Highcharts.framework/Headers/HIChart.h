@@ -235,7 +235,7 @@ Allow panning in a chart. Best used with `panKey` to combine zooming and panning
 */
 @property(nonatomic, readwrite) HIPanning *panning;
 /**
-Options to render charts in 3 dimensions. This feature requires `highcharts-3d.js`, found in the download package or online at [https://code.highcharts.com/highcharts-3d.js](http://code.highcharts.com/highcharts-3d.js).
+Options to render charts in 3 dimensions. This feature requires `highcharts-3d.js`, found in the download package or online at [https://code.highcharts.com/highcharts-3d.js](https://code.highcharts.com/highcharts-3d.js).
 */
 @property(nonatomic, readwrite) HIOptions3d *options3d;
 /**
@@ -315,9 +315,9 @@ Whether to invert the axes so that the x axis is vertical and y axis is horizont
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inverted;
 /**
-Set the overall animation for all chart updating. Animation can be disabled throughout the chart by setting it to false here. It can be overridden for each individual API method as a function parameter. The only animation not affected by this option is the initial series animation, see `plotOptions.series.animation`. The animation can either be set as a boolean or a configuration object. If `true`, it will use the 'swing' jQuery easing and a duration of 500 ms. If used as a configuration object, the following properties are supported: - **duration**: The duration of the animation in milliseconds. - **easing**: A string reference to an easing function set on the  `Math` object. See  [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/).
+Set the overall animation for all chart updating. Animation can be disabled throughout the chart by setting it to false here. It can be overridden for each individual API method as a function parameter. The only animation not affected by this option is the initial series animation, see `plotOptions.series.animation`. The animation can either be set as a boolean or a configuration object. If `true`, it will use the 'swing' jQuery easing and a duration of 500 ms. If used as a configuration object, the following properties are supported: - **duration**: The duration of the animation in milliseconds. - **easing**: A string reference to an easing function set on the  `Math` object. See  [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/). When zooming on a series with less than 100 points, the chart redraw will be done with animation, but in case of more data points, it is necessary to set this option to ensure animation on zoom.
 
-**Defaults to** `true`.
+**Defaults to** `undefined`.
 
 **Try it**
 

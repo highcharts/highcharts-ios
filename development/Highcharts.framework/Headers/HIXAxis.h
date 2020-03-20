@@ -269,6 +269,11 @@ Whether to force the axis to end on a tick. Use this option with the `maxPadding
 @property(nonatomic, readwrite) NSNumber /* Bool */ *endOnTick;
 /**
 An array of lines stretching across the plot area, marking a specific value on one of the axes. In styled mode, the plot lines are styled by the `.highcharts-plot-line` class in addition to the `className` option.
+
+**Try it**
+
+* [Basic plot line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-color/)
+* [Solid gauge plot line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-solidgauge/labels-auto-aligned/)
 */
 @property(nonatomic, readwrite) NSArray <HIPlotLines *> *plotLines;
 /**

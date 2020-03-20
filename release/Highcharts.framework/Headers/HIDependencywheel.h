@@ -82,7 +82,7 @@ The minimal width for a line of a sankey. By default, 0 values are not shown.
 */
 @property(nonatomic, readwrite) NSNumber *minLinkWidth;
 /**
-The padding between nodes in a sankey diagram or dependency wheel, in pixels.
+The padding between nodes in a sankey diagram or dependency wheel, in pixels. If the number of nodes is so great that it is possible to lay them out within the plot area with the given `nodePadding`, they will be rendered with a smaller padding as a strategy to avoid overflow.
 */
 @property(nonatomic, readwrite) NSNumber *nodePadding;
 /**

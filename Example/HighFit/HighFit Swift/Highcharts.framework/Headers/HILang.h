@@ -11,7 +11,7 @@
 
 
 /**
-Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. ```js Highcharts.setOptions({   lang: {     months: [       'Janvier', 'FĂŠvrier', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'AoĂťt',       'Septembre', 'Octobre', 'Novembre', 'DĂŠcembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } }); ```
+Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. ```js Highcharts.setOptions({   lang: {     months: [       'Janvier', 'FÃ©vrier', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'AoÃ»t',       'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } }); ```
 */
 @interface HILang: HIChartsJSONSerializable
 
@@ -42,7 +42,7 @@ Short week days, starting Sunday. If not specified, Highcharts uses the first th
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *shortWeekdays;
 /**
-Exporting module only. View the chart in full screen.
+Exporting module only. The text for the menu item to view the chart in full screen.
 */
 @property(nonatomic, readwrite) NSString *viewFullscreen;
 /**
@@ -58,7 +58,7 @@ The loading text that appears when the chart is set into the loading state follo
 */
 @property(nonatomic, readwrite) NSString *loading;
 /**
-[Metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix) used to shorten high numbers in axis labels. Replacing any of the positions with `null` causes the full number to be written. Setting `numericSymbols` to `null` disables shortening altogether.
+[Metric prefixes](https://en.wikipedia.org/wiki/Metric_prefix) used to shorten high numbers in axis labels. Replacing any of the positions with `null` causes the full number to be written. Setting `numericSymbols` to `null` disables shortening altogether.
 
 **Defaults to** `["k", "M", "G", "T", "P", "E"]`.
 
@@ -115,6 +115,10 @@ What to show in a date field for invalid dates. Defaults to an empty string.
 */
 @property(nonatomic, readwrite) NSString *invalidDate;
 /**
+Exporting module only. The text for the menu item to exit the chart from full screen.
+*/
+@property(nonatomic, readwrite) NSString *exitFullscreen;
+/**
 The text for the label appearing when a chart is zoomed.
 */
 @property(nonatomic, readwrite) NSString *resetZoom;
@@ -122,10 +126,6 @@ The text for the label appearing when a chart is zoomed.
 Exporting module only. The text for the PDF download menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadPDF;
-/**
-The text for the menu item.
-*/
-@property(nonatomic, readwrite) NSString *openInCloud;
 /**
 The tooltip title for the label appearing when a chart is zoomed.
 */

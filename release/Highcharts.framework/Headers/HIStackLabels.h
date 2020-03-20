@@ -42,7 +42,7 @@ Defines the vertical alignment of the stack total label. Can be one of `"top"`, 
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
-A [format string](http://docs.highcharts.com/#formatting) for the data label. Available variables are the same as for `formatter`.
+A format string for the data label. Available variables are the same as for `formatter`.
 
 **Defaults to** `{total}`.
 */

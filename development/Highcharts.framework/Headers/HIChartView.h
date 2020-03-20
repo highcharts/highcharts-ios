@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HIOptions.h"
-#import "HIGChartViewDelegate.h"
+#import "HIChartViewDelegate.h"
 #import "HILang.h"
 #import "HIGlobal.h"
 

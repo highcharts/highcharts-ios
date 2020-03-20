@@ -72,11 +72,11 @@ The minimum value of the axis. If `null` the min value is automatically calculat
 */
 @property(nonatomic, readwrite) NSNumber *min;
 /**
-An array of objects defining plot bands on the Y axis.
+An array of colored bands stretching across the plot area marking an interval on the axis. In styled mode, the plot bands are styled by the `.highcharts-plot-band` class in addition to the `className` option.
 */
 @property(nonatomic, readwrite) NSArray <HIPlotBands *> *plotBands;
 /**
-Solid gauge series only. Color stops for the solid gauge. Use this in cases where a linear gradient between a `minColor` and `maxColor` is not sufficient. The stops is an array of tuples, where the first item is a float between 0 and 1 assigning the relative position in the gradient, and the second item is the color. For solid gauges, the Y axis also inherits the concept of [data classes](http://api.highcharts.com/highmaps#colorAxis.dataClasses) from the Highmaps color axis.
+Solid gauge series only. Color stops for the solid gauge. Use this in cases where a linear gradient between a `minColor` and `maxColor` is not sufficient. The stops is an array of tuples, where the first item is a float between 0 and 1 assigning the relative position in the gradient, and the second item is the color. For solid gauges, the Y axis also inherits the concept of [data classes](https://api.highcharts.com/highmaps#colorAxis.dataClasses) from the Highmaps color axis.
 
 **Try it**
 
@@ -141,8 +141,6 @@ The pixel width of the major tick marks.
 /**
 Whether to display the axis on the opposite side of the normal. The normal is on the left side for vertical axes and bottom for horizontal, so the opposite sides will be right and top respectively. This is typically used with dual or multiple axes.
 
-**Defaults to** `false`.
-
 **Try it**
 
 * [Secondary Y axis opposite](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/opposite/)
@@ -151,15 +149,13 @@ Whether to display the axis on the opposite side of the normal. The normal is on
 /**
 Whether to reverse the axis so that the highest number is closest to the origin.
 
-**Defaults to** `false`.
-
 **Try it**
 
 * [Reversed Y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/reversed/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
 /**
-An array of objects representing plot lines on the X axis
+An array of lines stretching across the plot area, marking a specific value on one of the axes. In styled mode, the plot lines are styled by the `.highcharts-plot-line` class in addition to the `className` option.
 
 **Try it**
 
@@ -212,7 +208,7 @@ Solid gauge only. Unless `stops` are set, the color to represent the minimum val
 /**
 Whether to show the last tick label. Defaults to `true` on cartesian charts, and `false` on polar charts.
 
-**Defaults to** `true`.
+**Defaults to** `True`.
 
 **Try it**
 

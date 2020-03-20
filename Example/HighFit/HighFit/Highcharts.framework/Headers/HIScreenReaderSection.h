@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIAnnotations.h"
 #import "HIFunction.h"
 
 
@@ -24,6 +24,10 @@ Function to run upon clicking the "View as Data Table" link in the screen reader
 */
 @property(nonatomic, readwrite) HIFunction *onViewDataTableClick;
 /**
+Function to run upon clicking the "Play as sound" button in the screen reader region. By default Highcharts will call the `chart.sonify` function.
+*/
+@property(nonatomic, readwrite) HIFunction *onPlayAsSoundClick;
+/**
 Format for the screen reader information region after the chart. Analogous to `beforeChartFormat`.
 */
 @property(nonatomic, readwrite) NSString *afterChartFormat;
@@ -32,7 +36,7 @@ Date format to use to describe range of datetime axes. For an overview of the re
 */
 @property(nonatomic, readwrite) NSString *axisRangeDateFormat;
 /**
-Format for the screen reader information region before the chart. Supported HTML tags are `<h1-7>`, `<p>`, `<div>`, `<a>`, and `<button>`. Attributes are not supported, except for id on `<div>`, `<a>`, and `<button>`. Id is required on `<a>` and `<button>` in the format `<tag id="abcd">`. Numbers, lower- and uppercase letters, "-" and "#" are valid characters in IDs.
+Format for the screen reader information region before the chart. Supported HTML tags are `<h1-7>`, `<p>`, `<div>`, `<a>`, `<ul>`, `<ol>`, `<li>`, and `<button>`. Attributes are not supported, except for id on `<div>`, `<a>`, and `<button>`. Id is required on `<a>` and `<button>` in the format `<tag id="abcd">`. Numbers, lower- and uppercase letters, "-" and "#" are valid characters in IDs.
 */
 @property(nonatomic, readwrite) NSString *beforeChartFormat;
 /**
@@ -41,6 +45,10 @@ A formatter function to create the HTML contents of the hidden screen reader inf
 @property(nonatomic, readwrite) HIFunction *afterChartFormatter;
 @property(nonatomic, readwrite) NSString *beforeRegionLabel;
 @property(nonatomic, readwrite) NSString *afterRegionLabel;
+/**
+Language options for annotation descriptions.
+*/
+@property(nonatomic, readwrite) HIAnnotations *annotations;
 /**
 Label for the end of the chart. Announced by screen readers.
 */

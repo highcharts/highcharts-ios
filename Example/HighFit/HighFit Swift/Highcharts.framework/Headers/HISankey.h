@@ -68,7 +68,7 @@ Higher numbers makes the links in a sankey diagram or dependency wheelrender mor
 */
 @property(nonatomic, readwrite) NSNumber *curveFactor;
 /**
-The padding between nodes in a sankey diagram or dependency wheel, in pixels.
+The padding between nodes in a sankey diagram or dependency wheel, in pixels. If the number of nodes is so great that it is possible to lay them out within the plot area with the given `nodePadding`, they will be rendered with a smaller padding as a strategy to avoid overflow.
 */
 @property(nonatomic, readwrite) NSNumber *nodePadding;
 /**

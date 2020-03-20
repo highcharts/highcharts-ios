@@ -13,6 +13,7 @@
 #import "HIExporting.h"
 #import "HIBoost.h"
 #import "HIAnnotations.h"
+#import "HIDefs.h"
 #import "HIChart.h"
 #import "HICredits.h"
 #import "HIZAxis.h"
@@ -46,7 +47,7 @@ Series options for specific data and the data itself. In TypeScript you have to 
 @property(nonatomic, readwrite) NSArray<HISeries *> *series;
 
 /**
-Options for configuring accessibility for the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](http://www.highcharts.com/docs/chart-concepts/accessibility).
+Options for configuring accessibility for the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility).
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 
@@ -135,7 +136,7 @@ Styled mode only. Configuration object for adding SVG definitions for reusable e
 * [Define a custom marker for annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/custom-markers/)
 * [Define markers in a styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/annotations-markers/)
 */
-@property(nonatomic, readwrite) id defs;
+@property(nonatomic, readwrite) HIDefs *defs;
 
 /**
 General options for the chart.

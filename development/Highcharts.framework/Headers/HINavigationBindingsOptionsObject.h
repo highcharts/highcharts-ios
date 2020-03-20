@@ -11,9 +11,9 @@
 
 
 /**
-A config object for bindings in Stock Tools module.
+A config object for navigation bindings in annotations.
 */
-@interface HIStockToolsBindingsObject: HIChartsJSONSerializable
+@interface HINavigationBindingsOptionsObject: HIChartsJSONSerializable
 
 /**
 ClassName of the element for a binding.

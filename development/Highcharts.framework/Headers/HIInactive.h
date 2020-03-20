@@ -14,18 +14,28 @@ The opposite state of a hover for series.
 
 **Try it**
 
-* [Disabled inactive state by setting opacity](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-inactive-opacity)
+* [Disabled inactive state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-inactive-disabled)
 */
 @interface HIInactive: HIChartsJSONSerializable
 
 /**
-Opacity of series elements (dataLabels, line, area). Set to 1 to disable inactive state.
+Opacity of series elements (dataLabels, line, area).
 */
 @property(nonatomic, readwrite) NSNumber *opacity;
 /**
 The animation for entering the inactive state.
 */
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+/**
+Enable or disable the inactive state for a series
+
+**Defaults to** `true`.
+
+**Try it**
+
+* [Disabled inactive state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-inactive-disabled)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 Opacity for the links between nodes in the sankey diagram in inactive mode.
 */

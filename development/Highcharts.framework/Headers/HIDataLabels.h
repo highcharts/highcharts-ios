@@ -44,14 +44,18 @@ Styles for the label. The default `color` setting is `"contrast"`, which is a ps
 **Try it**
 
 * [Bold labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-style/)
-* [Long labels truncated with an ellipsis in a pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotOptions/pie-datalabels-overflow/)
-* [Long labels are wrapped in a pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotOptions/pie-datalabels-overflow-wrap/)
+* [Long labels truncated with an ellipsis in a pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-overflow/)
+* [Long labels are wrapped in a pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-overflow-wrap/)
 */
 @property(nonatomic, readwrite) HIStyle *style;
 /**
-Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `auto`, `parallel` and `perpendicular`. When `auto`, the best fit will be computed for the point. The `series.rotation` option takes precedence over `rotationMode`.
+Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `auto`, `circular`, `parallel` and `perpendicular`. When `auto`, the best fit will be computed for the point. The `circular` option works similiar to `auto`, but uses the `textPath` feature - labels are curved, resulting in a better layout, however multiple lines and `textOutline` are not supported. The `series.rotation` option takes precedence over `rotationMode`.
 
-**Accepted values:** `["auto", "perpendicular", "parallel"]`.
+**Accepted values:** `["auto", "perpendicular", "parallel", "circular"]`.
+
+**Try it**
+
+* [Circular rotation mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sunburst-datalabels-rotationmode-circular/)
 */
 @property(nonatomic, readwrite) NSString *rotationMode;
 @property(nonatomic, readwrite) NSNumber *y;
@@ -252,10 +256,7 @@ Y offset of the lower data labels relative to the point value.
 * [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
 */
 @property(nonatomic, readwrite) NSNumber *yLow;
-/**
-Callback to format data labels for _parentNodes_. The `parentNodeFormat` option takes precedence over the `parentNodeFormatter`.
-*/
-@property(nonatomic, readwrite) HIFunction *parentNodeFormatter;
+@property(nonatomic, readwrite) NSString *parentNodeFormat;
 /**
 Options for a _parentNode_ label text. **Note:** Only SVG-based renderer supports this option.
 
@@ -264,6 +265,14 @@ Options for a _parentNode_ label text. **Note:** Only SVG-based renderer support
 * [Dashboard with dataLabels on parentNodes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-packedbubble/packed-dashboard)
 */
 @property(nonatomic, readwrite) HIParentNodeTextPath *parentNodeTextPath;
+/**
+Callback to format data labels for _parentNodes_. The `parentNodeFormat` option takes precedence over the `parentNodeFormatter`.
+*/
+@property(nonatomic, readwrite) HIFunction *parentNodeFormatter;
+/**
+Presentation attributes for the text path.
+*/
+@property(nonatomic, readwrite) HISVGAttributes *attributes;
 /**
 The width of the line connecting the data label to the point. In styled mode, the connector stroke width is given in the `.highcharts-data-label-connector` class.
 
@@ -349,11 +358,6 @@ Works only if `connectorShape` is `'crookedLine'`. It defines how far from the v
 * [crookDistance set to 90%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-crookdistance/)
 */
 @property(nonatomic, readwrite) NSString *crookDistance;
-/**
-Presentation attributes for the text path.
-*/
-@property(nonatomic, readwrite) HISVGAttributes *attributes;
-@property(nonatomic, readwrite) NSString *parentNodeFormat;
 
 -(NSDictionary *)getParams;
 

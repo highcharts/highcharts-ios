@@ -16,6 +16,22 @@ Options for annotation's shapes. Each shape inherits options from the shapeOptio
 @interface HIShapeOptions: HIChartsJSONSerializable
 
 /**
+The URL for an image to use as the annotation shape. Note, type has to be set to `'image'`.
+
+**Try it**
+
+* [Define a marker image url for annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape-src/)
+*/
+@property(nonatomic, readwrite) NSString *src;
+/**
+Name of the dash style to use for the shape's stroke.
+
+**Try it**
+
+* [Possible values demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/)
+*/
+@property(nonatomic, readwrite) NSString *dashStyle;
+/**
 The pixel stroke width of the shape.
 
 **Try it**

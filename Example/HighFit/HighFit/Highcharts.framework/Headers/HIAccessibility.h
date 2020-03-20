@@ -18,12 +18,13 @@
 #import "HIAccessibilityExporting.h"
 #import "HIRangeSelector.h"
 #import "HIAccessibilityLegend.h"
+#import "HISonification.h"
 #import "HIAxis.h"
 #import "HIFunction.h"
 
 
 /**
-Options for configuring accessibility for the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](http://www.highcharts.com/docs/chart-concepts/accessibility).
+Options for configuring accessibility for the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility).
 */
 @interface HIAccessibility: HIChartsJSONSerializable
 
@@ -100,6 +101,10 @@ Range description for an axis. Overrides the default range description. Set to e
 @property(nonatomic, readwrite) NSString *defaultChartTitle;
 @property(nonatomic, readwrite) NSString *svgContainerLabel;
 /**
+Thousands separator to use when formatting numbers for screen readers. Note that many screen readers will not handle space as a thousands separator, and will consider "11 700" as two numbers. Set to `null` to use the separator defined in `lang.thousandsSep`.
+*/
+@property(nonatomic, readwrite) NSString *thousandsSep;
+/**
 Chart type description strings. This is added to the chart information region. If there is only a single series type used in the chart, we use the format string for the series type, or default if missing. There is one format string for cases where there is only a single series in the chart, and one for multiple series of the same type.
 */
 @property(nonatomic, readwrite) HIChartTypes *chartTypes;
@@ -130,9 +135,9 @@ Title element text for the chart SVG element. Leave this empty to disable adding
 */
 @property(nonatomic, readwrite) NSString *svgContainerTitle;
 /**
-Thousands separator to use when formatting numbers for screen readers. Note that many screen readers will not handle space as a thousands separator, and will consider "11 700" as two numbers. Set to `null` to use the separator defined in `lang.thousandsSep`.
+Language options for sonification.
 */
-@property(nonatomic, readwrite) NSString *thousandsSep;
+@property(nonatomic, readwrite) HISonification *sonification;
 /**
 Set a label on the container wrapping the SVG.
 */

@@ -7,6 +7,7 @@
 */
 
 #import "HIStyle.h"
+#import "HIFunction.h"
 
 
 /**
@@ -19,7 +20,7 @@ Options for annotation's control points. Each control point inherits options fro
 @property(nonatomic, readwrite) NSString *symbol;
 @property(nonatomic, readwrite) NSNumber *height;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
-@property(nonatomic, readwrite) id positioner;
+@property(nonatomic, readwrite) HIFunction *positioner;
 
 -(NSDictionary *)getParams;
 

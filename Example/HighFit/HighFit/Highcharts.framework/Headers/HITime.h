@@ -7,6 +7,7 @@
 */
 
 #import "HIChartsJSONSerializable.h"
+#import "HIFunction.h"
 
 
 /**
@@ -24,7 +25,7 @@ A custom `Date` class for advanced date handling. For example, [JDate](https://g
 */
 @property(nonatomic, readwrite) id Date;
 /**
-Requires [moment.js](http://momentjs.com/). If the timezone option is specified, it creates a default `getTimezoneOffset` function that looks up the specified timezone in moment.js. If moment.js is not included, this throws a Highcharts error in the console, but does not crash the chart.
+Requires [moment.js](https://momentjs.com/). If the timezone option is specified, it creates a default `getTimezoneOffset` function that looks up the specified timezone in moment.js. If moment.js is not included, this throws a Highcharts error in the console, but does not crash the chart.
 
 **Try it**
 
@@ -38,7 +39,7 @@ A callback to return the time zone offset for a given datetime. It takes the tim
 
 * [Use moment.js to draw Oslo time regardless of browser locale](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/time/gettimezoneoffset/)
 */
-@property(nonatomic, readwrite) NSString *getTimezoneOffset;
+@property(nonatomic, readwrite) HIFunction *getTimezoneOffset;
 /**
 The timezone offset in minutes. Positive values are west, negative values are east of UTC, as in the ECMAScript [getTimezoneOffset](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset) method. Use this to display UTC based data in a predefined time zone.
 

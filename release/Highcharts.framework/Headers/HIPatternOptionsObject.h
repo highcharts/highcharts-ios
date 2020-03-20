@@ -47,6 +47,10 @@ Either an SVG path as string, or an object. As an object, supply the path string
 */
 @property(nonatomic, readwrite) HISVGAttributes *path;
 /**
+SVG `patternTransform` to apply to the entire pattern.
+*/
+@property(nonatomic, readwrite) NSString *patternTransform;
+/**
 Width of the pattern. For images this is automatically set to the width of the element bounding box if not supplied. For non-image patterns the default is 32px. Note that automatic resizing of image patterns to fill a bounding box dynamically is only supported for patterns with an automatically calculated ID.
 */
 @property(nonatomic, readwrite) NSNumber *width;

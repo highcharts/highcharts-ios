@@ -1,6 +1,6 @@
 /* *
  *
- *  (c) 2010-2019 Torstein Honsi
+ *  (c) 2010-2020 Torstein Honsi
  *
  *  License: www.highcharts.com/license
  *
@@ -57,14 +57,14 @@ import H from './Globals.js';
  * @param {Highcharts.PointInteractionEventObject} event
  *        Event that occured.
  */
+import Legend from './Legend.js';
+import Point from './Point.js';
 import U from './Utilities.js';
-var defined = U.defined, extend = U.extend, isArray = U.isArray, isObject = U.isObject, objectEach = U.objectEach, pick = U.pick;
+var addEvent = U.addEvent, createElement = U.createElement, css = U.css, defined = U.defined, extend = U.extend, fireEvent = U.fireEvent, isArray = U.isArray, isFunction = U.isFunction, isObject = U.isObject, merge = U.merge, objectEach = U.objectEach, pick = U.pick;
 import './Chart.js';
 import './Options.js';
-import './Legend.js';
-import './Point.js';
 import './Series.js';
-var addEvent = H.addEvent, Chart = H.Chart, createElement = H.createElement, css = H.css, defaultOptions = H.defaultOptions, defaultPlotOptions = H.defaultPlotOptions, fireEvent = H.fireEvent, hasTouch = H.hasTouch, Legend = H.Legend, merge = H.merge, Point = H.Point, Series = H.Series, seriesTypes = H.seriesTypes, svg = H.svg, TrackerMixin;
+var Chart = H.Chart, defaultOptions = H.defaultOptions, defaultPlotOptions = H.defaultPlotOptions, hasTouch = H.hasTouch, Series = H.Series, seriesTypes = H.seriesTypes, svg = H.svg, TrackerMixin;
 /* eslint-disable valid-jsdoc */
 /**
  * TrackerMixin for points and graphs.
@@ -79,7 +79,6 @@ TrackerMixin = H.TrackerMixin = {
      * @private
      * @function Highcharts.TrackerMixin.drawTrackerPoint
      * @param {Highcharts.Series} this
-     * @return {void}
      * @fires Highcharts.Series#event:afterDrawTracker
      */
     drawTrackerPoint: function () {
@@ -142,7 +141,6 @@ TrackerMixin = H.TrackerMixin = {
      * @private
      * @function Highcharts.TrackerMixin.drawTrackerGraph
      * @param {Highcharts.Series} this
-     * @return {void}
      * @fires Highcharts.Series#event:afterDrawTracker
      */
     drawTrackerGraph: function () {
@@ -258,75 +256,85 @@ extend(Legend.prototype, {
      * @param {Highcharts.BubbleLegend|Highcharts.Point|Highcharts.Series} item
      * @param {Highcharts.SVGElement} legendItem
      * @param {boolean} [useHTML=false]
-     * @return {void}
      * @fires Highcharts.Point#event:legendItemClick
      * @fires Highcharts.Series#event:legendItemClick
      */
     setItemEvents: function (item, legendItem, useHTML) {
         var legend = this, boxWrapper = legend.chart.renderer.boxWrapper, isPoint = item instanceof Point, activeClass = 'highcharts-legend-' +
-            (isPoint ? 'point' : 'series') + '-active', styledMode = legend.chart.styledMode;
+            (isPoint ? 'point' : 'series') + '-active', styledMode = legend.chart.styledMode, 
+        // When `useHTML`, the symbol is rendered in other group, so
+        // we need to apply events listeners to both places
+        legendItems = useHTML ?
+            [legendItem, item.legendSymbol] :
+            [item.legendGroup];
         // Set the events on the item group, or in case of useHTML, the item
         // itself (#1249)
-        (useHTML ? legendItem : item.legendGroup)
-            .on('mouseover', function () {
-            if (item.visible) {
-                legend.allItems.forEach(function (inactiveItem) {
-                    if (item !== inactiveItem) {
-                        inactiveItem.setState('inactive', !isPoint);
+        legendItems.forEach(function (element) {
+            if (element) {
+                element
+                    .on('mouseover', function () {
+                    if (item.visible) {
+                        legend.allItems.forEach(function (inactiveItem) {
+                            if (item !== inactiveItem) {
+                                inactiveItem.setState('inactive', !isPoint);
+                            }
+                        });
+                    }
+                    item.setState('hover');
+                    // A CSS class to dim or hide other than the hovered
+                    // series.
+                    // Works only if hovered series is visible (#10071).
+                    if (item.visible) {
+                        boxWrapper.addClass(activeClass);
+                    }
+                    if (!styledMode) {
+                        legendItem.css(legend.options.itemHoverStyle);
+                    }
+                })
+                    .on('mouseout', function () {
+                    if (!legend.chart.styledMode) {
+                        legendItem.css(merge(item.visible ?
+                            legend.itemStyle :
+                            legend.itemHiddenStyle));
+                    }
+                    legend.allItems.forEach(function (inactiveItem) {
+                        if (item !== inactiveItem) {
+                            inactiveItem.setState('', !isPoint);
+                        }
+                    });
+                    // A CSS class to dim or hide other than the hovered
+                    // series.
+                    boxWrapper.removeClass(activeClass);
+                    item.setState();
+                })
+                    .on('click', function (event) {
+                    var strLegendItemClick = 'legendItemClick', fnLegendItemClick = function () {
+                        if (item.setVisible) {
+                            item.setVisible();
+                        }
+                        // Reset inactive state
+                        legend.allItems.forEach(function (inactiveItem) {
+                            if (item !== inactiveItem) {
+                                inactiveItem.setState(item.visible ? 'inactive' : '', !isPoint);
+                            }
+                        });
+                    };
+                    // A CSS class to dim or hide other than the hovered
+                    // series. Event handling in iOS causes the activeClass
+                    // to be added prior to click in some cases (#7418).
+                    boxWrapper.removeClass(activeClass);
+                    // Pass over the click/touch event. #4.
+                    event = {
+                        browserEvent: event
+                    };
+                    // click the name or symbol
+                    if (item.firePointEvent) { // point
+                        item.firePointEvent(strLegendItemClick, event, fnLegendItemClick);
+                    }
+                    else {
+                        fireEvent(item, strLegendItemClick, event, fnLegendItemClick);
                     }
                 });
-            }
-            item.setState('hover');
-            // A CSS class to dim or hide other than the hovered series.
-            // Works only if hovered series is visible (#10071).
-            if (item.visible) {
-                boxWrapper.addClass(activeClass);
-            }
-            if (!styledMode) {
-                legendItem.css(legend.options.itemHoverStyle);
-            }
-        })
-            .on('mouseout', function () {
-            if (!legend.chart.styledMode) {
-                legendItem.css(merge(item.visible ?
-                    legend.itemStyle :
-                    legend.itemHiddenStyle));
-            }
-            legend.allItems.forEach(function (inactiveItem) {
-                if (item !== inactiveItem) {
-                    inactiveItem.setState('', !isPoint);
-                }
-            });
-            // A CSS class to dim or hide other than the hovered series
-            boxWrapper.removeClass(activeClass);
-            item.setState();
-        })
-            .on('click', function (event) {
-            var strLegendItemClick = 'legendItemClick', fnLegendItemClick = function () {
-                if (item.setVisible) {
-                    item.setVisible();
-                }
-                // Reset inactive state
-                legend.allItems.forEach(function (inactiveItem) {
-                    if (item !== inactiveItem) {
-                        inactiveItem.setState(item.visible ? 'inactive' : '', !isPoint);
-                    }
-                });
-            };
-            // A CSS class to dim or hide other than the hovered series.
-            // Event handling in iOS causes the activeClass to be added
-            // prior to click in some cases (#7418).
-            boxWrapper.removeClass(activeClass);
-            // Pass over the click/touch event. #4.
-            event = {
-                browserEvent: event
-            };
-            // click the name or symbol
-            if (item.firePointEvent) { // point
-                item.firePointEvent(strLegendItemClick, event, fnLegendItemClick);
-            }
-            else {
-                fireEvent(item, strLegendItemClick, event, fnLegendItemClick);
             }
         });
     },
@@ -334,7 +342,6 @@ extend(Legend.prototype, {
      * @private
      * @function Highcharts.Legend#createCheckboxForItem
      * @param {Highcharts.BubbleLegend|Highcharts.Point|Highcharts.Series} item
-     * @return {void}
      * @fires Highcharts.Series#event:checkboxClick
      */
     createCheckboxForItem: function (item) {
@@ -359,11 +366,12 @@ extend(Legend.prototype, {
 // Extend the Chart object with interaction
 extend(Chart.prototype, /** @lends Chart.prototype */ {
     /**
-     * Display the zoom button.
+     * Display the zoom button, so users can reset zoom to the default view
+     * settings.
      *
-     * @private
      * @function Highcharts.Chart#showResetZoom
-     * @return {void}
+     *
+     * @fires Highcharts.Chart#event:afterShowResetZoom
      * @fires Highcharts.Chart#event:beforeShowResetZoom
      */
     showResetZoom: function () {
@@ -395,7 +403,7 @@ extend(Chart.prototype, /** @lends Chart.prototype */ {
      * [Axis.setExtremes](/class-reference/Highcharts.Axis#setExtremes).
      *
      * @function Highcharts.Chart#zoomOut
-     * @return {void}
+     *
      * @fires Highcharts.Chart#event:selection
      */
     zoomOut: function () {
@@ -407,7 +415,6 @@ extend(Chart.prototype, /** @lends Chart.prototype */ {
      * @private
      * @function Highcharts.Chart#zoom
      * @param {Highcharts.SelectEventObject} event
-     * @return {void}
      */
     zoom: function (event) {
         var chart = this, hasZoomed, pointer = chart.pointer, displayButton = false, mouseDownPos = chart.inverted ? pointer.mouseDownX : pointer.mouseDownY, resetZoomButton;
@@ -462,7 +469,6 @@ extend(Chart.prototype, /** @lends Chart.prototype */ {
      * @function Highcharts.Chart#pan
      * @param {Highcharts.PointerEventObject} e
      * @param {string} panning
-     * @return {void}
      */
     pan: function (e, panning) {
         var chart = this, hoverPoints = chart.hoverPoints, panningOptions, chartOptions = chart.options.chart, doRedraw, type;
@@ -566,19 +572,16 @@ extend(Point.prototype, /** @lends Highcharts.Point.prototype */ {
      * @function Highcharts.Point#select
      *
      * @param {boolean} [selected]
-     *        When `true`, the point is selected. When `false`, the point is
-     *        unselected. When `null` or `undefined`, the selection state is
-     *        toggled.
+     * When `true`, the point is selected. When `false`, the point is
+     * unselected. When `null` or `undefined`, the selection state is toggled.
      *
      * @param {boolean} [accumulate=false]
-     *        When `true`, the selection is added to other selected points.
-     *        When `false`, other selected points are deselected. Internally in
-     *        Highcharts, when
-     *        [allowPointSelect](http://api.highcharts.com/highcharts/plotOptions.series.allowPointSelect)
-     *        is `true`, selected points are accumulated on Control, Shift or
-     *        Cmd clicking the point.
-     *
-     * @return {void}
+     * When `true`, the selection is added to other selected points.
+     * When `false`, other selected points are deselected. Internally in
+     * Highcharts, when
+     * [allowPointSelect](https://api.highcharts.com/highcharts/plotOptions.series.allowPointSelect)
+     * is `true`, selected points are accumulated on Control, Shift or Cmd
+     * clicking the point.
      *
      * @fires Highcharts.Point#event:select
      * @fires Highcharts.Point#event:unselect
@@ -631,8 +634,6 @@ extend(Point.prototype, /** @lends Highcharts.Point.prototype */ {
      *
      * @param {Highcharts.PointerEventObject} [e]
      *        The event arguments.
-     *
-     * @return {void}
      */
     onMouseOver: function (e) {
         var point = this, series = point.series, chart = series.chart, pointer = chart.pointer;
@@ -647,7 +648,6 @@ extend(Point.prototype, /** @lends Highcharts.Point.prototype */ {
      * events.
      *
      * @function Highcharts.Point#onMouseOut
-     * @return {void}
      * @fires Highcharts.Point#event:mouseOut
      */
     onMouseOut: function () {
@@ -666,14 +666,13 @@ extend(Point.prototype, /** @lends Highcharts.Point.prototype */ {
      *
      * @private
      * @function Highcharts.Point#importEvents
-     * @return {void}
      */
     importEvents: function () {
         if (!this.hasImportedEvents) {
             var point = this, options = merge(point.series.options.point, point.options), events = options.events;
             point.events = events;
             objectEach(events, function (event, eventType) {
-                if (H.isFunction(event)) {
+                if (isFunction(event)) {
                     addEvent(point, eventType, event);
                 }
             });
@@ -866,7 +865,6 @@ extend(Series.prototype, /** @lends Highcharts.Series.prototype */ {
      * Runs on mouse over the series graphical items.
      *
      * @function Highcharts.Series#onMouseOver
-     * @return {void}
      * @fires Highcharts.Series#event:mouseOver
      */
     onMouseOver: function () {
@@ -1029,15 +1027,13 @@ extend(Series.prototype, /** @lends Highcharts.Series.prototype */ {
      * @function Highcharts.Series#setVisible
      *
      * @param {boolean} [visible]
-     *        True to show the series, false to hide. If undefined, the
-     *        visibility is toggled.
+     * True to show the series, false to hide. If undefined, the visibility is
+     * toggled.
      *
      * @param {boolean} [redraw=true]
-     *        Whether to redraw the chart after the series is altered. If doing
-     *        more operations on the chart, it is a good idea to set redraw to
-     *        false and call {@link Chart#redraw|chart.redraw()} after.
-     *
-     * @return {void}
+     * Whether to redraw the chart after the series is altered. If doing more
+     * operations on the chart, it is a good idea to set redraw to false and
+     * call {@link Chart#redraw|chart.redraw()} after.
      *
      * @fires Highcharts.Series#event:hide
      * @fires Highcharts.Series#event:show
@@ -1100,23 +1096,20 @@ extend(Series.prototype, /** @lends Highcharts.Series.prototype */ {
      *         Toggle visibility from a button
      *
      * @function Highcharts.Series#show
-     * @return {void}
      * @fires Highcharts.Series#event:show
      */
     show: function () {
         this.setVisible(true);
     },
     /**
-     * Hide the series if visible. If the {@link
-     * https://api.highcharts.com/highcharts/chart.ignoreHiddenSeries|
-     * chart.ignoreHiddenSeries} option is true, the chart is redrawn without
-     * this series.
+     * Hide the series if visible. If the
+     * [chart.ignoreHiddenSeries](https://api.highcharts.com/highcharts/chart.ignoreHiddenSeries)
+     * option is true, the chart is redrawn without this series.
      *
      * @sample highcharts/members/series-hide/
      *         Toggle visibility from a button
      *
      * @function Highcharts.Series#hide
-     * @return {void}
      * @fires Highcharts.Series#event:hide
      */
     hide: function () {
@@ -1126,8 +1119,7 @@ extend(Series.prototype, /** @lends Highcharts.Series.prototype */ {
      * Select or unselect the series. This means its
      * {@link Highcharts.Series.selected|selected}
      * property is set, the checkbox in the legend is toggled and when selected,
-     * the series is returned by the
-     * {@link Highcharts.Chart#getSelectedSeries}
+     * the series is returned by the {@link Highcharts.Chart#getSelectedSeries}
      * function.
      *
      * @sample highcharts/members/series-select/
@@ -1136,10 +1128,8 @@ extend(Series.prototype, /** @lends Highcharts.Series.prototype */ {
      * @function Highcharts.Series#select
      *
      * @param {boolean} [selected]
-     *        True to select the series, false to unselect. If undefined, the
-     *        selection state is toggled.
-     *
-     * @return {void}
+     * True to select the series, false to unselect. If undefined, the selection
+     * state is toggled.
      *
      * @fires Highcharts.Series#event:select
      * @fires Highcharts.Series#event:unselect

@@ -151,25 +151,29 @@ Whether or not to add series descriptions to charts with a single series.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *describeSingleSeries;
 /**
-yAxis description for series if there are multiple yAxes in the chart.
+User supplied description text. This is added in the point comment description by default if present.
 */
-@property(nonatomic, readwrite) NSString *yAxisDescription;
+@property(nonatomic, readwrite) NSString *definition;
 /**
 xAxis description for series if there are multiple xAxes in the chart.
 */
 @property(nonatomic, readwrite) NSString *xAxisDescription;
 /**
-Description for the value of null points.
+yAxis description for series if there are multiple yAxes in the chart.
 */
-@property(nonatomic, readwrite) NSString *nullPointValue;
+@property(nonatomic, readwrite) NSString *yAxisDescription;
 /**
-User supplied description text. This is added after the main summary if present.
+Description for annotations on a point, as it is made available to assistive technology.
 */
-@property(nonatomic, readwrite) NSString *definition;
+@property(nonatomic, readwrite) NSString *pointAnnotationsDescription;
 /**
 Lang configuration for the series main summary. Each series type has two modes: 1. This series type is the only series type used in the  chart 2. This is a combination chart with multiple series types If a definition does not exist for the specific series type and mode, the 'default' lang definitions are used.
 */
 @property(nonatomic, readwrite) HISummary *summary;
+/**
+Description for the value of null points.
+*/
+@property(nonatomic, readwrite) NSString *nullPointValue;
 /**
 When set to `false` will prevent the series data from being included in any form of data export. Since version 6.0.0 until 7.1.0 the option was existing undocumented as `includeInCSVExport`.
 */
@@ -277,6 +281,16 @@ A configuration object for the tooltip rendering of each single series. Properti
 */
 @property(nonatomic, readwrite) HITooltip *tooltip;
 /**
+Series labels are placed as close to the series as possible in a natural way, seeking to avoid other series. The goal of this feature is to make the chart more easily readable, like if a human designer placed the labels in the optimal position. The series labels currently work with series types having a `graph` or an `area`.
+
+**Try it**
+
+* [Line chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-label/line-chart)
+* [Stream graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/streamgraph)
+* [Stock chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-label/stock-chart)
+*/
+@property(nonatomic, readwrite) HILabel *label;
+/**
 Same as `accessibility.pointDescriptionFormatter`, but for an individual series. Overrides the chart wide configuration.
 */
 @property(nonatomic, readwrite) HIFunction *pointDescriptionFormatter;
@@ -291,7 +305,7 @@ You can set the cursor to "pointer" if you have click events attached to the ser
 */
 @property(nonatomic, readwrite) NSString *cursor;
 /**
-A name for the dash style to use for the graph, or for some series types the outline of each shape. In styled mode, the [stroke dash-array](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-dashstyle/) can be set with the same classes as listed under `series.color`.
+Name of the dash style to use for the graph, or for some series types the outline of each shape. In styled mode, the [stroke dash-array](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/series-dashstyle/) can be set with the same classes as listed under `series.color`.
 
 **Defaults to** `Solid`.
 
@@ -333,15 +347,13 @@ Enable or disable the mouse tracking for a specific series. This includes point 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enableMouseTracking;
 /**
-Series labels are placed as close to the series as possible in a natural way, seeking to avoid other series. The goal of this feature is to make the chart more easily readable, like if a human designer placed the labels in the optimal position. The series labels currently work with series types having a `graph` or an `area`.
+A reserved subspace to store options and values for customized functionality. Here you can add additional data for your own event callbacks and formatter callbacks.
 
 **Try it**
 
-* [Line chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-label/line-chart)
-* [Stream graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/streamgraph)
-* [Stock chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-label/stock-chart)
+* [Point and series with custom data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/custom/)
 */
-@property(nonatomic, readwrite) HILabel *label;
+@property(nonatomic, readwrite) NSDictionary *custom;
 /**
 Whether to stack the values of each series on top of each other. Possible values are `undefined` to disable, `"normal"` to stack by value or `"percent"`. When stacking is enabled, data must be sorted in ascending X order. A special stacking option is with the streamgraph series type, where the stacking option is set to `"stream"`. The second one is `"overlap"`, which only applies to waterfall series.
 
@@ -364,7 +376,7 @@ Whether to stack the values of each series on top of each other. Possible values
 /**
 Enable or disable the initial animation when a series is displayed. The animation can also be set as a configuration object. Please note that this option only applies to the initial animation of the series itself. For other animations, see `chart.animation` and the animation parameter under the API methods. The following properties are supported: - `duration`: The duration of the animation in milliseconds. - `easing`: Can be a string reference to an easing function set on  the `Math` object or a function. See the _Custom easing function_  demo below. Due to poor performance, animation is disabled in old IE browsers for several chart types.
 
-**Defaults to** `true`.
+**Defaults to** `True`.
 
 **Try it**
 
@@ -545,7 +557,7 @@ The `id` of another series to link to. Additionally, the value can be ":previous
 /**
 Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn't triggered until the mouse moves over another series, or out of the plot area. When false, the `mouseOut` event on a series is triggered when the mouse leaves the area around the series' graph or markers. This also implies the tooltip when not shared. When `stickyTracking` is false and `tooltip.shared` is false, the tooltip will be hidden when moving the mouse between series. Defaults to true for line and area type series, but to false for columns, pies etc. **Note:** The boost module will force this option because of technical limitations.
 
-**Defaults to** `true`.
+**Defaults to** `True`.
 
 **Try it**
 

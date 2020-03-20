@@ -28,8 +28,6 @@ Decides in what dimensions the user can pan the chart. Can be one of `x`, `y`, o
 @property(nonatomic, readwrite) NSString *type;
 /**
 Enable or disable chart panning.
-
-**Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 

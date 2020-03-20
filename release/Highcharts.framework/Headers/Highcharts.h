@@ -14,9 +14,6 @@ FOUNDATION_EXPORT double HighchartsVersionNumber;
 //! Project version string for Highcharts.
 FOUNDATION_EXPORT const unsigned char HighchartsVersionString[];
 
-
-#import <Highcharts/HIGChartView.h>
-
 #import <Highcharts/HIChartView.h>
 
 #import <Highcharts/UIColor+HIG.h>

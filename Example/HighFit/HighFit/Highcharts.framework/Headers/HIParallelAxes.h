@@ -143,8 +143,6 @@ The pixel width of the major tick marks.
 /**
 Whether to display the axis on the opposite side of the normal. The normal is on the left side for vertical axes and bottom for horizontal, so the opposite sides will be right and top respectively. This is typically used with dual or multiple axes.
 
-**Defaults to** `false`.
-
 **Try it**
 
 * [Secondary Y axis opposite](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/opposite/)
@@ -152,8 +150,6 @@ Whether to display the axis on the opposite side of the normal. The normal is on
 @property(nonatomic, readwrite) NSNumber /* Bool */ *opposite;
 /**
 Whether to reverse the axis so that the highest number is closest to the origin.
-
-**Defaults to** `false`.
 
 **Try it**
 
@@ -173,7 +169,7 @@ Parallel coordinates only. Format that will be used for point.y and available in
 /**
 Whether to show the last tick label. Defaults to `true` on cartesian charts, and `false` on polar charts.
 
-**Defaults to** `true`.
+**Defaults to** `True`.
 
 **Try it**
 

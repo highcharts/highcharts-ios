@@ -7,8 +7,8 @@
 */
 
 #import "HIAccessibility.h"
-#import "HIDataLabels.h"
 #import "HIDragDrop.h"
+#import "HIDataLabels.h"
 #import "HIEvents.h"
 #import "HIMarker.h"
 #import "HITargetOptions.h"
@@ -281,9 +281,9 @@ The y value of the point.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-A description of the point to add to the screen reader information about the point.
+A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color by is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
 */
-@property(nonatomic, readwrite) NSString *definition;
+@property(nonatomic, readwrite) NSNumber *colorIndex;
 /**
 The name of the point as shown in the legend, tooltip, dataLabels, etc.
 
@@ -311,13 +311,13 @@ Accessibility options for a data point.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
-Individual data label for each point. The options are the same as the ones for `plotOptions.series.dataLabels`.
+A reserved subspace to store options and values for customized functionality. Here you can add additional data for your own event callbacks and formatter callbacks.
 
 **Try it**
 
-* [Show a label for the last value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/datalabels/)
+* [Point and series with custom data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/custom/)
 */
-@property(nonatomic, readwrite) HIDataLabels *dataLabels;
+@property(nonatomic, readwrite) NSDictionary *custom;
 /**
 An additional, individual class name for the data point's graphic representation.
 */
@@ -347,13 +347,21 @@ The `id` of a series in the `drilldown.series` array to use for a drilldown for 
 */
 @property(nonatomic, readwrite) NSString *drilldown;
 /**
+Individual data label for each point. The options are the same as the ones for `plotOptions.series.dataLabels`.
+
+**Try it**
+
+* [Show a label for the last value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/datalabels/)
+*/
+@property(nonatomic, readwrite) HIDataLabels *dataLabels;
+/**
 The individual point events.
 */
 @property(nonatomic, readwrite) HIEvents *events;
 /**
-A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color by is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
+A description of the point to add to the screen reader information about the point.
 */
-@property(nonatomic, readwrite) NSNumber *colorIndex;
+@property(nonatomic, readwrite) NSString *definition;
 /**
 The sequential index of the data point in the legend.
 */
@@ -408,6 +416,16 @@ The width of the border surrounding the column or bar. In styled mode, the strok
 * [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
+/**
+Color of the line that connects the dumbbell point's values. By default it is the series' color.
+*/
+@property(nonatomic, readwrite) NSString *connectorColor;
+/**
+Pixel width of the line that connects the dumbbell point's values.
+
+**Defaults to** `1`.
+*/
+@property(nonatomic, readwrite) NSNumber *connectorWidth;
 /**
 Whether to display a slice offset from the center.
 
@@ -494,6 +512,12 @@ Whether the link goes out of the system.
 The size value for each bubble. The bubbles' diameters are computed based on the `z`, and controlled by series options like `minSize`, `maxSize`, `sizeBy`, `zMin` and `zMax`.
 */
 @property(nonatomic, readwrite) NSNumber *z;
+/**
+Color of the start markers in a dumbbell graph.
+
+**Defaults to** `#333333`.
+*/
+@property(nonatomic, readwrite) HIColor *lowColor;
 /**
 The ending X value of the range point.
 

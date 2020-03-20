@@ -12,7 +12,7 @@
 
 
 /**
-An array of objects defining plot bands on the Y axis.
+An array of colored bands stretching across the plot area marking an interval on the axis. In styled mode, the plot bands are styled by the `.highcharts-plot-band` class in addition to the `className` option.
 */
 @interface HIPlotBands: HIChartsJSONSerializable
 

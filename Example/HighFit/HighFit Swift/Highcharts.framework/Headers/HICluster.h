@@ -9,10 +9,10 @@
 #import "HIStates.h"
 #import "HIZones.h"
 #import "HILayoutAlgorithm.h"
+#import "HIDataLabels.h"
 #import "HIMarker.h"
 #import "HIEvents.h"
 #import "HIAnimationOptionsObject.h"
-#import "HIDataLabels.h"
 
 
 /**

@@ -22,7 +22,7 @@ Options for the tooltip that appears when the user hovers over a series or point
 /**
 Whether the tooltip should update as the finger moves on a touch device. If this is `true` and `chart.panning` is set,`followTouchMove` will take over one-finger touches, so the user needs to use two fingers for zooming and panning. Note the difference to `followPointer` that only defines the _position_ of the tooltip. If `followPointer` is false in for example a column series, the tooltip will show above or below the column, but as `followTouchMove` is true, the tooltip will jump from column to column as the user swipes across the plot area.
 
-**Defaults to** `true`.
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *followTouchMove;
 /**
@@ -83,6 +83,14 @@ A callback function to place the tooltip in a default position. The callback rec
 * [A fixed tooltip position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/positioner/)
 */
 @property(nonatomic, readwrite) HIFunction *positioner;
+/**
+Prevents the tooltip from switching or closing, when touched or pointed.
+
+**Try it**
+
+* [Tooltip sticks on pointer contact](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/stickoncontact/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *stickOnContact;
 /**
 Use HTML to render the contents of the tooltip instead of SVG. Using HTML allows advanced formatting like tables and images in the tooltip. It is also recommended for rtl languages as it works around rtl bugs in early Firefox.
 
@@ -146,8 +154,6 @@ Enable or disable animation of the tooltip.
 /**
 Split the tooltip into one label per series, with the header close to the axis. This is recommended over `shared` tooltips for charts with multiple line series, generally making them easier to read. This option takes precedence over `tooltip.shared`.
 
-**Defaults to** `false`.
-
 **Try it**
 
 * [Split tooltip](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/split/)
@@ -189,7 +195,7 @@ When the tooltip is shared, the entire plot area will capture mouse movement or 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *shared;
 /**
-Callback function to format the text of the tooltip from scratch. In case of single or `shared` tooltips, a string should be returned. In case of `split` tooltips, it should return an array where the first item is the header, and subsequent items are mapped to the points. Return `false` to disable tooltip for a specific point on series. A subset of HTML is supported. Unless `useHTML` is true, the HTML of the tooltip is parsed and converted to SVG, therefore this isn't a complete HTML renderer. The following HTML tags are supported: `b`, `br`, `em`, `i`, `span`, `strong`. Spans can be styled with a `style` attribute, but only text-related CSS, that is shared with SVG, is handled. The available data in the formatter differ a bit depending on whether the tooltip is shared or split, or belongs to a single point. In a shared/split tooltip, all properties except `x`, which is common for all points, are kept in an array, `this.points`. Available data are: - **this.percentage (not shared) **  **this.points[i].percentage (shared)**:  Stacked series and pies only. The point's percentage of the total. - **this.point (not shared) / this.points[i].point (shared)**:  The point object. The point name, if defined, is available through  `this.point.name`. - **this.points**:  In a shared tooltip, this is an array containing all other  properties for each point. - **this.series (not shared) / this.points[i].series (shared)**:  The series object. The series name is available through  `this.series.name`. - **this.total (not shared) / this.points[i].total (shared)**:  Stacked series only. The total value at this point's x value. - **this.x**:  The x value. This property is the same regardless of the tooltip  being shared or not. - **this.y (not shared) / this.points[i].y (shared)**:  The y value.
+Callback function to format the text of the tooltip from scratch. In case of single or `shared` tooltips, a string should be returned. In case of `split` tooltips, it should return an array where the first item is the header, and subsequent items are mapped to the points. Return `false` to disable tooltip for a specific point on series. A subset of HTML is supported. Unless `useHTML` is true, the HTML of the tooltip is parsed and converted to SVG, therefore this isn't a complete HTML renderer. The following HTML tags are supported: `b`, `br`, `em`, `i`, `span`, `strong`. Spans can be styled with a `style` attribute, but only text-related CSS, that is shared with SVG, is handled. The available data in the formatter differ a bit depending on whether the tooltip is shared or split, or belongs to a single point. In a shared/split tooltip, all properties except `x`, which is common for all points, are kept in an array, `this.points`. Available data are: - **this.percentage (not shared) / **this.points[i].percentage (shared)**:  Stacked series and pies only. The point's percentage of the total. - **this.point (not shared) / this.points[i].point (shared)**:  The point object. The point name, if defined, is available through  `this.point.name`. - **this.points**:  In a shared tooltip, this is an array containing all other  properties for each point. - **this.series (not shared) / this.points[i].series (shared)**:  The series object. The series name is available through  `this.series.name`. - **this.total (not shared) / this.points[i].total (shared)**:  Stacked series only. The total value at this point's x value. - **this.x**:  The x value. This property is the same regardless of the tooltip  being shared or not. - **this.y (not shared) / this.points[i].y (shared)**:  The y value.
 
 **Try it**
 
@@ -281,8 +287,6 @@ The pixel width of the tooltip border. In styled mode, the stroke width is set i
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Whether the tooltip should follow the mouse as it moves across columns, pie slices and other point types with an extent. By default it behaves this way for pie, polygon, map, sankey and wordcloud series by override in the `plotOptions` for those series types. For touch moves to behave the same way, `followTouchMove` must be `true` also.
-
-**Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *followPointer;
 /**

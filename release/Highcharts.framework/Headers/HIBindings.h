@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIStockToolsBindingsObject.h"
+#import "HINavigationBindingsOptionsObject.h"
 
 
 /**
@@ -21,15 +21,15 @@ Bindings definitions for custom HTML buttons. Each binding implements simple eve
 /**
 A rectangle annotation bindings. Includes `start` and one event in `steps` array.
 */
-@property(nonatomic, readwrite) HIStockToolsBindingsObject *rectangleAnnotation;
+@property(nonatomic, readwrite) HINavigationBindingsOptionsObject *rectangleAnnotation;
 /**
 A label annotation bindings. Includes `start` event only.
 */
-@property(nonatomic, readwrite) HIStockToolsBindingsObject *labelAnnotation;
+@property(nonatomic, readwrite) HINavigationBindingsOptionsObject *labelAnnotation;
 /**
 A circle annotation bindings. Includes `start` and one event in `steps` array.
 */
-@property(nonatomic, readwrite) HIStockToolsBindingsObject *circleAnnotation;
+@property(nonatomic, readwrite) HINavigationBindingsOptionsObject *circleAnnotation;
 
 -(NSDictionary *)getParams;
 
