@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -41,16 +41,6 @@
 @interface HITilemap: HISeries
 
 /**
-The row size - how many Y axis units each tilemap row should span. Analogous to `colsize`.
-
-**Defaults to** `1`.
-
-**Try it**
-
-* [1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/heatmap/)
-*/
-@property(nonatomic, readwrite) NSNumber *rowsize;
-/**
 The padding between points in the tilemap.
 
 **Defaults to** `0`.
@@ -61,15 +51,6 @@ The padding between points in the tilemap.
 */
 @property(nonatomic, readwrite) NSNumber *pointPadding;
 /**
-The shape of the tiles in the tilemap. Possible values are `hexagon`, `circle`, `diamond`, and `square`.
-
-**Try it**
-
-* [Circular tile shapes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/circlemap-africa)
-* [Diamond tile shapes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/diamondmap)
-*/
-@property(nonatomic, readwrite) NSString *tileShape;
-/**
 The column size - how many X axis units each column in the tilemap should span. Works as in `Heatmaps`.
 
 **Defaults to** `1`.
@@ -79,6 +60,25 @@ The column size - how many X axis units each column in the tilemap should span. 
 * [One day](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/heatmap/)
 */
 @property(nonatomic, readwrite) NSNumber *colsize;
+/**
+The row size - how many Y axis units each tilemap row should span. Analogous to `colsize`.
+
+**Defaults to** `1`.
+
+**Try it**
+
+* [1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/heatmap/)
+*/
+@property(nonatomic, readwrite) NSNumber *rowsize;
+/**
+The shape of the tiles in the tilemap. Possible values are `hexagon`, `circle`, `diamond`, and `square`.
+
+**Try it**
+
+* [Circular tile shapes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/circlemap-africa)
+* [Diamond tile shapes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/diamondmap)
+*/
+@property(nonatomic, readwrite) NSString *tileShape;
 /**
 The color applied to null points. In styled mode, a general CSS class is applied instead.
 */

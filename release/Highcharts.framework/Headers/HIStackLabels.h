@@ -1,11 +1,12 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIColor.h"
 #import "HIFunction.h"
 #import "HICSSObject.h"
 
@@ -23,6 +24,14 @@ Allow the stack labels to overlap.
 * [Default false](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-allowoverlap-false/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowOverlap;
+/**
+The border color for the stack label. Defaults to `undefined`.
+
+**Try it**
+
+* [Stack labels box options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-box/)
+*/
+@property(nonatomic, readwrite) HIColor *borderColor;
 /**
 CSS styles for the label. In styled mode, the styles are set in the `.highcharts-stack-label` class.
 
@@ -47,6 +56,16 @@ A format string for the data label. Available variables are the same as for `for
 **Defaults to** `{total}`.
 */
 @property(nonatomic, readwrite) NSString *format;
+/**
+The border radius in pixels for the stack label.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [Stack labels box options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-box/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
 Defines the horizontal alignment of the stack total label. Can be one of `"left"`, `"center"` or `"right"`. The default value is calculated at runtime and depends on orientation and whether the stack is positive or negative.
 
@@ -78,6 +97,24 @@ The text alignment for the label. While `align` determines where the texts ancho
 * [Label in center position but text-aligned left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-textalign-left/)
 */
 @property(nonatomic, readwrite) NSString *textAlign;
+/**
+The border width in pixels for the stack label.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [Stack labels box options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-box/)
+*/
+@property(nonatomic, readwrite) NSNumber *borderWidth;
+/**
+The background color or gradient for the stack label.
+
+**Try it**
+
+* [Stack labels box options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-box/)
+*/
+@property(nonatomic, readwrite) HIColor *backgroundColor;
 /**
 The y position offset of the label relative to the tick position on the axis. The default value is calculated at runtime and depends on orientation and whether the stack is positive or negative.
 

@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -20,6 +20,54 @@ The hover state for a single point marker.
 @property(nonatomic, readwrite) NSString *borderColor;
 @property(nonatomic, readwrite) NSNumber *opacity;
 /**
+Set the marker's fixed width on hover state.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [70px fixed marker's width and height on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-width)
+*/
+@property(nonatomic, readwrite) NSNumber *width;
+/**
+The number of pixels to increase the height of the selected point.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [20px greater width and height on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-widthplus)
+*/
+@property(nonatomic, readwrite) NSNumber *heightPlus;
+/**
+The additional line width for a hovered point.
+
+**Try it**
+
+* [5 pixels wider lineWidth on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-linewidthplus)
+*/
+@property(nonatomic, readwrite) NSNumber *lineWidthPlus;
+/**
+The number of pixels to increase the width of the selected point.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [20px greater width and height on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-widthplus)
+*/
+@property(nonatomic, readwrite) NSNumber *widthPlus;
+/**
+Set the marker's fixed height on hover state.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [70px fixed marker's width and height on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-width)
+*/
+@property(nonatomic, readwrite) NSNumber *height;
+/**
 Enable or disable the point marker.
 
 **Try it**
@@ -27,14 +75,6 @@ Enable or disable the point marker.
 * [Disabled hover state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-enabled/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
-/**
-The additional line width for a hovered point.
-
-**Try it**
-
-* [2 pixels wider on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-states-hover-linewidthplus/)
-*/
-@property(nonatomic, readwrite) NSNumber *lineWidthPlus;
 /**
 The radius of the point marker. In hover state, it defaults to the normal state's radius + 2 as per the `radiusPlus` option.
 

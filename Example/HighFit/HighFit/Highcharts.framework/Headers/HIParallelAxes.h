@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -86,7 +86,7 @@ The minimum value of the axis. If `null` the min value is automatically calculat
 */
 @property(nonatomic, readwrite) NSNumber *min;
 /**
-Whether to force the axis to end on a tick. Use this option with the `maxPadding` option to control the axis end.
+Whether to force the axis to end on a tick. Use this option with the `maxPadding` option to control the axis end. This option is always disabled, when panning type is either `y` or `xy`.
 
 **Try it**
 
@@ -177,7 +177,7 @@ Whether to show the last tick label. Defaults to `true` on cartesian charts, and
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showLastLabel;
 /**
-Whether to force the axis to start on a tick. Use this option with the `maxPadding` option to control the axis start.
+Whether to force the axis to start on a tick. Use this option with the `maxPadding` option to control the axis start. This option is always disabled, when panning type is either `y` or `xy`.
 
 **Try it**
 

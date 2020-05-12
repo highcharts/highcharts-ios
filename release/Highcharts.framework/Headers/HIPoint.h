@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -7,6 +7,7 @@
 */
 
 #import "HIEvents.h"
+#import "HIFunction.h"
 #import "HIAnimationOptionsObject.h"
 
 
@@ -36,6 +37,30 @@ This number defines which yAxis the point is connected to. It refers to either t
 Format to use for describing the values of data points to assistive technology - including screen readers. The point context is available as `{point}`. Additionally, the series name, annotation info, and description added in `point.accessibility.description` is added by default if relevant. To override this, use the `accessibility.point.descriptionFormatter` option.
 */
 @property(nonatomic, readwrite) NSString *valueDescriptionFormat;
+/**
+Suffix to add to the values in the point descriptions. Uses `tooltip.valueSuffix` if not defined.
+*/
+@property(nonatomic, readwrite) NSString *valueSuffix;
+/**
+Date format to use for points on datetime axes when describing them to screen reader users. Defaults to the same format as in tooltip. For an overview of the replacement codes, see `dateFormat`.
+*/
+@property(nonatomic, readwrite) NSString *dateFormat;
+/**
+Formatter function to determine the date/time format used with points on datetime axes when describing them to screen reader users. Receives one argument, `point`, referring to the point to describe. Should return a date format string compatible with `dateFormat`.
+*/
+@property(nonatomic, readwrite) HIFunction *dateFormatter;
+/**
+Prefix to add to the values in the point descriptions. Uses `tooltip.valuePrefix` if not defined.
+*/
+@property(nonatomic, readwrite) NSString *valuePrefix;
+/**
+Formatter function to use instead of the default for point descriptions. Receives one argument, `point`, referring to the point to describe. Should return a string with the description of the point for a screen reader user. If `false` is returned, the default formatter will be used for that point. Note: Prefer using `accessibility.point.valueDescriptionFormat` instead if possible, as default functionality such as describing annotations will be preserved.
+*/
+@property(nonatomic, readwrite) HIFunction *descriptionFormatter;
+/**
+Decimals to use for the values in the point descriptions. Uses `tooltip.valueDecimals` if not defined.
+*/
+@property(nonatomic, readwrite) NSNumber *valueDecimals;
 
 -(NSDictionary *)getParams;
 

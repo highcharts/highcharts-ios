@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -253,10 +253,6 @@ A URL to a remote JSON dataset, structured as a column array. Will be fetched wh
 */
 @property(nonatomic, readwrite) NSString *columnsURL;
 /**
-The `high` value for each data point, signifying the highest value in the sample set. The top whisker is drawn here.
-*/
-@property(nonatomic, readwrite) NSNumber *high;
-/**
 The lower quartile for each data point. This is the bottom of the box.
 */
 @property(nonatomic, readwrite) NSNumber *q1;
@@ -269,9 +265,57 @@ The median for each data point. This is drawn as a line through the middle area 
 */
 @property(nonatomic, readwrite) NSNumber *median;
 /**
+The `high` value for each data point, signifying the highest value in the sample set. The top whisker is drawn here.
+*/
+@property(nonatomic, readwrite) NSNumber *high;
+/**
+The dash style of the stem.
+
+**Defaults to** `Solid`.
+
+**Try it**
+
+* [Box plot styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/box-plot-styling/)
+* [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
+*/
+@property(nonatomic, readwrite) NSString *stemDashStyle;
+/**
+The dash style of the whiskers.
+
+**Defaults to** `Solid`.
+
+**Try it**
+
+* [Box plot styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/box-plot-styling/)
+* [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
+*/
+@property(nonatomic, readwrite) NSString *whiskerDashStyle;
+/**
 The `low` value for each data point, signifying the lowest value in the sample set. The bottom whisker is drawn here.
 */
 @property(nonatomic, readwrite) NSNumber *low;
+/**
+The dash style of the median.
+
+**Defaults to** `Solid`.
+
+**Try it**
+
+* [Box plot styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/box-plot-styling/)
+* [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
+*/
+@property(nonatomic, readwrite) NSString *medianDashStyle;
+/**
+The dash style of the box.
+
+**Defaults to** `Solid`.
+
+**Try it**
+
+* [Box plot styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/box-plot-styling/)
+* [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
+*/
+@property(nonatomic, readwrite) NSString *boxDashStyle;
 /**
 The rank for this point's data label in case of collision. If two data labels are about to overlap, only the one with the highest `labelrank` will be drawn.
 */

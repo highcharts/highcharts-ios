@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -24,6 +24,10 @@ Decides in what dimensions the user can pan the chart. Can be one of `x`, `y`, o
 **Accepted values:** `["x", "y", "xy"]`.
 
 **Defaults to** `x`.
+
+**Try it**
+
+* [Zooming and xy panning](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/panning-type)
 */
 @property(nonatomic, readwrite) NSString *type;
 /**

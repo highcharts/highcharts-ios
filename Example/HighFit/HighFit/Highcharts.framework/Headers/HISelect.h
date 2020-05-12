@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -58,6 +58,46 @@ The color of the point marker's outline. When `undefined`, the series' or point'
 * [Red line color for selected points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-select-linecolor/)
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
+/**
+Set the marker's fixed width on select state.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [70px fixed marker's width and height on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-width)
+*/
+@property(nonatomic, readwrite) NSNumber *width;
+/**
+The number of pixels to increase the height of the hovered point.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [One day](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-widthplus)
+*/
+@property(nonatomic, readwrite) NSNumber *heightPlus;
+/**
+The number of pixels to increase the width of the hovered point.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [One day](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-widthplus)
+*/
+@property(nonatomic, readwrite) NSNumber *widthPlus;
+/**
+Set the marker's fixed height on select state.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [70px fixed marker's width and height on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/plotoptions/heatmap-marker-states-hover-width)
+*/
+@property(nonatomic, readwrite) NSNumber *height;
 /**
 A specific border color for the selected point.
 

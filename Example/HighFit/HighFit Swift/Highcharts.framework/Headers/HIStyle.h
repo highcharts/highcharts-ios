@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -18,6 +18,7 @@ CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of cate
 */
 @interface HIStyle: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) NSString *transition;
 @property(nonatomic, readwrite) NSString *fontWeight;
 @property(nonatomic, readwrite) NSString *fontSize;
 @property(nonatomic, readwrite) NSString *textOutline;

@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2018 Highsoft AS
+* (c) 2009-2020 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -7,6 +7,7 @@
 */
 
 #import "HIAccessibility.h"
+#import "HIExportData.h"
 #import "HINavigation.h"
 
 
@@ -33,6 +34,10 @@ Exporting module only. The text for the PNG download menu item.
 Configure the accessibility strings in the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility). For more dynamic control over the accessibility functionality, see `accessibility.pointDescriptionFormatter`, `accessibility.seriesDescriptionFormatter`, and `accessibility.screenReaderSectionFormatter`.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
+/**
+The text for exported table.
+*/
+@property(nonatomic, readwrite) HIExportData *exportData;
 /**
 Short week days, starting Sunday. If not specified, Highcharts uses the first three letters of the `lang.weekdays` option.
 
