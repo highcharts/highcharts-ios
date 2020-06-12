@@ -63,9 +63,7 @@ Sets an ID for an annotation. Can be user later when removing an annotation in `
 */
 @property(nonatomic, readwrite) NSString *id;
 /**
-Allow an annotation to be draggable by a user. Possible values are `"x"`, `"xy"`, `"y"` and `""` (disabled).
-
-**Accepted values:** `["x", "xy", "y", ""]`.
+Allow an annotation to be draggable by a user. Possible values are `'x'`, `'xy'`, `'y'` and `''` (disabled).
 
 **Try it**
 

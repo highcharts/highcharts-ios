@@ -117,7 +117,7 @@ A [format](https://www.highcharts.com/docs/chart-concepts/labels-and-string-form
 */
 @property(nonatomic, readwrite) NSString *format;
 /**
-When either the borderWidth or the backgroundColor is set, this  is the padding within the box.
+When either the borderWidth or the backgroundColor is set, this is the padding within the box.
 
 **Try it**
 

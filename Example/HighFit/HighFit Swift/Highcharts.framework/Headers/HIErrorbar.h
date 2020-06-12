@@ -195,6 +195,14 @@ A series specific or series type specific color set to apply instead of the glob
 */
 @property(nonatomic, readwrite) HIColor *edgeColor;
 /**
+When `true`, the columns will center in the category, ignoring null or missing points. When `false`, space will be reserved for null or missing points.
+
+**Try it**
+
+* [Center in category](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-column/centerincategory/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *centerInCategory;
+/**
 The maximum allowed pixel width for a column, translated to the height of a bar in a bar chart. This prevents the columns from becoming too wide when there is a small number of points in the chart.
 
 **Try it**

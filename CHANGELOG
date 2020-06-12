@@ -1,3 +1,43 @@
+# Version 8.1.1
+
+## Framework:
+
+1. Added new option, `plotOptions.column.centerInCategory`. It centers columns within each category group, but avoiding gaps for `null` or missing points.
+2. Added deprecation error handling.
+3. Added support for selecting and dragging `parentNode` in the packed bubble series. See #11782.
+
+## Framework bug fixes:
+
+1. Fixed #13559, no JavaScript execution should be allowed from chart configuration strings, except from callbacks like event handlers and formatters. This prevents JavaScript from being injected from forms and other inputs relaying directly to text properties in the chart config.
+2. Fixed #13541, `chart.update` with `oneToOne` failed when removing and adding series, if all series had explicit id's.
+3. Fixed issue with JS errors and malfunction on drill-up button on touch devices when the accessibility module was loaded.
+4. Fixed #12804, in sunburst charts, the drill-up button was visible after drilling up to the top level.
+5. Fixed #13554, a11y not supporting proximate legend layout.
+6. Fixed #13534, dragging points caused an error on iOS.
+7. Fixed #13369, edge case where ticks were different after changing series visibility.
+8. Fixed #13293, added the X value in exported data table if the point had defined name and `xAxis` was not a category type.
+9. Fixed #13590, CSS classes not being removed correctly, causing unwanted behaviour in pie chart hovering and unhovering.
+10. Fixed #13309, PDF exports always having landscape orientation when using the `offline-exporting` module.
+11. Fixed #13574, packed bubble size changed when other series were added.
+12. Fixed #13372, drilldown in horizontal item series was not allowed.
+13. Fixed #13420, adding annotation was not working on iOS devices.
+14. Fixed #13202, the lollipop series didn't work with all data formats.
+15. Fixed #13371, unable to display data labels in item series without setting series size.
+16. Fixed #12077, histogram long decimals crashed browsers.
+17. Fixed #13342, tooltip tracking was broken after height update.
+18. Fixed #13379, item series with no data threw an error.
+19. Fixed #12569, point hover state was lost when axis updated.
+20. Fixed #11501, 3D pie was not correctly exported to PDF with offline export.
+21. Fixed #13071, unnecessary network request in IE11.
+22. Fixed #13489, `Chart.print()` was not working correctly with `highcharts-more.js` (specifically network graphs) included.
+23. Fixed #13482, unable to disable markers in styled mode with a11y.
+24. Fixed #13463, closing export menu using ESC key should not move focus.
+25. Fixed #11750, `series.opacity` option was not respected when creating or updating series.
+26. Fixed #13308, empty space appeared on top and bottom of sankey chart when using the `minLinkWidth` option.
+27. Fixed #13375, events were not added to dynamically created plot bands and lines.
+28. Fixed #13421, animation was fired when zooming boosted series.
+29. Fixed #13353, item series - when rendered in a full circle, points overlapped.
+
 # Version 8.1.0
 
 ## iOS:

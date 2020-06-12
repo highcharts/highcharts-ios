@@ -112,6 +112,14 @@ The color of the border surrounding each column or bar. In styled mode, the bord
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+When `true`, the columns will center in the category, ignoring null or missing points. When `false`, space will be reserved for null or missing points.
+
+**Try it**
+
+* [Center in category](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-column/centerincategory/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *centerInCategory;
+/**
 A collection of options for the individual nodes. The nodes in a sankey diagram are auto-generated instances of `Highcharts.Point`, but options can be applied here and linked by the `id`.
 
 **Try it**

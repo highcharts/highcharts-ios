@@ -120,6 +120,14 @@ The color of the border surrounding each column or bar. In styled mode, the bord
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+When `true`, the columns will center in the category, ignoring null or missing points. When `false`, space will be reserved for null or missing points.
+
+**Try it**
+
+* [Center in category](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-column/centerincategory/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *centerInCategory;
+/**
 3D columns only. The width of the colored edges.
 
 **Defaults to** `1`.

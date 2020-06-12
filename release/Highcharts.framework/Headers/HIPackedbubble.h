@@ -8,6 +8,7 @@
 
 #import "HISeries.h"
 #import "HILayoutAlgorithm.h"
+#import "HIParentNode.h"
 
 
 /**
@@ -74,6 +75,10 @@ Maximum bubble size. Bubbles will automatically size between the `minSize` and `
 * [Bubble size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-size/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ maxSize;
+/**
+Series options for parent nodes.
+*/
+@property(nonatomic, readwrite) HIParentNode *parentNode;
 /**
 An option is giving a possibility to choose between using simulation for calculating bubble positions. These reflects in both animation and final position of bubbles. Simulation is also adding options to the series graph based on used layout. In case of big data sets, with any performance issues, it is possible to disable animation and pack bubble in a simple circular way.
 

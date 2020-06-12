@@ -58,12 +58,12 @@ Decides how the data label will be rotated relative to the perimeter of the sunb
 * [Circular rotation mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sunburst-datalabels-rotationmode-circular/)
 */
 @property(nonatomic, readwrite) NSString *rotationMode;
-@property(nonatomic, readwrite) NSNumber *y;
-@property(nonatomic, readwrite) NSString *align;
 @property(nonatomic, readwrite) NSString *verticalAlign;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *inside;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 @property(nonatomic, readwrite) NSString *format;
+@property(nonatomic, readwrite) NSString *align;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *inside;
+@property(nonatomic, readwrite) NSString *y;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
 /**
 Callback to format data labels for _nodes_ in the sankey diagram. The `nodeFormat` option takes precedence over the `nodeFormatter`.
@@ -257,17 +257,7 @@ Y offset of the lower data labels relative to the point value.
 */
 @property(nonatomic, readwrite) NSNumber *yLow;
 @property(nonatomic, readwrite) NSString *parentNodeFormat;
-/**
-Options for a _parentNode_ label text. **Note:** Only SVG-based renderer supports this option.
-
-**Try it**
-
-* [Dashboard with dataLabels on parentNodes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-packedbubble/packed-dashboard)
-*/
 @property(nonatomic, readwrite) HIParentNodeTextPath *parentNodeTextPath;
-/**
-Callback to format data labels for _parentNodes_. The `parentNodeFormat` option takes precedence over the `parentNodeFormatter`.
-*/
 @property(nonatomic, readwrite) HIFunction *parentNodeFormatter;
 /**
 Presentation attributes for the text path.

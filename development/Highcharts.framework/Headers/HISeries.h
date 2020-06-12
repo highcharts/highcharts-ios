@@ -107,9 +107,7 @@ This option allows grouping series in a stacked chart. The stack option can be a
 <a href="http://jsfiddle.net/gh/get/jquery/3.1.1/highcharts/highcharts/tree/master/samples/highcharts/series/stack/" target="_blank">Stacked and grouped columns</a>*/
 @property(nonatomic, readwrite) NSString *stack;
 /**
-The type of series. Can be one of area, areaspline,
- bar, column, line, pie,
- scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
+The type of series. Can be one of area, areaspline, bar, column, line, pie, scatter or spline. From version 2.3, arearange, areasplinerange and columnrange are supported with the highcharts-more.js component.
 
 **Accepted values:** `[null, "line", "spline", "column", "area", "areaspline", "pie", "arearange", "areasplinerange", "boxplot", "bubble", "columnrange", "errorbar", "funnel", "gauge", "scatter", "waterfall"]`.
 
@@ -357,7 +355,7 @@ A reserved subspace to store options and values for customized functionality. He
 */
 @property(nonatomic, readwrite) NSDictionary *custom;
 /**
-Whether to stack the values of each series on top of each other. Possible values are `undefined` to disable, `"normal"` to stack by value or `"percent"`. When stacking is enabled, data must be sorted in ascending X order. A special stacking option is with the streamgraph series type, where the stacking option is set to `"stream"`. The second one is `"overlap"`, which only applies to waterfall series.
+Whether to stack the values of each series on top of each other. Possible values are `undefined` to disable, `"normal"` to stack by value or `"percent"`. When stacking is enabled, data must be sorted in ascending X order. Some stacking options are related to specific series types. In the streamgraph series type, the stacking option is set to `"stream"`. The second one is `"overlap"`, which only applies to waterfall series.
 
 **Accepted values:** `["normal", "overlap", "percent", "stream"]`.
 
