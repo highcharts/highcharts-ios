@@ -63,7 +63,10 @@ Decides how the data label will be rotated relative to the perimeter of the sunb
 @property(nonatomic, readwrite) NSString *align;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inside;
-@property(nonatomic, readwrite) NSString *y;
+/**
+The y position offset of the label relative to the point in pixels.
+*/
+@property(nonatomic, readwrite) NSNumber *y;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
 /**
 Callback to format data labels for _nodes_ in the sankey diagram. The `nodeFormat` option takes precedence over the `nodeFormatter`.
