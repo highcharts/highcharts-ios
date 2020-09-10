@@ -13,12 +13,10 @@
 #import "HITitle.h"
 #import "HIAccessibility.h"
 #import "HIBreaks.h"
-#import "HIDateTimeLabelFormats.h"
 #import "HIEvents.h"
 #import "HICrosshair.h"
 #import "HIColor.h"
 #import "HIFunction.h"
-#import "HIGradientColorStopObject.h"
 
 
 /**
@@ -82,7 +80,7 @@ Solid gauge series only. Color stops for the solid gauge. Use this in cases wher
 
 * [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-solid/)
 */
-@property(nonatomic, readwrite) NSArray<HIGradientColorStopObject *> *stops;
+@property(nonatomic, readwrite) NSArray *stops;
 /**
 Whether to force the axis to end on a tick. Use this option with the `maxPadding` option to control the axis end. This option is always disabled, when panning type is either `y` or `xy`.
 
@@ -520,14 +518,6 @@ An array defining breaks in the axis, the sections defined will be left out and 
 * [Advanced with callback](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/axisbreak/break-visualized/)
 */
 @property(nonatomic, readwrite) NSArray <HIBreaks *> *breaks;
-/**
-For a datetime axis, the scale will automatically adjust to the appropriate unit. This member gives the default string representations used for each unit. For intermediate values, different units may be used, for example the `day` unit can be used on midnight and `hour` unit be used for intermediate values on the same axis. For an overview of the replacement codes, see `dateFormat`. Defaults to: ```js {   millisecond: '%H:%M:%S.%L',   second: '%H:%M:%S',   minute: '%H:%M',   hour: '%H:%M',   day: '%e. %b',   week: '%e. %b',   month: '%b \'%y',   year: '%Y' } ```
-
-**Try it**
-
-* [Different day format on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/datetimelabelformats/)
-*/
-@property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**
 Enable or disable minor ticks. Unless `minorTickInterval` is set, the tick interval is calculated as a fifth of the `tickInterval`. On a logarithmic axis, minor ticks are laid out based on a best guess, attempting to enter approximately 5 minor ticks between each major tick. Prior to v6.0.0, ticks were unabled in auto layout by setting `minorTickInterval` to `"auto"`.
 

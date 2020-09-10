@@ -7,7 +7,7 @@
  */
 
 @import UIKit;
-#import "HIChartsJSONSerializable.h"
+#import "HIPatternObject.h"
 
 /**
  *  This class provides color management in the chart.
@@ -48,6 +48,11 @@
  * Init with UIKit's UIColor
  */
 - (instancetype)initWithUIColor: (UIColor *) color;
+
+/**
+ * Pattern fill
+ */
+- (instancetype)initWithPattern: (HIPatternObject *) pattern;
 
 -(id)getData;
 

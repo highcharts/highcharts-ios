@@ -15,7 +15,7 @@ An object of key-value pairs for SVG attributes. Attributes in Highcharts elemen
 */
 @interface HISVGAttributes: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *d;
+@property(nonatomic, readwrite) NSArray /* <NSString, NSNumber> */ *d;
 @property(nonatomic, readwrite) HIColor *fill;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inverted;
 @property(nonatomic, readwrite) NSArray<NSNumber *> *matrix;

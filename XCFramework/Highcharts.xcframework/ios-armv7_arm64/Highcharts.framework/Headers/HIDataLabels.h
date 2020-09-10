@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIStyle.h"
+#import "HICSSObject.h"
 #import "HIFilter.h"
 #import "HITextPath.h"
 #import "HIParentNodeTextPath.h"
@@ -14,6 +14,7 @@
 #import "HISVGAttributes.h"
 #import "HIColor.h"
 #import "HIFunction.h"
+#import "HIAnimationOptionsObject.h"
 #import "HIShadowOptionsObject.h"
 
 
@@ -33,9 +34,11 @@ Whether to allow data labels to overlap. To make the labels less sensitive for o
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowOverlap;
 /**
-Whether to defer displaying the data labels until the initial series animation has finished.
+Whether to defer displaying the data labels until the initial series animation has finished. Setting to `false` renders the data label immediately. If set to `true` inherits the defer time set in `plotOptions.series.animation`.
 
-**Defaults to** `true`.
+**Try it**
+
+* [Set defer time](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/animation-defer)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *defer;
 /**
@@ -47,7 +50,7 @@ Styles for the label. The default `color` setting is `"contrast"`, which is a ps
 * [Long labels truncated with an ellipsis in a pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-overflow/)
 * [Long labels are wrapped in a pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-overflow-wrap/)
 */
-@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `auto`, `circular`, `parallel` and `perpendicular`. When `auto`, the best fit will be computed for the point. The `circular` option works similiar to `auto`, but uses the `textPath` feature - labels are curved, resulting in a better layout, however multiple lines and `textOutline` are not supported. The `series.rotation` option takes precedence over `rotationMode`.
 
@@ -101,12 +104,6 @@ The border radius in pixels for the data label.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
-How to handle data labels that flow outside the plot area. The default is `"justify"`, which aligns them inside the plot area. For columns and bars, this means it will be moved inside the bar. To display data labels outside the plot area, set `crop` to `false` and `overflow` to `"allow"`.
-
-**Defaults to** `justify`.
-*/
-@property(nonatomic, readwrite) NSString *overflow;
-/**
 The name of a symbol to use for the border around the label. Symbols are predefined functions on the Renderer object.
 
 **Defaults to** `square`.
@@ -117,15 +114,11 @@ The name of a symbol to use for the border around the label. Symbols are predefi
 */
 @property(nonatomic, readwrite) NSString *shape;
 /**
-Text rotation in degrees. Note that due to a more complex structure, backgrounds, borders and padding will be lost on a rotated data label.
+How to handle data labels that flow outside the plot area. The default is `"justify"`, which aligns them inside the plot area. For columns and bars, this means it will be moved inside the bar. To display data labels outside the plot area, set `crop` to `false` and `overflow` to `"allow"`.
 
-**Defaults to** `0`.
-
-**Try it**
-
-* [Vertical labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-rotation/)
+**Defaults to** `justify`.
 */
-@property(nonatomic, readwrite) NSNumber *rotation;
+@property(nonatomic, readwrite) NSString *overflow;
 /**
 The border color for the data label. Defaults to `undefined`.
 
@@ -157,6 +150,14 @@ The text color for the data labels. Defaults to `undefined`. For certain series 
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
+Enable or disable the initial animation when a series is displayed for the `dataLabels`. The animation can also be set as a configuration object. Please note that this option only applies to the initial animation. For other animations, see `chart.animation` and the animation parameter under the API methods. The following properties are supported: - `defer`: The animation delay time in milliseconds.
+
+**Try it**
+
+* [Animation defer settings](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/animation-defer/)
+*/
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+/**
 Format for points with the value of null. Works analogously to `format`. `nullFormat` can be applied only to series which support displaying null points.
 
 **Try it**
@@ -173,15 +174,6 @@ When either the `borderWidth` or the `backgroundColor` is set, this is the paddi
 */
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
-The x position offset of the label relative to the point in pixels.
-
-**Try it**
-
-* [Vertical and positioned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-rotation/)
-* [Data labels inside the bar](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bar-datalabels-align-inside-bar/)
-*/
-@property(nonatomic, readwrite) NSNumber *x;
-/**
 The shadow of the box. Works best with `borderWidth` or `backgroundColor`. Since 2.3 the shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
 
 **Defaults to** `false`.
@@ -191,6 +183,25 @@ The shadow of the box. Works best with `borderWidth` or `backgroundColor`. Since
 * [Data labels box options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-box/)
 */
 @property(nonatomic, readwrite) HIShadowOptionsObject *shadow;
+/**
+The x position offset of the label relative to the point in pixels.
+
+**Try it**
+
+* [Vertical and positioned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-rotation/)
+* [Data labels inside the bar](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bar-datalabels-align-inside-bar/)
+*/
+@property(nonatomic, readwrite) NSNumber *x;
+/**
+Text rotation in degrees. Note that due to a more complex structure, backgrounds, borders and padding will be lost on a rotated data label.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [Vertical labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-rotation/)
+*/
+@property(nonatomic, readwrite) NSNumber *rotation;
 /**
 A class name for the data label. Particularly in styled mode, this can be used to give each series' or point's data label unique styling. In addition to this option, a default color class name is added so that we can give the labels a contrast text shadow.
 

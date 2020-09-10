@@ -15,6 +15,10 @@ The text for exported table.
 @interface HIExportData: HIChartsJSONSerializable
 
 /**
+The annotation column title.
+*/
+@property(nonatomic, readwrite) NSString *annotationHeader;
+/**
 The category column title.
 */
 @property(nonatomic, readwrite) NSString *categoryHeader;

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v8.1.1 (2020-06-09)
+ * @license Highcharts JS v8.2.0 (2020-08-20)
  * @module highcharts/modules/histogram-bellcurve
  * @requires highcharts
  *
@@ -9,5 +9,5 @@
  * License: www.highcharts.com/license
  */
 'use strict';
-import '../../modules/histogram.src.js';
-import '../../modules/bellcurve.src.js';
+import '../../Series/HistogramSeries.js';
+import '../../Series/BellcurveSeries.js';

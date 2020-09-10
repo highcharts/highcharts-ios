@@ -35,9 +35,9 @@ Configure the accessibility strings in the chart. Requires the [accessibility mo
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
-The text for exported table.
+The text for the menu item.
 */
-@property(nonatomic, readwrite) HIExportData *exportData;
+@property(nonatomic, readwrite) NSString *hideData;
 /**
 Short week days, starting Sunday. If not specified, Highcharts uses the first three letters of the `lang.weekdays` option.
 
@@ -46,6 +46,10 @@ Short week days, starting Sunday. If not specified, Highcharts uses the first th
 * [Finnish two-letter abbreviations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/lang/shortweekdays/)
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *shortWeekdays;
+/**
+The text for exported table.
+*/
+@property(nonatomic, readwrite) HIExportData *exportData;
 /**
 Exporting module only. The text for the menu item to view the chart in full screen.
 */

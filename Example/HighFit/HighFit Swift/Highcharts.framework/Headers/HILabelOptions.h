@@ -19,6 +19,14 @@ Options for annotation's labels. Each label inherits options from the labelOptio
 @interface HILabelOptions: HIChartsJSONSerializable
 
 /**
+Whether the annotation is visible in the exported data table.
+
+**Try it**
+
+* [Do not include in the data export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/include-in-data-export/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
+/**
 The border radius in pixels for the annotaiton's label.
 
 **Try it**

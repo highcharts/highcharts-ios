@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v8.1.1 (2020-06-09)
+ * @license Highcharts Gantt JS v8.2.0 (2020-08-20)
  * @module highcharts/modules/treegrid
  * @requires highcharts
  *
@@ -10,4 +10,4 @@
  * License: www.highcharts.com/license
  */
 'use strict';
-import '../../parts-gantt/TreeGridAxis.js';
+import '../../Core/Axis/TreeGridAxis.js';

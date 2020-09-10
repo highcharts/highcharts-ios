@@ -12,6 +12,7 @@
 #import "HILabels.h"
 #import "HILabelOptions.h"
 #import "HIEvents.h"
+#import "HIAnimationOptionsObject.h"
 
 
 /**
@@ -71,6 +72,14 @@ Allow an annotation to be draggable by a user. Possible values are `'x'`, `'xy'`
 */
 @property(nonatomic, readwrite) NSString *draggable;
 /**
+Enable or disable the initial animation when a series is displayed for the `annotation`. The animation can also be set as a configuration object. Please note that this option only applies to the initial animation. For other animations, see `chart.animation` and the animation parameter under the API methods. The following properties are supported: - `defer`: The animation delay time in milliseconds.
+
+**Try it**
+
+* [Animation defer settings](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/defer/)
+*/
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+/**
 Events available in annotations.
 */
 @property(nonatomic, readwrite) HIEvents *events;
@@ -78,6 +87,18 @@ Events available in annotations.
 @property(nonatomic, readwrite) NSString *descriptionSinglePoint;
 @property(nonatomic, readwrite) NSString *descriptionNoPoints;
 @property(nonatomic, readwrite) NSString *heading;
+/**
+The way to mark the separator for annotations combined in one export-data table cell.
+*/
+@property(nonatomic, readwrite) NSString *itemDelimiter;
+/**
+When several labels are assigned to a specific point, they will be displayed in one field in the table.
+
+**Try it**
+
+* [Concatenate point annotations with itemDelimiter set.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/join-annotations/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *join;
 
 -(NSDictionary *)getParams;
 

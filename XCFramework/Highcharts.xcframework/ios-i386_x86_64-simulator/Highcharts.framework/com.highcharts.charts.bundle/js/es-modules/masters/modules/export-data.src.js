@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v8.1.1 (2020-06-09)
+ * @license Highcharts JS v8.2.0 (2020-08-20)
  * @module highcharts/modules/export-data
  * @requires highcharts
  * @requires highcharts/modules/exporting
@@ -11,4 +11,4 @@
  * License: www.highcharts.com/license
  */
 'use strict';
-import '../../modules/export-data.src.js';
+import '../../Extensions/ExportData.js';

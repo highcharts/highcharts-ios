@@ -7,7 +7,6 @@
 */
 
 #import "HIPatternOptionsObject.h"
-#import "HIAnimationOptionsObject.h"
 
 
 /**
@@ -18,7 +17,7 @@ Holds a pattern definition.
 /**
 Animation options for the image pattern loading.
 */
-@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *animation;
 /**
 Pattern options
 */

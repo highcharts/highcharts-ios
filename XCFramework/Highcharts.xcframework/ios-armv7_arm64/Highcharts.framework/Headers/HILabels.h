@@ -41,7 +41,7 @@ What part of the string the given position is anchored to. Can be one of `"left"
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-The y position offset of the label relative to the tick position on the axis.
+The y position offset of all labels relative to the tick positions on the axis. For polar and radial axis consider the use of the `distance` option.
 
 **Defaults to** `3`.
 
@@ -51,7 +51,7 @@ The y position offset of the label relative to the tick position on the axis.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The x position offset of the label relative to the tick position on the axis. Defaults to -15 for left axis, 15 for right axis.
+The x position offset of all labels relative to the tick positions on the axis. Defaults to -15 for left axis, 15 for right axis.
 
 **Try it**
 
@@ -204,6 +204,14 @@ This option defines the point to which the label will be connected. It can be ei
 * [Attach annotation to a mock point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/mock-point/)
 */
 @property(nonatomic, readwrite) HIPoint *point;
+/**
+Whether the annotation is visible in the exported data table.
+
+**Try it**
+
+* [Do not include in the data export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/include-in-data-export/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
 The border radius in pixels for the annotaiton's label.
 

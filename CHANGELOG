@@ -1,3 +1,49 @@
+# Version 8.2.0
+
+## iOS:
+
+1. Added new initializer to `HIColor` for supporting pattern fills.
+2. Fixed #320, Memory leak and High Memory usage.
+3. Fixed #293, #322, Changed `dataLabels.style` object type from `HIStyle` to `HICSSObject`.
+
+## Framework:
+
+1. Internally reorganized source file structure and naming.
+2. Added `defer` as animation parameter, see #12901. This allows for granular deferring of series animation, labels etc.
+3. Added toggle feature for the data table in the `export-data` module. See #13690.
+4. Added support for configuring sonification options in the chart configuration, as well as support for disabling individual series, configuring master volume, and inverted polarity mapping. Note that chart configuration options are still considered experimental and may change.
+5. Added new option, time.moment, allowing the `moment.js` library to be used without being available in the window context.
+
+## Framework upgrade notes:
+
+1. The file structure of ES modules has changed. This has no consequences when using master files as advised (like http://code.highcharts.com/es-modules/masters/highcharts.src.js), but may break when loading module files directly.
+
+## Framework bug fixes:
+
+1. Fixed #13694, threshold wasn't respected when `low` was defined.
+2. Fixed #13553, exception on negative X values on logarithmic axis.
+3. Fixed #13737, a regression causing chart zoom to conflict with the browser's drag-and-drop behaviour.
+4. Fixed #13710, a regression causing errors on empty pie series.
+5. Fixed #13726, `img` and `br` tags in data labels not being proper XHTML on SVG export.
+6. Fixed #13538, `softThreshold` not working as expected when a `threshold` was set.
+7. Fixed #10555, `scrollablePlotArea` not rendering correctly on FireFox.
+8. Fixed #12959, #13937, drilldown did not work on treemap and sunburst series after update.
+9. Fixed #13789, incorrect arearange path on polar chart when the `connectEnds` option was set to false.
+10. [object Object].
+11. Fixed #13736, draggable annotations did not work on touch devices.
+12. Fixed #13707, view table link should be a button.
+13. Fixed #13864, better accessible legend item labels.
+14. Fixed #13729, focus issues with shift+tab.
+15. Fixed #13971, missing Series imports preventing some builds from the Download Builder to work.
+16. Fixed #13532, a regression in 8.1.0 causing annotations of type "label", "circle" and "rectangle" not to be editable.
+17. Fixed #13762, missing `xAxis` labels on a polar chart when the `useHTML` option was set to true.
+18. Fixed #13846, data labels were initially hidden in some pie chart instances due to overlapping detection.
+19. Fixed #12868, drag zoom was not working on multiple charts after scrolling.
+20. Fixed #13785, wrong CSV output for data without defined `y` value.
+21. Fixed #13771, polar chart tooltip was hidden when point value was equal to max.
+22. Fixed #13570, updating chart and networkgraph series simultaneously threw errors.
+23. Increased precision of sonification duration.
+
 # Version 8.1.2
 
 ## iOS:

@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIAnnotations.h"
 #import "HIFunction.h"
 
 
@@ -30,14 +30,6 @@ Formatter callback for the column headers. Parameters are: - `item` - The series
 */
 @property(nonatomic, readwrite) HIFunction *columnHeaderFormatter;
 /**
-Which decimal point to use for exported CSV. Defaults to the same as the browser locale, typically `.` (English) or `,` (German, French etc).
-*/
-@property(nonatomic, readwrite) NSString *decimalPoint;
-/**
-The line delimiter in the exported data, defaults to a newline.
-*/
-@property(nonatomic, readwrite) NSString *lineDelimiter;
-/**
 The item delimiter in the exported data. Use `;` for direct exporting to Excel. Defaults to a best guess based on the browser locale. If the locale _decimal point_ is `,`, the `itemDelimiter` defaults to `;`, otherwise the `itemDelimiter` defaults to `,`.
 */
 @property(nonatomic, readwrite) NSString *itemDelimiter;
@@ -45,6 +37,18 @@ The item delimiter in the exported data. Use `;` for direct exporting to Excel. 
 Which date format to use for exported dates on a datetime X axis. See `Highcharts.dateFormat`.
 */
 @property(nonatomic, readwrite) NSString *dateFormat;
+/**
+The line delimiter in the exported data, defaults to a newline.
+*/
+@property(nonatomic, readwrite) NSString *lineDelimiter;
+/**
+Which decimal point to use for exported CSV. Defaults to the same as the browser locale, typically `.` (English) or `,` (German, French etc).
+*/
+@property(nonatomic, readwrite) NSString *decimalPoint;
+/**
+Options for annotations in the export-data table.
+*/
+@property(nonatomic, readwrite) HIAnnotations *annotations;
 
 -(NSDictionary *)getParams;
 

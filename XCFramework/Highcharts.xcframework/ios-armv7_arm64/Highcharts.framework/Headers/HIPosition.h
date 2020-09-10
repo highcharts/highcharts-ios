@@ -11,23 +11,27 @@
 
 /**
 The position of the button.
+
+**Try it**
+
+* [Above the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/resetzoombutton-position/)
 */
 @interface HIPosition: HIChartsJSONSerializable
 
 /**
-Vertical offset of the button.
+The vertical offset of the button.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-Horizontal offset of the button.
+The horizontal offset of the button.
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Horizontal alignment of the button.
+The horizontal alignment of the button.
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
-Vertical alignment of the button.
+The vertical alignment of the button.
 
 **Defaults to** `top`.
 */

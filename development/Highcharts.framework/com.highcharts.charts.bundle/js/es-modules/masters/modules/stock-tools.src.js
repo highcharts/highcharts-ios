@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v8.1.1 (2020-06-09)
+ * @license Highstock JS v8.2.0 (2020-08-20)
  * @module highcharts/modules/stock-tools
  * @requires highcharts
  * @requires highcharts/modules/stock
@@ -12,5 +12,5 @@
  * License: www.highcharts.com/license
  */
 'use strict';
-import '../../modules/stock-tools-bindings.js';
-import '../../modules/stock-tools-gui.js';
+import '../../Stock/StockToolsBindings.js';
+import '../../Stock/StockToolsGui.js';
