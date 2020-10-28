@@ -21,7 +21,7 @@ The color of the ranges borders, can be also defined for an individual range.
 
 **Try it**
 
-* [Similat look to the bubble series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/similartoseries/)
+* [Similar look to the bubble series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/similartoseries/)
 * [Individual bubble border color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/bordercolor/)
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
@@ -62,7 +62,7 @@ The main color of the bubble legend. Applies to ranges, if individual color is n
 
 **Try it**
 
-* [Similat look to the bubble series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/similartoseries/)
+* [Similar look to the bubble series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/similartoseries/)
 * [Individual bubble color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/color/)
 */
 @property(nonatomic, readwrite) HIColor *color;

@@ -1,3 +1,23 @@
+# Version 8.2.2
+
+## iOS:
+
+1. Reverted `HIMillisecond`, `HIWeek`, `HIHour`, `HIMonth`, `HISecond`, `HIYear`, `HIDay` and `HIMinute` types.
+
+## Framework bug fixes:
+
+1. Fixed #13811, `Point.partialFill` didn't override `Series.partialFill`.
+2. Fixed #14356, offline PDF export failed for larger datasets.
+3. Fixed #14352, wrong button text displayed when chart initialized with a table.
+4. Fixed #14349, first point being `null` broke the accessibility screen reader.
+5. Fixed #14366, error in boost module on older Windows installations.
+6. Fixed #14050, error when passing empty `dataLabels` array `columnrange` and related series.
+7. Fixed #14298, Chrome complained about touch events not being `cancelable` when calling `preventDefault`.
+8. Fixed #14310, `addPlotBandOrLine` didn't check if the axis was visible before rendering.
+9. Fixed #14278, first point was highlighted on long touch when the accessibility module was loaded.
+10. Fixed #13956, annotations had the wrong position for resized Y axis.
+11. Fixed #14230, `chart.update` failed to update `time` options in some cases.
+
 # Version 8.2.1
 
 ## iOS:

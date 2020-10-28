@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIStyle.h"
+#import "HIChartsJSONSerializable.h"
 #import "HIFunction.h"
 
 
@@ -15,11 +15,6 @@ Options for annotation's control points. Each control point inherits options fro
 */
 @interface HIControlPointOptions: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) HIStyle *style;
-@property(nonatomic, readwrite) NSNumber *width;
-@property(nonatomic, readwrite) NSString *symbol;
-@property(nonatomic, readwrite) NSNumber *height;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 @property(nonatomic, readwrite) HIFunction *positioner;
 
 -(NSDictionary *)getParams;

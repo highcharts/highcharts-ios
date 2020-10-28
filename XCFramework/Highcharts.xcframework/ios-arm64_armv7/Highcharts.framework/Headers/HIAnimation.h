@@ -18,6 +18,9 @@ Enable or disable the initial animation when a series is displayed for the `anno
 */
 @interface HIAnimation: HIChartsJSONSerializable
 
+/**
+The animation delay time in milliseconds. Set to `0` renders annotation immediately. As `undefined` inherits defer time from the `series.animation.defer`.
+*/
 @property(nonatomic, readwrite) NSNumber *defer;
 @property(nonatomic, readwrite) NSNumber *duration;
 

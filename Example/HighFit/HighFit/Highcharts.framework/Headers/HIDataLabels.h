@@ -70,6 +70,39 @@ Decides how the data label will be rotated relative to the perimeter of the sunb
 The y position offset of the label relative to the point in pixels.
 */
 @property(nonatomic, readwrite) NSNumber *y;
+/**
+Y offset of the higher data labels relative to the point value.
+
+**Try it**
+
+* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
+*/
+@property(nonatomic, readwrite) NSNumber *yHigh;
+/**
+X offset of the higher data labels relative to the point value.
+
+**Try it**
+
+* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
+*/
+@property(nonatomic, readwrite) NSNumber *xHigh;
+/**
+X offset of the lower data labels relative to the point value.
+
+**Try it**
+
+* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
+* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
+*/
+@property(nonatomic, readwrite) NSNumber *xLow;
+/**
+Y offset of the lower data labels relative to the point value.
+
+**Try it**
+
+* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
+*/
+@property(nonatomic, readwrite) NSNumber *yLow;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
 /**
 Callback to format data labels for _nodes_ in the sankey diagram. The `nodeFormat` option takes precedence over the `nodeFormatter`.
@@ -237,39 +270,6 @@ The Z index of the data labels. The default Z index puts it above the series. Us
 Options for a label text which should follow marker's shape. Border and background are disabled for a label that follows a path. **Note:** Only SVG-based renderer supports this option. Setting `useHTML` to true will disable this option.
 */
 @property(nonatomic, readwrite) HITextPath *textPath;
-/**
-Y offset of the higher data labels relative to the point value.
-
-**Try it**
-
-* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
-*/
-@property(nonatomic, readwrite) NSNumber *yHigh;
-/**
-X offset of the higher data labels relative to the point value.
-
-**Try it**
-
-* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
-*/
-@property(nonatomic, readwrite) NSNumber *xHigh;
-/**
-X offset of the lower data labels relative to the point value.
-
-**Try it**
-
-* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
-* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
-*/
-@property(nonatomic, readwrite) NSNumber *xLow;
-/**
-Y offset of the lower data labels relative to the point value.
-
-**Try it**
-
-* [Data labels on range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/arearange-datalabels/)
-*/
-@property(nonatomic, readwrite) NSNumber *yLow;
 @property(nonatomic, readwrite) NSString *parentNodeFormat;
 @property(nonatomic, readwrite) HIParentNodeTextPath *parentNodeTextPath;
 @property(nonatomic, readwrite) HIFunction *parentNodeFormatter;
@@ -320,6 +320,14 @@ Options for a _link_ label text which should follow link connection. Border and 
 */
 @property(nonatomic, readwrite) HILinkTextPath *linkTextPath;
 /**
+Works only if `connectorShape` is `'crookedLine'`. It defines how far from the vertical plot edge the coonnector path should be crooked.
+
+**Try it**
+
+* [crookDistance set to 90%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-crookdistance/)
+*/
+@property(nonatomic, readwrite) NSString *crookDistance;
+/**
 Alignment method for data labels. Possible values are: - `toPlotEdges`: Each label touches the nearest vertical edge of  the plot area. - `connectors`: Connectors have the same x position and the  widest label of each half (left & right) touches the nearest  vertical edge of the plot area.
 
 **Try it**
@@ -354,14 +362,6 @@ Specifies the method that is used to generate the connector path. Highcharts pro
 * [connectorShape is a function](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-connectorshape-function/)
 */
 @property(nonatomic, readwrite) NSString *connectorShape;
-/**
-Works only if `connectorShape` is `'crookedLine'`. It defines how far from the vertical plot edge the coonnector path should be crooked.
-
-**Try it**
-
-* [crookDistance set to 90%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-crookdistance/)
-*/
-@property(nonatomic, readwrite) NSString *crookDistance;
 
 -(NSDictionary *)getParams;
 

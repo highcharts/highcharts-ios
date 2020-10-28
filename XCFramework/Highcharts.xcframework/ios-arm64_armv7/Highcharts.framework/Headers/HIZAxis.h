@@ -332,8 +332,6 @@ The dash or dot style of the grid lines. For possible values, see [this demonstr
 /**
 Whether to display the axis on the opposite side of the normal. The normal is on the left side for vertical axes and bottom for horizontal, so the opposite sides will be right and top respectively. This is typically used with dual or multiple axes.
 
-**Defaults to** `false`.
-
 **Try it**
 
 * [Secondary Y axis opposite](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/opposite/)
@@ -361,10 +359,6 @@ The maximum value of the axis. If `null`, the max value is automatically calcula
 @property(nonatomic, readwrite) NSNumber *max;
 /**
 For a datetime axis, the scale will automatically adjust to the appropriate unit. This member gives the default string representations used for each unit. For intermediate values, different units may be used, for example the `day` unit can be used on midnight and `hour` unit be used for intermediate values on the same axis. For an overview of the replacement codes, see `dateFormat`. Defaults to: ```js {   millisecond: '%H:%M:%S.%L',   second: '%H:%M:%S',   minute: '%H:%M',   hour: '%H:%M',   day: '%e. %b',   week: '%e. %b',   month: '%b \'%y',   year: '%Y' } ```
-
-**Try it**
-
-* [Different day format on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/datetimelabelformats/)
 */
 @property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**

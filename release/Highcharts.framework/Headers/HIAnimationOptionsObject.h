@@ -20,6 +20,10 @@ A callback function to exectute when the animation finishes.
 */
 @property(nonatomic, readwrite) HIFunction *complete;
 /**
+The animation delay time in milliseconds.
+*/
+@property(nonatomic, readwrite) NSNumber *defer;
+/**
 The animation duration in milliseconds.
 */
 @property(nonatomic, readwrite) NSNumber *duration;

@@ -78,7 +78,7 @@ Defines additional snapping area around an annotation making this annotation to 
 /**
 The type of the shape, e.g. circle or rectangle.
 
-**Defaults to** `'rect'`.
+**Defaults to** `rect`.
 
 **Try it**
 

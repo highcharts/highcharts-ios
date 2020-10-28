@@ -124,10 +124,6 @@ The shadow option for hovered state.
 A specific color for the hovered point.
 */
 @property(nonatomic, readwrite) HIColor *color;
-/**
-The additional connector line width for a hovered point.
-*/
-@property(nonatomic, readwrite) NSNumber *connectorWidthPlus;
 
 -(NSDictionary *)getParams;
 
