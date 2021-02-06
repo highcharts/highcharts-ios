@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2020 Highsoft AS. All rights reserved.
+//  Copyright © 2021 Highsoft AS. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2020 Highsoft AS
+* (c) 2009-2021 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -154,9 +154,7 @@ The pixel padding for axis labels, to ensure white space between them.
 */
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
-A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for the axis label.
-
-**Defaults to** `{value}`.
+A format string for the axis label. See [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for example usage. Note: The default value is not specified due to the dynamic nature of the default implementation.
 
 **Try it**
 

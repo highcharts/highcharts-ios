@@ -333,6 +333,7 @@ If the plot area sized is calculated automatically and the legend is not floatin
 */
 @property(nonatomic, readwrite) NSNumber *margin;
 @property(nonatomic, readwrite) NSString *legendLabel;
+@property(nonatomic, readwrite) NSString *legendLabelNoTitle;
 @property(nonatomic, readwrite) NSString *legendItem;
 
 -(NSDictionary *)getParams;

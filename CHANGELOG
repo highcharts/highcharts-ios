@@ -1,3 +1,84 @@
+# Version 9.0.0
+
+## iOS:
+
+1. Added Swift Package Manager support.
+
+## Framework:
+
+1. Improved security by filtering all HTML configuration strings and abstract syntax trees through allow lists before inserting into the DOM.
+2. Added support for area series in 3D charts.
+3. Added new feature chart.zoomBySingleTouch to provide optional mouse-like selection zooming for touch devices. See #14775.
+4. Added accessibility support for legend title #(14872) and provided more intuitive legend item labels for assistive technology (#14837).
+
+## Framework bug fixes:
+
+1. Fixed #14138, tooltip was displayed outside `plotArea` for columns when they were exceeding `yAxis` extremes.
+2. Fixed #13490, point hovering effects such as `tooltip` stopped working after disabling `chart.polar` with `update`.
+3. Fixed #10322, limit local timezone to timestamps without timezone.
+4. Fixed #14910, `centerInCategory` broke after zooming twice.
+5. Fixed #8095, reset zoom button was not visible after drilldown.
+6. Fixed #14893, removed misleading default value in the `labels.format` docs.
+7. Fixed #11494, setting `z-index` on tooltip with `outside` set to `true` through chart options was not possible.
+8. Fixed #14351, `solidgauge` pane flickered on `update`.
+9. Fixed #14771, incorrect tooltip position on inverted chart with adjusted axis width.
+10. Fixed #14053, plot bands added before `update` with `redraw` set to `false` were not added when dynamically adding plot bands between the `update` and a `redraw`.
+11. Fixed #14148, `waterfall` chart with reversed `yAxis` rendered wrong stacking connectors.
+12. Fixed #14209, histogram after `setData` with empty array wasn't updated.
+13. Fixed #14876, `minPointLength` columns did not show for series with only zero values when combined with series with only negative values.
+14. Fixed #14834, `colorAxis` ignored `reversed` option set in chart config on `update`.
+15. Fixed #14793, Z axis broke on `update`.
+16. Fixed #14833, column series axis breaks did not render correctly.
+17. Fixed #14283, problems with dynamically updating the color axis `visible` property.
+18. Fixed #14858, left and right-aligned callout labels with the anchor above or below sometimes missed anchor lines when there was no room for a chevron.
+19. Fixed #13220, #12788, #12489, #11975, wrong pointer position after changing size or scale on a parent element. `Chart.reflow` now needs to be called after scale changes and `Chart.updateContainerScaling` has been removed.
+20. Fixed #14305, original chart options got mutated on update.
+21. Fixed #14830, exporting waterfall chart with stack labels and hidden series threw.
+22. Fixed #8635, zooming variwide chart did not work.
+23. Fixed #8742, some `stackLabels` did not render with `dataLabels` enabled.
+24. Fixed #8795, hovering the chart after zooming in and using `setData` with `redraw` set to `false` threw.
+25. Fixed #14549, incorrect clip-path for added axis.
+26. Fixed #13283, an issue with the data module's CSV parser. Hex colors (and any other strings following a hash) were treated as a comment and ignored.
+27. Fixed #14769, axis label formatter was called with NaN values when the axis was short and series consisted of only null values.
+28. Fixed #13996, #13488, pointer position was wrong after chart element was scrolled inside another element.
+29. Fixed #14773, `styledMode` pie series not updating color correctly second time.
+30. Fixed a11y issue with absolute positioning, touches #14090.
+31. Fixed the initialization of `Time.variableTimezone`, it caused `Time` to sometimes return the wrong time when `useUTC` was set to `false`.
+32. Fixed #14623, `Point.colorIndex` did not pick up `Series.colorIndex` updates.
+33. Fixed #14584, setting `dataLabels.allowOverlap` to `false` did not work properly for sankey series.
+34. Fixed #14624, panning.type enabled panning while `panning.enabled = false`.
+35. Fixed #14649, dynamically updating visual attributes on points in flag series did not work.
+36. Fixed #14637, setting `pointPlacement` to `between` placed line series points on ticks instead of between them.
+37. Fixed #14315, setting X axis extremes outside the chart series' data range threw.
+38. Fixed #14246, pie point stayed hidden after first legend item click when `ignoreHiddenPoint` was set to `false`.
+39. Fixed #14236, stacked area chart did not render correctly with the `broken-axis` module loaded and a `gapSize` greater than `0`.
+40. Fixed #13948, exported PDFs containing linear gradients with multiple 0 offset stops had errors.
+41. Fixed #13961, `datetime` axis had missing ticks when `Chart.time` had half-hour `timezone` or `timezoneOffset` set.
+42. Fixed #13804, 3d pie animation in inactive tab threw.
+43. Fixed #13716, annotations added in responsive rules did not work.
+44. Fixed #14746, column chart with null data, datetime axis and `useUTC` set to `false` threw.
+45. Fixed #14765, `Highcharts.patterns` global was missing.
+46. Fixed #14444, boosted inverted chart had wrong clip-path.
+47. Fixed #14244, tooltip in column-based series with multiple `xAxis` had wrong position.
+48. Fixed #14362, no animation when a series was added dynamically.
+49. Fixed #14426, it was not possible to pan vertically to 0 after zooming.
+50. Fixed #14458, drilling down 3d chart points with the same name threw.
+51. Fixed #14425, last histogram bin sometimes had inaccurate x2.
+52. Fixed #14417, charts displayed parts of the data when min or max exceeded extreme values.
+53. Fixed #14397, `networkgraph` simulation restarted on `series.update()`.
+54. Fixed #14078, all points rendered in all series with boost.usePreallocated on.
+55. Fixed #14428, enabling `drilldown` through `Point.update()` did not work.
+56. Fixed #14214, parliament chart (item series type) threw error on negative values. Negative values should be ignored like in the pie series.
+57. Fixed #14433, dependency wheel data labels had wrong position for items covering more than 180 degrees of the wheel.
+58. Fixed #14260, series graph color was affected by `marker.fillColor` in Boost.
+59. Fixed #14289, histogram series entered an infinite loop when passed certain data values.
+60. Fixed #14379, when `scrollablePlotArea` was enabled, gauge axis was not scrolling along.
+61. Fixed #14440, `ColumnRangeSeries` missed `adjustForMissingColumns`.
+62. Fixed #13277, event listener leakage in several series and export module.
+63. Fixed regressions with `chart.update` and `chart.setSize`, causing side effects like stacks not updating and series not.
+64. Fixed #14023, for small numbers and decimals argument set to zero, the `numberFormater` returned wrong values.
+65. Fixed #13957, added error handler while mixed series data in boost.
+
 # Version 8.2.2
 
 ## iOS:

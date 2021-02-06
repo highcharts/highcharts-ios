@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2020 Highsoft AS
+* (c) 2009-2021 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -124,7 +124,7 @@ The maximum allowed pixel width for a column, translated to the height of a bar 
 */
 @property(nonatomic, readwrite) NSNumber *maxPointWidth;
 /**
-A pixel value specifying a fixed width for each column or bar point. When `null`, the width is calculated from the `pointPadding` and `groupPadding`. The width effects the dimension that is not based on the point value. For column series it is the hoizontal length and for bar series it is the vertical length.
+A pixel value specifying a fixed width for each column or bar point. When set to `undefined`, the width is calculated from the `pointPadding` and `groupPadding`. The width effects the dimension that is not based on the point value. For column series it is the hoizontal length and for bar series it is the vertical length.
 
 **Try it**
 

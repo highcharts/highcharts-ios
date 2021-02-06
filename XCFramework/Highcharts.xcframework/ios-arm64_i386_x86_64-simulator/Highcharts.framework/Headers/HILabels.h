@@ -154,9 +154,7 @@ The pixel padding for axis labels, to ensure white space between them.
 */
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
-A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for the axis label.
-
-**Defaults to** `{value}`.
+A format string for the axis label. See [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for example usage. Note: The default value is not specified due to the dynamic nature of the default implementation.
 
 **Try it**
 

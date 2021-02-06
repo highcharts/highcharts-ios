@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2020 Highsoft AS
+* (c) 2009-2021 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -333,6 +333,7 @@ If the plot area sized is calculated automatically and the legend is not floatin
 */
 @property(nonatomic, readwrite) NSNumber *margin;
 @property(nonatomic, readwrite) NSString *legendLabel;
+@property(nonatomic, readwrite) NSString *legendLabelNoTitle;
 @property(nonatomic, readwrite) NSString *legendItem;
 
 -(NSDictionary *)getParams;

@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2020 Highsoft AS
+* (c) 2009-2021 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -38,6 +38,14 @@ Can set a `borderDashStyle` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) NSString *borderDashStyle;
 /**
+Decides which level takes effect from the options set in the levels object.
+
+**Try it**
+
+* [Sunburst chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sunburst)
+*/
+@property(nonatomic, readwrite) NSNumber *level;
+/**
 Can set a `color` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) HIColor *color;
@@ -57,14 +65,6 @@ Can set a `borderWidth` on all points which lies on the same level.
 Can set a `rotation` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
-/**
-Decides which level takes effect from the options set in the levels object.
-
-**Try it**
-
-* [Styling of both levels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-levels/)
-*/
-@property(nonatomic, readwrite) NSNumber *level;
 /**
 Can set the layoutAlgorithm option on a specific level.
 

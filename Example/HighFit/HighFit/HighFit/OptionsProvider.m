@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2020 Highsoft AS. All rights reserved.
+//  Copyright © 2021 Highsoft AS. All rights reserved.
 //
 
 #import "OptionsProvider.h"
@@ -18,7 +18,7 @@
 {
     NSArray *categories = nil;
     
-    id step = [NSNull null];
+     id step = [NSNull null];
     
     if ([type isEqualToString:@"day"]) {
         categories = @[ @"12AM", @"", @"3AM", @"", @"6AM", @"", @"9AM", @"", @"12PM", @"", @"3PM", @"", @"6PM", @"", @"9PM", @"", @"12AM"];
@@ -137,7 +137,7 @@
         
         return hioptions;
     }
-    
+
     if ([options[@"chartType"] isEqualToString:@"column"]) {
         
         HIOptions *hioptions = [[HIOptions alloc]init];
@@ -235,7 +235,7 @@
         
         return hioptions;
     }
-    
+
     if ([options[@"chartType"] isEqualToString:@"spline"]) {
         
         HIOptions *hioptions = [[HIOptions alloc]init];

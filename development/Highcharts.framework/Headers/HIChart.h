@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2020 Highsoft AS
+* (c) 2009-2021 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -96,6 +96,14 @@ The margin between the right outer edge of the chart and the plot area. Use this
 */
 @property(nonatomic, readwrite) NSNumber *marginRight;
 /**
+Enables zooming by a single touch, in combination with `chart.zoomType`. When enabled, two-finger pinch will still work as set up by `chart.pinchType`. However, `zoomBySingleTouch` will interfere with touch-dragging the chart to read the tooltip. And especially when vertical zooming is enabled, it will make it hard to scroll vertically on the page.
+
+**Try it**
+
+* [Zoom by single touch enabled, with buttons to toggle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoombysingletouch)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *zoomBySingleTouch;
+/**
 The color of the inner chart or plot area border.
 
 **Try it**
@@ -146,7 +154,6 @@ The HTML element where the chart will be rendered. If it is a string, the elemen
 
 * [String](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/reflow-true/)
 * [Object reference](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/renderto-object/)
-* [Object reference through jQuery](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/renderto-jquery/)
 */
 @property(nonatomic, readwrite) NSString *renderTo;
 /**

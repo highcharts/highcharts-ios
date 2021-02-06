@@ -6,20 +6,15 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIAttributes.h"
 
 
 /**
  */
 @interface HIReverseArrow: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSNumber *refY;
-@property(nonatomic, readwrite) NSNumber *refX;
-@property(nonatomic, readwrite) NSNumber /* Bool */ *render;
+@property(nonatomic, readwrite) HIAttributes *attributes;
 @property(nonatomic, readwrite) NSString *tagName;
-@property(nonatomic, readwrite) NSNumber *markerWidth;
-@property(nonatomic, readwrite) NSString *id;
-@property(nonatomic, readwrite) NSNumber *markerHeight;
 
 -(NSDictionary *)getParams;
 

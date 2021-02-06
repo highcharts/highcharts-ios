@@ -3,12 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45A942171F5D897400A71DF9 /* Highcharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45A942161F5D897400A71DF9 /* Highcharts.framework */; };
-		45A942191F5D897B00A71DF9 /* Highcharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45A942161F5D897400A71DF9 /* Highcharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45DAC0921F56A5680004F0B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DAC0911F56A5680004F0B1 /* AppDelegate.swift */; };
 		45DAC0991F56A5680004F0B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45DAC0981F56A5680004F0B1 /* Assets.xcassets */; };
 		45DAC09C1F56A5690004F0B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45DAC09A1F56A5690004F0B1 /* LaunchScreen.storyboard */; };
@@ -25,6 +23,8 @@
 		45DAC0C51F56A9210004F0B1 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DAC0C31F56A9210004F0B1 /* DataViewController.swift */; };
 		45DAC0C61F56A9210004F0B1 /* DataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DAC0C41F56A9210004F0B1 /* DataViewController.xib */; };
 		45DAC0C81F56A9960004F0B1 /* OptionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DAC0C71F56A9960004F0B1 /* OptionsProvider.swift */; };
+		CD4D8D3E25CECF8C00DDF837 /* Highcharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D8D3C25CECF8400DDF837 /* Highcharts.xcframework */; };
+		CD4D8D3F25CECF8C00DDF837 /* Highcharts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D8D3C25CECF8400DDF837 /* Highcharts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,7 +34,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				45A942191F5D897B00A71DF9 /* Highcharts.framework in Embed Frameworks */,
+				CD4D8D3F25CECF8C00DDF837 /* Highcharts.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,7 +42,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		45A942161F5D897400A71DF9 /* Highcharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Highcharts.framework; sourceTree = "<group>"; };
 		45DAC08E1F56A5680004F0B1 /* HighFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DAC0911F56A5680004F0B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45DAC0981F56A5680004F0B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +60,7 @@
 		45DAC0C31F56A9210004F0B1 /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		45DAC0C41F56A9210004F0B1 /* DataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataViewController.xib; sourceTree = "<group>"; };
 		45DAC0C71F56A9960004F0B1 /* OptionsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsProvider.swift; sourceTree = "<group>"; };
+		CD4D8D3C25CECF8400DDF837 /* Highcharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Highcharts.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45A942171F5D897400A71DF9 /* Highcharts.framework in Frameworks */,
+				CD4D8D3E25CECF8C00DDF837 /* Highcharts.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +107,7 @@
 		45DAC0A31F56A6870004F0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				45A942161F5D897400A71DF9 /* Highcharts.framework */,
+				CD4D8D3C25CECF8400DDF837 /* Highcharts.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -369,7 +369,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -387,7 +388,10 @@
 				);
 				INFOPLIST_FILE = HighFit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.HighfitSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -409,7 +413,10 @@
 				);
 				INFOPLIST_FILE = HighFit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.HighfitSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

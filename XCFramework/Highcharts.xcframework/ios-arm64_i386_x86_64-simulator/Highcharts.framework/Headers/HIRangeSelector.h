@@ -14,8 +14,9 @@ Range selector language options for accessibility.
 */
 @interface HIRangeSelector: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *buttonText;
+@property(nonatomic, readwrite) NSString *dropdownLabel;
 @property(nonatomic, readwrite) NSString *maxInputLabel;
+@property(nonatomic, readwrite) NSString *clickButtonAnnouncement;
 @property(nonatomic, readwrite) NSString *minInputLabel;
 
 -(NSDictionary *)getParams;

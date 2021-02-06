@@ -3,14 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		201EF17B1EAA1373008ACC11 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201EF1791EAA1373008ACC11 /* Fabric.framework */; };
 		201EF17C1EAA1373008ACC11 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201EF17A1EAA1373008ACC11 /* Crashlytics.framework */; };
-		20FB4D441EA8E56700494BEA /* Highcharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FB4D431EA8E56700494BEA /* Highcharts.framework */; };
-		20FB4D461EA8E56C00494BEA /* Highcharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 20FB4D431EA8E56700494BEA /* Highcharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		341658331D67310100D6FF2A /* OptionsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 341658321D67310100D6FF2A /* OptionsProvider.m */; };
 		3424054F1D6AFBEA001CD7AF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3424054E1D6AFBEA001CD7AF /* Launch Screen.storyboard */; };
 		342CEC591D63163700661D50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CEC581D63163700661D50 /* main.m */; };
@@ -29,6 +27,8 @@
 		349F3DFE1D65F61000CC4BFA /* DataTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349F3DFC1D65F61000CC4BFA /* DataTableViewController.xib */; };
 		34B85FEE1D805115003A9231 /* DataCaloriesOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 34B85FED1D805115003A9231 /* DataCaloriesOut.json */; };
 		34BCB0E11D664A11002C5E96 /* DataSteps.json in Resources */ = {isa = PBXBuildFile; fileRef = 34BCB0DF1D664A11002C5E96 /* DataSteps.json */; };
+		CDE0D16525CE9B2D0055467B /* Highcharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE0D16425CE9B2D0055467B /* Highcharts.xcframework */; };
+		CDE0D16625CE9B420055467B /* Highcharts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDE0D16425CE9B2D0055467B /* Highcharts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,7 +38,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				20FB4D461EA8E56C00494BEA /* Highcharts.framework in Embed Frameworks */,
+				CDE0D16625CE9B420055467B /* Highcharts.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,7 +48,6 @@
 /* Begin PBXFileReference section */
 		201EF1791EAA1373008ACC11 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		201EF17A1EAA1373008ACC11 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		20FB4D431EA8E56700494BEA /* Highcharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Highcharts.framework; sourceTree = "<group>"; };
 		341658311D67310100D6FF2A /* OptionsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsProvider.h; sourceTree = "<group>"; };
 		341658321D67310100D6FF2A /* OptionsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsProvider.m; sourceTree = "<group>"; };
 		3424054E1D6AFBEA001CD7AF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		349F3DFC1D65F61000CC4BFA /* DataTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableViewController.xib; sourceTree = "<group>"; };
 		34B85FED1D805115003A9231 /* DataCaloriesOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataCaloriesOut.json; sourceTree = "<group>"; };
 		34BCB0DF1D664A11002C5E96 /* DataSteps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataSteps.json; sourceTree = "<group>"; };
+		CDE0D16425CE9B2D0055467B /* Highcharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Highcharts.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20FB4D441EA8E56700494BEA /* Highcharts.framework in Frameworks */,
 				201EF17C1EAA1373008ACC11 /* Crashlytics.framework in Frameworks */,
+				CDE0D16525CE9B2D0055467B /* Highcharts.xcframework in Frameworks */,
 				201EF17B1EAA1373008ACC11 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,9 +135,9 @@
 		342CEC6E1D63177B00661D50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDE0D16425CE9B2D0055467B /* Highcharts.xcframework */,
 				201EF1791EAA1373008ACC11 /* Fabric.framework */,
 				201EF17A1EAA1373008ACC11 /* Crashlytics.framework */,
-				20FB4D431EA8E56700494BEA /* Highcharts.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 112bef3bdec791a7739aeb94e74bf6d43edf2c0d 644f7e73deb0e81eb81b416feadaa46307ae7f9ff1e0d900ea4d034222c85505";
+			shellScript = "./Fabric.framework/run 112bef3bdec791a7739aeb94e74bf6d43edf2c0d 644f7e73deb0e81eb81b416feadaa46307ae7f9ff1e0d900ea4d034222c85505\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -401,7 +401,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FYYW4F45T7;
 				ENABLE_BITCODE = NO;
@@ -416,7 +415,10 @@
 					"${PROJECT_DIR}/../../Highcharts.framework/Headers",
 				);
 				INFOPLIST_FILE = HighFit/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.HighFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -426,7 +428,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FYYW4F45T7;
 				ENABLE_BITCODE = NO;
@@ -441,7 +442,10 @@
 					"${PROJECT_DIR}/../../Highcharts.framework/Headers",
 				);
 				INFOPLIST_FILE = HighFit/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.highsoft.HighFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

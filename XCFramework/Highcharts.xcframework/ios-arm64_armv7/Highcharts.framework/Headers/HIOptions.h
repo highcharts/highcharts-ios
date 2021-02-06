@@ -114,6 +114,22 @@ Options for the exporting module. For an overview on the matter, see [the docs](
 */
 @property(nonatomic, readwrite) HIExporting *exporting;
 
+/**
+Options for the Boost module. The Boost module allows certain series types to be rendered by WebGL instead of the default SVG. This allows hundreds of thousands of data points to be rendered in milliseconds. In addition to the WebGL rendering it saves time by skipping processing and inspection of the data wherever possible. This introduces some limitations to what features are available in boost mode. See [the docs](https://www.highcharts.com/docs/advanced-chart-features/boost-module) for details. In addition to the global `boost` option, each series has a `boostThreshold` that defines when the boost should kick in. Requires the `modules/boost.js` module.
+
+**Try it**
+
+* [Line chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/line)
+* [Line chart with hundreds of series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/line-series-heavy)
+* [Scatter chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/scatter)
+* [Area chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/area)
+* [Area range chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/arearange)
+* [Column chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/column)
+* [Column range chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/columnrange)
+* [Bubble chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/bubble)
+* [Heat map](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/heatmap)
+* [Tree map](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/treemap)
+*/
 @property(nonatomic, readwrite) HIBoost *boost;
 
 /**
@@ -129,7 +145,7 @@ A basic type of an annotation. It allows to add custom labels or shapes. The ite
 @property(nonatomic, readwrite) NSArray<HIAnnotations *> *annotations;
 
 /**
-Options for configuring markers for annotations. An example of the arrow marker:  {  arrow: {   id: 'arrow',   tagName: 'marker',   refY: 5,   refX: 5,   markerWidth: 10,   markerHeight: 10,   children: [{    tagName: 'path',    attrs: {     d: 'M 0 0 L 10 5 L 0 10 Z',     strokeWidth: 0    }   }]  } } 
+Options for configuring markers for annotations. An example of the arrow marker:  {  arrow: {   id: 'arrow',   tagName: 'marker',   refY: 5,   refX: 5,   markerWidth: 10,   markerHeight: 10,   children: [{    tagName: 'path',    attrs: {     d: 'M 0 0 L 10 5 L 0 10 Z',     'stroke-width': 0    }   }]  } } 
 
 **Try it**
 
