@@ -41,7 +41,6 @@
 
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
-@property(nonatomic, readwrite) NSString *legendType;
 
 -(NSDictionary *)getParams;
 

@@ -6,14 +6,15 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HISVGAttributes.h"
 
 
 /**
-Serialized form of an SVG/HTML definition, including children. Some key property names are reserved: tagName, textContent, and children.
+Serialized form of an SVG/HTML definition, including children.
 */
 @interface HIASTNode: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) HISVGAttributes *attributes;
 @property(nonatomic, readwrite) NSArray *children;
 @property(nonatomic, readwrite) NSString *tagName;
 @property(nonatomic, readwrite) NSString *textContent;

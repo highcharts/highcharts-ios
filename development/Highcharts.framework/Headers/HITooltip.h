@@ -230,7 +230,7 @@ The format for the date in the tooltip header if the X axis is a datetime axis. 
 */
 @property(nonatomic, readwrite) NSString *xDateFormat;
 /**
-For series on a datetime axes, the date format in the tooltip's header will by default be guessed based on the closest data points. This member gives the default string representations used for each unit. For an overview of the replacement codes, see `dateFormat`.
+For series on datetime axes, the date format in the tooltip's header will by default be guessed based on the closest data points. This member gives the default string representations used for each unit. For an overview of the replacement codes, see `dateFormat`.
 */
 @property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**

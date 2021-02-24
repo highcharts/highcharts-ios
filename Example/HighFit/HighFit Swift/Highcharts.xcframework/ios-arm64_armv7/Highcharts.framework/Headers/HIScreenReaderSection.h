@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2020 Highsoft AS
+* (c) 2009-2021 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -36,7 +36,7 @@ Date format to use to describe range of datetime axes. For an overview of the re
 */
 @property(nonatomic, readwrite) NSString *axisRangeDateFormat;
 /**
-Format for the screen reader information region before the chart. Supported HTML tags are `<h1-7>`, `<p>`, `<div>`, `<a>`, `<ul>`, `<ol>`, `<li>`, and `<button>`. Attributes are not supported, except for id on `<div>`, `<a>`, and `<button>`. Id is required on `<a>` and `<button>` in the format `<tag id="abcd">`. Numbers, lower- and uppercase letters, "-" and "#" are valid characters in IDs.
+Format for the screen reader information region before the chart. Supported HTML tags are `<h1-6>`, `<p>`, `<div>`, `<a>`, `<ul>`, `<ol>`, `<li>`, and `<button>`. Attributes are not supported, except for id on `<div>`, `<a>`, and `<button>`. Id is required on `<a>` and `<button>` in the format `<tag id="abcd">`. Numbers, lower- and uppercase letters, "-" and "#" are valid characters in IDs. The headingTagName is an auto-detected heading (h1-h6) that corresponds to the heading level below the previous heading in the DOM.
 */
 @property(nonatomic, readwrite) NSString *beforeChartFormat;
 /**
