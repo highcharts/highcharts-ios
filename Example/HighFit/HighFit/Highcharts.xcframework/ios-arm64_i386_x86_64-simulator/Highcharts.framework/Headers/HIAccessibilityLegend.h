@@ -22,6 +22,10 @@ Language options for accessibility of the legend.
 **Defaults to** `"Toggle series visibility"`.
 */
 @property(nonatomic, readwrite) NSString *legendLabel;
+/**
+**Defaults to** `"Toggle series visibility"`.
+*/
+@property(nonatomic, readwrite) NSString *legendLabelNoTitle;
 
 -(NSDictionary *)getParams;
 

@@ -1,11 +1,11 @@
 /**
- * @license Highcharts JS v9.0.0 (2021-02-02)
+ * @license Highcharts JS v9.1.0 (2021-05-03)
  * @module highcharts/modules/dotplot
  * @requires highcharts
  *
  * Dot plot series type for Highcharts
  *
- * (c) 2010-2019 Torstein Honsi
+ * (c) 2010-2021 Torstein Honsi
  *
  * License: www.highcharts.com/license
  */

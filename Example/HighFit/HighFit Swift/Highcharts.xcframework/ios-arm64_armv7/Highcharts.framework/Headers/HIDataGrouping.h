@@ -10,7 +10,7 @@
 
 
 /**
-Data grouping options for the wind barbs. In Highcharts, this requires the `modules/datagrouping.js` module to be loaded. In Highstock, data grouping is included.
+Data grouping options for the wind barbs. In Highcharts, this requires the `modules/datagrouping.js` module to be loaded. In Highcharts Stock, data grouping is included.
 
 **Try it**
 

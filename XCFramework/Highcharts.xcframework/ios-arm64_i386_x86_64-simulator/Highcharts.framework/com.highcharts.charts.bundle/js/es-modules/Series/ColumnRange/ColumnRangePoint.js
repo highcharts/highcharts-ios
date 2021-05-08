@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
 var _a = SeriesRegistry.seriesTypes, ColumnPoint = _a.column.prototype.pointClass, AreaRangePoint = _a.arearange.prototype.pointClass;
 import U from '../../Core/Utilities.js';
-var extend = U.extend;
+var extend = U.extend, isNumber = U.isNumber;
 /* *
  *
  *  Class
@@ -38,10 +38,12 @@ var ColumnRangePoint = /** @class */ (function (_super) {
         _this.options = void 0;
         _this.barX = void 0;
         _this.pointWidth = void 0;
-        _this.shapeArgs = void 0;
         _this.shapeType = void 0;
         return _this;
     }
+    ColumnRangePoint.prototype.isValid = function () {
+        return isNumber(this.low);
+    };
     return ColumnRangePoint;
 }(AreaRangePoint));
 /* *

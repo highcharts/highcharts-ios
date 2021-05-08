@@ -1,14 +1,20 @@
 /**
- * @license Highcharts JS v9.0.0 (2021-02-02)
+ * @license Highcharts JS v9.1.0 (2021-05-03)
  * @module highcharts/highcharts
  *
- * (c) 2009-2018 Torstein Honsi
+ * (c) 2009-2021 Torstein Honsi
  *
  * License: www.highcharts.com/license
  */
 'use strict';
 import Highcharts from '../Core/Globals.js';
 import Utilities from '../Core/Utilities.js';
+import Options from '../Core/Options.js';
+import Fx from '../Core/Animation/Fx.js';
+import Animation from '../Core/Animation/AnimationUtilities.js';
+import AST from '../Core/Renderer/HTML/AST.js';
+import FormatUtilities from '../Core/FormatUtilities.js';
+import SVGElement from '../Core/Renderer/SVG/SVGElement.js';
 import '../Core/Renderer/SVG/SVGRenderer.js';
 import '../Core/Renderer/HTML/HTMLElement.js';
 import '../Core/Renderer/HTML/HTMLRenderer.js';
@@ -35,51 +41,71 @@ import '../Series/Pie/PieSeries.js';
 import '../Core/Series/DataLabels.js';
 import '../Extensions/OverlappingDataLabels.js';
 import '../Core/Responsive.js';
-Highcharts.addEvent = Utilities.addEvent;
-Highcharts.arrayMax = Utilities.arrayMax;
-Highcharts.arrayMin = Utilities.arrayMin;
-Highcharts.attr = Utilities.attr;
-Highcharts.clearTimeout = Utilities.clearTimeout;
-Highcharts.correctFloat = Utilities.correctFloat;
-Highcharts.createElement = Utilities.createElement;
-Highcharts.css = Utilities.css;
-Highcharts.defined = Utilities.defined;
-Highcharts.destroyObjectProperties = Utilities.destroyObjectProperties;
-Highcharts.discardElement = Utilities.discardElement;
-Highcharts.erase = Utilities.erase;
-Highcharts.error = Utilities.error;
-Highcharts.extend = Utilities.extend;
-Highcharts.extendClass = Utilities.extendClass;
-Highcharts.find = Utilities.find;
-Highcharts.fireEvent = Utilities.fireEvent;
-Highcharts.format = Utilities.format;
-Highcharts.getMagnitude = Utilities.getMagnitude;
-Highcharts.getStyle = Utilities.getStyle;
-Highcharts.inArray = Utilities.inArray;
-Highcharts.isArray = Utilities.isArray;
-Highcharts.isClass = Utilities.isClass;
-Highcharts.isDOMElement = Utilities.isDOMElement;
-Highcharts.isFunction = Utilities.isFunction;
-Highcharts.isNumber = Utilities.isNumber;
-Highcharts.isObject = Utilities.isObject;
-Highcharts.isString = Utilities.isString;
-Highcharts.keys = Utilities.keys;
-Highcharts.merge = Utilities.merge;
-Highcharts.normalizeTickInterval = Utilities.normalizeTickInterval;
-Highcharts.numberFormat = Utilities.numberFormat;
-Highcharts.objectEach = Utilities.objectEach;
-Highcharts.offset = Utilities.offset;
-Highcharts.pad = Utilities.pad;
-Highcharts.pick = Utilities.pick;
-Highcharts.pInt = Utilities.pInt;
-Highcharts.relativeLength = Utilities.relativeLength;
-Highcharts.removeEvent = Utilities.removeEvent;
-Highcharts.splat = Utilities.splat;
-Highcharts.stableSort = Utilities.stableSort;
-Highcharts.syncTimeout = Utilities.syncTimeout;
-Highcharts.timeUnits = Utilities.timeUnits;
-Highcharts.uniqueKey = Utilities.uniqueKey;
-Highcharts.useSerialIds = Utilities.useSerialIds;
-Highcharts.wrap = Utilities.wrap;
-Highcharts.Series = Series;
-export default Highcharts;
+var G = Highcharts;
+// Animation
+G.animate = Animation.animate;
+G.animObject = Animation.animObject;
+G.getDeferredAnimation = Animation.getDeferredAnimation;
+G.setAnimation = Animation.setAnimation;
+G.stop = Animation.stop;
+G.timers = Fx.timers;
+// Classes
+G.AST = AST;
+G.Fx = Fx;
+G.Series = Series;
+G.SVGElement = SVGElement;
+// Format Utilities
+G.dateFormat = FormatUtilities.dateFormat;
+G.format = FormatUtilities.format;
+G.numberFormat = FormatUtilities.numberFormat;
+// Options
+G.defaultOptions = Options.defaultOptions;
+G.getOptions = Options.getOptions;
+G.time = Options.defaultTime;
+G.setOptions = Options.setOptions;
+// Utilities
+G.addEvent = Utilities.addEvent;
+G.arrayMax = Utilities.arrayMax;
+G.arrayMin = Utilities.arrayMin;
+G.attr = Utilities.attr;
+G.clearTimeout = Utilities.clearTimeout;
+G.correctFloat = Utilities.correctFloat;
+G.createElement = Utilities.createElement;
+G.css = Utilities.css;
+G.defined = Utilities.defined;
+G.destroyObjectProperties = Utilities.destroyObjectProperties;
+G.discardElement = Utilities.discardElement;
+G.erase = Utilities.erase;
+G.error = Utilities.error;
+G.extend = Utilities.extend;
+G.extendClass = Utilities.extendClass;
+G.find = Utilities.find;
+G.fireEvent = Utilities.fireEvent;
+G.getMagnitude = Utilities.getMagnitude;
+G.getStyle = Utilities.getStyle;
+G.inArray = Utilities.inArray;
+G.isArray = Utilities.isArray;
+G.isClass = Utilities.isClass;
+G.isDOMElement = Utilities.isDOMElement;
+G.isFunction = Utilities.isFunction;
+G.isNumber = Utilities.isNumber;
+G.isObject = Utilities.isObject;
+G.isString = Utilities.isString;
+G.keys = Utilities.keys;
+G.merge = Utilities.merge;
+G.normalizeTickInterval = Utilities.normalizeTickInterval;
+G.objectEach = Utilities.objectEach;
+G.offset = Utilities.offset;
+G.pad = Utilities.pad;
+G.pick = Utilities.pick;
+G.pInt = Utilities.pInt;
+G.relativeLength = Utilities.relativeLength;
+G.removeEvent = Utilities.removeEvent;
+G.splat = Utilities.splat;
+G.stableSort = Utilities.stableSort;
+G.syncTimeout = Utilities.syncTimeout;
+G.timeUnits = Utilities.timeUnits;
+G.uniqueKey = Utilities.uniqueKey;
+G.useSerialIds = Utilities.useSerialIds;
+G.wrap = Utilities.wrap;
+export default G;

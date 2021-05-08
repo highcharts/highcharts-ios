@@ -39,7 +39,7 @@ The border corner radius of the legend.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
-Whether to show the symbol on the right side of the text rather than the left side. This is common in Arabic and Hebraic.
+Whether to show the symbol on the right side of the text rather than the left side. This is common in Arabic and Hebrew.
 
 **Defaults to** `false`.
 

@@ -123,7 +123,7 @@ The maximum value of the axis in terms of map point values. If `null`, the max v
 /**
 Whether to reverse the axis so that the highest number is closest to the origin. Defaults to `false` in a horizontal legend and `true` in a vertical legend, where the smallest value starts on top.
 
-**Defaults to** `false`.
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -132,8 +132,6 @@ Whether to reverse the axis so that the highest number is closest to the origin.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
 /**
 The width of the grid lines extending from the axis across the gradient of a scalar color axis.
-
-**Defaults to** `0`.
 
 **Try it**
 
@@ -223,8 +221,6 @@ For categorized axes only. If `on` the tick mark is placed in the center of the 
 /**
 The Z index of the grid lines.
 
-**Defaults to** `1`.
-
 **Try it**
 
 * [A Z index of 4 renders the grid above the graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/gridzindex/)
@@ -236,8 +232,6 @@ Accessibility options for an axis. Requires the accessibility module.
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Whether axis, including axis title, line, ticks and labels, should be visible.
-
-**Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
@@ -251,8 +245,6 @@ The pixel width of the major tick marks. Defaults to 0 on category axes, otherwi
 @property(nonatomic, readwrite) NSNumber *tickWidth;
 /**
 Whether to show the first tick label.
-
-**Defaults to** `true`.
 
 **Try it**
 
@@ -325,8 +317,6 @@ A callback function returning array defining where the ticks are laid out on the
 /**
 The dash or dot style of the minor grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
-**Defaults to** `Solid`.
-
 **Try it**
 
 * [Long dashes on minor grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minorgridlinedashstyle/)
@@ -341,7 +331,7 @@ The pixel length of the minor tick marks.
 */
 @property(nonatomic, readwrite) NSNumber *minorTickLength;
 /**
-Datetime axis only. An array determining what time intervals the ticks are allowed to fall on. Each array item is an array where the first value is the time unit and the second value another array of allowed multiples. Defaults to: ```js units: [[   'millisecond', // unit name   [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples ], [   'second',   [1, 2, 5, 10, 15, 30] ], [   'minute',   [1, 2, 5, 10, 15, 30] ], [   'hour',   [1, 2, 3, 4, 6, 8, 12] ], [   'day',   [1] ], [   'week',   [1] ], [   'month',   [1, 3, 6] ], [   'year',   null ]] ```
+Datetime axis only. An array determining what time intervals the ticks are allowed to fall on. Each array item is an array where the first value is the time unit and the second value another array of allowed multiples. Defaults to: ```js units: [[   'millisecond', // unit name   [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples ], [   'second',   [1, 2, 5, 10, 15, 30] ], [   'minute',   [1, 2, 5, 10, 15, 30] ], [   'hour',   [1, 2, 3, 4, 6, 8, 12] ], [   'day',   [1, 2] ], [   'week',   [1, 2] ], [   'month',   [1, 2, 3, 4, 6] ], [   'year',   null ]] ```
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> *units;
 /**
@@ -375,8 +365,6 @@ The highest allowed value for automatically computed axis extremes.
 /**
 The dash or dot style of the grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
-**Defaults to** `Solid`.
-
 **Try it**
 
 * [Long dashes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/gridlinedashstyle/)
@@ -393,6 +381,10 @@ The position of the minor tick marks relative to the axis line. Can be one of `i
 * [Inside](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickposition-inside/)
 */
 @property(nonatomic, readwrite) NSString *minorTickPosition;
+/**
+The Z index for the axis group.
+*/
+@property(nonatomic, readwrite) NSNumber *zIndex;
 /**
 Enable or disable minor ticks. Unless `minorTickInterval` is set, the tick interval is calculated as a fifth of the `tickInterval`. On a logarithmic axis, minor ticks are laid out based on a best guess, attempting to enter approximately 5 minor ticks between each major tick. Prior to v6.0.0, ticks were unabled in auto layout by setting `minorTickInterval` to `"auto"`.
 
@@ -446,8 +438,6 @@ The position of the major tick marks relative to the axis line. Can be one of `i
 /**
 Whether to show the last tick label. Defaults to `true` on cartesian charts, and `false` on polar charts.
 
-**Defaults to** `true`.
-
 **Try it**
 
 * [Set to true on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/showlastlabel-true/)
@@ -455,8 +445,6 @@ Whether to show the last tick label. Defaults to `true` on cartesian charts, and
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showLastLabel;
 /**
 Applies only when the axis `type` is `category`. When `uniqueNames` is true, points are placed on the X axis according to their names. If the same point name is repeated in the same or another series, the point is placed on the same X position as other points of the same name. When `uniqueNames` is false, the points are laid out in increasing X positions regardless of their names, and the X axis category will take the name of the last point in each position.
-
-**Defaults to** `true`.
 
 **Try it**
 

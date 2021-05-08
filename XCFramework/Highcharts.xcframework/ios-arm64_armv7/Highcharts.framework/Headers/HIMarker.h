@@ -36,6 +36,8 @@ The width of the point marker's outline.
 /**
 The radius of the point marker.
 
+**Defaults to** `4`.
+
 **Try it**
 
 * [Bigger markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-radius/)

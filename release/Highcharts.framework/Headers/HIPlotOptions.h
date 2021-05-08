@@ -39,8 +39,8 @@
 #import "HIBubble.h"
 #import "HIFunnel.h"
 #import "HIHistogram.h"
-#import "HILine.h"
 #import "HISunburst.h"
+#import "HILine.h"
 #import "HIWordcloud.h"
 #import "HIScatter.h"
 #import "HISankey.h"
@@ -337,14 +337,6 @@ A histogram is a column series which represents the distribution of the data set
 */
 @property(nonatomic, readwrite) HIHistogram *histogram;
 /**
-A line series displays information as a series of data points connected by straight line segments. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `line` series are defined in  `plotOptions.line`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     line: {       // shared options for all line series     }   },   series: [{     // specific options for this series instance     type: 'line'   }] }); ```       
-
-**Try it**
-
-* [Line chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-basic/)
-*/
-@property(nonatomic, readwrite) HILine *line;
-/**
 A Sunburst displays hierarchical data, where a level in the hierarchy is represented by a circle. The center represents the root node of the tree. The visualization bears a resemblance to both treemap and pie charts. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `sunburst` series are defined in  `plotOptions.sunburst`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     sunburst: {       // shared options for all sunburst series     }   },   series: [{     // specific options for this series instance     type: 'sunburst'   }] }); ```       
 
 **Try it**
@@ -352,6 +344,14 @@ A Sunburst displays hierarchical data, where a level in the hierarchy is represe
 * [Sunburst chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sunburst)
 */
 @property(nonatomic, readwrite) HISunburst *sunburst;
+/**
+A line series displays information as a series of data points connected by straight line segments. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `line` series are defined in  `plotOptions.line`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     line: {       // shared options for all line series     }   },   series: [{     // specific options for this series instance     type: 'line'   }] }); ```       
+
+**Try it**
+
+* [Line chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-basic/)
+*/
+@property(nonatomic, readwrite) HILine *line;
 /**
 A word cloud is a visualization of a set of words, where the size and placement of a word is determined by how it is weighted. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `wordcloud` series are defined in  `plotOptions.wordcloud`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     wordcloud: {       // shared options for all wordcloud series     }   },   series: [{     // specific options for this series instance     type: 'wordcloud'   }] }); ```       
 

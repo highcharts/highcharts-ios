@@ -303,6 +303,10 @@ var TimelineSeries = /** @class */ (function (_super) {
         colorByPoint: true,
         stickyTracking: false,
         ignoreHiddenPoint: true,
+        /**
+         * @ignore
+         * @private
+         */
         legendType: 'point',
         lineWidth: 4,
         tooltip: {
@@ -370,7 +374,7 @@ var TimelineSeries = /** @class */ (function (_super) {
             /**
              * @type    {Highcharts.TimelineDataLabelsFormatterCallbackFunction}
              * @default function () {
-             *   var format;
+             *   let format;
              *
              *   if (!this.series.chart.styledMode) {
              *       format = '<span style="color:' + this.point.color +

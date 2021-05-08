@@ -11,12 +11,14 @@
  * */
 'use strict';
 import Chart from '../../Core/Chart/Chart.js';
+import O from '../../Core/Options.js';
+var getOptions = O.getOptions;
 import Point from '../../Core/Series/Point.js';
 import Series from '../../Core/Series/Series.js';
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
 var seriesTypes = SeriesRegistry.seriesTypes;
 import U from '../../Core/Utilities.js';
-var addEvent = U.addEvent, error = U.error, getOptions = U.getOptions, isArray = U.isArray, isNumber = U.isNumber, pick = U.pick, wrap = U.wrap;
+var addEvent = U.addEvent, error = U.error, isArray = U.isArray, isNumber = U.isNumber, pick = U.pick, wrap = U.wrap;
 import '../../Core/Options.js';
 import butils from './BoostUtils.js';
 import boostable from './Boostables.js';
@@ -43,7 +45,7 @@ Chart.prototype.isChartSeriesBoosting = function () {
 /**
  * Get the clip rectangle for a target, either a series or the chart. For the
  * chart, we need to consider the maximum extent of its Y axes, in case of
- * Highstock panes and navigator.
+ * Highcharts Stock panes and navigator.
  *
  * @private
  * @function Highcharts.Chart#getBoostClipRect
@@ -248,9 +250,11 @@ wrap(Series.prototype, 'processData', function (proceed) {
         // Enter or exit boost mode
         if (this.isSeriesBoosting) {
             // Force turbo-mode:
-            firstPoint = this.getFirstValidPoint(this.options.data);
-            if (!isNumber(firstPoint) && !isArray(firstPoint)) {
-                error(12, false, this.chart);
+            if (this.options.data && this.options.data.length) {
+                firstPoint = this.getFirstValidPoint(this.options.data);
+                if (!isNumber(firstPoint) && !isArray(firstPoint)) {
+                    error(12, false, this.chart);
+                }
             }
             this.enterBoost();
         }
@@ -347,6 +351,7 @@ Series.prototype.hasExtremes = function (checkX) {
  * @function Highcharts.Series#destroyGraphics
  */
 Series.prototype.destroyGraphics = function () {
+    var _this = this;
     var series = this, points = this.points, point, i;
     if (points) {
         for (i = 0; i < points.length; i = i + 1) {
@@ -361,6 +366,15 @@ Series.prototype.destroyGraphics = function () {
             series[prop] = series[prop].destroy();
         }
     });
+    if (this.getZonesGraphs) {
+        var props = this.getZonesGraphs([['graph', 'highcharts-graph']]);
+        props.forEach(function (prop) {
+            var zoneGraph = _this[prop[0]];
+            if (zoneGraph) {
+                _this[prop[0]] = zoneGraph.destroy();
+            }
+        });
+    }
 };
 // Set default options
 boostable.forEach(function (type) {

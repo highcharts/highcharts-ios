@@ -1,0 +1,1 @@
+(function(a){a.wrap(a.Chart.prototype,"addButton",function(a,c){a.apply(this,Array.prototype.slice.call(arguments,1));var b=this;b.exportSVGElements[1].on("touchstart",function(){b.exportChartLocal()})})})(Highcharts);

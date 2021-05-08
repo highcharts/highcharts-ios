@@ -163,9 +163,7 @@ An array of lines stretching across the plot area, marking a specific value on o
 */
 @property(nonatomic, readwrite) NSArray <HIPlotLines *> *plotLines;
 /**
-The width of the grid lines extending the ticks across the plot area. In styled mode, the stroke width is given in the `.highcharts-grid-line` class.
-
-**Defaults to** `0`.
+The width of the grid lines extending the ticks across the plot area. Defaults to 1 on the Y axis and 0 on the X axis, except for 3d charts. In styled mode, the stroke width is given in the `.highcharts-grid-line` class.
 
 **Try it**
 
@@ -269,8 +267,6 @@ The top position of the Y axis. If it's a number, it is interpreted as pixel pos
 /**
 Whether to zoom axis. If `chart.zoomType` is set, the option allows to disable zooming on an individual axis.
 
-**Defaults to** `enabled`.
-
 **Try it**
 
 * [Zoom enabled is false](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/zoomenabled/)
@@ -308,8 +304,6 @@ For categorized axes only. If `on` the tick mark is placed in the center of the 
 /**
 The Z index of the grid lines.
 
-**Defaults to** `1`.
-
 **Try it**
 
 * [A Z index of 4 renders the grid above the graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/gridzindex/)
@@ -321,14 +315,10 @@ Accessibility options for an axis. Requires the accessibility module.
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Whether axis, including axis title, line, ticks and labels, should be visible.
-
-**Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
 When using multiple axis, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in an Axis options are set to false, then the `alignTicks ` will be disabled for the Axis. Disabled for logarithmic axes.
-
-**Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
@@ -337,8 +327,6 @@ The minimum tick interval allowed in axis values. For example on zooming in on a
 @property(nonatomic, readwrite) NSNumber *minTickInterval;
 /**
 Whether to show the first tick label.
-
-**Defaults to** `true`.
 
 **Try it**
 
@@ -390,9 +378,9 @@ In a polar chart, this is the angle of the Y axis in degrees, where 0 is up and 
 */
 @property(nonatomic, readwrite) NSNumber *angle;
 /**
-Whether to allow decimals in this axis' ticks. When counting integers, like persons or hits on a web page, decimals should be avoided in the labels.
+Whether to allow decimals in this axis' ticks. When counting integers, like persons or hits on a web page, decimals should be avoided in the labels. By default, decimals are allowed on small scale axes.
 
-**Defaults to** `true`.
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -430,8 +418,6 @@ A callback function returning array defining where the ticks are laid out on the
 /**
 The dash or dot style of the minor grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
-**Defaults to** `Solid`.
-
 **Try it**
 
 * [Long dashes on minor grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minorgridlinedashstyle/)
@@ -450,7 +436,7 @@ The pixel length of the minor tick marks.
 */
 @property(nonatomic, readwrite) NSNumber *minorTickLength;
 /**
-Datetime axis only. An array determining what time intervals the ticks are allowed to fall on. Each array item is an array where the first value is the time unit and the second value another array of allowed multiples. Defaults to: ```js units: [[   'millisecond', // unit name   [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples ], [   'second',   [1, 2, 5, 10, 15, 30] ], [   'minute',   [1, 2, 5, 10, 15, 30] ], [   'hour',   [1, 2, 3, 4, 6, 8, 12] ], [   'day',   [1] ], [   'week',   [1] ], [   'month',   [1, 3, 6] ], [   'year',   null ]] ```
+Datetime axis only. An array determining what time intervals the ticks are allowed to fall on. Each array item is an array where the first value is the time unit and the second value another array of allowed multiples. Defaults to: ```js units: [[   'millisecond', // unit name   [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples ], [   'second',   [1, 2, 5, 10, 15, 30] ], [   'minute',   [1, 2, 5, 10, 15, 30] ], [   'hour',   [1, 2, 3, 4, 6, 8, 12] ], [   'day',   [1, 2] ], [   'week',   [1, 2] ], [   'month',   [1, 2, 3, 4, 6] ], [   'year',   null ]] ```
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> *units;
 /**
@@ -492,8 +478,6 @@ Whether to show the axis line and title when the axis has no data.
 /**
 The dash or dot style of the grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
-**Defaults to** `Solid`.
-
 **Try it**
 
 * [Long dashes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/gridlinedashstyle/)
@@ -524,6 +508,10 @@ For a datetime axis, the scale will automatically adjust to the appropriate unit
 */
 @property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**
+The Z index for the axis group.
+*/
+@property(nonatomic, readwrite) NSNumber *zIndex;
+/**
 Enable or disable minor ticks. Unless `minorTickInterval` is set, the tick interval is calculated as a fifth of the `tickInterval`. On a logarithmic axis, minor ticks are laid out based on a best guess, attempting to enter approximately 5 minor ticks between each major tick. Prior to v6.0.0, ticks were unabled in auto layout by setting `minorTickInterval` to `"auto"`.
 
 **Defaults to** `false`.
@@ -546,14 +534,12 @@ The pixel width of the minor tick mark.
 /**
 The distance in pixels from the plot area to the axis line. A positive offset moves the axis with it's line, labels and ticks away from the plot area. This is typically used when two or more axes are displayed on the same side of the plot. With multiple axes the offset is dynamically adjusted to avoid collision, this can be overridden by setting offset explicitly.
 
-**Defaults to** `0`.
-
 **Try it**
 
 * [Y axis offset of 70](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/offset/)
 * [Axes positioned in the center of the plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/offset-centered/)
 */
-@property(nonatomic, readwrite) NSNumber *offset;
+@property(nonatomic, readwrite) NSString *offset;
 /**
 Color for the main tick marks. In styled mode, the stroke is given in the `.highcharts-tick` class.
 
@@ -623,8 +609,6 @@ When using an alternate grid color, a band is painted across the plot area betwe
 @property(nonatomic, readwrite) HIColor *alternateGridColor;
 /**
 Applies only when the axis `type` is `category`. When `uniqueNames` is true, points are placed on the X axis according to their names. If the same point name is repeated in the same or another series, the point is placed on the same X position as other points of the same name. When `uniqueNames` is false, the points are laid out in increasing X positions regardless of their names, and the X axis category will take the name of the last point in each position.
-
-**Defaults to** `true`.
 
 **Try it**
 

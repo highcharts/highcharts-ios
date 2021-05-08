@@ -16,7 +16,7 @@ Options for exporting data to CSV or ExCel, or displaying the data in a HTML tab
 **Try it**
 
 * [Categorized data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/categorized/)
-* [Highstock time axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/stock-timeaxis/)
+* [Highcharts Stock time axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/stock-timeaxis/)
 * [Using a third party XLSX converter](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/xlsx/)
 */
 @interface HICsv: HIChartsJSONSerializable

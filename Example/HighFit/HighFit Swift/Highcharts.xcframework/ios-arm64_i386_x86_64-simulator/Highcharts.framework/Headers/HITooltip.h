@@ -262,7 +262,7 @@ Enable or disable the tooltip.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"`, or `"square"`. When `tooltip.split` option is enabled, shape is applied to all boxes except header, which is controlled by `tooltip.headerShape`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
+The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"` or `"rect"`. When `tooltip.split` option is enabled, shape is applied to all boxes except header, which is controlled by `tooltip.headerShape`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
 
 **Defaults to** `callout`.
 */
@@ -286,7 +286,7 @@ The pixel width of the tooltip border. In styled mode, the stroke width is set i
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
-Whether the tooltip should follow the mouse as it moves across columns, pie slices and other point types with an extent. By default it behaves this way for pie, polygon, map, sankey and wordcloud series by override in the `plotOptions` for those series types. For touch moves to behave the same way, `followTouchMove` must be `true` also.
+Whether the tooltip should follow the mouse as it moves across columns, pie slices and other point types with an extent. By default it behaves this way for pie, polygon, map, sankey and wordcloud series by override in the `plotOptions` for those series types. Does not apply if `split` is `true`. For touch moves to behave the same way, `followTouchMove` must be `true` also.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *followPointer;
 /**

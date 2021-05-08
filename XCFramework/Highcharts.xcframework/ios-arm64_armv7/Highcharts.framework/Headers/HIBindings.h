@@ -14,7 +14,7 @@ Bindings definitions for custom HTML buttons. Each binding implements simple eve
 
 **Try it**
 
-* [Custom bindings in Highstock](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/stocktools-thresholds)
+* [Custom bindings in Highcharts Stock](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/stocktools-thresholds)
 */
 @interface HIBindings: HIChartsJSONSerializable
 

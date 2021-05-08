@@ -59,7 +59,7 @@ The x position offset of all labels relative to the tick positions on the axis. 
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-Horizontal axes only. The number of lines to spread the labels over to make room or tighter labels.
+Horizontal axes only. The number of lines to spread the labels over to make room or tighter labels. 0 disables staggering.
 
 **Try it**
 
@@ -68,8 +68,6 @@ Horizontal axes only. The number of lines to spread the labels over to make room
 @property(nonatomic, readwrite) NSNumber *staggerLines;
 /**
 When each category width is more than this many pixels, we don't apply auto rotation. Instead, we lay out the axis label with word wrap. A lower limit makes sense when the label contains multiple short words that don't extend the available horizontal space for each label.
-
-**Defaults to** `80`.
 
 **Try it**
 
@@ -87,7 +85,7 @@ Defines how the labels are be repositioned according to the 3D chart orientation
 */
 @property(nonatomic, readwrite) NSString *position3d;
 /**
-Rotation of the labels in degrees.
+Rotation of the labels in degrees. When `undefined`, the `autoRotation` option takes precedence.
 
 **Defaults to** `0`.
 
@@ -115,8 +113,6 @@ Whether to reserve space for the labels. By default, space is reserved for the l
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reserveSpace;
 /**
 Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the labels.
-
-**Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
@@ -128,7 +124,7 @@ If enabled, the axis labels will skewed to follow the perspective. This will fix
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *skew3d;
 /**
-Callback JavaScript function to format the label. The value is given by `this.value`. Additional properties for `this` are `axis`, `chart`, `isFirst` and `isLast`. The value of the default label formatter can be retrieved by calling `this.axis.defaultLabelFormatter.call(this)` within the function. Defaults to: ```js function() {   return this.value; } ```
+Callback JavaScript function to format the label. The value is given by `this.value`. Additional properties for `this` are `axis`, `chart`, `isFirst`, `isLast` and `text` which holds the value of the default formatter. Defaults to a built in function returning a formatted string depending on whether the axis is `category`, `datetime`, `numeric` or other.
 
 **Try it**
 
@@ -137,9 +133,9 @@ Callback JavaScript function to format the label. The value is given by `this.va
 */
 @property(nonatomic, readwrite) HIFunction *formatter;
 /**
-For horizontal axes, the allowed degrees of label rotation to prevent overlapping labels. If there is enough space, labels are not rotated. As the chart gets narrower, it will start rotating the labels -45 degrees, then remove every second label and try again with rotations 0 and -45 etc. Set it to `false` to disable rotation, which will cause the labels to word-wrap if possible.
+For horizontal axes, the allowed degrees of label rotation to prevent overlapping labels. If there is enough space, labels are not rotated. As the chart gets narrower, it will start rotating the labels -45 degrees, then remove every second label and try again with rotations 0 and -45 etc. Set it to `undefined` to disable rotation, which will cause the labels to word-wrap if possible. Defaults to `[-45]`` on bottom and top axes, `undefined` on left and right axes.
 
-**Defaults to** `[-45]`.
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -148,27 +144,35 @@ For horizontal axes, the allowed degrees of label rotation to prevent overlappin
 */
 @property(nonatomic, readwrite) NSArray<NSNumber *> *autoRotation;
 /**
-The pixel padding for axis labels, to ensure white space between them.
+Whether to allow the axis labels to overlap. When false, overlapping labels are hidden.
 
-**Defaults to** `5`.
+**Defaults to** `false`.
+
+**Try it**
+
+* [X axis labels overlap enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-allowoverlap-true/)
 */
-@property(nonatomic, readwrite) NSNumber *padding;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *allowOverlap;
 /**
-A format string for the axis label. See [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for example usage. Note: The default value is not specified due to the dynamic nature of the default implementation.
+The Z index for the axis labels.
+*/
+@property(nonatomic, readwrite) NSNumber *zIndex;
+/**
+A format string for the axis label. The context is available as format string variables. For example, you can use `{text}` to insert the default formatted text. The recommended way of adding units for the label is using `text`, for example `{text} km`. To add custom numeric or datetime formatting, use `{value}` with formatting, for example `{value:.1f}` or `{value:%Y-%m-%d}`. See [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for more examples of formatting. The default value is not specified due to the dynamic nature of the default implementation.
 
 **Try it**
 
 * [Add units to Y axis label](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/labels-format/)
+* [Linked category names](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-format-linked/)
+* [Custom number format](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-format-custom/)
 */
 @property(nonatomic, readwrite) NSString *format;
 /**
-The Z index for the axis labels.
-
-**Defaults to** `7`.
+The pixel padding for axis labels, to ensure white space between them.
 */
-@property(nonatomic, readwrite) NSNumber *zIndex;
+@property(nonatomic, readwrite) NSNumber *padding;
 /**
-To show only every _n_'th label on the axis, set the step to _n_. Setting the step to 2 shows every other label. By default, the step is calculated automatically to avoid overlap. To prevent this, set it to 1\. This usually only happens on a category axis, and is often a sign that you have chosen the wrong axis type. Read more at [Axis docs](https://www.highcharts.com/docs/chart-concepts/axes) => What axis should I use?
+To show only every _n_'th label on the axis, set the step to _n_. Setting the step to 2 shows every other label. By default, when 0, the step is calculated automatically to avoid overlap. To prevent this, set it to 1\. This usually only happens on a category axis, and is often a sign that you have chosen the wrong axis type. Read more at [Axis docs](https://www.highcharts.com/docs/chart-concepts/axes) => What axis should I use?
 
 **Try it**
 
@@ -180,8 +184,6 @@ To show only every _n_'th label on the axis, set the step to _n_. Setting the st
 How to handle overflowing labels on horizontal axis. If set to `"allow"`, it will not be aligned at all. By default it `"justify"` labels inside the chart area. If there is room to move it, it will be aligned to the edge, else it will be removed.
 
 **Accepted values:** `["allow", "justify"]`.
-
-**Defaults to** `justify`.
 */
 @property(nonatomic, readwrite) NSString *overflow;
 /**
@@ -262,14 +264,6 @@ The background color or gradient for the annotation's label.
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
 */
 @property(nonatomic, readwrite) HIColor *backgroundColor;
-/**
-Whether to allow the annotation's labels to overlap. To make the labels less sensitive for overlapping, the can be set to 0.
-
-**Try it**
-
-* [Hide overlapping labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/tooltip-like/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *allowOverlap;
 /**
 The shadow of the box. The shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
 
