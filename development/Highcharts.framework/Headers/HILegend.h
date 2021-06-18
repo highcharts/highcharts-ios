@@ -107,6 +107,10 @@ The color of the drawn border around the legend.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+A CSS class name to apply to the legend group.
+*/
+@property(nonatomic, readwrite) NSString *className;
+/**
 The layout of the legend items. Can be one of `horizontal` or `vertical` or `proximate`. When `proximate`, the legend items will be placed as close as possible to the graphs they're representing, except in inverted charts or when the legend position doesn't allow it.
 
 **Accepted values:** `["horizontal", "vertical", "proximate"]`.

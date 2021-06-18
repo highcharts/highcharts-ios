@@ -47,6 +47,16 @@ Padding between the points in the heatmap.
 */
 @property(nonatomic, readwrite) NSNumber *pointPadding;
 /**
+The row size - how many Y axis units each heatmap row should span.
+
+**Defaults to** `1`.
+
+**Try it**
+
+* [1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/heatmap/)
+*/
+@property(nonatomic, readwrite) NSNumber *rowsize;
+/**
 The column size - how many X axis units each column in the heatmap should span.
 
 **Defaults to** `1`.
@@ -57,15 +67,9 @@ The column size - how many X axis units each column in the heatmap should span.
 */
 @property(nonatomic, readwrite) NSNumber *colsize;
 /**
-The row size - how many Y axis units each heatmap row should span.
-
-**Defaults to** `1`.
-
-**Try it**
-
-* [1 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/demo/heatmap/)
+The border radius for each heatmap item.
 */
-@property(nonatomic, readwrite) NSNumber *rowsize;
+@property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
 The color applied to null points. In styled mode, a general CSS class is applied instead.
 */

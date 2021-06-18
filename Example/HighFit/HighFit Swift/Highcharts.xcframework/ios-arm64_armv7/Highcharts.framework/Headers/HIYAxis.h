@@ -440,6 +440,10 @@ Datetime axis only. An array determining what time intervals the ticks are allow
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> *units;
 /**
+Whether to pan axis. If `chart.panning` is enabled, the option allows to disable panning on an individual axis.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *panningEnabled;
+/**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
 
 **Accepted values:** `["circle", "polygon"]`.
@@ -539,7 +543,7 @@ The distance in pixels from the plot area to the axis line. A positive offset mo
 * [Y axis offset of 70](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/offset/)
 * [Axes positioned in the center of the plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/offset-centered/)
 */
-@property(nonatomic, readwrite) NSString *offset;
+@property(nonatomic, readwrite) NSNumber *offset;
 /**
 Color for the main tick marks. In styled mode, the stroke is given in the `.highcharts-tick` class.
 

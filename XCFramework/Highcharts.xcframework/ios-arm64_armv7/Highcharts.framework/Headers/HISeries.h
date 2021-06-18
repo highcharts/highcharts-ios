@@ -291,7 +291,7 @@ Series labels are placed as close to the series as possible in a natural way, se
 */
 @property(nonatomic, readwrite) HILabel *label;
 /**
-Same as `accessibility.pointDescriptionFormatter`, but for an individual series. Overrides the chart wide configuration.
+Same as `accessibility.series.descriptionFormatter`, but for an individual series. Overrides the chart wide configuration.
 */
 @property(nonatomic, readwrite) HIFunction *pointDescriptionFormatter;
 /**

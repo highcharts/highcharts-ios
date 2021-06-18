@@ -63,7 +63,7 @@ The class name of the menu appearing from the button.
 */
 @property(nonatomic, readwrite) NSString *menuClassName;
 /**
-The symbol for the button. Points to a definition function in the `Highcharts.Renderer.symbols` collection. The default `exportIcon` function is part of the exporting module. Possible values are "circle", "square", "diamond", "triangle", "triangle-down", "menu", "menuball" or custom shape.
+The symbol for the button. Points to a definition function in the `Highcharts.Renderer.symbols` collection. The default `menu` function is part of the exporting module. Possible values are "circle", "square", "diamond", "triangle", "triangle-down", "menu", "menuball" or custom shape.
 
 **Try it**
 

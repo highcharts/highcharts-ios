@@ -356,6 +356,10 @@ Datetime axis only. An array determining what time intervals the ticks are allow
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> *units;
 /**
+Whether to pan axis. If `chart.panning` is enabled, the option allows to disable panning on an individual axis.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *panningEnabled;
+/**
 The pixel length of the main tick marks.
 
 **Try it**

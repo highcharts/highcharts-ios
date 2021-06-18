@@ -48,6 +48,10 @@ Whether to ignore hidden points when the layout algorithm runs. If `false`, hidd
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
 /**
+The border radius for each treemap item.
+*/
+@property(nonatomic, readwrite) NSNumber *borderRadius;
+/**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;

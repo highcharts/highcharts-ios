@@ -343,6 +343,10 @@ A soft minimum for the axis. If the series data minimum is greater than this, th
 */
 @property(nonatomic, readwrite) NSNumber *softMin;
 /**
+Whether to pan axis. If `chart.panning` is enabled, the option allows to disable panning on an individual axis.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *panningEnabled;
+/**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
 
 **Accepted values:** `["circle", "polygon"]`.
