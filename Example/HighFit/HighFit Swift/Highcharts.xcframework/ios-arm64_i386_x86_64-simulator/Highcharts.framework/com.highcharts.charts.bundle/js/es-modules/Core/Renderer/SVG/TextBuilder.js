@@ -45,11 +45,9 @@ var TextBuilder = /** @class */ (function () {
      * @return {void}.
      */
     TextBuilder.prototype.buildSVG = function () {
-        var wrapper = this.svgElement;
-        var textNode = wrapper.element, renderer = wrapper.renderer, textStr = pick(wrapper.textStr, '').toString(), hasMarkup = textStr.indexOf('<') !== -1, childNodes = textNode.childNodes, textCache, i = childNodes.length, tempParent = this.width && !wrapper.added && renderer.box;
-        var regexMatchBreaks = /<br.*?>/g;
-        // The buildText code is quite heavy, so if we're not changing something
-        // that affects the text, skip it (#6113).
+        var wrapper = this.svgElement, textNode = wrapper.element, renderer = wrapper.renderer, textStr = pick(wrapper.textStr, '').toString(), hasMarkup = textStr.indexOf('<') !== -1, childNodes = textNode.childNodes, tempParent = this.width && !wrapper.added && renderer.box, regexMatchBreaks = /<br.*?>/g, 
+        // The buildText code is quite heavy, so if we're not changing
+        // something that affects the text, skip it (#6113).
         textCache = [
             textStr,
             this.ellipsis,
@@ -65,7 +63,7 @@ var TextBuilder = /** @class */ (function () {
         wrapper.textCache = textCache;
         delete wrapper.actualWidth;
         // Remove old text
-        while (i--) {
+        for (var i = childNodes.length; i--;) {
             textNode.removeChild(childNodes[i]);
         }
         // Simple strings, add text directly and return
@@ -121,6 +119,20 @@ var TextBuilder = /** @class */ (function () {
         var wrapper = this.svgElement;
         var x = attr(wrapper.element, 'x');
         wrapper.firstLineMetrics = void 0;
+        // Remove empty tspans (including breaks) from the beginning because
+        // SVG's getBBox doesn't count empty lines. The use case is tooltip
+        // where the header is empty. By doing this in the DOM rather than in
+        // the AST, we can inspect the textContent directly and don't have to
+        // recurse down to look for valid content.
+        var firstChild;
+        while ((firstChild = wrapper.element.firstChild)) {
+            if (/^[\s\u200B]*$/.test(firstChild.textContent || ' ')) {
+                wrapper.element.removeChild(firstChild);
+            }
+            else {
+                break;
+            }
+        }
         // Modify hard line breaks by applying the rendered line height
         [].forEach.call(wrapper.element.querySelectorAll('tspan.highcharts-br'), function (br, i) {
             if (br.nextSibling && br.previousSibling) { // #5261
@@ -316,16 +328,6 @@ var TextBuilder = /** @class */ (function () {
             }
         };
         nodes.forEach(modifyChild);
-        // Remove empty spans from the beginning because SVG's getBBox doesn't
-        // count empty lines. The use case is tooltip where the header is empty.
-        while (nodes[0]) {
-            if (nodes[0].tagName === 'tspan' && !nodes[0].children) {
-                nodes.splice(0, 1);
-            }
-            else {
-                break;
-            }
-        }
     };
     /*
      * Truncate the text node contents to a given length. Used when the css

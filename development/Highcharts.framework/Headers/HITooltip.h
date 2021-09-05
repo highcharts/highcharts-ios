@@ -84,7 +84,7 @@ A callback function to place the tooltip in a default position. The callback rec
 */
 @property(nonatomic, readwrite) HIFunction *positioner;
 /**
-Prevents the tooltip from switching or closing, when touched or pointed.
+Prevents the tooltip from switching or closing when touched or pointed.
 
 **Try it**
 
@@ -123,8 +123,6 @@ CSS styles for the tooltip. The tooltip can also be styled through the CSS class
 The name of a symbol to use for the border around the tooltip header. Applies only when `tooltip.split` is enabled. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
 
 **Accepted values:** `["callout", "square"]`.
-
-**Defaults to** `callout`.
 */
 @property(nonatomic, readwrite) NSString *headerShape;
 /**
@@ -183,8 +181,6 @@ Proximity snap for graphs or single points. It defaults to 10 for mouse-powered 
 @property(nonatomic, readwrite) NSNumber *snap;
 /**
 When the tooltip is shared, the entire plot area will capture mouse movement or touch events. Tooltip texts for series types with ordered data (not pie, scatter, flags etc) will be shown in a single bubble. This is recommended for single series charts and for tablet/mobile optimized charts. See also `tooltip.split`, that is better suited for charts with many series, especially line-type series. The `tooltip.split` option takes precedence over `tooltip.shared`.
-
-**Defaults to** `false`.
 
 **Try it**
 
@@ -263,8 +259,6 @@ Enable or disable the tooltip.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"` or `"rect"`. When `tooltip.split` option is enabled, shape is applied to all boxes except header, which is controlled by `tooltip.headerShape`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
-
-**Defaults to** `callout`.
 */
 @property(nonatomic, readwrite) NSString *shape;
 /**
@@ -291,8 +285,6 @@ Whether the tooltip should follow the mouse as it moves across columns, pie slic
 @property(nonatomic, readwrite) NSNumber /* Bool */ *followPointer;
 /**
 The number of milliseconds to wait until the tooltip is hidden when mouse out from a point or chart.
-
-**Defaults to** `500`.
 */
 @property(nonatomic, readwrite) NSNumber *hideDelay;
 /**

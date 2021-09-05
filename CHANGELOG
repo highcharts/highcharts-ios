@@ -1,3 +1,53 @@
+# Version 9.2.2
+
+## Framework:
+
+1. Improved ES module architecture with support for tree shaking of the most commonly used modules. See #8667.
+2. Added new feature, `series.relativeXValue`, allowing point X values to be relative to the `series.pointStart` and subject to `series.pointInterval` and `series.pointIntervalUnit`.
+3. Added internal support for Google Sheets API v4, fixing stability problems with loading data from spreadsheets.
+
+## Framework upgrade notes:
+
+1. Existing setups with Google Sheets stopped working in August 2021 as Google phased out version 3 of their Google Sheets API. Highcharts has now been upgraded to version 4 of the API, but this will not work unless an API key is given in the data.googleAPIKey option. See the `comprehensive tutorial` from Hands-On Data Visualization on how to obtain the key. Additionally, `data.googleSpreadsheetWorksheet` is deprecated and replaced by `data.googleSpreadsheetRange`, which allows for more detailed instructions on what data to load.
+
+## Framework bug fixes:
+
+1. Fixed #15938, charts still crashed in some legacy browsers where `Intl` was missing.
+2. Fixed #15235, whitespace between HTML elements got removed.
+3. Fixed #15986, accessibility exit anchor disappeared on `Chart.update`.
+4. Fixed #15229, accessibility region labels were sometimes duplicated.
+5. Fixed #16119, touch scrolling was blocked after zooming when single-finger panning was not enabled.
+6. Fixed #16146, negative values broke sunburst chart.
+7. Fixed #16153, `fontFamily` reset when updating `chart.style`.
+8. Fixed #16126, printing chart in full screen with accessibility loaded threw.
+9. Fixed #16112, axis options set by `setOptions` were not picked up by polar chart when chart axis options were set as an array.
+10. Fixed #16104, chart warned about unsorted data when updating category names.
+11. Fixed #14143, #14434, #13310, tooltip with `stickOnContact` and `useHTML` or `outside` enabled did not work properly.
+12. Fixed #16080, #13705, sankey chart with self-referential points broke on `redraw`.
+13. Fixed #16084, #13671, updating timeline chart did not work properly in some cases.
+14. Fixed #15334, some waterfall data labels did not show for points below `threshold`.
+15. Fixed #16062, lines after the first line break in text with `useHTML` set to `true` were misaligned in exported charts when exporting.allowHTML was set to `false`.
+16. Fixed #16053, color axis disappeared after toggling legend.
+17. Fixed #16044, draggable point guide box was not big enough when the point was partially outside the end of the axis.
+18. Fixed #16042, 1px gaps showed between some xrange points when there was no gaps in the data.
+19. Fixed #1441, `datetime` axis ticks did not get date/time formatting applied when `tickPositions` were set.
+20. Fixed #15777, plot line labels were not clipped.
+21. Fixed #13840, 3d column chart with scrollbar showed points outside plot in upper left corner.
+22. Fixed #15983, event did not get removed when updating it to `undefined`.
+23. Fixed #15973, word cloud focus border position for rotated points was wrong in Firefox.
+24. Fixed #12015, linked series did not get inactive state applied when hovering legend item.
+25. Fixed #15946, unchanged markers set in options did not animate when updating data through `update`.
+26. Fixed #15449, HTML in exporting menu item text did not work.
+27. Fixed #15922, heatmap data labels with `useHTML` enabled and default formatter did not work, per-point `borderColor` and `borderWidth` did not work.
+28. Fixed #15902, legend proxy buttons did not update when updating series.
+29. Fixed 3d bug, z-axis updated twice on `Chart.update`.
+30. Fixed #15862, `Chart.update` with `oneToOne` attempting to remove pane threw.
+31. Fixed #9047, boosted series with null points showed warnings in some browsers.
+32. Fixed #5430, marker shown on hover with disabled markers missed CSS class.
+33. Fixed #15909, pie point with `visible` set to `false` and `useHTML` data labels threw.
+34. Fixed additional case for #15235, nested whitespace got removed in HTML.
+35. Fixed #16231, a regresssion in v9.2 causing exporting not to work with `styledMode` enabled.
+
 # Version 9.1.2
 
 ## Framework:

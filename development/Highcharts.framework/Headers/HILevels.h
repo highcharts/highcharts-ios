@@ -54,17 +54,9 @@ Can set `dataLabels` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) HIDataLabels *dataLabels;
 /**
-Can set a `rotationMode` on all points which lies on the same level.
-*/
-@property(nonatomic, readwrite) NSString *rotationMode;
-/**
 Can set a `borderWidth` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
-/**
-Can set a `rotation` on all points which lies on the same level.
-*/
-@property(nonatomic, readwrite) NSNumber *rotation;
 /**
 Can set the layoutAlgorithm option on a specific level.
 

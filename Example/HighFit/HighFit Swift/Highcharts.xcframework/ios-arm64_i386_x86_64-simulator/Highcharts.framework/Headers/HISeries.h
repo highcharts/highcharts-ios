@@ -224,13 +224,14 @@ The main color of the series. In line type series it applies to the line and the
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
-If no x values are given for the points in a series, `pointInterval` defines the interval of the x values. For example, if a series contains one value every decade starting from year 0, set `pointInterval` to `10`. In true `datetime` axes, the `pointInterval` is set in milliseconds. It can be also be combined with `pointIntervalUnit` to draw irregular time intervals. Please note that this options applies to the _series data_, not the interval of the axis ticks, which is independent.
+If no x values are given for the points in a series, `pointInterval` defines the interval of the x values. For example, if a series contains one value every decade starting from year 0, set `pointInterval` to `10`. In true `datetime` axes, the `pointInterval` is set in milliseconds. It can be also be combined with `pointIntervalUnit` to draw irregular time intervals. If combined with `relativeXValue`, an x value can be set on each point, and the `pointInterval` is added x times to the `pointStart` setting. Please note that this options applies to the _series data_, not the interval of the axis ticks, which is independent.
 
 **Defaults to** `1`.
 
 **Try it**
 
 * [Datetime X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-pointstart-datetime/)
+* [Relative x value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-relativexvalue/)
 */
 @property(nonatomic, readwrite) NSNumber *pointInterval;
 /**
@@ -395,6 +396,16 @@ Determines whether the series should look for the nearest point in both dimensio
 * [Different hover behaviors](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series/findnearestpointby/)
 */
 @property(nonatomic, readwrite) NSString *findNearestPointBy;
+/**
+When true, X values in the data set are relative to the current `pointStart`, `pointInterval` and `pointIntervalUnit` settings. This allows compression of the data for datasets with irregular X values. The real X values are computed on the formula `f(x) = ax + b`, where `a` is the `pointInterval` (optionally with a time unit given by `pointIntervalUnit`), and `b` is the `pointStart`.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Relative X value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-relativexvalue/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *relativeXValue;
 /**
 The threshold, also called zero level or base level. For line type series this is only used in conjunction with `negativeColor`.
 
@@ -588,7 +599,7 @@ An additional class name to apply to the series' graphical elements. This option
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-If no x values are given for the points in a series, pointStart defines on what value to start. For example, if a series contains one yearly value starting from 1945, set pointStart to 1945.
+If no x values are given for the points in a series, pointStart defines on what value to start. For example, if a series contains one yearly value starting from 1945, set pointStart to 1945. If combined with `relativeXValue`, an x value can be set on each point. The x value from the point options is multiplied by `pointInterval` and added to `pointStart` to produce a modified x value.
 
 **Defaults to** `0`.
 
@@ -596,6 +607,7 @@ If no x values are given for the points in a series, pointStart defines on what 
 
 * [Linear](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-pointstart-linear/)
 * [Datetime](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-pointstart-datetime/)
+* [Relative x value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-relativexvalue/)
 */
 @property(nonatomic, readwrite) NSNumber *pointStart;
 /**

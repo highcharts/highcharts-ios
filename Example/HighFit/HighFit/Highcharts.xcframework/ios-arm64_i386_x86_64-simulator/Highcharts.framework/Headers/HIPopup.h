@@ -74,6 +74,7 @@ Translations for all field names used in popup.
 @property(nonatomic, readwrite) NSString *xAxisUnit;
 @property(nonatomic, readwrite) NSString *shapeOptions;
 @property(nonatomic, readwrite) NSString *outerBackground;
+@property(nonatomic, readwrite) NSString *periods;
 @property(nonatomic, readwrite) NSString *simpleShapes;
 @property(nonatomic, readwrite) NSString *stroke;
 @property(nonatomic, readwrite) NSString *fibonacci;

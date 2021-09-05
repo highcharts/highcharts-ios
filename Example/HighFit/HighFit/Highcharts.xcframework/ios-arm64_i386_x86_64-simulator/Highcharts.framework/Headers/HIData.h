@@ -39,6 +39,14 @@ Enables automatic refetching of remote datasets every _n_ seconds (defined by se
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enablePolling;
 /**
+The Google Spreadsheet `range` to use in combination with `googleSpreadsheetKey`. See [developers.google.com](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get) for details. If given, it takes precedence over `startColumn`, `endColumn`, `startRow` and `endRow`.
+
+**Try it**
+
+* [Load a Google Spreadsheet](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/google-spreadsheet/)
+*/
+@property(nonatomic, readwrite) NSString *googleSpreadsheetRange;
+/**
 In tabular input data, the first column (indexed by 0) to use.
 
 **Defaults to** `0`.
@@ -67,13 +75,13 @@ An HTML table or the id of such to be parsed as input data. Related options are 
 */
 @property(nonatomic, readwrite) NSString *table;
 /**
-A URL to a remote JSON dataset, structured as a row array. Will be fetched when the chart is created using Ajax.
+A callback function to access the parsed columns, the two-dimentional input data array directly, before they are interpreted into series data and categories. Return `false` to stop completion, or call `this.complete()` to continue async.
 
 **Try it**
 
-* [Rows with live polling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/livedata-rows)
+* [Modify data after parse](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/parsed/)
 */
-@property(nonatomic, readwrite) NSString *rowsURL;
+@property(nonatomic, readwrite) HIFunction *parsed;
 /**
 A callback function to parse string representations of dates into JavaScript timestamps. Should return an integer timestamp on success.
 */
@@ -115,14 +123,6 @@ Which of the predefined date formats in Date.prototype.dateFormats to use to par
 */
 @property(nonatomic, readwrite) NSString *dateFormat;
 /**
-The Google Spreadsheet worksheet to use in combination with `googleSpreadsheetKey`. The available id's from your sheet can be read from `https://spreadsheets.google.com/feeds/worksheets/{key}/public/basic`.
-
-**Try it**
-
-* [Load a Google Spreadsheet](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/google-spreadsheet/)
-*/
-@property(nonatomic, readwrite) NSString *googleSpreadsheetWorksheet;
-/**
 Sets the refresh rate for data polling when importing remote dataset by setting `data.csvURL`, `data.rowsURL`, `data.columnsURL`, or `data.googleSpreadsheetKey`. Note that polling must be enabled by setting `data.enablePolling` to true. The value is the number of seconds between pollings. It cannot be set to less than 1 second.
 
 **Defaults to** `1`.
@@ -133,13 +133,13 @@ Sets the refresh rate for data polling when importing remote dataset by setting 
 */
 @property(nonatomic, readwrite) NSNumber *dataRefreshRate;
 /**
-A callback function to access the parsed columns, the two-dimentional input data array directly, before they are interpreted into series data and categories. Return `false` to stop completion, or call `this.complete()` to continue async.
+A URL to a remote JSON dataset, structured as a row array. Will be fetched when the chart is created using Ajax.
 
 **Try it**
 
-* [Modify data after parse](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/parsed/)
+* [Rows with live polling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/livedata-rows)
 */
-@property(nonatomic, readwrite) HIFunction *parsed;
+@property(nonatomic, readwrite) NSString *rowsURL;
 /**
 In tabular input data, the first row (indexed by 0) to use.
 
@@ -217,7 +217,15 @@ Whether to use the first row in the data set as series names.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *firstRowAsNames;
 /**
-The key for a Google Spreadsheet to load. See [general information on GS](https://developers.google.com/gdata/samples/spreadsheet_sample).
+The Google Spreadsheet API key required for access generated at [APIServices/Credentials](https://console.cloud.google.com/apis/credentials). See a comprehensive tutorial for setting up the key at the [Hands-On Data Visualization](https://handsondataviz.org/google-sheets-api-key.html) book website.
+
+**Try it**
+
+* [Load a Google Spreadsheet](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/google-spreadsheet/)
+*/
+@property(nonatomic, readwrite) NSString *googleAPIKey;
+/**
+The key or `spreadsheetId` value for a Google Spreadsheet to load. See [developers.google.com](https://developers.google.com/sheets/api/guides/concepts) for how to find the `spreadsheetId`. In order for Google Sheets to load, a valid `googleAPIKey` must also be given.
 
 **Try it**
 
