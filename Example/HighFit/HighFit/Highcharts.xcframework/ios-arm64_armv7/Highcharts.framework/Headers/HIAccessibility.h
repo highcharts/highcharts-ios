@@ -20,7 +20,6 @@
 #import "HIAccessibilityLegend.h"
 #import "HISonification.h"
 #import "HIAxis.h"
-#import "HIFunction.h"
 
 
 /**
@@ -29,7 +28,7 @@ Options for configuring accessibility for the chart. Requires the [accessibility
 @interface HIAccessibility: HIChartsJSONSerializable
 
 /**
-Amount of landmarks/regions to create for screen reader users. More landmarks can make navigation with screen readers easier, but can be distracting if there are lots of charts on the page. Three modes are available: - `all`: Adds regions for all series, legend, menu, information   region. - `one`: Adds a single landmark per chart. - `disabled`: No landmarks are added.
+Amount of landmarks/regions to create for screen reader users. More landmarks can make navigation with screen readers easier, but can be distracting if there are lots of charts on the page. Three modes are available: - `all`: Adds regions for all series, legend, information   region. - `one`: Adds a single landmark per chart. - `disabled`: No landmarks are added.
 
 **Accepted values:** `["all", "one", "disabled"]`.
 */
@@ -90,10 +89,6 @@ A text description of the chart. **Note: Prefer using `linkedDescription` or `ca
 Expose only the series element to screen readers, not its points.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *exposeAsGroupOnly;
-/**
-Formatter function to use instead of the default for point descriptions. Same as `accessibility.point.descriptionFormatter`, but for a single series.
-*/
-@property(nonatomic, readwrite) HIFunction *pointDescriptionFormatter;
 /**
 Range description for an axis. Overrides the default range description. Set to empty to disable range description for this axis.
 */

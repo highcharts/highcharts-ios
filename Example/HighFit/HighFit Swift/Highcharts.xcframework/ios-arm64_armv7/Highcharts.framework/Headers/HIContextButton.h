@@ -20,10 +20,6 @@ Options for the export button. In styled mode, export button styles can be appli
 See `navigation.buttonOptions.symbolFill`.
 
 **Defaults to** `#666666`.
-
-**Try it**
-
-* [Blue symbol stroke for one of the buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolfill/)
 */
 @property(nonatomic, readwrite) HIColor *symbolFill;
 /**
@@ -72,13 +68,15 @@ The symbol for the button. Points to a definition function in the `Highcharts.Re
 */
 @property(nonatomic, readwrite) NSString *symbol;
 /**
-The color of the symbol's stroke or line.
+The vertical offset of the button's position relative to its `verticalAlign`.
+
+**Defaults to** `0`.
 
 **Try it**
 
-* [Blue symbol stroke](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-symbolstroke/)
+* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
 */
-@property(nonatomic, readwrite) HIColor *symbolStroke;
+@property(nonatomic, readwrite) NSNumber *y;
 /**
 A text string to add to the individual button.
 
@@ -90,14 +88,7 @@ A text string to add to the individual button.
 * [Combined symbol and text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/buttons-text-symbol/)
 */
 @property(nonatomic, readwrite) NSString *text;
-/**
-Alignment for the buttons.
-
-**Try it**
-
-* [Center aligned](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-align/)
-*/
-@property(nonatomic, readwrite) NSString *align;
+@property(nonatomic, readwrite) HITheme *theme;
 /**
 Whether to enable buttons.
 
@@ -108,84 +99,6 @@ Whether to enable buttons.
 * [Exporting module loaded but buttons disabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-enabled/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
-/**
-A configuration object for the button theme. The object accepts SVG properties like `stroke-width`, `stroke` and `fill`. Tri-state button styles are supported by the `states.hover` and `states.select` objects.
-
-**Try it**
-
-* [Theming the buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-theme/)
-*/
-@property(nonatomic, readwrite) HITheme *theme;
-/**
-Pixel height of the buttons.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *height;
-/**
-The pixel width of the button.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *width;
-/**
-The pixel spacing between buttons.
-*/
-@property(nonatomic, readwrite) NSNumber *buttonSpacing;
-/**
-The pixel size of the symbol on the button.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolSize;
-/**
-The vertical offset of the button's position relative to its `verticalAlign`.
-
-**Defaults to** `0`.
-
-**Try it**
-
-* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
-*/
-@property(nonatomic, readwrite) NSNumber *y;
-/**
-The vertical alignment of the buttons. Can be one of `"top"`, `"middle"` or `"bottom"`.
-
-**Try it**
-
-* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
-*/
-@property(nonatomic, readwrite) NSString *verticalAlign;
-/**
-The y position of the center of the symbol inside the button.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolY;
-/**
-The x position of the center of the symbol inside the button.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolX;
-/**
-The pixel stroke width of the symbol on the button.
-
-**Try it**
-
-* [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
-*/
-@property(nonatomic, readwrite) NSNumber *symbolStrokeWidth;
 
 -(NSDictionary *)getParams;
 

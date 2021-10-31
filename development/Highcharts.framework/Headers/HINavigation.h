@@ -17,23 +17,10 @@
 
 
 /**
-A collection of options for buttons and menus appearing in the exporting module.
+A collection of options for buttons and menus appearing in the exporting module or in Stock Tools.
 */
 @interface HINavigation: HIChartsJSONSerializable
 
-/**
-CSS styles for the popup menu appearing by default when the export icon is clicked. This menu is rendered in HTML.
-
-**Defaults to** `{"border": "1px solid #999999", "background": "#ffffff", "padding": "5px 0"}`.
-
-**Try it**
-
-* [Light gray menu background](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menustyle/)
-*/
-@property(nonatomic, readwrite) HICSSObject *menuStyle;
-/**
-A collection of options for buttons appearing in the exporting module. In styled mode, the buttons are styled with the `.highcharts-contextbutton` and `.highcharts-button-symbol` classes.
-*/
 @property(nonatomic, readwrite) HIButtonOptions *buttonOptions;
 /**
 Path where Highcharts will look for icons. Change this to use icons from a different server.
@@ -52,33 +39,14 @@ Additional options to be merged into all annotations.
 */
 @property(nonatomic, readwrite) HIAnnotationsOptions *annotationsOptions;
 /**
-CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML. Font size defaults to `11px` on desktop and `14px` on touch devices.
-
-**Defaults to** `{"padding": "0.5em 1em", "color": "#333333", "background": "none", "fontSize": "11px/14px", "transition": "background 250ms, color 250ms"}`.
-
-**Try it**
-
-* [Add a grey stripe to the left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemstyle/)
-*/
-@property(nonatomic, readwrite) HICSSObject *menuItemStyle;
-/**
 Bindings definitions for custom HTML buttons. Each binding implements simple event-driven interface: - `className`: classname used to bind event to - `init`: initial event, fired on button click - `start`: fired on first click on a chart - `steps`: array of sequential events fired one after another on each  of users clicks - `end`: last event to be called after last step event
 
 **Try it**
 
-* [Custom bindings in Highcharts Stock](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/stocktools-thresholds)
+* [Simple binding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/bindings/)
+* [Custom annotation binding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/bindings-custom-annotation/)
 */
 @property(nonatomic, readwrite) HIBindings *bindings;
-/**
-CSS styles for the hover state of the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
-
-**Defaults to** `{"background": "#335cad", "color": "#ffffff"}`.
-
-**Try it**
-
-* [Bold text on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/menuitemhoverstyle/)
-*/
-@property(nonatomic, readwrite) HICSSObject *menuItemHoverStyle;
 /**
 Events to communicate between Stock Tools and custom GUI.
 */

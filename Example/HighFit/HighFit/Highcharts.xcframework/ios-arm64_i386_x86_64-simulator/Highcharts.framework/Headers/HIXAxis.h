@@ -263,8 +263,8 @@ Whether to force the axis to end on a tick. Use this option with the `maxPadding
 
 **Try it**
 
-* [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/reflow-true/)
-* [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/endontick/)
+* [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/endontick/)
+* [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/endontick-false/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *endOnTick;
 /**

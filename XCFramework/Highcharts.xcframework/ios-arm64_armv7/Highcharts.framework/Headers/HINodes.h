@@ -20,6 +20,14 @@ A collection of options for the individual nodes. The nodes in a sankey diagram 
 @interface HINodes: HIChartsJSONSerializable
 
 /**
+The vertical offset of a node. Positive values shift the node down, negative shift it up. If a percantage string is given, the node is offset by the percentage of the node size.
+
+**Try it**
+
+* [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ offsetVertical;
+/**
 The color index of the auto generated node, especially for use in styled mode.
 */
 @property(nonatomic, readwrite) NSNumber *colorIndex;
@@ -32,6 +40,14 @@ The color of the auto generated node.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
+The horizontal offset of a node. Positive values shift the node right, negative shift it left. If a percantage string is given, the node is offset by the percentage of the node size.
+
+**Try it**
+
+* [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ offsetHorizontal;
+/**
 Individual data label for each node. The options are the same as the ones for `series.sankey.dataLabels`.
 */
 @property(nonatomic, readwrite) NSArray <HIDataLabels *> *dataLabels;
@@ -43,16 +59,6 @@ An optional column index of where to place the node. The default behaviour is to
 * [Specified node column](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
 */
 @property(nonatomic, readwrite) NSNumber *column;
-/**
-In a horizontal layout, the vertical offset of a node in terms of weight. Positive values shift the node downwards, negative shift it upwards. In a vertical layout, like organization chart, the offset is horizontal. If a percantage string is given, the node is offset by the percentage of the node size plus `nodePadding`.
-
-**Defaults to** `0`.
-
-**Try it**
-
-* [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ offset;
 /**
 The id of the auto-generated node, refering to the `from` or `to` setting of the link.
 */

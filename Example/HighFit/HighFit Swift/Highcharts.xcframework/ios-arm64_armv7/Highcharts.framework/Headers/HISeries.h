@@ -179,16 +179,6 @@ When set to `false` will prevent the series data from being included in any form
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
-Whether to select the series initially. If `showCheckbox` is true, the checkbox next to the series name in the legend will be checked for a selected series.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [One out of two series selected](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-selected/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *selected;
-/**
 Styled mode only. A specific color index to use for the series, so its graphic representations are given the class name `highcharts-color-{n}`.
 */
 @property(nonatomic, readwrite) NSNumber *colorIndex;
@@ -441,6 +431,10 @@ For some series, there is a limit that shuts down initial animation by default w
 */
 @property(nonatomic, readwrite) NSNumber *animationLimit;
 /**
+When a series contains a data array that is longer than this, only one dimensional arrays of numbers, or two dimensional arrays with x and y values are allowed. Also, only the first point is tested, and the rest are assumed to be the same format. This saves expensive data checking and indexing in long series. Set it to `0` disable. Note: In boost mode turbo threshold is forced. Only array of numbers or two dimensional arrays are allowed.
+*/
+@property(nonatomic, readwrite) NSNumber *turboThreshold;
+/**
 An array specifying which option maps to which key in the data point array. This makes it convenient to work with unstructured data arrays from different sources.
 
 **Try it**
@@ -450,9 +444,15 @@ An array specifying which option maps to which key in the data point array. This
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *keys;
 /**
-When a series contains a data array that is longer than this, only one dimensional arrays of numbers, or two dimensional arrays with x and y values are allowed. Also, only the first point is tested, and the rest are assumed to be the same format. This saves expensive data checking and indexing in long series. Set it to `0` disable. Note: In boost mode turbo threshold is forced. Only array of numbers or two dimensional arrays are allowed.
+Whether to select the series initially. If `showCheckbox` is true, the checkbox next to the series name in the legend will be checked for a selected series.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [One out of two series selected](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-selected/)
 */
-@property(nonatomic, readwrite) NSNumber *turboThreshold;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *selected;
 /**
 If set to `true`, the accessibility module will skip past the points in this series for keyboard navigation.
 */

@@ -21,10 +21,6 @@ A collection of attributes for the button. The object takes SVG attributes like 
 
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
-Padding for the button.
-*/
-@property(nonatomic, readwrite) NSNumber *padding;
-/**
 Default stroke for the buttons.
 
 **Defaults to** `none`.

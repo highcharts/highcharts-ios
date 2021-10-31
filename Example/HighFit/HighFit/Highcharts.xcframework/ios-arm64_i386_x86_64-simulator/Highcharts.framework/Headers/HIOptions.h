@@ -229,7 +229,7 @@ Time options that can apply globally or to individual charts. These settings aff
 @property(nonatomic, readwrite) HITime *time;
 
 /**
-A collection of options for buttons and menus appearing in the exporting module.
+A collection of options for buttons and menus appearing in the exporting module or in Stock Tools.
 */
 @property(nonatomic, readwrite) HINavigation *navigation;
 

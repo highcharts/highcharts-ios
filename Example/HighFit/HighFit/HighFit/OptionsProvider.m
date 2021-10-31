@@ -57,7 +57,6 @@
         
         HINavigation *navigation = [[HINavigation alloc]init];
         navigation.buttonOptions = [[HIButtonOptions alloc]init];
-        navigation.buttonOptions.symbolStroke = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.4];
         navigation.buttonOptions.theme = [[HITheme alloc] init];
         navigation.buttonOptions.theme.fill = [[HIColor alloc] initWithRGBA:0 green:0 blue:0 alpha:0.0];
         hioptions.navigation = navigation;
@@ -157,7 +156,6 @@
         
         HINavigation *navigation = [[HINavigation alloc]init];
         navigation.buttonOptions = [[HIButtonOptions alloc]init];
-        navigation.buttonOptions.symbolStroke = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.4];
         navigation.buttonOptions.theme = [[HITheme alloc] init];
         navigation.buttonOptions.theme.fill = [[HIColor alloc] initWithRGBA:0 green:0 blue:0 alpha:0.0];
         hioptions.navigation = navigation;
@@ -255,7 +253,6 @@
         
         HINavigation *navigation = [[HINavigation alloc]init];
         navigation.buttonOptions = [[HIButtonOptions alloc]init];
-        navigation.buttonOptions.symbolStroke = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.4];
         navigation.buttonOptions.theme = [[HITheme alloc] init];
         navigation.buttonOptions.theme.fill = [[HIColor alloc] initWithRGBA:0 green:0 blue:0 alpha:0.0];
         hioptions.navigation = navigation;

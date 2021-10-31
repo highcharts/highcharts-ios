@@ -6,6 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HIEllipseAnnotation.h"
 #import "HINavigationBindingsOptionsObject.h"
 
 
@@ -14,7 +15,8 @@ Bindings definitions for custom HTML buttons. Each binding implements simple eve
 
 **Try it**
 
-* [Custom bindings in Highcharts Stock](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/stocktools-thresholds)
+* [Simple binding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/bindings/)
+* [Custom annotation binding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/bindings-custom-annotation/)
 */
 @interface HIBindings: HIChartsJSONSerializable
 
@@ -30,6 +32,7 @@ A label annotation bindings. Includes `start` event only.
 A circle annotation bindings. Includes `start` and one event in `steps` array.
 */
 @property(nonatomic, readwrite) HINavigationBindingsOptionsObject *circleAnnotation;
+@property(nonatomic, readwrite) HIEllipseAnnotation *ellipseAnnotation;
 
 -(NSDictionary *)getParams;
 

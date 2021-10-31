@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "Highcharts"
-  s.version      = "9.2.2"
+  s.version      = "9.3.0"
   s.summary      = "Powerful, vast charting library"
 
   s.description  = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
    s.license   =  { :type =>'Custom', :file => "LICENSE" }
    
    s.author             = "Highsoft"
-   s.source       = { :git => "https://github.com/highcharts/highcharts-ios.git", :tag => "v9.2.2" }
+   s.source       = { :git => "https://github.com/highcharts/highcharts-ios.git", :tag => "v9.3.0" }
    s.ios.deployment_target = '9.0'
 
    

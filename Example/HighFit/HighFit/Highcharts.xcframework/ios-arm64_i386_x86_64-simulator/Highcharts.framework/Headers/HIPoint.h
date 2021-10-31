@@ -12,27 +12,14 @@
 
 
 /**
-Properties for each single point.
+Point accessibility options for a series.
 */
 @interface HIPoint: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) HIEvents *events;
 /**
-The y position of the point. Units can be either in axis or chart pixel coordinates.
+Formatter function to use instead of the default for point descriptions. Same as `accessibility.point.descriptionFormatter`, but applies to a series instead of the whole chart. Note: Prefer using `accessibility.point.valueDescriptionFormat` instead if possible, as default functionality such as describing annotations will be preserved.
 */
-@property(nonatomic, readwrite) NSNumber *y;
-/**
-The x position of the point. Units can be either in axis or chart pixel coordinates.
-*/
-@property(nonatomic, readwrite) NSNumber *x;
-/**
-This number defines which xAxis the point is connected to. It refers to either the axis id or the index of the axis in the xAxis array. If the option is not configured or the axis is not found the point's x coordinate refers to the chart pixels.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ xAxis;
-/**
-This number defines which yAxis the point is connected to. It refers to either the axis id or the index of the axis in the yAxis array. If the option is not configured or the axis is not found the point's y coordinate refers to the chart pixels.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ yAxis;
+@property(nonatomic, readwrite) HIFunction *descriptionFormatter;
 /**
 Format to use for describing the values of data points to assistive technology - including screen readers. The point context is available as `{point}`. Additionally, the series name, annotation info, and description added in `point.accessibility.description` is added by default if relevant. To override this, use the `accessibility.point.descriptionFormatter` option.
 */
@@ -54,13 +41,10 @@ Prefix to add to the values in the point descriptions. Uses `tooltip.valuePrefix
 */
 @property(nonatomic, readwrite) NSString *valuePrefix;
 /**
-Formatter function to use instead of the default for point descriptions. Receives one argument, `point`, referring to the point to describe. Should return a string with the description of the point for a screen reader user. If `false` is returned, the default formatter will be used for that point. Note: Prefer using `accessibility.point.valueDescriptionFormat` instead if possible, as default functionality such as describing annotations will be preserved.
-*/
-@property(nonatomic, readwrite) HIFunction *descriptionFormatter;
-/**
 Decimals to use for the values in the point descriptions. Uses `tooltip.valueDecimals` if not defined.
 */
 @property(nonatomic, readwrite) NSNumber *valueDecimals;
+@property(nonatomic, readwrite) HIEvents *events;
 
 -(NSDictionary *)getParams;
 

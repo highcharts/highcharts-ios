@@ -1,3 +1,37 @@
+# Version 9.3.0
+
+## iOS:
+
+1. Added `HIAnnotationMockPointOptionsObject` type.
+
+## Framework:
+
+1. Added new offset options for nodes in Sankey and Organization chart, `nodes.offsetHorizontal` and `nodes.offsetVertical`. See #15225.
+2. Added new option, `annotations.crop`, allowing to hide annotations outside the plot area. See #15399.
+3. Allow removing accessibility information sections by setting section formats to `null`.
+4. Support `series.accessibility.point` options matching the top level `accessibility.point` options.
+5. Support `pageUp/pageDown` in legend keyboard navigation for scrolling between legend pages.
+6. Improvements to series keyboard navigation, now supporting `End/Home/PgUp/PgDown` keys.
+
+## Framework bug fixes:
+
+1. Fixed `#12169`, allowing Blob offline export in Firefox.
+2. Fixed `#16150`, pyramid shape was incorrect for inverted charts when `yAxis.width` set.
+3. Fixed `#16275`, ticks on the axis weren't displayed when their value was too high.
+4. Fixed `#16165`, border radius disappeared after hovering a point in heatmap.
+5. Fixed `#13780`, tooltip was mispositioned when `yAxis` was reversed.
+6. Fixed `#12828`, click event on point wasn't working on IE with color axis.
+7. Fixed issue `#15876`, DOM order not following `keyboardNavigation.order`.
+8. Fixed `#11756`, adding image without optional parameters threw an error.
+9. Fixed `#15480` and `#16052`, disabled point markers sometimes appeared on redraw with accessibility module loaded.
+10. Fixed `#13683`, the last row of items in a paginated legend was not fully visible in edge cases.
+11. Fixed `#16004`, a regression causing shared tooltip not to show for some axes with multiple differently positioned axes.
+12. Fixed `#16245`, automatic `minRange` did not consider `floor/ceiling`.
+13. Fixed `#12961`, the chart crashed when `axis.tickInterval` was negative.
+14. Fixed `#15117`, `pointStart` and `pointInterval` did not work with turboed 2d array data.
+15. Fixed `#16143`, offline exporting hidden boosted series threw error 28.
+16. Fixed `#16176`, funnel data labels with `rotation` set showed console error.
+
 # Version 9.2.2
 
 ## Framework:
