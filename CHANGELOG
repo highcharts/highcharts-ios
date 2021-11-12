@@ -1,3 +1,13 @@
+# Version 9.3.1
+
+## iOS:
+
+1. Added XCFramework Support via CocoaPods, #379
+
+## Framework:
+
+No changes for the basic Highcharts package.
+
 # Version 9.3.0
 
 ## iOS:

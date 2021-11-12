@@ -110,7 +110,7 @@
 		</data>
 		<key>Headers/HIBoost.h</key>
 		<data>
-		1al8XJl+iGRRwyENG42PPSgsab4=
+		w83QFr8biClZesjQ/nVnLCik+9Q=
 		</data>
 		<key>Headers/HIBottom.h</key>
 		<data>
@@ -878,7 +878,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ROCDmwpX3/zK/zpotCtZiVfiH8Y=
+		MKhaL6jYv+klv52M6MF7RTM7Ry8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -1446,7 +1446,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Accessibility.js</key>
 		<data>
-		9MYYU+o+uj/Y7MSa5mrA8PlMa3Y=
+		IbL/3I3uFZCtvDpPzhgrFFyNbX8=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/AccessibilityComponent.js</key>
 		<data>
@@ -1462,7 +1462,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/InfoRegionsComponent.js</key>
 		<data>
-		wPAjTXZg1JLV1WCkgO8EEt+gTOM=
+		cgSOb7GTPQm9GG249XazJznYsA4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/LegendComponent.js</key>
 		<data>
@@ -1470,11 +1470,11 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/MenuComponent.js</key>
 		<data>
-		jRqzyXh744VlUzz8gMpBvekF5ds=
+		wQWFYH61J+ga3r8ngtBu7LvfD7Q=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/RangeSelectorComponent.js</key>
 		<data>
-		Qe5QMonH7DmJOycz7b2BHGvy71I=
+		F7QLKRyPmmRXnH4YuFJuSPWc45o=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/SeriesComponent/ForcedMarkers.js</key>
 		<data>
@@ -1514,7 +1514,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/KeyboardNavigation.js</key>
 		<data>
-		CUrXhgUCZeVUpGhnKWqpYmwGOnk=
+		x6X3a5v4uU/O52DaoBw1OdTRjkQ=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/KeyboardNavigationHandler.js</key>
 		<data>
@@ -1614,7 +1614,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/Axis/OrdinalAxis.js</key>
 		<data>
-		0LXjlI0Bl8+Xbkxa9z1aD3OXUjg=
+		go/whFOScfzb9E0D918sOGcqzKw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/Axis/PlotLineOrBand/PlotLineOrBand.js</key>
 		<data>
@@ -1722,7 +1722,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/Globals.js</key>
 		<data>
-		M6PGKY/VaHdGP5x0GxHIuYgH+FY=
+		dOqPx75/U5+QlisUpLnd/XVdNQo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/HttpUtilities.js</key>
 		<data>
@@ -1782,7 +1782,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/Renderer/SVG/SVGRenderer.js</key>
 		<data>
-		R1ybib47lcFfkEwf9ZqoGmnn6uU=
+		jcM1954J7WXBUJpiCOSfAhS+QaM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/Renderer/SVG/SVGRenderer3D.js</key>
 		<data>
@@ -1970,11 +1970,11 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Annotations/NavigationBindings.js</key>
 		<data>
-		yQ9ajwxTf/6j3b3ubhPkjF1vt94=
+		AFHlFcL5EBAmsAu9zL639X7vAlo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Annotations/Popup.js</key>
 		<data>
-		HZ3FWPs8/hRdBBHmizaz1sFyjcA=
+		7P/eIAfwQ2ljRODwWY/w9YCTio4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Annotations/Types/BasicAnnotation.js</key>
 		<data>
@@ -2038,7 +2038,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Boost/BoostOptions.js</key>
 		<data>
-		aWYlG+qcDy/gj7gjVi8HZXD1ujQ=
+		KBIfbpbnbsJBNcM6mvlUSggM+YI=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Boost/BoostOverrides.js</key>
 		<data>
@@ -2118,7 +2118,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Exporting/Exporting.js</key>
 		<data>
-		UioKBpJ5l0w38tr0r8z+ICCYGIw=
+		OCmp4wCo1hPDwdndG5lTPTJbcTA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Exporting/ExportingDefaults.js</key>
 		<data>
@@ -2154,11 +2154,11 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/OfflineExporting/OfflineExportingDefaults.js</key>
 		<data>
-		M+GbUSm0SAOjb7EOm1UtznWV6zg=
+		99kwOUUBmZ8wOmSvaNYoTNE6eIM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Oldie/Oldie.js</key>
 		<data>
-		mwGOdzc6suXtjcqaWNo3ERGxEMk=
+		M9Uu5nGOQcfKXk4GE8X7R+xlHIo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Oldie/VMLAxis3D.js</key>
 		<data>
@@ -2190,7 +2190,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Polar.js</key>
 		<data>
-		+psuAF0dLlkWT7klCLXlftJWgrM=
+		lUB4bdBUuPyT2LefDNxrPSgzZIs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/PriceIndication.js</key>
 		<data>
@@ -2350,15 +2350,15 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/MapView.js</key>
 		<data>
-		pem9gB0Wm/ed475uVItyLreAd9o=
+		1OkkR/P2bXCHpzYg8qbGMiAFEqM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/MapViewOptionsDefault.js</key>
 		<data>
-		SoO+HlFJpDOcrO10KLjQtJoWEiE=
+		ZRP9/7/worAaIdfGq0zS2pvWVNA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projection.js</key>
 		<data>
-		BoDmowfimc0a9ybZQ1vt+hFfdgg=
+		OOIbTjfE4aLcm+sq59k5t3m+/00=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/ProjectionDefinition.js</key>
 		<data>
@@ -2366,23 +2366,27 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/EqualEarth.js</key>
 		<data>
-		yq07vsZyPX1T2YgzBlTRQqBqWfw=
+		GuEaV7EjHa4YSonGlCVqcQsajZw=
+		</data>
+		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/LambertConformalConic.js</key>
+		<data>
+		rI1tBZI+B2vABIckqFq41kjKpNM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/Miller.js</key>
 		<data>
-		gq81lkgAkHLWZzSTwc2tzbCufuU=
+		EnlN6TNqoz8fTru7QjFY2T0k2ko=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/Orthographic.js</key>
 		<data>
-		GnqbB+SJky0FHF4CpFSokUN2g6k=
+		EUpgXdOWEq+I0nQnAN6dZecx6ac=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/ProjectionRegistry.js</key>
 		<data>
-		iDGzt2iYdXJC5fLEVsno/UAyjfk=
+		70UAVNrM6L39QgpwoWLblDQVq4o=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/WebMercator.js</key>
 		<data>
-		BAe9NpnMKMQZ6jQhKx4XGEUgveg=
+		JKN5vz7xFIzlqM3YaVMs/UUxp7I=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/Area/AreaSeries.js</key>
 		<data>
@@ -2638,7 +2642,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/Map/MapSeries.js</key>
 		<data>
-		2OiRkHRxv8x4rx48uMQaX2RhnsU=
+		ssI+RihfkXp5xe+ecDacjHOdbAw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/MapBubble/MapBubblePoint.js</key>
 		<data>
@@ -2650,7 +2654,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/MapLine/MapLineSeries.js</key>
 		<data>
-		bq9OsJ9/xjk0lY/ezErJ2zw4Iq0=
+		XQGY5sO5gsG5NdrJ0hH3pw9x1vg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/MapPoint/MapPointPoint.js</key>
 		<data>
@@ -2658,7 +2662,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/MapPoint/MapPointSeries.js</key>
 		<data>
-		kORsih3ls0+enu5ggUfpx5PBgqk=
+		YCWzw/MRx5F/yM7AKj47BMioeXM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/Networkgraph/DraggableNodes.js</key>
 		<data>
@@ -3086,7 +3090,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Stock/Indicators/SMA/SMAIndicator.js</key>
 		<data>
-		wIesWW27RH75Z6qSyc0e4uxr5s0=
+		bfrH+kA+nueZ1yu/4i/1vCEjFEY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Stock/Indicators/SlowStochastic/SlowStochasticIndicator.js</key>
 		<data>
@@ -3114,7 +3118,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Stock/Indicators/VBP/VBPIndicator.js</key>
 		<data>
-		6zxDQgajI3i9NdmygLT15CioUAo=
+		QcxXemRGnbvAZEhWrk+79GT0U6Q=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Stock/Indicators/VBP/VBPPoint.js</key>
 		<data>
@@ -3142,347 +3146,347 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/Stock/StockToolsGui.js</key>
 		<data>
-		3x34TXdNFPccIOHx8KHYwW59lPw=
+		LeqH6cti/rfb4P7etJXXXVDOkwM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/highcharts-3d.src.js</key>
 		<data>
-		ZZZqqlacGprMW2W+3uOxzLn+LOU=
+		A9UxMPgkpEAgPFyROkLWYjFin8Q=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/highcharts-more.src.js</key>
 		<data>
-		l24cscfn18nqsaBuJJi3diP41Tc=
+		Wwxxvyj23qrqeUhz7hRubhocZjw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/highcharts.src.js</key>
 		<data>
-		6HZeW0MhJPbWEe2oURblORiSOe4=
+		Em+AYPVPAXbbqcypWOK+BeNRttQ=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/accessibility.src.js</key>
 		<data>
-		9sx2O0QGB34Q/ksp26HMwlXXZBc=
+		QfA7FlT647ZrSa/cTZFZFtHqrX8=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/annotations-advanced.src.js</key>
 		<data>
-		2Uk8UrurDS8WCtrfKGFIlNU1uX8=
+		2qxH2hDnh6AzEovmLc93Wt9W8wk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/annotations.src.js</key>
 		<data>
-		z+NK2AXx6LqkXXMFipdkFB6qtnQ=
+		34QlXssgQD/n1z11dMiCsTOuiGU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/arrow-symbols.src.js</key>
 		<data>
-		P6yylk8LAU8QFhfZtrU8avJS93c=
+		dFBbU035KXxkA3w76883bCpVpAs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/boost-canvas.src.js</key>
 		<data>
-		74KhoOvBdU0heRq10ptYUiiiV78=
+		LLpai1D0DFy9SbIQqpWy5VbLTyg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/boost.src.js</key>
 		<data>
-		DfSZz6CseE4fADAfL8fSI3HP7fo=
+		NaNd/ZKgmIH/rnLJuBOraY8zk7Y=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/broken-axis.src.js</key>
 		<data>
-		wF/vInJMDYQz66rUSiaexiJsYu0=
+		dvYLsi1I6MPmdI8T34eiBpdYccc=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/bullet.src.js</key>
 		<data>
-		59E0X/jC0NRvDvgqM3nQhNFJzko=
+		/FHGJRWdXB+71MumtLtf3LhuXAY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/coloraxis.src.js</key>
 		<data>
-		TMwPVmDnE/bMGwzqmHAId05jPGM=
+		8upKiqoJRyA5rSQJG5RyYlq3+Hg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/current-date-indicator.src.js</key>
 		<data>
-		Ff7Y3mpbcBGbtZscPpYDwle9abc=
+		j6C0cWzgeKrBcbpQ0DjGentk1gM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/cylinder.src.js</key>
 		<data>
-		jqFu/WqIm/mR+OvcsLTl162jMQo=
+		XP6kbjNGir4N2hXb7JdfEFuOJ8Q=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/data.src.js</key>
 		<data>
-		QjqsCKE91DzlWBipMRvhh9ExZwQ=
+		v/4Te0GlafFWcmZim69aF6CuCKo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/datagrouping.src.js</key>
 		<data>
-		IrFb4I9HKBo9T4lc9hhif7H/qHs=
+		Bf29Yb89mN7PYhuhqiBg9ZwvFso=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/debugger.src.js</key>
 		<data>
-		KTON3YJfrmRFLf8P7MN5mIjguaM=
+		oZScM453L5JWtOUZJFMwZodVfbQ=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/dependency-wheel.src.js</key>
 		<data>
-		wtgxyK7a1VGvk7zEPNU8Z8O20UU=
+		S7Dj+Rse/40NVJa3FkssAkWBYcQ=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/dotplot.src.js</key>
 		<data>
-		l+BqCGxw3P1YIelwNLGyyoagRSo=
+		cmZQ5fY3J3BIExtDhhHl8uIQnlA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/drag-panes.src.js</key>
 		<data>
-		Efk22i3yFOD3Nob6tiUqNbeXls8=
+		AgBvb9CrzArfR2Hj8ZuNiSxz1Dc=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/draggable-points.src.js</key>
 		<data>
-		MNPXrqgsJBbPy8P4IP3iXuj2XVc=
+		dmdZm05H4poQgL7iyTN1vGKpEYA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/drilldown.src.js</key>
 		<data>
-		kRJOS0+REbpUXAjhOD7AMpOt6Ow=
+		mHEiOueA3tzgNhM3AosC5N4NeNU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/dumbbell.src.js</key>
 		<data>
-		g8QRlqD0seJlZoK4tT105rEEL2o=
+		NCXFeyMhHSFXnxRi0KtIp1yvL9Y=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/export-data.src.js</key>
 		<data>
-		nFaILWPGQI5D79HpzcsFdc70ni0=
+		XDASnjtyVBYrz2uFfL+Z7M8MRFA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/exporting.src.js</key>
 		<data>
-		yFiXTwvJpRQskMkn9CDS7IpoEmg=
+		F2zyp+A3ge4KEDvD2SuGciMofxs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/full-screen.src.js</key>
 		<data>
-		EeYzi4s80ytsLTtRZ9GOmHA5t98=
+		C7WEI53gX3HP9scw0k8jyw/kIgE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/funnel.src.js</key>
 		<data>
-		cFs0PYOc+3r9BxS6QvBrtihdFnw=
+		wTe7YXBFC6bq0AZZ7P3ktnjVnAU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/funnel3d.src.js</key>
 		<data>
-		h1hnmXzshovNYKnJs4rFgk2Beuo=
+		vQXPEKc3iFc7YenLiKUW8AWvKyU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/gantt.src.js</key>
 		<data>
-		1/Cp7B0sMuQW0TyAfEjcOpjdaMI=
+		aWcQvxPcoCSC6RqGf+AKf5amMnc=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/grid-axis.src.js</key>
 		<data>
-		VR1RXZfSYtc7hJ1QLxqDx8p2OD4=
+		adFFV2hHnk84pgrbXiSDsgK10+Y=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/heatmap.src.js</key>
 		<data>
-		2poYOYAqUA46nuQuKHX7MiTZlwU=
+		NJCiRCbrq+6qY3Gz8U7FgwjfpIs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/heikinashi.src.js</key>
 		<data>
-		kFsRxAgH/ba1Ox6z88wI6ZxFWjA=
+		pJAJhC8gqhCl8ESdulzyTDpNawo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/histogram-bellcurve.src.js</key>
 		<data>
-		icTJTDpv3OLuIWOXqntfE2tXuMs=
+		NM297SSJXAy5PXjMO9eo368/nd0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/hollowcandlestick.src.js</key>
 		<data>
-		nVeYlUlycXzjIfBrGFol9/tsyNY=
+		CRG0/1IQPz4buNi0hSlJ1ObABEo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/item-series.src.js</key>
 		<data>
-		tpOsb8D2BAVniI8f/5/G2WQdYjE=
+		2vOl0Rg0DbbirUi8yf1L3KpVkaM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/lollipop.src.js</key>
 		<data>
-		u28/9LRbNwQl/RuOz7J0ro/WLfM=
+		3Qos4Q/dR/FbxVJBcpveSZXp/cQ=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/marker-clusters.src.js</key>
 		<data>
-		uPJBEPUshCE9GwWrqFAjgXKqrgo=
+		IRz17FLmE1+LJzH3eWotQ2jy9pU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/networkgraph.src.js</key>
 		<data>
-		j9afsMLvazyJ/4Z3XJWOOmupgno=
+		jSo0MOIP/ve7TsWbhkhiTNF8P1E=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/no-data-to-display.src.js</key>
 		<data>
-		vJtd5Nxb6VMtpMgfsk4Dd/evK7w=
+		211pIf9jr51bomsf3iam/rbuZUE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/offline-exporting.src.js</key>
 		<data>
-		GAfOsp0LcrXBpdGsB9HIPdxZj8g=
+		WmQOQG6bj5SkzsPJXxeBlOZuck8=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/oldie-polyfills.src.js</key>
 		<data>
-		H1wqr3QxAV9cMSFEwH4t3jTdHLE=
+		YY9a7ZuZm8ruB3p510bONSTX7DE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/oldie.src.js</key>
 		<data>
-		FLBrKDrQKYg5OxqcHjOK67igO18=
+		hwQtaAjnc6a6LPFt97TGqJ9GkvY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/organization.src.js</key>
 		<data>
-		b8jTEquilGaw/+nvgynyAH5yfEs=
+		j+2JtDuITvYcr3rgBWBG3I3Chcw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/overlapping-datalabels.src.js</key>
 		<data>
-		5GRnG+5fCV4djTKEyDgikPabkao=
+		ETprah6iHSjXE/U0OASJKBbs3CE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/parallel-coordinates.src.js</key>
 		<data>
-		eW8uB5ZCCYEDwQOgdhWEewXGX5M=
+		PlNeVvBDasc0B+TmK/4UDT+0K88=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pareto.src.js</key>
 		<data>
-		2lUeDuCAGBp+DHSsTb5p1fs9DiM=
+		KN/vgjwzTkvbSxKqd0d/nCV29Pc=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pathfinder.src.js</key>
 		<data>
-		iokJbWrpuBxmARS+xFejlEgRADc=
+		sC+dL45Q/OP0A8eykyRa7O4UBk8=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pattern-fill.src.js</key>
 		<data>
-		j++e7jmbvCQmlpSfbH4ONqWuIT0=
+		E9zssBK2u25H2J6hGJG1qe9k/FI=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/price-indicator.src.js</key>
 		<data>
-		nNNx6e/25LMX9yczrnklMrJ3FQM=
+		nJnTRUCi+Oxw0bSuUdFsjdv3mdI=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pyramid3d.src.js</key>
 		<data>
-		8VmY1Qu1fynKECVtQ3INSCIR7+M=
+		pEnjiz1pkCfwZyzDhkNpYfulvEM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/sankey.src.js</key>
 		<data>
-		HpXdn23UpeNnOCN6jc82c/hfZGQ=
+		A3H9Xi36F9fLMj7lZp5y0ym2vUA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/series-label.src.js</key>
 		<data>
-		J4jPSC1ctloQnBtvCFGyMsP0Mmg=
+		T+PKTBsqE3FJGxV5Ye4WEsQf9+s=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/solid-gauge.src.js</key>
 		<data>
-		UWU88EHqftneOpRZ0Xrv54q8BVc=
+		a4rsyF4gktdgB/AO8P0EjvilN0w=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/sonification.src.js</key>
 		<data>
-		7FD8BikRO4C5AvggxPfF1cbNB54=
+		W12FAL7NsMXhFXaEaVlGAdh6T+0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/static-scale.src.js</key>
 		<data>
-		+nLlSmwMcpBs7tkFQ8YML7aTBsw=
+		Dv+xG/OJPyIBQEptPCiCFQ12NTc=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/stock-tools.src.js</key>
 		<data>
-		+5bTyjYde+zP/1itzHpEjTZzZlo=
+		zCo3dnp9jlhjYd86S7YbjkKUXd4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/stock.src.js</key>
 		<data>
-		/8+UtHi8AdadvKTLPURe4tzQzAw=
+		M3nxeMJJPEebt0+tmIP9KovVZdY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/streamgraph.src.js</key>
 		<data>
-		o2w3b4kOC0qlxFx7hVvpbGZQ4l0=
+		66pca8z3ceT5L18fc10oSM2nDYc=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/sunburst.src.js</key>
 		<data>
-		rGimW06DCBgMKjEFsSyXWt7l3Ig=
+		nLRz1yOaIPKuGVFzYKD27zRKEhY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/tilemap.src.js</key>
 		<data>
-		JY2DTAUhZDS2CbzMEfg4JyfCZNE=
+		IGBp2hk5IeswmCZKIL6+gXXrb98=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/timeline.src.js</key>
 		<data>
-		iMQxQB92mF6k1GFhLnB2ISSj0fo=
+		NzqEbCLDR2cFfiwgOh5BHpQLSWY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/treegrid.src.js</key>
 		<data>
-		UDeDJO2SlY9XsuQ2qRqrz3blOAg=
+		dvjhIvxHxD/Fqi0O0IKm4n4Yexg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/treemap.src.js</key>
 		<data>
-		v/Ll5maKNYKpRuyySjZ8Hv4zKmw=
+		+Xe0kDJdNugxtFmXMg7LR5WlR1c=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/variable-pie.src.js</key>
 		<data>
-		UGsjakpNXuXtiScaFJklBGbc+jc=
+		g1NSZZqpydWQSdJJLnQWV0zeLCE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/variwide.src.js</key>
 		<data>
-		RU+p2VgEwWtnlJbO4x4cuNTYF24=
+		e8/8aGKavPdXnKRHrc1poYVP4EM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/vector.src.js</key>
 		<data>
-		6i5wYeuU9QEAdSF5Gkctyqhcwfc=
+		WTZb9AIVPCurxb3rCoz+gJmvoJ8=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/venn.src.js</key>
 		<data>
-		We/zzNlZ+gY7swS9PHwwIZ/+3lI=
+		v4iIV4LeU97wwzfeWxQetG6aN4Q=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/windbarb.src.js</key>
 		<data>
-		A1lyOP9WbsTC+Ab2tGdTwKjA1W0=
+		O7Pid/yUmWS9JPWhSj3g7knYwrU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/wordcloud.src.js</key>
 		<data>
-		8jiHmIZJUPtICQOR5WQZgmHri9I=
+		Q96pKy1uK9A6JjZfFyQaqoYPsv4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/xrange.src.js</key>
 		<data>
-		72G61HF8+74e5l3Y6OSvmXskUkQ=
+		9ZukwUhKunu57nUb8RsZpAqDkhs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/avocado.src.js</key>
 		<data>
-		XteFsEUnQLc2zglDoDYJVtkQAg8=
+		77NjSQ+79AoicvaA6VUGeTXnlhw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/dark-blue.src.js</key>
 		<data>
-		0gjCUvM8ebwDKc4wblpzec1pe/w=
+		E9uYL5xIeGLhp8gzbX00glwGZH0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/dark-green.src.js</key>
 		<data>
-		TaGjVfdiXmTZYVWKaWtZvIDUW3w=
+		x9d4/nt/Mzf4Ld4dI5HxOBtlVAM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/dark-unica.src.js</key>
 		<data>
-		8gTgHkF52Ezxr9YCi+cte8Yyu4Y=
+		g2A4UQ+ShCXuUdjOsV0WESCpj18=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/gray.src.js</key>
 		<data>
-		RoXyy4NmCISbzcRtmIVE5SRQoNA=
+		Smkw59UoQxRTnSf6SZeN85j3Szo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/grid-light.src.js</key>
 		<data>
-		jAQDKa8BJllxnutH0wxgtgU+NVY=
+		ozJUFis0jUG1GlAyLOs1i31hzUM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/grid.src.js</key>
 		<data>
-		/JuWfDcHlXXtR/k4aMycwelLVaQ=
+		hGbTe19horjJn4pfsp5t4y0j6Yw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/high-contrast-dark.src.js</key>
 		<data>
-		FSnksobtTy/Pi0y1tYDAe90AeOU=
+		TfGE7xPCkZsWeDq6jItRAa46Hp0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/high-contrast-light.src.js</key>
 		<data>
-		aT2DsLSjQikjyPtxkhrC1msJF/k=
+		wXoicBUijgwXDzHIP2huPObGA+Y=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/sand-signika.src.js</key>
 		<data>
-		vonP5IZt4WyFkPXrdnHszMlaa9k=
+		H/QpseMM8NjV2erFf43LuSRYhWw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/skies.src.js</key>
 		<data>
-		OTlh7qTJhOJcMZ1AQTvmESkYHdA=
+		lmmnZNRgVYONZU0z3/NJ1GTc++A=
 		</data>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/sunset.src.js</key>
 		<data>
-		5ukxcEMEJDpvqQd60Sgy0ftmcT8=
+		4QDiPOB0tszQvs7f0kF/VzZFZ2I=
 		</data>
 		<key>com.highcharts.charts.bundle/js/highcharts-3d.js</key>
 		<data>
-		8fZnDbtaOv4jVWRE9V7djeZnm8A=
+		ZPfbV9OALX2LnaIgaxUYS53vdPk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/highcharts-more.js</key>
 		<data>
-		CgmwTUfSSWG/UEk0NURHIJqqXlA=
+		1HrdRi/48qPY9UlfhywF6uFXfkk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/highcharts.js</key>
 		<data>
-		6z9pQjvtQOdt8KsIzN9wT0eaC4k=
+		6nPZMRXosQpDmkr1qvmSxi8dI8Q=
 		</data>
 		<key>com.highcharts.charts.bundle/js/lib/canvg.js</key>
 		<data>
@@ -3502,35 +3506,35 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/accessibility.js</key>
 		<data>
-		bccSQFXFXLVL27+pElXgC/o25zE=
+		ZZnMrLFHzpQKJkBS/cY6gw6c/Lg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/annotations-advanced.js</key>
 		<data>
-		XTSzmKaV15ho5vuf/VfHUU3DajI=
+		CtXiaA0+EIurHEmPig7aVszxUsM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/annotations.js</key>
 		<data>
-		xX3KxrXKDdpBnvdR9b1d9VoEMbs=
+		uGDshLjkgQvUXPCNEBnfHVRrlLc=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/arrow-symbols.js</key>
 		<data>
-		rUfVbcFDEIe+e7M+Ki943ftjBg8=
+		MC1aY+C4Tuz+X1FKyVRCNeDJlvk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/boost-canvas.js</key>
 		<data>
-		OoJRl7x1ZmkTKbbxfKoW1JVR4P4=
+		Rp4EljJgJI4VH5JnpPiauQmlSao=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/boost.js</key>
 		<data>
-		oTwRqJ43r7/87y3uAQR/d+dvAls=
+		XtdCxFuA2nqSR9KN8ldnsf4uUiU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/broken-axis.js</key>
 		<data>
-		j8u2M7uhcTW06FCLScY4ehOwBc8=
+		9xKwl5UKrgn6FwIN2gjDmfGOwxo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/bullet.js</key>
 		<data>
-		YOvgk9ZYdxTOsGtm0g6XmNBSon0=
+		xmOSsVEjI/MAGpdoaYTP/uWPxDs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/canvg.js</key>
 		<data>
@@ -3538,51 +3542,51 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/coloraxis.js</key>
 		<data>
-		jffQnzSLVkDEjaM55yaOXcJGkww=
+		qkWS68h87mO96qVYkLOZHmPBu5U=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/current-date-indicator.js</key>
 		<data>
-		XLSkWapfq/rbfaJiR2SzagPSvH4=
+		7kDK/gRyATAhgvz8JClDNCqXrX4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/cylinder.js</key>
 		<data>
-		KDrS1VUthGzDTXo4jhGZIpO1BYA=
+		ACKLWCLqSqynxIGwP7bbFYo9Jpk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/data.js</key>
 		<data>
-		QVOwO3rsZbVg1U6VAh3TKntKOTA=
+		N+WURr2D/hzNsessBOkAcceckIE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/datagrouping.js</key>
 		<data>
-		tRi9pHOo83thJgtNY3mY5J/6sSQ=
+		msWMXvooAe7Yoy1vnJWZw6iB79w=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/debugger.js</key>
 		<data>
-		9g+kayEHr6GKw/R8MiPJpVnJSrk=
+		6HAI3CLhDRO1m3bMJ6hLuTtuwFA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/dependency-wheel.js</key>
 		<data>
-		vCPFgtUIR3C4RFRFKeELhnaP7XU=
+		lMqUfRjjfEDVmX8y6KiVsvNBROY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/dotplot.js</key>
 		<data>
-		AvLsyqFrjKW4zjHOnC3oQYa7pJg=
+		RwEEtlA0e+SQ5FgT0yk8cYi5Q+0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/drag-panes.js</key>
 		<data>
-		nQvqncdgSHor815cCaEMpZpcOpk=
+		dTNwttaLd9HuE3Z3179wTtwnpMg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/draggable-points.js</key>
 		<data>
-		0n+kcTLqzIwKq9EkEqz3lLhGO+4=
+		e4PXjJm4iDyKXN8eY37CwqqMysM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/drilldown.js</key>
 		<data>
-		K7ADccHljztOvdiJoY+0tqe2E1U=
+		QfofayinPJ2aKAiV/etZhq6xcuQ=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/dumbbell.js</key>
 		<data>
-		Bb1yM9qtDGyrYoEL6knLzA+eKIw=
+		1t9HS4pGPbW4rkPp+UphjF6NsRQ=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/export-csv.js</key>
 		<data>
@@ -3590,59 +3594,59 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/export-data.js</key>
 		<data>
-		3nuxPIMbYusPGh9d6bIU6X1FbyI=
+		IuJx/iBONYt7OAskPGbLQbR8Ct0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/exporting.js</key>
 		<data>
-		43JEHqwnVICMbo9LmW4b9vWVXXw=
+		MgxCY+UpZ7d368PRdJ4GN8a9/L4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/full-screen.js</key>
 		<data>
-		6KbqWmisenHPL3B2V4ZI5kRjNr4=
+		TuiI1UFa+90hhck7YQ/IuOtaVuM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/funnel.js</key>
 		<data>
-		+W7KT8Ik6hmP7YLqsEgIUJ6aAAg=
+		Ve45puPWhuJM+yLA1x91KKVdlT0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/funnel3d.js</key>
 		<data>
-		0r4k5+k1zsjkO7S4pxd6SvuBJYA=
+		HMXqWCGoMmVW7sZbU/7focX5jM0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/gantt.js</key>
 		<data>
-		FKGbJ7Qk2HMoLBldjB5HZyrX4CA=
+		V77o367HvWqo+kkNx79xl18Ekjs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/grid-axis.js</key>
 		<data>
-		RyLYMhR3aEdCxwiEkaTl5BD2TnI=
+		KCM05OuQWLQYqj2nxciAEM8bio4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/heatmap.js</key>
 		<data>
-		9fF2RntjwXUAux76QsviN2txJY8=
+		phbjLyHvB8pD6zlXAz0LMrOsIlg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/heikinashi.js</key>
 		<data>
-		yc+36ALrcGPx3o4Hf0lJzsA62jg=
+		rEMtiHLD1LeQnjtUfpz53QMFtx4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/histogram-bellcurve.js</key>
 		<data>
-		J+ISvmjihOLR8TvmN73eByEsvqw=
+		VFj6sMq8atJPB/oBTmdO7oBl0I4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/hollowcandlestick.js</key>
 		<data>
-		T7n92BEgZkSoC/Lvjs+JJJRsUHM=
+		yok4Ja1B31vr78JGagNtC1+EGdU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/item-series.js</key>
 		<data>
-		1SdnRTQH/ODgNKVtJWJp1kZweyo=
+		MB1IYhnW4uwaN+mPWfZBW7HR6Ag=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/lollipop.js</key>
 		<data>
-		9JOocGeXJkSyiO9ZhPvrshDrj5g=
+		+UQPhtiZFL2fE0oGEp/Q2ZVo/+A=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/marker-clusters.js</key>
 		<data>
-		m5g/fzCIa3GZKcU/8YJHpYBwJtY=
+		5pS31lfh83TE+B1zV92O/gsV+Wo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/moment-timezone-with-data.js</key>
 		<data>
@@ -3654,11 +3658,11 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/networkgraph.js</key>
 		<data>
-		WAZJRlduING3zJmVUE/qHSI1kn8=
+		z/Q3nGqOcYQzfS9d08TPDJ2pA4I=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/no-data-to-display.js</key>
 		<data>
-		rLy+SW6QwBO1f3bWri8q6XYSE24=
+		Nef8pdlZFPETqiahYBVSeh5LKv8=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/offline-exporting-wrap.js</key>
 		<data>
@@ -3666,43 +3670,43 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/offline-exporting.js</key>
 		<data>
-		dgInr5fllSBXBljGpMN8iZPwIXA=
+		EK/Vc6OVVNPEChMUPRbfemi4qrs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/oldie-polyfills.js</key>
 		<data>
-		vVZEqL84UGP3kNBOebP3YRuJy2Q=
+		+CmXt6iz+cdHfGTtAUo/IrlzJCY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/oldie.js</key>
 		<data>
-		QHJokXHrM6weuc5dSxLdE01ZE0I=
+		XYQRo/sKqCa2cVUxED3uDMVsNu4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/organization.js</key>
 		<data>
-		/saZ1a/95Am55DgMfbjuBo0mX9M=
+		IzH1dZP83CW+7MnTRyIrg2WefLE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/overlapping-datalabels.js</key>
 		<data>
-		8+LFMxU2xKk1Zfq4EcjwBeAszoE=
+		iR8BrrUuxjS/+GshJLVVjJduaKg=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/parallel-coordinates.js</key>
 		<data>
-		pS6npyL6+kBG3R1sKCIX76/rjiw=
+		Gtn5y5AH5aDXNo+zAdZ0H/LJdAs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/pareto.js</key>
 		<data>
-		JfidQmHuQSX3oOkWFdFu2tAhIB4=
+		EVz2BrEUPE0njnTeL6nKYWSvrS4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/pathfinder.js</key>
 		<data>
-		/MfioDe8CSQx1WwTK/aFozaep98=
+		qohb2MQgesJxL+yoQi6Y6gTZYvM=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/pattern-fill.js</key>
 		<data>
-		bvnN9bSwh3E7zfP9yAMXW/HJj50=
+		HU1zBRodzVKrHxlT1NMKE9DD5FU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/price-indicator.js</key>
 		<data>
-		ON9yaAZjhcrilfjhfAMqWTAW4OA=
+		0n1MPGUa5QvQBzRhuQh87Z7g0T0=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/proj4.js</key>
 		<data>
@@ -3710,7 +3714,7 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/pyramid3d.js</key>
 		<data>
-		KpfPOUBGVhfHUWorsTzAJFOnJII=
+		oDgJDHV8T0GBc0tCdfIQ5DWU+lA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/rgbColor.js</key>
 		<data>
@@ -3718,83 +3722,83 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/sankey.js</key>
 		<data>
-		cRZUR0q3Xikv6d8YaC1Pt3VjK5A=
+		sJwghvEA3yXKS7g+MZ2iW5YRl+I=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/series-label.js</key>
 		<data>
-		Oe25EjsZtpr9oHh3BioOxWzwXBs=
+		luvRRuto4hYVA5AGYK6CmVNoy6E=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/solid-gauge.js</key>
 		<data>
-		Rg2LzxvQtgrjWmeWq4WpIUm/W9o=
+		yhfO1jnAsmYz/ASzqXz4JXuo2IY=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/sonification.js</key>
 		<data>
-		G5+URPyesQkcVFqFlhhKRgH/vM4=
+		uBOYcsk3CJO44hw+D9YT8vIPAyE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/static-scale.js</key>
 		<data>
-		8GQjErJIr64z6Z4YTIEeNk0t+XY=
+		AcbH4HUieO2T1Ca0Ia8Bm5X+zEk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/stock-tools.js</key>
 		<data>
-		ZDsQqWYo00ePn6aLUNnJBpwGCpI=
+		WhxL7XhZvnlQRW9ciWy1ZNuhCQE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/stock.js</key>
 		<data>
-		RR9ML283QzXLDcnh2CoylaAOCJY=
+		LsaWL4559Z9kxL0ODp+sBKAx60M=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/streamgraph.js</key>
 		<data>
-		YULpqxYBmoxLIl7aQqGGaL3CIX4=
+		TvMik80Em9PHNmE4CgSARw3h6AI=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/sunburst.js</key>
 		<data>
-		lEctrsLCr9VoOvHI/klTy7tGh9Y=
+		4+u7k8Gyc9cBQHWp8m0sEykwncs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/tilemap.js</key>
 		<data>
-		Sv+jMyxoJj9aaqg96SBomNjsQ5I=
+		NgidHpq1Kaw8RGbGzKxWX5TaV4k=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/timeline.js</key>
 		<data>
-		IlNOOJH0Hz8shWepnjoSqMa43mk=
+		2fszoVU/q8p9rHdr+FrjO2Udyx8=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/treegrid.js</key>
 		<data>
-		rDhblNIGHtxLAFuMsuqON6nfmW8=
+		W2CO9CJ2YQgdpyMajJ7CdRId2lw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/treemap.js</key>
 		<data>
-		QT6EL+w3jKJAzduaVgwLz8yEtSM=
+		hY+wJdau6/bQ/B5ihyW4tUgAO80=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/variable-pie.js</key>
 		<data>
-		4uRBWiavNPj6zIoD2aXU2cDQRn8=
+		AEgzjorh+TSAg/QIlXAtVt4aY6I=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/variwide.js</key>
 		<data>
-		ygNcRetX28+qN9wxkALboo+dcOw=
+		KP2YCZNT99Ki7NmCkIkk9eQLzJs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/vector.js</key>
 		<data>
-		tmOIlgYL2+jdnvZcWu6YaciOsVM=
+		pIof5RW2dH0befzE0D0Zl8LrXuk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/venn.js</key>
 		<data>
-		R+Dn/pXr3aneC4Fjo2/O94DgCPM=
+		nXGIupi0RRgxvfQWj53MPElCnEs=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/windbarb.js</key>
 		<data>
-		5ZtIUsXa707W9fHu17KpOxRe4Gc=
+		FI98uFcVs6Sf4S5CrH936wrBzj4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/wordcloud.js</key>
 		<data>
-		5TOMFrQ3O1h50tpv8eUP1iYMpnw=
+		4Q8jo0srv15vN6V341q2yufHu3s=
 		</data>
 		<key>com.highcharts.charts.bundle/js/modules/xrange.js</key>
 		<data>
-		XgcCc+ik8VziaEN264skTdCnEJQ=
+		GOfPEbztsmPrxxcXv/E4MvifJ2Y=
 		</data>
 		<key>com.highcharts.charts.bundle/js/readme.txt</key>
 		<data>
@@ -3802,51 +3806,51 @@
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/avocado.js</key>
 		<data>
-		qJf3UTSLUPH4p7D+AtGhIsntpi4=
+		QNcc9Vv7bxi4k4UDXGQ7baN6O/c=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/dark-blue.js</key>
 		<data>
-		nhgwayiNucjMU0Su0bkPGq3ZdCY=
+		UnFdZUIipVG8W/F11uyhu0deQvw=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/dark-green.js</key>
 		<data>
-		9mubaI2FtVnqqDtEaVXwjGqFCz8=
+		lQGyH9A+PpsFIRP9ELTDUK51TRA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/dark-unica.js</key>
 		<data>
-		NAwiXk7DE9igNMY3/42PHC8a1KU=
+		7By9ob9bmnjMQdLX17agIF7c+xA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/gray.js</key>
 		<data>
-		ZgkmvLTx9Pv+1jYtD1sfekWxyVo=
+		TlHsuxsZBRU1xRxh+57dPCxkyJk=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/grid-light.js</key>
 		<data>
-		I6xYQ1+Yxd6XHairHeTYWSBqWHE=
+		ikqv6om9torNgnnFj3/VV6RfUTU=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/grid.js</key>
 		<data>
-		xEJ5SydOSUZ/1s4gLJuciJAiqlc=
+		UzzeXu1mGOXZv+2Warv24wrVoeo=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/high-contrast-dark.js</key>
 		<data>
-		eiR+RX1P5eU25zucO4kuhihf9r8=
+		U5H7lVMpwm2nOQrGfNADB0ehVd4=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/high-contrast-light.js</key>
 		<data>
-		ww5TfVCtQ3pDxWF2g5RTle0NZdQ=
+		FhN1r1ydNDWGFXmVbZxCHBDVdyA=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/sand-signika.js</key>
 		<data>
-		xN0wh0+xxMedxMNRSvpcT1ziSTs=
+		/0tuP+M3/3zJ9MeE4cWwQ9BpivE=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/skies.js</key>
 		<data>
-		d1IZRtLHtxEA2aaEeeXcrFQey0k=
+		8tayk2nnXbA3NSOa8cuUtGmgr80=
 		</data>
 		<key>com.highcharts.charts.bundle/js/themes/sunset.js</key>
 		<data>
-		nVoVS2OueZGpqmrMLi+KV7S/HPw=
+		yL+PDpKHMV78wi4izrecGKtYaDQ=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -4141,11 +4145,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1al8XJl+iGRRwyENG42PPSgsab4=
+			w83QFr8biClZesjQ/nVnLCik+9Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			+OJsjPMMMCm81P7WW4TRGUijki4M4VuX8YYPxqYMfyo=
+			SsmtaT4r6VgxvWdzCfdqmjcPN4v4T1Y2tT5XjePksqw=
 			</data>
 		</dict>
 		<key>Headers/HIBottom.h</key>
@@ -7804,11 +7808,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9MYYU+o+uj/Y7MSa5mrA8PlMa3Y=
+			IbL/3I3uFZCtvDpPzhgrFFyNbX8=
 			</data>
 			<key>hash2</key>
 			<data>
-			eA5z3StOTtqJHkn1SrCbXjZ4AjvSHPnw2y0HqT8YDxE=
+			v28VUcYSZqOlMA6n0p7bstLe+ylfCt1jPMRD3m6hoX8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/AccessibilityComponent.js</key>
@@ -7848,11 +7852,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wPAjTXZg1JLV1WCkgO8EEt+gTOM=
+			cgSOb7GTPQm9GG249XazJznYsA4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q4v94bPAO2VAyzw3hGBAc6YPWrnNEV5Vesk+FprYmpA=
+			1i/6K/h+ODx88ysOsR1TOPR/y48kWb4rMPLWg+PxsLE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/LegendComponent.js</key>
@@ -7870,22 +7874,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jRqzyXh744VlUzz8gMpBvekF5ds=
+			wQWFYH61J+ga3r8ngtBu7LvfD7Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			tXeyc0oJ1xUmAnhlFhI4StafgO0H0uA43wrA8l9Yeic=
+			VW92O9QljOisxu5qEyfdWjhLMu4c3G+s6aqCilasRbU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/RangeSelectorComponent.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Qe5QMonH7DmJOycz7b2BHGvy71I=
+			F7QLKRyPmmRXnH4YuFJuSPWc45o=
 			</data>
 			<key>hash2</key>
 			<data>
-			wvrMj6DJiAjSspHsaXMRJ8zUZH8C0K4dLLoZW/89SL0=
+			MYRBbsJtThZ6SIqiNQ29L2lh04wi/gTDKtHMSa2A1TA=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/Components/SeriesComponent/ForcedMarkers.js</key>
@@ -7991,11 +7995,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CUrXhgUCZeVUpGhnKWqpYmwGOnk=
+			x6X3a5v4uU/O52DaoBw1OdTRjkQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			xSx4LLtI65Y4GCbegw1udL9a/7SmcATAFu1omuoKi6M=
+			fDuaY3JATHA5pXaP7Ddf4m5RAflh4dG9wp6hpJumH4k=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Accessibility/KeyboardNavigationHandler.js</key>
@@ -8266,11 +8270,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0LXjlI0Bl8+Xbkxa9z1aD3OXUjg=
+			go/whFOScfzb9E0D918sOGcqzKw=
 			</data>
 			<key>hash2</key>
 			<data>
-			03lRFgtjThA/9731YDZyDWLZYS6PADvb7qvbvck8qXM=
+			Lolc6JWgnkR4mUW2QCzSSB6f+iT7Nzl8MB2jDs4noOA=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/Axis/PlotLineOrBand/PlotLineOrBand.js</key>
@@ -8563,11 +8567,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			M6PGKY/VaHdGP5x0GxHIuYgH+FY=
+			dOqPx75/U5+QlisUpLnd/XVdNQo=
 			</data>
 			<key>hash2</key>
 			<data>
-			qhjGX+/H0vwz9qMf8nWal/RLAWLcoKt9Fw9NMNZimQM=
+			qgpRjrY3cNRKs/xZaP8xbvum5Y5Nwg3LJ2p+NMljtX4=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/HttpUtilities.js</key>
@@ -8728,11 +8732,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			R1ybib47lcFfkEwf9ZqoGmnn6uU=
+			jcM1954J7WXBUJpiCOSfAhS+QaM=
 			</data>
 			<key>hash2</key>
 			<data>
-			xTknl54f/gkabJ9toXBNM/5KMhq19YlzkRXE3JrMiEU=
+			ZhCslVn1NhZ1xGFRBNqzF8q+mpWM+GrcJBlm4KTEkaY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Core/Renderer/SVG/SVGRenderer3D.js</key>
@@ -9245,22 +9249,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yQ9ajwxTf/6j3b3ubhPkjF1vt94=
+			AFHlFcL5EBAmsAu9zL639X7vAlo=
 			</data>
 			<key>hash2</key>
 			<data>
-			ctf/kOVmoDwfxnUyMRP/bvYtPC5t9zCy57jnaEU8lbk=
+			3PHGfk4bu07fVmo1bLT3mYzgy/n8uvUME2BIzwM8hpc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Annotations/Popup.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HZ3FWPs8/hRdBBHmizaz1sFyjcA=
+			7P/eIAfwQ2ljRODwWY/w9YCTio4=
 			</data>
 			<key>hash2</key>
 			<data>
-			oDdOsINko7UpoGnNRkkMvNQTrkJ9Vsru/eexp2lUF5c=
+			rWk9cVVUZUXkVJgG5gTrkiidxF5wSSPlHe5TBYn3OIw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Annotations/Types/BasicAnnotation.js</key>
@@ -9432,11 +9436,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aWYlG+qcDy/gj7gjVi8HZXD1ujQ=
+			KBIfbpbnbsJBNcM6mvlUSggM+YI=
 			</data>
 			<key>hash2</key>
 			<data>
-			4Zzllunak+X8HAgJ3j+kzk0Yw7y8lQpG0UOL4mlM6yc=
+			21NombBUCSl/KWZ1SVmAVbozKPL78CwJTushprZMRg0=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Boost/BoostOverrides.js</key>
@@ -9652,11 +9656,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UioKBpJ5l0w38tr0r8z+ICCYGIw=
+			OCmp4wCo1hPDwdndG5lTPTJbcTA=
 			</data>
 			<key>hash2</key>
 			<data>
-			5nJWGdbz5R3XfioWpk2C8p168q45n/ffZFeBrfQE4WI=
+			lvs51GZAxHKpN+Fx+czC4gsVfSClpcPD/Js/88IH2Fo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Exporting/ExportingDefaults.js</key>
@@ -9751,22 +9755,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			M+GbUSm0SAOjb7EOm1UtznWV6zg=
+			99kwOUUBmZ8wOmSvaNYoTNE6eIM=
 			</data>
 			<key>hash2</key>
 			<data>
-			FNYWRRWthxafxLz7W1Z/tPiGlSW48S2TByui9lP7EF8=
+			J+wvc1G8ZolvDxGWm9BmKjnofX0ZilzfXs4fHG6fYSc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Oldie/Oldie.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mwGOdzc6suXtjcqaWNo3ERGxEMk=
+			M9Uu5nGOQcfKXk4GE8X7R+xlHIo=
 			</data>
 			<key>hash2</key>
 			<data>
-			1D3wM9/7qOADhBUZ+L8/b6mWTYX52o1jInc7EtPWyYU=
+			u/q4AVpWqY6vH81izoV5siwEMVPj1sqdtqt0FADK5PY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/Oldie/VMLAxis3D.js</key>
@@ -9850,11 +9854,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+psuAF0dLlkWT7klCLXlftJWgrM=
+			lUB4bdBUuPyT2LefDNxrPSgzZIs=
 			</data>
 			<key>hash2</key>
 			<data>
-			A4DcSzsnoaTeQAyr0a8qy1iURwKgQhbeH5738gXQ+og=
+			U8fOZndlR6A9J5a0gc5uB7G8WI0fqYc35p533tB+Ces=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Extensions/PriceIndication.js</key>
@@ -10290,33 +10294,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pem9gB0Wm/ed475uVItyLreAd9o=
+			1OkkR/P2bXCHpzYg8qbGMiAFEqM=
 			</data>
 			<key>hash2</key>
 			<data>
-			hNIfUE69irflmYXeARTl21F6MRqsLmU2xGMI39MxmP8=
+			bGNwHF+85JVCWjYV3oC79RRnNwL5u2rsszgkWYsA4g8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/MapViewOptionsDefault.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			SoO+HlFJpDOcrO10KLjQtJoWEiE=
+			ZRP9/7/worAaIdfGq0zS2pvWVNA=
 			</data>
 			<key>hash2</key>
 			<data>
-			0PuLSOfx/O6b1eapkVzlO6XnweefNxMfP3rn2nouUl4=
+			u62V3Wb3svqakg5tW2icGqsekzQdpw6wRP7A5vnCvf4=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projection.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BoDmowfimc0a9ybZQ1vt+hFfdgg=
+			OOIbTjfE4aLcm+sq59k5t3m+/00=
 			</data>
 			<key>hash2</key>
 			<data>
-			4S2/v7AVC1e+vjgK+/h6Zu4J48CPBx3sMa9IR12C/k8=
+			iqYmjmzdnGRvzCG2a+yNtDsX2J6gaSrDg5mCcjM4p+0=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/ProjectionDefinition.js</key>
@@ -10334,55 +10338,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yq07vsZyPX1T2YgzBlTRQqBqWfw=
+			GuEaV7EjHa4YSonGlCVqcQsajZw=
 			</data>
 			<key>hash2</key>
 			<data>
-			8YmzhDM4Us+SihybZDP06+ScQdrU2UthGujQzF46mQI=
+			oND8gh23+ACFFMKjZgjVzw4ERxp//rLVNaTGQzmja2c=
+			</data>
+		</dict>
+		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/LambertConformalConic.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rI1tBZI+B2vABIckqFq41kjKpNM=
+			</data>
+			<key>hash2</key>
+			<data>
+			rNPl9x2M8zQEC7HEdhl0q82HrXQiHNr2KNcAzGouyyU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/Miller.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gq81lkgAkHLWZzSTwc2tzbCufuU=
+			EnlN6TNqoz8fTru7QjFY2T0k2ko=
 			</data>
 			<key>hash2</key>
 			<data>
-			x5sBS+nO34evq1ZuK1UIlX80jamRlqZCJere0BFDlDw=
+			NluXBDe/0ybfetmQr3grhlj0I9AmOL/pMzp2jelZRcE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/Orthographic.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GnqbB+SJky0FHF4CpFSokUN2g6k=
+			EUpgXdOWEq+I0nQnAN6dZecx6ac=
 			</data>
 			<key>hash2</key>
 			<data>
-			GNRF4BFVi88OUmFZwCoO2vk3yImA2wEwVUW7MjxyWqk=
+			X2cnMdsDogpQteqQ7Vk5UylLAMbw/pl1ok7NoyTRCmg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/ProjectionRegistry.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iDGzt2iYdXJC5fLEVsno/UAyjfk=
+			70UAVNrM6L39QgpwoWLblDQVq4o=
 			</data>
 			<key>hash2</key>
 			<data>
-			EOeqWIM153Qv5l5N1NsuvK2apgGxyu1ZFzKTo+XwexA=
+			F3Jtg5ILK9Lx1u9d4dUEBltzPLYj9C5R0RqaP7CpAA4=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Maps/Projections/WebMercator.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BAe9NpnMKMQZ6jQhKx4XGEUgveg=
+			JKN5vz7xFIzlqM3YaVMs/UUxp7I=
 			</data>
 			<key>hash2</key>
 			<data>
-			qB9sIAsrTUGHbNmbmc7bXD6nmwC/Fbr73bEUy9bzX+M=
+			UUtbHt3KoePZsR+YF2ZiiniRtl/LnATlZNELxNcpG8Y=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/Area/AreaSeries.js</key>
@@ -11082,11 +11097,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2OiRkHRxv8x4rx48uMQaX2RhnsU=
+			ssI+RihfkXp5xe+ecDacjHOdbAw=
 			</data>
 			<key>hash2</key>
 			<data>
-			m2mOem3A65E5tba7jhVdFfZA/hKZrU++SuUQ8eiPbc0=
+			g+7YteMJssxwmYtAjBpTOHX6hHrMKQVhfFXsOtiI2hA=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/MapBubble/MapBubblePoint.js</key>
@@ -11115,11 +11130,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bq9OsJ9/xjk0lY/ezErJ2zw4Iq0=
+			XQGY5sO5gsG5NdrJ0hH3pw9x1vg=
 			</data>
 			<key>hash2</key>
 			<data>
-			0emnEughX/P/TbZk+pbH4veRZv6kd5S3Y8r3qPHxv5U=
+			H11LE+XACk1Wmw2ql9EQmE+nwi5VE6kL31G69gQgQfM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/MapPoint/MapPointPoint.js</key>
@@ -11137,11 +11152,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kORsih3ls0+enu5ggUfpx5PBgqk=
+			YCWzw/MRx5F/yM7AKj47BMioeXM=
 			</data>
 			<key>hash2</key>
 			<data>
-			w1zTxckgS0sJhESqYkf2GKWj9QryX8ZYszQfDqCQWXk=
+			dpHbVTqkXfg05bFFy/FnOqW//ynn+pXVw9aCQJfyr3A=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Series/Networkgraph/DraggableNodes.js</key>
@@ -12314,11 +12329,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wIesWW27RH75Z6qSyc0e4uxr5s0=
+			bfrH+kA+nueZ1yu/4i/1vCEjFEY=
 			</data>
 			<key>hash2</key>
 			<data>
-			qiiG7UaCBU8nszbM9NO+nRfw+kJeXmDJn349aSes5UM=
+			Y+kaoN5pSPRPwScx3m2l3ovTa3MfkmzLw1CfRMODMuc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Stock/Indicators/SlowStochastic/SlowStochasticIndicator.js</key>
@@ -12391,11 +12406,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6zxDQgajI3i9NdmygLT15CioUAo=
+			QcxXemRGnbvAZEhWrk+79GT0U6Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			mKaOQVhF8oYli+D5rSC/pqpCYNMcsJBRSXcbXJ9Z8bs=
+			hJKObRCBl0SF28kVhXQNG87o8kmfgQ0GAcX9YDoz4+I=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/Stock/Indicators/VBP/VBPPoint.js</key>
@@ -12468,946 +12483,946 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3x34TXdNFPccIOHx8KHYwW59lPw=
+			LeqH6cti/rfb4P7etJXXXVDOkwM=
 			</data>
 			<key>hash2</key>
 			<data>
-			exyqJau6XLf4iUtMkisRmKbOVNJHTq9WTgV1E/aWt+c=
+			ZdD55Qa8+CFs/LUUMGtlJ6P9wScvje5PSSoCngbRAxI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/highcharts-3d.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZZZqqlacGprMW2W+3uOxzLn+LOU=
+			A9UxMPgkpEAgPFyROkLWYjFin8Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			gkQ4F77cl0Vp2xuyGfQX7Uesc9nhMroDWnsuajfEjbI=
+			GTXsYUdd/QUZ1gH/1KOBUSI4t6j024JDUptcex80uIE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/highcharts-more.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			l24cscfn18nqsaBuJJi3diP41Tc=
+			Wwxxvyj23qrqeUhz7hRubhocZjw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Zy2AcoeMDSmSD7a3GAh9jiO4JWcEueVSi8KET5RIcPE=
+			OOFaMwUwtQRMKETmdr9z4dkNXLGu5UhuuizP3nFyNZg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/highcharts.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6HZeW0MhJPbWEe2oURblORiSOe4=
+			Em+AYPVPAXbbqcypWOK+BeNRttQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			U2bU4ONk4rG+bKtKujXGD8vKQfQM16NW1VaaZocu2eE=
+			Rcdp53LmbR4aiEoBJ6hanXFG2Yqmt89FTR0TVLhMCQ8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/accessibility.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9sx2O0QGB34Q/ksp26HMwlXXZBc=
+			QfA7FlT647ZrSa/cTZFZFtHqrX8=
 			</data>
 			<key>hash2</key>
 			<data>
-			/dyV/COy/YgDdwa/aB43E+rBtpxDKrhM5K5SYvuyWm4=
+			mxZbkJ+CZKc/cdSUS22Gau/uCCzJL2YHYrAZzBAxMX8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/annotations-advanced.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2Uk8UrurDS8WCtrfKGFIlNU1uX8=
+			2qxH2hDnh6AzEovmLc93Wt9W8wk=
 			</data>
 			<key>hash2</key>
 			<data>
-			pwyl0h85lt6idYw28IbIYVPVvLRZog7BNjj4gg0i7H8=
+			ZJXCMs71YIynvp5//pT+w23PTQl+/lmRWjrM7Hy8Zvw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/annotations.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			z+NK2AXx6LqkXXMFipdkFB6qtnQ=
+			34QlXssgQD/n1z11dMiCsTOuiGU=
 			</data>
 			<key>hash2</key>
 			<data>
-			GC770XzBpVKZz8dYXZWAD/jogURGippxCaaEsNK5aq0=
+			1ZniGEN9XUCDLtEB+mTHDbEgSfvruTr5EdZ73Clhtm4=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/arrow-symbols.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			P6yylk8LAU8QFhfZtrU8avJS93c=
+			dFBbU035KXxkA3w76883bCpVpAs=
 			</data>
 			<key>hash2</key>
 			<data>
-			J+oKbMevAjHOs13/S5CDaZTqQKvlGxaObF0LaaY59zs=
+			F+rXRsOI9OaPc86qA253iMxfuTf3tA+ONW3lwZPXhcQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/boost-canvas.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			74KhoOvBdU0heRq10ptYUiiiV78=
+			LLpai1D0DFy9SbIQqpWy5VbLTyg=
 			</data>
 			<key>hash2</key>
 			<data>
-			SJGLvPz2Q08aswRbMDoNmEHahJn2HhyCsvMWZ0o2vOk=
+			D9vGOocRx4xK8R1nw+hxbXznP1JNZepCfZHfg3mET2U=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/boost.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DfSZz6CseE4fADAfL8fSI3HP7fo=
+			NaNd/ZKgmIH/rnLJuBOraY8zk7Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			dDXGddJhcl4QtYbTpdNRIL0CxkTeCa8rUhM+w17qTo8=
+			QO/kLUKi0I53Z41OGC1uNTxQZ5URoB9v5ntrKCv3SQk=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/broken-axis.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wF/vInJMDYQz66rUSiaexiJsYu0=
+			dvYLsi1I6MPmdI8T34eiBpdYccc=
 			</data>
 			<key>hash2</key>
 			<data>
-			/ey9LD4R/ZVdhFGXgQH9oQQg2yvh/mqVqrMo078nQrU=
+			eGLfJ2AyEoQ10lcKImcngIyOH8aIEX92NeD7LldtyWk=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/bullet.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			59E0X/jC0NRvDvgqM3nQhNFJzko=
+			/FHGJRWdXB+71MumtLtf3LhuXAY=
 			</data>
 			<key>hash2</key>
 			<data>
-			KRnSFOC0mSdVJKN1eJNdo67jlTu83Yli+xG2KSMuQAY=
+			Yr2YABgftyO9ynQnmZQXCP3n78mQ4smM+607oURzRe8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/coloraxis.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TMwPVmDnE/bMGwzqmHAId05jPGM=
+			8upKiqoJRyA5rSQJG5RyYlq3+Hg=
 			</data>
 			<key>hash2</key>
 			<data>
-			eZBk1A2O8Zdepo6twsCk1G2PTCROAjepjFpSWI2QcJE=
+			vh87fGIrMx5lj5mM9rHSm6/ng0b/XF7N7nn1qF8hjow=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/current-date-indicator.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ff7Y3mpbcBGbtZscPpYDwle9abc=
+			j6C0cWzgeKrBcbpQ0DjGentk1gM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z83t6UVLMl/CdtjD20rMAjo3ywQUTekGgZx5leSK6Hc=
+			zSaRzGL2/3ZIc/+iaFLnEV6Ck1ennq0CcZltV7rPP2o=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/cylinder.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jqFu/WqIm/mR+OvcsLTl162jMQo=
+			XP6kbjNGir4N2hXb7JdfEFuOJ8Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			w/nkuUea3/3RovAQYjuCp523GCreNyDn150Qk0naIBo=
+			4F8LPy8iqaHi5s92iT8T83rTU5S0VBF/2D3fJwxViA8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/data.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QjqsCKE91DzlWBipMRvhh9ExZwQ=
+			v/4Te0GlafFWcmZim69aF6CuCKo=
 			</data>
 			<key>hash2</key>
 			<data>
-			aTQXUMJdGxUF/cvY3jDv4wE9A5y3hKuIjIkqxFtj0uk=
+			1js8CKpl7lri0tRO8uI+aHrbnRkxFVPLg7oQ58FUBGs=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/datagrouping.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			IrFb4I9HKBo9T4lc9hhif7H/qHs=
+			Bf29Yb89mN7PYhuhqiBg9ZwvFso=
 			</data>
 			<key>hash2</key>
 			<data>
-			DhOhZwRMEhYVSQPhL8oOaQjsjvgvLZhZEGBb5lcqpKI=
+			up6JjZFuaqUbaGfS7LMTxibwwTNwRAsaOqKCYnNZRfg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/debugger.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KTON3YJfrmRFLf8P7MN5mIjguaM=
+			oZScM453L5JWtOUZJFMwZodVfbQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			/Nsd8ikG2iMtqD4eUHqUE/LKMJfTngfBiqUXpvar024=
+			6+/Aq0mSUVuraDXPIEAQ3B4pYf/L+ar0Q8wNk8p00cY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/dependency-wheel.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wtgxyK7a1VGvk7zEPNU8Z8O20UU=
+			S7Dj+Rse/40NVJa3FkssAkWBYcQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			xZ5/e2YJuWCPc4oxvxRhSH2iC4RX3vlDJmxMNFKyCM8=
+			A3f0oq4B5TznjsCkmZeg7swb5xsOQU+Q8uitKiU9F4k=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/dotplot.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			l+BqCGxw3P1YIelwNLGyyoagRSo=
+			cmZQ5fY3J3BIExtDhhHl8uIQnlA=
 			</data>
 			<key>hash2</key>
 			<data>
-			hNPAeqXAGNQfcvb1UqAOhgN84hSmig0N+saK5R7ztaM=
+			JEFtaUnDa/+BBstjqc9F0a35BJgDmMc/8w+WXsybY5I=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/drag-panes.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Efk22i3yFOD3Nob6tiUqNbeXls8=
+			AgBvb9CrzArfR2Hj8ZuNiSxz1Dc=
 			</data>
 			<key>hash2</key>
 			<data>
-			LmrdibjRAmFU5evunsqyJPWcYj4HWdnYEyj9UZ3JMpA=
+			7WqDvF+wHUBAk3e1igIJMEPEhekPctg+e3gfc1f5ySU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/draggable-points.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MNPXrqgsJBbPy8P4IP3iXuj2XVc=
+			dmdZm05H4poQgL7iyTN1vGKpEYA=
 			</data>
 			<key>hash2</key>
 			<data>
-			dG9LQNlcBJcS+YysN5rfwS6wjxgkG0jWm5zpKbBhCiI=
+			Mo8w4WFr3YMmxtV6ZpGdmg9d1PBncHr0PqN6Ccq3i4c=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/drilldown.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kRJOS0+REbpUXAjhOD7AMpOt6Ow=
+			mHEiOueA3tzgNhM3AosC5N4NeNU=
 			</data>
 			<key>hash2</key>
 			<data>
-			n8xr6nIRq/dZM3xEpDDMznvYBywqlrEJahxs6whMLZo=
+			uxXnJgxTAVgVC1nacjhbT46OFIky+vQjLiQVq/rk3tQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/dumbbell.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			g8QRlqD0seJlZoK4tT105rEEL2o=
+			NCXFeyMhHSFXnxRi0KtIp1yvL9Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			yB1s1EIo1OYRdSSJZV2rgv6EbgS4LcYPcxbta6yLNdc=
+			541lSjWhW5n2q8RL9Wc9xGCiQY8LOafhREl737LSKa0=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/export-data.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nFaILWPGQI5D79HpzcsFdc70ni0=
+			XDASnjtyVBYrz2uFfL+Z7M8MRFA=
 			</data>
 			<key>hash2</key>
 			<data>
-			IdyE4EUNv3s6zXNkL6G4ce5Ax52Q1VMTdyV42TXZ3rs=
+			Gnh0eocNfrbWlePlo8eJobukLCAxDxft56DDWfWPgsU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/exporting.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			yFiXTwvJpRQskMkn9CDS7IpoEmg=
+			F2zyp+A3ge4KEDvD2SuGciMofxs=
 			</data>
 			<key>hash2</key>
 			<data>
-			MWx2JpvHfaDsI7674LBSCnfuahzOO/QAEzyxCrBloxA=
+			BPsfjvWQsny6Cd+fAORdd9UsCz/fuSwtsD/iLpwLrBc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/full-screen.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EeYzi4s80ytsLTtRZ9GOmHA5t98=
+			C7WEI53gX3HP9scw0k8jyw/kIgE=
 			</data>
 			<key>hash2</key>
 			<data>
-			2BEP2GIt2r15i5vK1T7W0E4MGRuwujD98kLZpgGWuSU=
+			HccyLYFDToQJL1Gu8yDLKrcEArRNjYsFCXdB8TQMuzM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/funnel.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cFs0PYOc+3r9BxS6QvBrtihdFnw=
+			wTe7YXBFC6bq0AZZ7P3ktnjVnAU=
 			</data>
 			<key>hash2</key>
 			<data>
-			vUs3tGKSR/Qzb1oRUpUNk3Tx7dCp7NIrNtJWVbPWOLY=
+			2l9xdH+Hs4Vbw8t+/Js0obWFXkkoyZdHYdfK4xvPr8Y=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/funnel3d.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			h1hnmXzshovNYKnJs4rFgk2Beuo=
+			vQXPEKc3iFc7YenLiKUW8AWvKyU=
 			</data>
 			<key>hash2</key>
 			<data>
-			iRk2innMF4QoPGFMIiye4lHu7fwy3MhAEn+ImbnrWGQ=
+			jI13y054dj8ZbzejWPk1GKxGMzJOfcOleGec8t/vt6M=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/gantt.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1/Cp7B0sMuQW0TyAfEjcOpjdaMI=
+			aWcQvxPcoCSC6RqGf+AKf5amMnc=
 			</data>
 			<key>hash2</key>
 			<data>
-			AuGYRc+pF1ISdRvkGreLTr4xCnZnWxlpbshOmxMIM0A=
+			DdGUk2wNU6cefCQTK01NtUy1nEcHlGzVIoAMJ22l8mw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/grid-axis.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VR1RXZfSYtc7hJ1QLxqDx8p2OD4=
+			adFFV2hHnk84pgrbXiSDsgK10+Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			IK2mnymmICo619S/8ABCd3tfAsWkbHL8E7L9IMXsqeo=
+			Ny8NaBBCbx1irPkFi8Fed7IOsrVz1/kGqIpzEEnStPI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/heatmap.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2poYOYAqUA46nuQuKHX7MiTZlwU=
+			NJCiRCbrq+6qY3Gz8U7FgwjfpIs=
 			</data>
 			<key>hash2</key>
 			<data>
-			On4+aNKQTx0AUItVt7+cSiirskIfQ8DMoqiMcALm3PI=
+			jyCNEQ2sGD46XJaqMoUDjJ5NlDGIPwpVN3gGGXYtVkc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/heikinashi.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kFsRxAgH/ba1Ox6z88wI6ZxFWjA=
+			pJAJhC8gqhCl8ESdulzyTDpNawo=
 			</data>
 			<key>hash2</key>
 			<data>
-			7VaWV8ZzoTqJbS4GwhvvlkA7iVUky6Ox9NlasFbXk9k=
+			aey+wkOaztdssyTaRAepQ1E0DYAjVY0ZSWB0oDbaxEQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/histogram-bellcurve.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			icTJTDpv3OLuIWOXqntfE2tXuMs=
+			NM297SSJXAy5PXjMO9eo368/nd0=
 			</data>
 			<key>hash2</key>
 			<data>
-			rK9TFsc6NfsbYmL+M5Io47ZkOaTYXtoLShE/JDkulCw=
+			Q729ws8tWa9pAGAAPznsHOVUTLhtMGJ+Gy8K/F5fu/U=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/hollowcandlestick.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nVeYlUlycXzjIfBrGFol9/tsyNY=
+			CRG0/1IQPz4buNi0hSlJ1ObABEo=
 			</data>
 			<key>hash2</key>
 			<data>
-			/TR7736gR9etanTqP2qpzdAGpcPJy1BMvv5pLly9DHU=
+			z701O40XNbW31rY58zgnSIlL5qlPx/guxhRbROUXWLg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/item-series.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tpOsb8D2BAVniI8f/5/G2WQdYjE=
+			2vOl0Rg0DbbirUi8yf1L3KpVkaM=
 			</data>
 			<key>hash2</key>
 			<data>
-			7uoP1A0UTbi14sWIf5T9avSOFFgGuQDSTyop55HpjhI=
+			VRi74UgSx6KJBgrdwjzebpyhxTALxue8DhWwrPBUPrM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/lollipop.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u28/9LRbNwQl/RuOz7J0ro/WLfM=
+			3Qos4Q/dR/FbxVJBcpveSZXp/cQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			LXpqgwOu1F5LmGA8HKBF7378fdhUck62cwyqxnsXRu0=
+			8STvUBpY0y3FXBYWCEiAmSZE6H5LBHWRoj20doLQuWM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/marker-clusters.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uPJBEPUshCE9GwWrqFAjgXKqrgo=
+			IRz17FLmE1+LJzH3eWotQ2jy9pU=
 			</data>
 			<key>hash2</key>
 			<data>
-			9XZZ4xb3wEsx6xCfj9KiNYerX/rlmmdT8/ytjFCx9bg=
+			lz7pcUohq1a95mMMW2ZithDojorbfYSfivP6nJCTjFo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/networkgraph.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			j9afsMLvazyJ/4Z3XJWOOmupgno=
+			jSo0MOIP/ve7TsWbhkhiTNF8P1E=
 			</data>
 			<key>hash2</key>
 			<data>
-			mOc3dlmsZH8jSSVXX41OYPhFjnGJQbjDwWXC7bJDPNk=
+			mTERW0jC1jzG0xLsBWCoEEW0tnialQ8qyi3IV2quaSs=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/no-data-to-display.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vJtd5Nxb6VMtpMgfsk4Dd/evK7w=
+			211pIf9jr51bomsf3iam/rbuZUE=
 			</data>
 			<key>hash2</key>
 			<data>
-			Y1nmdPXS9lAmlc+vx23Iy2ZsTEqAhoIkIz2j18W3rVo=
+			ZTGjnciexXGr5sM2/dAiHoQjZnGhWUQIou1S2vbLXFU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/offline-exporting.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GAfOsp0LcrXBpdGsB9HIPdxZj8g=
+			WmQOQG6bj5SkzsPJXxeBlOZuck8=
 			</data>
 			<key>hash2</key>
 			<data>
-			68/8wDXw2JlOohl+t8iO/JSdhMkD1etpXVAmVSBiJdI=
+			LYe7Ai7Spf6/8e5colcu6c7rY/Go69zY6Fu5FrocFhU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/oldie-polyfills.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			H1wqr3QxAV9cMSFEwH4t3jTdHLE=
+			YY9a7ZuZm8ruB3p510bONSTX7DE=
 			</data>
 			<key>hash2</key>
 			<data>
-			GwvUnEOdw719OBFTiukMb6O/uY3twZN4gunm70qhgNk=
+			yAsw8pKkXUSwziq04r9XCVQcvcwE8lr0S07zPSSFd0k=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/oldie.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FLBrKDrQKYg5OxqcHjOK67igO18=
+			hwQtaAjnc6a6LPFt97TGqJ9GkvY=
 			</data>
 			<key>hash2</key>
 			<data>
-			JVsInUoOAFA7oHzPJmkanLCGTRTzhbVZXoaluD7xWZQ=
+			FyXVCd62eT8l62B+evX87dw1K5U3MItgqbzkp3N9LeI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/organization.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			b8jTEquilGaw/+nvgynyAH5yfEs=
+			j+2JtDuITvYcr3rgBWBG3I3Chcw=
 			</data>
 			<key>hash2</key>
 			<data>
-			dPYMyZ30ErQsX+toSVlPIvny5mUGrLt7b1aapzZUyqA=
+			idhFTOZpmn1Muoxd+GF7jMxDz7eaUvwgorQqCvOxR+A=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/overlapping-datalabels.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5GRnG+5fCV4djTKEyDgikPabkao=
+			ETprah6iHSjXE/U0OASJKBbs3CE=
 			</data>
 			<key>hash2</key>
 			<data>
-			0vo9QM+oHPsbOSaf6dugpkklPkJ3LLRXmrOoloE4e4A=
+			pmTwjyCH2rclO+S3t95q8IXD/WrfmQUwJLaB34i6tMY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/parallel-coordinates.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eW8uB5ZCCYEDwQOgdhWEewXGX5M=
+			PlNeVvBDasc0B+TmK/4UDT+0K88=
 			</data>
 			<key>hash2</key>
 			<data>
-			XSXMxtzvnRUMeKLMr3kxqnuVseg1kbu8/VfbLppFjBs=
+			Ox+OGWY4qLSDijbqzlSDKhvHcx+LdBX6eB2ntKXLT2g=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pareto.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2lUeDuCAGBp+DHSsTb5p1fs9DiM=
+			KN/vgjwzTkvbSxKqd0d/nCV29Pc=
 			</data>
 			<key>hash2</key>
 			<data>
-			sRAWgtnkzgneeWZ9LFsqqKzJFcM4L8uqCGdOKLGaUlU=
+			w9h2gUmpSZQne0EaoWIBTeFy/KqvpvdKFCOJGP/O3eE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pathfinder.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iokJbWrpuBxmARS+xFejlEgRADc=
+			sC+dL45Q/OP0A8eykyRa7O4UBk8=
 			</data>
 			<key>hash2</key>
 			<data>
-			guJ29VldLeaX/ArvwFhceEAC3vFeue5BKMYUtI23iSY=
+			ZtRflL1jK5VlI0FYWGkocqWjQfRyxO3vbFh4NQZVpOA=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pattern-fill.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			j++e7jmbvCQmlpSfbH4ONqWuIT0=
+			E9zssBK2u25H2J6hGJG1qe9k/FI=
 			</data>
 			<key>hash2</key>
 			<data>
-			83PqYtLxoZZezKAtzdBA1yrbFa0qjMt8mkE4rpxEowY=
+			xWVTuq5gZ+MzkdthCzC5STaNT05LsA0LrFgLaoPBuj8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/price-indicator.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nNNx6e/25LMX9yczrnklMrJ3FQM=
+			nJnTRUCi+Oxw0bSuUdFsjdv3mdI=
 			</data>
 			<key>hash2</key>
 			<data>
-			ztnYmbiIcLQB0DFeILH7BR5vtobJCc11C88RJLwSIuA=
+			S6A/TTW9jZ04H1fgoMwR8pkHderrFgpWA97xO8VfKok=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/pyramid3d.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8VmY1Qu1fynKECVtQ3INSCIR7+M=
+			pEnjiz1pkCfwZyzDhkNpYfulvEM=
 			</data>
 			<key>hash2</key>
 			<data>
-			W0mZtb2I1UhYDyt3LPenVitWDCF854YcH01k+ldfswA=
+			96iqI+DbvezGhRouQL1/Ve6fKPfCzgGDsrrbiBTxbNU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/sankey.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HpXdn23UpeNnOCN6jc82c/hfZGQ=
+			A3H9Xi36F9fLMj7lZp5y0ym2vUA=
 			</data>
 			<key>hash2</key>
 			<data>
-			+UtNM5X+UaR3B0dh1hRo8GbZfQ43llxU10uv+qFTJ+g=
+			xjdsIzHcFFkNqfUrm5TMG0WFzXZZU1rFgQjNWdoG85I=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/series-label.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			J4jPSC1ctloQnBtvCFGyMsP0Mmg=
+			T+PKTBsqE3FJGxV5Ye4WEsQf9+s=
 			</data>
 			<key>hash2</key>
 			<data>
-			VG6nd9M5i0+uArRjypSID0dJzHw1A8ZKByozMeATQ4M=
+			Mzxq9Pj50yIu1Uu6QG1upLFBKxTyFKjTBBu/NXdKLco=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/solid-gauge.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UWU88EHqftneOpRZ0Xrv54q8BVc=
+			a4rsyF4gktdgB/AO8P0EjvilN0w=
 			</data>
 			<key>hash2</key>
 			<data>
-			/6QMJx8BwY4lemDn5XA5pOHQDshst66MC0RIcbR1wNY=
+			2mi/1UcrckMWlRYQ6/V84PPeRkZXcjboFayFnRato5E=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/sonification.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7FD8BikRO4C5AvggxPfF1cbNB54=
+			W12FAL7NsMXhFXaEaVlGAdh6T+0=
 			</data>
 			<key>hash2</key>
 			<data>
-			dFADV5H4NFIHz5hKFMHGMXW8SIsOPV72OQ1iqVPn9wo=
+			vVIwsFLq7XaYRfmPtyD2vUSLQja6TxTnE85KkjR7s2s=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/static-scale.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+nLlSmwMcpBs7tkFQ8YML7aTBsw=
+			Dv+xG/OJPyIBQEptPCiCFQ12NTc=
 			</data>
 			<key>hash2</key>
 			<data>
-			O/W9Qc1eM6lGOjSzzegp3YlIMyzY6B3ll7rtbFo2Kh8=
+			VL/7kUVUzWQuRQGBGzdm2MGbpemgSw16rbyAI/WtT6w=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/stock-tools.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+5bTyjYde+zP/1itzHpEjTZzZlo=
+			zCo3dnp9jlhjYd86S7YbjkKUXd4=
 			</data>
 			<key>hash2</key>
 			<data>
-			sQqiN0YT4QtMvDM4hV+JTRlKEtYU1sLqwkiNo+uip6o=
+			XQNpnQX4zmFQge6SnyeWBZQeTO2MtSEzSfKHFjke6FQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/stock.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/8+UtHi8AdadvKTLPURe4tzQzAw=
+			M3nxeMJJPEebt0+tmIP9KovVZdY=
 			</data>
 			<key>hash2</key>
 			<data>
-			aTAw3cRJSkT4ZPEu55j5fWp4Ch05tkxd6WL8MGrfqvY=
+			WfmJwPvSru1iDaqQVsHS5PJgx5wYewL29NwbC1Tr/Bk=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/streamgraph.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			o2w3b4kOC0qlxFx7hVvpbGZQ4l0=
+			66pca8z3ceT5L18fc10oSM2nDYc=
 			</data>
 			<key>hash2</key>
 			<data>
-			eE2KRAqtCiBNR4eWB0Ej5Y1F7cSQ3Xd97t9gGWgOvqY=
+			AqA3UrZJcQuFOPiRPl4XIRc0xwL+PDVUBqgsMT7rbAI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/sunburst.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rGimW06DCBgMKjEFsSyXWt7l3Ig=
+			nLRz1yOaIPKuGVFzYKD27zRKEhY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Qf3OYEVWjT/ZZmEGf0/rX6GG2K7PvZ5cpvKrvaSLPl8=
+			BjgEK3dpwZissXYOJiWRvbi56Ra42tc2R9Fj0oV7KiQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/tilemap.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JY2DTAUhZDS2CbzMEfg4JyfCZNE=
+			IGBp2hk5IeswmCZKIL6+gXXrb98=
 			</data>
 			<key>hash2</key>
 			<data>
-			xqE9ZzXqNk0TJSNDX3CyWcjEWVQr8nWZxNnkwtyG6us=
+			f8AnB/HD9T4nev8pv3FkU9PSCpclyWKtuFGCPBTdttQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/timeline.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iMQxQB92mF6k1GFhLnB2ISSj0fo=
+			NzqEbCLDR2cFfiwgOh5BHpQLSWY=
 			</data>
 			<key>hash2</key>
 			<data>
-			/i122zXx44Cv2+rqkRrqE9xGwwiw/eMn47kG9L2uClE=
+			4LMaHwwmgmDQqBi3kCEJGHgyCQj28g5oIHq2XN13QTU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/treegrid.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UDeDJO2SlY9XsuQ2qRqrz3blOAg=
+			dvjhIvxHxD/Fqi0O0IKm4n4Yexg=
 			</data>
 			<key>hash2</key>
 			<data>
-			2dXviHgICtpwb5Qd3NFO0nE7fd+djTuIrDTTPuj9C68=
+			Usq+ODx3/Yi/MPp5/oYpX97QPwXcUZRiGoBNEkLZw94=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/treemap.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v/Ll5maKNYKpRuyySjZ8Hv4zKmw=
+			+Xe0kDJdNugxtFmXMg7LR5WlR1c=
 			</data>
 			<key>hash2</key>
 			<data>
-			FAucSe/Kkq8O5rtHe5xBdvNAsb/Ab9wZNxgcROEkm9U=
+			utIBeDVewQrf/dwHrDuv9eSVN2MP7xt5PhYoYlu+uSw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/variable-pie.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UGsjakpNXuXtiScaFJklBGbc+jc=
+			g1NSZZqpydWQSdJJLnQWV0zeLCE=
 			</data>
 			<key>hash2</key>
 			<data>
-			MStW4dcOGYgibhpXMTFjjXiUA1XZdu4jwQLdJmCBlqo=
+			sX07ug/VvcHJqF8bvxe1CD9/mFYJGE8WnfFV6Ef/Qbc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/variwide.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RU+p2VgEwWtnlJbO4x4cuNTYF24=
+			e8/8aGKavPdXnKRHrc1poYVP4EM=
 			</data>
 			<key>hash2</key>
 			<data>
-			23Ih+tfw1tYG0wS9I9kJUoGdJm9NHQ6fHILytM4m7Ds=
+			kpPunS2A/d8fVhyjpT/rfRBIkfrOTGSUAPUCFENPISs=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/vector.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6i5wYeuU9QEAdSF5Gkctyqhcwfc=
+			WTZb9AIVPCurxb3rCoz+gJmvoJ8=
 			</data>
 			<key>hash2</key>
 			<data>
-			+uZzQuyYrTkcCFNkngitY49cXdbP+Xo9eOdkaryg+BM=
+			bUFfSTuY65ut70mPw+fAjM6sOwuF3relIJtaA+NRU5A=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/venn.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			We/zzNlZ+gY7swS9PHwwIZ/+3lI=
+			v4iIV4LeU97wwzfeWxQetG6aN4Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			x2Gn7sUscHBmCBqRLfXIuGajY6mUVwDZ3c8vrm3K948=
+			Ymt1euuovlazcftDjow/guDR7mRTa571SsyISBPMCUM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/windbarb.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			A1lyOP9WbsTC+Ab2tGdTwKjA1W0=
+			O7Pid/yUmWS9JPWhSj3g7knYwrU=
 			</data>
 			<key>hash2</key>
 			<data>
-			rXN0C3snINHb0KswwIBHdjwc8uO26PqAvlIWW9Sru1g=
+			xp6lGTPdeyeghzDce7bPK2fHISkXKY3HiR67liPJgx4=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/wordcloud.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8jiHmIZJUPtICQOR5WQZgmHri9I=
+			Q96pKy1uK9A6JjZfFyQaqoYPsv4=
 			</data>
 			<key>hash2</key>
 			<data>
-			EfeKdXtGggHLeY/JkbrsNJhBEVn3BR+NTvxge1nRLRE=
+			qY9UEKDpvAs0x63BG2S7leFWGEr4RT5g9lKilb840rE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/modules/xrange.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			72G61HF8+74e5l3Y6OSvmXskUkQ=
+			9ZukwUhKunu57nUb8RsZpAqDkhs=
 			</data>
 			<key>hash2</key>
 			<data>
-			YxfKwsEa9eVmT2qKSmyNKOCaHmQbcCQvfA2Zp5ZXT3o=
+			f3Iw3xOgGCCpKLyMrxm04ZHXVyFJ/usdKNnFpMNoVrY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/avocado.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XteFsEUnQLc2zglDoDYJVtkQAg8=
+			77NjSQ+79AoicvaA6VUGeTXnlhw=
 			</data>
 			<key>hash2</key>
 			<data>
-			+uEjLViCVVQSnufS6zeKKGumJjL1h7ZMexCZmTRhVw0=
+			dy4ez7pFW30TkXJ7kwNGRR97ki/E3XFZIQVN06cw6ws=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/dark-blue.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0gjCUvM8ebwDKc4wblpzec1pe/w=
+			E9uYL5xIeGLhp8gzbX00glwGZH0=
 			</data>
 			<key>hash2</key>
 			<data>
-			6qWp/RGlFjihGX+jHjFocnqxdP4+/KtXsc4KD1mBPQI=
+			mhpG7z33L1ABrqPurwgGRGnqqG/V/H8WE9uRdg8J6jQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/dark-green.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TaGjVfdiXmTZYVWKaWtZvIDUW3w=
+			x9d4/nt/Mzf4Ld4dI5HxOBtlVAM=
 			</data>
 			<key>hash2</key>
 			<data>
-			T910yccjD6Ffe09RKviVQyJJWoQ+surNa13cqBAPWLs=
+			8tpixXrSwl3HBfKISpvhVNfWe+1jYWVQkIPSKdNs0ao=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/dark-unica.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8gTgHkF52Ezxr9YCi+cte8Yyu4Y=
+			g2A4UQ+ShCXuUdjOsV0WESCpj18=
 			</data>
 			<key>hash2</key>
 			<data>
-			cIJr4MycdO9XfCRYTY7eI1uXFEofUFrUIVVddPqicUI=
+			3oc1PJua4thwT0jPG3sWlwI+0+0jYTg+PRJvBTlNzfo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/gray.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RoXyy4NmCISbzcRtmIVE5SRQoNA=
+			Smkw59UoQxRTnSf6SZeN85j3Szo=
 			</data>
 			<key>hash2</key>
 			<data>
-			iVIi1U0AD3gE1HqY6tu8Tv+F4dWIzZaw9eD2Jh+94OQ=
+			wK1km3oNlOEgT+vYoRWbP3UMoUui8FergjTlTw3Z588=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/grid-light.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jAQDKa8BJllxnutH0wxgtgU+NVY=
+			ozJUFis0jUG1GlAyLOs1i31hzUM=
 			</data>
 			<key>hash2</key>
 			<data>
-			mipt3CV8G4/Yi7NmNEvc67TaUAkr1D1SdPla9ekxokU=
+			4MyPU4ZPcPjSOt5GTDiUgQEUed3mZrYW4B6s0xDQNNI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/grid.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/JuWfDcHlXXtR/k4aMycwelLVaQ=
+			hGbTe19horjJn4pfsp5t4y0j6Yw=
 			</data>
 			<key>hash2</key>
 			<data>
-			gS4yrrpTXu93+yIySYlB21xFISqbNGex0t8ZmWo3EWc=
+			ZVr3qixaUb1G/eMUJ5uN3akyTZ+0SA6TZ3GgZCIuBno=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/high-contrast-dark.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FSnksobtTy/Pi0y1tYDAe90AeOU=
+			TfGE7xPCkZsWeDq6jItRAa46Hp0=
 			</data>
 			<key>hash2</key>
 			<data>
-			p1dE8phzocSATj5/GUZSNGOx5znLSZ4rTJG/QUZjKnk=
+			/CSyZzxb9w/SsKguKada7uCBpTlRZgjhmPGqusGXbRY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/high-contrast-light.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			aT2DsLSjQikjyPtxkhrC1msJF/k=
+			wXoicBUijgwXDzHIP2huPObGA+Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			3ybt/ex5qK/JwqjoJhHSDc99+gFno5wqXzxfry7rHqY=
+			764I+ejfma1Sa/lwM1KB+fp86bVfsjkCyW9ycLvglwg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/sand-signika.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vonP5IZt4WyFkPXrdnHszMlaa9k=
+			H/QpseMM8NjV2erFf43LuSRYhWw=
 			</data>
 			<key>hash2</key>
 			<data>
-			rpQa8RWxMUVeb/88r7zmjZ5qfbVysv6YB65LpXK5CoE=
+			s2Qijv0pAp90FMCuvIqiXifM0eF1V7J5Qu8NjNGg7KM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/skies.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OTlh7qTJhOJcMZ1AQTvmESkYHdA=
+			lmmnZNRgVYONZU0z3/NJ1GTc++A=
 			</data>
 			<key>hash2</key>
 			<data>
-			M4igRfLcbjFMYraEhdxMkkppAwtQie/D7vHRaMzBWZ4=
+			SIOAJtCfk/B7WU0EOhTNAI5BiEOhmojD1/doG4UmPfw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/es-modules/masters/themes/sunset.src.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5ukxcEMEJDpvqQd60Sgy0ftmcT8=
+			4QDiPOB0tszQvs7f0kF/VzZFZ2I=
 			</data>
 			<key>hash2</key>
 			<data>
-			bKzYSv4JNXzH8mlTuRBmrABR8DYorprfgwzX/GyQx44=
+			ASHR2zmyq/+58gWFmo8Jb60/QJ56ubUTkZ25C6SoaKo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/highcharts-3d.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8fZnDbtaOv4jVWRE9V7djeZnm8A=
+			ZPfbV9OALX2LnaIgaxUYS53vdPk=
 			</data>
 			<key>hash2</key>
 			<data>
-			qLYbWVmHnUmwDgn8X8LUDVAkr4WrbETn3n+m004fGoQ=
+			BYMsUQ+ggh7elA0WbTMKm2g6geGnIdiE1CNrzqxgjuY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/highcharts-more.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CgmwTUfSSWG/UEk0NURHIJqqXlA=
+			1HrdRi/48qPY9UlfhywF6uFXfkk=
 			</data>
 			<key>hash2</key>
 			<data>
-			sGjt8gXL6vNif9ZODOTVtWw8F72fiGu+aH2jjHSh8PU=
+			D+cXSogqJ7g+fSNy4h6LIDAyJ6oVzUowEPb0WeGOiAo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/highcharts.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6z9pQjvtQOdt8KsIzN9wT0eaC4k=
+			6nPZMRXosQpDmkr1qvmSxi8dI8Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			hc10NXtE+IqU0B8/UsFjuoYIuSUxTAK/5Ojc+ZJabVw=
+			Eom2+QYW3POzC6ZVVGCtTxmC3ZTFqictFrNIFEiGf0o=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/lib/canvg.js</key>
@@ -13458,88 +13473,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bccSQFXFXLVL27+pElXgC/o25zE=
+			ZZnMrLFHzpQKJkBS/cY6gw6c/Lg=
 			</data>
 			<key>hash2</key>
 			<data>
-			1LegboainKkMOtB5ETphmQHo0pYudLNseuCidPqWbUY=
+			EW9Ukf3YdBZc1kIyJVxvxge15esX3d3HBomHnDuxJgQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/annotations-advanced.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XTSzmKaV15ho5vuf/VfHUU3DajI=
+			CtXiaA0+EIurHEmPig7aVszxUsM=
 			</data>
 			<key>hash2</key>
 			<data>
-			KEqZ4yqil1f9ll2q2KK4IszOzGMBtc6rcg72lPiUZxE=
+			JP6oowHZYhSDkYhSIz73RbdXa/HNyVj8ijoWxiTN5DU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/annotations.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xX3KxrXKDdpBnvdR9b1d9VoEMbs=
+			uGDshLjkgQvUXPCNEBnfHVRrlLc=
 			</data>
 			<key>hash2</key>
 			<data>
-			hcpXY7IPMY3GJfxKEGXYwPL6PuouPcIZ8jQ7lnVAFjw=
+			u+GAV8S3UC9Gjb+/jhTVVLAfwJxlaVQ2A2/Y25QRWCE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/arrow-symbols.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rUfVbcFDEIe+e7M+Ki943ftjBg8=
+			MC1aY+C4Tuz+X1FKyVRCNeDJlvk=
 			</data>
 			<key>hash2</key>
 			<data>
-			I7mlHezP07iK2kVXypddRW+HMippKP++bLYWI3pP2+Y=
+			HQ6Kln3mOUaVewI4TYgmA834mX44MUbP2r7+N2/eenk=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/boost-canvas.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OoJRl7x1ZmkTKbbxfKoW1JVR4P4=
+			Rp4EljJgJI4VH5JnpPiauQmlSao=
 			</data>
 			<key>hash2</key>
 			<data>
-			LtLWqANTjdrZk4m1zSk3w+qUW2NRgfzRhZlZCgPhU0w=
+			AA62O/5lZVUtFVbO2Das+BrXJViJdm6PdzPBzJ2aks8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/boost.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			oTwRqJ43r7/87y3uAQR/d+dvAls=
+			XtdCxFuA2nqSR9KN8ldnsf4uUiU=
 			</data>
 			<key>hash2</key>
 			<data>
-			+oQqfaKnI8BORlM6tsxQGdO0irwNY3ddeZKoDJP0GZs=
+			9Ih1F6njVhcVYVOdTKML/gROhjpLGSa+341xcbqEPYs=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/broken-axis.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			j8u2M7uhcTW06FCLScY4ehOwBc8=
+			9xKwl5UKrgn6FwIN2gjDmfGOwxo=
 			</data>
 			<key>hash2</key>
 			<data>
-			OybST8ou+9kzBBuvgiSoA+b1+uzLQmk9YVx3Tze7DjE=
+			jFYxgHlajgeoyiisNAU8I5gd9S5ftG55D8w61xwMvGc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/bullet.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			YOvgk9ZYdxTOsGtm0g6XmNBSon0=
+			xmOSsVEjI/MAGpdoaYTP/uWPxDs=
 			</data>
 			<key>hash2</key>
 			<data>
-			DJdLCNluo5FrmF6EAQrPrXPk77tOWIVXlyR1DKO0oOE=
+			4yyfexDHRVtdbDcWFQjs1gUykkOr4oWu4y/pSTJbjmM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/canvg.js</key>
@@ -13557,132 +13572,132 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jffQnzSLVkDEjaM55yaOXcJGkww=
+			qkWS68h87mO96qVYkLOZHmPBu5U=
 			</data>
 			<key>hash2</key>
 			<data>
-			U12HS8uodrLga5VKLGkbPEzMDNA0wo1pEVLCdMXIKb4=
+			XCE4LJqAlvIYeARgyH24k4dWhy/+yJy6K1Xyxxf2u+I=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/current-date-indicator.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XLSkWapfq/rbfaJiR2SzagPSvH4=
+			7kDK/gRyATAhgvz8JClDNCqXrX4=
 			</data>
 			<key>hash2</key>
 			<data>
-			7Zqrota3CbuSLEh4FAPCYZCBRlxLWyBbWIs/UFiw2a8=
+			EISMLQTJX/gqu+omv9PP/XgsW0I02AzgezJUD9wYAtw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/cylinder.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KDrS1VUthGzDTXo4jhGZIpO1BYA=
+			ACKLWCLqSqynxIGwP7bbFYo9Jpk=
 			</data>
 			<key>hash2</key>
 			<data>
-			qx5oeGXV9y6/vjrTNIYZDKDSaj/EibuLE/tSM/LmQRw=
+			D03FvIpsKi/3409JaB0y65C4yrenDIWVRtPNy4QTiHk=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/data.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QVOwO3rsZbVg1U6VAh3TKntKOTA=
+			N+WURr2D/hzNsessBOkAcceckIE=
 			</data>
 			<key>hash2</key>
 			<data>
-			14d85ocExODB1jKVVl9Zu4loMh9aSvQ9FNfQCZRxRak=
+			KXoNv/xwoLYgYBBve+WryCUTxyiSVjvZILwZQ7Lu0MI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/datagrouping.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tRi9pHOo83thJgtNY3mY5J/6sSQ=
+			msWMXvooAe7Yoy1vnJWZw6iB79w=
 			</data>
 			<key>hash2</key>
 			<data>
-			394jn13f3zNL6TByjBntikM4X6N3GOQTSNrUXGVc9+g=
+			tjyu9yi8+AtvvTS+/6Ma7Y6ZdCAlo8XfxhZ+DU5KRAo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/debugger.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9g+kayEHr6GKw/R8MiPJpVnJSrk=
+			6HAI3CLhDRO1m3bMJ6hLuTtuwFA=
 			</data>
 			<key>hash2</key>
 			<data>
-			DcPyZijc1KqzoE5tKST/4R7lC8c1UzcrfdvAxs+liEk=
+			jsjOU0KuBD6ZjG2X2YkT3/Yga4xgkwa8HdOn9L6UdnM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/dependency-wheel.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vCPFgtUIR3C4RFRFKeELhnaP7XU=
+			lMqUfRjjfEDVmX8y6KiVsvNBROY=
 			</data>
 			<key>hash2</key>
 			<data>
-			rK7JRGMvjiTJxNo/RD9tjAZLPbz83Ftu0f7x53l0zeU=
+			n01moZxYrjKh+vpnXD5V3nE9jLPrMHtgZAX2AbxOI6U=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/dotplot.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AvLsyqFrjKW4zjHOnC3oQYa7pJg=
+			RwEEtlA0e+SQ5FgT0yk8cYi5Q+0=
 			</data>
 			<key>hash2</key>
 			<data>
-			9kOGLLtULIWlpur0OnPSOGKqj9wJk2dFFhq/x6yol9c=
+			FXFP8yIMWPHUnLnU3GjsvByxvmc4qoo2JQc2bE96wCM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/drag-panes.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nQvqncdgSHor815cCaEMpZpcOpk=
+			dTNwttaLd9HuE3Z3179wTtwnpMg=
 			</data>
 			<key>hash2</key>
 			<data>
-			79zBsT05LHb9bkdmWJ32iM22bfPXVwls2I2f7XbG1xc=
+			J1O8vg/sFqUnJ2ZtR113mzZHCjIDLpb9wadnvJyaIGs=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/draggable-points.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0n+kcTLqzIwKq9EkEqz3lLhGO+4=
+			e4PXjJm4iDyKXN8eY37CwqqMysM=
 			</data>
 			<key>hash2</key>
 			<data>
-			ebIf5hMpCr+Bn18G3uu3HNj9xQT81Z9KqP5bxuTIw5A=
+			115k/M0cuMW4V/cmILdcNcd93TGBpr9YuwGB8YUS5ME=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/drilldown.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			K7ADccHljztOvdiJoY+0tqe2E1U=
+			QfofayinPJ2aKAiV/etZhq6xcuQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			KcolfzgAromf5TivNAPTq5N6RO7GniGn9G7Np10N/lA=
+			oyolxGdSGRlu2EKOq0sB/7T02oyZhYGYwhvsqccIok4=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/dumbbell.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Bb1yM9qtDGyrYoEL6knLzA+eKIw=
+			1t9HS4pGPbW4rkPp+UphjF6NsRQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			NBB6/Ek5X1P82sSbVbtVy8/53UNPCGQdT7mn50Edyrc=
+			iGTA0U8WO+qFEhZftVn/hrKbHMLdtx3EyTN1wRGhUWI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/export-csv.js</key>
@@ -13700,154 +13715,154 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3nuxPIMbYusPGh9d6bIU6X1FbyI=
+			IuJx/iBONYt7OAskPGbLQbR8Ct0=
 			</data>
 			<key>hash2</key>
 			<data>
-			xWdPAThWdv3S4O4Zz3S6fH/4yU/xondhlFf6Cx9gu6I=
+			YWES/Ys/MDxNHHnZQfBeOSIwiP6EsNKY5ZT20qXdoKo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/exporting.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			43JEHqwnVICMbo9LmW4b9vWVXXw=
+			MgxCY+UpZ7d368PRdJ4GN8a9/L4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z+DotNBv1ajsm87ZBmUcngmsUdpaanSF4jhlGuD1/L4=
+			+aCjisDkIOVr0yADHCNSL5u8W3UzkkJPQ+V3RIDeE4M=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/full-screen.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6KbqWmisenHPL3B2V4ZI5kRjNr4=
+			TuiI1UFa+90hhck7YQ/IuOtaVuM=
 			</data>
 			<key>hash2</key>
 			<data>
-			DZv6nnnQw+1LzDCoDreKpQmLBWw3tPL9FLNcLQ2sW64=
+			Ws9wXHA32uwbyCfY4eVzfihWSOuZGzCO9DsjD0Rr4eo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/funnel.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+W7KT8Ik6hmP7YLqsEgIUJ6aAAg=
+			Ve45puPWhuJM+yLA1x91KKVdlT0=
 			</data>
 			<key>hash2</key>
 			<data>
-			aBewsNJDGrvp2Y0pJa/P0LDwNVEpC2mv5gDwde2Zm50=
+			lz1iurnsKmlcFaX3YejyC+BMY2dBN8NJ8ygeOkMzczU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/funnel3d.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0r4k5+k1zsjkO7S4pxd6SvuBJYA=
+			HMXqWCGoMmVW7sZbU/7focX5jM0=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZVJrEE+nt6Ty6l32Mtx9Opm9MfpUfuDhYPYHBfrRGXE=
+			+Td7c+HWJYtTR44ZT0B+fkE7+LrddO1WkTuV2rh0f5E=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/gantt.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FKGbJ7Qk2HMoLBldjB5HZyrX4CA=
+			V77o367HvWqo+kkNx79xl18Ekjs=
 			</data>
 			<key>hash2</key>
 			<data>
-			/WUSkjNwDEi/9cUDCVPFYKwo/1YKHdOM30LqL+blZ0Q=
+			uoBT6qsGfiUjs2yBrmqrK2Be++f3nWpycVv5+UT8y0U=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/grid-axis.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RyLYMhR3aEdCxwiEkaTl5BD2TnI=
+			KCM05OuQWLQYqj2nxciAEM8bio4=
 			</data>
 			<key>hash2</key>
 			<data>
-			T3Blt5ZFA4AMuWXzly8Soql5VTmvemgvEZnXy4EZYQM=
+			tMI6tYFG7JiqVtkZfljrGvT5pRGxhe9CVjdfiYdt2Pg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/heatmap.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9fF2RntjwXUAux76QsviN2txJY8=
+			phbjLyHvB8pD6zlXAz0LMrOsIlg=
 			</data>
 			<key>hash2</key>
 			<data>
-			IzbD67sbIJKe9vqZMfkrg0kOEg0JcJ1YcbmjhQENSEU=
+			fdfrUMwwHOh+Bh8NTB8WfqBrmukGp9Wyn7NvwiRtNqs=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/heikinashi.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			yc+36ALrcGPx3o4Hf0lJzsA62jg=
+			rEMtiHLD1LeQnjtUfpz53QMFtx4=
 			</data>
 			<key>hash2</key>
 			<data>
-			LJQNTsRbevrzSo6JRLABSw7zaAT1fnGJU56XwM6rdXA=
+			yOiQnV5bCznMt19Rt2Y1Dcq5cVhLUXgGRz7LEF5JA1k=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/histogram-bellcurve.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			J+ISvmjihOLR8TvmN73eByEsvqw=
+			VFj6sMq8atJPB/oBTmdO7oBl0I4=
 			</data>
 			<key>hash2</key>
 			<data>
-			LJw3+bYPrfBcwn6n4OvFMDXBmpuMsIFx7Wab3Q0s5Ek=
+			zcdWaV7a9vYyy9JJxYJmRwKdubxzovxo6UdkrmXd70g=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/hollowcandlestick.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			T7n92BEgZkSoC/Lvjs+JJJRsUHM=
+			yok4Ja1B31vr78JGagNtC1+EGdU=
 			</data>
 			<key>hash2</key>
 			<data>
-			WMxbNFs3H83nldm+o3i3vo2C9C35IKP2HSIXTHBZgNw=
+			lGPUrGI86ejICH29MAx/hbphaF8HqZig5Ut2yKSG+uM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/item-series.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1SdnRTQH/ODgNKVtJWJp1kZweyo=
+			MB1IYhnW4uwaN+mPWfZBW7HR6Ag=
 			</data>
 			<key>hash2</key>
 			<data>
-			3dcHEKfzjapbG/pweXawyAkTdEumTzPQ1gOsxeXmBg4=
+			3X6pryQwhwjOeJicgAZ5p5umoXoiBb/iMtDXVYUM1ZE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/lollipop.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9JOocGeXJkSyiO9ZhPvrshDrj5g=
+			+UQPhtiZFL2fE0oGEp/Q2ZVo/+A=
 			</data>
 			<key>hash2</key>
 			<data>
-			BDYuN0hUCCMB1628Aze2EphvdRsK/hEqIFo7L9mtCw0=
+			jlQ2dvF/kmaQzlfy+zGnf/cVPPuvf3KU/p0uzJSn6vQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/marker-clusters.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			m5g/fzCIa3GZKcU/8YJHpYBwJtY=
+			5pS31lfh83TE+B1zV92O/gsV+Wo=
 			</data>
 			<key>hash2</key>
 			<data>
-			tik4P471n7Z6cBpI4DVS21M/bBKLJoVo/SfN3NDdjiM=
+			GbmL6Ab5Tjdl9JQfDD8tyrl0xPJOorIWOed6Rr/mz+A=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/moment-timezone-with-data.js</key>
@@ -13876,22 +13891,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WAZJRlduING3zJmVUE/qHSI1kn8=
+			z/Q3nGqOcYQzfS9d08TPDJ2pA4I=
 			</data>
 			<key>hash2</key>
 			<data>
-			KVBZcRAHCec6fJ5u8OxxMh4hBnLhtR2NTL/qCwRLIM8=
+			ezO7AMNBD4r9GR/BdqWQEQO/b7FW7xuFPL0aHKam/jw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/no-data-to-display.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rLy+SW6QwBO1f3bWri8q6XYSE24=
+			Nef8pdlZFPETqiahYBVSeh5LKv8=
 			</data>
 			<key>hash2</key>
 			<data>
-			ql3lO0jQL9xVRCs0jrEaYSCr8j1p8JB+8H7vHl9WaHs=
+			ZwK4No5Egbcevn3amoojalJLXjQsPqfc/BuaY3YyKY8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/offline-exporting-wrap.js</key>
@@ -13909,110 +13924,110 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dgInr5fllSBXBljGpMN8iZPwIXA=
+			EK/Vc6OVVNPEChMUPRbfemi4qrs=
 			</data>
 			<key>hash2</key>
 			<data>
-			qXKlzLLFBSYyEt8tzU2dnDoTaqbMiHnDNrOQW924A8g=
+			4c7d/fCbuBDfa6LHRLXveTQY9GSAekmyTlVBih4M1us=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/oldie-polyfills.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vVZEqL84UGP3kNBOebP3YRuJy2Q=
+			+CmXt6iz+cdHfGTtAUo/IrlzJCY=
 			</data>
 			<key>hash2</key>
 			<data>
-			E/wc3qJxc5DFX63/+2hAG4nCsiZyInHUmT4+BdLe1bI=
+			gZGQ8LOmhebQ2Rf6JPrfmRFHXe2MMS+DRRer3rIRqQI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/oldie.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QHJokXHrM6weuc5dSxLdE01ZE0I=
+			XYQRo/sKqCa2cVUxED3uDMVsNu4=
 			</data>
 			<key>hash2</key>
 			<data>
-			OsnXSs6hUw41Ew8aPeEDCtsXrbbDITzTV/FCWCPVd58=
+			ingGyUVK9lsjfb8Ws8EWTOpkVJz/p1tuQuB4HNvxCYA=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/organization.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/saZ1a/95Am55DgMfbjuBo0mX9M=
+			IzH1dZP83CW+7MnTRyIrg2WefLE=
 			</data>
 			<key>hash2</key>
 			<data>
-			fb62jYtf5oV23o2Lxa90LhvYdNyknQz5PfJHsKsDe74=
+			mjs7km+O2OPXcKmgbZ9QOTUIqRDt/rX8u2HTsJ9SMjU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/overlapping-datalabels.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8+LFMxU2xKk1Zfq4EcjwBeAszoE=
+			iR8BrrUuxjS/+GshJLVVjJduaKg=
 			</data>
 			<key>hash2</key>
 			<data>
-			w7ALejF7caNkBIxKqnNmJ8dDyAshB9eEJhM3LkS+WuI=
+			wPbzNJVzOflLZ9UcBy2Z73ByG1zjIkE4ShPi6a/y4+o=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/parallel-coordinates.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pS6npyL6+kBG3R1sKCIX76/rjiw=
+			Gtn5y5AH5aDXNo+zAdZ0H/LJdAs=
 			</data>
 			<key>hash2</key>
 			<data>
-			jpJYItXzHUX76VcuoWS3nYfuhIsLN0s2C5nV1foG5X4=
+			TMyyU39i5GQn3Px+U+NC2bxCKqpgPYlNxD57dxkiJ8o=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/pareto.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JfidQmHuQSX3oOkWFdFu2tAhIB4=
+			EVz2BrEUPE0njnTeL6nKYWSvrS4=
 			</data>
 			<key>hash2</key>
 			<data>
-			HvNNpRWQKrkeXd1BrTDmzGLsi0JhZUUMnHbs0LTmXVU=
+			w4SLi/7fJ6tErGTThjn3tZUmJFh5avbBbYB23Gy5n78=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/pathfinder.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/MfioDe8CSQx1WwTK/aFozaep98=
+			qohb2MQgesJxL+yoQi6Y6gTZYvM=
 			</data>
 			<key>hash2</key>
 			<data>
-			AeqKRmKsabWPI0QaUNBgW/VZ3npv/qT6UiNWutwki3E=
+			ljw0En7AsPteK36yPeLEsEu+XUh4T8+KVfh+T7OfCfg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/pattern-fill.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bvnN9bSwh3E7zfP9yAMXW/HJj50=
+			HU1zBRodzVKrHxlT1NMKE9DD5FU=
 			</data>
 			<key>hash2</key>
 			<data>
-			0W0fUB/ZTO/lJ8vJgW8irwrD+Xvk2EIGjYb5/fQKH/0=
+			SZrm1aYYu5eDoW87rVx71smsLT6fJxGN75TPhDPFreo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/price-indicator.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ON9yaAZjhcrilfjhfAMqWTAW4OA=
+			0n1MPGUa5QvQBzRhuQh87Z7g0T0=
 			</data>
 			<key>hash2</key>
 			<data>
-			wqlHkD9HcGbwdYtRQR1eRKQtuML4O4FXqureTuc5brQ=
+			3/R7GC89Oo2lf6a5xAAJ8lvxlm8U9yijOgrKIJenuYQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/proj4.js</key>
@@ -14030,11 +14045,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KpfPOUBGVhfHUWorsTzAJFOnJII=
+			oDgJDHV8T0GBc0tCdfIQ5DWU+lA=
 			</data>
 			<key>hash2</key>
 			<data>
-			j6wJHtRp39qyWiQLscgOM1RX2GNR4rcdiijMysGd49E=
+			NYkdoN9mirbmL31faDHFOr95Wx+Jp3ZL0LBMnLkp+W8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/rgbColor.js</key>
@@ -14052,220 +14067,220 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cRZUR0q3Xikv6d8YaC1Pt3VjK5A=
+			sJwghvEA3yXKS7g+MZ2iW5YRl+I=
 			</data>
 			<key>hash2</key>
 			<data>
-			vyWtp03Mx+g9Rk7CQGHoVvBaVpfDQOBlgLArqbHiidM=
+			YhgPKW+uWPKDJHn2Fvg6GVdYoca4VlitC4Bv/az5dG8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/series-label.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Oe25EjsZtpr9oHh3BioOxWzwXBs=
+			luvRRuto4hYVA5AGYK6CmVNoy6E=
 			</data>
 			<key>hash2</key>
 			<data>
-			FNruwCHHoIjpoRycLp1ruE3zeIjeF1GcEtCX6munE/4=
+			O6ResV4KSg9/7oniv5MvG8nJiP0El+JRvDiNgruu4VY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/solid-gauge.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Rg2LzxvQtgrjWmeWq4WpIUm/W9o=
+			yhfO1jnAsmYz/ASzqXz4JXuo2IY=
 			</data>
 			<key>hash2</key>
 			<data>
-			lM2p4SSdoKUiDLZIAnvJIZwVn0YMgCNAkCu+S9uh7bQ=
+			UuFuQXLj9vJ6kkMb1HzM9p3kTYLLmYPIsha16tm2Ee8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/sonification.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G5+URPyesQkcVFqFlhhKRgH/vM4=
+			uBOYcsk3CJO44hw+D9YT8vIPAyE=
 			</data>
 			<key>hash2</key>
 			<data>
-			c45mdfR8rBx6BQ0EtjPeWKg0k8Rhjy6qRUBawy4O8QA=
+			J/2dURHzflCIuVT0u2Qjvo6FG5r3LYQBVkh3a39i/5U=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/static-scale.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8GQjErJIr64z6Z4YTIEeNk0t+XY=
+			AcbH4HUieO2T1Ca0Ia8Bm5X+zEk=
 			</data>
 			<key>hash2</key>
 			<data>
-			QNY5+bR74OQfG9wi7v8gyApO22VUFcr11G6bb1tibyU=
+			2rwAkFMImTfJCY+9CO72rGyMFwdcb8nVmKR0CAfApNU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/stock-tools.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZDsQqWYo00ePn6aLUNnJBpwGCpI=
+			WhxL7XhZvnlQRW9ciWy1ZNuhCQE=
 			</data>
 			<key>hash2</key>
 			<data>
-			sLk8z18zf2OMwTcJwGetKExynozghuO45U00Kwh9jV0=
+			TUSBd8/iRxtI1FmHSem/jgUcum7gkUcb/2n7BfmaRM8=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/stock.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RR9ML283QzXLDcnh2CoylaAOCJY=
+			LsaWL4559Z9kxL0ODp+sBKAx60M=
 			</data>
 			<key>hash2</key>
 			<data>
-			XVrA5DIKyn9CMt98uBa6gUNwhqiQrwOif3tOdDoGI+I=
+			yy2wkuPT/kJrgr4uTeOObOU5l27KM8m/wv6qNcyeBec=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/streamgraph.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			YULpqxYBmoxLIl7aQqGGaL3CIX4=
+			TvMik80Em9PHNmE4CgSARw3h6AI=
 			</data>
 			<key>hash2</key>
 			<data>
-			YhT7eHhpQwqGr/rC1VbjKgg7+Wudp3juSEeVf07S+p8=
+			omIr4CTvk8yuqiNLqxzwQPkGJpSHL7ninjEWjdzXMNo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/sunburst.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			lEctrsLCr9VoOvHI/klTy7tGh9Y=
+			4+u7k8Gyc9cBQHWp8m0sEykwncs=
 			</data>
 			<key>hash2</key>
 			<data>
-			25SewTu5cFLIj1Ih/+van8jz1V+pxDAIpXsjMGe2fBA=
+			ycf4GJ1ngRHkHt0PPc4BKa/sIYlQ7RJ6KsF8vEb0Xdc=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/tilemap.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Sv+jMyxoJj9aaqg96SBomNjsQ5I=
+			NgidHpq1Kaw8RGbGzKxWX5TaV4k=
 			</data>
 			<key>hash2</key>
 			<data>
-			yM4txrYv5s3B4QI6Le/4LZjOyb0z6i+ETLxQVhOdiCM=
+			0LoZwRuD1n6m0X+rucC/OZYrlDt1rIETf9un7GO8eAo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/timeline.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			IlNOOJH0Hz8shWepnjoSqMa43mk=
+			2fszoVU/q8p9rHdr+FrjO2Udyx8=
 			</data>
 			<key>hash2</key>
 			<data>
-			07RPDKaYd57hcqwljBpAhafc728QqqG45bTGIsGVvFI=
+			Z/HqbpUTaP0rRuLxuQONYx/8u+IqA69My13JBW6cyAY=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/treegrid.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rDhblNIGHtxLAFuMsuqON6nfmW8=
+			W2CO9CJ2YQgdpyMajJ7CdRId2lw=
 			</data>
 			<key>hash2</key>
 			<data>
-			xlaRC7GEmJwTg1JaMXr+MuqNefz8NJCAiJzdIs9nMr8=
+			xHFfPGRxdCUUDNvnLwopjiOspF4BO86X1sqd9dwsmBE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/treemap.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QT6EL+w3jKJAzduaVgwLz8yEtSM=
+			hY+wJdau6/bQ/B5ihyW4tUgAO80=
 			</data>
 			<key>hash2</key>
 			<data>
-			iImxstBTAG5TwwJI7OXYVOkV+WqMj934PTqbKO46oxA=
+			QBgfcAQdHqjcivNfLs/Ou3ieJFEtxSWebkwLP8YSp3o=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/variable-pie.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4uRBWiavNPj6zIoD2aXU2cDQRn8=
+			AEgzjorh+TSAg/QIlXAtVt4aY6I=
 			</data>
 			<key>hash2</key>
 			<data>
-			xzLZe+U8D1/QefI8m+2pr7tMEXgAQLgKJ7HTTDeFF0E=
+			kavV8NMf+Ly+ft5hGczvdTaK+uyQanRUgVmK7ZZ0ZIo=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/variwide.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ygNcRetX28+qN9wxkALboo+dcOw=
+			KP2YCZNT99Ki7NmCkIkk9eQLzJs=
 			</data>
 			<key>hash2</key>
 			<data>
-			8zfwKTrAEgUmhpnUuu0WpDFPG+ob4VJqdhH65gYdMYs=
+			QI03ixeF/97h9x8qFvqI92O0ES+F0hj2QzLbN12UsBE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/vector.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tmOIlgYL2+jdnvZcWu6YaciOsVM=
+			pIof5RW2dH0befzE0D0Zl8LrXuk=
 			</data>
 			<key>hash2</key>
 			<data>
-			UWYhzQczNOWL8ELqBtnyckeX8JLBPnwnq52FwZADmwU=
+			/AfUm68xSnTh7tM+ABar2GEdasY2TMZlAom8DA+YLoI=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/venn.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			R+Dn/pXr3aneC4Fjo2/O94DgCPM=
+			nXGIupi0RRgxvfQWj53MPElCnEs=
 			</data>
 			<key>hash2</key>
 			<data>
-			uL4ne1MYo1v3inJJPPSCJ6CbFolEcFf/koKtrvCIqSM=
+			vCp7HRDPz8OP33JROcoCViIOZKvNMDE2YUsBRwOrSqg=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/windbarb.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5ZtIUsXa707W9fHu17KpOxRe4Gc=
+			FI98uFcVs6Sf4S5CrH936wrBzj4=
 			</data>
 			<key>hash2</key>
 			<data>
-			n8s91+Fb/RF0H5t2KpyIomrLH2m++L5m3ldfuepWLMk=
+			d3jPA+Igi31sqH7zEWuRTxorv/SW0/JPAB+XwJF/Bd4=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/wordcloud.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5TOMFrQ3O1h50tpv8eUP1iYMpnw=
+			4Q8jo0srv15vN6V341q2yufHu3s=
 			</data>
 			<key>hash2</key>
 			<data>
-			3RwSMKo5l5DYPXb6de7fflwcocnBXPZGFDXpelMAd4I=
+			Fn9AGLBgjm8axQG7gYgQET+dTQbcEECvOZsue9abF6M=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/modules/xrange.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XgcCc+ik8VziaEN264skTdCnEJQ=
+			GOfPEbztsmPrxxcXv/E4MvifJ2Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			lP1Rra1DuGVtpL07FoqijGf5bBkmuM7FSBgxKS58rTU=
+			phLx7o1zQ0Rm9thes7pUCvej+0dBOsAC7SDQmtdW5AQ=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/readme.txt</key>
@@ -14283,132 +14298,132 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qJf3UTSLUPH4p7D+AtGhIsntpi4=
+			QNcc9Vv7bxi4k4UDXGQ7baN6O/c=
 			</data>
 			<key>hash2</key>
 			<data>
-			y3D7/lE6FcFlEgvDy+RkSGd9VeQhZJKd56mMAYJytao=
+			CQ8CdVBEQMFdrnXwRcRDY8ajMKzTXhqFV43d3Lpd0eM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/dark-blue.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nhgwayiNucjMU0Su0bkPGq3ZdCY=
+			UnFdZUIipVG8W/F11uyhu0deQvw=
 			</data>
 			<key>hash2</key>
 			<data>
-			rnWcMAgzELmq9+Jjuyxu1Nf1kLLy93j53zfcTnfqDAk=
+			dbCq5Ce5s+aKqmiGX1qZDj+8mH8ZIlKv1dWcdtENCIw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/dark-green.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9mubaI2FtVnqqDtEaVXwjGqFCz8=
+			lQGyH9A+PpsFIRP9ELTDUK51TRA=
 			</data>
 			<key>hash2</key>
 			<data>
-			1cBpqQ9qxg8bdP/5Rk6ka/hvy58DRFVsqfltg7diz6M=
+			PG4PfwP8O2ZGP0zxQiLZMboqlGFVJkc9QSAWOEIIdIw=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/dark-unica.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NAwiXk7DE9igNMY3/42PHC8a1KU=
+			7By9ob9bmnjMQdLX17agIF7c+xA=
 			</data>
 			<key>hash2</key>
 			<data>
-			SJdXt/1jReJsMDWDeh1NvMj5CgDkk71h6SzxsgoTmWs=
+			Ax1fzdPuL5IeWkjOUB05zeOYIxLY0XD//RVDJrBYk70=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/gray.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZgkmvLTx9Pv+1jYtD1sfekWxyVo=
+			TlHsuxsZBRU1xRxh+57dPCxkyJk=
 			</data>
 			<key>hash2</key>
 			<data>
-			23jmm3gZJIUjrVx9XagC+iGkCJ4H6Wv3Hgp4Fi4KhA0=
+			1eC1kysa9ollOyEFQxSulRDylX/RHaEumZ43Tv3Cqbk=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/grid-light.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			I6xYQ1+Yxd6XHairHeTYWSBqWHE=
+			ikqv6om9torNgnnFj3/VV6RfUTU=
 			</data>
 			<key>hash2</key>
 			<data>
-			EVgMlwefPMIzZW4cvU8ghkm7u+j4hwmi7PXss1sEjOY=
+			sShsVd0PjgQXE1uxKNN+b5rN92M1y33l3ghJsWDj7HE=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/grid.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xEJ5SydOSUZ/1s4gLJuciJAiqlc=
+			UzzeXu1mGOXZv+2Warv24wrVoeo=
 			</data>
 			<key>hash2</key>
 			<data>
-			oeCwdC2zS1SKmrqpTbe6Jtn9ppo4Wx2xogRmZXTSAvg=
+			UP0CGzSKUn8z5Ck7PmxisdfhKiTV+Ct5ayXvPEN+aFk=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/high-contrast-dark.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eiR+RX1P5eU25zucO4kuhihf9r8=
+			U5H7lVMpwm2nOQrGfNADB0ehVd4=
 			</data>
 			<key>hash2</key>
 			<data>
-			RSHlhyl5kquDwz9I0SRG27pgEEABCbCpziHIDkytFLI=
+			FRRHlO04ZZ/QlujeXz6/L7G5YOLM/8iFgUplXaum9ps=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/high-contrast-light.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ww5TfVCtQ3pDxWF2g5RTle0NZdQ=
+			FhN1r1ydNDWGFXmVbZxCHBDVdyA=
 			</data>
 			<key>hash2</key>
 			<data>
-			5X9dk1ekj/jQ/lqxn58JbQ+omK2iio/j9zUzqnWJTFk=
+			0N3IeRb+sLM3sJbx0Qm0EA2B5ww+MfIZu8XURC3j7D0=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/sand-signika.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xN0wh0+xxMedxMNRSvpcT1ziSTs=
+			/0tuP+M3/3zJ9MeE4cWwQ9BpivE=
 			</data>
 			<key>hash2</key>
 			<data>
-			vOJSkKqxpeyW2yp3AmxbdJk7SCsJRU4Fdw+eOOx0Rfo=
+			SQ/FFcLNkX9MHYMNqRw0+h6YU/EKFG/TN3WpLmG+vGM=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/skies.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			d1IZRtLHtxEA2aaEeeXcrFQey0k=
+			8tayk2nnXbA3NSOa8cuUtGmgr80=
 			</data>
 			<key>hash2</key>
 			<data>
-			fhppqTqdxBzJnrJIp/G6NxpH/ik/UJ6I14lQiwL6l3U=
+			LessZq7r4MlOOhvDX4aeoTXNKUMhz8pO7gZjlFKJuGU=
 			</data>
 		</dict>
 		<key>com.highcharts.charts.bundle/js/themes/sunset.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nVoVS2OueZGpqmrMLi+KV7S/HPw=
+			yL+PDpKHMV78wi4izrecGKtYaDQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			kofod57p7i0twKkkiK92wLx8sux/czIvlegdUJhvQiU=
+			GD7g61d7aeX1/yYkCrrlPSzwoY1wJQ/oQd76gPnO2po=
 			</data>
 		</dict>
 	</dict>
