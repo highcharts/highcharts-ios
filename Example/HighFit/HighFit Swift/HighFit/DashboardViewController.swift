@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2021 Highsoft AS. All rights reserved.
+//  Copyright © 2022 Highsoft AS. All rights reserved.
 //
 
 import UIKit
@@ -118,7 +118,7 @@ class DashboardViewController: UITableViewController, HIChartViewDelegate {
             button.tag = indexPath.row
             button.addTarget(self, action: #selector(self.showDetailData), for: .touchUpInside)
             
-            chartView.addSubview(button)
+            cell!.contentView.addSubview(button)
             
             return cell!
         }

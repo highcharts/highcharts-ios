@@ -73,6 +73,8 @@ If there is no space for a word on the playing field, then this option will allo
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowExtendPlayingField;
 /**
 Spiral used for placing a word after the initial position experienced a collision with either another word or the borders. It is possible for users to add their own custom spiralling algorithms for use in word cloud. Read more about it in our [documentation](https://www.highcharts.com/docs/chart-and-series-types/word-cloud-series#custom-spiralling-algorithm)
+
+**Accepted values:** `["archimedean", "rectangular", "square"]`.
 */
 @property(nonatomic, readwrite) NSString *spiral;
 /**
@@ -95,6 +97,8 @@ Rotation options for the words in the wordcloud.
 @property(nonatomic, readwrite) HIRotation *rotation;
 /**
 This option decides which algorithm is used for placement, and rotation of a word. The choice of algorith is therefore a crucial part of the resulting layout of the wordcloud. It is possible for users to add their own custom placement strategies for use in word cloud. Read more about it in our [documentation](https://www.highcharts.com/docs/chart-and-series-types/word-cloud-series#custom-placement-strategies)
+
+**Accepted values:** `["center", "random"]`.
 */
 @property(nonatomic, readwrite) NSString *placementStrategy;
 /**

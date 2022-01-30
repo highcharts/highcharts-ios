@@ -479,14 +479,6 @@ Pixel width of the line that connects the dumbbell point's values.
 */
 @property(nonatomic, readwrite) NSNumber *connectorWidth;
 /**
-Whether to display a slice offset from the center.
-
-**Try it**
-
-* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
-/**
 Point padding for a single point.
 
 **Try it**
@@ -518,6 +510,14 @@ When this property is true, the point display the total sum across the entire se
 * [Waterfall](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/waterfall/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *isSum;
+/**
+Whether to display a slice offset from the center.
+
+**Try it**
+
+* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
 /**
 The node that the link runs to.
 */

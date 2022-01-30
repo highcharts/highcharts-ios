@@ -1,3 +1,20 @@
+# Version 9.3.2
+
+## iOS:
+
+1. Fixed export methods issue, #383
+
+## Framework:
+
+1. Added support for `Trusted Types`, a browser standard for preventing cross-site scripting vulnerabilities.
+
+## Framework bug fixes:
+
+1. Fixed `#16398`, spacing was incorrect for legend items without a name.
+2. Fixed issue with data module updates with `firstRowAsNames` enabled. 
+3. Fixed `#16665`, a regression causing updating of `dataLabels.useHTML` not to take effect.
+4. Fixed `#16562`, Windows high contrast mode keyboard navigation issues.
+
 # Version 9.3.1
 
 ## iOS:
