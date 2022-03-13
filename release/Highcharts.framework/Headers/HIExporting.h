@@ -9,6 +9,7 @@
 #import "HIAccessibility.h"
 #import "HIButtons.h"
 #import "HICsv.h"
+#import "HIPdfFont.h"
 #import "HIFunction.h"
 
 
@@ -155,6 +156,14 @@ Experimental setting to allow HTML inside the chart (added through the `useHTML`
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowHTML;
 /**
+Settings for a custom font for the exported PDF, when using the `offline-exporting` module. This is used for languages containing non-ASCII characters, like Chinese, Russian, Japanese etc. As described in the [jsPDF docs](https://github.com/parallax/jsPDF#use-of-unicode-characters--utf-8), the 14 standard fonts in PDF are limited to the ASCII-codepage. Therefore, in order to support other text in the exported PDF, one or more TTF font files have to be passed on to the exporting module. See more in [the docs](https://www.highcharts.com/docs/export-module/client-side-export).
+
+**Try it**
+
+* [Download PDF in a language containing non-Latin characters.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/exporting/offline-download-pdffont/)
+*/
+@property(nonatomic, readwrite) HIPdfFont *pdfFont;
+/**
 Additional chart options to be merged into the chart before exporting to an image format. This does not apply to printing the chart via the export menu. For example, a common use case is to add data labels to improve readability of the exported chart, or to add a printer-friendly color scheme to exported PDFs.
 
 **Try it**
@@ -167,7 +176,7 @@ Function to call if the offline-exporting module fails to export a chart on the 
 */
 @property(nonatomic, readwrite) HIFunction *error;
 /**
-Path where Highcharts will look for export module dependencies to load on demand if they don't already exist on `window`. Should currently point to location of [CanVG](https://github.com/canvg/canvg) library, [jsPDF](https://github.com/yWorks/jsPDF) and [svg2pdf.js](https://github.com/yWorks/svg2pdf.js), required for client side export in certain browsers.
+Path where Highcharts will look for export module dependencies to load on demand if they don't already exist on `window`. Should currently point to location of [CanVG](https://github.com/canvg/canvg) library, [jsPDF](https://github.com/parallax/jsPDF) and [svg2pdf.js](https://github.com/yWorks/svg2pdf.js), required for client side export in certain browsers.
 */
 @property(nonatomic, readwrite) NSString *libURL;
 @property(nonatomic, readwrite) NSString *menuButtonLabel;

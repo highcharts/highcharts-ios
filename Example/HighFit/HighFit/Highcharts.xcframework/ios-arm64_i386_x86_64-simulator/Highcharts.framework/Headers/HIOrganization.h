@@ -57,13 +57,28 @@ The border color of the node cards.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
-In a horizontal chart, the width of the nodes in pixels. Node that most organization charts are vertical, so the name of this option is counterintuitive.
+In a horizontal chart, the minimum width of the **hanging** nodes only, in pixels. In a vertical chart, the minimum height of the **haning** nodes only, in pixels too. Note: Used only when `hangingIndentTranslation` is set to `shrink`.
 */
-@property(nonatomic, readwrite) NSNumber *nodeWidth;
+@property(nonatomic, readwrite) NSNumber *minNodeLength;
 /**
 The border radius of the node cards.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
+/**
+Defines the indentation of a `hanging` layout parent's children. Possible options: - `inherit` (default): Only the first child adds the indentation, children of a child with indentation inherit the indentation. - `cumulative`: All children of a child with indentation add its own indent. The option may cause overlapping of nodes. Then use `shrink` option: - `shrink`: Nodes shrink by the `hangingIndent` value until they reach the `minNodeLength`.
+
+**Defaults to** `inherit`.
+
+**Try it**
+
+* [Every indent increases the indentation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/hanging-cumulative)
+* [Every indent decreases the nodes' width](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/hanging-shrink)
+*/
+@property(nonatomic, readwrite) NSString *hangingIndentTranslation;
+/**
+In a horizontal chart, the width of the nodes in pixels. Note that most organization charts are vertical, so the name of this option is counterintuitive.
+*/
+@property(nonatomic, readwrite) NSNumber *nodeWidth;
 /**
 Radius for the rounded corners of the links between nodes.
 

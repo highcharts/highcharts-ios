@@ -21,8 +21,8 @@ CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of cate
 @property(nonatomic, readwrite) NSString *transition;
 @property(nonatomic, readwrite) NSString *fontWeight;
 @property(nonatomic, readwrite) NSString *fontSize;
-@property(nonatomic, readwrite) NSString *textOutline;
 @property(nonatomic, readwrite) NSString *color;
+@property(nonatomic, readwrite) NSString *textOutline;
 @property(nonatomic, readwrite) NSString *cursor;
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 @property(nonatomic, readwrite) NSNumber *lineWidth;

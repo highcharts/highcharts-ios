@@ -13,6 +13,7 @@
  */
 @interface HIAttributes: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) NSString *startOffset;
 @property(nonatomic, readwrite) NSNumber *refX;
 @property(nonatomic, readwrite) NSNumber *markerWidth;
 @property(nonatomic, readwrite) NSNumber *refY;

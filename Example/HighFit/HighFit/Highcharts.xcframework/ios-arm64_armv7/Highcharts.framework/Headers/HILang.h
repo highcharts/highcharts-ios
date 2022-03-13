@@ -62,6 +62,7 @@ The text to display when the chart contains no data.
 * [No-data text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/no-data-to-display/no-data-line)
 */
 @property(nonatomic, readwrite) NSString *noData;
+@property(nonatomic, readwrite) NSString *mainBreadcrumb;
 /**
 The loading text that appears when the chart is set into the loading state following a call to `chart.showLoading`.
 */

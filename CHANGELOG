@@ -1,3 +1,62 @@
+# Version 10.0.0
+
+## iOS:
+
+1. Fixed #383, export methods no longer working.
+2. Fixed #392, added missing fields to `HIPoint` class.
+
+## Framework:
+
+1. Adde new series type, arc diagram.
+2. Added breadcrumbs functionality for drilldown charts as well as hierarchical series like treemaps and sunburst. This replaces the drill-up and traverse-up buttons.
+3. Added new feature chart.alignThresholds for aligning the thresholds in charts with multiple axes.
+4. Added new options hangingIndentTranslation and minNodeLength for Organization chart, for improving the layout of deep structures. See #13915.
+5. Added new option `Highcharts.AST.bypassHTMLFiltering` for disabling AST filtering.
+6. Added option, boost.pixelRatio, providing Retina and device pixel ratio support to the Boost module.
+7. Added `areaspline` series to the supported series in the Boost module, see #8288.
+
+## Framework upgrade notes:
+
+1. In an organization chart, children of a parent with `hanging` layout will now inherit this layout. To prevent this, set `layout = "normal"` for these nodes.
+2. The drilldown.drillUpButton options set is deprecated and replaced by drilldown.breadcrumbs. Some but not all settings are backwards compatible. See our demo of mimicking the legacy button style with breadcrumbs. The same is true for treemap.traverseUpButton.
+3. The offline exporting module now requires version 2 of jsPDF and version 2 of svg2pdf when exporting to PDF. Our own CDN, downloads and packages are updated, but if you're loading old releases from elsewhere, it will fail.
+
+## Framework bug fixes:
+
+1. Fixed #15133, data labels were missing the fade-in effect upon drilling down.
+2. Fixed #16470, setting custom drag handle cursor in options.
+3. Fixed #16873, Windows High Contrast Mode not detected in non-Microsoft browsers.
+4. Migrated global win to window. This will mask the global window object in every Highcharts bundle, so that always `Highcharts.win === window`.
+5. Fixed #16788, accessibility issue with some columns not being focusable because of wrong `point.isInside` flag.
+6. Fixed #16431, data points were trimmed due to axis floating-point rounding.
+7. Fixed #16979, only one point per x value was shown when stacking set to `percent`.
+8. Fixed #16974, esc keypress keyboard focus issue with multiple charts on the same page.
+9. Fixed #16818, issue with keyboard navigation and legend.labelFormatter.
+10. Fixed #14175, enabling and disabling dataLabels.rotation misplaced data label's position.
+11. Fixed #16474, added missing click event callback on sides of the 3D pie slices.
+12. Fixed #16893, series.findNearestPointBy set to `xy` was not working well with Boost.
+13. Fixed #16791, exporting a chart in styled mode on Safari v15 produced a black image.
+14. Fixed #11712, in node-based series types like dependency wheel and network graph, calling `node.update()` in the afterAnimate event would throw errors.
+15. Fixed #16339, keyboard focus management issues with fullscreen change.
+16. Fixed #16884, smarter defaults for accessible point descriptions.
+17. Fixed #16045, tooltip with opacity was not fully hidden when hovering over a reset zoom button.
+18. Fixed #6417, added support for non-ASCII characters (Chinese, Russian etc) in exported PDF via the new exporting.pdfFont property.
+19. Fixed issues with data.enablePolling and Google Sheets.
+20. Fixed issue with data module updates when `dataGrouping` options were present.
+21. Fixed #16820, adding drilldown series on point mouseover threw an error.
+22. Fixed #16169, stack order was affected when centerInCategory enabled and `reversedStacks` set to false.
+23. Fixed #16479, `resetZoomButton` was not visible after drilling up to a level with zoom.
+24. Fixed #16568, setting `data` options with `Highcharts.setOptions` did not work.
+25. Fixed #16135, after drill-up, the series did not go back to its original state.
+26. Fixed #16589, SVG export broken when accessibility module was included.
+27. Fixed issue on mobile where a point would be highlighted visually after drilldown with a11y module loaded.
+28. Fixed keyboard nav issues #16633, #16634, #16625.
+29. Fixed legend keyboard navigation issues #16520, #16545, #16467.
+30. Fixed #16497, legend keyboard navigation caused page scroll with container scaling.
+31. Fixed #10525, setting tickPositions to `undefined` didn't clear options.
+32. Fixed #16697, legend item style changed when using the keyboard to focus it.
+33. Fixed #16596, the first column point of categorized x-axis wasn't draggable.
+
 # Version 9.3.2
 
 ## iOS:

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v9.3.2 (2021-11-29)
+ * @license Highcharts JS v10.0.0 (2022-03-07)
  * @module highcharts/modules/arrow-symbols
  * @requires highcharts
  *

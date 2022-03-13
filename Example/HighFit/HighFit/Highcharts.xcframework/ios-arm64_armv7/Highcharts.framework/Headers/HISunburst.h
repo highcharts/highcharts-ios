@@ -8,7 +8,7 @@
 
 #import "HISeries.h"
 #import "HILevelSize.h"
-#import "HITraverseUpButton.h"
+#import "HIBreadcrumbs.h"
 #import "HILevels.h"
 #import "HIColor.h"
 
@@ -67,9 +67,9 @@ The center of the sunburst chart relative to the plot area. Can be percentages o
 */
 @property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
 /**
-Options for the button appearing when traversing down in a treemap.
+Options for the breadcrumbs, the navigation at the top leading the way up through the traversed levels.
 */
-@property(nonatomic, readwrite) HITraverseUpButton *traverseUpButton;
+@property(nonatomic, readwrite) HIBreadcrumbs *breadcrumbs;
 /**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
 

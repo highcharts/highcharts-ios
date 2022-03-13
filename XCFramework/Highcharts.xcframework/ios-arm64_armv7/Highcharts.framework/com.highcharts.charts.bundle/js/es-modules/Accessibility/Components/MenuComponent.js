@@ -101,7 +101,6 @@ var MenuComponent = /** @class */ (function (_super) {
         if (menu) {
             menu.setAttribute('aria-hidden', 'true');
         }
-        this.isExportMenuShown = false;
         this.setExportButtonExpandedState('false');
     };
     /**
@@ -113,7 +112,6 @@ var MenuComponent = /** @class */ (function (_super) {
             this.addAccessibleContextMenuAttribs();
             unhideChartElementFromAT(chart, menu);
         }
-        this.isExportMenuShown = true;
         this.setExportButtonExpandedState('true');
     };
     /**
@@ -130,8 +128,19 @@ var MenuComponent = /** @class */ (function (_super) {
      * proxy overlay.
      */
     MenuComponent.prototype.onChartRender = function () {
+        var chart = this.chart, focusEl = chart.focusElement, a11y = chart.accessibility;
         this.proxyProvider.clearGroup('chartMenu');
         this.proxyMenuButton();
+        if (this.exportButtonProxy &&
+            focusEl &&
+            focusEl === chart.exportingGroup) {
+            if (focusEl.focusBorder) {
+                chart.setFocusToElement(focusEl, this.exportButtonProxy.buttonElement);
+            }
+            else if (a11y) {
+                a11y.keyboardNavigation.tabindexContainer.focus();
+            }
+        }
     };
     /**
      * @private
@@ -146,7 +155,8 @@ var MenuComponent = /** @class */ (function (_super) {
                     chart: chart,
                     chartTitle: getChartTitle(chart)
                 }),
-                'aria-expanded': false
+                'aria-expanded': false,
+                title: chart.options.lang.contextButtonTitle || null
             });
         }
     };
@@ -297,7 +307,7 @@ var MenuComponent = /** @class */ (function (_super) {
         var chart = this.chart;
         var curHighlightedItem = chart.exportDivElements[chart.highlightedExportItemIx];
         var exportButtonElement = getExportMenuButtonElement(chart).element;
-        if (this.isExportMenuShown) {
+        if (chart.openMenu) {
             this.fakeClickEvent(curHighlightedItem);
         }
         else {
@@ -366,7 +376,7 @@ var MenuComponent = /** @class */ (function (_super) {
      */
     function chartHideExportMenu() {
         var chart = this, exportList = chart.exportDivElements;
-        if (exportList && chart.exportContextMenu) {
+        if (exportList && chart.exportContextMenu && chart.openMenu) {
             // Reset hover states etc.
             exportList.forEach(function (el) {
                 if (el &&

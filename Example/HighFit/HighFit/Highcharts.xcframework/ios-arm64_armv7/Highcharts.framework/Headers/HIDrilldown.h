@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIDrillUpButton.h"
+#import "HIBreadcrumbs.h"
 #import "HIAnimationOptionsObject.h"
 #import "HICSSObject.h"
 
@@ -27,9 +27,9 @@ Additional styles to apply to the data label of a point that has drilldown data.
 */
 @property(nonatomic, readwrite) HICSSObject *activeDataLabelStyle;
 /**
-An array of series configurations for the drill down. Each series configuration uses the same syntax as the `series` option set. These drilldown series are hidden by default. The drilldown series is linked to the parent series' point by its `id`.
+Options for the breadcrumbs, the navigation at the top leading the way up through the drilldown levels.
 */
-@property(nonatomic, readwrite) NSArray *series;
+@property(nonatomic, readwrite) HIBreadcrumbs *breadcrumbs;
 /**
 When this option is false, clicking a single point will drill down all points in the same category, equivalent to clicking the X axis label.
 
@@ -45,13 +45,9 @@ Set the animation for all drilldown animations. Animation of a drilldown occurs 
 */
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
-Options for the drill up button that appears when drilling down on a series. The text for the button is defined in `lang.drillUpText`.
-
-**Try it**
-
-* [Drill up button](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/drilldown/drillupbutton/)
+An array of series configurations for the drill down. Each series configuration uses the same syntax as the `series` option set. These drilldown series are hidden by default. The drilldown series is linked to the parent series' point by its `id`.
 */
-@property(nonatomic, readwrite) HIDrillUpButton *drillUpButton;
+@property(nonatomic, readwrite) NSArray *series;
 /**
 Additional styles to apply to the X axis label for a point that has drilldown data. By default it is underlined and blue to invite to interaction. In styled mode, active label styles can be set with the `.highcharts-drilldown-axis-label` class.
 

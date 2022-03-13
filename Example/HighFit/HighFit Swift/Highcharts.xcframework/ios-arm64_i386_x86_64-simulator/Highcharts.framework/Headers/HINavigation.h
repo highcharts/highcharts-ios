@@ -8,6 +8,7 @@
 
 #import "HIButtonOptions.h"
 #import "HIAnnotationsOptions.h"
+#import "HIBreadcrumbs.h"
 #import "HIBindings.h"
 #import "HIEvents.h"
 #import "HIPopup.h"
@@ -23,14 +24,6 @@ A collection of options for buttons and menus appearing in the exporting module 
 
 @property(nonatomic, readwrite) HIButtonOptions *buttonOptions;
 /**
-Path where Highcharts will look for icons. Change this to use icons from a different server.
-*/
-@property(nonatomic, readwrite) NSString *iconsURL;
-/**
-A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events. Default value of versions < 7.0.4 `highcharts-bindings-wrapper`
-*/
-@property(nonatomic, readwrite) NSString *bindingsClassName;
-/**
 Additional options to be merged into all annotations.
 
 **Try it**
@@ -38,6 +31,14 @@ Additional options to be merged into all annotations.
 * [Set red color of all line annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/stock/stocktools/navigation-annotation-options)
 */
 @property(nonatomic, readwrite) HIAnnotationsOptions *annotationsOptions;
+/**
+A CSS class name where all bindings will be attached to. Multiple charts on the same page should have separate class names to prevent duplicating events. Default value of versions < 7.0.4 `highcharts-bindings-wrapper`
+*/
+@property(nonatomic, readwrite) NSString *bindingsClassName;
+/**
+Options for breadcrumbs. Breadcrumbs general options are defined in `navigation.breadcrumbs`. Specific options for drilldown are set in `drilldown.breadcrumbs` and for tree-like series traversing, in `plotOptions[series].breadcrumbs`.
+*/
+@property(nonatomic, readwrite) HIBreadcrumbs *breadcrumbs;
 /**
 Bindings definitions for custom HTML buttons. Each binding implements simple event-driven interface: - `className`: classname used to bind event to - `init`: initial event, fired on button click - `start`: fired on first click on a chart - `steps`: array of sequential events fired one after another on each  of users clicks - `end`: last event to be called after last step event
 
@@ -51,6 +52,10 @@ Bindings definitions for custom HTML buttons. Each binding implements simple eve
 Events to communicate between Stock Tools and custom GUI.
 */
 @property(nonatomic, readwrite) HIEvents *events;
+/**
+Path where Highcharts will look for icons. Change this to use icons from a different server.
+*/
+@property(nonatomic, readwrite) NSString *iconsURL;
 /**
 Text styles for the legend page navigation.
 

@@ -69,7 +69,7 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
 /**
-When using multiple axis, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in an Axis options are set to false, then the `alignTicks ` will be disabled for the Axis. Disabled for logarithmic axes.
+When using multiple axes, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in the axis options are set to false, then the `alignTicks ` will be disabled for the axis. Disabled for logarithmic axes.
 
 **Defaults to** `true`.
 
@@ -111,6 +111,14 @@ The color of the inner chart or plot area border.
 * [Blue border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/plotbordercolor/)
 */
 @property(nonatomic, readwrite) HIColor *plotBorderColor;
+/**
+When using multiple axes, align the thresholds. When this is true, other ticks will also be aligned. Note that for line series and some other series types, the `threshold` option is set to `null` by default. This will in turn cause their y-axis to not have a threshold. In order to avoid that, set the series `threshold` to 0 or another number. If `startOnTick` or `endOnTick` in the axis options are set to false, or if the axis is logarithmic, the threshold will not be aligned.
+
+**Try it**
+
+* [Set to true](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/alignthresholds/)
+*/
+@property(nonatomic, readwrite) id alignThresholds;
 /**
 The space between the right edge of the chart and the content (plot area, axis title and labels, title, subtitle or legend in top position).
 

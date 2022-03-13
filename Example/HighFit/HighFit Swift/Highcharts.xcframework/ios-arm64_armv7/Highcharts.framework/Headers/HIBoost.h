@@ -34,6 +34,17 @@ If set to true, the whole chart will be boosted if one of the series crosses its
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowForce;
 /**
+The pixel ratio for the WebGL content. If 0, the `window.devicePixelRatio` is used. This ensures sharp graphics on high DPI displays like Apple's Retina, as well as when a page is zoomed. The default is left at 1 for now, as this is a new feature that has the potential to break existing setups. Over time, when it has been battle tested, the intention is to set it to 0 by default. Another use case for this option is to set it to 2 in order to make exported and upscaled charts render sharp. One limitation when using the `pixelRatio` is that the line width of graphs is scaled down. Since the Boost module currently can only render 1px line widths, it is scaled down to a thin 0.5 pixels on a Retina display.
+
+**Defaults to** `1`.
+
+**Try it**
+
+* [Enable the `devicePixelRatio`](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/line-devicepixelratio)
+* [Sharper graphics in export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/boost/line-export-pixelratio)
+*/
+@property(nonatomic, readwrite) NSNumber *pixelRatio;
+/**
 Enable or disable boost on a chart.
 
 **Defaults to** `true`.

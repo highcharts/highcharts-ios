@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIAttributes.h"
 
 
 /**
@@ -14,6 +14,7 @@ Options for a _link_ label text which should follow link connection. Border and 
 */
 @interface HILinkTextPath: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) HIAttributes *attributes;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 
 -(NSDictionary *)getParams;

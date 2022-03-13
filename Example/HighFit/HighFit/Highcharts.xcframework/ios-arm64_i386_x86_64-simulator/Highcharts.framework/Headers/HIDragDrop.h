@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIGuideBox.h"
 #import "HIDragHandle.h"
+#import "HIGuideBox.h"
 
 
 /**
@@ -58,6 +58,10 @@ Allow Q3 value to be dragged individually.
 **Defaults to** `true`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggableQ3;
+/**
+Options for the drag handles available in column series.
+*/
+@property(nonatomic, readwrite) HIDragHandle *dragHandle;
 /**
 Allow target value to be dragged individually.
 
@@ -134,10 +138,6 @@ Group the points by a property. Points with the same property value will be grou
 * [Drag grouped points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
 */
 @property(nonatomic, readwrite) NSString *groupBy;
-/**
-Options for the drag handles.
-*/
-@property(nonatomic, readwrite) HIDragHandle *dragHandle;
 /**
 Update points as they are dragged. If false, a guide box is drawn to illustrate the new point size.
 

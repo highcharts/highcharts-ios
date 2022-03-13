@@ -427,6 +427,18 @@ The label of event.
 */
 @property(nonatomic, readwrite) NSString *label;
 /**
+The node that the link runs from.
+*/
+@property(nonatomic, readwrite) NSString *from;
+/**
+The weight of the link.
+*/
+@property(nonatomic, readwrite) NSNumber *weight;
+/**
+The node that the link runs to.
+*/
+@property(nonatomic, readwrite) NSString *to;
+/**
 The vector direction in degrees, where 0 is north (pointing towards south).
 */
 @property(nonatomic, readwrite) NSNumber *direction;
@@ -519,21 +531,9 @@ Whether to display a slice offset from the center.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
 /**
-The node that the link runs to.
-*/
-@property(nonatomic, readwrite) NSString *to;
-/**
-The node that the link runs from.
-*/
-@property(nonatomic, readwrite) NSString *from;
-/**
 By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
-/**
-The weight of the link.
-*/
-@property(nonatomic, readwrite) NSNumber *weight;
 /**
 The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
 

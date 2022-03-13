@@ -88,7 +88,7 @@ The job title for the node card, will be inserted by the default `dataLabel.node
 */
 @property(nonatomic, readwrite) NSString *title;
 /**
-Layout for the node's children. If `hanging`, this node's children will hang below their parent, allowing a tighter packing of nodes in the diagram.
+Layout for the node's children. If `hanging`, this node's children will hang below their parent, allowing a tighter packing of nodes in the diagram. Note: Since @next version, the `hanging` layout is set by default for children of a parent using `hanging` layout.
 
 **Defaults to** `normal`.
 

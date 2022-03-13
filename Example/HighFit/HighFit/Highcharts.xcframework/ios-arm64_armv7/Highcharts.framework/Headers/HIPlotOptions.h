@@ -13,6 +13,7 @@
 #import "HINetworkgraph.h"
 #import "HIBar.h"
 #import "HIVariwide.h"
+#import "HIArcdiagram.h"
 #import "HIAreasplinerange.h"
 #import "HIItem.h"
 #import "HIVector.h"
@@ -123,6 +124,14 @@ A variwide chart (related to marimekko chart) is a column chart with a variable 
 * [Variwide columns on a datetime axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-variwide/datetime/)
 */
 @property(nonatomic, readwrite) HIVariwide *variwide;
+/**
+Arc diagram series is a chart drawing style in which the vertices of the chart are positioned along a line on the Euclidean plane and the edges are drawn as a semicircle in one of the two half-planes delimited by the line, or as smooth curves formed by sequences of semicircles. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `arcdiagram` series are defined in  `plotOptions.arcdiagram`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     arcdiagram: {       // shared options for all arcdiagram series     }   },   series: [{     // specific options for this series instance     type: 'arcdiagram'   }] }); ```       
+
+**Try it**
+
+* [Arc Diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/arc-diagram/)
+*/
+@property(nonatomic, readwrite) HIArcdiagram *arcdiagram;
 /**
 The area spline range is a cartesian series type with higher and lower Y values along an X axis. The area inside the range is colored, and the graph outlining the area is a smoothed spline. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `areasplinerange` series are defined in  `plotOptions.areasplinerange`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     areasplinerange: {       // shared options for all areasplinerange series     }   },   series: [{     // specific options for this series instance     type: 'areasplinerange'   }] }); ```       
 */

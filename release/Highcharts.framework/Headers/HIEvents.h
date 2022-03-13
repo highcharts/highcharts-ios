@@ -141,10 +141,6 @@ Fires after a chart is printed through the context menu item or the `Chart.print
 */
 @property(nonatomic, readwrite) HIFunction *afterPrint;
 /**
-Fires when the cluster point is clicked and `drillToCluster` is enabled. One parameter, `event`, is passed to the function. The default action is to zoom to the cluster points range. This can be prevented by calling `event.preventDefault()`.
-*/
-@property(nonatomic, readwrite) HIFunction *drillToCluster;
-/**
 Fires when the point is unselected either programmatically or following a click on the point. One parameter, `event`, is passed to the function. Returning `false` cancels the operation.
 
 **Try it**
@@ -193,7 +189,7 @@ Fires when the mouse leaves the area close to the point. One parameter, `event`,
 */
 @property(nonatomic, readwrite) HIFunction *mouseOut;
 /**
-Fires when the mouse enters the area close to the point. One parameter, `event`, is passed to the function, containing common event information.
+Fires when the mouse enters the area close to the point. One parameter, `event`, is passed to the function, containing common event information. Returning `false` cancels the default behavior, which is to show a tooltip for the point.
 
 **Try it**
 
@@ -216,6 +212,10 @@ Callback that fires when starting to drag a point. The mouse event object is pas
 * [Drag events](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
 */
 @property(nonatomic, readwrite) HIFunction *dragStart;
+/**
+Fires when the cluster point is clicked and `drillToCluster` is enabled. One parameter, `event`, is passed to the function. The default action is to zoom to the cluster points range. This can be prevented by calling `event.preventDefault()`.
+*/
+@property(nonatomic, readwrite) HIFunction *drillToCluster;
 /**
 Fires on a request for change of root node for the tree, before the update is made. An event object is passed to the function, containing additional properties `newRootId`, `previousRootId`, `redraw` and `trigger`.
 

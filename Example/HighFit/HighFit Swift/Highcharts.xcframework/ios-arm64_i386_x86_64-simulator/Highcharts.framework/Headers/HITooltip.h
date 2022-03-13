@@ -215,6 +215,7 @@ The HTML of the point's line in the tooltip. Variables are enclosed by curly bra
 **Try it**
 
 * [A different point format with value suffix](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/pointformat/)
+* [Show extra information about points in the tooltip](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/pointformat-extra-information/)
 */
 @property(nonatomic, readwrite) NSString *pointFormat;
 /**

@@ -7,6 +7,7 @@
 */
 
 #import "HIEvents.h"
+#import "HIColor.h"
 #import "HIFunction.h"
 #import "HIAnimationOptionsObject.h"
 
@@ -44,6 +45,58 @@ Prefix to add to the values in the point descriptions. Uses `tooltip.valuePrefix
 Decimals to use for the values in the point descriptions. Uses `tooltip.valueDecimals` if not defined.
 */
 @property(nonatomic, readwrite) NSNumber *valueDecimals;
+/**
+For categorized axes this property holds the category name for the point. For other axes it holds the X value.
+*/
+@property(nonatomic, readwrite) NSString *category;
+/**
+The point's current color.
+*/
+@property(nonatomic, readwrite) HIColor *color;
+/**
+The point's current color index, used in styled mode instead of `color`. The color index is inserted in class names used for styling.
+*/
+@property(nonatomic, readwrite) NSNumber *colorIndex;
+/**
+The name of the point. The name can be given as the first position of the point configuration array, or as a `name` property in the configuration:
+*/
+@property(nonatomic, readwrite) NSString *name;
+/**
+The percentage for points in a stacked series or pies.
+*/
+@property(nonatomic, readwrite) NSNumber *percentage;
+/**
+The translated X value for the point in terms of pixels. Relative to the X axis position if the series has one, otherwise relative to the plot area. Depending on the series type this value might not be defined.
+*/
+@property(nonatomic, readwrite) NSNumber *plotX;
+/**
+The translated Y value for the point in terms of pixels. Relative to the Y axis position if the series has one, otherwise relative to the plot area. Depending on the series type this value might not be defined.
+*/
+@property(nonatomic, readwrite) NSNumber *plotY;
+/**
+Whether the point is selected or not.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *selected;
+/**
+Pie series only. Whether to display a slice offset from the center.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
+/**
+The total of values in either a stack for stacked series, or a pie in a pie series.
+*/
+@property(nonatomic, readwrite) NSNumber *total;
+/**
+For certain series types, like pie charts, where individual points can be shown or hidden.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
+/**
+The x value of the point.
+*/
+@property(nonatomic, readwrite) NSNumber *x;
+/**
+The y value of the point.
+*/
+@property(nonatomic, readwrite) NSNumber *y;
 @property(nonatomic, readwrite) HIEvents *events;
 
 -(NSDictionary *)getParams;

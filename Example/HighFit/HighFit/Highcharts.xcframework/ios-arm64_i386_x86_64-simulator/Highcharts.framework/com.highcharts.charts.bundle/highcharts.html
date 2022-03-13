@@ -48,10 +48,10 @@
             function shareChart(type) {
                 switch (type) {
                     case "image":
-                        chart.exportChartLocal({type: 'image/png'});
+                        chart.exportChart({type: 'image/png'});
                         break;
                     case "pdf":
-                        chart.exportChartLocal({type: 'application/pdf'});
+                        chart.exportChart({type: 'application/pdf'});
                         break;
                     case "csv":
                         var csvText = "data:text/csv;charset=utf-8," + chart.getCSV();

@@ -12,7 +12,7 @@
 
 
 /**
-Options for the drag handles.
+Options for the drag handles available in column series.
 */
 @interface HIDragHandle: HIChartsJSONSerializable
 
