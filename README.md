@@ -30,13 +30,13 @@ Here we present how to create basic chart and place it in your project.
 - First of all download Highcharts xcframework from here: [Highcharts](https://github.com/highcharts/highcharts-ios/tree/master/XCFramework) 
 or by using **Cocoapods** by adding 
     ```
-    pod 'Highcharts', '~> 10.0.0'
+    pod 'Highcharts', '~> 10.0.0.1'
     ```
     to your Podfile
     
     or **Carthage** by adding
     ```
-    github "https://github.com/highcharts/highcharts-ios" >= 10.0.0
+    github "https://github.com/highcharts/highcharts-ios" >= 10.0.0.1
     ```
     to your Cartfile
     
