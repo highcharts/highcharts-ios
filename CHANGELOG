@@ -1,3 +1,35 @@
+# Version 10.1.0
+
+## iOS:
+
+1. Added Mac Catalyst support, #398
+
+## Framework:
+
+1. Added `allowMutatingData` chart property to prevent data mutation while updating series or point. See #4259.
+2. Added new option, `accessibility.point.describeNull`.
+3. Added new fullscreen events, `fullscreenOpen` and `fullscreenClose`, callback functions to modify chart options during toggle fullscreen mode. See #16968.
+4. Added warning by default when the `accessibility.js` module is not loaded.
+5. Added new option, `accessibility.series.descriptionFormat`.
+6. Improved the theme colors for high contrast light and high contrast dark to show more hue variance.
+7. Reduced verbosity of accessibility information by default.
+8. Changed the default value of `SVGElement.show`'s `inherit` argument to `true`.
+9. Added option to remember keyboard focus for points: `accessibility.keyboardNavigation.seriesNavigation.rememberPointFocus`.
+10. Added new option `pie.thickness` describing thickness ring of pie. This option takes precedence over `pie.innerSize`. See #6647.
+
+## Framework bug fixes:
+
+1. Fixed #8324, an error was thrown when calling `drillUp()` after `chart.applyDrilldown()`.
+2. Fixed #17188, an incorrect breadcrumbs list was generated when drilling down the axis category.
+3. Improved default behavior of accessibility module with axis descriptions as well as landmark roles.
+4. Fixed #15178, warning of invalid attribute for Reset Zoom button.
+5. Fixed #17146, a regression in v10 with parsing of HTML with inline style rules containing a colon.
+6. Fixed #14320, the table was not re-rendered after a data update.
+7. Part of #15863, the scrollbar is no longer initially rendered with `y: -9999`.
+8. Fixed #9687, vertical data label suppressed when close to the right edge of the plot area.
+9. Fixed #17100, excessive padding in some cases when `tickAmount` was set.
+10. Fixed #16921, regression causing the wrong size of a hovered heatmap cell after zooming in.
+
 # Version 10.0.0.1
 
 ## iOS:

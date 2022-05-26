@@ -10,7 +10,8 @@
 
 
 /**
- */
+A ellipse annotation bindings. Includes `start` and two events in `steps` array. First updates the second point, responsible for a rx width, and second updates the ry width.
+*/
 @interface HIEllipseAnnotation: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSString *className;

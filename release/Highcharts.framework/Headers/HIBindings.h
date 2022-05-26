@@ -6,7 +6,6 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIEllipseAnnotation.h"
 #import "HINavigationBindingsOptionsObject.h"
 
 
@@ -32,7 +31,10 @@ A label annotation bindings. Includes `start` event only.
 A circle annotation bindings. Includes `start` and one event in `steps` array.
 */
 @property(nonatomic, readwrite) HINavigationBindingsOptionsObject *circleAnnotation;
-@property(nonatomic, readwrite) HIEllipseAnnotation *ellipseAnnotation;
+/**
+A ellipse annotation bindings. Includes `start` and two events in `steps` array. First updates the second point, responsible for a rx width, and second updates the ry width.
+*/
+@property(nonatomic, readwrite) HINavigationBindingsOptionsObject *ellipseAnnotation;
 
 -(NSDictionary *)getParams;
 

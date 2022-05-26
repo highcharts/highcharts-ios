@@ -123,6 +123,12 @@ The color of the border surrounding each slice. When `null`, the border takes th
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+Thickness describing the ring size for a donut type chart, overriding `innerSize`.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSNumber *thickness;
+/**
 If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
 
 **Try it**

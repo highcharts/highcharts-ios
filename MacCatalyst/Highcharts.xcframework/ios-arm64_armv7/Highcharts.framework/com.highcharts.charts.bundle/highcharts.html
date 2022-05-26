@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="highcharts.css">
+        <meta charset="utf-8">
+            <meta id="viewport" name="viewport" content="width={{width}}, height={{height}}, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <title></title>
+            {{script}}
+    </head>
+    <style type="text/css">
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+    </style>
+    <body style="margin:0">
+        <div id="container" style="width:{{width}}px; height:{{height}}px"></div>
+        <script>
+            Highcharts.setOptions({
+                exporting: {
+                    libURL: 'js/lib/',
+                    buttons: {
+                        contextButton: {
+                            menuItems: null,
+                            onclick: function(){
+                                iOSExportHandler("exportButtonPressed");
+                            }
+                        }
+                    }
+                },
+                lang: {{lang}},
+                global: {{global}}
+            });
+            var chart = new Highcharts.Chart({{options}});
+            
+            function updateOptions(options) {
+                chart.update(options, true, true, false);
+            }
+        
+            function iOSEventHandler(event) {
+                window.webkit.messageHandlers.observe.postMessage(event);
+            }
+        
+            function iOSExportHandler(event) {
+                window.webkit.messageHandlers.exporting.postMessage(event);
+            }
+        
+            function shareChart(type) {
+                switch (type) {
+                    case "image":
+                        chart.exportChartLocal({type: 'image/png'});
+                        break;
+                    case "pdf":
+                        chart.exportChartLocal({type: 'application/pdf'});
+                        break;
+                    case "csv":
+                        var csvText = "data:text/csv;charset=utf-8," + chart.getCSV();
+                        iOSExportHandler(csvText);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            function modifySize(width, height) {
+                document.getElementById('viewport').setAttribute('content', 'width=' + width + ', height=' + height + ', initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+                document.getElementById('container').setAttribute('style', 'width:' + width + 'px; height:' + height + 'px');
+                chart.reflow();
+            }
+        
+        </script>
+    </body>
+</html>

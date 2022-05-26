@@ -147,6 +147,14 @@ When a series contains more points than this, we no longer expose information ab
 */
 @property(nonatomic, readwrite) NSNumber *pointDescriptionEnabledThreshold;
 /**
+Format to use for describing the data series group to assistive technology - including screen readers. The series context and its subproperties are available under the variable `{series}`, for example `{series.name}` for the series name, and `{series.points.length}` for the number of data points. The chart context and its subproperties are available under the variable `{chart}`, for example `{chart.series.length}` for the number of series in the chart. `{seriesDescription}` refers to the automatic description of the series type and number of points added by Highcharts by default. `{authorDescription}` refers to the description added in `series.description` if one is present. `{axisDescription}` refers to the description added if the chart has multiple X or Y axes. Note that if `series.descriptionFormatter` is declared it will take precedence, and this option will be overridden.
+
+**Try it**
+
+* [Accessible low-medium-high chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/accessibility/advanced-accessible)
+*/
+@property(nonatomic, readwrite) NSString *descriptionFormat;
+/**
 Whether or not to add series descriptions to charts with a single series.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *describeSingleSeries;
@@ -167,7 +175,7 @@ Description for annotations on a point, as it is made available to assistive tec
 */
 @property(nonatomic, readwrite) NSString *pointAnnotationsDescription;
 /**
-Lang configuration for the series main summary. Each series type has two modes: 1. This series type is the only series type used in the  chart 2. This is a combination chart with multiple series types If a definition does not exist for the specific series type and mode, the 'default' lang definitions are used.
+Lang configuration for the series main summary. Each series type has two modes: 1. This series type is the only series type used in the  chart 2. This is a combination chart with multiple series types If a definition does not exist for the specific series type and mode, the 'default' lang definitions are used. Chart and its subproperties can be accessed with the `{chart}` variable. The series and its subproperties can be accessed with the `{series}` variable. The series index (starting from 1) can be accessed with the `{seriesNumber}` variable.
 */
 @property(nonatomic, readwrite) HISummary *summary;
 /**

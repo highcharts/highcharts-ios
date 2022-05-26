@@ -234,6 +234,12 @@ Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series s
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
 /**
+Thickness describing the ring size for a donut type chart, overriding `innerSize`.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSNumber *thickness;
+/**
 The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
 
 **Defaults to** `80`.

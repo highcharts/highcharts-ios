@@ -76,6 +76,14 @@ Fires when the chart is finished loading. Since v4.2.2, it also waits for images
 */
 @property(nonatomic, readwrite) HIFunction *load;
 /**
+Fires when a fullscreen is opened through the context menu item, or the `Chart.fullscreen.open` method.
+
+**Try it**
+
+* [Title size change on fullscreen open](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-fullscreen)
+*/
+@property(nonatomic, readwrite) HIFunction *fullscreenOpen;
+/**
 Fires when an area of the chart has been selected. Selection is enabled by setting the chart's zoomType. One parameter, `event`, is passed to the function, containing common event information. The default action for the selection event is to zoom the chart to the selected area. It can be prevented by calling `event.preventDefault()` or return false. Information on the selected area can be found through `event.xAxis` and `event.yAxis`, which are arrays containing the axes of each dimension and each axis' min and max values. The primary axes are `event.xAxis[0]` and `event.yAxis[0]`. Remember the unit of a datetime axis is milliseconds since 1970-01-01 00:00:00. ```js selection: function(event) {   // log the min and max of the primary, datetime x-axis   console.log(     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].min     ),     Highcharts.dateFormat(       '%Y-%m-%d %H:%M:%S',       event.xAxis[0].max     )   );   // log the min and max of the y axis   console.log(event.yAxis[0].min, event.yAxis[0].max); } ```
 
 **Try it**
@@ -96,6 +104,14 @@ Fires when a series is added to the chart after load time, using the `addSeries`
 * [Alert on add series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-addseries/)
 */
 @property(nonatomic, readwrite) HIFunction *addSeries;
+/**
+Fires when a fullscreen is closed through the context menu item, or a fullscreen is closed on the `Escape` button click, or the `Chart.fullscreen.close` method.
+
+**Try it**
+
+* [Title size change on fullscreen open](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-fullscreen)
+*/
+@property(nonatomic, readwrite) HIFunction *fullscreenClose;
 /**
 Fires when drilling up from a drilldown series.
 */

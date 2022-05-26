@@ -15,6 +15,10 @@ Options for the keyboard navigation of data points and series.
 @interface HISeriesNavigation: HIChartsJSONSerializable
 
 /**
+Remember which point was focused even after navigating away from the series, so that when navigating back to the series you start at the last focused point.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *rememberPointFocus;
+/**
 Skip null points when navigating through points with the keyboard.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *skipNullPoints;

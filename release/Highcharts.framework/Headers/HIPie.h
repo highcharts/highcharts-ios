@@ -75,6 +75,12 @@ The color of the border surrounding each slice. When `null`, the border takes th
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+Thickness describing the ring size for a donut type chart, overriding `innerSize`.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) NSNumber *thickness;
+/**
 The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
 
 **Defaults to** `80`.
@@ -107,7 +113,7 @@ The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to 
 */
 @property(nonatomic, readwrite) NSNumber *endAngle;
 /**
-The size of the inner diameter for the pie. A size greater than 0 renders a donut chart. Can be a percentage or pixel value. Percentages are relative to the pie size. Pixel values are given as integers. Note: in Highcharts < 4.1.2, the percentage was relative to the plot area, not the pie size.
+The size of the inner diameter for the pie. A size greater than 0 renders a donut chart. Can be a percentage or pixel value. Percentages are relative to the pie size. Pixel values are given as integers. Setting overridden by thickness. Note: in Highcharts < 4.1.2, the percentage was relative to the plot area, not the pie size.
 
 **Defaults to** `0`.
 

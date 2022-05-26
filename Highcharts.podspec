@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "Highcharts"
-  s.version      = "10.0.0.1"
+  s.version      = "10.1.0"
   s.summary      = "Powerful, vast charting library"
 
   s.description  = <<-DESC
@@ -13,14 +13,14 @@ Pod::Spec.new do |s|
    s.license   =  { :type =>'Custom', :file => "LICENSE" }
    
    s.author             = "Highsoft"
-   s.source       = { :git => "https://github.com/highcharts/highcharts-ios.git", :tag => "v10.0.0.1" }
+   s.source       = { :git => "https://github.com/highcharts/highcharts-ios.git", :tag => "v10.1.0" }
    s.ios.deployment_target = '9.0'
 
    
    s.ios.vendored_frameworks = 'XCFramework/Highcharts.xcframework'
 
    s.pod_target_xcconfig = {
-      'VALID_ARCHS' =>  'armv7 armv7s x86_64 arm64',
+    'VALID_ARCHS' =>  'armv7 armv7s arm64 arm64e x86_64'
    }
  
 end

@@ -69,6 +69,17 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
 /**
+Additional CSS styles to apply inline to the container `div`. Note that since the default font styles are applied in the renderer, it is ignorant of the individual chart options and must be set globally.
+
+**Defaults to** `{"fontFamily": "\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","fontSize":"12px"}`.
+
+**Try it**
+
+* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
+* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
+*/
+@property(nonatomic, readwrite) HICSSObject *style;
+/**
 When using multiple axes, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in the axis options are set to false, then the `alignTicks ` will be disabled for the axis. Disabled for logarithmic axes.
 
 **Defaults to** `true`.
@@ -216,13 +227,17 @@ An explicit width for the chart. By default (when `null`) the width is calculate
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**
-The margin between the left outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also `spacingLeft`.
+Set the overall animation for all chart updating. Animation can be disabled throughout the chart by setting it to false here. It can be overridden for each individual API method as a function parameter. The only animation not affected by this option is the initial series animation, see `plotOptions.series.animation`. The animation can either be set as a boolean or a configuration object. If `true`, it will use the 'swing' jQuery easing and a duration of 500 ms. If used as a configuration object, the following properties are supported: - `defer`: The animation delay time in milliseconds. - `duration`: The duration of the animation in milliseconds. - `easing`: A string reference to an easing function set on the  `Math` object. See  [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/). When zooming on a series with less than 100 points, the chart redraw will be done with animation, but in case of more data points, it is necessary to set this option to ensure animation on zoom.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
-* [150px left margin](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/marginleft/)
+* [Updating with no animation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-none/)
+* [With a longer duration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-duration/)
+* [With a jQuery UI easing](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-easing/)
 */
-@property(nonatomic, readwrite) NSNumber *marginLeft;
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
 The background color or gradient for the plot area.
 
@@ -290,16 +305,17 @@ Allows setting a key to switch between zooming and panning. Can be one of `alt`,
 */
 @property(nonatomic, readwrite) NSString *panKey;
 /**
-Additional CSS styles to apply inline to the container `div`. Note that since the default font styles are applied in the renderer, it is ignorant of the individual chart options and must be set globally.
-
-**Defaults to** `{"fontFamily": "\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","fontSize":"12px"}`.
+The margin between the left outer edge of the chart and the plot area. Use this to set a fixed pixel value for the margin as opposed to the default dynamic margin. See also `spacingLeft`.
 
 **Try it**
 
-* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
-* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
+* [150px left margin](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/marginleft/)
 */
-@property(nonatomic, readwrite) HICSSObject *style;
+@property(nonatomic, readwrite) NSNumber *marginLeft;
+/**
+By default, (because of memory and performance reasons) the chart does not copy the data but keeps it as a reference. In some cases, this might result in mutating the original data source. In order to prevent that, set that property to false. Please note that changing that might decrease performance, especially with bigger sets of data.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *allowMutatingData;
 /**
 Options for a scrollable plot area. This feature provides a minimum size for the plot area of the chart. If the size gets smaller than this, typically on mobile devices, a native browser scrollbar is presented. This scrollbar provides smooth scrolling for the contents of the plot area, whereas the title, legend and unaffected axes are fixed. Since v7.1.2, a scrollable plot area can be defined for either horizontal or vertical scrolling, depending on whether the `minWidth` or `minHeight` option is set.
 
@@ -329,18 +345,6 @@ Whether to invert the axes so that the x axis is vertical and y axis is horizont
 * [Inverted line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/inverted/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inverted;
-/**
-Set the overall animation for all chart updating. Animation can be disabled throughout the chart by setting it to false here. It can be overridden for each individual API method as a function parameter. The only animation not affected by this option is the initial series animation, see `plotOptions.series.animation`. The animation can either be set as a boolean or a configuration object. If `true`, it will use the 'swing' jQuery easing and a duration of 500 ms. If used as a configuration object, the following properties are supported: - `defer`: The animation delay time in milliseconds. - `duration`: The duration of the animation in milliseconds. - `easing`: A string reference to an easing function set on the  `Math` object. See  [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/). When zooming on a series with less than 100 points, the chart redraw will be done with animation, but in case of more data points, it is necessary to set this option to ensure animation on zoom.
-
-**Defaults to** `undefined`.
-
-**Try it**
-
-* [Updating with no animation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-none/)
-* [With a longer duration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-duration/)
-* [With a jQuery UI easing](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/animation-easing/)
-*/
-@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
 The pixel width of the plot area border.
 
