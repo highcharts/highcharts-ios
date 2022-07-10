@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>drilldown</key>
+	<array>
+		<string>drilldown</string>
+	</array>
+	<key>solidgauge</key>
+	<array>
+		<string>solid-gauge</string>
+	</array>
+	<key>heatmap</key>
+	<array>
+		<string>heatmap</string>
+	</array>
+	<key>treemap</key>
+	<array>
+		<string>treemap</string>
+	</array>
+	<key>funnel</key>
+	<array>
+		<string>funnel</string>
+	</array>
+	<key>pyramid</key>
+	<array>
+		<string>funnel</string>
+	</array>
+</dict>
+</plist>

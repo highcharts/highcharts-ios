@@ -62,7 +62,7 @@ Fill opacity for the area. When you set an explicit `fillColor`, the `fillOpacit
 
 * [Automatic fill color and fill opacity of 0.1](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillopacity/)
 */
-@property(nonatomic, readwrite) NSNumber *fillOpacity;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ fillOpacity;
 /**
 This option allows to define the length of the bell curve. A unit of the length of the bell curve is standard deviation.
 

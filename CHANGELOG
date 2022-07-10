@@ -1,3 +1,29 @@
+# Version 10.2.0
+
+## iOS:
+
+1. Added Mac Catalyst support to the main framework, #398
+
+## Framework:
+
+1. Added option to sort the chart data table by clicking the column headers. See #16972.
+2. Added RTL support for breadcrumbs, see #17340.
+3. Added new feature, `series.onPoint`, allowing to display some series types (e.g. pie) over a point with a given id. See #12526.
+
+## Framework bug fixes:
+
+1. Fixed #17273, data labels did not always have enough contrast. Ensured maximum contrast according to W3C's relative luminance.
+2. Fixed #12206, `xAxis.labels.y` did not adapt to multiline labels when `xAxis.opposite` was true.
+3. Fixed #17281, an error in console when bubble with custom marker exceeded the `zThreshold`.
+4. Fixed #17285, made the `opacity` property work for different states in the `sankey` series.
+5. Fixed #17167, legend title didn't hide when chart data was empty.
+6. Fixed #17336, hover state was only applied once to buttons.
+7. Fixed #11816, in gauge series, added dial `path` into API documentation.
+8. Fixed #17352, the tooltip was not visible after updating `scrollablePlotArea`.
+9. Fixed #17381, generic class names in data table conflicted with commonly used classes in CSS.
+10. Fixed #17186, CSV rows were missing delimiters when data was missing at the end of a row.
+11. Fixed #17236, timeout for accessibility module warning caused test issues.
+
 # Version 10.1.0
 
 ## iOS:

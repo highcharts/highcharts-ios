@@ -129,7 +129,7 @@ When using multiple axes, align the thresholds. When this is true, other ticks w
 
 * [Set to true](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/alignthresholds/)
 */
-@property(nonatomic, readwrite) id alignThresholds;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *alignThresholds;
 /**
 The space between the right edge of the chart and the content (plot area, axis title and labels, title, subtitle or legend in top position).
 

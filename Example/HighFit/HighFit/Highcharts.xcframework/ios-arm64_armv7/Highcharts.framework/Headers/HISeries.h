@@ -13,6 +13,7 @@
 #import "HIMarker.h"
 #import "HITooltip.h"
 #import "HILabel.h"
+#import "HIOnPoint.h"
 #import "HIEvents.h"
 #import "HIAccessibility.h"
 #import "HIZones.h"
@@ -353,6 +354,10 @@ A reserved subspace to store options and values for customized functionality. He
 * [Point and series with custom data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/custom/)
 */
 @property(nonatomic, readwrite) NSDictionary *custom;
+/**
+Options for the `Series on point` feature. Only `pie` and `sunburst` series are supported at this moment.
+*/
+@property(nonatomic, readwrite) HIOnPoint *onPoint;
 /**
 Whether to stack the values of each series on top of each other. Possible values are `undefined` to disable, `"normal"` to stack by value or `"percent"`. When stacking is enabled, data must be sorted in ascending X order. Some stacking options are related to specific series types. In the streamgraph series type, the stacking option is set to `"stream"`. The second one is `"overlap"`, which only applies to waterfall series.
 

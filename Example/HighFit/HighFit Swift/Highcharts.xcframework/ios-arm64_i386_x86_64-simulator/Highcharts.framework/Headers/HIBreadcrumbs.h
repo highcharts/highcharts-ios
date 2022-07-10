@@ -37,6 +37,14 @@ A format string for the breadcrumbs button. Variables are enclosed by curly brac
 */
 @property(nonatomic, readwrite) NSString *format;
 /**
+Whether to reverse the order of buttons. This is common in Arabic and Hebrew.
+
+**Try it**
+
+* [Breadcrumbs in RTL](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/breadcrumbs/rtl)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *rtl;
+/**
 Whether to use HTML to render the breadcrumbs items texts.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;

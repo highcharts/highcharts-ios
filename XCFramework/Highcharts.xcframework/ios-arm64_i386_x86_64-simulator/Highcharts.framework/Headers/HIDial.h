@@ -90,6 +90,14 @@ The width of the top of the dial, closest to the perimeter. The pivot narrows in
 */
 @property(nonatomic, readwrite) NSNumber *topWidth;
 /**
+An array with an SVG path for the custom dial.
+
+**Try it**
+
+* [Dial options demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/gauge-path/)
+*/
+@property(nonatomic, readwrite) id path;
+/**
 The pixel width of the base of the gauge dial. The base is the part closest to the pivot, defined by baseLength.
 
 **Defaults to** `3`.

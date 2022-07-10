@@ -28,6 +28,9 @@ CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of cate
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 @property(nonatomic, readwrite) NSString *textOverflow;
 @property(nonatomic, readwrite) NSString *whiteSpace;
+@property(nonatomic, readwrite) NSString *stroke;
+@property(nonatomic, readwrite) NSNumber *strokeWidth;
+@property(nonatomic, readwrite) NSString *fill;
 
 -(NSDictionary *)getParams;
 

@@ -10,22 +10,26 @@
 
 
 /**
-The position of the button.
-
-**Try it**
-
-* [Above the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/resetzoombutton-position/)
+Options allowing to set a position and an offset of the series in the _Series on point_ feature.
 */
 @interface HIPosition: HIChartsJSONSerializable
 
 /**
-The vertical offset of the button.
+Y position of the series center. By default, the series is displayed on the point that it is connected to.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-The horizontal offset of the button.
+X position of the series center. By default, the series is displayed on the point that it is connected to.
 */
 @property(nonatomic, readwrite) NSNumber *x;
+/**
+Series center offset from the original x position. If defined, the connector line is drawn connecting original position with new position.
+*/
+@property(nonatomic, readwrite) NSNumber *offsetX;
+/**
+Series center offset from the original y position. If defined, the connector line is drawn from original position to a new position.
+*/
+@property(nonatomic, readwrite) NSNumber *offsetY;
 /**
 The horizontal alignment of the button.
 */
