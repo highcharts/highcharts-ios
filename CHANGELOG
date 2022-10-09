@@ -1,3 +1,29 @@
+# Version 10.2.1
+
+## iOS:
+
+1. Added SwiftUI demo project and how to use Highcharts with SwiftUI into the readme.
+
+## Framework:
+
+1. Refactored zoom options, introduced new object structure as `chart.zooming`.
+2. Added `Highcharts.Series.types` and `Series.registerType(type, class)` for custom series, see #17551.
+
+## Framework bug fixes:
+
+1. Fixed #17413, data labels contrast color omitted the chart background.
+2. Fixed #17547; if `chart.zoomType` option is set, boosted rendering will not be forced as long as threshold is not reached.
+3. Fixed #17627, single quoted attributes were not recognized and caused color style not to apply in tooltips.
+4. Fixed #15752, arearange didn’t work in parallel coordinates.
+5. Fixed #17442, color axis data classes were not keyboard navigable.
+6. Fixed #17438, updating points with the category axis gave the wrong x position.
+7. Fixed #17486, `bubbleZExtremes` was not removed when the bubble series was removed.
+8. Fixed #17481, zones clip was incorrectly calculated and the line was partially missing when `scrollablePlotArea` was enabled.
+9. Fixed #17484, changed the link opacity on hover in organization series.
+10. Fixed #17472, shared tooltip did not work in polar charts.
+11. Fixed #17359, `stickyTracking` was not respected correctly for polar charts.
+12. Fixed #17401, console error from accessibility module when using numeric point id.
+
 # Version 10.2.0
 
 ## iOS:

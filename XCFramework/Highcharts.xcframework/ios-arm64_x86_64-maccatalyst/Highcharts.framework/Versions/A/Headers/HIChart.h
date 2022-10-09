@@ -11,7 +11,7 @@
 #import "HIOptions3d.h"
 #import "HIEvents.h"
 #import "HIScrollablePlotArea.h"
-#import "HIResetZoomButton.h"
+#import "HIZooming.h"
 #import "HIColor.h"
 #import "HIAnimationOptionsObject.h"
 #import "HICSSObject.h"
@@ -107,14 +107,6 @@ The margin between the right outer edge of the chart and the plot area. Use this
 */
 @property(nonatomic, readwrite) NSNumber *marginRight;
 /**
-Enables zooming by a single touch, in combination with `chart.zoomType`. When enabled, two-finger pinch will still work as set up by `chart.pinchType`. However, `zoomBySingleTouch` will interfere with touch-dragging the chart to read the tooltip. And especially when vertical zooming is enabled, it will make it hard to scroll vertically on the page.
-
-**Try it**
-
-* [Zoom by single touch enabled, with buttons to toggle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoombysingletouch)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *zoomBySingleTouch;
-/**
 The color of the inner chart or plot area border.
 
 **Try it**
@@ -186,19 +178,6 @@ Whether to reflow the chart to fit the width of the container div on resizing th
 * [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/reflow-false/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reflow;
-/**
-Decides in what dimensions the user can zoom by dragging the mouse. Can be one of `x`, `y` or `xy`.
-
-**Accepted values:** `["x", "y", "xy"]`.
-
-**Try it**
-
-* [None by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoomtype-none/)
-* [X](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoomtype-x/)
-* [Y](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoomtype-y/)
-* [Xy](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoomtype-xy/)
-*/
-@property(nonatomic, readwrite) NSString *zoomType;
 /**
 The space between the top edge of the chart and the content (plot area, axis title and labels, title, subtitle or legend in top position).
 
@@ -356,12 +335,6 @@ The pixel width of the plot area border.
 */
 @property(nonatomic, readwrite) NSNumber *plotBorderWidth;
 /**
-Set a key to hold when dragging to zoom the chart. This is useful to avoid zooming while moving points. Should be set different than `chart.panKey`.
-
-**Accepted values:** `["alt", "ctrl", "meta", "shift"]`.
-*/
-@property(nonatomic, readwrite) NSString *zoomKey;
-/**
 If true, the axes will scale to the remaining visible series once one series is hidden. If false, hiding and showing a series will not affect the axes or the other series. For stacks, once one series within the stack is hidden, the rest of the stack will close in around it even if the axis is not affected.
 
 **Try it**
@@ -371,6 +344,10 @@ If true, the axes will scale to the remaining visible series once one series is 
 * [True with stack](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/ignorehiddenseries-true-stacked/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenSeries;
+/**
+Chart zooming options.
+*/
+@property(nonatomic, readwrite) HIZooming *zooming;
 /**
 The background color of the marker square when selecting (zooming in on) an area of the chart.
 
@@ -394,14 +371,6 @@ Callback function to override the default function that formats all the numbers 
 */
 @property(nonatomic, readwrite) HIFunction *numberFormatter;
 /**
-Equivalent to `zoomType`, but for multitouch gestures only. By default, the `pinchType` is the same as the `zoomType` setting. However, pinching can be enabled separately in some cases, for example in stock charts where a mouse drag pans the chart, while pinching is enabled. When `tooltip.followTouchMove` is true, pinchType only applies to two-finger touches.
-
-**Accepted values:** `["x", "y", "xy"]`.
-
-**Defaults to** `undefined`.
-*/
-@property(nonatomic, readwrite) NSString *pinchType;
-/**
 In styled mode, this sets how many colors the class names should rotate between. With ten colors, series (or points) are given class names like `highcharts-color-0`, `highcharts-color-0` `...] `highcharts-color-9`. The equivalent in non-styled mode is to set colors using the [colors` setting.
 */
 @property(nonatomic, readwrite) NSNumber *colorCount;
@@ -414,10 +383,6 @@ Flag to render charts as a parallel coordinates plot. In a parallel coordinates 
 * [Star plot, multivariate data in a polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/polar/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *parallelCoordinates;
-/**
-The button that appears after a selection zoom, allowing the user to reset zoom.
-*/
-@property(nonatomic, readwrite) HIResetZoomButton *resetZoomButton;
 /**
 Whether to show the axes initially. This only applies to empty charts where series are added dynamically, as axes are automatically added to cartesian series.
 

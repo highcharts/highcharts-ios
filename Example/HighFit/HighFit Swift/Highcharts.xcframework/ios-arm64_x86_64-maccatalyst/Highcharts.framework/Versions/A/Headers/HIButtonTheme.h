@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HICSSObject.h"
+#import "HIStyle.h"
 
 
 /**
@@ -18,7 +18,7 @@ A collection of attributes for the buttons. The object takes SVG attributes like
 */
 @interface HIButtonTheme: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) HICSSObject *style;
+@property(nonatomic, readwrite) HIStyle *style;
 
 -(NSDictionary *)getParams;
 

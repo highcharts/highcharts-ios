@@ -11,7 +11,11 @@
 
 
 /**
-Options for the `Series on point` feature. Only `pie` and `sunburst` series are supported at this moment.
+Options for the _Series on point_ feature. Only `pie` and `sunburst` series are supported at this moment.
+
+**Try it**
+
+* [Series on point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-on-point/series-on-point)
 */
 @interface HIOnPoint: HIChartsJSONSerializable
 

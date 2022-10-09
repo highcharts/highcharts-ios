@@ -19,13 +19,19 @@ Color of the link between two nodes.
 */
 @property(nonatomic, readwrite) NSString *color;
 /**
-Width (px) of the link between two nodes.
+Opacity of the link between two nodes.
+
+**Defaults to** `1`.
 */
-@property(nonatomic, readwrite) NSNumber *width;
+@property(nonatomic, readwrite) NSNumber *opacity;
 /**
 A name for the dash style to use for links.
 */
 @property(nonatomic, readwrite) NSString *dashStyle;
+/**
+Width (px) of the link between two nodes.
+*/
+@property(nonatomic, readwrite) NSNumber *width;
 
 -(NSDictionary *)getParams;
 

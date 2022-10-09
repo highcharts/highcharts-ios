@@ -66,9 +66,9 @@ Works only if `connectorShape` is `'crookedLine'`. It defines how far from the v
 
 * [crookDistance set to 90%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-crookdistance/)
 */
-@property(nonatomic, readwrite) NSString *crookDistance;
+@property(nonatomic, readwrite) NSNumber *crookDistance;
 /**
-Alignment method for data labels. Possible values are: - `toPlotEdges`: Each label touches the nearest vertical edge of  the plot area. - `connectors`: Connectors have the same x position and the  widest label of each half (left & right) touches the nearest  vertical edge of the plot area.
+Alignment method for data labels. Possible values are: - `plotEdges`: Each label touches the nearest vertical edge of  the plot area. - `connectors`: Connectors have the same x position and the  widest label of each half (left & right) touches the nearest  vertical edge of the plot area.
 
 **Try it**
 
@@ -259,6 +259,12 @@ Text rotation in degrees. Note that due to a more complex structure, backgrounds
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**
+The z index of the data labels. Use a `zIndex` of 6 to display it above the series, or use a `zIndex` of 2 to display it behind the series.
+
+**Defaults to** `6`.
+*/
+@property(nonatomic, readwrite) NSNumber *zIndex;
+/**
 A class name for the data label. Particularly in styled mode, this can be used to give each series' or point's data label unique styling. In addition to this option, a default color class name is added so that we can give the labels a contrast text shadow.
 
 **Try it**
@@ -291,12 +297,6 @@ Aligns data labels relative to points. If `center` alignment is not possible, it
 **Defaults to** `center`.
 */
 @property(nonatomic, readwrite) NSString *position;
-/**
-The Z index of the data labels. The default Z index puts it above the series. Use a Z index of 2 to display it behind the series.
-
-**Defaults to** `6`.
-*/
-@property(nonatomic, readwrite) NSNumber *z;
 /**
 Options for a label text which should follow marker's shape. Border and background are disabled for a label that follows a path. **Note:** Only SVG-based renderer supports this option. Setting `useHTML` to true will disable this option.
 */
@@ -362,7 +362,10 @@ Whether to position data labels alternately. For example, if `distance` is set e
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alternate;
 @property(nonatomic, readwrite) NSNumber *width;
-@property(nonatomic, readwrite) NSNumber *zIndex;
+/**
+Options for a _link_ label text which should follow link connection. Border and background are disabled for a label that follows a path. **Note:** Only SVG-based renderer supports this option. Setting `useHTML` to true will disable this option.
+*/
+@property(nonatomic, readwrite) HILinkTextPath *linkTextPath;
 /**
 The [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) specifying what to show for _links_ in the networkgraph. (Default: `undefined`)
 */
@@ -371,10 +374,6 @@ The [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-st
 Callback to format data labels for _links_ in the sankey diagram. The `linkFormat` option takes precedence over the `linkFormatter`.
 */
 @property(nonatomic, readwrite) HIFunction *linkFormatter;
-/**
-Options for a _link_ label text which should follow link connection. Border and background are disabled for a label that follows a path. **Note:** Only SVG-based renderer supports this option. Setting `useHTML` to true will disable this option.
-*/
-@property(nonatomic, readwrite) HILinkTextPath *linkTextPath;
 
 -(NSDictionary *)getParams;
 

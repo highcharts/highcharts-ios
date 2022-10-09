@@ -67,7 +67,7 @@ The column size - how many X axis units each column in the heatmap should span.
 */
 @property(nonatomic, readwrite) NSNumber *colsize;
 /**
-The border radius for each heatmap item.
+The border radius for each heatmap item. The border's color and width can be set in marker options.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**

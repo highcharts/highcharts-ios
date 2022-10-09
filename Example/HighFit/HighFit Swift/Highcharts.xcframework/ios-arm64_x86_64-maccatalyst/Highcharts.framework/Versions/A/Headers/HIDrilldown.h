@@ -13,6 +13,10 @@
 
 /**
 Options for drill down, the concept of inspecting increasingly high resolution data through clicking on chart items like columns or pie slices. The drilldown feature requires the drilldown.js file to be loaded, found in the modules directory of the download package, or online at [https://code.highcharts.com/modules/drilldown.js](https://code.highcharts.com/modules/drilldown.js).
+
+**Try it**
+
+* [Organization chart drilldown](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/drilldown)
 */
 @interface HIDrilldown: HIChartsJSONSerializable
 

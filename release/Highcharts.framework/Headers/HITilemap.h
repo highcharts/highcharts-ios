@@ -80,7 +80,7 @@ The shape of the tiles in the tilemap. Possible values are `hexagon`, `circle`, 
 */
 @property(nonatomic, readwrite) NSString *tileShape;
 /**
-The border radius for each heatmap item.
+The border radius for each heatmap item. The border's color and width can be set in marker options.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**

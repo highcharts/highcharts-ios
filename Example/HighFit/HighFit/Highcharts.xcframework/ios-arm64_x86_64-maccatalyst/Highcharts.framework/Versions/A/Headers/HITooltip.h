@@ -36,12 +36,14 @@ Callback function to format the text of the tooltip for visible null points. Wor
 /**
 The HTML of the cluster point's in the tooltip. Works only with marker-clusters module and analogously to `pointFormat`. The cluster tooltip can be also formatted using `tooltip.formatter` callback function and `point.isCluster` flag.
 
+**Defaults to** `Clustered points: {point.clusterPointsAmount}`.
+
 **Try it**
 
 * [Format tooltip for cluster points.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/marker-clusters/grid)
 * [Format tooltip for clusters using tooltip.formatter](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/marker-clusters/europe/)
 */
-@property(nonatomic, readwrite) id clusterFormat;
+@property(nonatomic, readwrite) NSString *clusterFormat;
 /**
 The radius of the rounded border corners.
 

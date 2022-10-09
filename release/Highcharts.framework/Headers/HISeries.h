@@ -246,6 +246,7 @@ Determines what data value should be used to calculate point color if `colorAxis
 **Try it**
 
 * [Custom color key](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/custom-color-key/)
+* [Custom colorKey with color axis stops](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/color-key-with-stops/)
 * [Changed default color key](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/changed-default-color-key/)
 */
 @property(nonatomic, readwrite) NSString *colorKey;
@@ -355,7 +356,11 @@ A reserved subspace to store options and values for customized functionality. He
 */
 @property(nonatomic, readwrite) NSDictionary *custom;
 /**
-Options for the `Series on point` feature. Only `pie` and `sunburst` series are supported at this moment.
+Options for the _Series on point_ feature. Only `pie` and `sunburst` series are supported at this moment.
+
+**Try it**
+
+* [Series on point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-on-point/series-on-point)
 */
 @property(nonatomic, readwrite) HIOnPoint *onPoint;
 /**
@@ -524,15 +529,16 @@ When using dual or multiple color axes, this number defines which colorAxis the 
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ colorAxis;
 /**
-Defines the Axis on which the zones are applied.
+Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn't triggered until the mouse moves over another series, or out of the plot area. When false, the `mouseOut` event on a series is triggered when the mouse leaves the area around the series' graph or markers. This also implies the tooltip when not shared. When `stickyTracking` is false and `tooltip.shared` is false, the tooltip will be hidden when moving the mouse between series. Defaults to true for line and area type series, but to false for columns, pies etc. **Note:** The boost module will force this option because of technical limitations.
 
-**Defaults to** `y`.
+**Defaults to** `True`.
 
 **Try it**
 
-* [Zones on the X-Axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series/color-zones-zoneaxis-x/)
+* [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stickytracking-true/)
+* [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stickytracking-false/)
 */
-@property(nonatomic, readwrite) NSString *zoneAxis;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *stickyTracking;
 /**
 An array defining zones within a series. Zones can be applied to the X axis, Y axis or Z axis for bubbles, according to the `zoneAxis` option. The zone definitions have to be in ascending order regarding to the value. In styled mode, the color zones are styled with the `.highcharts-zone-{n}` class, or custom classed from the `className` option ([view live demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/color-zones/)).
 
@@ -587,16 +593,19 @@ The `id` of another series to link to. Additionally, the value can be ":previous
 */
 @property(nonatomic, readwrite) NSString *linkedTo;
 /**
-Sticky tracking of mouse events. When true, the `mouseOut` event on a series isn't triggered until the mouse moves over another series, or out of the plot area. When false, the `mouseOut` event on a series is triggered when the mouse leaves the area around the series' graph or markers. This also implies the tooltip when not shared. When `stickyTracking` is false and `tooltip.shared` is false, the tooltip will be hidden when moving the mouse between series. Defaults to true for line and area type series, but to false for columns, pies etc. **Note:** The boost module will force this option because of technical limitations.
+Indicates data is structured as columns instead of rows.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *dataAsColumns;
+/**
+Defines the Axis on which the zones are applied.
 
-**Defaults to** `True`.
+**Defaults to** `y`.
 
 **Try it**
 
-* [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stickytracking-true/)
-* [False](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stickytracking-false/)
+* [Zones on the X-Axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series/color-zones-zoneaxis-x/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *stickyTracking;
+@property(nonatomic, readwrite) NSString *zoneAxis;
 /**
 Options for the series data labels, appearing next to each data point. Since v6.2.0, multiple data labels can be applied to each single point by defining them as an array of configs. In styled mode, the data labels can be styled with the `.highcharts-data-label-box` and `.highcharts-data-label` class names ([see example](https://www.highcharts.com/samples/highcharts/css/series-datalabels)).
 
@@ -627,6 +636,10 @@ If no x values are given for the points in a series, pointStart defines on what 
 The line cap used for line ends and line joins on the graph.
 
 **Defaults to** `round`.
+
+**Try it**
+
+* [Line cap comparison](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-line/linecap/)
 */
 @property(nonatomic, readwrite) NSString *linecap;
 /**

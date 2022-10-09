@@ -41,20 +41,6 @@
 @interface HIVector: HISeries
 
 /**
-Maximum length of the arrows in the vector plot. The individual arrow length is computed between 0 and this value.
-*/
-@property(nonatomic, readwrite) NSNumber *vectorLength;
-/**
-What part of the vector it should be rotated around. Can be one of `start`, `center` and `end`. When `start`, the vectors will start from the given [x, y] position, and when `end` the vectors will end in the [x, y] position.
-
-**Accepted values:** `["start", "center", "end"]`.
-
-**Try it**
-
-* [Rotate from start](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/vector-rotationorigin-start/)
-*/
-@property(nonatomic, readwrite) NSString *rotationOrigin;
-/**
 Options for marker clusters, the concept of sampling the data values into larger blocks in order to ease readability and increase performance of the JavaScript charts. Note: marker clusters module is not working with `boost` and `draggable-points` modules. The marker clusters feature requires the marker-clusters.js file to be loaded, found in the modules directory of the download package, or online at `https://code.highcharts.com/modules/marker-clusters.js`.
 
 **Try it**

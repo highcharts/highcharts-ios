@@ -28,7 +28,7 @@ Options for the Boost module. The Boost module allows certain series types to be
 @interface HIBoost: HIChartsJSONSerializable
 
 /**
-If set to true, the whole chart will be boosted if one of the series crosses its threshold, and all the series can be boosted.
+The chart will be boosted, if one of the series crosses its threshold and all the series in the chart can be boosted.
 
 **Defaults to** `true`.
 */

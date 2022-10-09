@@ -44,7 +44,7 @@ Whether to give each point an individual color.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
-Wether to draw rounded edges on the gauge.
+Whether to draw rounded edges on the gauge.
 
 **Defaults to** `false`.
 

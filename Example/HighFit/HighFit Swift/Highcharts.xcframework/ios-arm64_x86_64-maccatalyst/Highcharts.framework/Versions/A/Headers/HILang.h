@@ -103,10 +103,6 @@ Exporting module only. The text for the SVG download menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadSVG;
 /**
-The text for the button that appears when drilling down, linking back to the parent series. The parent series' name is inserted for `{series.name}`.
-*/
-@property(nonatomic, readwrite) NSString *drillUpText;
-/**
 The text for the menu item.
 */
 @property(nonatomic, readwrite) NSString *viewData;

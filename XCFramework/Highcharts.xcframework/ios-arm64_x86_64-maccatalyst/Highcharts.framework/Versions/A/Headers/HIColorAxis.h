@@ -70,6 +70,11 @@ Whether to force the axis to start on a tick. Use this option with the `maxPaddi
 @property(nonatomic, readwrite) NSNumber /* Bool */ *startOnTick;
 /**
 Color stops for the gradient of a scalar color axis. Use this in cases where a linear gradient between a `minColor` and `maxColor` is not sufficient. The stops is an array of tuples, where the first item is a float between 0 and 1 assigning the relative position in the gradient, and the second item is the color.
+
+**Try it**
+
+* [Color axis stops](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/coloraxis-stops/)
+* [Color axis stops with custom colorKey](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/color-key-with-stops/)
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> /* <NSNumber, NSString> */ *stops;
 /**

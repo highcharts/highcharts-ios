@@ -47,6 +47,12 @@ A collection of options for the individual nodes. The nodes in a dependency diag
 */
 @property(nonatomic, readwrite) NSArray <HINodes *> *nodes;
 /**
+Size of the wheel in pixel or percent relative to the canvas space.
+
+**Defaults to** `100%`.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
+/**
 The start angle of the dependency wheel, in degrees where 0 is up.
 */
 @property(nonatomic, readwrite) NSNumber *startAngle;

@@ -51,11 +51,11 @@ The pyramid neck width is zero by default, as opposed to the funnel, which share
 
 * [Funnel demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/funnel/)
 */
-@property(nonatomic, readwrite) NSString *neckWidth;
+@property(nonatomic, readwrite) NSNumber *neckWidth;
 /**
 The pyramid neck width is zero by default, as opposed to the funnel, which shares the same layout logic.
 */
-@property(nonatomic, readwrite) NSString *neckHeight;
+@property(nonatomic, readwrite) NSNumber *neckHeight;
 /**
 The center of the series. By default, it is centered in the middle of the plot area, so it fills the plot area height.
 

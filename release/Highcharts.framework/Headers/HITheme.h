@@ -19,7 +19,6 @@ A collection of attributes for the button. The object takes SVG attributes like 
 */
 @interface HITheme: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSNumber *zIndex;
 /**
 Default stroke for the buttons.
 
@@ -32,6 +31,7 @@ The default fill exists only to capture hover events.
 **Defaults to** `#ffffff`.
 */
 @property(nonatomic, readwrite) HIColor *fill;
+@property(nonatomic, readwrite) NSNumber *zIndex;
 
 -(NSDictionary *)getParams;
 

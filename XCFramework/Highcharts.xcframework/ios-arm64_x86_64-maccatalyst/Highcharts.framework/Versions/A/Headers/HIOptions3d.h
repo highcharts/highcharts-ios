@@ -27,7 +27,7 @@ Set it to `"auto"` to automatically move the labels to the best edge.
 */
 @property(nonatomic, readwrite) NSString *axisLabelPosition;
 /**
-Wether to render the chart using the 3D functionality.
+Whether to render the chart using the 3D functionality.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**

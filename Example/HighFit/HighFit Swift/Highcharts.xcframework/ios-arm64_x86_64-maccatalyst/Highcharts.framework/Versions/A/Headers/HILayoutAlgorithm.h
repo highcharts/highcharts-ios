@@ -86,7 +86,7 @@ Whether to split series into individual groups or to mix all series together.
 
 **Defaults to** `false`.
 */
-@property(nonatomic, readwrite) NSString *splitSeries;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *splitSeries;
 /**
 Whether bubbles should interact with their parentNode to keep them inside.
 */

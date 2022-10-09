@@ -61,7 +61,7 @@ An array containing the default colors for the chart's series. When all colors a
 
 * [Assign a global color theme](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/colors/)
 */
-@property(nonatomic, readwrite) NSArray<NSString *> *colors;
+@property(nonatomic, readwrite) NSArray<HIColor *> *colors;
 
 /**
 The pane serves as a container for axes and backgrounds for circular gauges and polar charts.
@@ -181,6 +181,10 @@ The X axis or category axis. Normally this is the horizontal axis, though if the
 
 /**
 Options for drill down, the concept of inspecting increasingly high resolution data through clicking on chart items like columns or pie slices. The drilldown feature requires the drilldown.js file to be loaded, found in the modules directory of the download package, or online at [https://code.highcharts.com/modules/drilldown.js](https://code.highcharts.com/modules/drilldown.js).
+
+**Try it**
+
+* [Organization chart drilldown](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/drilldown)
 */
 @property(nonatomic, readwrite) HIDrilldown *drilldown;
 

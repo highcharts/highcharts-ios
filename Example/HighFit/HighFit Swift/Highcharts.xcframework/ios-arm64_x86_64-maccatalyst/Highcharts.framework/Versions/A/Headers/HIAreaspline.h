@@ -58,7 +58,7 @@ Fill opacity for the area. When you set an explicit `fillColor`, the `fillOpacit
 
 * [Automatic fill color and fill opacity of 0.1](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillopacity/)
 */
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ fillOpacity;
+@property(nonatomic, readwrite) NSNumber *fillOpacity;
 /**
 A separate color for the negative part of the area. In styled mode, a negative color is set with the `.highcharts-negative` class name.
 

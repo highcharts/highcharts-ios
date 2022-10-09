@@ -26,6 +26,10 @@ Can set a `borderColor` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
+Determines whether the chart should receive one color per point based on this level.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
+/**
 Can set a `colorVariation` on all points which lies on the same level.
 */
 @property(nonatomic, readwrite) HIColorVariation *colorVariation;
@@ -69,12 +73,6 @@ Can set the layoutStartingDirection option on a specific level.
 **Accepted values:** `["vertical", "horizontal"]`.
 */
 @property(nonatomic, readwrite) NSString *layoutStartingDirection;
-/**
-Can set `colorByPoint` on all nodes which lay on the same level.
-
-**Defaults to** `true`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 Can set `states` on all nodes and points which lay on the same level.
 */

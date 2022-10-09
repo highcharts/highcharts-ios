@@ -68,10 +68,6 @@ The word with the largest weight will have a font size equal to this value. The 
 */
 @property(nonatomic, readwrite) NSNumber *maxFontSize;
 /**
-If there is no space for a word on the playing field, then this option will allow the playing field to be extended to fit the word. If false then the word will be dropped from the visualization. NB! This option is currently not decided to be published in the API, and is therefore marked as private.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *allowExtendPlayingField;
-/**
 Spiral used for placing a word after the initial position experienced a collision with either another word or the borders. It is possible for users to add their own custom spiralling algorithms for use in word cloud. Read more about it in our [documentation](https://www.highcharts.com/docs/chart-and-series-types/word-cloud-series#custom-spiralling-algorithm)
 
 **Accepted values:** `["archimedean", "rectangular", "square"]`.

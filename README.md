@@ -30,20 +30,20 @@ Here we present how to create basic chart and place it in your project.
 - First of all download Highcharts xcframework from here: [Highcharts](https://github.com/highcharts/highcharts-ios/tree/master/XCFramework) 
 or by using **Cocoapods** by adding 
     ```
-    pod 'Highcharts', '~> 10.2.0'
+    pod 'Highcharts', '~> 10.2.1'
     ```
     to your Podfile
-    
-    or **Carthage** by adding
-    ```
-    github "https://github.com/highcharts/highcharts-ios" >= 10.2.0
-    ```
-    to your Cartfile
     
     or **Swift Package Manager** by adding package dependency
     ```
     https://github.com/highcharts/highcharts-ios
     ```
+
+    or **Carthage** by adding
+    ```
+    github "https://github.com/highcharts/highcharts-ios" >= 10.2.1
+    ```
+    to your Cartfile.
 
 - Now add Highcharts to your project by simply copying it to your project to folder **Frameworks** (create it if necessary) and remeber to check "**Copy items if needed**" option
 
@@ -61,13 +61,11 @@ or by using **Cocoapods** by adding
 
 You are now set to use Highcharts!
 
-Please note when linking manually that binary framework in the 'release' directory is designed to allow uploads to the AppStore. Therefore it does not allow running on iOS Simulator. In order to use simulator, download the repository and use framework that can be found in the 'development' directory. Cocoapods/SPM/XCFramework solve this problem automatically - they introduce a stripping script for AppStore uploads.
+## Using Highcharts (UIKit demo app)
 
-## Using Highcharts (demo app)
+#### Set AppDelegate
 
-##### Set AppDelegate
-
-In your **AppDelegate.swift** import Highcharts at the top
+In your **AppDelegate.swift** import `Highcharts` at the top
 
 ```swift
 import Highcharts
@@ -78,7 +76,7 @@ Add this line to your **application:didFinishLaunchingWithOptions** method:
 HIChartView.preload()
 ```
 #### Add HIChartView to your View Controller
-In your View Controller .swift file add
+In your View Controller.swift file add
 ```swift
 import Highcharts
 ```
@@ -143,7 +141,7 @@ Don't forget to add chartView as subview to your View Controller's view! At the 
 view.addSubview(chartView)
 ```
 That's it! We are now set to run our application!
-Your View Controller .m file should look like this
+Your View Controller.swift file should look like this
 ```swift
 import Highcharts
 import UIKit
@@ -182,6 +180,85 @@ class ViewController: UIViewController {
 
 }
 ```
+
+## Using Highcharts (SwiftUI demo app)
+
+#### Setting up preload
+
+In your **App.swift** import `Highcharts` at the top
+
+```swift
+import Highcharts
+```
+
+Add the following line to your **init()** or **application:didFinishLaunchingWithOptions** method:
+
+```swift
+HIChartView.preload()
+```
+
+#### Creating a simple SwiftUI wrapper for HIChartView
+
+It takes a few steps:
+ - Create a struct conforming `UIViewRepresentable`;
+ - Define a property that stores a `HIOptions` configuration of the chart;
+ - Implement `makeUIView()` that will create our chart view;
+ - Implement `updateUIView()` that will update our chart view
+
+In your code it could looks like this:
+
+```swift
+struct ChartView: UIViewRepresentable {
+
+  var options: HIOptions
+
+  func makeUIView(context: Context) -> HIChartView {
+    let chart = HIChartView()
+    chart.options = options
+    return chart
+  }
+
+  func updateUIView(_ uiView: HIChartView, context: Context) {
+    uiView.options = options
+  }
+
+}
+```
+
+That’s all! We can use now the `ChartView` component in SwiftUI:
+
+```swift
+import Highcharts
+import SwiftUI
+
+struct ContentView: View {
+
+  private var chartOptions: HIOptions {
+    let options = HIOptions()
+    
+    let chart = HIChart()
+    chart.type = "column"
+    options.chart = chart
+    
+    let title = HITitle()
+    title.text = "Demo chart in SwiftUI"
+    options.title = title
+    
+    let series = HIColumn()
+    series.data = [49.9, 71.5, 106.4, 129.2, 144, 176, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    options.series = [series]
+    
+    return options
+  }
+
+  var body: some View {
+    ChartView(options: chartOptions)
+  }
+
+}
+```
+
+Full `SwiftUI` demo project you can find here: [HCSwiftUIDemo](https://github.com/highcharts/highcharts-ios/tree/master/Example/HCSwiftUIDemo).
 
 ## ***Press "Run" in XCode.***
 #### For more complex solutions see demo app [HighFit](https://github.com/highcharts/highcharts-ios/tree/master/Example/HighFit) provided by Highcharts or read the following [documentation](http://api.highcharts.com/highcharts-ios/)!
