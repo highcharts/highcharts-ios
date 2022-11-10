@@ -84,6 +84,9 @@ var DumbbellSeries = /** @class */ (function (_super) {
             seriesOptions.states.hover &&
             seriesOptions.states.hover.connectorWidthPlus, 1), dashStyle = pick(pointOptions.dashStyle, seriesOptions.dashStyle), pointTop = pick(point.plotLow, point.plotY), pxThreshold = yAxis.toPixels(seriesOptions.threshold || 0, true), pointHeight = chart.inverted ?
             yAxis.len - pxThreshold : pxThreshold, pointBottom = pick(point.plotHigh, pointHeight), attribs, origProps;
+        if (typeof pointTop !== 'number') {
+            return {};
+        }
         if (point.state) {
             connectorWidth = connectorWidth + connectorWidthPlus;
         }
@@ -103,7 +106,7 @@ var DumbbellSeries = /** @class */ (function (_super) {
             connectorWidth = 0;
         }
         // Connector should reflect upper marker's zone color
-        if (point.upperGraphic) {
+        if (point.graphics && point.graphics[1]) {
             origProps = {
                 y: point.y,
                 zone: point.zone
@@ -212,21 +215,22 @@ var DumbbellSeries = /** @class */ (function (_super) {
         // Draw connectors and color upper markers
         while (i < pointLength) {
             point = series.points[i];
+            var _a = point.graphics || [], lowerGraphic = _a[0], upperGraphic = _a[1];
             series.drawConnector(point);
-            if (point.upperGraphic) {
-                point.upperGraphic.element.point = point;
-                point.upperGraphic.addClass('highcharts-lollipop-high');
+            if (upperGraphic) {
+                upperGraphic.element.point = point;
+                upperGraphic.addClass('highcharts-lollipop-high');
             }
             point.connector.element.point = point;
-            if (point.lowerGraphic) {
+            if (lowerGraphic) {
                 zoneColor = point.zone && point.zone.color;
                 lowerGraphicColor = pick(point.options.lowColor, seriesLowColor, point.options.color, zoneColor, point.color, series.color);
                 if (!chart.styledMode) {
-                    point.lowerGraphic.attr({
+                    lowerGraphic.attr({
                         fill: lowerGraphicColor
                     });
                 }
-                point.lowerGraphic.addClass('highcharts-lollipop-low');
+                lowerGraphic.addClass('highcharts-lollipop-low');
             }
             i++;
         }

@@ -49,11 +49,6 @@ var BubbleLegendItem = /** @class */ (function () {
         this.chart = void 0;
         this.fontMetrics = void 0;
         this.legend = void 0;
-        this.legendGroup = void 0;
-        this.legendItem = void 0;
-        this.legendItemHeight = void 0;
-        this.legendItemWidth = void 0;
-        this.legendSymbol = void 0;
         this.maxLabel = void 0;
         this.movementX = void 0;
         this.ranges = void 0;
@@ -101,7 +96,7 @@ var BubbleLegendItem = /** @class */ (function () {
      *        Legend instance
      */
     BubbleLegendItem.prototype.drawLegendSymbol = function (legend) {
-        var chart = this.chart, options = this.options, itemDistance = pick(legend.options.itemDistance, 20), ranges = options.ranges, connectorDistance = options.connectorDistance;
+        var chart = this.chart, itemDistance = pick(legend.options.itemDistance, 20), legendItem = this.legendItem || {}, options = this.options, ranges = options.ranges, connectorDistance = options.connectorDistance;
         var connectorSpace;
         // Predict label dimensions
         this.fontMetrics = chart.renderer.fontMetrics(options.labels.style.fontSize);
@@ -127,8 +122,8 @@ var BubbleLegendItem = /** @class */ (function () {
         this.maxLabel = maxLabel;
         this.movementX = options.labels.align === 'left' ?
             connectorSpace : 0;
-        this.legendItemWidth = size + connectorSpace + itemDistance;
-        this.legendItemHeight = size + this.fontMetrics.h / 2;
+        legendItem.labelWidth = size + connectorSpace + itemDistance;
+        legendItem.labelHeight = size + this.fontMetrics.h / 2;
     };
     /**
      * Set style options for each bubbleLegend range.
@@ -188,11 +183,11 @@ var BubbleLegendItem = /** @class */ (function () {
         return bubbleSeries.getRadius.call(this, zMin, zMax, minSize, maxSize, value);
     };
     /**
-     * Render the legendSymbol group.
+     * Render the legendItem group.
      * @private
      */
     BubbleLegendItem.prototype.render = function () {
-        var renderer = this.chart.renderer, zThreshold = this.options.zThreshold;
+        var legendItem = this.legendItem || {}, renderer = this.chart.renderer, zThreshold = this.options.zThreshold;
         if (!this.symbols) {
             this.symbols = {
                 connectors: [],
@@ -201,19 +196,20 @@ var BubbleLegendItem = /** @class */ (function () {
             };
         }
         // Nesting SVG groups to enable handleOverflow
-        this.legendSymbol = renderer.g('bubble-legend');
-        this.legendItem = renderer.g('bubble-legend-item');
+        legendItem.symbol = renderer.g('bubble-legend');
+        legendItem.label = renderer.g('bubble-legend-item');
         // To enable default 'hideOverlappingLabels' method
-        this.legendSymbol.translateX = 0;
-        this.legendSymbol.translateY = 0;
-        this.ranges.forEach(function (range) {
+        legendItem.symbol.translateX = 0;
+        legendItem.symbol.translateY = 0;
+        for (var _i = 0, _a = this.ranges; _i < _a.length; _i++) {
+            var range = _a[_i];
             if (range.value >= zThreshold) {
                 this.renderRange(range);
             }
-        }, this);
+        }
         // To use handleOverflow method
-        this.legendSymbol.add(this.legendItem);
-        this.legendItem.add(this.legendGroup);
+        legendItem.symbol.add(legendItem.label);
+        legendItem.label.add(legendItem.group);
         this.hideOverlappingLabels();
     };
     /**
@@ -247,7 +243,7 @@ var BubbleLegendItem = /** @class */ (function () {
                 bubbleSeries.colorIndex + ' ' :
             '') +
             'highcharts-bubble-legend-symbol ' +
-            (options.className || '')).add(this.legendSymbol));
+            (options.className || '')).add(this.legendItem.symbol));
         // Render connector
         symbols.connectors.push(renderer
             .path(renderer.crispLine([
@@ -259,14 +255,14 @@ var BubbleLegendItem = /** @class */ (function () {
             'highcharts-color-' +
                 this.options.seriesIndex + ' ' : '') +
             'highcharts-bubble-legend-connectors ' +
-            (options.connectorClassName || '')).add(this.legendSymbol));
+            (options.connectorClassName || '')).add(this.legendItem.symbol));
         // Render label
         var label = renderer
             .text(this.formatLabel(range), labelX, labelY + labelMovement)
             .attr((styledMode ? {} : range.labelAttribs))
             .css(styledMode ? {} : labelsOptions.style)
             .addClass('highcharts-bubble-legend-labels ' +
-            (options.labels.className || '')).add(this.legendSymbol);
+            (options.labels.className || '')).add(this.legendItem.symbol);
         labels.push(label);
         // To enable default 'hideOverlappingLabels' method
         label.placed = true;

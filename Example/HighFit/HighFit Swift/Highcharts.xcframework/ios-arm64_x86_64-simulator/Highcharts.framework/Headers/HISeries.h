@@ -145,10 +145,14 @@ Formatter function to use instead of the default for series descriptions. Receiv
 @property(nonatomic, readwrite) HIFunction *descriptionFormatter;
 /**
 When a series contains more points than this, we no longer expose information about individual points to screen readers. Set to `false` to disable.
+
+**Defaults to** `200`.
 */
 @property(nonatomic, readwrite) NSNumber *pointDescriptionEnabledThreshold;
 /**
 Format to use for describing the data series group to assistive technology - including screen readers. The series context and its subproperties are available under the variable `{series}`, for example `{series.name}` for the series name, and `{series.points.length}` for the number of data points. The chart context and its subproperties are available under the variable `{chart}`, for example `{chart.series.length}` for the number of series in the chart. `{seriesDescription}` refers to the automatic description of the series type and number of points added by Highcharts by default. `{authorDescription}` refers to the description added in `series.description` if one is present. `{axisDescription}` refers to the description added if the chart has multiple X or Y axes. Note that if `series.descriptionFormatter` is declared it will take precedence, and this option will be overridden.
+
+**Defaults to** `{seriesDescription}{authorDescription}{axisDescription}`.
 
 **Try it**
 
@@ -161,18 +165,26 @@ Whether or not to add series descriptions to charts with a single series.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *describeSingleSeries;
 /**
 User supplied description text. This is added in the point comment description by default if present.
+
+**Defaults to** `{description}`.
 */
 @property(nonatomic, readwrite) NSString *definition;
 /**
 xAxis description for series if there are multiple xAxes in the chart.
+
+**Defaults to** `X axis, {name}`.
 */
 @property(nonatomic, readwrite) NSString *xAxisDescription;
 /**
 yAxis description for series if there are multiple yAxes in the chart.
+
+**Defaults to** `Y axis, {name}`.
 */
 @property(nonatomic, readwrite) NSString *yAxisDescription;
 /**
 Description for annotations on a point, as it is made available to assistive technology.
+
+**Defaults to** `{Annotation: #each(annotations). }`.
 */
 @property(nonatomic, readwrite) NSString *pointAnnotationsDescription;
 /**
@@ -181,6 +193,8 @@ Lang configuration for the series main summary. Each series type has two modes: 
 @property(nonatomic, readwrite) HISummary *summary;
 /**
 Description for the value of null points.
+
+**Defaults to** `No value`.
 */
 @property(nonatomic, readwrite) NSString *nullPointValue;
 /**
@@ -189,6 +203,10 @@ When set to `false` will prevent the series data from being included in any form
 @property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
 Styled mode only. A specific color index to use for the series, so its graphic representations are given the class name `highcharts-color-{n}`.
+
+**Try it**
+
+* [Series and point color index](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/colorindex/)
 */
 @property(nonatomic, readwrite) NSNumber *colorIndex;
 /**
@@ -235,6 +253,8 @@ If no x values are given for the points in a series, `pointInterval` defines the
 @property(nonatomic, readwrite) NSNumber *pointInterval;
 /**
 When the series contains less points than the crop threshold, all points are drawn, even if the points fall outside the visible plot area at the current zoom. The advantage of drawing all points (including markers and columns), is that animation is performed on updates. On the other hand, when the series contains more points than the crop threshold, the series data is cropped to only contain points that fall within the plot area. The advantage of cropping away invisible points is to increase performance on large series.
+
+**Defaults to** `300`.
 */
 @property(nonatomic, readwrite) NSNumber *cropThreshold;
 @property(nonatomic, readwrite) HIStates *states;
@@ -252,6 +272,8 @@ Determines what data value should be used to calculate point color if `colorAxis
 @property(nonatomic, readwrite) NSString *colorKey;
 /**
 When this is true, the series will not cause the Y axis to cross the zero plane (or `threshold` option) unless the data actually crosses the plane. For example, if `softThreshold` is `false`, a series of 0, 1, 2, 3 will make the Y axis show negative values according to the `minPadding` option. If `softThreshold` is `true`, the Y axis starts at 0.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *softThreshold;
 /**
@@ -366,8 +388,6 @@ Options for the _Series on point_ feature. Only `pie` and `sunburst` series are 
 /**
 Whether to stack the values of each series on top of each other. Possible values are `undefined` to disable, `"normal"` to stack by value or `"percent"`. When stacking is enabled, data must be sorted in ascending X order. Some stacking options are related to specific series types. In the streamgraph series type, the stacking option is set to `"stream"`. The second one is `"overlap"`, which only applies to waterfall series.
 
-**Accepted values:** `["normal", "overlap", "percent", "stream"]`.
-
 **Try it**
 
 * [Line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stacking-line/)
@@ -383,7 +403,7 @@ Whether to stack the values of each series on top of each other. Possible values
 */
 @property(nonatomic, readwrite) NSString *stacking;
 /**
-Enable or disable the initial animation when a series is displayed. The animation can also be set as a configuration object. Please note that this option only applies to the initial animation of the series itself. For other animations, see `chart.animation` and the animation parameter under the API methods. The following properties are supported: - `defer`: The animation delay time in milliseconds. - `duration`: The duration of the animation in milliseconds. - `easing`: Can be a string reference to an easing function set on  the `Math` object or a function. See the _Custom easing function_  demo below. Due to poor performance, animation is disabled in old IE browsers for several chart types.
+Enable or disable the initial animation when a series is displayed. The animation can also be set as a configuration object. Please note that this option only applies to the initial animation of the series itself. For other animations, see `chart.animation` and the animation parameter under the API methods. The following properties are supported: - `defer`: The animation delay time in milliseconds. - `duration`: The duration of the animation in milliseconds. (Defaults to  `1000`) - `easing`: Can be a string reference to an easing function set on  the `Math` object or a function. See the _Custom easing function_  demo below. (Defaults to `easeInOutSine`) Due to poor performance, animation is disabled in old IE browsers for several chart types.
 
 **Defaults to** `True`.
 
@@ -397,7 +417,7 @@ Enable or disable the initial animation when a series is displayed. The animatio
 /**
 Determines whether the series should look for the nearest point in both dimensions or just the x-dimension when hovering the series. Defaults to `'xy'` for scatter series and `'x'` for most other series. If the data has duplicate x-values, it is recommended to set this to `'xy'` to allow hovering over all points. Applies only to series types using nearest neighbor search (not direct hover) for tooltip.
 
-**Accepted values:** `["x", "xy"]`.
+**Defaults to** `x`.
 
 **Try it**
 
@@ -431,8 +451,6 @@ If true, a checkbox is displayed next to the legend item to allow selecting the 
 /**
 Sets the color blending in the boost module.
 
-**Accepted values:** `["add", "multiply", "darken"]`.
-
 **Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *boostBlending;
@@ -442,14 +460,22 @@ General event handlers for the series items. These event hooks can also be attac
 @property(nonatomic, readwrite) HIEvents *events;
 /**
 Opacity of a series parts: line, fill (e.g.area) and dataLabels.
+
+**Defaults to** `1`.
 */
 @property(nonatomic, readwrite) NSNumber *opacity;
 /**
-For some series, there is a limit that shuts down initial animation by default when the total number of points in the chart is too high. For example, for a column chart and its derivatives, animation does not run if there is more than 250 points totally. To disable this cap, set `animationLimit` to `Infinity`.
+For some series, there is a limit that shuts down animation by default when the total number of points in the chart is too high. For example, for a column chart and its derivatives, animation does not run if there is more than 250 points totally. To disable this cap, set `animationLimit` to `Infinity`. This option works if animation is fired on individual points, not on a group of points like e.g. during the initial animation.
+
+**Try it**
+
+* [Animation limit on updating individual points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animationlimit/)
 */
 @property(nonatomic, readwrite) NSNumber *animationLimit;
 /**
 When a series contains a data array that is longer than this, only one dimensional arrays of numbers, or two dimensional arrays with x and y values are allowed. Also, only the first point is tested, and the rest are assumed to be the same format. This saves expensive data checking and indexing in long series. Set it to `0` disable. Note: In boost mode turbo threshold is forced. Only array of numbers or two dimensional arrays are allowed.
+
+**Defaults to** `1000`.
 */
 @property(nonatomic, readwrite) NSNumber *turboThreshold;
 /**
@@ -481,8 +507,6 @@ Accessibility options for a series.
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Whether to apply steps to the line. Possible values are `left`, `center` and `right`.
-
-**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 
@@ -550,8 +574,6 @@ An array defining zones within a series. Zones can be applied to the X axis, Y a
 /**
 On datetime series, this allows for setting the `pointInterval` to irregular time units, `day`, `month` and `year`. A day is usually the same as 24 hours, but `pointIntervalUnit` also takes the DST crossover into consideration when dealing with local time. Combine this option with `pointInterval` to draw weeks, quarters, 6 months, 10 years etc. Please note that this options applies to the _series data_, not the interval of the axis ticks, which is independent.
 
-**Accepted values:** `["day", "month", "year"]`.
-
 **Try it**
 
 * [One point a month](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-pointintervalunit/)
@@ -559,6 +581,8 @@ On datetime series, this allows for setting the `pointInterval` to irregular tim
 @property(nonatomic, readwrite) NSString *pointIntervalUnit;
 /**
 Pixel width of the graph line.
+
+**Defaults to** `2`.
 
 **Try it**
 
@@ -568,6 +592,8 @@ Pixel width of the graph line.
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
 When true, each point or column edge is rounded to its nearest pixel in order to render sharp on screen. In some cases, when there are a lot of densely packed columns, this leads to visible difference in column widths or distance between columns. In these cases, setting `crisp` to `false` may look better, even though each column is rendered blurry.
+
+**Defaults to** `True`.
 
 **Try it**
 

@@ -62,7 +62,7 @@ Fill opacity for the area. When you set an explicit `fillColor`, the `fillOpacit
 /**
 Whether the whole area or just the line should respond to mouseover tooltips and other mouse or touch events.
 
-**Defaults to** `false`.
+**Defaults to** `True`.
 
 **Try it**
 

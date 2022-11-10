@@ -43,6 +43,7 @@ import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
 var ScatterSeries = SeriesRegistry.seriesTypes.scatter;
 import VennPoint from './VennPoint.js';
 import VennUtils from './VennUtils.js';
+import LegendSymbol from '../../Core/Legend/LegendSymbol.js';
 import U from '../../Core/Utilities.js';
 var addEvent = U.addEvent, extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, isObject = U.isObject, isString = U.isString, merge = U.merge;
 /* *
@@ -467,6 +468,8 @@ var VennSeries = /** @class */ (function (_super) {
      *         Venn diagram
      * @sample {highcharts} highcharts/demo/euler-diagram/
      *         Euler diagram
+     * @sample {highcharts} highcharts/series-venn/point-legend/
+     *         Venn diagram with a legend
      *
      * @extends      plotOptions.scatter
      * @excluding    connectEnds, connectNulls, cropThreshold, dragDrop,
@@ -499,9 +502,19 @@ var VennSeries = /** @class */ (function (_super) {
          * @private
          */
         inactiveOtherPoints: true,
+        /**
+         * @ignore-option
+         * @private
+         */
         marker: false,
         opacity: 0.75,
         showInLegend: false,
+        /**
+         * @ignore-option
+         *
+         * @private
+         */
+        legendType: 'point',
         states: {
             /**
              * @excluding halo
@@ -531,6 +544,7 @@ var VennSeries = /** @class */ (function (_super) {
 extend(VennSeries.prototype, {
     axisTypes: [],
     directTouch: true,
+    drawLegendSymbol: LegendSymbol.drawRectangle,
     isCartesian: false,
     pointArrayMap: ['value'],
     pointClass: VennPoint,

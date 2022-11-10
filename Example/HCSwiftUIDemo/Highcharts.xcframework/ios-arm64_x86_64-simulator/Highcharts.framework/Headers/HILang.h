@@ -19,15 +19,21 @@ Language object. The language object is global and it can't be set on each chart
 /**
 The text for the menu item.
 
+**Defaults to** `Download CSV`.
+
 **Defaults to** `Share CSV`.
 */
 @property(nonatomic, readwrite) NSString *downloadCSV;
 /**
 The text for the menu item.
+
+**Defaults to** `Download XLS`.
 */
 @property(nonatomic, readwrite) NSString *downloadXLS;
 /**
 Exporting module only. The text for the PNG download menu item.
+
+**Defaults to** `Share image`.
 */
 @property(nonatomic, readwrite) NSString *downloadPNG;
 /**
@@ -36,6 +42,8 @@ Configure the accessibility strings in the chart. Requires the [accessibility mo
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 The text for the menu item.
+
+**Defaults to** `Hide data table`.
 */
 @property(nonatomic, readwrite) NSString *hideData;
 /**
@@ -52,10 +60,14 @@ The text for exported table.
 @property(nonatomic, readwrite) HIExportData *exportData;
 /**
 Exporting module only. The text for the menu item to view the chart in full screen.
+
+**Defaults to** `View in full screen`.
 */
 @property(nonatomic, readwrite) NSString *viewFullscreen;
 /**
 The text to display when the chart contains no data.
+
+**Defaults to** `No data to display`.
 
 **Try it**
 
@@ -65,6 +77,8 @@ The text to display when the chart contains no data.
 @property(nonatomic, readwrite) NSString *mainBreadcrumb;
 /**
 The loading text that appears when the chart is set into the loading state following a call to `chart.showLoading`.
+
+**Defaults to** `Loading...`.
 */
 @property(nonatomic, readwrite) NSString *loading;
 /**
@@ -79,6 +93,8 @@ The loading text that appears when the chart is set into the loading state follo
 @property(nonatomic, readwrite) NSArray<NSString *> *numericSymbols;
 /**
 Exporting module only. The text for the menu item to print the chart.
+
+**Defaults to** `Print chart`.
 */
 @property(nonatomic, readwrite) NSString *printChart;
 /**
@@ -100,14 +116,20 @@ An array containing the weekday names.
 @property(nonatomic, readwrite) NSArray<NSString *> *weekdays;
 /**
 Exporting module only. The text for the SVG download menu item.
+
+**Defaults to** `Download SVG vector image`.
 */
 @property(nonatomic, readwrite) NSString *downloadSVG;
 /**
 The text for the menu item.
+
+**Defaults to** `View data table`.
 */
 @property(nonatomic, readwrite) NSString *viewData;
 /**
 Exporting module menu. The tooltip title for the context menu holding print and export menu items.
+
+**Defaults to** `Chart context menu`.
 */
 @property(nonatomic, readwrite) NSString *contextButtonTitle;
 /**
@@ -122,18 +144,26 @@ What to show in a date field for invalid dates. Defaults to an empty string.
 @property(nonatomic, readwrite) NSString *invalidDate;
 /**
 Exporting module only. The text for the menu item to exit the chart from full screen.
+
+**Defaults to** `Exit from full screen`.
 */
 @property(nonatomic, readwrite) NSString *exitFullscreen;
 /**
 The text for the label appearing when a chart is zoomed.
+
+**Defaults to** `Reset zoom`.
 */
 @property(nonatomic, readwrite) NSString *resetZoom;
 /**
 Exporting module only. The text for the PDF download menu item.
+
+**Defaults to** `Share PDF`.
 */
 @property(nonatomic, readwrite) NSString *downloadPDF;
 /**
 The tooltip title for the label appearing when a chart is zoomed.
+
+**Defaults to** `Reset zoom level 1:1`.
 */
 @property(nonatomic, readwrite) NSString *resetZoomTitle;
 /**
@@ -153,10 +183,14 @@ An array containing the months names in abbreviated form. Corresponds to the `%b
 @property(nonatomic, readwrite) NSArray<NSString *> *shortMonths;
 /**
 Exporting module only. The text for the JPEG download menu item.
+
+**Defaults to** `Share image`.
 */
 @property(nonatomic, readwrite) NSString *downloadJPEG;
 /**
 The default decimal point used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments.
+
+**Defaults to** `.`.
 */
 @property(nonatomic, readwrite) NSString *decimalPoint;
 /**

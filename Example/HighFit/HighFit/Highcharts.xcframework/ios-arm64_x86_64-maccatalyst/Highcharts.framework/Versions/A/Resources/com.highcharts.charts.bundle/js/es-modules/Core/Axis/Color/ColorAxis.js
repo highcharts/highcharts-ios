@@ -71,8 +71,6 @@ var ColorAxis = /** @class */ (function (_super) {
         _this.chart = void 0;
         _this.coll = 'colorAxis';
         _this.dataClasses = void 0;
-        _this.legendItem = void 0;
-        _this.legendItems = void 0;
         _this.name = ''; // Prevents 'undefined' in legend in IE8
         _this.options = void 0;
         _this.stops = void 0;
@@ -137,10 +135,10 @@ var ColorAxis = /** @class */ (function (_super) {
      * @private
      */
     ColorAxis.prototype.initDataClasses = function (userOptions) {
-        var axis = this, chart = axis.chart, options = axis.options, len = userOptions.dataClasses.length;
+        var axis = this, chart = axis.chart, legendItem = axis.legendItem = axis.legendItem || {}, len = userOptions.dataClasses.length, options = axis.options;
         var dataClasses, colorCounter = 0, colorCount = chart.options.chart.colorCount;
         axis.dataClasses = dataClasses = [];
-        axis.legendItems = [];
+        legendItem.labels = [];
         (userOptions.dataClasses || []).forEach(function (dataClass, i) {
             var colors;
             dataClass = merge(dataClass);
@@ -214,7 +212,7 @@ var ColorAxis = /** @class */ (function (_super) {
      */
     ColorAxis.prototype.setAxisSize = function () {
         var axis = this;
-        var symbol = axis.legendSymbol;
+        var symbol = axis.legendItem && axis.legendItem.symbol;
         var chart = axis.chart;
         var legendOptions = chart.options.legend || {};
         var x, y, width, height;
@@ -296,7 +294,7 @@ var ColorAxis = /** @class */ (function (_super) {
      */
     ColorAxis.prototype.getOffset = function () {
         var axis = this;
-        var group = axis.legendGroup;
+        var group = axis.legendItem && axis.legendItem.group;
         var sideOffset = axis.chart.axisOffset[axis.side];
         if (group) {
             // Hook for the getOffset method to add groups to this parent
@@ -350,31 +348,24 @@ var ColorAxis = /** @class */ (function (_super) {
      * @private
      */
     ColorAxis.prototype.drawLegendSymbol = function (legend, item) {
-        var axis = this;
-        var padding = legend.padding;
-        var legendOptions = legend.options;
-        var horiz = axis.horiz;
-        var width = pick(legendOptions.symbolWidth, horiz ? ColorAxis.defaultLegendLength : 12);
-        var height = pick(legendOptions.symbolHeight, horiz ? 12 : ColorAxis.defaultLegendLength);
-        var labelPadding = pick(
+        var axis = this, legendItem = item.legendItem || {}, padding = legend.padding, legendOptions = legend.options, itemDistance = pick(legendOptions.itemDistance, 10), horiz = axis.horiz, width = pick(legendOptions.symbolWidth, horiz ? ColorAxis.defaultLegendLength : 12), height = pick(legendOptions.symbolHeight, horiz ? 12 : ColorAxis.defaultLegendLength), labelPadding = pick(
         // @todo: This option is not documented, nor implemented when
         // vertical
         legendOptions.labelPadding, horiz ? 16 : 30);
-        var itemDistance = pick(legendOptions.itemDistance, 10);
         this.setLegendColor();
         // Create the gradient
-        if (!item.legendSymbol) {
-            item.legendSymbol = this.chart.renderer.rect(0, legend.baseline - 11, width, height).attr({
+        if (!legendItem.symbol) {
+            legendItem.symbol = this.chart.renderer.rect(0, legend.baseline - 11, width, height).attr({
                 zIndex: 1
-            }).add(item.legendGroup);
+            }).add(legendItem.group);
         }
         // Set how much space this legend item takes up
-        axis.legendItemWidth = (width +
+        legendItem.labelWidth = (width +
             padding +
             (horiz ?
                 itemDistance :
                 this.options.labels.x + this.maxLabelLength));
-        axis.legendItemHeight = height + padding + (horiz ? labelPadding : 0);
+        legendItem.labelHeight = height + padding + (horiz ? labelPadding : 0);
     };
     /**
      * Fool the legend.
@@ -460,11 +451,7 @@ var ColorAxis = /** @class */ (function (_super) {
      * @emits Highcharts.ColorAxis#event:drawCrosshair
      */
     ColorAxis.prototype.drawCrosshair = function (e, point) {
-        var axis = this;
-        var plotX = point && point.plotX;
-        var plotY = point && point.plotY;
-        var axisPos = axis.pos;
-        var axisLen = axis.len;
+        var axis = this, legendItem = axis.legendItem || {}, plotX = point && point.plotX, plotY = point && point.plotY, axisPos = axis.pos, axisLen = axis.len;
         var crossPos;
         if (point) {
             crossPos = axis.toPixels(point.getNestedProperty(point.series.colorKey));
@@ -481,10 +468,10 @@ var ColorAxis = /** @class */ (function (_super) {
             point.plotY = plotY;
             if (axis.cross &&
                 !axis.cross.addedToColorAxis &&
-                axis.legendGroup) {
+                legendItem.group) {
                 axis.cross
                     .addClass('highcharts-coloraxis-marker')
-                    .add(axis.legendGroup);
+                    .add(legendItem.group);
                 axis.cross.addedToColorAxis = true;
                 if (!axis.chart.styledMode &&
                     typeof axis.crosshair === 'object') {
@@ -543,7 +530,7 @@ var ColorAxis = /** @class */ (function (_super) {
             axis.destroyItems();
         }
         _super.prototype.update.call(this, newOptions, redraw);
-        if (axis.legendItem) {
+        if (axis.legendItem && axis.legendItem.label) {
             axis.setLegendColor();
             legend.colorizeItem(this, true);
         }
@@ -553,15 +540,15 @@ var ColorAxis = /** @class */ (function (_super) {
      * @private
      */
     ColorAxis.prototype.destroyItems = function () {
-        var axis = this;
-        var chart = axis.chart;
-        if (axis.legendItem) {
+        var axis = this, chart = axis.chart, legendItem = axis.legendItem || {};
+        if (legendItem.label) {
             chart.legend.destroyItem(axis);
         }
-        else if (axis.legendItems) {
-            axis.legendItems.forEach(function (item) {
+        else if (legendItem.labels) {
+            for (var _i = 0, _a = legendItem.labels; _i < _a.length; _i++) {
+                var item = _a[_i];
                 chart.legend.destroyItem(item);
-            });
+            }
         }
         chart.isDirtyLegend = true;
     };
@@ -588,12 +575,17 @@ var ColorAxis = /** @class */ (function (_super) {
      * @private
      */
     ColorAxis.prototype.getDataClassLegendSymbols = function () {
-        var axis = this;
-        var chart = axis.chart;
-        var legendItems = axis.legendItems;
-        var legendOptions = chart.options.legend;
-        var valueDecimals = legendOptions.valueDecimals;
-        var valueSuffix = legendOptions.valueSuffix || '';
+        var axis = this, chart = axis.chart, legendItems = (axis.legendItem &&
+            axis.legendItem.labels ||
+            []), legendOptions = chart.options.legend, valueDecimals = pick(legendOptions.valueDecimals, -1), valueSuffix = pick(legendOptions.valueSuffix, '');
+        var getPointsInDataClass = function (i) {
+            return axis.series.reduce(function (points, s) {
+                points.push.apply(points, s.points.filter(function (point) {
+                    return point.dataClass === i;
+                }));
+                return points;
+            }, []);
+        };
         var name;
         if (!legendItems.length) {
             axis.dataClasses.forEach(function (dataClass, i) {
@@ -624,17 +616,23 @@ var ColorAxis = /** @class */ (function (_super) {
                     options: {},
                     drawLegendSymbol: LegendSymbol.drawRectangle,
                     visible: true,
-                    setState: noop,
                     isDataClass: true,
+                    // Override setState to set either normal or inactive
+                    // state to all points in this data class
+                    setState: function (state) {
+                        for (var _i = 0, _a = getPointsInDataClass(i); _i < _a.length; _i++) {
+                            var point = _a[_i];
+                            point.setState(state);
+                        }
+                    },
+                    // Override setState to show or hide all points in this
+                    // data class
                     setVisible: function () {
                         this.visible = vis = axis.visible = !vis;
-                        axis.series.forEach(function (series) {
-                            series.points.forEach(function (point) {
-                                if (point.dataClass === i) {
-                                    point.setVisible(vis);
-                                }
-                            });
-                        });
+                        for (var _i = 0, _a = getPointsInDataClass(i); _i < _a.length; _i++) {
+                            var point = _a[_i];
+                            point.setVisible(vis);
+                        }
                         chart.legend.colorizeItem(this, vis);
                     }
                 }, dataClass));
@@ -653,11 +651,7 @@ var ColorAxis = /** @class */ (function (_super) {
      * @private
      */
     ColorAxis.keepProps = [
-        'legendGroup',
-        'legendItemHeight',
-        'legendItemWidth',
-        'legendItem',
-        'legendSymbol'
+        'legendItem'
     ];
     return ColorAxis;
 }(Axis));

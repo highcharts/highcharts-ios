@@ -229,8 +229,9 @@ var DataLabel;
      * Draw the data labels
      * @private
      */
-    function drawDataLabels() {
-        var series = this, chart = series.chart, seriesOptions = series.options, points = series.points, hasRendered = series.hasRendered || 0, renderer = chart.renderer, _a = chart.options.chart, backgroundColor = _a.backgroundColor, plotBackgroundColor = _a.plotBackgroundColor, contrastColor = renderer.getContrast((isString(plotBackgroundColor) && plotBackgroundColor) ||
+    function drawDataLabels(points) {
+        if (points === void 0) { points = this.points; }
+        var series = this, chart = series.chart, seriesOptions = series.options, hasRendered = series.hasRendered || 0, renderer = chart.renderer, _a = chart.options.chart, backgroundColor = _a.backgroundColor, plotBackgroundColor = _a.plotBackgroundColor, contrastColor = renderer.getContrast((isString(plotBackgroundColor) && plotBackgroundColor) ||
             (isString(backgroundColor) && backgroundColor) ||
             "#000000" /* Palette.neutralColor100 */);
         var seriesDlOptions = seriesOptions.dataLabels, pointOptions, dataLabelsGroup;
@@ -408,11 +409,13 @@ var DataLabel;
                             // read text bounding box
                             dataLabel.css(style).shadow(labelOptions.shadow);
                         }
-                        if (labelOptions.textPath && !labelOptions.useHTML) {
+                        var textPathOptions = labelOptions[point.formatPrefix + 'TextPath'] ||
+                            labelOptions.textPath;
+                        if (textPathOptions && !labelOptions.useHTML) {
                             dataLabel.setTextPath((point.getDataLabelPath &&
-                                point.getDataLabelPath(dataLabel)) || point.graphic, labelOptions.textPath);
+                                point.getDataLabelPath(dataLabel)) || point.graphic, textPathOptions);
                             if (point.dataLabelPath &&
-                                !labelOptions.textPath.enabled) {
+                                !textPathOptions.enabled) {
                                 // clean the DOM
                                 point.dataLabelPath = (point.dataLabelPath.destroy());
                             }

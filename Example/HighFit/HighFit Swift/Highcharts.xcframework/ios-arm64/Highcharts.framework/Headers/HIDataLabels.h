@@ -90,6 +90,8 @@ The width of the line connecting the data label to the pie slice. In styled mode
 /**
 Whether to render the connector as a soft arc or a line with sharp break. Works only if `connectorShape` equals to `fixedOffset`.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Soft](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-softconnector-true/)
@@ -99,6 +101,8 @@ Whether to render the connector as a soft arc or a line with sharp break. Works 
 /**
 The distance from the data label to the connector. Note that data labels also have a default `padding`, so in order for the connector to touch the text, the `padding` must also be 0.
 
+**Defaults to** `5`.
+
 **Try it**
 
 * [No padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-connectorpadding/)
@@ -106,6 +110,8 @@ The distance from the data label to the connector. Note that data labels also ha
 @property(nonatomic, readwrite) NSNumber *connectorPadding;
 /**
 Specifies the method that is used to generate the connector path. Highcharts provides 3 built-in connector shapes: `'fixedOffset'` (default), `'straight'` and `'crookedLine'`. Using `'crookedLine'` has the most sense (in most of the cases) when `'alignTo'` is set. Users can provide their own method by passing a function instead of a String. 3 arguments are passed to the callback: - Object that holds the information about the coordinates of the  label (`x` & `y` properties) and how the label is located in  relation to the pie (`alignment` property). `alignment` can by  one of the following:  `'left'` (pie on the left side of the data label),  `'right'` (pie on the right side of the data label) or  `'center'` (data label overlaps the pie). - Object that holds the information about the position of the  connector. Its `touchingSliceAt` porperty tells the position  of the place where the connector touches the slice. - Data label options The function has to return an SVG path definition in array form (see the example).
+
+**Defaults to** `fixedOffset`.
 
 **Try it**
 
@@ -122,17 +128,19 @@ Callback JavaScript function to format the data label. Note that if a `format` i
 /**
 The distance of the data label from the pie's edge. Negative numbers put the data label on top of the pie slices. Can also be defined as a percentage of pie's radius. Connectors are only shown for data labels outside the pie.
 
+**Defaults to** `30`.
+
 **Try it**
 
 * [Data labels on top of the pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-distance/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ distance;
 /**
-Callback JavaScript function that defines formatting for points with the value of null. Works analogously to `formatter`. `nullPointFormatter` can be applied only to series which support displaying null points.
+Callback JavaScript function that defines formatting for points with the value of null. Works analogously to `formatter`. `nullFormatter` can be applied only to series which support displaying null points i.e `heatmap` or `tilemap`. Does not work with series that don't display null points, like `line`, `column`, `bar` or `pie`.
 
 **Try it**
 
-* [Format data label and tooltip for null point.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-format/)
+* [Format data label for null points in heat map](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-nullformat/)
 */
 @property(nonatomic, readwrite) HIFunction *nullFormatter;
 /**
@@ -214,15 +222,17 @@ The background color or gradient for the data label.
 */
 @property(nonatomic, readwrite) HIColor *backgroundColor;
 /**
-Format for points with the value of null. Works analogously to `format`. `nullFormat` can be applied only to series which support displaying null points.
+Format for points with the value of null. Works analogously to `format`. `nullFormat` can be applied only to series which support displaying null points i.e `heatmap` or `tilemap`. Does not work with series that don't display null points, like `line`, `column`, `bar` or `pie`.
 
 **Try it**
 
-* [Format data label and tooltip for null point.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-format/)
+* [Format data label for null points in heat map](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-datalabels-nullformat/)
 */
 @property(nonatomic, readwrite) id /* Bool, NSString */ nullFormat;
 /**
 When either the `borderWidth` or the `backgroundColor` is set, this is the padding within the box.
+
+**Defaults to** `5`.
 
 **Try it**
 
@@ -341,6 +351,8 @@ Callback to format data labels for _nodes_ in the sankey diagram. The `nodeForma
 /**
 The [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) specifying what to show for _nodes_ in the sankey diagram. By default the `nodeFormatter` returns `{point.name}`.
 
+**Defaults to** `undefined`.
+
 **Try it**
 
 * [Node and link data labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-link-datalabels/)
@@ -355,6 +367,8 @@ Presentation attributes for the text path.
 @property(nonatomic, readwrite) HISVGAttributes *attributes;
 /**
 Whether to position data labels alternately. For example, if `distance` is set equal to `100`, then data labels will be positioned alternately (on both sides of the point) at a distance of 100px.
+
+**Defaults to** `True`.
 
 **Try it**
 

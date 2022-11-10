@@ -23,6 +23,8 @@ Time options that can apply globally or to individual charts. These settings aff
 /**
 Whether to use UTC time for axis scaling, tickmark placement and time display in `Highcharts.dateFormat`. Advantages of using UTC is that the time displays equally regardless of the user agent's time zone settings. Local time can be used when the data is loaded in real time or when correct Daylight Saving Time transitions are required.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/time/useutc-true/)
@@ -31,6 +33,8 @@ Whether to use UTC time for axis scaling, tickmark placement and time display in
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useUTC;
 /**
 A callback to return the time zone offset for a given datetime. It takes the timestamp in terms of milliseconds since January 1 1970, and returns the timezone offset in minutes. This provides a hook for drawing time based charts in specific time zones using their local DST crossover dates, with the help of external libraries.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -43,10 +47,14 @@ Allows to manually load the `moment.js` library from Highcharts options instead 
 @property(nonatomic, readwrite) HIFunction *moment;
 /**
 A custom `Date` class for advanced date handling. For example, [JDate](https://github.com/tahajahangir/jdate) can be hooked in to handle Jalali dates.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) id Date;
 /**
 Requires [moment.js](https://momentjs.com/). If the timezone option is specified, it creates a default `getTimezoneOffset` function that looks up the specified timezone in moment.js. If moment.js is not included, this throws a Highcharts error in the console, but does not crash the chart.
+
+**Defaults to** `undefined`.
 
 **Try it**
 

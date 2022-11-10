@@ -201,7 +201,7 @@ var AxisDefaults;
          * @sample {highcharts} highcharts/xaxis/crosshair-both/
          *         Crosshair on both axes
          * @sample {highstock} stock/xaxis/crosshairs-xy/
-         *         Crosshair on both axes
+         *         Crosshair on both axes, with y axis label
          * @sample {highmaps} highcharts/xaxis/crosshair-both/
          *         Crosshair on both axes
          *
@@ -1427,7 +1427,9 @@ var AxisDefaults;
          * @sample {highstock} stock/xaxis/showfirstlabel/
          *         Labels below plot lines on Y axis
          *
-         * @product   highcharts highstock gantt
+         * @type    {boolean}
+         * @default undefined
+         * @product highcharts highstock gantt
          */
         showLastLabel: true,
         /**
@@ -2188,11 +2190,11 @@ var AxisDefaults;
          * [data classes](https://api.highcharts.com/highmaps#colorAxis.dataClasses)
          * from the Highmaps color axis.
          *
+         * @sample {highcharts} highcharts/demo/gauge-solid/
+         *         Gauge with stops
+         *
          * @see [minColor](#yAxis.minColor)
          * @see [maxColor](#yAxis.maxColor)
-         *
-         * @sample {highcharts} highcharts/demo/gauge-solid/
-         *         True by default
          *
          * @type      {Array<Array<number,Highcharts.ColorType>>}
          * @since     4.0
@@ -2294,6 +2296,18 @@ var AxisDefaults;
          * @see [tickPositions](#xAxis.tickPositions)
          */
         tickPixelInterval: 72,
+        /**
+         * Whether to show the last tick label.
+         *
+         * @productdesc {highcharts|gantt}
+         * Defaults to `true` on cartesian charts, and `false` on polar charts.
+         *
+         * @productdesc {highstock}
+         * Defaults to `true` for categorized yAxis and `false` for other types
+         * of yAxis.
+         *
+         * @default undefined
+         */
         showLastLabel: true,
         /**
          * @extends xAxis.labels
@@ -2346,8 +2360,7 @@ var AxisDefaults;
              *         Solid gauge labels auto aligned
              *
              * @type       {Highcharts.AlignValue}
-             * @default    {highcharts|highmaps} right
-             * @default    {highstock} left
+             * @default    {highstock} right
              * @apioption  yAxis.labels.align
              */
             /**

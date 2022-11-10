@@ -42,6 +42,7 @@ var getColor = TU.getColor, getLevelOptions = TU.getLevelOptions, updateRootId =
 import U from '../../Core/Utilities.js';
 var addEvent = U.addEvent, correctFloat = U.correctFloat, defined = U.defined, error = U.error, extend = U.extend, fireEvent = U.fireEvent, isArray = U.isArray, isNumber = U.isNumber, isObject = U.isObject, isString = U.isString, merge = U.merge, pick = U.pick, stableSort = U.stableSort;
 import './TreemapComposition.js';
+import TreemapNode from './TreemapNode.js';
 /* *
  *
  *  Class
@@ -72,6 +73,7 @@ var TreemapSeries = /** @class */ (function (_super) {
         _this.data = void 0;
         _this.mapOptionsToLevel = void 0;
         _this.nodeMap = void 0;
+        _this.nodeList = void 0;
         _this.options = void 0;
         _this.points = void 0;
         _this.rootNode = void 0;
@@ -223,29 +225,6 @@ var TreemapSeries = /** @class */ (function (_super) {
             point.dataLabel.attr({ zIndex: (point.node.zIndex || 0) + 1 });
         }
     };
-    TreemapSeries.prototype.buildNode = function (id, i, level, list, parent) {
-        var series = this, children = [], point = series.points[i], height = 0, node, child;
-        // Actions
-        ((list[id] || [])).forEach(function (i) {
-            child = series.buildNode(series.points[i].id, i, (level + 1), list, id);
-            height = Math.max(child.height + 1, height);
-            children.push(child);
-        });
-        node = {
-            id: id,
-            i: i,
-            children: children,
-            height: height,
-            level: level,
-            parent: parent,
-            visible: false // @todo move this to better location
-        };
-        series.nodeMap[node.id] = node;
-        if (point) {
-            point.node = node;
-        }
-        return node;
-    };
     /**
      * Recursive function which calculates the area for all children of a
      * node.
@@ -378,8 +357,9 @@ var TreemapSeries = /** @class */ (function (_super) {
      * Override drawPoints
      * @private
      */
-    TreemapSeries.prototype.drawPoints = function () {
-        var series = this, chart = series.chart, renderer = chart.renderer, points = series.points, styledMode = chart.styledMode, options = series.options, shadow = styledMode ? {} : options.shadow, borderRadius = options.borderRadius, withinAnimationLimit = chart.pointCount < options.animationLimit, allowTraversingTree = options.allowTraversingTree;
+    TreemapSeries.prototype.drawPoints = function (points) {
+        if (points === void 0) { points = this.points; }
+        var series = this, chart = series.chart, renderer = chart.renderer, styledMode = chart.styledMode, options = series.options, shadow = styledMode ? {} : options.shadow, borderRadius = options.borderRadius, withinAnimationLimit = chart.pointCount < options.animationLimit, allowTraversingTree = options.allowTraversingTree;
         points.forEach(function (point) {
             var levelDynamic = point.node.levelDynamic, animatableAttribs = {}, attribs = {}, css = {}, groupKey = 'level-group-' + point.node.level, hasGraphic = !!point.graphic, shouldAnimate = withinAnimationLimit && hasGraphic, shapeArgs = point.shapeArgs;
             // Don't bother with calculate styling if the point is not drawn
@@ -424,7 +404,7 @@ var TreemapSeries = /** @class */ (function (_super) {
                 renderer: renderer,
                 shadow: shadow,
                 shapeArgs: shapeArgs,
-                shapeType: 'rect'
+                shapeType: point.shapeType
             });
             // If setRootNode is allowed, set a point cursor on clickables &
             // add drillId to point
@@ -537,7 +517,28 @@ var TreemapSeries = /** @class */ (function (_super) {
             return d.id;
         }), parentList = series.getListOfParents(this.data, allIds);
         series.nodeMap = {};
-        return series.buildNode('', -1, 0, parentList);
+        series.nodeList = [];
+        return series.buildTree('', -1, 0, parentList);
+    };
+    TreemapSeries.prototype.buildTree = function (id, index, level, list, parent) {
+        var series = this, children = [], point = series.points[index], height = 0, node, child;
+        // Actions
+        (list[id] || []).forEach(function (i) {
+            child = series.buildTree(series.points[i].id, i, level + 1, list, id);
+            height = Math.max(child.height + 1, height);
+            children.push(child);
+        });
+        node = new series.NodeClass().init(id, index, children, height, level, series, parent);
+        children.forEach(function (child) {
+            child.parentNode = node;
+        });
+        series.nodeMap[node.id] = node;
+        series.nodeList.push(node);
+        if (point) {
+            point.node = node;
+            node.point = point;
+        }
+        return node;
     };
     /**
      * Define hasData function for non-cartesian series. Returns true if the
@@ -1380,6 +1381,7 @@ extend(TreemapSeries.prototype, {
     parallelArrays: ['x', 'y', 'value', 'colorValue'],
     pointArrayMap: ['value'],
     pointClass: TreemapPoint,
+    NodeClass: TreemapNode,
     trackerGroups: ['group', 'dataLabelsGroup'],
     utils: {
         recursive: TreemapUtilities.recursive

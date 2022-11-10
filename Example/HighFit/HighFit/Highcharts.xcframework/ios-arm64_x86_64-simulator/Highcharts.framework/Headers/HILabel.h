@@ -32,6 +32,8 @@ For area-like series, allow the font size to vary so that small areas get a smal
 @property(nonatomic, readwrite) NSNumber *minFontSize;
 /**
 A format string for the label, with support for a subset of HTML. Variables are enclosed by curly brackets. Available variables are `name`, `options.xxx`, `color` and other members from the `series` object. Use this option also to set a static text for the label.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *format;
 /**
@@ -40,10 +42,14 @@ For area-like series, allow the font size to vary so that small areas get a smal
 @property(nonatomic, readwrite) NSNumber *maxFontSize;
 /**
 Enable the series label per series.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 If the label is closer than this to a neighbour graph, draw a connector.
+
+**Defaults to** `24`.
 */
 @property(nonatomic, readwrite) NSNumber *connectorNeighbourDistance;
 /**
@@ -56,8 +62,14 @@ An array of boxes to avoid when laying out the labels. Each item has a `left`, `
 @property(nonatomic, readwrite) NSArray<HILabelIntersectBoxObject *> *boxesToAvoid;
 /**
 Callback function to format each of the series' labels. The `this` keyword refers to the series object. By default the `formatter` is undefined and the `series.name` is rendered.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HIFunction *formatter;
+/**
+Whether to use HTML to render the series label.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
 Allow labels to be placed distant to the graph if necessary, and draw a connector line to the graph. Setting this option to true may decrease the performance significantly, since the algorithm with systematically search for open spaces in the whole plot area. Visually, it may also result in a more cluttered chart, though more of the series will be labeled.
 */
@@ -86,12 +98,6 @@ Horizontal alignment of the label. Can be one of "left", "center" or "right".
 * [Aligned to the right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-label-align-right/)
 */
 @property(nonatomic, readwrite) NSString *align;
-/**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the labels.
-
-**Defaults to** `false`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
 Vertical position of the text baseline relative to the alignment. Default varies by orientation.
 

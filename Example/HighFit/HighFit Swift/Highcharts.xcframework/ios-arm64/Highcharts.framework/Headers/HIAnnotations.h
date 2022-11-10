@@ -34,6 +34,8 @@ An array of labels for the annotation. For options that apply to multiple labels
 /**
 Whether to hide the part of the annotation that is outside the plot area.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Crop line annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-crop-overflow/)
@@ -41,6 +43,8 @@ Whether to hide the part of the annotation that is outside the plot area.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
 /**
 Whether the annotation is visible.
+
+**Defaults to** `True`.
 
 **Try it**
 
@@ -57,6 +61,8 @@ Options for annotation's control points. Each control point inherits options fro
 @property(nonatomic, readwrite) HIControlPointOptions *controlPointOptions;
 /**
 Allow an annotation to be draggable by a user. Possible values are `'x'`, `'xy'`, `'y'` and `''` (disabled).
+
+**Defaults to** `xy`.
 
 **Try it**
 
@@ -81,6 +87,8 @@ Options for annotation's labels. Each label inherits options from the labelOptio
 @property(nonatomic, readwrite) HILabelOptions *labelOptions;
 /**
 The Z index of the annotation.
+
+**Defaults to** `6`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
@@ -97,6 +105,8 @@ Options for annotation's shapes. Each shape inherits options from the shapeOptio
 @property(nonatomic, readwrite) NSString *heading;
 /**
 The way to mark the separator for annotations combined in one export-data table cell.
+
+**Defaults to** `; `.
 */
 @property(nonatomic, readwrite) NSString *itemDelimiter;
 /**

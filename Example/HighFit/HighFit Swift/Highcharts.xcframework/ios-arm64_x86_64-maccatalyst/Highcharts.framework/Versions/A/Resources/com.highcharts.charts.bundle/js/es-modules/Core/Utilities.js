@@ -659,14 +659,12 @@ function relativeLength(value, base, offset) {
 function wrap(obj, method, func) {
     var proceed = obj[method];
     obj[method] = function () {
-        var args = Array.prototype.slice.call(arguments), outerArgs = arguments, ctx = this;
-        ctx.proceed = function () {
-            proceed.apply(ctx, arguments.length ? arguments : outerArgs);
-        };
-        args.unshift(proceed);
-        var ret = func.apply(this, args);
-        ctx.proceed = null;
-        return ret;
+        var outerArgs = arguments, scope = this;
+        return func.apply(this, [
+            function () {
+                return proceed.apply(scope, arguments.length ? arguments : outerArgs);
+            }
+        ].concat([].slice.call(arguments)));
     };
 }
 /**

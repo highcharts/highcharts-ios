@@ -16,6 +16,8 @@ The opposite state of a hover for a single point node. Applied to all not connec
 
 /**
 Opacity of inactive markers.
+
+**Defaults to** `0.3`.
 */
 @property(nonatomic, readwrite) NSNumber *opacity;
 /**
@@ -34,6 +36,8 @@ Enable or disable the inactive state for a series
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 Opacity for the links between nodes in the sankey diagram in inactive mode.
+
+**Defaults to** `0.1`.
 */
 @property(nonatomic, readwrite) NSNumber *linkOpacity;
 

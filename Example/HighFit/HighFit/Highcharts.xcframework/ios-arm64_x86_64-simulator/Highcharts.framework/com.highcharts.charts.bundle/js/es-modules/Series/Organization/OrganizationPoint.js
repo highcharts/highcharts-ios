@@ -71,14 +71,12 @@ var OrganizationPoint = /** @class */ (function (_super) {
         _this.series = void 0;
         _this.toNode = void 0;
         return _this;
-        /* eslint-enable valid-jsdoc */
     }
     /* *
      *
      *  Functions
      *
      * */
-    /* eslint-disable valid-jsdoc */
     /**
      * All nodes in an org chart are equal width.
      * @private

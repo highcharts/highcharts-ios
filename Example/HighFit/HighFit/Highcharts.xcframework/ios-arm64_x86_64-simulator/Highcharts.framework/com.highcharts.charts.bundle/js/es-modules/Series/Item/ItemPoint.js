@@ -43,7 +43,6 @@ var ItemPoint = /** @class */ (function (_super) {
          *
          * */
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.graphics = void 0;
         _this.options = void 0;
         _this.series = void 0;
         return _this;

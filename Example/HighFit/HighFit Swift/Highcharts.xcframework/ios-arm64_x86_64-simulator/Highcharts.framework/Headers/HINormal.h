@@ -16,6 +16,8 @@ The normal state of a single point marker. Currently only used for setting anima
 
 /**
 Animation when returning to normal state after hovering.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 

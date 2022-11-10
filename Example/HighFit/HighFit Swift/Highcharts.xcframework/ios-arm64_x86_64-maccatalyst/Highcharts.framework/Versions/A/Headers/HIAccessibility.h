@@ -12,6 +12,7 @@
 #import "HIScreenReaderSection.h"
 #import "HIAnnounceNewData.h"
 #import "HIChartTypes.h"
+#import "HISeriesTypeDescriptions.h"
 #import "HITable.h"
 #import "HIZoom.h"
 #import "HISeriesTypeDescriptions.h"
@@ -30,7 +31,7 @@ Options for configuring accessibility for the chart. Requires the [accessibility
 /**
 Amount of landmarks/regions to create for screen reader users. More landmarks can make navigation with screen readers easier, but can be distracting if there are lots of charts on the page. Three modes are available: - `all`: Adds regions for all series, legend, information   region. - `one`: Adds a single landmark per chart. - `disabled`: No landmarks are added.
 
-**Accepted values:** `["all", "one", "disabled"]`.
+**Defaults to** `all`.
 */
 @property(nonatomic, readwrite) NSString *landmarkVerbosity;
 /**
@@ -43,6 +44,8 @@ A hook for adding custom components to the accessibility module. Should be an ob
 @property(nonatomic, readwrite) id customComponents;
 /**
 Link the chart to an HTML element describing the contents of the chart. It is always recommended to describe charts using visible text, to improve SEO as well as accessibility for users with disabilities. This option lets an HTML element with a description be linked to the chart, so that screen reader users can connect the two. By setting this option to a string, Highcharts runs the string as an HTML selector query on the entire document. If there is only a single match, this element is linked to the chart. The content of the linked element will be included in the chart description for screen reader users. By default, the chart looks for an adjacent sibling element with the `highcharts-description` class. The feature can be disabled by setting the option to an empty string, or overridden by providing the `accessibility.description` option. Alternatively, the HTML element to link can be passed in directly as an HTML node. If you need the description to be part of the exported image, consider using the `caption` feature. If you need the description to be hidden visually, use the `accessibility.description` option.
+
+**Defaults to** `*[data-highcharts-chart="{index}"] + .highcharts-description`.
 
 **Try it**
 
@@ -63,6 +66,8 @@ Options for keyboard navigation.
 @property(nonatomic, readwrite) HIKeyboardNavigation *keyboardNavigation;
 /**
 Enable accessibility functionality for the chart. For more information on how to include these features, and why this is recommended, see [Highcharts Accessibility](https://www.highcharts.com/docs/accessibility/accessibility-module). Highcharts will by default emit a warning to the console if the [accessibility module](https://code.highcharts.com/modules/accessibility.js) is not loaded. Setting this option to `false` will override and silence the warning. Once the module is loaded, setting this option to `false` will disable the module for this chart.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
@@ -97,12 +102,18 @@ Range description for an axis. Overrides the default range description. Set to e
 @property(nonatomic, readwrite) NSString *svgContainerLabel;
 /**
 Thousands separator to use when formatting numbers for screen readers. Note that many screen readers will not handle space as a thousands separator, and will consider "11 700" as two numbers. Set to `null` to use the separator defined in `lang.thousandsSep`.
+
+**Defaults to** `,`.
 */
 @property(nonatomic, readwrite) NSString *thousandsSep;
 /**
 Chart type description strings. This is added to the chart information region. If there is only a single series type used in the chart, we use the format string for the series type, or default if missing. There is one format string for cases where there is only a single series in the chart, and one for multiple series of the same type.
 */
 @property(nonatomic, readwrite) HIChartTypes *chartTypes;
+/**
+Descriptions of lesser known series types. The relevant description is added to the screen reader information region when these series types are used.
+*/
+@property(nonatomic, readwrite) HISeriesTypeDescriptions *seriesTypeDescriptions;
 /**
 Accessibility language options for the data table.
 */
@@ -112,10 +123,6 @@ Chart and map zoom accessibility language options.
 */
 @property(nonatomic, readwrite) HIZoom *zoom;
 @property(nonatomic, readwrite) NSString *credits;
-/**
-Descriptions of lesser known series types. The relevant description is added to the screen reader information region when these series types are used.
-*/
-@property(nonatomic, readwrite) HISeriesTypeDescriptions *seriesTypeDescriptions;
 @property(nonatomic, readwrite) NSString *drillUpButton;
 /**
 Exporting menu format strings for accessibility module.

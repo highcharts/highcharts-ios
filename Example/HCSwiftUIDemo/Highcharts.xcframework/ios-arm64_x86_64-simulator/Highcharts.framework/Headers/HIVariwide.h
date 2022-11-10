@@ -85,6 +85,12 @@ The minimal height for a column or width for a bar. By default, 0 values are not
 */
 @property(nonatomic, readwrite) NSNumber *minPointLength;
 /**
+The spacing between columns on the Z Axis in a 3D chart.
+
+**Defaults to** `1`.
+*/
+@property(nonatomic, readwrite) NSNumber *groupZPadding;
+/**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;
@@ -98,6 +104,10 @@ The color of the border surrounding each column or bar. In styled mode, the bord
 * [Dark gray border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-bordercolor/)
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
+/**
+3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
+*/
+@property(nonatomic, readwrite) HIColor *edgeColor;
 /**
 When `true`, the columns will center in the category, ignoring null or missing points. When `false`, space will be reserved for null or missing points.
 
@@ -133,6 +143,18 @@ When using automatic point colors pulled from the global `colors` or series-spec
 * [True](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-colorbypoint-true/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
+/**
+3D columns only. The width of the colored edges.
+
+**Defaults to** `1`.
+*/
+@property(nonatomic, readwrite) NSNumber *edgeWidth;
+/**
+Depth of the columns in a 3D column chart.
+
+**Defaults to** `25`.
+*/
+@property(nonatomic, readwrite) NSNumber *depth;
 /**
 The width of the border surrounding each column or bar. Defaults to `1` when there is room for a border, but to `0` when the columns are so dense that a border would cover the next column. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
 

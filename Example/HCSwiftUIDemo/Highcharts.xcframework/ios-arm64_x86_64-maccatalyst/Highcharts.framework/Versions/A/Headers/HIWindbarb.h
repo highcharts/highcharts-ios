@@ -51,10 +51,14 @@ The id of another series in the chart that the wind barbs are projected on. When
 @property(nonatomic, readwrite) NSString *onSeries;
 /**
 Pixel length of the stems.
+
+**Defaults to** `20`.
 */
 @property(nonatomic, readwrite) NSNumber *vectorLength;
 /**
 Vertical offset from the cartesian position, in pixels. The default value makes sure the symbols don't overlap the X axis when `onSeries` is `null`, and that they don't overlap the linked series when `onSeries` is given.
+
+**Defaults to** `-20`.
 */
 @property(nonatomic, readwrite) NSNumber *yOffset;
 /**
@@ -71,6 +75,8 @@ Horizontal offset from the cartesian position, in pixels. When the chart is inve
 @property(nonatomic, readwrite) NSNumber *xOffset;
 /**
 Padding between each column or bar, in x axis units.
+
+**Defaults to** `0.1`.
 
 **Try it**
 
@@ -165,6 +171,8 @@ When using automatic point colors pulled from the global `colors` or series-spec
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 Padding between each value groups, in x axis units.
+
+**Defaults to** `0.2`.
 
 **Try it**
 

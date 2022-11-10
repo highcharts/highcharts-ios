@@ -30,7 +30,7 @@ var __extends = (this && this.__extends) || (function () {
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
 var Point = SeriesRegistry.series.prototype.pointClass, TreemapPoint = SeriesRegistry.seriesTypes.treemap.prototype.pointClass;
 import U from '../../Core/Utilities.js';
-var correctFloat = U.correctFloat, extend = U.extend, wrap = U.wrap;
+var correctFloat = U.correctFloat, extend = U.extend;
 /* *
  *
  *  Class
@@ -49,6 +49,7 @@ var SunburstPoint = /** @class */ (function (_super) {
         _this.options = void 0;
         _this.series = void 0;
         _this.shapeExisting = void 0;
+        _this.shapeType = void 0;
         return _this;
         /* eslint-enable valid-jsdoc */
     }

@@ -15,6 +15,8 @@
 
 /**
 Enable or disable `textPath` option for link's or marker's data labels.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 

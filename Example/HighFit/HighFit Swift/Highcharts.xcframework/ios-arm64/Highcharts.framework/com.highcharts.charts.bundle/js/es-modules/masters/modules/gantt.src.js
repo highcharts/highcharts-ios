@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v10.2.1 (2022-08-29)
+ * @license Highcharts Gantt JS v10.3.1 (2022-10-31)
  * @module highcharts/modules/gantt
  * @requires highcharts
  *
@@ -11,17 +11,21 @@
  */
 'use strict';
 import Highcharts from '../../Core/Globals.js';
+import Navigator from '../../Stock/Navigator/Navigator.js';
+import Scrollbar from '../../Stock/Scrollbar/Scrollbar.js';
+import RangeSelector from '../../Stock/RangeSelector/RangeSelector.js';
 import XRangeSeries from '../../Series/XRange/XRangeSeries.js';
 import '../../Series/Gantt/GanttSeries.js';
 import GanttChart from '../../Core/Chart/GanttChart.js';
-import Scrollbar from '../../Core/Scrollbar.js';
-import '../../Extensions/RangeSelector.js';
-import '../../Core/Navigator.js';
 var G = Highcharts;
 // Classes
-G.Scrollbar = Scrollbar;
 G.GanttChart = GanttChart;
 G.ganttChart = GanttChart.ganttChart;
+G.Navigator = Navigator;
+G.RangeSelector = RangeSelector;
+G.Scrollbar = Scrollbar;
 // Compositions
+Navigator.compose(G.Axis, G.Chart, G.Series);
+RangeSelector.compose(G.Axis, G.Chart);
 Scrollbar.compose(G.Axis);
 XRangeSeries.compose(G.Axis);

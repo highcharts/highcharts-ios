@@ -51,6 +51,8 @@ The maximum possible z value for the point's radius calculation. If the point's 
 /**
 The minimum size of the points' radius related to chart's `plotArea`. If a number is set, it applies in pixels.
 
+**Defaults to** `10%`.
+
 **Try it**
 
 * [Example of minPointSize and maxPointSize](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/variable-radius-pie/min-max-point-size/)
@@ -59,6 +61,8 @@ The minimum size of the points' radius related to chart's `plotArea`. If a numbe
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minPointSize;
 /**
 Whether the pie slice's value should be represented by the area or the radius of the slice. Can be either `area` or `radius`. The default, `area`, corresponds best to the human perception of the size of each pie slice.
+
+**Defaults to** `area`.
 
 **Try it**
 
@@ -77,6 +81,8 @@ The minimum possible z value for the point's radius calculation. If the point's 
 /**
 The maximum size of the points' radius related to chart's `plotArea`. If a number is set, it applies in pixels.
 
+**Defaults to** `100%`.
+
 **Try it**
 
 * [Example of minPointSize and maxPointSize](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/variable-radius-pie/min-max-point-size/)
@@ -84,6 +90,8 @@ The maximum size of the points' radius related to chart's `plotArea`. If a numbe
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ maxPointSize;
 /**
 Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
+
+**Defaults to** `True`.
 
 **Try it**
 
@@ -130,6 +138,8 @@ The minimum size for a pie in response to auto margins. The pie will try to shri
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
 /**
 If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -179,6 +189,8 @@ The center of the pie chart relative to the plot area. Can be percentages or pix
 /**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
 
+**Defaults to** `10`.
+
 **Try it**
 
 * [20px offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-slicedoffset-20/)
@@ -192,6 +204,8 @@ The thickness of a 3D pie.
 @property(nonatomic, readwrite) NSNumber *depth;
 /**
 The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
+
+**Defaults to** `1`.
 
 **Try it**
 

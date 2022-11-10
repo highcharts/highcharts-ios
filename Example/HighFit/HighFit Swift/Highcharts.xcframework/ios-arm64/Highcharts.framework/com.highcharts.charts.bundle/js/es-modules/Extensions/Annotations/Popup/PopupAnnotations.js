@@ -51,8 +51,8 @@ function addForm(chart, options, callback, isInit) {
     }, void 0, popupDiv);
     addFormFields.call(this, lhsCol, chart, '', options, [], true);
     this.addButton(bottomRow, isInit ?
-        (lang.addButton || 'add') :
-        (lang.saveButton || 'save'), isInit ? 'add' : 'save', popupDiv, callback);
+        (lang.addButton || 'Add') :
+        (lang.saveButton || 'Save'), isInit ? 'add' : 'save', popupDiv, callback);
 }
 /**
  * Create annotation simple form. It contains two buttons
@@ -80,11 +80,11 @@ function addToolbar(chart, options, callback) {
     // Basic shapes:
     options.shapes && options.shapes[0].type, '')));
     // add buttons
-    var button = this.addButton(popupDiv, lang.removeButton || 'remove', 'remove', popupDiv, callback);
+    var button = this.addButton(popupDiv, lang.removeButton || 'Remove', 'remove', popupDiv, callback);
     button.className += ' highcharts-annotation-remove-button';
     button.style['background-image'] = 'url(' +
         this.iconsURL + 'destroy.svg)';
-    button = this.addButton(popupDiv, lang.editButton || 'edit', 'edit', popupDiv, function () {
+    button = this.addButton(popupDiv, lang.editButton || 'Edit', 'edit', popupDiv, function () {
         showForm.call(_this, 'annotation-edit', chart, options, callback);
     });
     button.className += ' highcharts-annotation-edit-button';

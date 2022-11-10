@@ -10,7 +10,7 @@
 'use strict';
 import ErrorMessages from './ErrorMessages.js';
 import H from '../../Core/Globals.js';
-import D from '../../Core/DefaultOptions.js';
+import D from '../../Core/Defaults.js';
 var setOptions = D.setOptions;
 import U from '../../Core/Utilities.js';
 var addEvent = U.addEvent, find = U.find, isNumber = U.isNumber;

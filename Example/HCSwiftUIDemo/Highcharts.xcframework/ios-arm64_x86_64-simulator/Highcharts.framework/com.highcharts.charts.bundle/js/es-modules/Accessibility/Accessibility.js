@@ -10,7 +10,7 @@
  *
  * */
 'use strict';
-import D from '../Core/DefaultOptions.js';
+import D from '../Core/Defaults.js';
 var defaultOptions = D.defaultOptions;
 import H from '../Core/Globals.js';
 var doc = H.doc;

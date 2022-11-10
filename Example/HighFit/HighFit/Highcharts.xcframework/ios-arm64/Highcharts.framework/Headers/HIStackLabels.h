@@ -88,6 +88,8 @@ Enable or disable the stack total labels.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 Whether to hide stack labels that are outside the plot area. By default, the stack label is moved inside the plot area according to the `overflow` option.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *crop;
 /**
@@ -142,6 +144,8 @@ The x position offset of the label relative to the left of the stacked bar. The 
 @property(nonatomic, readwrite) NSNumber *x;
 /**
 How to handle stack total labels that flow outside the plot area. The default is set to `"justify"`, which aligns them inside the plot area. For columns and bars, this means it will be moved inside the bar. To display stack labels outside the plot area, set `crop` to `false` and `overflow` to `"allow"`.
+
+**Defaults to** `justify`.
 
 **Try it**
 

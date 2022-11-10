@@ -17,6 +17,8 @@ The chart's main title.
 /**
 Adjustment made to the title width, normally to reserve space for the exporting burger menu.
 
+**Defaults to** `-44`.
+
 **Try it**
 
 * [Wider menu, greater padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust/)
@@ -53,6 +55,8 @@ The title of the chart. To disable the title, set the `text` to `undefined`.
 @property(nonatomic, readwrite) NSString *text;
 /**
 The horizontal alignment of the title. Can be one of "left", "center" and "right".
+
+**Defaults to** `center`.
 
 **Try it**
 
@@ -91,6 +95,8 @@ When the title is floating, the plot area will not move to make space for it.
 /**
 The margin between the title and the plot area, or if a subtitle is present, the margin between the subtitle and the plot area.
 
+**Defaults to** `15`.
+
 **Try it**
 
 * [A chart title margin of 50](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/margin-50/)
@@ -106,16 +112,13 @@ Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-
 /**
 The rotation of the text in degrees. 0 is horizontal, 270 is vertical reading from bottom to top.
 
+**Defaults to** `270`.
+
 **Try it**
 
 * [Horizontal](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/title-offset/)
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
-/**
-Whether to reserve space for the title when laying out the axis.
-
-**Defaults to** `true`.
-*/
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reserveSpace;
 /**
 If enabled, the axis title will skewed to follow the perspective. This will fix overlapping labels and titles, but texts become less legible due to the distortion. The final appearance depends heavily on `title.position3d`. A `null` value will use the config from `labels.skew3d`.

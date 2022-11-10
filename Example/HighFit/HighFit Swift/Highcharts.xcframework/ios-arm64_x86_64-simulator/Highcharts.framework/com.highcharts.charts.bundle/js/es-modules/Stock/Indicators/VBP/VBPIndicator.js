@@ -31,8 +31,7 @@ var animObject = A.animObject;
 import H from '../../../Core/Globals.js';
 var noop = H.noop;
 import SeriesRegistry from '../../../Core/Series/SeriesRegistry.js';
-var SMAIndicator = SeriesRegistry.seriesTypes.sma;
-var columnPrototype = SeriesRegistry.seriesTypes.column.prototype;
+var _a = SeriesRegistry.seriesTypes, columnProto = _a.column.prototype, SMAIndicator = _a.sma;
 import U from '../../../Core/Utilities.js';
 import StockChart from '../../../Core/Chart/StockChart.js';
 var addEvent = U.addEvent, arrayMax = U.arrayMax, arrayMin = U.arrayMin, correctFloat = U.correctFloat, defined = U.defined, error = U.error, extend = U.extend, isArray = U.isArray, merge = U.merge;
@@ -176,10 +175,10 @@ var VBPIndicator = /** @class */ (function (_super) {
         var indicator = this;
         if (indicator.options.volumeDivision.enabled) {
             indicator.posNegVolume(true, true);
-            columnPrototype.drawPoints.apply(indicator, arguments);
+            columnProto.drawPoints.apply(indicator, arguments);
             indicator.posNegVolume(false, false);
         }
-        columnPrototype.drawPoints.apply(indicator, arguments);
+        columnProto.drawPoints.apply(indicator, arguments);
     };
     // Function responsible for dividing volume into positive and negative
     VBPIndicator.prototype.posNegVolume = function (initVol, pos) {
@@ -224,7 +223,7 @@ var VBPIndicator = /** @class */ (function (_super) {
     };
     VBPIndicator.prototype.translate = function () {
         var indicator = this, options = indicator.options, chart = indicator.chart, yAxis = indicator.yAxis, yAxisMin = yAxis.min, zoneLinesOptions = indicator.options.zoneLines, priceZones = (indicator.priceZones), yBarOffset = 0, indicatorPoints, volumeDataArray, maxVolume, primalBarWidth, barHeight, barHeightP, oldBarHeight, barWidth, pointPadding, chartPlotTop, barX, barY;
-        columnPrototype.translate.apply(indicator);
+        columnProto.translate.apply(indicator);
         indicatorPoints = indicator.points;
         // Do translate operation when points exist
         if (indicatorPoints.length) {
@@ -557,8 +556,8 @@ extend(VBPIndicator.prototype, {
     pointClass: VBPPoint,
     markerAttribs: noop,
     drawGraph: noop,
-    getColumnMetrics: columnPrototype.getColumnMetrics,
-    crispCol: columnPrototype.crispCol
+    getColumnMetrics: columnProto.getColumnMetrics,
+    crispCol: columnProto.crispCol
 });
 SeriesRegistry.registerSeriesType('vbp', VBPIndicator);
 /* *

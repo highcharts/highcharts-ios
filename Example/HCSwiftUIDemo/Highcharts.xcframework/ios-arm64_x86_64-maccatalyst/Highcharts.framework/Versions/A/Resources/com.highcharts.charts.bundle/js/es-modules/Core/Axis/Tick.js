@@ -156,7 +156,7 @@ var Tick = /** @class */ (function () {
                 return labelOptions.formatter.call(ctx, ctx);
             }
             if (labelOptions.format) {
-                ctx.text = axis.defaultLabelFormatter.call(ctx);
+                ctx.text = axis.defaultLabelFormatter.call(ctx, ctx);
                 return F.format(labelOptions.format, ctx, chart);
             }
             return axis.defaultLabelFormatter.call(ctx, ctx);

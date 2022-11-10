@@ -119,12 +119,30 @@ var MapPoint = /** @class */ (function (_super) {
      */
     MapPoint.prototype.onMouseOver = function (e) {
         U.clearTimeout(this.colorInterval);
-        if (!this.isNull || this.series.options.nullInteraction) {
+        if (
+        // Valid...
+        (!this.isNull && this.visible) ||
+            // ... or interact anyway
+            this.series.options.nullInteraction) {
             _super.prototype.onMouseOver.call(this, e);
         }
         else {
             // #3401 Tooltip doesn't hide when hovering over null points
             this.series.onMouseOut(e);
+        }
+    };
+    MapPoint.prototype.setVisible = function (vis) {
+        var method = vis ? 'show' : 'hide';
+        this.visible = this.options.visible = !!vis;
+        // Show and hide associated elements
+        if (this.dataLabel) {
+            this.dataLabel[method]();
+        }
+        // For invisible map points, render them as null points rather than
+        // fully removing them. Makes more sense for color axes with data
+        // classes.
+        if (this.graphic) {
+            this.graphic.attr(this.series.pointAttribs(this));
         }
     };
     /**

@@ -27,6 +27,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import A from '../../Core/Animation/AnimationUtilities.js';
 var animObject = A.animObject;
+import ApproximationRegistry from '../../Extensions/DataGrouping/ApproximationRegistry.js';
 import H from '../../Core/Globals.js';
 var noop = H.noop;
 import OnSeriesComposition from '../OnSeriesComposition.js';
@@ -75,8 +76,8 @@ var WindbarbSeries = /** @class */ (function (_super) {
      * @private
      */
     WindbarbSeries.registerApproximation = function () {
-        if (H.approximations && !H.approximations.windbarb) {
-            H.approximations.windbarb = function (values, directions) {
+        if (!ApproximationRegistry.windbarb) {
+            ApproximationRegistry.windbarb = function (values, directions) {
                 var vectorX = 0, vectorY = 0, i, len = values.length;
                 for (i = 0; i < len; i++) {
                     vectorX += values[i] * Math.cos(directions[i] * H.deg2rad);

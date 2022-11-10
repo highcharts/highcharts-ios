@@ -13,7 +13,7 @@
 'use strict';
 import AST from '../../Core/Renderer/HTML/AST.js';
 import Chart from '../../Core/Chart/Chart.js';
-import D from '../../Core/DefaultOptions.js';
+import D from '../../Core/Defaults.js';
 var defaultOptions = D.defaultOptions;
 import DownloadURL from '../DownloadURL.js';
 var downloadURL = DownloadURL.downloadURL;
@@ -414,11 +414,11 @@ var OfflineExporting;
                     href.indexOf('data:') !== 0);
             });
         };
-        // If we are on IE and in styled mode, add a whitelist to the renderer
+        // If we are on IE and in styled mode, add an allowlist to the renderer
         // for inline styles that we want to pass through. There are so many
-        // styles by default in IE that we don't want to blacklist them all.
-        if (H.isMS && chart.styledMode && !Exporting.inlineWhitelist.length) {
-            Exporting.inlineWhitelist.push(/^blockSize/, /^border/, /^caretColor/, /^color/, /^columnRule/, /^columnRuleColor/, /^cssFloat/, /^cursor/, /^fill$/, /^fillOpacity/, /^font/, /^inlineSize/, /^length/, /^lineHeight/, /^opacity/, /^outline/, /^parentRule/, /^rx$/, /^ry$/, /^stroke/, /^textAlign/, /^textAnchor/, /^textDecoration/, /^transform/, /^vectorEffect/, /^visibility/, /^x$/, /^y$/);
+        // styles by default in IE that we don't want to denylist them all.
+        if (H.isMS && chart.styledMode && !Exporting.inlineAllowlist.length) {
+            Exporting.inlineAllowlist.push(/^blockSize/, /^border/, /^caretColor/, /^color/, /^columnRule/, /^columnRuleColor/, /^cssFloat/, /^cursor/, /^fill$/, /^fillOpacity/, /^font/, /^inlineSize/, /^length/, /^lineHeight/, /^opacity/, /^outline/, /^parentRule/, /^rx$/, /^ry$/, /^stroke/, /^textAlign/, /^textAnchor/, /^textDecoration/, /^transform/, /^vectorEffect/, /^visibility/, /^x$/, /^y$/);
         }
         // Always fall back on:
         // - MS browsers: Embedded images JPEG/PNG, or any PDF

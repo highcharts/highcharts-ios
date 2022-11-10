@@ -12,7 +12,7 @@ import A from '../Animation/AnimationUtilities.js';
 var animObject = A.animObject;
 import AxisDefaults from './AxisDefaults.js';
 import Color from '../Color/Color.js';
-import D from '../DefaultOptions.js';
+import D from '../Defaults.js';
 var defaultOptions = D.defaultOptions;
 import F from '../Foundation.js';
 var registerEventOptions = F.registerEventOptions;
@@ -1254,19 +1254,20 @@ var Axis = /** @class */ (function () {
         // This is in turn needed in order to find tick positions in ordinal
         // axes.
         if (isXAxis && !secondPass) {
-            var hasExtemesChanged_1 = axis.min !== (axis.old && axis.old.min) ||
+            var hasExtremesChanged_1 = axis.min !==
+                (axis.old && axis.old.min) ||
                 axis.max !== (axis.old && axis.old.max);
             // First process all series assigned to that axis.
             axis.series.forEach(function (series) {
                 // Allows filtering out points outside the plot area.
                 series.forceCrop = (series.forceCropping &&
                     series.forceCropping());
-                series.processData(hasExtemesChanged_1);
+                series.processData(hasExtremesChanged_1);
             });
-            // Then apply grouping if needed. The hasExtemesChanged helps to
+            // Then apply grouping if needed. The hasExtremesChanged helps to
             // decide if the data grouping should be skipped in the further
             // calculations #16319.
-            fireEvent(this, 'postProcessData', { hasExtemesChanged: hasExtemesChanged_1 });
+            fireEvent(this, 'postProcessData', { hasExtremesChanged: hasExtremesChanged_1 });
         }
         // set the translation factor used in translate function
         axis.setAxisTranslation();
@@ -1307,8 +1308,8 @@ var Axis = /** @class */ (function () {
      * @emits Highcharts.Axis#event:afterSetTickPositions
      */
     Axis.prototype.setTickPositions = function () {
-        var axis = this, options = this.options, tickPositionsOption = options.tickPositions, minorTickIntervalOption = this.getMinorTickInterval(), hasVerticalPanning = this.hasVerticalPanning(), isColorAxis = this.coll === 'colorAxis', startOnTick = ((isColorAxis || !hasVerticalPanning) && options.startOnTick), endOnTick = ((isColorAxis || !hasVerticalPanning) && options.endOnTick);
-        var tickPositions, tickPositioner = options.tickPositioner;
+        var axis = this, options = this.options, tickPositionsOption = options.tickPositions, tickPositioner = options.tickPositioner, minorTickIntervalOption = this.getMinorTickInterval(), hasVerticalPanning = this.hasVerticalPanning(), isColorAxis = this.coll === 'colorAxis', startOnTick = ((isColorAxis || !hasVerticalPanning) && options.startOnTick), endOnTick = ((isColorAxis || !hasVerticalPanning) && options.endOnTick);
+        var tickPositions = [], tickPositionerResult;
         // Set the tickmarkOffset
         this.tickmarkOffset = (this.categories &&
             options.tickmarkPlacement === 'between' &&
@@ -1346,11 +1347,11 @@ var Axis = /** @class */ (function () {
          * @name Highcharts.Axis#tickPositions
          * @type {Highcharts.AxisTickPositionsArray|undefined}
          */
-        this.tickPositions =
+        if (tickPositionsOption) {
             // Find the tick positions. Work on a copy (#1565)
-            tickPositions =
-                (tickPositionsOption && tickPositionsOption.slice());
-        if (!tickPositions) {
+            tickPositions = tickPositionsOption.slice();
+        }
+        else if (isNumber(this.min) && isNumber(this.max)) {
             // Too many ticks (#6405). Create a friendly warning and provide two
             // ticks so at least we can show the data series.
             if ((!axis.ordinal || !axis.ordinal.positions) &&
@@ -1385,28 +1386,33 @@ var Axis = /** @class */ (function () {
             }
             // Too dense ticks, keep only the first and last (#4477)
             if (tickPositions.length > this.len) {
-                tickPositions = [tickPositions[0], tickPositions.pop()];
+                tickPositions = [
+                    tickPositions[0],
+                    tickPositions[tickPositions.length - 1]
+                ];
                 // Reduce doubled value (#7339)
                 if (tickPositions[0] === tickPositions[1]) {
                     tickPositions.length = 1;
                 }
             }
-            this.tickPositions = tickPositions;
             // Run the tick positioner callback, that allows modifying auto tick
             // positions.
             if (tickPositioner) {
-                tickPositioner = tickPositioner.apply(axis, [this.min, this.max]);
-                if (tickPositioner) {
-                    this.tickPositions = tickPositions = tickPositioner;
+                // Make it available to the positioner
+                this.tickPositions = tickPositions;
+                tickPositionerResult = tickPositioner.apply(axis, [this.min, this.max]);
+                if (tickPositionerResult) {
+                    tickPositions = tickPositionerResult;
                 }
             }
         }
+        this.tickPositions = tickPositions;
         // Reset min/max or remove extremes based on start/end on tick
         this.paddedTicks = tickPositions.slice(0); // Used for logarithmic minor
         this.trimTicks(tickPositions, startOnTick, endOnTick);
-        if (!this.isLinked) {
-            // Substract half a unit (#2619, #2846, #2515, #3390),
-            // but not in case of multiple ticks (#6897)
+        if (!this.isLinked && isNumber(this.min) && isNumber(this.max)) {
+            // Substract half a unit (#2619, #2846, #2515, #3390), but not in
+            // case of multiple ticks (#6897)
             if (this.single &&
                 tickPositions.length < 2 &&
                 !this.categories &&
@@ -1416,7 +1422,7 @@ var Axis = /** @class */ (function () {
                 this.min -= 0.5;
                 this.max += 0.5;
             }
-            if (!tickPositionsOption && !tickPositioner) {
+            if (!tickPositionsOption && !tickPositionerResult) {
                 this.adjustTickAmount();
             }
         }
@@ -2030,9 +2036,9 @@ var Axis = /** @class */ (function () {
             }
             return correctFloat(step * tickInterval);
         };
-        var newTickInterval = tickInterval, rotation, step, bestScore = Number.MAX_VALUE, autoRotation;
+        var newTickInterval = tickInterval, rotation, bestScore = Number.MAX_VALUE, autoRotation;
         if (horiz) {
-            if (!labelOptions.staggerLines && !labelOptions.step) {
+            if (!labelOptions.staggerLines) {
                 if (isNumber(rotationOption)) {
                     autoRotation = [rotationOption];
                 }
@@ -2041,12 +2047,12 @@ var Axis = /** @class */ (function () {
                 }
             }
             if (autoRotation) {
-                // Loop over the given autoRotation options, and determine
-                // which gives the best score. The best score is that with
-                // the lowest number of steps and a rotation closest
-                // to horizontal.
-                autoRotation.forEach(function (rot) {
-                    var score;
+                var step = void 0, score = void 0;
+                // Loop over the given autoRotation options, and determine which
+                // gives the best score. The best score is that with the lowest
+                // number of steps and a rotation closest to horizontal.
+                for (var _i = 0, autoRotation_1 = autoRotation; _i < autoRotation_1.length; _i++) {
+                    var rot = autoRotation_1[_i];
                     if (rot === rotationOption ||
                         (rot && rot >= -90 && rot <= 90)) { // #3891
                         step = getStep(Math.abs(labelMetrics.h / Math.sin(deg2rad * rot)));
@@ -2057,15 +2063,15 @@ var Axis = /** @class */ (function () {
                             newTickInterval = step;
                         }
                     }
-                });
+                }
             }
         }
-        else if (!labelOptions.step) { // #4411
+        else { // #4411
             newTickInterval = getStep(labelMetrics.h);
         }
         this.autoRotation = autoRotation;
         this.labelRotation = pick(rotation, isNumber(rotationOption) ? rotationOption : 0);
-        return newTickInterval;
+        return labelOptions.step ? tickInterval : newTickInterval;
     };
     /**
      * Get the general slot width for labels/categories on this axis. This may
@@ -3181,6 +3187,10 @@ export default Axis;
 * @name Highcharts.AxisLabelsFormatterContextObject#chart
 * @type {Highcharts.Chart}
 */ /**
+* Default formatting of date/time labels.
+* @name Highcharts.AxisLabelsFormatterContextObject#dateTimeLabelFormat
+* @type {string|undefined}
+*/ /**
 * Whether the label belongs to the first tick on the axis.
 * @name Highcharts.AxisLabelsFormatterContextObject#isFirst
 * @type {boolean}
@@ -3199,7 +3209,7 @@ export default Axis;
 * dates will be formatted as strings, and numbers with language-specific comma
 * separators, thousands separators and numeric symbols like `k` or `M`.
 * @name Highcharts.AxisLabelsFormatterContextObject#text
-* @type {string}
+* @type {string|undefined}
 */ /**
 * The Tick instance.
 * @name Highcharts.AxisLabelsFormatterContextObject#tick

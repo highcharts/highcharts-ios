@@ -26,7 +26,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import Chart from './Chart.js';
-import D from '../DefaultOptions.js';
+import D from '../Defaults.js';
 var getOptions = D.getOptions;
 import U from '../Utilities.js';
 var isArray = U.isArray, merge = U.merge, splat = U.splat;

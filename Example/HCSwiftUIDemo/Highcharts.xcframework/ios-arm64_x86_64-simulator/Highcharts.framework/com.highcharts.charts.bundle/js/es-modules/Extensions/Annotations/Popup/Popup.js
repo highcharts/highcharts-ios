@@ -11,10 +11,10 @@
  * */
 'use strict';
 import AST from '../../../Core/Renderer/HTML/AST.js';
+import D from '../../../Core/Defaults.js';
+var getOptions = D.getOptions;
 import H from '../../../Core/Globals.js';
 var doc = H.doc;
-import D from '../../../Core/DefaultOptions.js';
-var getOptions = D.getOptions;
 import PopupAnnotations from './PopupAnnotations.js';
 import PopupIndicators from './PopupIndicators.js';
 import PopupTabs from './PopupTabs.js';

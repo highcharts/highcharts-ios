@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.2.1 (2022-08-29)
+ * @license Highcharts JS v10.3.1 (2022-10-31)
  * @module highcharts/themes/high-contrast-light
  * @requires highcharts
  *

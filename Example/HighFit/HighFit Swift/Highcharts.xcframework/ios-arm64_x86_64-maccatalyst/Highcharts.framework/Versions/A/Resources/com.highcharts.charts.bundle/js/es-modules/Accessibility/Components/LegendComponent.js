@@ -47,7 +47,7 @@ var stripHTMLTags = HU.stripHTMLTagsFromString, addClass = HU.addClass, removeCl
  * @private
  */
 function scrollLegendToItem(legend, itemIx) {
-    var itemPage = legend.allItems[itemIx].pageIx, curPage = legend.currentPage;
+    var itemPage = (legend.allItems[itemIx].legendItem || {}).pageIx, curPage = legend.currentPage;
     if (typeof itemPage !== 'undefined' && itemPage + 1 !== curPage) {
         legend.scroll(1 + itemPage - curPage);
     }
@@ -64,15 +64,17 @@ function shouldDoLegendA11y(chart) {
 /**
  * @private
  */
-function setLegendItemHoverState(hoverActive, legendItem) {
-    legendItem.setState(hoverActive ? 'hover' : '', true);
-    ['legendGroup', 'legendItem', 'legendSymbol'].forEach(function (i) {
-        var obj = legendItem[i];
-        var el = obj && obj.element || obj;
-        if (el) {
-            fireEvent(el, hoverActive ? 'mouseover' : 'mouseout');
+function setLegendItemHoverState(hoverActive, item) {
+    var legendItem = item.legendItem || {};
+    item.setState(hoverActive ? 'hover' : '', true);
+    for (var _i = 0, _a = ['group', 'label', 'symbol']; _i < _a.length; _i++) {
+        var key = _a[_i];
+        var svgElement = legendItem[key];
+        var element = svgElement && svgElement.element || svgElement;
+        if (element) {
+            fireEvent(element, hoverActive ? 'mouseover' : 'mouseout');
         }
-    });
+    }
 }
 /* *
  *
@@ -148,16 +150,18 @@ var LegendComponent = /** @class */ (function (_super) {
         var items = legend.allItems || [];
         var curPage = legend.currentPage || 1;
         var clipHeight = legend.clipHeight || 0;
+        var legendItem;
         items.forEach(function (item) {
             if (item.a11yProxyElement) {
                 var hasPages = legend.pages && legend.pages.length;
                 var proxyEl = item.a11yProxyElement.element;
                 var hide = false;
+                legendItem = item.legendItem || {};
                 if (hasPages) {
-                    var itemPage = item.pageIx || 0;
-                    var y = item._legendItemPos ? item._legendItemPos[1] : 0;
-                    var h = item.legendItem ?
-                        Math.round(item.legendItem.getBBox().height) :
+                    var itemPage = legendItem.pageIx || 0;
+                    var y = legendItem.y || 0;
+                    var h = legendItem.label ?
+                        Math.round(legendItem.label.getBBox().height) :
                         0;
                     hide = y + h - legend.pages[itemPage] > clipHeight ||
                         itemPage !== curPage - 1;
@@ -195,15 +199,16 @@ var LegendComponent = /** @class */ (function (_super) {
         var newPageIx = curPageIx + direction;
         var pages = legend.pages || [];
         if (newPageIx > 0 && newPageIx <= pages.length) {
-            var len = legend.allItems.length;
-            for (var i = 0; i < len; ++i) {
-                if (legend.allItems[i].pageIx + 1 === newPageIx) {
-                    var res = chart.highlightLegendItem(i);
+            var i = 0, res = void 0;
+            for (var _i = 0, _a = legend.allItems; _i < _a.length; _i++) {
+                var item = _a[_i];
+                if (((item.legendItem || {}).pageIx || 0) + 1 === newPageIx) {
+                    res = chart.highlightLegendItem(i);
                     if (res) {
                         this.highlightedLegendItemIx = i;
                     }
-                    return;
                 }
+                ++i;
             }
         }
     };
@@ -280,10 +285,11 @@ var LegendComponent = /** @class */ (function (_super) {
      * @private
      */
     LegendComponent.prototype.proxyLegendItems = function () {
-        var component = this, items = (this.chart.legend &&
-            this.chart.legend.allItems || []);
+        var component = this, items = (this.chart.legend || {}).allItems || [];
+        var legendItem;
         items.forEach(function (item) {
-            if (item.legendItem && item.legendItem.element) {
+            legendItem = item.legendItem || {};
+            if (legendItem.label && legendItem.label.element) {
                 component.proxyLegendItem(item);
             }
         });
@@ -293,7 +299,8 @@ var LegendComponent = /** @class */ (function (_super) {
      * @param {Highcharts.BubbleLegendItem|Point|Highcharts.Series} item
      */
     LegendComponent.prototype.proxyLegendItem = function (item) {
-        if (!item.legendItem || !item.legendGroup) {
+        var legendItem = item.legendItem || {};
+        if (!legendItem.label || !legendItem.group) {
             return;
         }
         var itemLabel = this.chart.langFormat('accessibility.legend.legendItem', {
@@ -307,11 +314,11 @@ var LegendComponent = /** @class */ (function (_super) {
             'aria-label': itemLabel
         };
         // Considers useHTML
-        var proxyPositioningElement = item.legendGroup.div ?
-            item.legendItem :
-            item.legendGroup;
+        var proxyPositioningElement = legendItem.group.div ?
+            legendItem.label :
+            legendItem.group;
         item.a11yProxyElement = this.proxyProvider.addProxyElement('legend', {
-            click: item.legendItem,
+            click: legendItem.label,
             visual: proxyPositioningElement.element
         }, attribs);
     };
@@ -331,10 +338,7 @@ var LegendComponent = /** @class */ (function (_super) {
                 ],
                 [
                     [keys.enter, keys.space],
-                    function (keyCode) {
-                        if (H.isFirefox && keyCode === keys.space) { // #15520
-                            return this.response.success;
-                        }
+                    function () {
                         return component.onKbdClick(this);
                     }
                 ],
@@ -435,13 +439,13 @@ var LegendComponent = /** @class */ (function (_super) {
         var items = this.legend.allItems;
         var oldIx = this.accessibility &&
             this.accessibility.components.legend.highlightedLegendItemIx;
-        var itemToHighlight = items[ix];
+        var itemToHighlight = items[ix], legendItem = itemToHighlight.legendItem || {};
         if (itemToHighlight) {
             if (isNumber(oldIx) && items[oldIx]) {
                 setLegendItemHoverState(false, items[oldIx]);
             }
             scrollLegendToItem(this.legend, ix);
-            var legendItemProp = itemToHighlight.legendItem;
+            var legendItemProp = legendItem.label;
             var proxyBtn = itemToHighlight.a11yProxyElement &&
                 itemToHighlight.a11yProxyElement.buttonElement;
             if (legendItemProp && legendItemProp.element && proxyBtn) {

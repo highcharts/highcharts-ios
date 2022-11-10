@@ -158,12 +158,15 @@ var InfoRegionsComponent = /** @class */ (function (_super) {
         this.addEvent(chart, 'aftergetTableAST', function (e) {
             component.onDataTableCreated(e);
         });
-        this.addEvent(chart, 'afterViewData', function (tableDiv) {
-            component.dataTableDiv = tableDiv;
-            // Use small delay to give browsers & AT time to register new table
-            setTimeout(function () {
-                component.focusDataTable();
-            }, 300);
+        this.addEvent(chart, 'afterViewData', function (e) {
+            if (e.wasHidden) {
+                component.dataTableDiv = e.element;
+                // Use a small delay to give browsers & AT time to
+                // register the new table.
+                setTimeout(function () {
+                    component.focusDataTable();
+                }, 300);
+            }
         });
         this.announcer = new Announcer(chart, 'assertive');
     };

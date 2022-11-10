@@ -43,7 +43,7 @@
 /**
 The color of the border of each waterfall column. In styled mode, the border stroke can be set with the `.highcharts-point` class.
 
-**Defaults to** `#ffffff`.
+**Defaults to** `#333333`.
 
 **Try it**
 
@@ -60,10 +60,14 @@ The color used specifically for positive point columns. When not specified, the 
 @property(nonatomic, readwrite) HIColor *upColor;
 /**
 The color of the line that connects columns in a waterfall series. In styled mode, the stroke can be set with the `.highcharts-graph` class.
+
+**Defaults to** `#333333`.
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
 Padding between each column or bar, in x axis units.
+
+**Defaults to** `0.1`.
 
 **Try it**
 
@@ -148,6 +152,8 @@ When using automatic point colors pulled from the global `colors` or series-spec
 @property(nonatomic, readwrite) NSNumber /* Bool */ *colorByPoint;
 /**
 Padding between each value groups, in x axis units.
+
+**Defaults to** `0.2`.
 
 **Try it**
 

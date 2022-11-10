@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.2.1 (2022-08-29)
+ * @license Highstock JS v10.3.1 (2022-10-31)
  * @module highcharts/modules/stock-tools
  * @requires highcharts
  * @requires highcharts/modules/stock
@@ -14,9 +14,9 @@
 'use strict';
 import Highcharts from '../../Core/Globals.js';
 import NavigationBindings from '../../Extensions/Annotations/NavigationBindings.js';
-import StockTools from '../../Stock/StockTools.js';
-import StockToolsGui from '../../Stock/StockToolsGui.js';
-import Toolbar from '../../Stock/StockToolbar.js';
+import StockTools from '../../Stock/StockTools/StockTools.js';
+import StockToolsGui from '../../Stock/StockTools/StockToolsGui.js';
+import Toolbar from '../../Stock/StockTools/StockToolbar.js';
 var G = Highcharts;
 G.Toolbar = Toolbar;
 StockTools.compose(NavigationBindings);

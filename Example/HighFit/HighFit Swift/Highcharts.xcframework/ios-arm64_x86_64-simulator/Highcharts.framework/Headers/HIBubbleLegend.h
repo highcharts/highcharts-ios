@@ -19,6 +19,8 @@ The bubble legend is an additional element in legend which presents the scale of
 /**
 The color of the ranges borders, can be also defined for an individual range.
 
+**Defaults to** `undefined`.
+
 **Try it**
 
 * [Similar look to the bubble series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/similartoseries/)
@@ -27,14 +29,20 @@ The color of the ranges borders, can be also defined for an individual range.
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
 The color of the connector, can be also defined for an individual range.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HIColor *connectorColor;
 /**
 Define the visual z index of the bubble legend.
+
+**Defaults to** `1`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
 Whether the bubble legend range value should be represented by the area or the width of the bubble. The default, area, corresponds best to the human perception of the size of each bubble.
+
+**Defaults to** `area`.
 
 **Try it**
 
@@ -52,6 +60,8 @@ The position of the bubble legend in the legend.
 /**
 The width of the connectors in pixels.
 
+**Defaults to** `1`.
+
 **Try it**
 
 * [Increased connector width](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/bubble-legend/connectorandlabels/)
@@ -59,6 +69,8 @@ The width of the connectors in pixels.
 @property(nonatomic, readwrite) NSNumber *connectorWidth;
 /**
 The main color of the bubble legend. Applies to ranges, if individual color is not defined.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -81,6 +93,8 @@ When this is true, the absolute value of z determines the size of the bubble. Th
 /**
 An additional class name to apply to the bubble legend' circle graphical elements. This option does not replace default class names of the graphical element.
 
+**Defaults to** `undefined`.
+
 **Try it**
 
 * [Styling by CSS](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/bubble-legend/)
@@ -97,18 +111,26 @@ Options for specific range. One range consists of bubble, label and connector.
 @property(nonatomic, readwrite) NSArray <HIRanges *> *ranges;
 /**
 Miximum bubble legend range size. If values for ranges are not specified, the `minSize` and the `maxSize` are calculated from bubble series.
+
+**Defaults to** `60`.
 */
 @property(nonatomic, readwrite) NSNumber *maxSize;
 /**
 Minimum bubble legend range size. If values for ranges are not specified, the `minSize` and the `maxSize` are calculated from bubble series.
+
+**Defaults to** `10`.
 */
 @property(nonatomic, readwrite) NSNumber *minSize;
 /**
 The width of the ranges borders in pixels, can be also defined for an individual range.
+
+**Defaults to** `2`.
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 An additional class name to apply to the bubble legend's connector graphical elements. This option does not replace default class names of the graphical element.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -121,6 +143,8 @@ Ranges with with lower value than zThreshold, are skipped.
 @property(nonatomic, readwrite) NSNumber *zThreshold;
 /**
 The length of the connectors in pixels. If labels are centered, the distance is reduced to 0.
+
+**Defaults to** `60`.
 
 **Try it**
 

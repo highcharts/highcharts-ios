@@ -306,6 +306,9 @@ var WordcloudSeries = /** @class */ (function (_super) {
             duration: 500
         },
         borderWidth: 0,
+        /**
+         * @ignore-option
+         */
         clip: false,
         colorByPoint: true,
         cropThreshold: Infinity,

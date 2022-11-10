@@ -62,6 +62,8 @@ Name of the dash style to use for the shape's stroke.
 /**
 The pixel stroke width of the shape.
 
+**Defaults to** `1`.
+
 **Try it**
 
 * [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
@@ -98,6 +100,8 @@ The width of the shape.
 /**
 The color of the shape's stroke.
 
+**Defaults to** `rgba(0, 0, 0, 0.75)`.
+
 **Try it**
 
 * [Basic shape annotation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shape/)
@@ -117,6 +121,8 @@ The xAxis index to which the points should be attached. Used for the ellipse.
 @property(nonatomic, readwrite) NSNumber *xAxis;
 /**
 Defines additional snapping area around an annotation making this annotation to focus. Defined in pixels.
+
+**Defaults to** `2`.
 */
 @property(nonatomic, readwrite) NSNumber *snap;
 /**
@@ -132,6 +138,8 @@ The type of the shape. Avaliable options are circle, rect and ellipse.
 @property(nonatomic, readwrite) NSString *type;
 /**
 The color of the shape's fill.
+
+**Defaults to** `rgba(0, 0, 0, 0.75)`.
 
 **Try it**
 

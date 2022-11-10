@@ -20,8 +20,6 @@ A declarative filter to control of which data labels to display. The declarative
 
 /**
 The operator to compare by. Can be one of `>`, `<`, `>=`, `<=`, `==`, and `===`.
-
-**Accepted values:** `[">", "<", ">=", "<=", "==", "==="]`.
 */
 @property(nonatomic, readwrite) NSString *operator;
 /**

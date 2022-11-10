@@ -30,6 +30,8 @@ CSS styles for the caption. In styled mode, the caption style is given in the `.
 @property(nonatomic, readwrite) HICSSObject *style;
 /**
 The vertical alignment of the caption. Can be one of `"top"`, `"middle"` and `"bottom"`. When middle, the caption behaves as floating.
+
+**Defaults to** `bottom`.
 */
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
@@ -42,6 +44,8 @@ The caption text of the chart.
 @property(nonatomic, readwrite) NSString *text;
 /**
 The horizontal alignment of the caption. Can be one of "left", "center" and "right".
+
+**Defaults to** `left`.
 */
 @property(nonatomic, readwrite) NSString *align;
 /**
@@ -62,6 +66,8 @@ When the caption is floating, the plot area will not move to make space for it.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
 /**
 The margin between the caption and the plot area.
+
+**Defaults to** `15`.
 */
 @property(nonatomic, readwrite) NSNumber *margin;
 /**

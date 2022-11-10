@@ -61,6 +61,7 @@ var MapBubbleSeries = /** @class */ (function (_super) {
         _this.data = void 0;
         _this.options = void 0;
         _this.points = void 0;
+        _this.clearBounds = mapProto.clearBounds;
         return _this;
     }
     MapBubbleSeries.prototype.searchPoint = function (e, compareX) {
@@ -244,6 +245,9 @@ var MapBubbleSeries = /** @class */ (function (_super) {
          * @default 500
          */
         animationLimit: 500,
+        /**
+         * @type {string|Array<string>}
+         */
         joinBy: 'hc-key',
         tooltip: {
             pointFormat: '{point.name}: {point.z}'

@@ -45,6 +45,8 @@ The subtitle of the chart.
 /**
 The horizontal alignment of the subtitle. Can be one of "left", "center" and "right".
 
+**Defaults to** `center`.
+
 **Try it**
 
 * [Footnote at right of plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/subtitle/align/)
@@ -80,6 +82,8 @@ When the subtitle is floating, the plot area will not move to make space for it.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
 /**
 Adjustment made to the subtitle width, normally to reserve space for the exporting burger menu.
+
+**Defaults to** `-44`.
 
 **Try it**
 

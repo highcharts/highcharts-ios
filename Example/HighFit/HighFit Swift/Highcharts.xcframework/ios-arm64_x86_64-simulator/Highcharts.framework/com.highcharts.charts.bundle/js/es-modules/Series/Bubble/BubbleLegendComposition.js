@@ -12,7 +12,7 @@
 'use strict';
 import BubbleLegendDefaults from './BubbleLegendDefaults.js';
 import BubbleLegendItem from './BubbleLegendItem.js';
-import D from '../../Core/DefaultOptions.js';
+import D from '../../Core/Defaults.js';
 var setOptions = D.setOptions;
 import U from '../../Core/Utilities.js';
 var addEvent = U.addEvent, objectEach = U.objectEach, wrap = U.wrap;
@@ -33,7 +33,7 @@ var composedClasses = [];
  */
 function chartDrawChartBox(proceed, options, callback) {
     var chart = this, legend = chart.legend, bubbleSeries = getVisibleBubbleSeriesIndex(chart) >= 0;
-    var bubbleLegendOptions, bubbleSizes;
+    var bubbleLegendOptions, bubbleSizes, legendItem;
     if (legend && legend.options.enabled && legend.bubbleLegend &&
         legend.options.bubbleLegend.autoRanges && bubbleSeries) {
         bubbleLegendOptions = legend.bubbleLegend.options;
@@ -43,7 +43,10 @@ function chartDrawChartBox(proceed, options, callback) {
         if (!bubbleLegendOptions.placed) {
             legend.group.placed = false;
             legend.allItems.forEach(function (item) {
-                item.legendGroup.translateY = null;
+                legendItem = item.legendItem || {};
+                if (legendItem.group) {
+                    legendItem.group.translateY = null;
+                }
             });
         }
         // Create legend with bubbleLegend
@@ -153,17 +156,17 @@ function getVisibleBubbleSeriesIndex(chart) {
  */
 function getLinesHeights(legend) {
     var items = legend.allItems, lines = [], length = items.length;
-    var lastLine, i = 0, j = 0;
+    var lastLine, legendItem, legendItem2, i = 0, j = 0;
     for (i = 0; i < length; i++) {
-        if (items[i].legendItemHeight) {
+        legendItem = items[i].legendItem || {};
+        legendItem2 = (items[i + 1] || {}).legendItem || {};
+        if (legendItem.labelHeight) {
             // for bubbleLegend
-            items[i].itemHeight = items[i].legendItemHeight;
+            items[i].itemHeight = legendItem.labelHeight;
         }
         if ( // Line break
         items[i] === items[length - 1] ||
-            items[i + 1] &&
-                items[i]._legendItemPos[1] !==
-                    items[i + 1]._legendItemPos[1]) {
+            legendItem.y !== legendItem2.y) {
             lines.push({ height: 0 });
             lastLine = lines[lines.length - 1];
             // Find the highest item in line
@@ -239,25 +242,28 @@ function onSeriesLegendItemClick() {
  */
 function retranslateItems(legend, lines) {
     var items = legend.allItems, rtl = legend.options.rtl;
-    var orgTranslateX, orgTranslateY, movementX, actualLine = 0;
+    var orgTranslateX, orgTranslateY, movementX, legendItem, actualLine = 0;
     items.forEach(function (item, index) {
-        orgTranslateX = item.legendGroup.translateX;
-        orgTranslateY = item._legendItemPos[1];
+        legendItem = item.legendItem || {};
+        if (!legendItem.group) {
+            return;
+        }
+        orgTranslateX = legendItem.group.translateX || 0;
+        orgTranslateY = legendItem.y || 0;
         movementX = item.movementX;
         if (movementX || (rtl && item.ranges)) {
             movementX = rtl ?
                 orgTranslateX - item.options.maxSize / 2 :
                 orgTranslateX + movementX;
-            item.legendGroup.attr({ translateX: movementX });
+            legendItem.group.attr({ translateX: movementX });
         }
         if (index > lines[actualLine].step) {
             actualLine++;
         }
-        item.legendGroup.attr({
+        legendItem.group.attr({
             translateY: Math.round(orgTranslateY + lines[actualLine].height / 2)
         });
-        item._legendItemPos[1] = orgTranslateY +
-            lines[actualLine].height / 2;
+        legendItem.y = orgTranslateY + lines[actualLine].height / 2;
     });
 }
 /* *

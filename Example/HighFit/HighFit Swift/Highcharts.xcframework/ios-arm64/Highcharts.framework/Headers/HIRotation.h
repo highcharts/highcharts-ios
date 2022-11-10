@@ -20,6 +20,8 @@ Rotation options for the words in the wordcloud.
 
 /**
 The largest degree of rotation for a word.
+
+**Defaults to** `90`.
 */
 @property(nonatomic, readwrite) NSNumber *to;
 /**
@@ -28,6 +30,8 @@ The smallest degree of rotation for a word.
 @property(nonatomic, readwrite) NSNumber *from;
 /**
 The number of possible orientations for a word, within the range of `rotation.from` and `rotation.to`. Must be a number larger than 0.
+
+**Defaults to** `2`.
 */
 @property(nonatomic, readwrite) NSNumber *orientations;
 

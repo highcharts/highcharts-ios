@@ -33,6 +33,8 @@
  *               boostBlending
  * @requires     modules/networkgraph
  * @optionparent plotOptions.networkgraph
+ *
+ * @private
  */
 var NetworkgraphSeriesDefaults = {
     stickyTracking: false,

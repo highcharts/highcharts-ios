@@ -7,10 +7,10 @@
 */
 
 #import "HIAccessibility.h"
+#import "HIMarker.h"
 #import "HIDragDrop.h"
 #import "HIDataLabels.h"
 #import "HIEvents.h"
-#import "HIMarker.h"
 #import "HITargetOptions.h"
 #import "HIPartialFill.h"
 #import "HIColor.h"
@@ -113,9 +113,6 @@ An URL to a remote CSV dataset. Will be fetched when the chart is created using 
 @property(nonatomic, readwrite) NSString *csvURL;
 /**
 Which of the predefined date formats in Date.prototype.dateFormats to use to parse date values. Defaults to a best guess based on what format gives valid and ordered dates. Valid options include: `YYYY/mm/dd`, `dd/mm/YYYY`, `mm/dd/YYYY`, `dd/mm/YY`, `mm/dd/YY`.
-
-**Accepted values:** `["YYYY/mm/dd", "dd/mm/YYYY", "mm/dd/YYYY", "dd/mm/YYYY",
-            "dd/mm/YY", "mm/dd/YY"]`.
 
 **Try it**
 
@@ -333,7 +330,11 @@ The y value of the point.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color by is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
+A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
+
+**Try it**
+
+* [Series and point color index](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/colorindex/)
 */
 @property(nonatomic, readwrite) NSNumber *colorIndex;
 /**
@@ -375,6 +376,10 @@ An additional, individual class name for the data point's graphic representation
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
+Options for the point markers of line-like series.
+*/
+@property(nonatomic, readwrite) HIMarker *marker;
+/**
 Point specific options for the draggable-points module. Overrides options on `series.dragDrop`.
 */
 @property(nonatomic, readwrite) HIDragDrop *dragDrop;
@@ -415,17 +420,31 @@ A description of the point to add to the screen reader information about the poi
 */
 @property(nonatomic, readwrite) NSString *definition;
 /**
+Whether to display a slice offset from the center.
+
+**Try it**
+
+* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
+/**
 The sequential index of the data point in the legend.
 */
 @property(nonatomic, readwrite) NSNumber *legendIndex;
 /**
-Options for the point markers of line-like series.
-*/
-@property(nonatomic, readwrite) HIMarker *marker;
-/**
 The label of event.
 */
 @property(nonatomic, readwrite) NSString *label;
+/**
+Whether the link goes out of the system.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Sankey chart with outgoing links](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-outgoing)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *outgoing;
 /**
 The node that the link runs from.
 */
@@ -491,6 +510,12 @@ Pixel width of the line that connects the dumbbell point's values.
 */
 @property(nonatomic, readwrite) NSNumber *connectorWidth;
 /**
+Color of the start markers in a dumbbell graph.
+
+**Defaults to** `#333333`.
+*/
+@property(nonatomic, readwrite) HIColor *lowColor;
+/**
 Point padding for a single point.
 
 **Try it**
@@ -523,53 +548,29 @@ When this property is true, the point display the total sum across the entire se
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *isSum;
 /**
-Whether to display a slice offset from the center.
-
-**Try it**
-
-* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
-/**
 By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
 /**
-The inner radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
+The inner radius of an individual point in a solid gauge. Can be given only in percentage, either as a number or a string like `"50%"`.
 
 **Try it**
 
 * [Individual radius and innerRadius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/solidgauge-radius/)
 */
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ innerRadius;
+@property(nonatomic, readwrite) NSString *innerRadius;
 /**
-The outer radius of an individual point in a solid gauge. Can be given as a number (pixels) or percentage string.
+The outer radius of an individual point in a solid gauge. Can be given only in percentage, either as a number or a string like `"100%"`.
 
 **Try it**
 
 * [Individual radius and innerRadius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/solidgauge-radius/)
 */
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ radius;
-/**
-Whether the link goes out of the system.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Sankey chart with outgoing links](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-outgoing)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *outgoing;
+@property(nonatomic, readwrite) NSString *radius;
 /**
 The size value for each bubble. The bubbles' diameters are computed based on the `z`, and controlled by series options like `minSize`, `maxSize`, `sizeBy`, `zMin` and `zMax`.
 */
 @property(nonatomic, readwrite) NSNumber *z;
-/**
-Color of the start markers in a dumbbell graph.
-
-**Defaults to** `#333333`.
-*/
-@property(nonatomic, readwrite) HIColor *lowColor;
 /**
 The ending X value of the range point.
 
@@ -608,6 +609,18 @@ The set or sets the options will be applied to. If a single entry is defined, th
 * [Euler diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/euler-diagram/)
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *sets;
+/**
+If point's children should be initially hidden
+
+**Try it**
+
+* [Treegraph chart with initially hidden children](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/level-options)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *collapsed;
+/**
+Options used for button, which toggles the collapse status of the node.
+*/
+@property(nonatomic, readwrite) id collapseButton;
 
 -(NSDictionary *)getParams;
 

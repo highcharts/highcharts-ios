@@ -11,6 +11,8 @@
 import A from '../Animation/AnimationUtilities.js';
 var animate = A.animate, animObject = A.animObject, setAnimation = A.setAnimation;
 import Axis from '../Axis/Axis.js';
+import D from '../Defaults.js';
+var defaultOptions = D.defaultOptions, defaultTime = D.defaultTime;
 import FormatUtilities from '../FormatUtilities.js';
 var numberFormat = FormatUtilities.numberFormat;
 import Foundation from '../Foundation.js';
@@ -19,8 +21,6 @@ import H from '../Globals.js';
 var charts = H.charts, doc = H.doc, marginNames = H.marginNames, svg = H.svg, win = H.win;
 import Legend from '../Legend/Legend.js';
 import MSPointer from '../MSPointer.js';
-import D from '../DefaultOptions.js';
-var defaultOptions = D.defaultOptions, defaultTime = D.defaultTime;
 import Pointer from '../Pointer.js';
 import RendererRegistry from '../Renderer/RendererRegistry.js';
 import SeriesRegistry from '../Series/SeriesRegistry.js';
@@ -426,10 +426,12 @@ var Chart = /** @class */ (function () {
         var series = options.series, box = (options.visiblePlotOnly && scrollablePlotBox) || plotBox, x = options.inverted ? plotY : plotX, y = options.inverted ? plotX : plotY, e = {
             x: x,
             y: y,
-            isInsidePlot: true
+            isInsidePlot: true,
+            options: options
         };
         if (!options.ignoreX) {
-            var xAxis = (series && (inverted ? series.yAxis : series.xAxis)) || {
+            var xAxis = (series &&
+                (inverted && !this.polar ? series.yAxis : series.xAxis)) || {
                 pos: plotLeft,
                 len: Infinity
             };
@@ -441,7 +443,7 @@ var Chart = /** @class */ (function () {
             }
         }
         if (!options.ignoreY && e.isInsidePlot) {
-            var yAxis = (series && (inverted ? series.xAxis : series.yAxis)) || {
+            var yAxis = (options.axis && !options.axis.isXAxis && options.axis) || (series && (inverted ? series.xAxis : series.yAxis)) || {
                 pos: plotTop,
                 len: Infinity
             };
@@ -2566,8 +2568,7 @@ var Chart = /** @class */ (function () {
      * @param {Highcharts.SelectEventObject} event
      */
     Chart.prototype.zoom = function (event) {
-        var chart = this, pointer = chart.pointer, mouseDownPos = chart.inverted ?
-            pointer.mouseDownX : pointer.mouseDownY;
+        var chart = this, pointer = chart.pointer;
         var displayButton = false, hasZoomed;
         // If zoom is called with no arguments, reset the axes
         if (!event || event.resetSelection) {
@@ -2578,20 +2579,12 @@ var Chart = /** @class */ (function () {
         }
         else { // else, zoom in on all axes
             event.xAxis.concat(event.yAxis).forEach(function (axisData) {
-                var axis = axisData.axis, axisStartPos = chart.inverted ? axis.left : axis.top, axisEndPos = chart.inverted ?
-                    axisStartPos + axis.width : axisStartPos + axis.height, isXAxis = axis.isXAxis;
-                var isWithinPane = false;
-                // Check if zoomed area is within the pane (#1289).
-                // In case of multiple panes only one pane should be zoomed.
-                if ((!isXAxis &&
-                    mouseDownPos >= axisStartPos &&
-                    mouseDownPos <= axisEndPos) ||
-                    isXAxis ||
-                    !defined(mouseDownPos)) {
-                    isWithinPane = true;
-                }
+                var axis = axisData.axis, isXAxis = axis.isXAxis;
                 // don't zoom more than minRange
-                if (pointer[isXAxis ? 'zoomX' : 'zoomY'] && isWithinPane) {
+                if (pointer[isXAxis ? 'zoomX' : 'zoomY'] &&
+                    (defined(pointer.mouseDownX) &&
+                        defined(pointer.mouseDownY) &&
+                        chart.isInsidePlot(pointer.mouseDownX - chart.plotLeft, pointer.mouseDownY - chart.plotTop, { axis: axis })) || !defined(chart.inverted ? pointer.mouseDownX : pointer.mouseDownY)) {
                     hasZoomed = axis.zoom(axisData.min, axisData.max);
                     if (axis.displayBtn) {
                         displayButton = true;
@@ -2921,6 +2914,9 @@ export default Chart;
 /**
  * @interface Highcharts.ChartIsInsideOptionsObject
  */ /**
+* @name Highcharts.ChartIsInsideOptionsObject#axis
+* @type {Highcharts.Axis|undefined}
+*/ /**
 * @name Highcharts.ChartIsInsideOptionsObject#ignoreX
 * @type {boolean|undefined}
 */ /**

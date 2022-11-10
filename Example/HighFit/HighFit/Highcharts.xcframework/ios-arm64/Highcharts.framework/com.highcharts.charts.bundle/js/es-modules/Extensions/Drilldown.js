@@ -16,11 +16,9 @@ import Axis from '../Core/Axis/Axis.js';
 import Chart from '../Core/Chart/Chart.js';
 import Color from '../Core/Color/Color.js';
 import ColumnSeries from '../Series/Column/ColumnSeries.js';
-import F from '../Core/FormatUtilities.js';
-var format = F.format;
 import H from '../Core/Globals.js';
 var noop = H.noop;
-import D from '../Core/DefaultOptions.js';
+import D from '../Core/Defaults.js';
 var defaultOptions = D.defaultOptions;
 import Point from '../Core/Series/Point.js';
 import Series from '../Core/Series/Series.js';
@@ -281,12 +279,12 @@ defaultOptions.drilldown = {
      *   object. See
      *   [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/).
      *
-     * @type    {boolean|Partial<Highcharts.AnimationOptionsObject>}
+     * @type    {boolean|Highcharts.AnimationOptionsObject}
      * @since   3.0.8
      * @product highcharts highmaps
      */
     animation: {
-        /** @internal */
+        /** @ignore-option */
         duration: 500
     },
     /**

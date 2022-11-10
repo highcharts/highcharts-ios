@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import Chart from './Chart.js';
-import D from '../DefaultOptions.js';
+import D from '../Defaults.js';
 var getOptions = D.getOptions;
 import SVGRenderer from '../Renderer/SVG/SVGRenderer.js';
 import U from '../Utilities.js';

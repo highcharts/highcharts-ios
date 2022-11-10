@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.2.1 (2022-08-29)
+ * @license Highstock JS v10.3.1 (2022-10-31)
  * @module highcharts/modules/heikinashi
  * @requires highcharts
  * @requires highcharts/modules/stock
@@ -11,4 +11,7 @@
  * License: www.highcharts.com/license
  */
 'use strict';
-import '../../Series/HeikinAshi/HeikinAshiSeries.js';
+import Highcharts from '../../Core/Globals.js';
+import HeikinAshiSeries from '../../Series/HeikinAshi/HeikinAshiSeries.js';
+var G = Highcharts;
+HeikinAshiSeries.compose(G.Series, G.Axis);

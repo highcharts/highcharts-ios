@@ -15,7 +15,7 @@ import Chart from '../Core/Chart/Chart.js';
 import F from '../Core/FormatUtilities.js';
 var format = F.format;
 import H from '../Core/Globals.js';
-import D from '../Core/DefaultOptions.js';
+import D from '../Core/Defaults.js';
 var setOptions = D.setOptions;
 import Series from '../Core/Series/Series.js';
 import U from '../Core/Utilities.js';
@@ -247,6 +247,10 @@ addEvent(Series, 'afterTranslate', function () {
                 point.clientX = point.plotX;
                 point.plotY = chart.yAxis[i]
                     .translate(point.y, false, true, void 0, true);
+                // Range series (#15752)
+                if (isNumber(point.high)) {
+                    point.plotHigh = chart.yAxis[i].translate(point.high, false, true, void 0, true);
+                }
                 if (typeof lastPlotX !== 'undefined') {
                     closestPointRangePx = Math.min(closestPointRangePx, Math.abs(point.plotX - lastPlotX));
                 }

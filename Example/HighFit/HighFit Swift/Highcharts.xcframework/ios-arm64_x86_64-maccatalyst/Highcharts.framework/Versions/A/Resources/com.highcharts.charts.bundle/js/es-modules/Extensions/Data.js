@@ -11,6 +11,8 @@
  * */
 'use strict';
 import Chart from '../Core/Chart/Chart.js';
+import D from '../Core/Defaults.js';
+var getOptions = D.getOptions;
 import G from '../Core/Globals.js';
 var doc = G.doc;
 import HU from '../Core/HttpUtilities.js';
@@ -19,8 +21,6 @@ import Point from '../Core/Series/Point.js';
 import SeriesRegistry from '../Core/Series/SeriesRegistry.js';
 var seriesTypes = SeriesRegistry.seriesTypes;
 import U from '../Core/Utilities.js';
-import D from '../Core/DefaultOptions.js';
-var getOptions = D.getOptions;
 var addEvent = U.addEvent, defined = U.defined, extend = U.extend, fireEvent = U.fireEvent, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach, pick = U.pick, splat = U.splat;
 /* *
  *

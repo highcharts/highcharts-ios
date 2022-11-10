@@ -29,7 +29,7 @@ var noop = H.noop;
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
 var _a = SeriesRegistry.seriesTypes, AreaSeries = _a.area, areaProto = _a.area.prototype, columnProto = _a.column.prototype;
 import U from '../../Core/Utilities.js';
-var defined = U.defined, extend = U.extend, isArray = U.isArray, pick = U.pick, merge = U.merge;
+var addEvent = U.addEvent, defined = U.defined, extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, pick = U.pick, merge = U.merge;
 /* *
  *
  *  Constants
@@ -94,6 +94,9 @@ var areaRangeSeriesOptions = {
      * @private
      */
     lineWidth: 1,
+    /**
+     * @type {number|null}
+     */
     threshold: null,
     tooltip: {
         pointFormat: '<span style="color:{series.color}">\u25CF</span> ' +
@@ -208,47 +211,10 @@ var AreaRangeSeries = /** @class */ (function (_super) {
      */
     AreaRangeSeries.prototype.highToXY = function (point) {
         // Find the polar plotX and plotY
-        var chart = this.chart, xy = this.xAxis.postTranslate(point.rectPlotX || 0, this.yAxis.len - point.plotHigh);
+        var chart = this.chart, xy = this.xAxis.postTranslate(point.rectPlotX || 0, this.yAxis.len - (point.plotHigh || 0));
         point.plotHighX = xy.x - chart.plotLeft;
         point.plotHigh = xy.y - chart.plotTop;
         point.plotLowX = point.plotX;
-    };
-    /**
-     * Translate data points from raw values x and y to plotX and plotY.
-     * @private
-     */
-    AreaRangeSeries.prototype.translate = function () {
-        var series = this;
-        areaProto.translate.apply(series);
-        // Set plotLow and plotHigh
-        series.points.forEach(function (point, i) {
-            var high = point.high, plotY = point.plotY;
-            if (point.isNull) {
-                point.plotY = null;
-            }
-            else {
-                var yAxis = series.chart.hasParallelCoordinates ?
-                    series.chart.yAxis[i] :
-                    series.yAxis;
-                point.plotLow = plotY;
-                // Calculate plotHigh value based on each yAxis scale (#15752)
-                point.plotHigh = yAxis.translate(series.dataModify ?
-                    series.dataModify.modifyValue(high) : high, 0, 1, 0, 1);
-                if (series.dataModify) {
-                    point.yBottom = point.plotHigh;
-                }
-            }
-        });
-        // Postprocess plotHigh
-        if (this.chart.polar) {
-            this.points.forEach(function (point) {
-                series.highToXY(point);
-                point.tooltipPos = [
-                    (point.plotHighX + point.plotLowX) / 2,
-                    (point.plotHigh + point.plotLow) / 2
-                ];
-            });
-        }
     };
     /**
      * Extend the line series' getSegmentPath method by applying the segment
@@ -379,12 +345,13 @@ var AreaRangeSeries = /** @class */ (function (_super) {
                 while (i--) {
                     point = data[i];
                     if (point) {
+                        var _a = point.plotHigh, plotHigh = _a === void 0 ? 0 : _a, _b = point.plotLow, plotLow = _b === void 0 ? 0 : _b;
                         up = upperDataLabelOptions.inside ?
-                            point.plotHigh < point.plotLow :
-                            point.plotHigh > point.plotLow;
+                            plotHigh < plotLow :
+                            plotHigh > plotLow;
                         point.y = point.high;
                         point._plotY = point.plotY;
-                        point.plotY = point.plotHigh;
+                        point.plotY = plotHigh;
                         // Store original data labels and set preliminary label
                         // objects to be picked up in the uber method
                         originalDataLabels[i] = point.dataLabel;
@@ -432,9 +399,10 @@ var AreaRangeSeries = /** @class */ (function (_super) {
                 while (i--) {
                     point = data[i];
                     if (point) {
+                        var _c = point.plotHigh, plotHigh = _c === void 0 ? 0 : _c, _d = point.plotLow, plotLow = _d === void 0 ? 0 : _d;
                         up = lowerDataLabelOptions.inside ?
-                            point.plotHigh < point.plotLow :
-                            point.plotHigh > point.plotLow;
+                            plotHigh < plotLow :
+                            plotHigh > plotLow;
                         // Set the default offset
                         point.below = !up;
                         if (inverted) {
@@ -488,6 +456,7 @@ var AreaRangeSeries = /** @class */ (function (_super) {
         i = 0;
         while (i < pointLength) {
             point = series.points[i];
+            point.graphics = point.graphics || [];
             // Save original props to be overridden by temporary props for top
             // points
             point.origProps = {
@@ -498,8 +467,10 @@ var AreaRangeSeries = /** @class */ (function (_super) {
                 zone: point.zone,
                 y: point.y
             };
-            point.lowerGraphic = point.graphic;
-            point.graphic = point.upperGraphic;
+            if (point.graphic) {
+                point.graphics[0] = point.graphic;
+            }
+            point.graphic = point.graphics[1];
             point.plotY = point.plotHigh;
             if (defined(point.plotHighX)) {
                 point.plotX = point.plotHighX;
@@ -524,8 +495,11 @@ var AreaRangeSeries = /** @class */ (function (_super) {
         i = 0;
         while (i < pointLength) {
             point = series.points[i];
-            point.upperGraphic = point.graphic;
-            point.graphic = point.lowerGraphic;
+            point.graphics = point.graphics || [];
+            if (point.graphic) {
+                point.graphics[1] = point.graphic;
+            }
+            point.graphic = point.graphics[0];
             if (point.origProps) {
                 extend(point, point.origProps);
                 delete point.origProps;
@@ -536,6 +510,43 @@ var AreaRangeSeries = /** @class */ (function (_super) {
     AreaRangeSeries.defaultOptions = merge(AreaSeries.defaultOptions, areaRangeSeriesOptions);
     return AreaRangeSeries;
 }(AreaSeries));
+addEvent(AreaRangeSeries, 'afterTranslate', function () {
+    // Set plotLow and plotHigh
+    var _this = this;
+    // Rules out lollipop, but lollipop should not inherit range series in the
+    // first place
+    if (this.pointArrayMap.join(',') === 'low,high') {
+        this.points.forEach(function (point) {
+            var high = point.high, plotY = point.plotY;
+            if (point.isNull) {
+                point.plotY = void 0;
+            }
+            else {
+                point.plotLow = plotY;
+                // Calculate plotHigh value based on each yAxis scale (#15752)
+                point.plotHigh = isNumber(high) ? _this.yAxis.translate(_this.dataModify ?
+                    _this.dataModify.modifyValue(high) : high, false, true, void 0, true) : void 0;
+                if (_this.dataModify) {
+                    point.yBottom = point.plotHigh;
+                }
+            }
+        });
+    }
+}, { order: 0 });
+addEvent(AreaRangeSeries, 'afterTranslate', function () {
+    var _this = this;
+    // Postprocess after the PolarComposition's afterTranslate
+    if (this.chart.polar) {
+        this.points.forEach(function (point) {
+            _this.highToXY(point);
+            point.plotLow = point.plotY;
+            point.tooltipPos = [
+                ((point.plotHighX || 0) + (point.plotLowX || 0)) / 2,
+                ((point.plotHigh || 0) + (point.plotLow || 0)) / 2
+            ];
+        });
+    }
+}, { order: 3 });
 extend(AreaRangeSeries.prototype, {
     deferTranslatePolar: true,
     pointArrayMap: ['low', 'high'],

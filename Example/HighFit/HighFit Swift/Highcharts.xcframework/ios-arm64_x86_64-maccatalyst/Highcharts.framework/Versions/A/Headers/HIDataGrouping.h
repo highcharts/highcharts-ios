@@ -20,14 +20,20 @@ Data grouping options for the wind barbs. In Highcharts, this requires the `modu
 
 /**
 Approximation function for the data grouping. The default returns an average of wind speed and a vector average direction weighted by wind speed.
+
+**Defaults to** `windbarb`.
 */
 @property(nonatomic, readwrite) NSString *approximation;
 /**
 Whether to enable data grouping.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The approximate data group width.
+
+**Defaults to** `30`.
 */
 @property(nonatomic, readwrite) NSNumber *groupPixelWidth;
 

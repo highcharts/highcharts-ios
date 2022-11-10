@@ -27,10 +27,10 @@ import H from '../../Core/Globals.js';
 var noop = H.noop;
 import MapPointPoint from './MapPointPoint.js';
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
-var ScatterSeries = SeriesRegistry.seriesTypes.scatter;
+var _a = SeriesRegistry.seriesTypes, MapSeries = _a.map, ScatterSeries = _a.scatter;
 import U from '../../Core/Utilities.js';
 var extend = U.extend, fireEvent = U.fireEvent, isNumber = U.isNumber, merge = U.merge;
-import '../../Core/DefaultOptions.js';
+import '../../Core/Defaults.js';
 import '../Scatter/ScatterSeries.js';
 /* *
  *
@@ -62,6 +62,7 @@ var MapPointSeries = /** @class */ (function (_super) {
         _this.data = void 0;
         _this.options = void 0;
         _this.points = void 0;
+        _this.clearBounds = MapSeries.prototype.clearBounds;
         return _this;
         /* eslint-enable valid-jsdoc */
     }
@@ -114,10 +115,15 @@ var MapPointSeries = /** @class */ (function (_super) {
         }
         // Create map based translation
         if (mapView) {
-            var hasCoordinates_1 = mapView.projection.hasCoordinates;
+            var mainSvgTransform_1 = mapView.getSVGTransform(), hasCoordinates_1 = mapView.projection.hasCoordinates;
             this.points.forEach(function (p) {
                 var _a = p.x, x = _a === void 0 ? void 0 : _a, _b = p.y, y = _b === void 0 ? void 0 : _b;
-                var xy = _this.projectPoint(p.options);
+                var svgTransform = (isNumber(p.insetIndex) &&
+                    mapView.insets[p.insetIndex].getSVGTransform()) || mainSvgTransform_1;
+                var xy = (_this.projectPoint(p.options) ||
+                    (p.properties &&
+                        _this.projectPoint(p.properties)));
+                var didBounds;
                 if (xy) {
                     x = xy.x;
                     y = xy.y;
@@ -126,14 +132,23 @@ var MapPointSeries = /** @class */ (function (_super) {
                 else if (p.bounds) {
                     x = p.bounds.midX;
                     y = p.bounds.midY;
+                    if (svgTransform && isNumber(x) && isNumber(y)) {
+                        p.plotX = x * svgTransform.scaleX +
+                            svgTransform.translateX;
+                        p.plotY = y * svgTransform.scaleY +
+                            svgTransform.translateY;
+                        didBounds = true;
+                    }
                 }
                 if (isNumber(x) && isNumber(y)) {
                     // Establish plotX and plotY
-                    var plotCoords = mapView.projectedUnitsToPixels({ x: x, y: y });
-                    p.plotX = plotCoords.x;
-                    p.plotY = hasCoordinates_1 ?
-                        plotCoords.y :
-                        _this.chart.plotHeight - plotCoords.y;
+                    if (!didBounds) {
+                        var plotCoords = mapView.projectedUnitsToPixels({ x: x, y: y });
+                        p.plotX = plotCoords.x;
+                        p.plotY = hasCoordinates_1 ?
+                            plotCoords.y :
+                            _this.chart.plotHeight - plotCoords.y;
+                    }
                 }
                 else {
                     p.y = p.plotX = p.plotY = void 0;

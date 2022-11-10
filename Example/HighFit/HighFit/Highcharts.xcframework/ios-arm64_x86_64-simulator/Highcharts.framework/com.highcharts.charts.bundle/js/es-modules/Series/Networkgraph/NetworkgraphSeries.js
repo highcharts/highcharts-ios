@@ -137,14 +137,11 @@ var NetworkgraphSeries = /** @class */ (function (_super) {
     NetworkgraphSeries.prototype.drawDataLabels = function () {
         var textPath = this.options.dataLabels.textPath;
         // Render node labels:
-        Series.prototype.drawDataLabels.apply(this, arguments);
+        Series.prototype.drawDataLabels.call(this, this.nodes);
         // Render link labels:
-        this.points = this.data;
         this.options.dataLabels.textPath =
             this.options.dataLabels.linkTextPath;
-        Series.prototype.drawDataLabels.apply(this, arguments);
-        // Restore nodes
-        this.points = this.nodes;
+        Series.prototype.drawDataLabels.call(this, this.data);
         this.options.dataLabels.textPath = textPath;
     };
     /**

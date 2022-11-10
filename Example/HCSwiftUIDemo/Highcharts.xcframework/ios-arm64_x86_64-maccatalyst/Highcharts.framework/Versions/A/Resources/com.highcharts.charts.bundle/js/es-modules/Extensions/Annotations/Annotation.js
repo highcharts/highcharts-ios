@@ -604,7 +604,7 @@ merge(Annotation.prototype, {
 export default Annotation;
 /* *
  *
- *  API Options
+ *  API Declarations
  *
  * */
 /**

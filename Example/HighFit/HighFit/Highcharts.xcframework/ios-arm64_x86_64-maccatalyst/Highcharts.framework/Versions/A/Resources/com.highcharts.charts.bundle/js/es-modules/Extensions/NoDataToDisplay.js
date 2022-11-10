@@ -13,7 +13,7 @@
  * */
 import AST from '../Core/Renderer/HTML/AST.js';
 import Chart from '../Core/Chart/Chart.js';
-import D from '../Core/DefaultOptions.js';
+import D from '../Core/Defaults.js';
 var getOptions = D.getOptions;
 import U from '../Core/Utilities.js';
 var addEvent = U.addEvent, extend = U.extend;

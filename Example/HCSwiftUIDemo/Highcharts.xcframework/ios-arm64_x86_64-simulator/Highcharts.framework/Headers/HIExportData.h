@@ -16,14 +16,20 @@ The text for exported table.
 
 /**
 The annotation column title.
+
+**Defaults to** `Annotations`.
 */
 @property(nonatomic, readwrite) NSString *annotationHeader;
 /**
 The category column title.
+
+**Defaults to** `Category`.
 */
 @property(nonatomic, readwrite) NSString *categoryHeader;
 /**
 The category column title when axis type set to "datetime".
+
+**Defaults to** `DateTime`.
 */
 @property(nonatomic, readwrite) NSString *categoryDatetimeHeader;
 

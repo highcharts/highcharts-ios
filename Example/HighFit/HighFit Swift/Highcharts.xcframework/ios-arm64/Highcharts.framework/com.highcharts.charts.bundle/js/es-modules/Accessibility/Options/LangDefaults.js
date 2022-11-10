@@ -33,6 +33,10 @@ var langOptions = {
      * @optionparent lang.accessibility
      */
     accessibility: {
+        /**
+         * @deprecated 10.2.1
+         * @apioption  lang.accessibility.resetZoomButton
+         */
         defaultChartTitle: 'Chart',
         chartContainerLabel: '{title}. Highcharts interactive chart.',
         svgContainerLabel: 'Interactive chart',

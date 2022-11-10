@@ -8,6 +8,7 @@
 
 #import "HISeries.h"
 #import "HIJitter.h"
+#import "HICluster.h"
 
 
 /**
@@ -69,6 +70,8 @@ The minimum for the Z value range. Defaults to the lowest Z value in the data.
 /**
 Maximum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the `z` value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height.
 
+**Defaults to** `20%`.
+
 **Try it**
 
 * [Bubble size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-size/)
@@ -76,6 +79,8 @@ Maximum bubble size. Bubbles will automatically size between the `minSize` and `
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ maxSize;
 /**
 Minimum bubble size. Bubbles will automatically size between the `minSize` and `maxSize` to reflect the `z` value of each bubble. Can be either pixels (when no unit is given), or a percentage of the smallest one of the plot width and height.
+
+**Defaults to** `8`.
 
 **Try it**
 
@@ -119,6 +124,16 @@ Apply a jitter effect for the rendered markers. When plotting discrete values, a
 * [Jittered scatter plot on top of a box plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-scatter/jitter-boxplot)
 */
 @property(nonatomic, readwrite) HIJitter *jitter;
+/**
+Options for marker clusters, the concept of sampling the data values into larger blocks in order to ease readability and increase performance of the JavaScript charts. Note: marker clusters module is not working with `boost` and `draggable-points` modules. The marker clusters feature requires the marker-clusters.js file to be loaded, found in the modules directory of the download package, or online at `https://code.highcharts.com/modules/marker-clusters.js`.
+
+**Try it**
+
+* [Maps marker clusters](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/marker-clusters/europe)
+* [Scatter marker clusters](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/marker-clusters/basic)
+* [Marker clusters with colorAxis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/marker-clusters/optimized-kmeans)
+*/
+@property(nonatomic, readwrite) HICluster *cluster;
 
 -(NSDictionary *)getParams;
 

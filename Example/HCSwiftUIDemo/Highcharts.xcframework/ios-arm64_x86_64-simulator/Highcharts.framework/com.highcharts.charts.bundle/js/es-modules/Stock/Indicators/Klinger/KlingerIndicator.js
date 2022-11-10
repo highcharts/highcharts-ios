@@ -23,8 +23,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import MultipleLinesComposition from '../MultipleLinesComposition.js';
 import SeriesRegistry from '../../../Core/Series/SeriesRegistry.js';
-var EMAIndicator = SeriesRegistry.seriesTypes.ema;
-var SMAIndicator = SeriesRegistry.seriesTypes.sma;
+var _a = SeriesRegistry.seriesTypes, EMAIndicator = _a.ema, SMAIndicator = _a.sma;
 import U from '../../../Core/Utilities.js';
 var correctFloat = U.correctFloat, error = U.error, extend = U.extend, isArray = U.isArray, merge = U.merge;
 /* *

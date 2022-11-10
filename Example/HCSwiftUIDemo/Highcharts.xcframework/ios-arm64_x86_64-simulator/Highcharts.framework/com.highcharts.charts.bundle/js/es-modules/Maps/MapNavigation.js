@@ -13,7 +13,7 @@ import H from '../Core/Globals.js';
 var doc = H.doc;
 import U from '../Core/Utilities.js';
 var addEvent = U.addEvent, extend = U.extend, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach, pick = U.pick;
-import './MapNavigationOptionsDefault.js';
+import './MapNavigationDefaults.js';
 /* eslint-disable no-invalid-this, valid-jsdoc */
 /**
  * @private

@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
-var ColumnSeries = SeriesRegistry.seriesTypes.column;
+var ColumnPoint = SeriesRegistry.seriesTypes.column.prototype.pointClass;
 import U from '../../Core/Utilities.js';
 var isNumber = U.isNumber;
 /* *
@@ -51,7 +51,6 @@ var FlagsPoint = /** @class */ (function (_super) {
      *  Functions
      *
      * */
-    /* eslint-disable valid-jsdoc */
     /**
      * @private
      */
@@ -68,7 +67,7 @@ var FlagsPoint = /** @class */ (function (_super) {
         return this.graphic && shape && shape !== this.graphic.symbolKey;
     };
     return FlagsPoint;
-}(ColumnSeries.prototype.pointClass));
+}(ColumnPoint));
 /* *
  *
  *  Default Export

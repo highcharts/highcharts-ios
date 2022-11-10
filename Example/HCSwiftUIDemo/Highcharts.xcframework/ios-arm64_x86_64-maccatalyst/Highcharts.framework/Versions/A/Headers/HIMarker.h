@@ -20,6 +20,8 @@ Options for the point markers of line-like series. Properties like `fillColor`, 
 /**
 A predefined shape or symbol for the marker. When undefined, the symbol is pulled from options.symbols. Other possible values are `'circle'`, `'square'`,`'diamond'`, `'triangle'` and `'triangle-down'`. Additionally, the URL to a graphic can be given on this form: `'url(graphic.png)'`. Note that for the image to be applied to exported charts, its URL needs to be accessible by the export server. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols`. The callback is then used by its method name, as shown in the demo.
 
+**Defaults to** `circle`.
+
 **Try it**
 
 * [Predefined, graphic and custom markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-symbol/)
@@ -36,21 +38,14 @@ The width of the point marker's outline.
 /**
 The radius of the point marker.
 
-**Defaults to** `4`.
+**Defaults to** `10`.
 
 **Try it**
 
 * [Bigger markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-radius/)
 */
 @property(nonatomic, readwrite) NSNumber *radius;
-/**
-The color of the point marker's outline. When `undefined`, the series' or point's color is used.
-
-**Try it**
-
-* [Inherit from series color (undefined)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
-*/
-@property(nonatomic, readwrite) NSString *lineColor;
+@property(nonatomic, readwrite) NSNumber *fillOpacity;
 /**
 Enable or disable the point marker. If `undefined`, the markers are hidden when the data is dense, and shown for more widespread data points.
 
@@ -87,22 +82,35 @@ The fill color of the point marker. When `undefined`, the series' or point's col
 */
 @property(nonatomic, readwrite) HIColor *fillColor;
 /**
-The color of the marker.
+The color of the point marker's outline. When `undefined`, the series' or point's color is used.
+
+**Defaults to** `#ffffff`.
+
+**Try it**
+
+* [Inherit from series color (undefined)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
 */
-@property(nonatomic, readwrite) HIColor *color;
-/**
-Animation for the marker as it moves between values. Set to `false` to disable animation. Defaults to `{ duration: 50 }`.
-*/
-@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
-@property(nonatomic, readwrite) NSNumber *fillOpacity;
+@property(nonatomic, readwrite) HIColor *lineColor;
 /**
 The threshold for how dense the point markers should be before they are hidden, given that `enabled` is not defined. The number indicates the horizontal distance between the two closest points in the series, as multiples of the `marker.radius`. In other words, the default value of 2 means points are hidden if overlapping horizontally.
+
+**Defaults to** `2`.
 
 **Try it**
 
 * [A higher threshold](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabledthreshold)
 */
 @property(nonatomic, readwrite) NSNumber *enabledThreshold;
+/**
+The color of the marker.
+
+**Defaults to** `#999999`.
+*/
+@property(nonatomic, readwrite) HIColor *color;
+/**
+Animation for the marker as it moves between values. Set to `false` to disable animation. Defaults to `{ duration: 50 }`.
+*/
+@property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 
 -(NSDictionary *)getParams;
 

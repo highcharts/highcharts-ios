@@ -17,6 +17,8 @@ The pane serves as a container for axes and backgrounds for circular gauges and 
 /**
 The inner size of the pane, either as a number defining pixels, or a percentage defining a percentage of the pane's size.
 
+**Defaults to** `0%`.
+
 **Try it**
 
 * [The inner size set to 20%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-polar/column-inverted-inner)
@@ -58,6 +60,8 @@ The start angle of the polar X axis or gauge axis, given in degrees where 0 is n
 @property(nonatomic, readwrite) NSNumber *startAngle;
 /**
 The size of the pane, either as a number defining pixels, or a percentage defining a percentage of the available plot area (the smallest of the plot height or plot width).
+
+**Defaults to** `85%`.
 
 **Try it**
 

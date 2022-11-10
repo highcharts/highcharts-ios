@@ -29,14 +29,20 @@ Function to run upon clicking the "Play as sound" button in the screen reader re
 @property(nonatomic, readwrite) HIFunction *onPlayAsSoundClick;
 /**
 Format for the screen reader information region after the chart. Analogous to `beforeChartFormat`.
+
+**Defaults to** `{endOfChartMarker}`.
 */
 @property(nonatomic, readwrite) NSString *afterChartFormat;
 /**
 Date format to use to describe range of datetime axes. For an overview of the replacement codes, see `dateFormat`.
+
+**Defaults to** `%Y-%m-%d %H:%M:%S`.
 */
 @property(nonatomic, readwrite) NSString *axisRangeDateFormat;
 /**
 Format for the screen reader information region before the chart. Supported HTML tags are `<h1-6>`, `<p>`, `<div>`, `<a>`, `<ul>`, `<ol>`, `<li>`, and `<button>`. Attributes are not supported, except for id on `<div>`, `<a>`, and `<button>`. Id is required on `<a>` and `<button>` in the format `<tag id="abcd">`. Numbers, lower- and uppercase letters, "-" and "#" are valid characters in IDs. The headingTagName is an auto-detected heading (h1-h6) that corresponds to the heading level below the previous heading in the DOM. Set to empty string to remove the region altogether.
+
+**Defaults to** `<{headingTagName}>{chartTitle}</{headingTagName}><div>{typeDescription}</div><div>{chartSubtitle}</div><div>{chartLongdesc}</div><div>{playAsSoundButton}</div><div>{viewTableButton}</div><div>{xAxisDescription}</div><div>{yAxisDescription}</div><div>{annotationsTitle}{annotationsList}</div>`.
 */
 @property(nonatomic, readwrite) NSString *beforeChartFormat;
 /**
@@ -51,6 +57,8 @@ Language options for annotation descriptions.
 @property(nonatomic, readwrite) HIAnnotations *annotations;
 /**
 Label for the end of the chart. Announced by screen readers.
+
+**Defaults to** `End of interactive chart.`.
 */
 @property(nonatomic, readwrite) NSString *endOfChartMarker;
 

@@ -37,6 +37,8 @@ The back side of the frame around a 3D chart.
 @property(nonatomic, readwrite) HIBack *back;
 /**
 Whether the frames are visible.
+
+**Defaults to** `default`.
 */
 @property(nonatomic, readwrite) NSString *visible;
 /**
@@ -45,6 +47,8 @@ The front of the frame around a 3D chart.
 @property(nonatomic, readwrite) HIFront *front;
 /**
 General pixel thickness for the frame faces.
+
+**Defaults to** `1`.
 */
 @property(nonatomic, readwrite) NSNumber *size;
 /**

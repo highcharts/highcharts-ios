@@ -35,10 +35,15 @@ The item delimiter in the exported data. Use `;` for direct exporting to Excel. 
 @property(nonatomic, readwrite) NSString *itemDelimiter;
 /**
 Which date format to use for exported dates on a datetime X axis. See `Highcharts.dateFormat`.
+
+**Defaults to** `%Y-%m-%d %H:%M:%S`.
 */
 @property(nonatomic, readwrite) NSString *dateFormat;
 /**
 The line delimiter in the exported data, defaults to a newline.
+
+**Defaults to** `
+`.
 */
 @property(nonatomic, readwrite) NSString *lineDelimiter;
 /**

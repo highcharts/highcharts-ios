@@ -74,8 +74,6 @@ Padding between each value groups, in x axis units.
 /**
 Whether to group non-stacked columns or to let them render independent of each other. Non-grouped columns will be laid out individually and overlap each other.
 
-**Defaults to** `true`.
-
 **Try it**
 
 * [Grouping disabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-grouping-false/)

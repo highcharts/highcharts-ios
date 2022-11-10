@@ -26,7 +26,7 @@ var animObject = A.animObject;
 import Chart from '../../Core/Chart/Chart.js';
 import FU from '../../Core/FormatUtilities.js';
 var format = FU.format;
-import D from '../../Core/DefaultOptions.js';
+import D from '../../Core/Defaults.js';
 var setOptions = D.setOptions;
 import SeriesLabelDefaults from './SeriesLabelDefaults.js';
 import SLU from './SeriesLabelUtilities.js';
@@ -226,7 +226,7 @@ function drawSeriesLabels(chart) {
                     labelText = labelOptions.formatter.call(series);
                 }
                 series.labelBySeries = label = chart.renderer
-                    .label(labelText, 0, 0, 'connector')
+                    .label(labelText, 0, 0, 'connector', 0, 0, labelOptions.useHTML)
                     .addClass('highcharts-series-label ' +
                     'highcharts-series-label-' + series.index + ' ' +
                     (series.options.className || '') + ' ' +

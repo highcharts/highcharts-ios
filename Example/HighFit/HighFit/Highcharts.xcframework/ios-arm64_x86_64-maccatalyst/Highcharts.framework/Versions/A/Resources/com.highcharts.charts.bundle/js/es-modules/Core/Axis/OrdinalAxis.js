@@ -615,7 +615,8 @@ var OrdinalAxis;
                     // For an axis with multiple series, check if the distance
                     // between points is identical throughout all series.
                     if (i > 0 &&
-                        series.options.id !== 'highcharts-navigator-series') {
+                        series.options.id !== 'highcharts-navigator-series' &&
+                        series.processedXData.length > 1) {
                         adjustOrdinalExtremesPoints =
                             distanceBetweenPoint_1 !== series.processedXData[1] -
                                 series.processedXData[0];

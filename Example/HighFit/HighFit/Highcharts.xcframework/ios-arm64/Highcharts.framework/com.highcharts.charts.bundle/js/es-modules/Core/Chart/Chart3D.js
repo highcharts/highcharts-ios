@@ -12,10 +12,10 @@
 'use strict';
 import Color from '../Color/Color.js';
 var color = Color.parse;
+import D from '../Defaults.js';
+var genericDefaultOptions = D.defaultOptions;
 import Math3D from '../Math3D.js';
 var perspective = Math3D.perspective, shapeArea3D = Math3D.shapeArea3D;
-import D from '../DefaultOptions.js';
-var genericDefaultOptions = D.defaultOptions;
 import U from '../Utilities.js';
 var addEvent = U.addEvent, isArray = U.isArray, merge = U.merge, pick = U.pick, wrap = U.wrap;
 var Chart3D;
@@ -672,8 +672,8 @@ var Chart3D;
         addEvent(ChartClass, 'beforeRedraw', onBeforeRedraw);
         addEvent(ChartClass, 'beforeRender', onBeforeRender);
         wrap(chartProto, 'isInsidePlot', wrapIsInsidePlot);
-        wrap(ChartClass, 'renderSeries', wrapRenderSeries);
-        wrap(ChartClass, 'setClassName', wrapSetClassName);
+        wrap(chartProto, 'renderSeries', wrapRenderSeries);
+        wrap(chartProto, 'setClassName', wrapSetClassName);
     }
     Chart3D.compose = compose;
     /**

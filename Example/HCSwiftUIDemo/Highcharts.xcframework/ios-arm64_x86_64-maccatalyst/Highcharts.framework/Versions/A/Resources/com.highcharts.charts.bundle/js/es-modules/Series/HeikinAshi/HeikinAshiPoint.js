@@ -23,13 +23,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-/* *
- *
- *  Imports
- *
- * */
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
-var CandlestickSeries = SeriesRegistry.seriesTypes.candlestick;
+var CandlestickPoint = SeriesRegistry.seriesTypes.candlestick.prototype.pointClass;
 /* *
  *
  *  Class
@@ -38,22 +33,10 @@ var CandlestickSeries = SeriesRegistry.seriesTypes.candlestick;
 var HeikinAshiPoint = /** @class */ (function (_super) {
     __extends(HeikinAshiPoint, _super);
     function HeikinAshiPoint() {
-        /* *
-         *
-         *  Properties
-         *
-         * */
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.series = void 0;
-        return _this;
-        /* *
-         *
-         *  Functions
-         *
-         * */
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return HeikinAshiPoint;
-}(CandlestickSeries.prototype.pointClass));
+}(CandlestickPoint));
 /* *
  *
  *  Default Export

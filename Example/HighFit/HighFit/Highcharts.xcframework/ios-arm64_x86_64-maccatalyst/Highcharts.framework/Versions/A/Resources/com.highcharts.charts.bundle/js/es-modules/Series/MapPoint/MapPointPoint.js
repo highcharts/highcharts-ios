@@ -35,11 +35,6 @@ var isNumber = U.isNumber;
 var MapPointPoint = /** @class */ (function (_super) {
     __extends(MapPointPoint, _super);
     function MapPointPoint() {
-        /* *
-         *
-         *  Properties
-         *
-         * */
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.options = void 0;
         _this.series = void 0;

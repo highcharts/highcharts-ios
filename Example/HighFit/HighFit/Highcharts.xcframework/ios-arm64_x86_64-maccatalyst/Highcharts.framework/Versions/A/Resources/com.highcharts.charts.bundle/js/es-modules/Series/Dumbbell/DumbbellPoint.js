@@ -64,11 +64,12 @@ var DumbbellPoint = /** @class */ (function (_super) {
         this.pointSetState.apply(this, arguments);
         if (!point.state) {
             verb = 'animate';
-            if (point.lowerGraphic && !chart.styledMode) {
-                point.lowerGraphic.attr({
+            var _a = point.graphics || [], lowerGraphic = _a[0], upperGraphic = _a[1];
+            if (lowerGraphic && !chart.styledMode) {
+                lowerGraphic.attr({
                     fill: lowerGraphicColor
                 });
-                if (point.upperGraphic) {
+                if (upperGraphic) {
                     origProps = {
                         y: point.y,
                         zone: point.zone
@@ -76,7 +77,7 @@ var DumbbellPoint = /** @class */ (function (_super) {
                     point.y = point.high;
                     point.zone = point.zone ? point.getZone() : void 0;
                     upperGraphicColor = pick(point.marker ? point.marker.fillColor : void 0, seriesMarker ? seriesMarker.fillColor : void 0, pointOptions.color, point.zone ? point.zone.color : void 0, point.color);
-                    point.upperGraphic.attr({
+                    upperGraphic.attr({
                         fill: upperGraphicColor
                     });
                     extend(point, origProps);

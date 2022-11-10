@@ -11,9 +11,9 @@
  * */
 'use strict';
 import Chart from '../Core/Chart/Chart.js';
-import H from '../Core/Globals.js';
-import D from '../Core/DefaultOptions.js';
+import D from '../Core/Defaults.js';
 var defaultOptions = D.defaultOptions;
+import H from '../Core/Globals.js';
 import U from '../Core/Utilities.js';
 import F from '../Core/FormatUtilities.js';
 var format = F.format;

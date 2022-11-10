@@ -7,7 +7,7 @@ import U from '../../Core/Utilities.js';
 var defined = U.defined;
 /* *
  *
- *  Constants
+ *  API Options
  *
  * */
 /**
@@ -555,26 +555,31 @@ var AnnotationDefaults = {
      * Options from the controlPointOptions can be overwritten
      * by options in a specific control point.
      *
-     * @declare   Highcharts.AnnotationControlPointOptionsObject
-     * @requires  modules/annotations
-     * @apioption annotations.controlPointOptions
+     * @declare  Highcharts.AnnotationControlPointOptionsObject
+     * @requires modules/annotations
      */
     controlPointOptions: {
         /**
          * @type      {Highcharts.AnnotationControlPointPositionerFunction}
          * @apioption annotations.controlPointOptions.positioner
          */
-        symbol: 'circle',
-        width: 10,
-        height: 10,
+        /**
+         * @type {Highcharts.Dictionary<Function>}
+         */
+        events: {},
+        /**
+         * @type {Highcharts.SVGAttributes}
+         */
         style: {
             cursor: 'pointer',
             fill: "#ffffff" /* Palette.backgroundColor */,
             stroke: "#000000" /* Palette.neutralColor100 */,
             'stroke-width': 2
         },
+        height: 10,
+        symbol: 'circle',
         visible: false,
-        events: {}
+        width: 10
     },
     /**
      * Event callback when annotation is added to the chart.

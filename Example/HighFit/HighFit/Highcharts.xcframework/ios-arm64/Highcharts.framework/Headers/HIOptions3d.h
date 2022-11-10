@@ -16,6 +16,8 @@ Options to render charts in 3 dimensions. This feature requires `highcharts-3d.j
 
 /**
 Defines the distance the viewer is standing in front of the chart, this setting is important to calculate the perspective effect in column and scatter charts. It is not used for 3D pie charts.
+
+**Defaults to** `25`.
 */
 @property(nonatomic, readwrite) NSNumber *viewDistance;
 /**
@@ -32,6 +34,8 @@ Whether to render the chart using the 3D functionality.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The total depth of the chart.
+
+**Defaults to** `100`.
 */
 @property(nonatomic, readwrite) NSNumber *depth;
 /**
@@ -40,6 +44,8 @@ One of the two rotation angles for the chart.
 @property(nonatomic, readwrite) NSNumber *beta;
 /**
 Whether the 3d box should automatically adjust to the chart plot area.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *fitToPlot;
 /**

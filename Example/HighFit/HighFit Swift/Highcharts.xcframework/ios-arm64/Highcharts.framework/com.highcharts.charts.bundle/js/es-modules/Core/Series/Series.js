@@ -10,8 +10,8 @@
 'use strict';
 import A from '../Animation/AnimationUtilities.js';
 var animObject = A.animObject, setAnimation = A.setAnimation;
-import DO from '../DefaultOptions.js';
-var defaultOptions = DO.defaultOptions;
+import D from '../Defaults.js';
+var defaultOptions = D.defaultOptions;
 import F from '../Foundation.js';
 var registerEventOptions = F.registerEventOptions;
 import H from '../Globals.js';
@@ -1741,8 +1741,9 @@ var Series = /** @class */ (function () {
      *
      * @function Highcharts.Series#drawPoints
      */
-    Series.prototype.drawPoints = function () {
-        var series = this, points = series.points, chart = series.chart, options = series.options, seriesMarkerOptions = options.marker, markerGroup = (series[series.specialGroup] ||
+    Series.prototype.drawPoints = function (points) {
+        if (points === void 0) { points = this.points; }
+        var series = this, chart = series.chart, options = series.options, seriesMarkerOptions = options.marker, markerGroup = (series[series.specialGroup] ||
             series.markerGroup), xAxis = series.xAxis, globallyEnabled = pick(seriesMarkerOptions.enabled, !xAxis || xAxis.isRadial ? true : null, 
         // Use larger or equal as radius is null in bubbles (#6321)
         series.closestPointRangePx >= (seriesMarkerOptions.enabledThreshold *
@@ -2843,7 +2844,8 @@ var Series = /** @class */ (function () {
             'group',
             'markerGroup',
             'dataLabelsGroup',
-            'transformGroup'
+            'transformGroup',
+            'shadowGroup'
         ], 
         // Animation must be enabled when calling update before the initial
         // animation has first run. This happens when calling update
@@ -2988,7 +2990,8 @@ var Series = /** @class */ (function () {
                     kinds.dataLabel = 1;
                 }
             }
-            this.points.forEach(function (point) {
+            for (var _a = 0, _b = this.points; _a < _b.length; _a++) {
+                var point = _b[_a];
                 if (point && point.series) {
                     point.resolveColor();
                     // Destroy elements in order to recreate based on updated
@@ -3001,7 +3004,7 @@ var Series = /** @class */ (function () {
                         chart.legend.destroyItem(point);
                     }
                 }
-            }, this);
+            }
         }
         series.initialType = initialType;
         chart.linkSeries(); // Links are lost in series.remove (#3028)
@@ -3219,7 +3222,7 @@ var Series = /** @class */ (function () {
      * @emits Highcharts.Series#event:show
      */
     Series.prototype.setVisible = function (vis, redraw) {
-        var series = this, chart = series.chart, legendItem = series.legendItem, ignoreHiddenSeries = chart.options.chart.ignoreHiddenSeries, oldVisibility = series.visible;
+        var series = this, chart = series.chart, ignoreHiddenSeries = chart.options.chart.ignoreHiddenSeries, oldVisibility = series.visible;
         // if called without an argument, toggle visibility
         series.visible =
             vis =
@@ -3244,7 +3247,7 @@ var Series = /** @class */ (function () {
             (chart.hoverPoint && chart.hoverPoint.series) === series) {
             series.onMouseOut();
         }
-        if (legendItem) {
+        if (series.legendItem) {
             chart.legend.colorizeItem(series, vis);
         }
         // rescale or adapt to resized chart

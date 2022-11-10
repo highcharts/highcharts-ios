@@ -59,7 +59,7 @@ var defaultOptions = {
      *
      * @type   {Object}
      *
-     * @sample maps/mapview/projection-explorer
+     * @sample maps/demo/projection-explorer
      *         Projection explorer
      * @sample maps/demo/topojson-projection
      *         Orthographic projection
@@ -74,7 +74,7 @@ var defaultOptions = {
          * `LambertConformalConic`, `Miller`, `Orthographic` and `WebMercator`.
          *
          * @type   {string}
-         * @sample maps/mapview/projection-explorer
+         * @sample maps/demo/projection-explorer
          *         Projection explorer
          * @sample maps/mapview/projection-custom-proj4js
          *         Custom UTM projection definition
@@ -91,7 +91,7 @@ var defaultOptions = {
          *
          * @sample maps/mapview/projection-parallels
          *         LCC projection with parallels
-         * @sample maps/mapview/projection-explorer
+         * @sample maps/demo/projection-explorer
          *         Projection explorer
          * @type {Array<number>}
          */
@@ -105,7 +105,7 @@ var defaultOptions = {
          * * `phi` shifts the latitudes by the given value. Can be omitted.
          * * `gamma` applies a _roll_. Can be omitted.
          *
-         * @sample maps/mapview/projection-explorer
+         * @sample maps/demo/projection-explorer
          *         Projection explorer
          * @sample maps/mapview/projection-america-centric
          *         America-centric world map

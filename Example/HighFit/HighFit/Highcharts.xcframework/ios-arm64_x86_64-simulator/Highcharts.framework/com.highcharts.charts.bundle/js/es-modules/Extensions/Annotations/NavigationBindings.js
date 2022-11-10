@@ -9,7 +9,7 @@
  * */
 'use strict';
 import ChartNavigationComposition from '../../Core/Chart/ChartNavigationComposition.js';
-import D from '../../Core/DefaultOptions.js';
+import D from '../../Core/Defaults.js';
 var setOptions = D.setOptions;
 import F from '../../Core/FormatUtilities.js';
 var format = F.format;
@@ -220,11 +220,10 @@ var NavigationBindings = /** @class */ (function () {
         this.chart = chart;
         this.options = options;
         this.eventsToUnbind = [];
-        this.container = this.chart.container
-            .querySelectorAll('.' + this.options.bindingsClassName);
+        this.container =
+            this.chart.container.getElementsByClassName(this.options.bindingsClassName || '');
         if (!this.container.length) {
-            this.container = doc
-                .querySelectorAll('.' + this.options.bindingsClassName);
+            this.container = doc.getElementsByClassName(this.options.bindingsClassName || '');
         }
     }
     /* *

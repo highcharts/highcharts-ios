@@ -27,6 +27,8 @@ The radius of the point marker. In hover state, it defaults to the normal state'
 /**
 The width of the point marker's outline.
 
+**Defaults to** `2`.
+
 **Try it**
 
 * [3px line width for selected points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-select-linewidth/)
@@ -45,6 +47,8 @@ Enable or disable visible feedback for selection.
 /**
 The fill color of the point marker.
 
+**Defaults to** `#cccccc`.
+
 **Try it**
 
 * [Solid red discs for selected points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-select-fillcolor/)
@@ -52,6 +56,8 @@ The fill color of the point marker.
 @property(nonatomic, readwrite) HIColor *fillColor;
 /**
 The color of the point marker's outline. When `undefined`, the series' or point's color is used.
+
+**Defaults to** `#000000`.
 
 **Try it**
 
@@ -116,6 +122,8 @@ Animation setting for hovering the graph in line-type series.
 @property(nonatomic, readwrite) HIAnimation *animation;
 /**
 The additional line width for the graph of a hovered series.
+
+**Defaults to** `1`.
 
 **Try it**
 

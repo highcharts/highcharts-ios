@@ -47,6 +47,8 @@ The HTML of the cluster point's in the tooltip. Works only with marker-clusters 
 /**
 The radius of the rounded border corners.
 
+**Defaults to** `3`.
+
 **Try it**
 
 * [5px by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/bordercolor-default/)
@@ -124,7 +126,7 @@ CSS styles for the tooltip. The tooltip can also be styled through the CSS class
 /**
 The name of a symbol to use for the border around the tooltip header. Applies only when `tooltip.split` is enabled. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
 
-**Accepted values:** `["callout", "square"]`.
+**Defaults to** `callout`.
 */
 @property(nonatomic, readwrite) NSString *headerShape;
 /**
@@ -234,10 +236,14 @@ For series on datetime axes, the date format in the tooltip's header will by def
 @property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**
 Padding inside the tooltip, in pixels.
+
+**Defaults to** `8`.
 */
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
 Whether to apply a drop shadow to the tooltip.
+
+**Defaults to** `True`.
 
 **Try it**
 
@@ -254,6 +260,8 @@ Distance from point to tooltip in pixels.
 /**
 Enable or disable the tooltip.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Disabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/enabled/)
@@ -262,6 +270,8 @@ Enable or disable the tooltip.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The name of a symbol to use for the border around the tooltip. Can be one of: `"callout"`, `"circle"` or `"rect"`. When `tooltip.split` option is enabled, shape is applied to all boxes except header, which is controlled by `tooltip.headerShape`. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
+
+**Defaults to** `callout`.
 */
 @property(nonatomic, readwrite) NSString *shape;
 /**
@@ -274,6 +284,8 @@ A CSS class name to apply to the tooltip's container div, allowing unique CSS st
 @property(nonatomic, readwrite) NSString *className;
 /**
 The pixel width of the tooltip border. In styled mode, the stroke width is set in the `.highcharts-tooltip-box` class.
+
+**Defaults to** `1`.
 
 **Try it**
 
@@ -288,6 +300,8 @@ Whether the tooltip should follow the mouse as it moves across columns, pie slic
 @property(nonatomic, readwrite) NSNumber /* Bool */ *followPointer;
 /**
 The number of milliseconds to wait until the tooltip is hidden when mouse out from a point or chart.
+
+**Defaults to** `500`.
 */
 @property(nonatomic, readwrite) NSNumber *hideDelay;
 /**
@@ -298,6 +312,12 @@ How many decimals to show in each series' y value. This is overridable in each s
 * [Set decimals, prefix and suffix for the value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/valuedecimals/)
 */
 @property(nonatomic, readwrite) NSNumber *valueDecimals;
+/**
+The HTML of the point's line in the tooltip. Variables are enclosed by curly brackets. Available variables are `point.id`, `point.fromNode.id`, `point.toNode.id`, `series.name`, `series.color` and other properties on the same form. Furthermore, This can also be overridden for each series, which makes it a good hook for displaying units. In styled mode, the dot is colored by a class name rather than the point color.
+
+**Defaults to** `{point.fromNode.id} â†’ {point.toNode.id}`.
+*/
+@property(nonatomic, readwrite) NSString *linkFormat;
 @property(nonatomic, readwrite) NSString *nodeFormat;
 /**
 A callback for defining the format for _nodes_ in the chart's tooltip, as opposed to links.

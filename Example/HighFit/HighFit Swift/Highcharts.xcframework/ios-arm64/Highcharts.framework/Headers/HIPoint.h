@@ -23,6 +23,8 @@ Formatter function to use instead of the default for point descriptions. Same as
 @property(nonatomic, readwrite) HIFunction *descriptionFormatter;
 /**
 Format to use for describing the values of data points to assistive technology - including screen readers. The point context is available as `{point}`. Other available context variables include `{index}`, `{value}`, and `{xDescription}`. Additionally, the series name, annotation info, and description added in `point.accessibility.description` is added by default if relevant. To override this, use the `accessibility.point.descriptionFormatter` option.
+
+**Defaults to** `{xDescription}{separator}{value}.`.
 */
 @property(nonatomic, readwrite) NSString *valueDescriptionFormat;
 /**
@@ -31,6 +33,8 @@ Suffix to add to the values in the point descriptions. Uses `tooltip.valueSuffix
 @property(nonatomic, readwrite) NSString *valueSuffix;
 /**
 Whether or not to describe points with the value `null` to assistive technology, such as screen readers.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *describeNull;
 /**

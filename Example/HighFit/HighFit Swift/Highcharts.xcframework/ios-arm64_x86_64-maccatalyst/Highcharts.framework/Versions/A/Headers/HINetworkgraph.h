@@ -53,6 +53,8 @@ A collection of options for the individual nodes. The nodes in a networkgraph di
 @property(nonatomic, readwrite) HILayoutAlgorithm *layoutAlgorithm;
 /**
 Flag to determine if nodes are draggable or not.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *draggable;
 /**

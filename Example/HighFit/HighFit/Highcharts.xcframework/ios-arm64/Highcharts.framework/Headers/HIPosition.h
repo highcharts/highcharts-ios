@@ -32,6 +32,8 @@ Series center offset from the original y position. If defined, the connector lin
 @property(nonatomic, readwrite) NSNumber *offsetY;
 /**
 The horizontal alignment of the button.
+
+**Defaults to** `right`.
 */
 @property(nonatomic, readwrite) NSString *align;
 /**

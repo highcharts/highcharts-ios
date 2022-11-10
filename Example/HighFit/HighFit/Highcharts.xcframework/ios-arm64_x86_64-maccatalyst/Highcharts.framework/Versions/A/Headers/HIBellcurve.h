@@ -66,6 +66,8 @@ Fill opacity for the area. When you set an explicit `fillColor`, the `fillOpacit
 /**
 This option allows to define the length of the bell curve. A unit of the length of the bell curve is standard deviation.
 
+**Defaults to** `3`.
+
 **Try it**
 
 * [Intervals and points in interval](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bellcurve-intervals-pointsininterval)
@@ -73,6 +75,8 @@ This option allows to define the length of the bell curve. A unit of the length 
 @property(nonatomic, readwrite) NSNumber *intervals;
 /**
 Defines how many points should be plotted within 1 interval. See `plotOptions.bellcurve.intervals`.
+
+**Defaults to** `3`.
 
 **Try it**
 

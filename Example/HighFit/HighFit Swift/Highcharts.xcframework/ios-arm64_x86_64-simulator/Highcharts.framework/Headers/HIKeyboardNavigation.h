@@ -17,10 +17,14 @@ Options for keyboard navigation for the legend.
 
 /**
 Enable keyboard navigation for the legend.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 Whether or not to wrap around when reaching the end of arrow-key navigation for an element in the chart.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *wrapAround;
 /**

@@ -54,10 +54,6 @@ var AreaRangePoint = /** @class */ (function (_super) {
          */
         _this.low = void 0;
         _this.options = void 0;
-        _this.plotHigh = void 0;
-        _this.plotLow = void 0;
-        _this.plotHighX = void 0;
-        _this.plotLowX = void 0;
         _this.plotX = void 0;
         _this.series = void 0;
         return _this;
@@ -85,9 +81,9 @@ var AreaRangePoint = /** @class */ (function (_super) {
             series.stateMarkerGraphic = series.upperStateMarkerGraphic;
         }
         // Change state also for the top marker
-        this.graphic = this.upperGraphic;
+        this.graphic = this.graphics && this.graphics[1];
         this.plotY = this.plotHigh;
-        if (isPolar) {
+        if (isPolar && isNumber(this.plotHighX)) {
             this.plotX = this.plotHighX;
         }
         // Top state:
@@ -95,8 +91,8 @@ var AreaRangePoint = /** @class */ (function (_super) {
         this.state = prevState;
         // Now restore defaults
         this.plotY = this.plotLow;
-        this.graphic = this.lowerGraphic;
-        if (isPolar) {
+        this.graphic = this.graphics && this.graphics[0];
+        if (isPolar && isNumber(this.plotLowX)) {
             this.plotX = this.plotLowX;
         }
         if (series.stateMarkerGraphic) {
@@ -113,7 +109,7 @@ var AreaRangePoint = /** @class */ (function (_super) {
         var path = [];
         // Bottom halo
         this.plotY = this.plotLow;
-        if (isPolar) {
+        if (isPolar && isNumber(this.plotLowX)) {
             this.plotX = this.plotLowX;
         }
         if (this.isInside) {
@@ -121,7 +117,7 @@ var AreaRangePoint = /** @class */ (function (_super) {
         }
         // Top halo
         this.plotY = this.plotHigh;
-        if (isPolar) {
+        if (isPolar && isNumber(this.plotHighX)) {
             this.plotX = this.plotHighX;
         }
         if (this.isTopInside) {

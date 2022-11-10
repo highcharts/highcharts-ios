@@ -26,7 +26,7 @@ import AST from '../../Core/Renderer/HTML/AST.js';
 import ExportDataDefaults from './ExportDataDefaults.js';
 import H from '../../Core/Globals.js';
 var doc = H.doc, win = H.win;
-import D from '../../Core/DefaultOptions.js';
+import D from '../../Core/Defaults.js';
 var getOptions = D.getOptions, setOptions = D.setOptions;
 import DownloadURL from '../DownloadURL.js';
 var downloadURL = DownloadURL.downloadURL;
@@ -262,7 +262,8 @@ function chartGetDataRows(multiLevelHeaders) {
                 chart: series.chart,
                 autoIncrement: series.autoIncrement,
                 options: series.options,
-                pointArrayMap: series.pointArrayMap
+                pointArrayMap: series.pointArrayMap,
+                index: series.index
             };
             // Export directly from options.data because we need the uncropped
             // data (#7913), and we need to support Boost (#7026).
@@ -276,6 +277,20 @@ function chartGetDataRows(multiLevelHeaders) {
                 }
                 series.pointClass.prototype.applyOptions.apply(mockPoint, [options]);
                 key = mockPoint.x;
+                if (defined(rows[key]) &&
+                    rows[key].seriesIndices.includes(mockSeries.index)) {
+                    // find keys, which belong to actual series
+                    var keysFromActualSeries = Object.keys(rows).filter(function (i) {
+                        return rows[i].seriesIndices.includes(mockSeries.index) &&
+                            key;
+                    }), 
+                    // find all properties, which start with actual key
+                    existingKeys = keysFromActualSeries
+                        .filter(function (propertyName) {
+                        return propertyName.indexOf(String(key)) === 0;
+                    });
+                    key = key.toString() + ',' + existingKeys.length;
+                }
                 var name = series.data[pIdx] && series.data[pIdx].name;
                 j = 0;
                 // Pies, funnels, geo maps etc. use point name in X row
@@ -299,6 +314,12 @@ function chartGetDataRows(multiLevelHeaders) {
                 rows[key].x = mockPoint.x;
                 rows[key].name = name;
                 rows[key].xValues[xAxisIndex] = mockPoint.x;
+                if (!defined(rows[key].seriesIndices)) {
+                    rows[key].seriesIndices = [];
+                }
+                rows[key].seriesIndices = __spreadArray(__spreadArray([], rows[key].seriesIndices, true), [
+                    mockSeries.index
+                ], false);
                 while (j < valueCount) {
                     prop = pointArrayMap[j]; // y, z etc
                     val = mockPoint[prop];
@@ -609,7 +630,8 @@ function chartHideData() {
 function chartToggleDataTable(show) {
     show = pick(show, !this.isDataTableVisible);
     // Create the div
-    if (show && !this.dataTableDiv) {
+    var createContainer = show && !this.dataTableDiv;
+    if (createContainer) {
         this.dataTableDiv = doc.createElement('div');
         this.dataTableDiv.className = 'highcharts-data-table';
         // Insert after the chart container
@@ -617,13 +639,17 @@ function chartToggleDataTable(show) {
     }
     // Toggle the visibility
     if (this.dataTableDiv) {
-        this.dataTableDiv.style.display = show ? 'block' : 'none';
+        var style = this.dataTableDiv.style, oldDisplay = style.display;
+        style.display = show ? 'block' : 'none';
         // Generate the data table
         if (show) {
             this.dataTableDiv.innerHTML = AST.emptyHTML;
             var ast = new AST([this.getTableAST()]);
             ast.addToDOM(this.dataTableDiv);
-            fireEvent(this, 'afterViewData', this.dataTableDiv);
+            fireEvent(this, 'afterViewData', {
+                element: this.dataTableDiv,
+                wasHidden: createContainer || oldDisplay !== style.display
+            });
         }
     }
     // Set the flag

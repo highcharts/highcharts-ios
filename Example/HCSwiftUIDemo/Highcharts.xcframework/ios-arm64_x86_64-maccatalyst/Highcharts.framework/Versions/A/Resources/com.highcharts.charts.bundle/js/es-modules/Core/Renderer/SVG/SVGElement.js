@@ -395,9 +395,6 @@ var SVGElement = /** @class */ (function () {
         var strokeWidth = parts[0];
         if (strokeWidth && strokeWidth !== 'none' && H.svg) {
             this.fakeTS = true; // Fake text shadow
-            // In order to get the right y position of the clone,
-            // copy over the y setter
-            this.ySetter = this.xSetter;
             // Since the stroke is applied on center of the actual outline, we
             // need to double it to get the correct stroke-width outside the
             // glyphs.

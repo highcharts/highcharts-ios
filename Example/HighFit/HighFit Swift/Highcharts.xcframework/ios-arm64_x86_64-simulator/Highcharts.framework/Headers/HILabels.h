@@ -32,8 +32,6 @@ Angular gauges and solid gauges only. The label's pixel distance from the perime
 /**
 What part of the string the given position is anchored to. Can be one of `"left"`, `"center"` or `"right"`. The exact position also depends on the `labels.x` setting. Angular gauges and solid gauges defaults to `"center"`. Solid gauges with two labels have additional option `"auto"` for automatic horizontal and vertical alignment.
 
-**Defaults to** `right`.
-
 **Try it**
 
 * [Left](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/labels-align-left/)
@@ -53,6 +51,8 @@ The y position offset of all labels relative to the tick positions on the axis. 
 /**
 The x position offset of all labels relative to the tick positions on the axis. Defaults to -15 for left axis, 15 for right axis.
 
+**Defaults to** `-8`.
+
 **Try it**
 
 * [Y axis labels placed on grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-x/)
@@ -69,6 +69,8 @@ Horizontal axes only. The number of lines to spread the labels over to make room
 /**
 When each category width is more than this many pixels, we don't apply auto rotation. Instead, we lay out the axis label with word wrap. A lower limit makes sense when the label contains multiple short words that don't extend the available horizontal space for each label.
 
+**Defaults to** `80`.
+
 **Try it**
 
 * [Lower limit](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-autorotationlimit/)
@@ -77,7 +79,7 @@ When each category width is more than this many pixels, we don't apply auto rota
 /**
 Defines how the labels are be repositioned according to the 3D chart orientation. - `'offset'`: Maintain a fixed horizontal/vertical distance from  the tick marks, despite the chart orientation. This is the  backwards compatible behavior, and causes skewing of X and Z  axes. - `'chart'`: Preserve 3D position relative to the chart. This  looks nice, but hard to read if the text isn't forward-facing. - `'flap'`: Rotated text along the axis to compensate for the  chart orientation. This tries to maintain text as legible as  possible on all orientations. - `'ortho'`: Rotated text along the axis direction so that the  labels are orthogonal to the axis. This is very similar to  `'flap'`, but prevents skewing the labels (X and Y scaling are  still present).
 
-**Accepted values:** `['offset', 'chart', 'flap', 'ortho']`.
+**Defaults to** `offset`.
 
 **Try it**
 
@@ -155,6 +157,8 @@ Whether to allow the axis labels to overlap. When false, overlapping labels are 
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowOverlap;
 /**
 The Z index for the axis labels.
+
+**Defaults to** `7`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
@@ -169,6 +173,8 @@ A format string for the axis label. The context is available as format string va
 @property(nonatomic, readwrite) NSString *format;
 /**
 The pixel padding for axis labels, to ensure white space between them.
+
+**Defaults to** `5`.
 */
 @property(nonatomic, readwrite) NSNumber *padding;
 /**
@@ -183,7 +189,7 @@ To show only every _n_'th label on the axis, set the step to _n_. Setting the st
 /**
 How to handle overflowing labels on horizontal axis. If set to `"allow"`, it will not be aligned at all. By default it `"justify"` labels inside the chart area. If there is room to move it, it will be aligned to the edge, else it will be removed.
 
-**Accepted values:** `["allow", "justify"]`.
+**Defaults to** `justify`.
 */
 @property(nonatomic, readwrite) NSString *overflow;
 /**
@@ -208,6 +214,8 @@ This option defines the point to which the label will be connected. It can be ei
 /**
 Whether the annotation is visible in the exported data table.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Do not include in the data export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/include-in-data-export/)
@@ -215,6 +223,8 @@ Whether the annotation is visible in the exported data table.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
 The border radius in pixels for the annotaiton's label.
+
+**Defaults to** `3`.
 
 **Try it**
 
@@ -244,6 +254,8 @@ Whether to hide the annotation's label that is outside the plot area.
 /**
 The name of a symbol to use for the border around the label. Symbols are predefined functions on the Renderer object.
 
+**Defaults to** `callout`.
+
 **Try it**
 
 * [Available shapes for labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shapes/)
@@ -252,6 +264,8 @@ The name of a symbol to use for the border around the label. Symbols are predefi
 /**
 The border color for the annotation's label.
 
+**Defaults to** `#000000`.
+
 **Try it**
 
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
@@ -259,6 +273,8 @@ The border color for the annotation's label.
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
 The background color or gradient for the annotation's label.
+
+**Defaults to** `rgba(0, 0, 0, 0.75)`.
 
 **Try it**
 
@@ -276,6 +292,8 @@ The shadow of the box. The shadow can be an object configuration containing `col
 /**
 The vertical alignment of the annotation's label.
 
+**Defaults to** `bottom`.
+
 **Try it**
 
 * [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
@@ -284,6 +302,8 @@ The vertical alignment of the annotation's label.
 /**
 A class name for styling by CSS.
 
+**Defaults to** `highcharts-no-tooltip`.
+
 **Try it**
 
 * [Styled mode annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/annotations)
@@ -291,6 +311,8 @@ A class name for styling by CSS.
 @property(nonatomic, readwrite) NSString *className;
 /**
 The border width in pixels for the annotation's label
+
+**Defaults to** `1`.
 
 **Try it**
 

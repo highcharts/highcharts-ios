@@ -275,20 +275,7 @@ var Tooltip = /** @class */ (function () {
         var tooltip = this, styledMode = this.chart.styledMode, options = this.options, doSplit = this.split && this.allowShared, className = ('tooltip' + (defined(options.className) ?
             ' ' + options.className :
             '')), pointerEvents = (options.style.pointerEvents ||
-            (!this.followPointer &&
-                options.stickOnContact ? 'auto' : 'none')), onMouseEnter = function () {
-            tooltip.inContact = true;
-        }, onMouseLeave = function (e) {
-            var series = tooltip.chart.hoverSeries;
-            // #14143, #13310: tooltip.options.useHTML
-            tooltip.inContact = tooltip.shouldStickOnContact() &&
-                tooltip.chart.pointer.inClass(e.relatedTarget, 'highcharts-tooltip');
-            if (!tooltip.inContact &&
-                series &&
-                series.onMouseOut) {
-                series.onMouseOut();
-            }
-        };
+            (this.shouldStickOnContact() ? 'auto' : 'none'));
         var container, renderer = this.chart.renderer;
         // If changing from a split tooltip to a non-split tooltip, we must
         // destroy it in order to get the SVG right. #13868.
@@ -317,8 +304,6 @@ var Tooltip = /** @class */ (function () {
                     pointerEvents: pointerEvents,
                     zIndex: Math.max(this.options.style.zIndex || 0, (chartStyle && chartStyle.zIndex || 0) + 3)
                 });
-                addEvent(container, 'mouseenter', onMouseEnter);
-                addEvent(container, 'mouseleave', onMouseLeave);
                 H.doc.body.appendChild(container);
                 /**
                  * Reference to the tooltip's renderer, when
@@ -375,8 +360,6 @@ var Tooltip = /** @class */ (function () {
                 };
             }
             this.label
-                .on('mouseenter', onMouseEnter)
-                .on('mouseleave', onMouseLeave)
                 .attr({ zIndex: 8 })
                 .add();
         }
@@ -655,14 +638,10 @@ var Tooltip = /** @class */ (function () {
          */
         this.outside = pick(options.outside, Boolean(chart.scrollablePixelsX || chart.scrollablePixelsY));
     };
-    Tooltip.prototype.shouldStickOnContact = function () {
-        return !!(!this.followPointer && this.options.stickOnContact);
-    };
-    /**
-     * Returns true, if the pointer is in contact with the tooltip tracker.
-     */
-    Tooltip.prototype.isStickyOnContact = function () {
-        return !!(this.shouldStickOnContact() && this.inContact);
+    Tooltip.prototype.shouldStickOnContact = function (pointerEvent) {
+        return !!(!this.followPointer &&
+            this.options.stickOnContact &&
+            (!pointerEvent || this.chart.pointer.inClass(pointerEvent.target, 'highcharts-tooltip')));
     };
     /**
      * Moves the tooltip with a soft animation to a new position.
@@ -1141,8 +1120,7 @@ var Tooltip = /** @class */ (function () {
      */
     Tooltip.prototype.drawTracker = function () {
         var tooltip = this;
-        if (tooltip.followPointer ||
-            !tooltip.options.stickOnContact) {
+        if (!this.shouldStickOnContact()) {
             if (tooltip.tracker) {
                 tooltip.tracker.destroy();
             }

@@ -24,8 +24,7 @@ var __extends = (this && this.__extends) || (function () {
 import H from '../../../Core/Globals.js';
 var noop = H.noop;
 import SeriesRegistry from '../../../Core/Series/SeriesRegistry.js';
-var SMAIndicator = SeriesRegistry.seriesTypes.sma;
-var columnProto = SeriesRegistry.seriesTypes.column.prototype;
+var _a = SeriesRegistry.seriesTypes, columnProto = _a.column.prototype, SMAIndicator = _a.sma;
 import U from '../../../Core/Utilities.js';
 var extend = U.extend, merge = U.merge, correctFloat = U.correctFloat, isArray = U.isArray;
 /* *

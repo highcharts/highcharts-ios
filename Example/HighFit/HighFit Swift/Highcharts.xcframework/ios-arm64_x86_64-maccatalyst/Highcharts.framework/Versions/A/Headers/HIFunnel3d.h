@@ -43,7 +43,7 @@
 /**
 When using automatic point colors pulled from the global `colors` or series-specific `plotOptions.column.colors` collections, this option determines whether the chart should receive one color per series or one color per point. In styled mode, the `colors` or `series.colors` arrays are not supported, and instead this option gives the points individual color class names on the form `highcharts-color-{n}`.
 
-**Defaults to** `false`.
+**Defaults to** `True`.
 
 **Try it**
 
@@ -58,6 +58,8 @@ A reversed funnel has the widest area down. A reversed funnel with no neck width
 /**
 The height of the neck, the lower part of the funnel. A number defines pixel width, a percentage string defines a percentage of the plot area height.
 
+**Defaults to** `25%`.
+
 **Try it**
 
 * [Funnel3d demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/funnel3d/)
@@ -65,6 +67,8 @@ The height of the neck, the lower part of the funnel. A number defines pixel wid
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ neckHeight;
 /**
 The height of the series. If it is a number it defines the pixel height, if it is a percentage string it is the percentage of the plot area height.
+
+**Defaults to** `100%`.
 
 **Try it**
 
@@ -74,6 +78,8 @@ The height of the series. If it is a number it defines the pixel height, if it i
 /**
 The max width of the series compared to the width of the plot area, or the pixel width if it is a number.
 
+**Defaults to** `90%`.
+
 **Try it**
 
 * [Funnel3d demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/funnel3d/)
@@ -82,6 +88,8 @@ The max width of the series compared to the width of the plot area, or the pixel
 /**
 The width of the neck, the lower part of the funnel. A number defines pixel width, a percentage string defines a percentage of the plot area width.
 
+**Defaults to** `30%`.
+
 **Try it**
 
 * [Funnel3d demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/funnel3d/)
@@ -89,16 +97,18 @@ The width of the neck, the lower part of the funnel. A number defines pixel widt
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ neckWidth;
 /**
 By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
 /**
 3D columns only. The width of the colored edges.
-
-**Defaults to** `1`.
 */
 @property(nonatomic, readwrite) NSNumber *edgeWidth;
 /**
 Padding between each column or bar, in x axis units.
+
+**Defaults to** `0.1`.
 
 **Try it**
 
@@ -183,6 +193,8 @@ A pixel value specifying a fixed width for each column or bar point. When set to
 /**
 Padding between each value groups, in x axis units.
 
+**Defaults to** `0.2`.
+
 **Try it**
 
 * [0.2 by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-grouppadding-default/)
@@ -228,11 +240,21 @@ The center of the series. By default, it is centered in the middle of the plot a
 /**
 Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [True, the hiddden point is ignored](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-ignorehiddenpoint/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
+/**
+The diameter of the pie relative to the plot area. Can be a percentage or pixel value. Pixel values are given as integers. The default behaviour (as of 3.0) is to scale to the plot area and give room for data labels within the plot area. `slicedOffset` is also included in the default size calculation. As a consequence, the size of the pie may vary when points are updated and data labels more around. In that case it is best to set a fixed value, for example `"75%"`.
+
+**Try it**
+
+* [Smaller pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-size/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
 /**
 Thickness describing the ring size for a donut type chart, overriding `innerSize`.
 
@@ -247,6 +269,8 @@ The minimum size for a pie in response to auto margins. The pie will try to shri
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
 /**
 If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -272,7 +296,21 @@ The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to 
 */
 @property(nonatomic, readwrite) NSNumber *endAngle;
 /**
+The size of the inner diameter for the pie. A size greater than 0 renders a donut chart. Can be a percentage or pixel value. Percentages are relative to the pie size. Pixel values are given as integers. Setting overridden by thickness. Note: in Highcharts < 4.1.2, the percentage was relative to the plot area, not the pie size.
+
+**Defaults to** `0`.
+
+**Try it**
+
+* [80px inner size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-innersize-80px/)
+* [50% of the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-innersize-50percent/)
+* [3D donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/3d-pie-donut/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ innerSize;
+/**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
+
+**Defaults to** `10`.
 
 **Try it**
 

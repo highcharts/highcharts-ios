@@ -22,8 +22,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import SeriesRegistry from '../../../Core/Series/SeriesRegistry.js';
-var StochasticIndicator = SeriesRegistry.seriesTypes.stochastic;
-var seriesTypes = SeriesRegistry.seriesTypes;
+var _a = SeriesRegistry.seriesTypes, smaProto = _a.sma.prototype, StochasticIndicator = _a.stochastic;
 import U from '../../../Core/Utilities.js';
 var extend = U.extend, merge = U.merge;
 /* *
@@ -65,7 +64,7 @@ var SlowStochasticIndicator = /** @class */ (function (_super) {
      *
      * */
     SlowStochasticIndicator.prototype.getValues = function (series, params) {
-        var periods = params.periods, fastValues = seriesTypes.stochastic.prototype.getValues.call(this, series, params), slowValues = {
+        var periods = params.periods, fastValues = _super.prototype.getValues.call(this, series, params), slowValues = {
             values: [],
             xData: [],
             yData: []
@@ -77,7 +76,7 @@ var SlowStochasticIndicator = /** @class */ (function (_super) {
         slowValues.xData = fastValues.xData.slice(periods[1] - 1);
         var fastYData = fastValues.yData.slice(periods[1] - 1);
         // Get SMA(%D)
-        var smoothedValues = seriesTypes.sma.prototype.getValues.call(this, {
+        var smoothedValues = smaProto.getValues.call(this, {
             xData: slowValues.xData,
             yData: fastYData
         }, {

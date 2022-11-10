@@ -22,6 +22,8 @@ CSS styles for the credits label.
 /**
 The text for the credits label.
 
+**Defaults to** `Highcharts.com`.
+
 **Try it**
 
 * [Custom URL and text](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/credits/href/)
@@ -30,6 +32,8 @@ The text for the credits label.
 /**
 Whether to show the credits text.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Credits disabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/credits/enabled-false/)
@@ -37,6 +41,8 @@ Whether to show the credits text.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The URL for the credits label.
+
+**Defaults to** `https://www.highcharts.com?credits`.
 
 **Try it**
 

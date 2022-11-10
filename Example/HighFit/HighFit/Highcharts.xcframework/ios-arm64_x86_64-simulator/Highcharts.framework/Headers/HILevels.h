@@ -17,10 +17,14 @@ Set options on specific levels. Takes precedence over series options, but not po
 
 **Try it**
 
-* [Sunburst chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sunburst)
+* [Treegraph chart with level options applied](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/level-options)
 */
 @interface HILevels: HIChartsJSONSerializable
 
+/**
+Set collapsed status for nodes level-wise.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *collapsed;
 /**
 Can set a `borderColor` on all points which lies on the same level.
 */
@@ -63,14 +67,10 @@ Can set a `borderWidth` on all points which lies on the same level.
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Can set the layoutAlgorithm option on a specific level.
-
-**Accepted values:** `["sliceAndDice", "stripes", "squarified", "strip"]`.
 */
 @property(nonatomic, readwrite) NSString *layoutAlgorithm;
 /**
 Can set the layoutStartingDirection option on a specific level.
-
-**Accepted values:** `["vertical", "horizontal"]`.
 */
 @property(nonatomic, readwrite) NSString *layoutStartingDirection;
 /**

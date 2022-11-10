@@ -27,6 +27,8 @@ The X axis or category axis. Normally this is the horizontal axis, though if the
 /**
 Whether to zoom axis. If `chart.zoomType` is set, the option allows to disable zooming on an individual axis.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Zoom enabled is false](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/zoomenabled/)
@@ -53,7 +55,7 @@ Refers to the index in the `panes` array. Used for circular gauges and polar cha
 /**
 For categorized axes only. If `on` the tick mark is placed in the center of the category, if `between` the tick mark is placed between categories. The default is `between` if the `tickInterval` is 1, else `on`.
 
-**Accepted values:** `["on", "between"]`.
+**Defaults to** `between`.
 
 **Try it**
 
@@ -78,6 +80,8 @@ The axis labels show the number or category for each tick. Since v8.0.0: Labels 
 /**
 The Z index of the grid lines.
 
+**Defaults to** `1`.
+
 **Try it**
 
 * [A Z index of 4 renders the grid above the graph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/gridzindex/)
@@ -97,10 +101,14 @@ The top position as the vertical axis. If it's a number, it is interpreted as pi
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ top;
 /**
 Whether axis, including axis title, line, ticks and labels, should be visible.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *visible;
 /**
 When using multiple axis, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in an Axis options are set to false, then the `alignTicks ` will be disabled for the Axis. Disabled for logarithmic axes.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignTicks;
 /**
@@ -109,6 +117,8 @@ The minimum tick interval allowed in axis values. For example on zooming in on a
 @property(nonatomic, readwrite) NSNumber *minTickInterval;
 /**
 The type of axis. Can be one of `linear`, `logarithmic`, `datetime` or `category`. In a datetime axis, the numbers are given in milliseconds, and tick marks are placed on appropriate values like full hours or days. In a category axis, the `point names` of the chart's series are used for categories, if not a `categories` array is defined.
+
+**Defaults to** `linear`.
 
 **Try it**
 
@@ -131,6 +141,8 @@ The pixel width of the major tick marks. Defaults to 0 on category axes, otherwi
 /**
 Whether to show the first tick label.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Set to false on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/showfirstlabel-false/)
@@ -148,6 +160,8 @@ Padding of the max value relative to the length of the axis. A padding of 0.05 w
 @property(nonatomic, readwrite) NSNumber *maxPadding;
 /**
 For datetime axes, this decides where to put the tick between weeks. 0 = Sunday, 1 = Monday.
+
+**Defaults to** `1`.
 
 **Try it**
 
@@ -241,6 +255,8 @@ Whether to reverse the axis so that the highest number is closest to the origin.
 /**
 The dash or dot style of the minor grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
+**Defaults to** `Solid`.
+
 **Try it**
 
 * [Long dashes on minor grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minorgridlinedashstyle/)
@@ -252,6 +268,8 @@ The width as the horizontal axis. If it's a number, it is interpreted as pixels.
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**
 The pixel length of the minor tick marks.
+
+**Defaults to** `2`.
 
 **Try it**
 
@@ -290,12 +308,12 @@ A soft minimum for the axis. If the series data minimum is greater than this, th
 @property(nonatomic, readwrite) NSNumber *softMin;
 /**
 Whether to pan axis. If `chart.panning` is enabled, the option allows to disable panning on an individual axis.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *panningEnabled;
 /**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
-
-**Accepted values:** `["circle", "polygon"]`.
 
 **Try it**
 
@@ -306,6 +324,8 @@ Polar charts only. Whether the grid lines should draw as a polygon with straight
 @property(nonatomic, readwrite) NSString *gridLineInterpolation;
 /**
 The pixel length of the main tick marks.
+
+**Defaults to** `10`.
 
 **Try it**
 
@@ -323,6 +343,8 @@ The highest allowed value for automatically computed axis extremes.
 /**
 Whether to show the axis line and title when the axis has no data.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [When clicking the legend to hide series, one axis preserves line and title, the other doesn't](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/showempty/)
@@ -330,6 +352,8 @@ Whether to show the axis line and title when the axis has no data.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showEmpty;
 /**
 The dash or dot style of the grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
+
+**Defaults to** `Solid`.
 
 **Try it**
 
@@ -347,7 +371,7 @@ Whether to display the axis on the opposite side of the normal. The normal is on
 /**
 The position of the minor tick marks relative to the axis line. Can be one of `inside` and `outside`.
 
-**Accepted values:** `["inside", "outside"]`.
+**Defaults to** `outside`.
 
 **Try it**
 
@@ -379,6 +403,8 @@ For a datetime axis, the scale will automatically adjust to the appropriate unit
 @property(nonatomic, readwrite) HIDateTimeLabelFormats *dateTimeLabelFormats;
 /**
 The Z index for the axis group.
+
+**Defaults to** `2`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
@@ -458,7 +484,7 @@ The interval of the tick marks in axis units. When `undefined`, the tick interva
 /**
 The position of the major tick marks relative to the axis line. Can be one of `inside` and `outside`.
 
-**Accepted values:** `["inside", "outside"]`.
+**Defaults to** `outside`.
 
 **Try it**
 
@@ -477,6 +503,8 @@ If categories are present for the xAxis, names are used instead of numbers for t
 @property(nonatomic, readwrite) NSArray<NSString *> *categories;
 /**
 If tickInterval is `null` this option sets the approximate pixel interval of the tick marks. Not applicable to categorized axis. The tick interval is also influenced by the `minTickInterval` option, that, by default prevents ticks from being denser than the data points.
+
+**Defaults to** `100`.
 
 **Try it**
 
@@ -522,6 +550,8 @@ When using an alternate grid color, a band is painted across the plot area betwe
 /**
 Whether to show the last tick label. Defaults to `true` on cartesian charts, and `false` on polar charts.
 
+**Defaults to** `undefined`.
+
 **Try it**
 
 * [Set to true on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/showlastlabel-true/)
@@ -538,6 +568,8 @@ The minimum value of the axis. If `null` the min value is automatically calculat
 @property(nonatomic, readwrite) NSNumber *min;
 /**
 Applies only when the axis `type` is `category`. When `uniqueNames` is true, points are placed on the X axis according to their names. If the same point name is repeated in the same or another series, the point is placed on the same X position as other points of the same name. When `uniqueNames` is false, the points are laid out in increasing X positions regardless of their names, and the X axis category will take the name of the last point in each position.
+
+**Defaults to** `True`.
 
 **Try it**
 
@@ -588,6 +620,8 @@ The color of the line marking the axis itself. In styled mode, the line stroke i
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
 Width of the minor, secondary grid lines. In styled mode, the stroke width is given in the `.highcharts-grid-line` class.
+
+**Defaults to** `1`.
 
 **Try it**
 

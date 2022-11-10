@@ -21,6 +21,8 @@ Options for annotation's labels. Each label inherits options from the labelOptio
 /**
 Whether the annotation is visible in the exported data table.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Do not include in the data export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/include-in-data-export/)
@@ -28,6 +30,8 @@ Whether the annotation is visible in the exported data table.
 @property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
 The border radius in pixels for the annotaiton's label.
+
+**Defaults to** `3`.
 
 **Try it**
 
@@ -57,6 +61,8 @@ Whether to hide the annotation's label that is outside the plot area.
 /**
 The name of a symbol to use for the border around the label. Symbols are predefined functions on the Renderer object.
 
+**Defaults to** `callout`.
+
 **Try it**
 
 * [Available shapes for labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/shapes/)
@@ -68,6 +74,8 @@ Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
 The border color for the annotation's label.
+
+**Defaults to** `#000000`.
 
 **Try it**
 
@@ -84,6 +92,8 @@ Styles for the annotation's label.
 @property(nonatomic, readwrite) HICSSObject *style;
 /**
 The background color or gradient for the annotation's label.
+
+**Defaults to** `rgba(0, 0, 0, 0.75)`.
 
 **Try it**
 
@@ -127,6 +137,8 @@ A [format](https://www.highcharts.com/docs/chart-concepts/labels-and-string-form
 /**
 When either the borderWidth or the backgroundColor is set, this is the padding within the box.
 
+**Defaults to** `5`.
+
 **Try it**
 
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
@@ -135,7 +147,7 @@ When either the borderWidth or the backgroundColor is set, this is the padding w
 /**
 How to handle the annotation's label that flow outside the plot area. The justify option aligns the label inside the plot area.
 
-**Accepted values:** `["allow", "justify"]`.
+**Defaults to** `justify`.
 
 **Try it**
 
@@ -153,6 +165,8 @@ The label's pixel distance from the point.
 /**
 The vertical alignment of the annotation's label.
 
+**Defaults to** `bottom`.
+
 **Try it**
 
 * [Set labels position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-position/)
@@ -160,6 +174,8 @@ The vertical alignment of the annotation's label.
 @property(nonatomic, readwrite) NSString *verticalAlign;
 /**
 The alignment of the annotation's label. If right, the right side of the label should be touching the point.
+
+**Defaults to** `center`.
 
 **Try it**
 
@@ -169,6 +185,8 @@ The alignment of the annotation's label. If right, the right side of the label s
 /**
 A class name for styling by CSS.
 
+**Defaults to** `highcharts-no-tooltip`.
+
 **Try it**
 
 * [Styled mode annotations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/annotations)
@@ -177,6 +195,8 @@ A class name for styling by CSS.
 /**
 The border width in pixels for the annotation's label
 
+**Defaults to** `1`.
+
 **Try it**
 
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
@@ -184,6 +204,8 @@ The border width in pixels for the annotation's label
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 The y position offset of the label relative to the point. Note that if a `distance` is defined, the distance takes precedence over `x` and `y` options.
+
+**Defaults to** `-16`.
 
 **Try it**
 

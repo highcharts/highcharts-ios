@@ -29,7 +29,7 @@ var noop = H.noop;
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
 var _a = SeriesRegistry.seriesTypes, AreaRangeSeries = _a.arearange, ColumnSeries = _a.column, columnProto = _a.column.prototype;
 import U from '../../Core/Utilities.js';
-var clamp = U.clamp, extend = U.extend, merge = U.merge, pick = U.pick;
+var clamp = U.clamp, extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
 /* *
  *
  *  Constants
@@ -122,42 +122,46 @@ var ColumnRangeSeries = /** @class */ (function (_super) {
         columnProto.translate.apply(this);
         // Set plotLow and plotHigh
         this.points.forEach(function (point) {
-            var shapeArgs = point.shapeArgs || {}, minPointLength = _this.options.minPointLength;
-            point.plotHigh = plotHigh = safeBounds(yAxis.translate(point.high, 0, 1, 0, 1));
-            point.plotLow = safeBounds(point.plotY);
-            // adjust shape
-            y = plotHigh;
-            height = pick(point.rectPlotY, point.plotY) - plotHigh;
-            // Adjust for minPointLength
-            if (Math.abs(height) < minPointLength) {
-                heightDifference = (minPointLength - height);
-                height += heightDifference;
-                y -= heightDifference / 2;
-                // Adjust for negative ranges or reversed Y axis (#1457)
-            }
-            else if (height < 0) {
-                height *= -1;
-                y -= height;
-            }
-            if (isRadial && _this.polar) {
-                start = point.barX + startAngleRad;
-                point.shapeType = 'arc';
-                point.shapeArgs = _this.polar.arc(y + height, y, start, start + point.pointWidth);
-            }
-            else {
-                shapeArgs.height = height;
-                shapeArgs.y = y;
-                var _a = shapeArgs.x, x = _a === void 0 ? 0 : _a, _b = shapeArgs.width, width = _b === void 0 ? 0 : _b;
-                point.tooltipPos = chart.inverted ?
-                    [
-                        yAxis.len + yAxis.pos - chart.plotLeft - y - height / 2,
-                        xAxis.len + xAxis.pos - chart.plotTop - x - width / 2,
+            var shapeArgs = point.shapeArgs || {}, minPointLength = _this.options.minPointLength, plotY = point.plotY, plotHigh = yAxis.translate(point.high, 0, 1, 0, 1);
+            if (isNumber(plotHigh) && isNumber(plotY)) {
+                point.plotHigh = safeBounds(plotHigh);
+                point.plotLow = safeBounds(plotY);
+                // adjust shape
+                y = point.plotHigh;
+                height = pick(point.rectPlotY, point.plotY) - point.plotHigh;
+                // Adjust for minPointLength
+                if (Math.abs(height) < minPointLength) {
+                    heightDifference = (minPointLength - height);
+                    height += heightDifference;
+                    y -= heightDifference / 2;
+                    // Adjust for negative ranges or reversed Y axis (#1457)
+                }
+                else if (height < 0) {
+                    height *= -1;
+                    y -= height;
+                }
+                if (isRadial && _this.polar) {
+                    start = point.barX + startAngleRad;
+                    point.shapeType = 'arc';
+                    point.shapeArgs = _this.polar.arc(y + height, y, start, start + point.pointWidth);
+                }
+                else {
+                    shapeArgs.height = height;
+                    shapeArgs.y = y;
+                    var _a = shapeArgs.x, x = _a === void 0 ? 0 : _a, _b = shapeArgs.width, width = _b === void 0 ? 0 : _b;
+                    point.tooltipPos = chart.inverted ?
+                        [
+                            yAxis.len + yAxis.pos - chart.plotLeft - y -
+                                height / 2,
+                            xAxis.len + xAxis.pos - chart.plotTop - x -
+                                width / 2,
+                            height
+                        ] : [
+                        xAxis.left - chart.plotLeft + x + width / 2,
+                        yAxis.pos - chart.plotTop + y + height / 2,
                         height
-                    ] : [
-                    xAxis.left - chart.plotLeft + x + width / 2,
-                    yAxis.pos - chart.plotTop + y + height / 2,
-                    height
-                ]; // don't inherit from column tooltip position - #3372
+                    ]; // don't inherit from column tooltip position - #3372
+                }
             }
         });
     };

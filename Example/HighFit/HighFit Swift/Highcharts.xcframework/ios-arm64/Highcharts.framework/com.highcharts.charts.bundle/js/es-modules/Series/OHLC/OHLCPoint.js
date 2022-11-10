@@ -44,14 +44,12 @@ var OHLCPoint = /** @class */ (function (_super) {
         _this.plotOpen = void 0;
         _this.series = void 0;
         return _this;
-        /* eslint-enable valid-jsdoc */
     }
     /* *
      *
      *  Functions
      *
      * */
-    /* eslint-disable valid-jsdoc */
     /**
      * Extend the parent method by adding up or down to the class name.
      * @private

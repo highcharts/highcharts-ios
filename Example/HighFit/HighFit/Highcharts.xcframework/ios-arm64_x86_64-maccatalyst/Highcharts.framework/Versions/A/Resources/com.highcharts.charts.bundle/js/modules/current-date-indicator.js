@@ -1,5 +1,5 @@
 /*
- Highcharts Gantt JS v10.2.1 (2022-08-29)
+ Highcharts Gantt JS v10.3.1 (2022-10-31)
 
  CurrentDateIndicator
 

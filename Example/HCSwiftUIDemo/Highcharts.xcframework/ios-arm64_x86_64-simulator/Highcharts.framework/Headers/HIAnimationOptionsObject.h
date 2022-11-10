@@ -11,7 +11,7 @@
 
 
 /**
-An animation configuration. Animation configurations can also be defined as booleans, where `false` turns off animation and `true` defaults to a duration of 500ms.
+An animation configuration. Animation configurations can also be defined as booleans, where `false` turns off animation and `true` defaults to a duration of 500ms and defer of 0ms.
 */
 @interface HIAnimationOptionsObject: HIChartsJSONSerializable
 
@@ -20,7 +20,7 @@ A callback function to exectute when the animation finishes.
 */
 @property(nonatomic, readwrite) HIFunction *complete;
 /**
-The animation delay time in milliseconds.
+The animation defer in milliseconds.
 */
 @property(nonatomic, readwrite) NSNumber *defer;
 /**

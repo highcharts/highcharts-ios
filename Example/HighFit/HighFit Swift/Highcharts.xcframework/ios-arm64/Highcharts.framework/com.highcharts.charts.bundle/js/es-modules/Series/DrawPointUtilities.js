@@ -34,7 +34,7 @@ function draw(point, params) {
     // Assigning class in dot notation does go well in IE8
     // eslint-disable-next-line dot-notation
     params.attribs['class'] = point.getClassName();
-    if (shouldDraw(point)) {
+    if ((point.shouldDraw())) {
         if (!graphic) {
             point.graphic = graphic = params.shapeType === 'text' ?
                 renderer.text() :
@@ -64,24 +64,12 @@ function draw(point, params) {
         }
     }
 }
-/**
- * @private
- */
-function shouldDraw(point) {
-    switch (point.series && point.series.type) {
-        case 'treemap':
-            return isNumber(point.plotY) && point.y !== null;
-        default:
-            return !point.isNull;
-    }
-}
 /* *
  *
  *  Default Export
  *
  * */
 var DrawPointUtilities = {
-    draw: draw,
-    shouldDraw: shouldDraw
+    draw: draw
 };
 export default DrawPointUtilities;

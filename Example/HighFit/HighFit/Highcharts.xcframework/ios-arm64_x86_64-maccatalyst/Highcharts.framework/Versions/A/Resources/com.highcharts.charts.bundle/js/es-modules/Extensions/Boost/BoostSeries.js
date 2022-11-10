@@ -14,8 +14,8 @@ import BoostableMap from './BoostableMap.js';
 import Boostables from './Boostables.js';
 import BoostChart from './BoostChart.js';
 var getBoostClipRect = BoostChart.getBoostClipRect, isChartSeriesBoosting = BoostChart.isChartSeriesBoosting;
-import DefaultOptions from '../../Core/DefaultOptions.js';
-var getOptions = DefaultOptions.getOptions;
+import D from '../../Core/Defaults.js';
+var getOptions = D.getOptions;
 import H from '../../Core/Globals.js';
 var doc = H.doc, noop = H.noop, win = H.win;
 import U from '../../Core/Utilities.js';
@@ -539,6 +539,7 @@ function getPoint(series, boostPoint) {
     point.plotX = boostPoint.plotX;
     point.plotY = boostPoint.plotY;
     point.index = boostPoint.i;
+    point.percentage = boostPoint.percentage;
     point.isInside = series.isPointInside(point);
     return point;
 }
@@ -590,7 +591,7 @@ function seriesRenderCanvas() {
             this.renderTarget = this.boost.target = this.boost.target.destroy();
         }
     }
-    var points = this.points = [], addKDPoint = function (clientX, plotY, i) {
+    var points = this.points = [], addKDPoint = function (clientX, plotY, i, percentage) {
         // We need to do ceil on the clientX to make things
         // snap to pixel values. The renderer will frequently
         // draw stuff on "sub-pixels".
@@ -611,7 +612,8 @@ function seriesRenderCanvas() {
                 clientX: clientX,
                 plotX: clientX,
                 plotY: plotY,
-                i: cropStart + i
+                i: cropStart + i,
+                percentage: percentage
             });
         }
     };
@@ -629,7 +631,7 @@ function seriesRenderCanvas() {
      */
     function processPoint(d, i) {
         var chartDestroyed = typeof chart.index === 'undefined';
-        var x, y, clientX, plotY, low = false, isYInside = true;
+        var x, y, clientX, plotY, percentage, low = false, isYInside = true;
         if (typeof d === 'undefined') {
             return true;
         }
@@ -654,6 +656,7 @@ function seriesRenderCanvas() {
                 x = d.x;
                 y = d.stackY;
                 low = y - d.y;
+                percentage = d.percentage;
             }
             // Optimize for scatter zooming
             if (!requireSorting) {
@@ -686,9 +689,9 @@ function seriesRenderCanvas() {
                                 yAxis.toPixels(maxVal, true);
                             yBottom =
                                 yAxis.toPixels(minVal, true);
-                            addKDPoint(clientX, plotY, maxI);
+                            addKDPoint(clientX, plotY, maxI, percentage);
                             if (yBottom !== plotY) {
-                                addKDPoint(clientX, yBottom, minI);
+                                addKDPoint(clientX, yBottom, minI, percentage);
                             }
                         }
                         minI = maxI = void 0;
@@ -697,7 +700,7 @@ function seriesRenderCanvas() {
                 }
                 else {
                     plotY = Math.ceil(yAxis.toPixels(y, true));
-                    addKDPoint(clientX, plotY, i);
+                    addKDPoint(clientX, plotY, i, percentage);
                 }
             }
         }

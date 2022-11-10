@@ -413,8 +413,10 @@ function geojson(json, hType, series) {
             }
         }
         if (pointOptions) {
-            var name_1 = properties && (properties.name || properties.NAME);
+            var name_1 = properties && (properties.name || properties.NAME), lon = properties && properties.lon, lat = properties && properties.lat;
             mapData.push(extend(pointOptions, {
+                lat: typeof lat === 'number' ? lat : void 0,
+                lon: typeof lon === 'number' ? lon : void 0,
                 name: typeof name_1 === 'string' ? name_1 : void 0,
                 /**
                  * In Highcharts Maps, when data is loaded from GeoJSON, the

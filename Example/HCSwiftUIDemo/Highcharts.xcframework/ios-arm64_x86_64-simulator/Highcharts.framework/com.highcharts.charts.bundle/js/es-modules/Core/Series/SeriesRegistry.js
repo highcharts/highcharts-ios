@@ -9,11 +9,11 @@
  * */
 'use strict';
 import H from '../Globals.js';
-import D from '../DefaultOptions.js';
+import D from '../Defaults.js';
 var defaultOptions = D.defaultOptions;
 import Point from './Point.js';
 import U from '../Utilities.js';
-var error = U.error, extendClass = U.extendClass, merge = U.merge;
+var extendClass = U.extendClass, merge = U.merge;
 /* *
  *
  *  Namespace

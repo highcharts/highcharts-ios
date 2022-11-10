@@ -10,6 +10,7 @@
 #import "HIVariablepie.h"
 #import "HIDumbbell.h"
 #import "HIStreamgraph.h"
+#import "HITreegraph.h"
 #import "HINetworkgraph.h"
 #import "HIBar.h"
 #import "HIVariwide.h"
@@ -98,6 +99,14 @@ A streamgraph is a type of stacked area graph which is displaced around a centra
 * [Streamgraph](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/streamgraph/)
 */
 @property(nonatomic, readwrite) HIStreamgraph *streamgraph;
+/**
+A treegraph series is a diagram, which shows a relation between ancestors and descendants with a clear parent - child relation. The best examples of the dataStructures, which best reflect this chart are e.g. genealogy tree or directory structure. TODO change back the demo path In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `treegraph` series are defined in  `plotOptions.treegraph`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     treegraph: {       // shared options for all treegraph series     }   },   series: [{     // specific options for this series instance     type: 'treegraph'   }] }); ```       
+
+**Try it**
+
+* [Treegraph Chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/treegraph-chart)
+*/
+@property(nonatomic, readwrite) HITreegraph *treegraph;
 /**
 A networkgraph is a type of relationship chart, where connnections (links) attracts nodes (points) and other nodes repulse each other. In TypeScript the `type` option must always be set. Configuration options for the series are given in three levels: 1. Options for all series in a chart are defined in the  `plotOptions.series` object. 2. Options for all `networkgraph` series are defined in  `plotOptions.networkgraph`. 3. Options for one single series are given in  `the series instance array`. ``` Highcharts.chart('container', {   plotOptions: {     series: {       // general options for all series     },     networkgraph: {       // shared options for all networkgraph series     }   },   series: [{     // specific options for this series instance     type: 'networkgraph'   }] }); ```       
 
@@ -293,6 +302,7 @@ A Venn diagram displays all possible logical relations between a collection of d
 
 * [Venn diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/venn-diagram/)
 * [Euler diagram](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/euler-diagram/)
+* [Venn diagram with a legend](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-venn/point-legend/)
 */
 @property(nonatomic, readwrite) HIVenn *venn;
 /**
@@ -473,6 +483,7 @@ Error bars are a graphical representation of the variability of data and are use
 
 * [Error bars on a column series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/error-bar/)
 * [Error bars on a scatter series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-errorbar/on-scatter/)
+* [Error bars with data labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-errorbar/datalabels/)
 */
 @property(nonatomic, readwrite) HIErrorbar *errorbar;
 /**

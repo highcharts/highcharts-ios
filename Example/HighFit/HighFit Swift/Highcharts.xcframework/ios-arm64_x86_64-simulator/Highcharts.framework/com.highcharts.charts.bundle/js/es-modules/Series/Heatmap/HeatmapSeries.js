@@ -384,6 +384,9 @@ var HeatmapSeries = /** @class */ (function (_super) {
             inside: true,
             verticalAlign: 'middle',
             crop: false,
+            /**
+             * @ignore-option
+             */
             overflow: false,
             padding: 0 // #3837
         },

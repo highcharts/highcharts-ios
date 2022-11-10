@@ -17,26 +17,38 @@ Style options for the guide box default state.
 
 /**
 Guide box zIndex.
+
+**Defaults to** `900`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
 Guide box fill color.
+
+**Defaults to** `rgba(0, 0, 0, 0.1)`.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
 CSS class name of the guide box in this state. Defaults to `highcharts-drag-box-default`.
+
+**Defaults to** `highcharts-drag-box-default`.
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
 Guide box cursor.
+
+**Defaults to** `move`.
 */
 @property(nonatomic, readwrite) NSString *cursor;
 /**
 Color of the border around the guide box.
+
+**Defaults to** `#888`.
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
 Width of the line around the guide box.
+
+**Defaults to** `1`.
 */
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 

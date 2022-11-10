@@ -48,6 +48,7 @@ var TreemapPoint = /** @class */ (function (_super) {
         _this.node = void 0;
         _this.options = void 0;
         _this.series = void 0;
+        _this.shapeType = 'rect';
         _this.value = void 0;
         return _this;
         /* eslint-enable valid-jsdoc */
@@ -96,7 +97,7 @@ var TreemapPoint = /** @class */ (function (_super) {
         }
     };
     TreemapPoint.prototype.shouldDraw = function () {
-        return DPU.shouldDraw(this);
+        return isNumber(this.plotY) && this.y !== null;
     };
     return TreemapPoint;
 }(ScatterPoint));

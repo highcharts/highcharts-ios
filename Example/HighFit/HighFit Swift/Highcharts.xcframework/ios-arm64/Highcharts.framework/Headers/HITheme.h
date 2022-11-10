@@ -11,14 +11,20 @@
 
 
 /**
-A collection of attributes for the button. The object takes SVG attributes like `fill`, `stroke`, `stroke-width` or `r`, the border radius. The theme also supports `style`, a collection of CSS properties for the text. Equivalent attributes for the hover state are given in `theme.states.hover`.
+A configuration object for the button theme. The object accepts SVG properties like `stroke-width`, `stroke` and `fill`. Tri-state button styles are supported by the `states.hover` and `states.select` objects.
 
 **Try it**
 
-* [Theming the button](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/resetzoombutton-theme/)
+* [Theming the buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-theme/)
 */
 @interface HITheme: HIChartsJSONSerializable
 
+/**
+Padding for the button.
+
+**Defaults to** `5`.
+*/
+@property(nonatomic, readwrite) NSNumber *padding;
 /**
 Default stroke for the buttons.
 

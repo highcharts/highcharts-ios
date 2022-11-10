@@ -79,6 +79,7 @@ var PackedBubbleSeries = /** @class */ (function (_super) {
      * */
     PackedBubbleSeries.compose = function (AxisClass, ChartClass, LegendClass, SeriesClass) {
         BubbleSeries.compose(AxisClass, ChartClass, LegendClass, SeriesClass);
+        DragNodesComposition.compose(ChartClass);
         PackedBubbleLayout.compose(ChartClass);
     };
     /* *
@@ -325,19 +326,11 @@ var PackedBubbleSeries = /** @class */ (function (_super) {
      * @private
      */
     PackedBubbleSeries.prototype.drawDataLabels = function () {
-        var textPath = this.options.dataLabels.textPath, points = this.points;
-        // Render node labels:
-        seriesProto.drawDataLabels.apply(this, arguments);
+        seriesProto.drawDataLabels.call(this, this.points);
         // Render parentNode labels:
         if (this.parentNode) {
             this.parentNode.formatPrefix = 'parentNode';
-            this.points = [this.parentNode];
-            this.options.dataLabels.textPath =
-                this.options.dataLabels.parentNodeTextPath;
-            seriesProto.drawDataLabels.apply(this, arguments);
-            // Restore nodes
-            this.points = points;
-            this.options.dataLabels.textPath = textPath;
+            seriesProto.drawDataLabels.call(this, [this.parentNode]);
         }
     };
     /**

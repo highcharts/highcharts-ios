@@ -9,4 +9,4 @@ let package = Package(name: "Highcharts",
                       products: [.library(name: "Highcharts",
                                           targets: ["Highcharts"])],
                       targets: [.binaryTarget(name: "Highcharts",
-                                              path: "XCFramework/Highcharts.xcframework")])
+                                              path: "Highcharts.xcframework")])

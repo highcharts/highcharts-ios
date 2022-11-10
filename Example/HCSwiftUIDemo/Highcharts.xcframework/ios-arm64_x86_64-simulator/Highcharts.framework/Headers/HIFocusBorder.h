@@ -20,6 +20,8 @@ Options for the focus border drawn around elements while navigating through them
 
 /**
 Focus border margin around the elements.
+
+**Defaults to** `2`.
 */
 @property(nonatomic, readwrite) NSNumber *margin;
 /**
@@ -28,10 +30,14 @@ Style options for the focus border drawn around elements while navigating throug
 @property(nonatomic, readwrite) HICSSObject *style;
 /**
 Enable/disable focus border for chart.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 Hide the browser's default focus indicator.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *hideBrowserFocusOutline;
 

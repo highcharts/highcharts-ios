@@ -9,6 +9,7 @@
  *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
  *
  * */
+'use strict';
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -25,23 +26,23 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
-var ColumnSeries = SeriesRegistry.seriesTypes.column;
+var ColumnPoint = SeriesRegistry.seriesTypes.column.prototype.pointClass;
 import U from '../../Core/Utilities.js';
 var isNumber = U.isNumber;
 /* *
  *
- * Class
+ *  Class
  *
  * */
 var VariwidePoint = /** @class */ (function (_super) {
     __extends(VariwidePoint, _super);
     function VariwidePoint() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
         /* *
          *
-         * Properites
+         *  Properites
          *
          * */
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.crosshairWidth = void 0;
         _this.options = void 0;
         _this.series = void 0;
@@ -49,17 +50,17 @@ var VariwidePoint = /** @class */ (function (_super) {
     }
     /* *
      *
-     * Functions
+     *  Functions
      *
      * */
     VariwidePoint.prototype.isValid = function () {
         return isNumber(this.y) && isNumber(this.z);
     };
     return VariwidePoint;
-}(ColumnSeries.prototype.pointClass));
+}(ColumnPoint));
 /* *
  *
- * Export
+ *  Default Export
  *
  * */
 export default VariwidePoint;

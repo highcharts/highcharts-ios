@@ -27,7 +27,7 @@ import H from './Globals.js';
 var charts = H.charts, doc = H.doc, noop = H.noop, win = H.win;
 import Pointer from './Pointer.js';
 import U from './Utilities.js';
-var addEvent = U.addEvent, css = U.css, objectEach = U.objectEach, removeEvent = U.removeEvent;
+var addEvent = U.addEvent, css = U.css, objectEach = U.objectEach, pick = U.pick, removeEvent = U.removeEvent;
 /* *
  *
  *  Constants
@@ -157,8 +157,10 @@ var MSPointer = /** @class */ (function (_super) {
     };
     // Add IE specific touch events to chart
     MSPointer.prototype.setDOMEvents = function () {
+        var tooltip = this.chart.tooltip;
         _super.prototype.setDOMEvents.call(this);
-        if (this.hasZoom || this.followTouchMove) {
+        if (this.hasZoom ||
+            pick((tooltip && tooltip.options.followTouchMove), true)) {
             this.batchMSEvents(addEvent);
         }
     };

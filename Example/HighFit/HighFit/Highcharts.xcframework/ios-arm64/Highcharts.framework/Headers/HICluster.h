@@ -29,6 +29,8 @@ Options for marker clusters, the concept of sampling the data values into larger
 /**
 When set to `false` prevent cluster overlapping - this option works only when `layoutAlgorithm.type = "grid"`.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Prevent overlapping](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/marker-clusters/grid)
@@ -63,6 +65,8 @@ Options for the cluster data labels.
 @property(nonatomic, readwrite) HIDataLabels *dataLabels;
 /**
 Zoom the plot area to the cluster points range when a cluster is clicked.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *drillToCluster;
 /**
@@ -77,6 +81,8 @@ Options for the cluster marker.
 @property(nonatomic, readwrite) HIMarker *marker;
 /**
 The minimum amount of points to be combined into a cluster. This value has to be greater or equal to 2.
+
+**Defaults to** `2`.
 
 **Try it**
 

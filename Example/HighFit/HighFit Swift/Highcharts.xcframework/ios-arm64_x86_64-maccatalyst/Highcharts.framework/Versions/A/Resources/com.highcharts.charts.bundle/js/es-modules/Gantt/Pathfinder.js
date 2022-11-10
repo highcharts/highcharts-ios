@@ -11,7 +11,12 @@
 'use strict';
 import Connection from './Connection.js';
 import Chart from '../Core/Chart/Chart.js';
+import D from '../Core/Defaults.js';
+var defaultOptions = D.defaultOptions;
 import H from '../Core/Globals.js';
+import Point from '../Core/Series/Point.js';
+import U from '../Core/Utilities.js';
+var addEvent = U.addEvent, defined = U.defined, error = U.error, extend = U.extend, merge = U.merge, pick = U.pick, splat = U.splat;
 /**
  * The default pathfinder algorithm to use for a chart. It is possible to define
  * your own algorithms by adding them to the
@@ -35,14 +40,9 @@ import H from '../Core/Globals.js';
  * @typedef {"fastAvoid"|"simpleConnect"|"straight"|string} Highcharts.PathfinderTypeValue
  */
 ''; // detach doclets above
-import D from '../Core/DefaultOptions.js';
-var defaultOptions = D.defaultOptions;
-import Point from '../Core/Series/Point.js';
-import U from '../Core/Utilities.js';
-var addEvent = U.addEvent, defined = U.defined, error = U.error, extend = U.extend, merge = U.merge, objectEach = U.objectEach, pick = U.pick, splat = U.splat;
 import pathfinderAlgorithms from './PathfinderAlgorithms.js';
 import '../Extensions/ArrowSymbols.js';
-var deg2rad = H.deg2rad, max = Math.max, min = Math.min;
+var max = Math.max, min = Math.min;
 /*
  @todo:
      - Document how to write your own algorithms

@@ -25,10 +25,14 @@ The border radius of the rectangle representing the target.
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
 The height of the rectangle representing the target.
+
+**Defaults to** `3`.
 */
 @property(nonatomic, readwrite) NSNumber *height;
 /**
 The width of the rectangle representing the target. Could be set as a pixel value or as a percentage of a column width.
+
+**Defaults to** `140%`.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**

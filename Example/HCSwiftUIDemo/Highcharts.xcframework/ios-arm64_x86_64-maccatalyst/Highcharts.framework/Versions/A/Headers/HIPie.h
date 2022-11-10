@@ -43,6 +43,8 @@
 /**
 Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [True, the hiddden point is ignored](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-ignorehiddenpoint/)
@@ -88,6 +90,8 @@ The minimum size for a pie in response to auto margins. The pie will try to shri
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
 /**
 If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
@@ -137,6 +141,8 @@ The center of the pie chart relative to the plot area. Can be percentages or pix
 /**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
 
+**Defaults to** `10`.
+
 **Try it**
 
 * [20px offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-slicedoffset-20/)
@@ -150,6 +156,8 @@ The thickness of a 3D pie.
 @property(nonatomic, readwrite) NSNumber *depth;
 /**
 The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
+
+**Defaults to** `1`.
 
 **Try it**
 

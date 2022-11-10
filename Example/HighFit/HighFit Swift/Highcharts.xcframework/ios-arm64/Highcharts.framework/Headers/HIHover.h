@@ -70,6 +70,8 @@ Set the marker's fixed height on hover state.
 /**
 Enable or disable the point marker.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Disabled hover state](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-states-hover-enabled/)
@@ -110,10 +112,14 @@ Animation when hovering over the marker.
 @property(nonatomic, readwrite) HIHalo *halo;
 /**
 How much to brighten the point on interaction. Requires the main color to be defined in hex or rgb(a) format. In styled mode, the hover brightening is by default replaced with a fill-opacity set in the `.highcharts-point:hover` rule.
+
+**Defaults to** `0.2`.
 */
 @property(nonatomic, readwrite) NSNumber *brightness;
 /**
 Opacity for the links between nodes in the sankey diagram in hover mode.
+
+**Defaults to** `1`.
 */
 @property(nonatomic, readwrite) NSNumber *linkOpacity;
 /**

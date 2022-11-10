@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
-var ColumnSeries = SeriesRegistry.seriesTypes.column;
+var ColumnPoint = SeriesRegistry.seriesTypes.column.prototype.pointClass;
 /* *
  *
  *  Class
@@ -48,7 +48,7 @@ var HLCPoint = /** @class */ (function (_super) {
         return _this;
     }
     return HLCPoint;
-}(ColumnSeries.prototype.pointClass));
+}(ColumnPoint));
 /* *
  *
  *  Default Export

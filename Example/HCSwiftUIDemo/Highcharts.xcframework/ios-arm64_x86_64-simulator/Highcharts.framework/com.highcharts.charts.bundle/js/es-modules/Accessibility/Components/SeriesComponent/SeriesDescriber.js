@@ -43,11 +43,11 @@ function findFirstPointWithGraphic(point) {
     }) || null;
 }
 /**
- * Whether or not we should add a dummy point element in
+ * Whether or not we should add a mock point element in
  * order to describe a point that has no graphic.
  * @private
  */
-function shouldAddDummyPoint(point) {
+function shouldAddMockPoint(point) {
     // Note: Sunburst series use isNull for hidden points on drilldown.
     // Ignore these.
     var series = point.series, chart = series && series.chart, isSunburst = series && series.is('sunburst'), isNull = point.isNull, shouldDescribeNull = chart &&
@@ -58,37 +58,37 @@ function shouldAddDummyPoint(point) {
 /**
  * @private
  */
-function makeDummyElement(point, pos) {
-    var renderer = point.series.chart.renderer, dummy = renderer.rect(pos.x, pos.y, 1, 1);
-    dummy.attr({
-        'class': 'highcharts-a11y-dummy-point',
+function makeMockElement(point, pos) {
+    var renderer = point.series.chart.renderer, mock = renderer.rect(pos.x, pos.y, 1, 1);
+    mock.attr({
+        'class': 'highcharts-a11y-mock-point',
         fill: 'none',
         opacity: 0,
         'fill-opacity': 0,
         'stroke-opacity': 0
     });
-    return dummy;
+    return mock;
 }
 /**
  * @private
  */
-function addDummyPointElement(point) {
+function addMockPointElement(point) {
     var series = point.series, firstPointWithGraphic = findFirstPointWithGraphic(point), firstGraphic = firstPointWithGraphic && firstPointWithGraphic.graphic, parentGroup = firstGraphic ?
         firstGraphic.parentGroup :
-        series.graph || series.group, dummyPos = firstPointWithGraphic ? {
+        series.graph || series.group, mockPos = firstPointWithGraphic ? {
         x: pick(point.plotX, firstPointWithGraphic.plotX, 0),
         y: pick(point.plotY, firstPointWithGraphic.plotY, 0)
     } : {
         x: pick(point.plotX, 0),
         y: pick(point.plotY, 0)
-    }, dummyElement = makeDummyElement(point, dummyPos);
+    }, mockElement = makeMockElement(point, mockPos);
     if (parentGroup && parentGroup.element) {
-        point.graphic = dummyElement;
-        point.hasDummyGraphic = true;
-        dummyElement.add(parentGroup);
+        point.graphic = mockElement;
+        point.hasMockGraphic = true;
+        mockElement.add(parentGroup);
         // Move to correct pos in DOM
-        parentGroup.element.insertBefore(dummyElement.element, firstGraphic ? firstGraphic.element : null);
-        return dummyElement.element;
+        parentGroup.element.insertBefore(mockElement.element, firstGraphic ? firstGraphic.element : null);
+        return mockElement.element;
     }
 }
 /**
@@ -297,7 +297,7 @@ function describePointsInSeries(series) {
     if (setScreenReaderProps || setKeyboardProps) {
         series.points.forEach(function (point) {
             var pointEl = point.graphic && point.graphic.element ||
-                shouldAddDummyPoint(point) && addDummyPointElement(point), pointA11yDisabled = (point.options &&
+                shouldAddMockPoint(point) && addMockPointElement(point), pointA11yDisabled = (point.options &&
                 point.options.accessibility &&
                 point.options.accessibility.enabled === false);
             if (pointEl) {

@@ -247,7 +247,8 @@ var MockPoint = /** @class */ (function () {
         var plotX = this.plotX, plotY = this.plotY, xAxis = this.series.xAxis, yAxis = this.series.yAxis, e = {
             x: plotX,
             y: plotY,
-            isInsidePlot: true
+            isInsidePlot: true,
+            options: {}
         };
         if (xAxis) {
             e.isInsidePlot = defined(plotX) && plotX >= 0 && plotX <= xAxis.len;

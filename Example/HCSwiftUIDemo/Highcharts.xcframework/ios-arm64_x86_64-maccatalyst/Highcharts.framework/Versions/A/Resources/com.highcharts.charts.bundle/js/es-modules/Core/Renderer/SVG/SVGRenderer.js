@@ -193,7 +193,7 @@ var SVGRenderer = /** @class */ (function () {
         this.url = this.getReferenceURL();
         // Add description
         var desc = this.createElement('desc').add();
-        desc.element.appendChild(doc.createTextNode('Created with Highcharts 10.2.1'));
+        desc.element.appendChild(doc.createTextNode('Created with Highcharts 10.3.1'));
         renderer.defs = this.createElement('defs').add();
         renderer.allowHTML = allowHTML;
         renderer.forExport = forExport;
@@ -573,7 +573,7 @@ var SVGRenderer = /** @class */ (function () {
             disabledStyle = disabledState.style;
             delete disabledState.style;
         }
-        // Add the events. IE9 and IE10 need mouseover and mouseout to funciton
+        // Add the events. IE9 and IE10 need mouseover and mouseout to function
         // (#667).
         addEvent(label.element, isMS ? 'mouseover' : 'mouseenter', function () {
             if (curState !== 3) {
@@ -619,6 +619,15 @@ var SVGRenderer = /** @class */ (function () {
             label
                 .attr(normalState)
                 .css(extend({ cursor: 'default' }, normalStyle));
+            // HTML labels don't need to handle pointer events because click and
+            // mouseenter/mouseleave is bound to the underlying <g> element.
+            // Should this be reconsidered, we need more complex logic to share
+            // events between the <g> and its <div> counterpart, and avoid
+            // triggering mouseenter/mouseleave when hovering from one to the
+            // other (#17440).
+            if (useHTML) {
+                label.text.css({ pointerEvents: 'none' });
+            }
         }
         return label
             .on('touchstart', function (e) { return e.stopPropagation(); })
@@ -1099,9 +1108,11 @@ var SVGRenderer = /** @class */ (function () {
              */
             ['width', 'height'].forEach(function (key) {
                 img_1[key + 'Setter'] = function (value, key) {
-                    var imgSize = this['img' + key];
                     this[key] = value;
+                    var _a = this, alignByTranslate = _a.alignByTranslate, element = _a.element, width = _a.width, height = _a.height, imgwidth = _a.imgwidth, imgheight = _a.imgheight;
+                    var imgSize = this['img' + key];
                     if (defined(imgSize)) {
+                        var scale = 1;
                         // Scale and center the image within its container.
                         // The name `backgroundSize` is taken from the CSS spec,
                         // but the value `within` is made up. Other possible
@@ -1109,19 +1120,22 @@ var SVGRenderer = /** @class */ (function () {
                         // implemented if needed.
                         if (options &&
                             options.backgroundSize === 'within' &&
-                            this.width &&
-                            this.height) {
-                            imgSize = Math.round(imgSize * Math.min(this.width / this.imgwidth, this.height / this.imgheight));
+                            width &&
+                            height) {
+                            scale = Math.min(width / imgwidth, height / imgheight);
+                            imgSize = Math.round(imgSize * scale);
+                            // Update both width and height to keep the ratio
+                            // correct (#17315)
+                            attr(element, {
+                                width: Math.round(imgwidth * scale),
+                                height: Math.round(imgheight * scale)
+                            });
                         }
-                        if (this.element) {
-                            this.element.setAttribute(key, imgSize);
+                        else if (element) {
+                            element.setAttribute(key, imgSize);
                         }
-                        if (!this.alignByTranslate) {
-                            var translate = ((this[key] || 0) - imgSize) / 2;
-                            var attribs = key === 'width' ?
-                                { translateX: translate } :
-                                { translateY: translate };
-                            this.attr(attribs);
+                        if (!alignByTranslate) {
+                            this.translate(((width || 0) - (imgSize * scale)) / 2, ((height || 0) - (imgSize * scale)) / 2);
                         }
                     }
                 };

@@ -8,6 +8,15 @@
  *
  * */
 'use strict';
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 import A from '../Core/Animation/AnimationUtilities.js';
 var animObject = A.animObject;
 import H from '../Core/Globals.js';
@@ -136,6 +145,24 @@ function onChartAfterDrawChartBox() {
         pane.render();
     });
 }
+/**
+ * If polar has polygonal grid lines, force start and endOnTick on radial axis
+ * @private
+ */
+function onChartAfterInit(event) {
+    var xAxis = event.args[0].xAxis, yAxis = event.args[0].yAxis, chart = event.args[0].chart;
+    if (xAxis && yAxis) {
+        if (yAxis.gridLineInterpolation === 'polygon') {
+            xAxis.startOnTick = true;
+            xAxis.endOnTick = true;
+        }
+        else if (xAxis.gridLineInterpolation === 'polygon' &&
+            chart.inverted) {
+            yAxis.startOnTick = true;
+            yAxis.endOnTick = true;
+        }
+    }
+}
 function onChartGetAxes() {
     var _this = this;
     if (!this.pane) {
@@ -146,6 +173,153 @@ function onChartGetAxes() {
         new Pane(// eslint-disable-line no-new
         paneOptions, _this);
     }, this);
+}
+/**
+ * Get selection dimensions
+ * @private
+ */
+function onPointerGetSelectionBox(event) {
+    var marker = event.args.marker, xAxis = this.chart.xAxis[0], yAxis = this.chart.yAxis[0], inverted = this.chart.inverted, radialAxis = inverted ? yAxis : xAxis, linearAxis = inverted ? xAxis : yAxis;
+    if (this.chart.polar) {
+        event.preventDefault();
+        var start = (marker.attr ? marker.attr('start') : marker.start) - radialAxis.startAngleRad;
+        var r = (marker.attr ? marker.attr('r') : marker.r);
+        var end = (marker.attr ? marker.attr('end') : marker.end) - radialAxis.startAngleRad;
+        var innerR = (marker.attr ? marker.attr('innerR') : marker.innerR);
+        event.result.x = start + radialAxis.pos;
+        event.result.width = end - start;
+        // innerR goes from pane's center but toValue computes values from top
+        event.result.y = linearAxis.len + linearAxis.pos - innerR;
+        event.result.height = innerR - r;
+    }
+}
+/**
+ * Get attrs for Polar selection marker
+ * @private
+ */
+function onPointerGetSelectionMarkerAttrs(event) {
+    var chart = this.chart;
+    if (chart.polar && chart.hoverPane && chart.hoverPane.axis) {
+        event.preventDefault();
+        var center = chart.hoverPane.center, mouseDownX = (this.mouseDownX || 0), mouseDownY = (this.mouseDownY || 0), chartY = event.args.chartY, chartX = event.args.chartX, fullCircle = Math.PI * 2, startAngleRad = chart.hoverPane.axis.startAngleRad, endAngleRad = chart.hoverPane.axis.endAngleRad, linearAxis = chart.inverted ? chart.xAxis[0] : chart.yAxis[0], attrs = {};
+        var shapeType = 'arc';
+        attrs.x = center[0] + chart.plotLeft;
+        attrs.y = center[1] + chart.plotTop;
+        // Adjust the width of the selection marker
+        if (this.zoomHor) {
+            var paneRadRange = startAngleRad > 0 ?
+                endAngleRad - startAngleRad :
+                Math.abs(startAngleRad) + Math.abs(endAngleRad);
+            var startAngle = Math.atan2(mouseDownY - chart.plotTop - center[1], mouseDownX - chart.plotLeft - center[0]) - startAngleRad, endAngle = Math.atan2(chartY - chart.plotTop - center[1], chartX - chart.plotLeft - center[0]) - startAngleRad;
+            attrs.r = center[2] / 2;
+            attrs.innerR = center[3] / 2;
+            if (startAngle <= 0) {
+                startAngle += fullCircle;
+            }
+            if (endAngle <= 0) {
+                endAngle += fullCircle;
+            }
+            if (endAngle < startAngle) {
+                // Swapping angles
+                endAngle = [startAngle, startAngle = endAngle][0];
+            }
+            // If pane is not a full circle we need to let users zoom to the min
+            // We do this by swapping angles after pointer crosses
+            // middle angle (swapAngle) of the missing slice of the pane
+            if (paneRadRange < fullCircle) {
+                var swapAngle = endAngleRad + (fullCircle - paneRadRange) / 2;
+                if (startAngleRad + endAngle > swapAngle) {
+                    endAngle = startAngle;
+                    startAngle = startAngleRad <= 0 ? startAngleRad : 0;
+                }
+            }
+            var start = attrs.start =
+                Math.max(startAngle + startAngleRad, startAngleRad), end = attrs.end =
+                Math.min(endAngle + startAngleRad, endAngleRad);
+            // Adjust the selection shape for polygon grid lines
+            if (linearAxis.options.gridLineInterpolation === 'polygon') {
+                var radialAxis = chart.hoverPane.axis, tickInterval = radialAxis.tickInterval, min = start - radialAxis.startAngleRad + radialAxis.pos, max = end - start;
+                var path = linearAxis.getPlotLinePath({
+                    value: linearAxis.max
+                }), pathStart = radialAxis.toValue(min), pathEnd = radialAxis.toValue(min + max);
+                if (pathStart < radialAxis.getExtremes().min) {
+                    var _a = radialAxis.getExtremes(), min_1 = _a.min, max_1 = _a.max;
+                    pathStart = max_1 - (min_1 - pathStart);
+                }
+                if (pathEnd < radialAxis.getExtremes().min) {
+                    var _b = radialAxis.getExtremes(), min_2 = _b.min, max_2 = _b.max;
+                    pathEnd = max_2 - (min_2 - pathEnd);
+                }
+                if (pathEnd < pathStart) {
+                    // Swapping angles
+                    pathEnd = [pathStart, pathStart = pathEnd][0];
+                }
+                // Get trimmed path
+                path = trimPath(path, pathStart, pathEnd, radialAxis);
+                // Add center to the path
+                path.push([
+                    'L', center[0] + chart.plotLeft,
+                    chart.plotTop + center[1]
+                ]);
+                attrs.d = path;
+                shapeType = 'path';
+            }
+        }
+        // Adjust the height of the selection marker
+        if (this.zoomVert) {
+            var linearAxis_1 = chart.inverted ? chart.xAxis[0] : chart.yAxis[0];
+            var innerR = Math.sqrt(Math.pow(mouseDownX - chart.plotLeft - center[0], 2) +
+                Math.pow(mouseDownY - chart.plotTop - center[1], 2)), r = Math.sqrt(Math.pow(chartX - chart.plotLeft - center[0], 2) +
+                Math.pow(chartY - chart.plotTop - center[1], 2));
+            if (r < innerR) {
+                // Swapping angles
+                innerR = [r, r = innerR][0];
+            }
+            if (r > center[2] / 2) {
+                r = center[2] / 2;
+            }
+            if (innerR < center[3] / 2) {
+                innerR = center[3] / 2;
+            }
+            if (!this.zoomHor) {
+                attrs.start = startAngleRad;
+                attrs.end = endAngleRad;
+            }
+            attrs.r = r;
+            attrs.innerR = innerR;
+            if (linearAxis_1.options.gridLineInterpolation === 'polygon') {
+                var end = linearAxis_1.toValue(linearAxis_1.len + linearAxis_1.pos - innerR), start = linearAxis_1.toValue(linearAxis_1.len + linearAxis_1.pos - r), path = linearAxis_1.getPlotLinePath({
+                    value: start
+                }).concat(linearAxis_1.getPlotLinePath({
+                    value: end,
+                    reverse: true
+                }));
+                attrs.d = path;
+                shapeType = 'path';
+            }
+        }
+        if (this.zoomHor &&
+            this.zoomVert &&
+            linearAxis.options.gridLineInterpolation === 'polygon') {
+            var radialAxis = chart.hoverPane.axis, start = attrs.start || 0, end = attrs.end || 0, min = start - radialAxis.startAngleRad + radialAxis.pos, max = end - start, pathStart = radialAxis.toValue(min), pathEnd = radialAxis.toValue(min + max);
+            // Trim path
+            if (attrs.d instanceof Array) {
+                var innerPath = attrs.d.slice(0, attrs.d.length / 2), outerPath = attrs.d.slice(attrs.d.length / 2, attrs.d.length);
+                outerPath = __spreadArray([], outerPath, true).reverse();
+                var radialAxis_1 = chart.hoverPane.axis;
+                innerPath = trimPath(innerPath, pathStart, pathEnd, radialAxis_1);
+                outerPath = trimPath(outerPath, pathStart, pathEnd, radialAxis_1);
+                if (outerPath) {
+                    (outerPath[0][0]) = 'L';
+                }
+                outerPath = __spreadArray([], outerPath, true).reverse();
+                attrs.d = innerPath.concat(outerPath);
+                shapeType = 'path';
+            }
+        }
+        event.attrs = attrs;
+        event.shapeType = shapeType;
+    }
 }
 /**
  * @private
@@ -182,20 +356,29 @@ function onSeriesAfterTranslate() {
         else {
             series.options.findNearestPointBy = 'xy';
         }
-        // Postprocess plot coordinates
-        if (!series.preventPostTranslate) {
-            var points = series.points;
-            var i = points.length, point = void 0;
-            while (i--) {
-                point = points[i];
-                // Translate plotX, plotY from angle and radius to true plot
-                // coordinates
-                series.polar.toXY(point);
-                // Treat points below Y axis min as null (#10082)
-                if (!chart_1.hasParallelCoordinates &&
-                    !series.yAxis.reversed &&
-                    point.y < series.yAxis.min) {
-                    point.isNull = true;
+        var points = series.points;
+        var i = points.length;
+        while (i--) {
+            // Translate plotX, plotY from angle and radius to true plot
+            // coordinates
+            if (!series.preventPostTranslate) {
+                series.polar.toXY(points[i]);
+            }
+            // Treat points below Y axis min as null (#10082)
+            if (!chart_1.hasParallelCoordinates &&
+                !series.yAxis.reversed) {
+                if (pick(points[i].y, Number.MIN_VALUE) < series.yAxis.min ||
+                    points[i].x < series.xAxis.min ||
+                    points[i].x > series.xAxis.max) {
+                    // Destroy markers
+                    points[i].isNull = true;
+                    // Destroy column's graphic
+                    points[i].plotY = NaN;
+                }
+                else {
+                    // Restore isNull flag
+                    points[i].isNull =
+                        points[i].isValid && !points[i].isValid();
                 }
             }
         }
@@ -237,6 +420,27 @@ function searchPointByAngle(e) {
     });
 }
 /**
+ * Trim polygonal path
+ * @private
+ */
+function trimPath(path, start, end, radialAxis) {
+    var tickInterval = radialAxis.tickInterval, ticks = radialAxis.tickPositions;
+    var lastTick = find(ticks, function (tick) { return tick >= end; }), firstTick = find(__spreadArray([], ticks, true).reverse(), function (tick) { return tick <= start; });
+    if (!defined(lastTick)) {
+        lastTick = ticks[ticks.length - 1];
+    }
+    if (!defined(firstTick)) {
+        firstTick = ticks[0];
+        lastTick += tickInterval;
+        path[0][0] = 'L';
+        // To do: figure out why -3 or -2
+        path.unshift(path[path.length - 3]);
+    }
+    path = path.slice(ticks.indexOf(firstTick), ticks.indexOf(lastTick) + 1);
+    path[0][0] = 'M';
+    return path;
+}
+/**
  * Extend chart.get to also search in panes. Used internally in
  * responsiveness and chart.update.
  * @private
@@ -263,7 +467,7 @@ function wrapColumnSeriesAlignDataLabel(proceed, point, dataLabel, options, alig
         else { // Required corrections for data labels of inverted bars
             // The plotX and plotY are correctly set therefore they
             // don't need to be swapped (inverted argument is false)
-            this.forceDL = chart.isInsidePlot(point.plotX, Math.round(point.plotY));
+            this.forceDL = chart.isInsidePlot(point.plotX, point.plotY);
             // Checks if labels should be positioned inside
             if (inside && point.shapeArgs) {
                 shapeArgs = point.shapeArgs;
@@ -547,6 +751,16 @@ function wrapPointerGetCoordinates(proceed, e) {
     return ret;
 }
 /**
+ * Prevent zooming on mobile devices
+ * @private
+ */
+function wrapPointerPinch(proceed, e) {
+    if (this.chart.polar) {
+        return;
+    }
+    proceed.call(this, e);
+}
+/**
  * Define the animate method for regular series
  * @private
  */
@@ -695,6 +909,7 @@ var PolarAdditions = /** @class */ (function () {
             composedClasses.push(ChartClass);
             addEvent(ChartClass, 'afterDrawChartBox', onChartAfterDrawChartBox);
             addEvent(ChartClass, 'getAxes', onChartGetAxes);
+            addEvent(ChartClass, 'init', onChartAfterInit);
             var chartProto = ChartClass.prototype;
             wrap(chartProto, 'get', wrapChartGet);
         }
@@ -702,6 +917,9 @@ var PolarAdditions = /** @class */ (function () {
             composedClasses.push(PointerClass);
             var pointerProto = PointerClass.prototype;
             wrap(pointerProto, 'getCoordinates', wrapPointerGetCoordinates);
+            wrap(pointerProto, 'pinch', wrapPointerPinch);
+            addEvent(PointerClass, 'getSelectionMarkerAttrs', onPointerGetSelectionMarkerAttrs);
+            addEvent(PointerClass, 'getSelectionBox', onPointerGetSelectionBox);
         }
         if (composedClasses.indexOf(SeriesClass) === -1) {
             composedClasses.push(SeriesClass);

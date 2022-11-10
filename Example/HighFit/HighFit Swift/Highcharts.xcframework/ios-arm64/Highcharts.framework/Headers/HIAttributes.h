@@ -6,19 +6,27 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HISVGAttributes.h"
 
 
 /**
- */
+A collection of SVG attributes to override the appearance of the halo, for example `fill`, `stroke` and `stroke-width`.
+*/
 @interface HIAttributes: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) NSNumber *startOffset;
+@property(nonatomic, readwrite) NSNumber *zIndex;
 @property(nonatomic, readwrite) NSNumber *refX;
 @property(nonatomic, readwrite) NSNumber *markerWidth;
 @property(nonatomic, readwrite) NSNumber *refY;
 @property(nonatomic, readwrite) NSString *id;
 @property(nonatomic, readwrite) NSNumber *markerHeight;
-@property(nonatomic, readwrite) NSNumber *zIndex;
+/**
+Text path shift along its y-axis.
+
+**Defaults to** `5`.
+*/
+@property(nonatomic, readwrite) HISVGAttributes *dy;
 
 -(NSDictionary *)getParams;
 

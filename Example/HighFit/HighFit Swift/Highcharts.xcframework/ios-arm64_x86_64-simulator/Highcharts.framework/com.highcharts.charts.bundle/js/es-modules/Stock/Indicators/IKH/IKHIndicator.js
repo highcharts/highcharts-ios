@@ -21,9 +21,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+import ApproximationRegistry from '../../../Extensions/DataGrouping/ApproximationRegistry.js';
 import Color from '../../../Core/Color/Color.js';
 var color = Color.parse;
-import H from '../../../Core/Globals.js';
 import SeriesRegistry from '../../../Core/Series/SeriesRegistry.js';
 var SMAIndicator = SeriesRegistry.seriesTypes.sma;
 import U from '../../../Core/Utilities.js';
@@ -106,10 +106,10 @@ function drawSenkouSpan(opt) {
 // Point: [undefined, value, value, ...] is correct
 // Point: [undefined, undefined, undefined, ...] is incorrect
 // @todo compose
-H.approximations['ichimoku-averages'] = function () {
+ApproximationRegistry['ichimoku-averages'] = function () {
     var ret = [], isEmptyRange;
     [].forEach.call(arguments, function (arr, i) {
-        ret.push(H.approximations.average(arr));
+        ret.push(ApproximationRegistry.average(arr));
         isEmptyRange = !isEmptyRange && typeof ret[i] === 'undefined';
     });
     // Return undefined when first elem. is undefined and let
@@ -306,7 +306,7 @@ var IKHIndicator = /** @class */ (function (_super) {
             lineIndex++;
         });
         // Generate senkouSpan area:
-        // If graphColection exist then remove svg
+        // If graphCollection exist then remove svg
         // element and indicator property
         if (indicator.graphCollection) {
             indicator.graphCollection.forEach(function (graphName) {
@@ -314,7 +314,7 @@ var IKHIndicator = /** @class */ (function (_super) {
                 delete indicator[graphName];
             });
         }
-        // Clean grapCollection or initialize it
+        // Clean graphCollection or initialize it
         indicator.graphCollection = [];
         // When user set negativeColor property
         if (negativeColor && ikhMap.senkouSpanA[0] && ikhMap.senkouSpanB[0]) {
@@ -332,7 +332,7 @@ var IKHIndicator = /** @class */ (function (_super) {
                 if (Math.floor(sectionPoints.length / 2) >= 1) {
                     var x = Math.floor(sectionPoints.length / 2);
                     // When middle points has equal values
-                    // Compare all ponints plotY value sum
+                    // Compare all points plotY value sum
                     if (sectionPoints[x].plotY === sectionNextPoints[x].plotY) {
                         pointsPlotYSum = 0;
                         nextPointsPlotYSum = 0;
@@ -461,22 +461,25 @@ var IKHIndicator = /** @class */ (function (_super) {
             if (typeof IKH[i] === 'undefined') {
                 IKH[i] = [];
             }
-            if (typeof IKH[i + period] === 'undefined') {
-                IKH[i + period] = [];
+            if (typeof IKH[i + period - 1] === 'undefined') {
+                IKH[i + period - 1] = [];
             }
-            IKH[i + period][0] = TS;
-            IKH[i + period][1] = KS;
-            IKH[i + period][2] = void 0;
-            IKH[i][2] = CS;
+            IKH[i + period - 1][0] = TS;
+            IKH[i + period - 1][1] = KS;
+            IKH[i + period - 1][2] = void 0;
+            if (typeof IKH[i + 1] === 'undefined') {
+                IKH[i + 1] = [];
+            }
+            IKH[i + 1][2] = CS;
             if (i <= period) {
-                IKH[i + period][3] = void 0;
-                IKH[i + period][4] = void 0;
+                IKH[i + period - 1][3] = void 0;
+                IKH[i + period - 1][4] = void 0;
             }
-            if (typeof IKH[i + 2 * period] === 'undefined') {
-                IKH[i + 2 * period] = [];
+            if (typeof IKH[i + 2 * period - 2] === 'undefined') {
+                IKH[i + 2 * period - 2] = [];
             }
-            IKH[i + 2 * period][3] = SSA;
-            IKH[i + 2 * period][4] = SSB;
+            IKH[i + 2 * period - 2][3] = SSA;
+            IKH[i + 2 * period - 2][4] = SSB;
             xData.push(date);
         }
         // Add timestamps for further points

@@ -20,18 +20,26 @@ Settings for a custom font for the exported PDF, when using the `offline-exporti
 
 /**
 The TTF font file for normal `font-style`. If font variations like `bold` or `italic` are not defined, the `normal` font will be used for those too.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *normal;
 /**
 The TTF font file for bold text.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *bold;
 /**
 The TTF font file for italic text.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *italic;
 /**
 The TTF font file for bold and italic text.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *bolditalic;
 

@@ -49,11 +49,19 @@ Whether to show the symbol on the right side of the text rather than the left si
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *rtl;
 /**
+For a color axis with data classes, a suffix for the range numbers in the legend.
+
+**Defaults to** `''`.
+*/
+@property(nonatomic, readwrite) NSString *valueSuffix;
+/**
 Accessibility options for the legend. Requires the Accessibility module.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 When this is true, the legend symbol width will be the same as the symbol height, which in turn defaults to the font size of the legend items.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *squareSymbol;
 /**
@@ -67,6 +75,8 @@ The width for each legend item. By default the items are laid out successively. 
 @property(nonatomic, readwrite) NSNumber *itemWidth;
 /**
 The pixel padding between the legend item symbol and the legend item text.
+
+**Defaults to** `5`.
 
 **Try it**
 
@@ -101,6 +111,8 @@ Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-
 /**
 The color of the drawn border around the legend.
 
+**Defaults to** `#999999`.
+
 **Try it**
 
 * [Brown border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/bordercolor/)
@@ -108,12 +120,14 @@ The color of the drawn border around the legend.
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
 A CSS class name to apply to the legend group.
+
+**Defaults to** `highcharts-no-tooltip`.
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
 The layout of the legend items. Can be one of `horizontal` or `vertical` or `proximate`. When `proximate`, the legend items will be placed as close as possible to the graphs they're representing, except in inverted charts or when the legend position doesn't allow it.
 
-**Accepted values:** `["horizontal", "vertical", "proximate"]`.
+**Defaults to** `horizontal`.
 
 **Try it**
 
@@ -216,6 +230,8 @@ The inner padding of the legend box.
 /**
 The vertical alignment of the legend box. Can be one of `top`, `middle` or `bottom`. Vertical position can be further determined by the `y` option. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area. When the `layout` option is `proximate`, the `verticalAlign` option doesn't apply.
 
+**Defaults to** `bottom`.
+
 **Try it**
 
 * [Legend 100px from the top of the chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/verticalalign/)
@@ -256,6 +272,8 @@ Options for the paging or navigation appearing when the legend is overflown. Nav
 /**
 The horizontal alignment of the legend box within the chart area. Valid values are `left`, `center` and `right`. In the case that the legend is aligned in a corner position, the `layout` option will determine whether to place it above/below or on the side of the plot area.
 
+**Defaults to** `center`.
+
 **Try it**
 
 * [Legend at the right of the chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/align/)
@@ -263,6 +281,8 @@ The horizontal alignment of the legend box within the chart area. Valid values a
 @property(nonatomic, readwrite) NSString *align;
 /**
 Enable or disable the legend. There is also a series-specific option, `showInLegend`, that can hide the series from the legend. In some series types this is `false` by default, so it must set to `true` in order to show the legend for the series.
+
+**Defaults to** `True`.
 
 **Try it**
 
@@ -285,6 +305,8 @@ CSS styles for each legend item when the corresponding series or point is hidden
 @property(nonatomic, readwrite) HICSSObject *itemHiddenStyle;
 /**
 If the `layout` is `horizontal` and the legend items span over two lines or more, whether to align the items into vertical columns. Setting this to `false` makes room for more items, but will look more messy.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignColumns;
 /**
@@ -336,6 +358,12 @@ If the plot area sized is calculated automatically and the legend is not floatin
 * [30 pixels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/margin-30/)
 */
 @property(nonatomic, readwrite) NSNumber *margin;
+/**
+For a color axis with data classes, how many decimals to render in the legend. The default preserves the decimals of the range numbers.
+
+**Defaults to** `-1`.
+*/
+@property(nonatomic, readwrite) NSNumber *valueDecimals;
 @property(nonatomic, readwrite) NSString *legendLabel;
 @property(nonatomic, readwrite) NSString *legendLabelNoTitle;
 @property(nonatomic, readwrite) NSString *legendItem;

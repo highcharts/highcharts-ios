@@ -93,6 +93,8 @@ When using multiple axes, the ticks of two or more opposite axes will automatica
 /**
 Whether to display errors on the chart. When `false`, the errors will be shown only in the console.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Show errors on chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/display-errors/)
@@ -108,6 +110,8 @@ The margin between the right outer edge of the chart and the plot area. Use this
 @property(nonatomic, readwrite) NSNumber *marginRight;
 /**
 The color of the inner chart or plot area border.
+
+**Defaults to** `#cccccc`.
 
 **Try it**
 
@@ -135,6 +139,8 @@ The space between the right edge of the chart and the content (plot area, axis t
 @property(nonatomic, readwrite) NSNumber *spacingRight;
 /**
 The color of the outer chart border.
+
+**Defaults to** `#335cad`.
 
 **Try it**
 
@@ -229,6 +235,8 @@ The background color or gradient for the plot area.
 /**
 The background color or gradient for the outer chart area.
 
+**Defaults to** `#ffffff`.
+
 **Try it**
 
 * [Color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/backgroundcolor-color/)
@@ -279,8 +287,6 @@ The distance between the outer edge of the chart and the content, like title or 
 @property(nonatomic, readwrite) NSArray<NSNumber *> *spacing;
 /**
 Allows setting a key to switch between zooming and panning. Can be one of `alt`, `ctrl`, `meta` (the command key on Mac and Windows key on Windows) or `shift`. The keys are mapped directly to the key properties of the click event argument (`event.altKey`, `event.ctrlKey`, `event.metaKey` and `event.shiftKey`).
-
-**Accepted values:** `["alt", "ctrl", "meta", "shift"]`.
 */
 @property(nonatomic, readwrite) NSString *panKey;
 /**
@@ -293,6 +299,8 @@ The margin between the left outer edge of the chart and the plot area. Use this 
 @property(nonatomic, readwrite) NSNumber *marginLeft;
 /**
 By default, (because of memory and performance reasons) the chart does not copy the data but keeps it as a reference. In some cases, this might result in mutating the original data source. In order to prevent that, set that property to false. Please note that changing that might decrease performance, especially with bigger sets of data.
+
+**Defaults to** `True`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowMutatingData;
 /**
@@ -337,6 +345,8 @@ The pixel width of the plot area border.
 /**
 If true, the axes will scale to the remaining visible series once one series is hidden. If false, hiding and showing a series will not affect the axes or the other series. For stacks, once one series within the stack is hidden, the rest of the stack will close in around it even if the axis is not affected.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [True by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/ignorehiddenseries-true/)
@@ -372,6 +382,8 @@ Callback function to override the default function that formats all the numbers 
 @property(nonatomic, readwrite) HIFunction *numberFormatter;
 /**
 In styled mode, this sets how many colors the class names should rotate between. With ten colors, series (or points) are given class names like `highcharts-color-0`, `highcharts-color-0` `...] `highcharts-color-9`. The equivalent in non-styled mode is to set colors using the [colors` setting.
+
+**Defaults to** `10`.
 */
 @property(nonatomic, readwrite) NSNumber *colorCount;
 /**

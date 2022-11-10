@@ -126,7 +126,7 @@ var VectorSeries = /** @class */ (function (_super) {
             }, {
                 length: 1
             });
-        item.legendLine = this.chart.renderer.path(path)
+        legendItem.line = this.chart.renderer.path(path)
         .addClass('highcharts-point')
         .attr({
             zIndex: 3,
@@ -134,7 +134,7 @@ var VectorSeries = /** @class */ (function (_super) {
             rotation: 270,
             'stroke-width': 1,
             'stroke': 'black'
-        }).add(item.legendGroup);
+        }).add(item.legendItem.group);
     },
     */
     /**

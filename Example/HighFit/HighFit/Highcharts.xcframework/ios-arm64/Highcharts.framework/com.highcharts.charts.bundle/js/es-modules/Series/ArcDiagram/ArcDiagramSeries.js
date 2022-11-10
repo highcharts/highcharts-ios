@@ -43,7 +43,7 @@ import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
 import SVGRenderer from '../../Core/Renderer/SVG/SVGRenderer.js';
 import U from '../../Core/Utilities.js';
 var symbols = SVGRenderer.prototype.symbols;
-var SankeySeries = SeriesRegistry.seriesTypes.sankey;
+var _a = SeriesRegistry.seriesTypes, ColumnSeries = _a.column, SankeySeries = _a.sankey;
 var extend = U.extend, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength;
 /* *
  *
@@ -330,14 +330,12 @@ var ArcDiagramSeries = /** @class */ (function (_super) {
         if (this.options.dataLabels) {
             var textPath = this.options.dataLabels.textPath;
             // Render node labels:
-            SankeySeries.prototype.drawDataLabels.apply(this, arguments);
+            ColumnSeries.prototype.drawDataLabels.call(this, this.nodes);
             // Render link labels:
-            this.points = this.data;
             this.options.dataLabels.textPath =
                 this.options.dataLabels.linkTextPath;
-            _super.prototype.drawDataLabels.apply(this, arguments);
+            ColumnSeries.prototype.drawDataLabels.call(this, this.data);
             // Restore nodes
-            this.points = this.points.concat(this.nodes || []);
             this.options.dataLabels.textPath = textPath;
         }
     };

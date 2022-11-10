@@ -21,8 +21,6 @@ Allow panning in a chart. Best used with `panKey` to combine zooming and panning
 /**
 Decides in what dimensions the user can pan the chart. Can be one of `x`, `y`, or `xy`.
 
-**Accepted values:** `["x", "y", "xy"]`.
-
 **Defaults to** `x`.
 
 **Try it**

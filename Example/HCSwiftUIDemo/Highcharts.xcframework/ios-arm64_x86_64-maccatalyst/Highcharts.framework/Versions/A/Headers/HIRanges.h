@@ -22,14 +22,20 @@ Options for specific range. One range consists of bubble, label and connector.
 
 /**
 The color of the border for individual range.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
 The color of the bubble for individual range.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
 The color of the connector for individual range.
+
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HIColor *connectorColor;
 /**

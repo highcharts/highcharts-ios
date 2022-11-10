@@ -20,6 +20,8 @@ Options for the breadcrumbs, the navigation at the top leading the way up throug
 
 /**
 The z index of the breadcrumbs group.
+
+**Defaults to** `7`.
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
@@ -64,6 +66,8 @@ What box to align the button to. Can be either `plotBox` or `spacingBox`.
 @property(nonatomic, readwrite) NSString *relativeTo;
 /**
 The default padding for each button and separator in each direction.
+
+**Defaults to** `5`.
 */
 @property(nonatomic, readwrite) NSNumber *buttonSpacing;
 /**
@@ -72,6 +76,8 @@ Options object for Breadcrumbs separator.
 @property(nonatomic, readwrite) HISeparator *separator;
 /**
 Show full path or only a single button.
+
+**Defaults to** `True`.
 
 **Try it**
 

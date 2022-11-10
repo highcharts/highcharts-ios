@@ -534,7 +534,9 @@ if (seriesTypes.arearange) {
             resize: true,
             resizeSide: 'bottom',
             handlePositioner: function (point) {
-                var bBox = point.lowerGraphic && point.lowerGraphic.getBBox();
+                var bBox = (point.graphics &&
+                    point.graphics[0] &&
+                    point.graphics[0].getBBox());
                 return bBox ? {
                     x: bBox.x + bBox.width / 2,
                     y: bBox.y + bBox.height / 2
@@ -558,7 +560,9 @@ if (seriesTypes.arearange) {
             resize: true,
             resizeSide: 'top',
             handlePositioner: function (point) {
-                var bBox = point.upperGraphic && point.upperGraphic.getBBox();
+                var bBox = (point.graphics &&
+                    point.graphics[1] &&
+                    point.graphics[1].getBBox());
                 return bBox ? {
                     x: bBox.x + bBox.width / 2,
                     y: bBox.y + bBox.height / 2

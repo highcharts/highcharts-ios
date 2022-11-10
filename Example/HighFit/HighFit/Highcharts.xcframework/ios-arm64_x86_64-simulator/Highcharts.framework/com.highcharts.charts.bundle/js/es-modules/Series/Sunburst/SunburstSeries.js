@@ -38,6 +38,7 @@ import SunburstUtilities from './SunburstUtilities.js';
 import TU from '../TreeUtilities.js';
 var getColor = TU.getColor, getLevelOptions = TU.getLevelOptions, setTreeValues = TU.setTreeValues, updateRootId = TU.updateRootId;
 import U from '../../Core/Utilities.js';
+import SunburstNode from './SunburstNode.js';
 var error = U.error, extend = U.extend, isNumber = U.isNumber, isObject = U.isObject, isString = U.isString, merge = U.merge, splat = U.splat;
 /* *
  *
@@ -275,7 +276,7 @@ function getDrillId(point, idRoot, mapIdToNode) {
 }
 // eslint-disable-next-line require-jsdoc
 function cbSetTreeValuesBefore(node, options) {
-    var mapIdToNode = options.mapIdToNode, nodeParent = mapIdToNode[node.parent], series = options.series, chart = series.chart, points = series.points, point = points[node.i], colors = (series.options.colors || chart && chart.options.colors), colorInfo = getColor(node, {
+    var mapIdToNode = options.mapIdToNode, parent = node.parent, nodeParent = parent ? mapIdToNode[parent] : void 0, series = options.series, chart = series.chart, points = series.points, point = points[node.i], colors = series.options.colors || chart && chart.options.colors, colorInfo = getColor(node, {
         colors: colors,
         colorIndex: series.colorIndex,
         index: options.index,
@@ -873,6 +874,7 @@ extend(SunburstSeries.prototype, {
     onPointSupported: true,
     pointAttribs: ColumnSeries.prototype.pointAttribs,
     pointClass: SunburstPoint,
+    NodeClass: SunburstNode,
     utils: SunburstUtilities
 });
 SeriesRegistry.registerSeriesType('sunburst', SunburstSeries);

@@ -22,8 +22,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import SeriesRegistry from '../../../Core/Series/SeriesRegistry.js';
-var ATRIndicator = SeriesRegistry.seriesTypes.atr;
-var SMAIndicator = SeriesRegistry.seriesTypes.sma;
+var _a = SeriesRegistry.seriesTypes, ATRIndicator = _a.atr, SMAIndicator = _a.sma;
 import U from '../../../Core/Utilities.js';
 import StockChart from '../../../Core/Chart/StockChart.js';
 var addEvent = U.addEvent, correctFloat = U.correctFloat, isArray = U.isArray, extend = U.extend, merge = U.merge, objectEach = U.objectEach;

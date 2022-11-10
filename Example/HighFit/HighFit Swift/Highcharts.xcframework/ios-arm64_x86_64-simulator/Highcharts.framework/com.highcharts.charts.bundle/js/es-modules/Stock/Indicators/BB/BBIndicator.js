@@ -152,10 +152,12 @@ var BBIndicator = /** @class */ (function (_super) {
          * @sample {highstock} stock/indicators/indicator-area-fill
          *      Background fill between lines.
          *
-         * @type      {Highcharts.Color}
-         * @since 9.3.2
+         * @type      {Highcharts.ColorType}
+         * @since     9.3.2
          * @apioption plotOptions.bb.fillColor
-         *
+         */
+        /**
+         * Parameters used in calculation of the regression points.
          */
         params: {
             period: 20,
@@ -170,7 +172,7 @@ var BBIndicator = /** @class */ (function (_super) {
          */
         bottomLine: {
             /**
-             * Styles for a bottom line.
+             * Styles for the bottom line.
              */
             styles: {
                 /**
@@ -192,9 +194,18 @@ var BBIndicator = /** @class */ (function (_super) {
          * @extends plotOptions.bb.bottomLine
          */
         topLine: {
+            /**
+             * Styles for the top line.
+             */
             styles: {
+                /**
+                 * Pixel width of the line.
+                 */
                 lineWidth: 1,
                 /**
+                 * Color of the line. If not set, it's inherited from
+                 * [plotOptions.bb.color](#plotOptions.bb.color).
+                 *
                  * @type {Highcharts.ColorString}
                  */
                 lineColor: void 0
