@@ -29,17 +29,23 @@ Enables zooming by a single touch, in combination with `chart.zooming.type`. Whe
 /**
 Decides in what dimensions the user can zoom by dragging the mouse. Can be one of `x`, `y` or `xy`.
 
+**Accepted values:** `["x", "y", "xy"]`.
+
 **Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *type;
 /**
 Equivalent to `type`, but for multitouch gestures only. By default, the `pinchType` is the same as the `type` setting. However, pinching can be enabled separately in some cases, for example in stock charts where a mouse drag pans the chart, while pinching is enabled. When `tooltip.followTouchMove` is true, pinchType only applies to two-finger touches.
 
+**Accepted values:** `["x", "y", "xy"]`.
+
 **Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *pinchType;
 /**
 Set a key to hold when dragging to zoom the chart. This is useful to avoid zooming while moving points. Should be set different than `chart.panKey`.
+
+**Accepted values:** `["alt", "ctrl", "meta", "shift"]`.
 
 **Defaults to** `undefined`.
 */

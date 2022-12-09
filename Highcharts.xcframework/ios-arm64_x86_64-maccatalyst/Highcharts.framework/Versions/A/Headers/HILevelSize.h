@@ -31,6 +31,8 @@ The value used for calculating the width of the ring. Its' affect is determined 
 /**
 How to interpret `levelSize.value`. - `percentage` gives a width relative to result of outer radius  minus inner radius. - `pixels` gives the ring a fixed width in pixels. - `weight` takes the remaining width after percentage and pixels,  and distributes it accross all "weighted" levels. The value  relative to the sum of all weights determines the width.
 
+**Accepted values:** `["percentage", "pixels", "weight"]`.
+
 **Defaults to** `weight`.
 
 **Try it**

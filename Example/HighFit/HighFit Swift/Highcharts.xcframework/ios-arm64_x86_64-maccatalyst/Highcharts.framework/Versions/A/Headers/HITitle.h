@@ -119,6 +119,11 @@ The rotation of the text in degrees. 0 is horizontal, 270 is vertical reading fr
 * [Horizontal](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/title-offset/)
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
+/**
+Whether to reserve space for the title when laying out the axis.
+
+**Defaults to** `true`.
+*/
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reserveSpace;
 /**
 If enabled, the axis title will skewed to follow the perspective. This will fix overlapping labels and titles, but texts become less legible due to the distortion. The final appearance depends heavily on `title.position3d`. A `null` value will use the config from `labels.skew3d`.

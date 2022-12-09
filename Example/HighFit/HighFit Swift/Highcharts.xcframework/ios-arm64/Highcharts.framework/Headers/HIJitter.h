@@ -14,7 +14,7 @@ Apply a jitter effect for the rendered markers. When plotting discrete values, a
 
 **Try it**
 
-* [Jitter on a scatter plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-scatter/jitter)
+* [Jitter on a scatter plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/scatter-jitter)
 * [Jittered scatter plot on top of a box plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-scatter/jitter-boxplot)
 */
 @interface HIJitter: HIChartsJSONSerializable

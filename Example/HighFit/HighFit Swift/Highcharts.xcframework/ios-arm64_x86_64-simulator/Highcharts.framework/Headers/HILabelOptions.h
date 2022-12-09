@@ -147,6 +147,8 @@ When either the borderWidth or the backgroundColor is set, this is the padding w
 /**
 How to handle the annotation's label that flow outside the plot area. The justify option aligns the label inside the plot area.
 
+**Accepted values:** `["allow", "justify"]`.
+
 **Defaults to** `justify`.
 
 **Try it**

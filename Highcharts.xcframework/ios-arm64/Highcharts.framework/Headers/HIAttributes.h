@@ -10,12 +10,10 @@
 
 
 /**
-A collection of SVG attributes to override the appearance of the halo, for example `fill`, `stroke` and `stroke-width`.
-*/
+ */
 @interface HIAttributes: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSNumber *startOffset;
-@property(nonatomic, readwrite) NSNumber *zIndex;
 @property(nonatomic, readwrite) NSNumber *refX;
 @property(nonatomic, readwrite) NSNumber *markerWidth;
 @property(nonatomic, readwrite) NSNumber *refY;
@@ -27,6 +25,7 @@ Text path shift along its y-axis.
 **Defaults to** `5`.
 */
 @property(nonatomic, readwrite) HISVGAttributes *dy;
+@property(nonatomic, readwrite) NSNumber *zIndex;
 
 -(NSDictionary *)getParams;
 

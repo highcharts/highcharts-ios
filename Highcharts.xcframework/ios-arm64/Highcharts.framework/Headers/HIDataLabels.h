@@ -40,6 +40,8 @@ Decides how the data label will be rotated relative to the perimeter of the sunb
 
 **Accepted values:** `["auto", "perpendicular", "parallel", "circular"]`.
 
+**Defaults to** `auto`.
+
 **Try it**
 
 * [Circular rotation mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sunburst-datalabels-rotationmode-circular/)

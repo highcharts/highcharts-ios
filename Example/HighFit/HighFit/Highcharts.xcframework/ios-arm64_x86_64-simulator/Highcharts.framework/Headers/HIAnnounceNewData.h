@@ -42,6 +42,8 @@ Choose whether or not the announcements should interrupt the screen reader. If n
 @property(nonatomic, readwrite) NSNumber /* Bool */ *interruptUser;
 /**
 Minimum interval between announcements in milliseconds. If new data arrives before this amount of time has passed, it is queued for announcement. If another new data event happens while an announcement is queued, the queued announcement is dropped, and the latest announcement is queued instead. Set to 0 to allow all announcements, but be warned that frequent announcements are disturbing to users.
+
+**Defaults to** `5000`.
 */
 @property(nonatomic, readwrite) NSNumber *minAnnounceInterval;
 

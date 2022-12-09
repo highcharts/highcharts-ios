@@ -103,16 +103,6 @@ When enabled the user can click on a point which is a parent and zoom in on its 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowTraversingTree;
 /**
-Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
-
-**Defaults to** `True`.
-
-**Try it**
-
-* [True, the hiddden point is ignored](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-ignorehiddenpoint/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
-/**
 A series specific or series type specific color set to use instead of the global `colors`.
 
 **Try it**
@@ -145,12 +135,6 @@ Thickness describing the ring size for a donut type chart, overriding `innerSize
 */
 @property(nonatomic, readwrite) NSNumber *thickness;
 /**
-The minimum size for a pie in response to auto margins. The pie will try to shrink to make room for data labels in side the plot area, but only to this size.
-
-**Defaults to** `80`.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ minSize;
-/**
 If the total sum of the pie's values is 0, the series is represented as an empty circle . The `fillColor` option defines the color of that circle. Use `pie.borderWidth` to set the border thickness.
 
 **Defaults to** `undefined`.
@@ -170,32 +154,6 @@ The start angle of the pie slices in degrees where 0 is top and 90 right.
 * [Start from right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-startangle-90/)
 */
 @property(nonatomic, readwrite) NSNumber *startAngle;
-/**
-The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to `startAngle` plus 360.
-
-**Try it**
-
-* [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
-*/
-@property(nonatomic, readwrite) NSNumber *endAngle;
-/**
-The size of the inner diameter for the pie. A size greater than 0 renders a donut chart. Can be a percentage or pixel value. Percentages are relative to the pie size. Pixel values are given as integers. Setting overridden by thickness. Note: in Highcharts < 4.1.2, the percentage was relative to the plot area, not the pie size.
-
-**Defaults to** `0`.
-
-**Try it**
-
-* [80px inner size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-innersize-80px/)
-* [50% of the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-innersize-50percent/)
-* [3D donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/3d-pie-donut/)
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ innerSize;
-/**
-The thickness of a 3D pie.
-
-**Defaults to** `0`.
-*/
-@property(nonatomic, readwrite) NSNumber *depth;
 /**
 The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
 

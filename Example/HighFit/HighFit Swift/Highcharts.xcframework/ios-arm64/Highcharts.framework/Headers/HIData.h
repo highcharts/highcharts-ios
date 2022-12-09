@@ -7,10 +7,10 @@
 */
 
 #import "HIAccessibility.h"
-#import "HIMarker.h"
 #import "HIDragDrop.h"
 #import "HIDataLabels.h"
 #import "HIEvents.h"
+#import "HIMarker.h"
 #import "HITargetOptions.h"
 #import "HIPartialFill.h"
 #import "HIColor.h"
@@ -113,6 +113,9 @@ An URL to a remote CSV dataset. Will be fetched when the chart is created using 
 @property(nonatomic, readwrite) NSString *csvURL;
 /**
 Which of the predefined date formats in Date.prototype.dateFormats to use to parse date values. Defaults to a best guess based on what format gives valid and ordered dates. Valid options include: `YYYY/mm/dd`, `dd/mm/YYYY`, `mm/dd/YYYY`, `dd/mm/YY`, `mm/dd/YY`.
+
+**Accepted values:** `["YYYY/mm/dd", "dd/mm/YYYY", "mm/dd/YYYY", "dd/mm/YYYY",
+            "dd/mm/YY", "mm/dd/YY"]`.
 
 **Try it**
 
@@ -372,13 +375,13 @@ A reserved subspace to store options and values for customized functionality. He
 */
 @property(nonatomic, readwrite) NSDictionary *custom;
 /**
-An additional, individual class name for the data point's graphic representation.
+An additional, individual class name for the data point's graphic representation. Changes to a point's color will also be reflected in a chart's legend and tooltip.
+
+**Try it**
+
+* [e](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/)
 */
 @property(nonatomic, readwrite) NSString *className;
-/**
-Options for the point markers of line-like series.
-*/
-@property(nonatomic, readwrite) HIMarker *marker;
 /**
 Point specific options for the draggable-points module. Overrides options on `series.dragDrop`.
 */
@@ -420,31 +423,17 @@ A description of the point to add to the screen reader information about the poi
 */
 @property(nonatomic, readwrite) NSString *definition;
 /**
-Whether to display a slice offset from the center.
-
-**Try it**
-
-* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
-/**
 The sequential index of the data point in the legend.
 */
 @property(nonatomic, readwrite) NSNumber *legendIndex;
 /**
+Options for the point markers of line-like series.
+*/
+@property(nonatomic, readwrite) HIMarker *marker;
+/**
 The label of event.
 */
 @property(nonatomic, readwrite) NSString *label;
-/**
-Whether the link goes out of the system.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Sankey chart with outgoing links](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-outgoing)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *outgoing;
 /**
 The node that the link runs from.
 */
@@ -510,12 +499,6 @@ Pixel width of the line that connects the dumbbell point's values.
 */
 @property(nonatomic, readwrite) NSNumber *connectorWidth;
 /**
-Color of the start markers in a dumbbell graph.
-
-**Defaults to** `#333333`.
-*/
-@property(nonatomic, readwrite) HIColor *lowColor;
-/**
 Point padding for a single point.
 
 **Try it**
@@ -548,6 +531,14 @@ When this property is true, the point display the total sum across the entire se
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *isSum;
 /**
+Whether to display a slice offset from the center.
+
+**Try it**
+
+* [One sliced point](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/point/sliced/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *sliced;
+/**
 By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *gradientForSides;
@@ -568,9 +559,25 @@ The outer radius of an individual point in a solid gauge. Can be given only in p
 */
 @property(nonatomic, readwrite) NSString *radius;
 /**
+Whether the link goes out of the system.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Sankey chart with outgoing links](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-outgoing)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *outgoing;
+/**
 The size value for each bubble. The bubbles' diameters are computed based on the `z`, and controlled by series options like `minSize`, `maxSize`, `sizeBy`, `zMin` and `zMax`.
 */
 @property(nonatomic, readwrite) NSNumber *z;
+/**
+Color of the start markers in a dumbbell graph.
+
+**Defaults to** `#333333`.
+*/
+@property(nonatomic, readwrite) HIColor *lowColor;
 /**
 The ending X value of the range point.
 

@@ -9,10 +9,8 @@
 #import "HILabels.h"
 #import "HIAccessibility.h"
 #import "HIPlotLines.h"
-#import "HIBreaks.h"
 #import "HIDateTimeLabelFormats.h"
 #import "HIEvents.h"
-#import "HICrosshair.h"
 #import "HITitle.h"
 #import "HIPlotBands.h"
 #import "HIColor.h"
@@ -60,6 +58,8 @@ Refers to the index in the `panes` array. Used for circular gauges and polar cha
 /**
 For categorized axes only. If `on` the tick mark is placed in the center of the category, if `between` the tick mark is placed between categories. The default is `between` if the `tickInterval` is 1, else `on`.
 
+**Accepted values:** `["on", "between"]`.
+
 **Defaults to** `between`.
 
 **Try it**
@@ -96,14 +96,6 @@ The Z index of the grid lines.
 Accessibility options for an axis. Requires the accessibility module.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
-/**
-The height as the vertical axis. If it's a number, it is interpreted as pixels. Since Highcharts 2: If it's a percentage string, it is interpreted as percentages of the total plot height.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
-/**
-The top position as the vertical axis. If it's a number, it is interpreted as pixel position relative to the chart. Since Highcharts 2: If it's a percentage string, it is interpreted as percentages of the plot height, offset from plot area top.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ top;
 /**
 Whether axis, including axis title, line, ticks and labels, should be visible.
 
@@ -268,10 +260,6 @@ The dash or dot style of the minor grid lines. For possible values, see [this de
 */
 @property(nonatomic, readwrite) NSString *minorGridLineDashStyle;
 /**
-The width as the horizontal axis. If it's a number, it is interpreted as pixels. Since Highcharts v5.0.13: If it's a percentage string, it is interpreted as percentages of the total plot width.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
-/**
 The pixel length of the minor tick marks.
 
 **Defaults to** `2`.
@@ -320,6 +308,8 @@ Whether to pan axis. If `chart.panning` is enabled, the option allows to disable
 /**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
 
+**Accepted values:** `["circle", "polygon"]`.
+
 **Try it**
 
 * [Polygon grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
@@ -346,16 +336,6 @@ The highest allowed value for automatically computed axis extremes.
 */
 @property(nonatomic, readwrite) NSNumber *ceiling;
 /**
-Whether to show the axis line and title when the axis has no data.
-
-**Defaults to** `True`.
-
-**Try it**
-
-* [When clicking the legend to hide series, one axis preserves line and title, the other doesn't](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/showempty/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *showEmpty;
-/**
 The dash or dot style of the grid lines. For possible values, see [this demonstration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-dashstyle-all/).
 
 **Defaults to** `Solid`.
@@ -376,6 +356,8 @@ Whether to display the axis on the opposite side of the normal. The normal is on
 /**
 The position of the minor tick marks relative to the axis line. Can be one of `inside` and `outside`.
 
+**Accepted values:** `["inside", "outside"]`.
+
 **Defaults to** `outside`.
 
 **Try it**
@@ -393,15 +375,6 @@ The maximum value of the axis. If `null`, the max value is automatically calcula
 * [Y axis max on logarithmic axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/max-logarithmic/)
 */
 @property(nonatomic, readwrite) NSNumber *max;
-/**
-An array defining breaks in the axis, the sections defined will be left out and all the points shifted closer to each other.
-
-**Try it**
-
-* [Simple break](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/axisbreak/break-simple/)
-* [Advanced with callback](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/axisbreak/break-visualized/)
-*/
-@property(nonatomic, readwrite) NSArray <HIBreaks *> *breaks;
 /**
 For a datetime axis, the scale will automatically adjust to the appropriate unit. This member gives the default string representations used for each unit. For intermediate values, different units may be used, for example the `day` unit can be used on midnight and `hour` unit be used for intermediate values on the same axis. For an overview of the replacement codes, see `dateFormat`. Defaults to: ```js {   millisecond: '%H:%M:%S.%L',   second: '%H:%M:%S',   minute: '%H:%M',   hour: '%H:%M',   day: '%e. %b',   week: '%e. %b',   month: '%b \'%y',   year: '%Y' } ```
 */
@@ -488,6 +461,8 @@ The interval of the tick marks in axis units. When `undefined`, the tick interva
 @property(nonatomic, readwrite) NSNumber *tickInterval;
 /**
 The position of the major tick marks relative to the axis line. Can be one of `inside` and `outside`.
+
+**Accepted values:** `["inside", "outside"]`.
 
 **Defaults to** `outside`.
 
@@ -603,27 +578,6 @@ The amount of ticks to draw on the axis. This opens up for aligning the ticks of
 */
 @property(nonatomic, readwrite) NSNumber *tickAmount;
 /**
-Configure a crosshair that follows either the mouse pointer or the hovered point. In styled mode, the crosshairs are styled in the `.highcharts-crosshair`, `.highcharts-crosshair-thin` or `.highcharts-xaxis-category` classes.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Crosshair on both axes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/crosshair-both/)
-*/
-@property(nonatomic, readwrite) HICrosshair *crosshair;
-/**
-The color of the line marking the axis itself. In styled mode, the line stroke is given in the `.highcharts-axis-line` or `.highcharts-xaxis-line` class.
-
-**Defaults to** `#ccd6eb`.
-
-**Try it**
-
-* [A red line on Y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/linecolor/)
-* [Axes in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/axis/)
-*/
-@property(nonatomic, readwrite) HIColor *lineColor;
-/**
 Width of the minor, secondary grid lines. In styled mode, the stroke width is given in the `.highcharts-grid-line` class.
 
 **Defaults to** `1`.
@@ -650,17 +604,6 @@ Specific tick interval in axis units for the minor ticks. On a linear axis, if `
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ minorTickInterval;
 /**
-The width of the line marking the axis itself. In styled mode, the stroke width is given in the `.highcharts-axis-line` or `.highcharts-xaxis-line` class.
-
-**Defaults to** `1`.
-
-**Try it**
-
-* [A 1px line on Y axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/linecolor/)
-* [Axes in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/axis/)
-*/
-@property(nonatomic, readwrite) NSNumber *lineWidth;
-/**
 If there are multiple axes on the same side of the chart, the pixel margin between the axes. Defaults to 0 on vertical axes, 15 on horizontal axes.
 */
 @property(nonatomic, readwrite) NSNumber *margin;
@@ -668,10 +611,6 @@ If there are multiple axes on the same side of the chart, the pixel margin betwe
 An array of colored bands stretching across the plot area marking an interval on the axis. In styled mode, the plot bands are styled by the `.highcharts-plot-band` class in addition to the `className` option.
 */
 @property(nonatomic, readwrite) NSArray <HIPlotBands *> *plotBands;
-/**
-The left position as the horizontal axis. If it's a number, it is interpreted as pixel position relative to the chart. Since Highcharts v5.0.13: If it's a percentage string, it is interpreted as percentages of the plot width, offset from plot area left.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ left;
 
 -(NSDictionary *)getParams;
 

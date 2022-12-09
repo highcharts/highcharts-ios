@@ -15,7 +15,6 @@
 #import "HISeriesTypeDescriptions.h"
 #import "HITable.h"
 #import "HIZoom.h"
-#import "HISeriesTypeDescriptions.h"
 #import "HIAccessibilityExporting.h"
 #import "HIRangeSelector.h"
 #import "HIAccessibilityLegend.h"
@@ -30,6 +29,8 @@ Options for configuring accessibility for the chart. Requires the [accessibility
 
 /**
 Amount of landmarks/regions to create for screen reader users. More landmarks can make navigation with screen readers easier, but can be distracting if there are lots of charts on the page. Three modes are available: - `all`: Adds regions for all series, legend, information   region. - `one`: Adds a single landmark per chart. - `disabled`: No landmarks are added.
+
+**Accepted values:** `["all", "one", "disabled"]`.
 
 **Defaults to** `all`.
 */

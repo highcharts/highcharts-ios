@@ -96,7 +96,7 @@ An array with an SVG path for the custom dial.
 
 * [Dial options demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/gauge-path/)
 */
-@property(nonatomic, readwrite) id path;
+@property(nonatomic, readwrite) NSArray<NSString *> *path;
 /**
 The pixel width of the base of the gauge dial. The base is the part closest to the pivot, defined by baseLength.
 

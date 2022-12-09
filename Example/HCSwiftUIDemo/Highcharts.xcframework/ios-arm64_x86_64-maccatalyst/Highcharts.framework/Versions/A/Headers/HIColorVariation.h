@@ -24,6 +24,8 @@ The ending value of a color variation. The last sibling will receive this value.
 @property(nonatomic, readwrite) NSNumber *to;
 /**
 The key of a color variation. Currently supports `brightness` only.
+
+**Accepted values:** `["brightness"]`.
 */
 @property(nonatomic, readwrite) NSString *key;
 

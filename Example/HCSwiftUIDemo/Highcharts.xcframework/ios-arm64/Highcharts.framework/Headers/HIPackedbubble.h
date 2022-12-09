@@ -9,8 +9,6 @@
 #import "HISeries.h"
 #import "HILayoutAlgorithm.h"
 #import "HIParentNode.h"
-#import "HIJitter.h"
-#import "HICluster.h"
 
 
 /**
@@ -98,22 +96,6 @@ An option is giving a possibility to choose between using simulation for calcula
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useSimulation;
 /**
-The minimum for the Z value range. Defaults to the highest Z value in the data.
-
-**Try it**
-
-* [Z has a possible range of 0-100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-zmin-zmax/)
-*/
-@property(nonatomic, readwrite) NSNumber *zMax;
-/**
-The minimum for the Z value range. Defaults to the lowest Z value in the data.
-
-**Try it**
-
-* [Z has a possible range of 0-100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-zmin-zmax/)
-*/
-@property(nonatomic, readwrite) NSNumber *zMin;
-/**
 Whether to display negative sized bubbles. The threshold is given by the `zThreshold` option, and negative bubbles can be visualized by setting `negativeColor`.
 
 **Defaults to** `true`.
@@ -131,35 +113,6 @@ When `displayNegative` is `false`, bubbles with lower Z values are skipped. When
 * [Negative bubbles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-negative/)
 */
 @property(nonatomic, readwrite) NSNumber *zThreshold;
-/**
-When this is true, the absolute value of z determines the size of the bubble. This means that with the default `zThreshold` of 0, a bubble of value -1 will have the same size as a bubble of value 1, while a bubble of value 0 will have a smaller size according to `minSize`.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Size by absolute value, various thresholds](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/bubble-sizebyabsolutevalue/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *sizeByAbsoluteValue;
-/**
-Apply a jitter effect for the rendered markers. When plotting discrete values, a little random noise may help telling the points apart. The jitter setting applies a random displacement of up to `n` axis units in either direction. So for example on a horizontal X axis, setting the `jitter.x` to 0.24 will render the point in a random position between 0.24 units to the left and 0.24 units to the right of the true axis position. On a category axis, setting it to 0.5 will fill up the bin and make the data appear continuous. When rendered on top of a box plot or a column series, a jitter value of 0.24 will correspond to the underlying series' default [groupPadding](https://api.highcharts.com/highcharts/plotOptions.column.groupPadding) and [pointPadding](https://api.highcharts.com/highcharts/plotOptions.column.pointPadding) settings.
-
-**Try it**
-
-* [Jitter on a scatter plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-scatter/jitter)
-* [Jittered scatter plot on top of a box plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-scatter/jitter-boxplot)
-*/
-@property(nonatomic, readwrite) HIJitter *jitter;
-/**
-Options for marker clusters, the concept of sampling the data values into larger blocks in order to ease readability and increase performance of the JavaScript charts. Note: marker clusters module is not working with `boost` and `draggable-points` modules. The marker clusters feature requires the marker-clusters.js file to be loaded, found in the modules directory of the download package, or online at `https://code.highcharts.com/modules/marker-clusters.js`.
-
-**Try it**
-
-* [Maps marker clusters](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/marker-clusters/europe)
-* [Scatter marker clusters](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/marker-clusters/basic)
-* [Marker clusters with colorAxis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/maps/marker-clusters/optimized-kmeans)
-*/
-@property(nonatomic, readwrite) HICluster *cluster;
 
 -(NSDictionary *)getParams;
 

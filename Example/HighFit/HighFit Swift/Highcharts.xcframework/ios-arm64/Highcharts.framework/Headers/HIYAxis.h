@@ -215,7 +215,7 @@ Whether to show the last tick label.
 
 * [Set to true on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/showlastlabel-true/)
 */
-@property(nonatomic, readwrite) NSString *showLastLabel;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *showLastLabel;
 /**
 Whether to force the axis to start on a tick. Use this option with the `maxPadding` option to control the axis start. This option is always disabled, when panning type is either `y` or `xy`.
 
@@ -300,6 +300,8 @@ Refers to the index in the `panes` array. Used for circular gauges and polar cha
 @property(nonatomic, readwrite) NSNumber *pane;
 /**
 For categorized axes only. If `on` the tick mark is placed in the center of the category, if `between` the tick mark is placed between categories. The default is `between` if the `tickInterval` is 1, else `on`.
+
+**Accepted values:** `["on", "between"]`.
 
 **Defaults to** `between`.
 
@@ -470,6 +472,8 @@ Whether to pan axis. If `chart.panning` is enabled, the option allows to disable
 /**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
 
+**Accepted values:** `["circle", "polygon"]`.
+
 **Try it**
 
 * [Polygon grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
@@ -517,6 +521,8 @@ The dash or dot style of the grid lines. For possible values, see [this demonstr
 @property(nonatomic, readwrite) NSString *gridLineDashStyle;
 /**
 The position of the minor tick marks relative to the axis line. Can be one of `inside` and `outside`.
+
+**Accepted values:** `["inside", "outside"]`.
 
 **Defaults to** `outside`.
 
@@ -595,6 +601,8 @@ The interval of the tick marks in axis units. When `undefined`, the tick interva
 @property(nonatomic, readwrite) NSNumber *tickInterval;
 /**
 The position of the major tick marks relative to the axis line. Can be one of `inside` and `outside`.
+
+**Accepted values:** `["inside", "outside"]`.
 
 **Defaults to** `outside`.
 

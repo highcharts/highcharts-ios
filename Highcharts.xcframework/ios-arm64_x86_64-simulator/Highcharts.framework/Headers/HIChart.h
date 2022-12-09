@@ -69,7 +69,7 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
 /**
-Additional CSS styles to apply inline to the container `div`. Note that since the default font styles are applied in the renderer, it is ignorant of the individual chart options and must be set globally.
+Additional CSS styles to apply inline to the container `div`. Note that since the default font styles are applied in the renderer, it is ignorant of the individual chart options and must be set globally. Also note that changing the font size in the `chart.style` options only applies to those elements that do not have a specific `fontSize` setting.
 
 **Defaults to** `{"fontFamily": "\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","fontSize":"12px"}`.
 
@@ -287,6 +287,8 @@ The distance between the outer edge of the chart and the content, like title or 
 @property(nonatomic, readwrite) NSArray<NSNumber *> *spacing;
 /**
 Allows setting a key to switch between zooming and panning. Can be one of `alt`, `ctrl`, `meta` (the command key on Mac and Windows key on Windows) or `shift`. The keys are mapped directly to the key properties of the click event argument (`event.altKey`, `event.ctrlKey`, `event.metaKey` and `event.shiftKey`).
+
+**Accepted values:** `["alt", "ctrl", "meta", "shift"]`.
 */
 @property(nonatomic, readwrite) NSString *panKey;
 /**

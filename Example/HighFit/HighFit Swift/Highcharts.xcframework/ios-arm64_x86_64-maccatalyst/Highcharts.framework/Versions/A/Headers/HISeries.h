@@ -388,6 +388,8 @@ Options for the _Series on point_ feature. Only `pie` and `sunburst` series are 
 /**
 Whether to stack the values of each series on top of each other. Possible values are `undefined` to disable, `"normal"` to stack by value or `"percent"`. When stacking is enabled, data must be sorted in ascending X order. Some stacking options are related to specific series types. In the streamgraph series type, the stacking option is set to `"stream"`. The second one is `"overlap"`, which only applies to waterfall series.
 
+**Accepted values:** `["normal", "overlap", "percent", "stream"]`.
+
 **Try it**
 
 * [Line](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-stacking-line/)
@@ -416,6 +418,8 @@ Enable or disable the initial animation when a series is displayed. The animatio
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
 /**
 Determines whether the series should look for the nearest point in both dimensions or just the x-dimension when hovering the series. Defaults to `'xy'` for scatter series and `'x'` for most other series. If the data has duplicate x-values, it is recommended to set this to `'xy'` to allow hovering over all points. Applies only to series types using nearest neighbor search (not direct hover) for tooltip.
+
+**Accepted values:** `["x", "xy"]`.
 
 **Defaults to** `x`.
 
@@ -450,6 +454,8 @@ If true, a checkbox is displayed next to the legend item to allow selecting the 
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showCheckbox;
 /**
 Sets the color blending in the boost module.
+
+**Accepted values:** `["add", "multiply", "darken"]`.
 
 **Defaults to** `undefined`.
 */
@@ -507,6 +513,8 @@ Accessibility options for a series.
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
 Whether to apply steps to the line. Possible values are `left`, `center` and `right`.
+
+**Accepted values:** `["left", "center", "right"]`.
 
 **Try it**
 
@@ -573,6 +581,8 @@ An array defining zones within a series. Zones can be applied to the X axis, Y a
 @property(nonatomic, readwrite) NSArray <HIZones *> *zones;
 /**
 On datetime series, this allows for setting the `pointInterval` to irregular time units, `day`, `month` and `year`. A day is usually the same as 24 hours, but `pointIntervalUnit` also takes the DST crossover into consideration when dealing with local time. Combine this option with `pointInterval` to draw weeks, quarters, 6 months, 10 years etc. Please note that this options applies to the _series data_, not the interval of the axis ticks, which is independent.
+
+**Accepted values:** `["day", "month", "year"]`.
 
 **Try it**
 
@@ -643,7 +653,11 @@ Options for the series data labels, appearing next to each data point. Since v6.
 */
 @property(nonatomic, readwrite) NSArray <HIDataLabels *> *dataLabels;
 /**
-An additional class name to apply to the series' graphical elements. This option does not replace default class names of the graphical element.
+An additional class name to apply to the series' graphical elements. This option does not replace default class names of the graphical element. Changes to the series' color will also be reflected in a chart's legend and tooltip.
+
+**Try it**
+
+* [e](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/)
 */
 @property(nonatomic, readwrite) NSString *className;
 /**

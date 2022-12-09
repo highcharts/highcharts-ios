@@ -47,17 +47,6 @@ The radius of the point marker.
 @property(nonatomic, readwrite) NSNumber *radius;
 @property(nonatomic, readwrite) NSNumber *fillOpacity;
 /**
-Enable or disable the point marker. If `undefined`, the markers are hidden when the data is dense, and shown for more widespread data points.
-
-**Defaults to** `undefined`.
-
-**Try it**
-
-* [Disabled markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabled/)
-* [Disabled in normal state but enabled on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabled-false/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
-/**
 Image markers only. Set the image width explicitly. When using this option, a `width` must also be set.
 
 **Try it**
@@ -92,15 +81,16 @@ The color of the point marker's outline. When `undefined`, the series' or point'
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
-The threshold for how dense the point markers should be before they are hidden, given that `enabled` is not defined. The number indicates the horizontal distance between the two closest points in the series, as multiples of the `marker.radius`. In other words, the default value of 2 means points are hidden if overlapping horizontally.
+Enable or disable the point marker. If `undefined`, the markers are hidden when the data is dense, and shown for more widespread data points.
 
-**Defaults to** `2`.
+**Defaults to** `undefined`.
 
 **Try it**
 
-* [A higher threshold](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabledthreshold)
+* [Disabled markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabled/)
+* [Disabled in normal state but enabled on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabled-false/)
 */
-@property(nonatomic, readwrite) NSNumber *enabledThreshold;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The color of the marker.
 
@@ -111,6 +101,16 @@ The color of the marker.
 Animation for the marker as it moves between values. Set to `false` to disable animation. Defaults to `{ duration: 50 }`.
 */
 @property(nonatomic, readwrite) HIAnimationOptionsObject *animation;
+/**
+The threshold for how dense the point markers should be before they are hidden, given that `enabled` is not defined. The number indicates the horizontal distance between the two closest points in the series, as multiples of the `marker.radius`. In other words, the default value of 2 means points are hidden if overlapping horizontally.
+
+**Defaults to** `2`.
+
+**Try it**
+
+* [A higher threshold](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabledthreshold)
+*/
+@property(nonatomic, readwrite) NSNumber *enabledThreshold;
 
 -(NSDictionary *)getParams;
 

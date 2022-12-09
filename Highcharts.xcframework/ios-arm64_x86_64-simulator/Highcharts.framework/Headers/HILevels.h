@@ -67,10 +67,14 @@ Can set a `borderWidth` on all points which lies on the same level.
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Can set the layoutAlgorithm option on a specific level.
+
+**Accepted values:** `["sliceAndDice", "stripes", "squarified", "strip"]`.
 */
 @property(nonatomic, readwrite) NSString *layoutAlgorithm;
 /**
 Can set the layoutStartingDirection option on a specific level.
+
+**Accepted values:** `["vertical", "horizontal"]`.
 */
 @property(nonatomic, readwrite) NSString *layoutStartingDirection;
 /**

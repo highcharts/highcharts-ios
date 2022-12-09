@@ -7,7 +7,6 @@
 */
 
 #import "HIMarker.h"
-#import "HIFunction.h"
 
 
 /**
@@ -71,6 +70,8 @@ Friction applied on forces to prevent nodes rushing to fast to the desired posit
 /**
 Integration type. Available options are `'euler'` and `'verlet'`. Integration determines how forces are applied on particles. In Euler integration, force is applied direct as `newPosition += velocity;`. In Verlet integration, new position is based on a previous posittion without velocity: `newPosition += previousPosition - newPosition`. Note that different integrations give different results as forces are different. In Highcharts v7.0.x only `'euler'` integration was supported.
 
+**Accepted values:** `["euler", "verlet"]`.
+
 **Defaults to** `euler`.
 
 **Try it**
@@ -78,24 +79,6 @@ Integration type. Available options are `'euler'` and `'verlet'`. Integration de
 * [Comparison of Verlet and Euler integrations](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/integration-comparison/)
 */
 @property(nonatomic, readwrite) NSString *integration;
-/**
-Approximation used to calculate repulsive forces affecting nodes. By default, when calculateing net force, nodes are compared against each other, which gives O(N^2) complexity. Using Barnes-Hut approximation, we decrease this to O(N log N), but the resulting graph will have different layout. Barnes-Hut approximation divides space into rectangles via quad tree, where forces exerted on nodes are calculated directly for nearby cells, and for all others, cells are treated as a separate node with center of mass.
-
-**Defaults to** `none`.
-
-**Try it**
-
-* [A graph with Barnes-Hut approximation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/barnes-hut-approximation/)
-*/
-@property(nonatomic, readwrite) NSString *approximation;
-/**
-Experimental. Enables live simulation of the algorithm implementation. All nodes are animated as the forces applies on them.
-
-**Try it**
-
-* [Live simulation enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/network-graph/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *enableSimulation;
 /**
 Ideal length (px) of the link between two nodes. When not defined, length is calculated as: `Math.pow(availableWidth * availableHeight / nodesLength, 0.4);` Note: Because of the algorithm specification, length of each link might be not exactly as specified.
 
@@ -105,35 +88,9 @@ Ideal length (px) of the link between two nodes. When not defined, length is cal
 */
 @property(nonatomic, readwrite) NSNumber *linkLength;
 /**
-Repulsive force applied on a node. Passed are two arguments: - `d` - which is current distance between two nodes - `k` - which is desired distance between two nodes In `verlet` integration, defaults to: `function (d, k) { return (k-d) / d * (k > d ? 1 : 0) }`
-
-**Defaults to** `function (d, k) { return k * k / d; }`.
-
-**Try it**
-
-* [Custom forces with Euler integration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/forces/)
-* [Custom forces with Verlet integration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/cuboids/)
-*/
-@property(nonatomic, readwrite) HIFunction *repulsiveForce;
-/**
-Barnes-Hut approximation only. Deteremines when distance between cell and node is small enough to caculate forces. Value of `theta` is compared directly with quotient `s / d`, where `s` is the size of the cell, and `d` is distance between center of cell's mass and currently compared node.
-
-**Defaults to** `0.5`.
-*/
-@property(nonatomic, readwrite) NSNumber *theta;
-/**
-Attraction force applied on a node which is conected to another node by a link. Passed are two arguments: - `d` - which is current distance between two nodes - `k` - which is desired distance between two nodes In `verlet` integration, defaults to: `function (d, k) { return (k-d) / d; }`
-
-**Defaults to** `function (d, k) { return k * k / d; }`.
-
-**Try it**
-
-* [Custom forces with Euler integration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/forces/)
-* [Custom forces with Verlet integration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/cuboids/)
-*/
-@property(nonatomic, readwrite) HIFunction *attractiveForce;
-/**
 Type of the algorithm used when positioning nodes.
+
+**Accepted values:** `["reingold-fruchterman"]`.
 
 **Defaults to** `reingold-fruchterman`.
 */

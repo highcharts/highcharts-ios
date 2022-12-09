@@ -119,16 +119,6 @@ The diameter of the pie relative to the plot area. Can be a percentage or pixel 
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
 /**
-The color of the border surrounding each slice. When `null`, the border takes the same color as the slice fill. This can be used together with a `borderWidth` to fill drawing gaps created by antialiazing artefacts in borderless pies. In styled mode, the border stroke is given in the `.highcharts-point` class.
-
-**Defaults to** `#ffffff`.
-
-**Try it**
-
-* [Black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-bordercolor-black/)
-*/
-@property(nonatomic, readwrite) HIColor *borderColor;
-/**
 Thickness describing the ring size for a donut type chart, overriding `innerSize`.
 
 **Defaults to** `undefined`.
@@ -160,32 +150,6 @@ The center of the pie chart relative to the plot area. Can be percentages or pix
 * [Centered at 100, 100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-center/)
 */
 @property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
-/**
-If a point is sliced, moved out from the center, how many pixels should it be moved?.
-
-**Defaults to** `10`.
-
-**Try it**
-
-* [20px offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-slicedoffset-20/)
-*/
-@property(nonatomic, readwrite) NSNumber *slicedOffset;
-/**
-The thickness of a 3D pie.
-
-**Defaults to** `0`.
-*/
-@property(nonatomic, readwrite) NSNumber *depth;
-/**
-The width of the border surrounding each slice. When setting the border width to 0, there may be small gaps between the slices due to SVG antialiasing artefacts. To work around this, keep the border width at 0.5 or 1, but set the `borderColor` to `null` instead. In styled mode, the border stroke width is given in the `.highcharts-point` class.
-
-**Defaults to** `1`.
-
-**Try it**
-
-* [3px border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-borderwidth/)
-*/
-@property(nonatomic, readwrite) NSNumber *borderWidth;
 
 -(NSDictionary *)getParams;
 

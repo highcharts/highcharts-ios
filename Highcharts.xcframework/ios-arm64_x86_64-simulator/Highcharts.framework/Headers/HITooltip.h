@@ -126,6 +126,8 @@ CSS styles for the tooltip. The tooltip can also be styled through the CSS class
 /**
 The name of a symbol to use for the border around the tooltip header. Applies only when `tooltip.split` is enabled. Custom callbacks for symbol path generation can also be added to `Highcharts.SVGRenderer.prototype.symbols` the same way as for `series.marker.symbol`.
 
+**Accepted values:** `["callout", "square"]`.
+
 **Defaults to** `callout`.
 */
 @property(nonatomic, readwrite) NSString *headerShape;

@@ -248,14 +248,6 @@ Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series s
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *ignoreHiddenPoint;
 /**
-The diameter of the pie relative to the plot area. Can be a percentage or pixel value. Pixel values are given as integers. The default behaviour (as of 3.0) is to scale to the plot area and give room for data labels within the plot area. `slicedOffset` is also included in the default size calculation. As a consequence, the size of the pie may vary when points are updated and data labels more around. In that case it is best to set a fixed value, for example `"75%"`.
-
-**Try it**
-
-* [Smaller pie](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-size/)
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
-/**
 Thickness describing the ring size for a donut type chart, overriding `innerSize`.
 
 **Defaults to** `undefined`.
@@ -295,18 +287,6 @@ The end angle of the pie in degrees where 0 is top and 90 is right. Defaults to 
 * [Semi-circle donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-semi-circle/)
 */
 @property(nonatomic, readwrite) NSNumber *endAngle;
-/**
-The size of the inner diameter for the pie. A size greater than 0 renders a donut chart. Can be a percentage or pixel value. Percentages are relative to the pie size. Pixel values are given as integers. Setting overridden by thickness. Note: in Highcharts < 4.1.2, the percentage was relative to the plot area, not the pie size.
-
-**Defaults to** `0`.
-
-**Try it**
-
-* [80px inner size](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-innersize-80px/)
-* [50% of the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-innersize-50percent/)
-* [3D donut](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/3d-pie-donut/)
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ innerSize;
 /**
 If a point is sliced, moved out from the center, how many pixels should it be moved?.
 

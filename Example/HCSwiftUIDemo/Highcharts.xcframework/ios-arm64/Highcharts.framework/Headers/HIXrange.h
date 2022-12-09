@@ -71,14 +71,6 @@ The corner radius of the border surrounding each column or bar.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
-The X axis range that each point is valid for. This determines the width of the column. On a categorized axis, the range will be 1 by default (one category unit). On linear and datetime axes, the range will be computed as the distance between the two closest data points. The default `null` means it is computed automatically, but this option can be used to override the automatic value. This option is set by default to 1 if data sorting is enabled.
-
-**Try it**
-
-* [Set the point range to one day on a data set with one week between the points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointrange/)
-*/
-@property(nonatomic, readwrite) NSNumber *pointRange;
-/**
 Padding between each column or bar, in x axis units.
 
 **Defaults to** `0.1`.
@@ -120,10 +112,6 @@ The color of the border surrounding each column or bar. In styled mode, the bord
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
-3D columns only. The color of the edges. Similar to `borderColor`, except it defaults to the same color as the column.
-*/
-@property(nonatomic, readwrite) HIColor *edgeColor;
-/**
 When `true`, the columns will center in the category, ignoring null or missing points. When `false`, space will be reserved for null or missing points.
 
 **Try it**
@@ -158,18 +146,6 @@ Padding between each value groups, in x axis units.
 * [No group padding - all columns are evenly spaced](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-grouppadding-none/)
 */
 @property(nonatomic, readwrite) NSNumber *groupPadding;
-/**
-3D columns only. The width of the colored edges.
-
-**Defaults to** `1`.
-*/
-@property(nonatomic, readwrite) NSNumber *edgeWidth;
-/**
-Depth of the columns in a 3D column chart.
-
-**Defaults to** `25`.
-*/
-@property(nonatomic, readwrite) NSNumber *depth;
 /**
 The width of the border surrounding each column or bar. Defaults to `1` when there is room for a border, but to `0` when the columns are so dense that a border would cover the next column. In styled mode, the stroke width can be set with the `.highcharts-point` rule.
 

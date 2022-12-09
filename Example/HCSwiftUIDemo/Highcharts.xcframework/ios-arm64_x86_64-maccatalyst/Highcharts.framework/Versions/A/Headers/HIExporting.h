@@ -122,6 +122,8 @@ An object containing additional key value data for the POST form that sends the 
 /**
 Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
 
+**Defaults to** `True`.
+
 **Try it**
 
 * [Multiple table headers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/export-data/multilevel-table)

@@ -110,6 +110,8 @@ Whether bubbles should interact with their parentNode to keep them inside.
 /**
 Integration type. Available options are `'euler'` and `'verlet'`. Integration determines how forces are applied on particles. In Euler integration, force is applied direct as `newPosition += velocity;`. In Verlet integration, new position is based on a previous posittion without velocity: `newPosition += previousPosition - newPosition`. Note that different integrations give different results as forces are different. In Highcharts v7.0.x only `'euler'` integration was supported.
 
+**Accepted values:** `["euler", "verlet"]`.
+
 **Defaults to** `euler`.
 
 **Try it**
@@ -118,7 +120,47 @@ Integration type. Available options are `'euler'` and `'verlet'`. Integration de
 */
 @property(nonatomic, readwrite) NSString *integration;
 /**
+Ideal length (px) of the link between two nodes. When not defined, length is calculated as: `Math.pow(availableWidth * availableHeight / nodesLength, 0.4);` Note: Because of the algorithm specification, length of each link might be not exactly as specified.
+
+**Try it**
+
+* [Numerical values](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/styled-links/)
+*/
+@property(nonatomic, readwrite) NSNumber *linkLength;
+/**
+Type of the algorithm used when positioning nodes.
+
+**Accepted values:** `["reingold-fruchterman"]`.
+
+**Defaults to** `reingold-fruchterman`.
+*/
+@property(nonatomic, readwrite) NSString *type;
+/**
+When `type` is set to `kmeans`, `distance` is a maximum distance between point and cluster center so that this point will be inside the cluster. The distance is either a number defining pixels or a percentage defining a percentage of the plot area width.
+
+**Defaults to** `40`.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ distance;
+/**
+When `type` is set to the `grid`, `gridSize` is a size of a grid square element either as a number defining pixels, or a percentage defining a percentage of the plot area width.
+
+**Defaults to** `50`.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ gridSize;
+/**
+When `type` is set to `undefined` and there are more visible points than the kmeansThreshold the `grid` algorithm is used to find clusters, otherwise `kmeans`. It ensures good performance on large datasets and better clusters arrangement after the zoom.
+
+**Defaults to** `100`.
+*/
+@property(nonatomic, readwrite) NSNumber *kmeansThreshold;
+/**
+When `type` is set to `kmeans`, `iterations` are the number of iterations that this algorithm will be repeated to find clusters positions.
+*/
+@property(nonatomic, readwrite) NSNumber *iterations;
+/**
 Approximation used to calculate repulsive forces affecting nodes. By default, when calculateing net force, nodes are compared against each other, which gives O(N^2) complexity. Using Barnes-Hut approximation, we decrease this to O(N log N), but the resulting graph will have different layout. Barnes-Hut approximation divides space into rectangles via quad tree, where forces exerted on nodes are calculated directly for nearby cells, and for all others, cells are treated as a separate node with center of mass.
+
+**Accepted values:** `["barnes-hut", "none"]`.
 
 **Defaults to** `none`.
 
@@ -127,14 +169,6 @@ Approximation used to calculate repulsive forces affecting nodes. By default, wh
 * [A graph with Barnes-Hut approximation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/barnes-hut-approximation/)
 */
 @property(nonatomic, readwrite) NSString *approximation;
-/**
-Ideal length (px) of the link between two nodes. When not defined, length is calculated as: `Math.pow(availableWidth * availableHeight / nodesLength, 0.4);` Note: Because of the algorithm specification, length of each link might be not exactly as specified.
-
-**Try it**
-
-* [Numerical values](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/styled-links/)
-*/
-@property(nonatomic, readwrite) NSNumber *linkLength;
 /**
 Repulsive force applied on a node. Passed are two arguments: - `d` - which is current distance between two nodes - `k` - which is desired distance between two nodes In `verlet` integration, defaults to: `function (d, k) { return (k-d) / d * (k > d ? 1 : 0) }`
 
@@ -163,34 +197,6 @@ Attraction force applied on a node which is conected to another node by a link. 
 * [Custom forces with Verlet integration](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/cuboids/)
 */
 @property(nonatomic, readwrite) HIFunction *attractiveForce;
-/**
-Type of the algorithm used when positioning nodes.
-
-**Defaults to** `reingold-fruchterman`.
-*/
-@property(nonatomic, readwrite) NSString *type;
-/**
-When `type` is set to `kmeans`, `distance` is a maximum distance between point and cluster center so that this point will be inside the cluster. The distance is either a number defining pixels or a percentage defining a percentage of the plot area width.
-
-**Defaults to** `40`.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ distance;
-/**
-When `type` is set to the `grid`, `gridSize` is a size of a grid square element either as a number defining pixels, or a percentage defining a percentage of the plot area width.
-
-**Defaults to** `50`.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ gridSize;
-/**
-When `type` is set to `undefined` and there are more visible points than the kmeansThreshold the `grid` algorithm is used to find clusters, otherwise `kmeans`. It ensures good performance on large datasets and better clusters arrangement after the zoom.
-
-**Defaults to** `100`.
-*/
-@property(nonatomic, readwrite) NSNumber *kmeansThreshold;
-/**
-When `type` is set to `kmeans`, `iterations` are the number of iterations that this algorithm will be repeated to find clusters positions.
-*/
-@property(nonatomic, readwrite) NSNumber *iterations;
 
 -(NSDictionary *)getParams;
 
