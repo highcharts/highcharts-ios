@@ -383,7 +383,7 @@ Callback function to override the default function that formats all the numbers 
 */
 @property(nonatomic, readwrite) HIFunction *numberFormatter;
 /**
-In styled mode, this sets how many colors the class names should rotate between. With ten colors, series (or points) are given class names like `highcharts-color-0`, `highcharts-color-0` `...] `highcharts-color-9`. The equivalent in non-styled mode is to set colors using the [colors` setting.
+In styled mode, this sets how many colors the class names should rotate between. With ten colors, series (or points) are given class names like `highcharts-color-0`, `highcharts-color-1` `...] `highcharts-color-9`. The equivalent in non-styled mode is to set colors using the [colors` setting.
 
 **Defaults to** `10`.
 */

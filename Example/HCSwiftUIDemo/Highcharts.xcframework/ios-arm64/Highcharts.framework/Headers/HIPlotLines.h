@@ -6,6 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
+#import "HILabels.h"
 #import "HILabel.h"
 #import "HIEvents.h"
 #import "HIColor.h"
@@ -51,6 +52,7 @@ The color of the line.
 * [A red line from X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-color/)
 */
 @property(nonatomic, readwrite) HIColor *color;
+@property(nonatomic, readwrite) HILabels *labels;
 /**
 Text labels for the plot bands
 */

@@ -40,6 +40,7 @@
  */
 @interface HILollipop: HISeries
 
+@property(nonatomic, readwrite) NSNumber *pointRange;
 /**
 Color of the line that connects the dumbbell point's values. By default it is the series' color.
 */
@@ -51,7 +52,6 @@ Pixel width of the line that connects the dumbbell point's values.
 */
 @property(nonatomic, readwrite) NSNumber *connectorWidth;
 @property(nonatomic, readwrite) NSNumber *pointPadding;
-@property(nonatomic, readwrite) NSNumber *pointRange;
 @property(nonatomic, readwrite) NSNumber *groupPadding;
 /**
 A separate color for the negative part of the area. In styled mode, a negative color is set with the `.highcharts-negative` class name.

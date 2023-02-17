@@ -323,6 +323,12 @@ The border width in pixels for the annotation's label
 * [Set labels graphic options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/annotations/label-presentation/)
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
+/**
+Whether to hide labels that are outside the plot area.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *clip;
 
 -(NSDictionary *)getParams;
 

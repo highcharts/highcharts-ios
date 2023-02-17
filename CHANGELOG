@@ -1,3 +1,38 @@
+# Version 10.3.3
+
+## Framework:
+
+1. Added `/es5` path for legacy script files on `code.highcharts.com` and in the npm package, see #18070.
+2. Added new option, `exporting.allowTableSorting`, to allow turning off sorting of the data table. See #18007.
+
+## Framework upgrade notes:
+1. In Highcharts version 11, released at the earliest March 1 2023, the main script files at `code.highcharts.com` and npm will be compiled for evergreen browsers. This includes files like `highcharts.js`, `modules/exporting.js`, `accessibility.js` etc. Should you need to continue supporting browsers more than three years old, like IE11, we will provide legacy script files in the `/es5` folder. These files are now available, and we recommend you do the switch before the release of version 11. See a `live example`, or read the details at #18070.
+2. Lollipop series data values should now be given as `y`, not as `low`. See `live demo`.
+
+## Framework bug fixes:
+
+1. Inheritance refactor of Lollipop series, #14103.
+2. Fixed #17888, plot line labels with `align: 'right'` and `textAlign: 'left'` weren't displayed. Added clip option for labels to allow displaying outside the plot area.
+3. Refactored how the position of stack labels is calculated. Closed #16764, #12133, #15129 and #17116.
+4. Fixed #17998, setting linecap wasn't reflected in legend items.
+5. Fixed #14114, color axis marker color did not get applied to most series in styled mode.
+6. Fixed #16274, custom marker symbol size was not being updated.
+7. Fixed #18212, long treemap data labels with `useHTML` set to `true` were wrongly positioned.
+8. Fixes #18147, some data labels weren't rendered correctly in polar charts.
+9. Fixed issue with series label overlapping data labels.
+10. Fixed #16944, wrong tooltip position when using the `positioner` callback and `outside: true`.
+11. Fixed #18168, legend item was mispositioned if the related series was located at the top of the chart and proximate layout was enabled.
+12. Fixed #17948, the tooltip position was bad when yAxis.reversedStacks was set to `false`.
+13. Fixed #17314, chart.alignThresholds and stacking were not working correctly together.
+14. Fixed #18116, the central data label in sunburst series was too short.
+15. Fixed #18080, hovering over area range points after zoom reset was throwing errors.
+16. Fixed #18145, boost module couldn't render series with colour set to grey.
+17. Fixed #18127, a regression causing an unintended border on data labels when setting `backgroundColor` and `borderColor` but no explicit `borderWidth`.
+18. Fixed #17856, line color in hover state did not work as expected in heatmap.
+19. Fixed #17933, x axis labels had incorrect styling after drilling down.
+20. Fixed #17963, breadcrumbs' position and display were incorrect when scrollablePlotArea was enabled.
+21. Fixed #17970, wrong color on heatmap point when updating from `null` to a valid number.
+
 # Version 10.3.2
 
 ## Framework:

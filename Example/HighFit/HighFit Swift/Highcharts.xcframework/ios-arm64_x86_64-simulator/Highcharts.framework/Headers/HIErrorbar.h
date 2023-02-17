@@ -57,7 +57,7 @@ Whether to group non-stacked columns or to let them render independent of each o
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *grouping;
 /**
-The width of the stem, the vertical line extending from the box to the whiskers. If `undefined`, the width is inherited from the `lineWidth` option. In styled mode, the stem stroke width can be set with the `.highcharts-boxplot-stem` class.
+The color of the stem, the vertical line extending from the box to the whiskers. If `undefined`, the series color is used. In styled mode, the stem stroke can be set with the `.highcharts-boxplot-stem` class.
 
 **Try it**
 
@@ -65,7 +65,7 @@ The width of the stem, the vertical line extending from the box to the whiskers.
 * [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
 * [Error bar styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/error-bar-styling/)
 */
-@property(nonatomic, readwrite) NSNumber *stemWidth;
+@property(nonatomic, readwrite) HIColor *stemColor;
 /**
 The length of the whiskers, the horizontal lines marking low and high values. It can be a numerical pixel value, or a percentage value of the box width. Set `0` to disable whiskers.
 
@@ -161,6 +161,16 @@ The dash style of the box.
 * [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
 */
 @property(nonatomic, readwrite) NSString *boxDashStyle;
+/**
+The width of the stem, the vertical line extending from the box to the whiskers. If `undefined`, the width is inherited from the `lineWidth` option. In styled mode, the stem stroke width can be set with the `.highcharts-boxplot-stem` class.
+
+**Try it**
+
+* [Box plot styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/box-plot-styling/)
+* [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
+* [Error bar styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/error-bar-styling/)
+*/
+@property(nonatomic, readwrite) NSNumber *stemWidth;
 /**
 Padding between each column or bar, in x axis units.
 
