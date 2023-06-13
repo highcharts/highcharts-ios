@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * (c) 2009-2021 Highsoft AS
  *
@@ -172,11 +172,6 @@
                 credits: {
                     style: {
                         color: textBright
-                    }
-                },
-                labels: {
-                    style: {
-                        color: '#707073'
                     }
                 },
                 drilldown: {

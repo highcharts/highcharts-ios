@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Item series type for Highcharts
  *
@@ -250,14 +250,15 @@
                             if (typeof r !== 'undefined') {
                                 attr.r = r;
                             }
+                            // Circles attributes update (#17257)
+                            if (pointAttr) {
+                                extend(attr, pointAttr);
+                            }
                             var graphic = graphics[val];
                             if (graphic) {
                                 graphic.animate(attr);
                             }
                             else {
-                                if (pointAttr) {
-                                    extend(attr, pointAttr);
-                                }
                                 graphic = renderer
                                     .symbol(symbol, void 0, void 0, void 0, void 0, {
                                     backgroundSize: 'within'
@@ -270,18 +271,20 @@
                             i++;
                         }
                     }
-                    graphics.forEach(function (graphic, i) {
+                    for (var j = 0; j < graphics.length; j++) {
+                        var graphic = graphics[j];
                         if (!graphic) {
                             return;
                         }
                         if (!graphic.isActive) {
                             graphic.destroy();
-                            graphics.splice(i, 1);
+                            graphics.splice(j, 1);
+                            j--; // Need to substract 1 after splice, #19053
                         }
                         else {
                             graphic.isActive = false;
                         }
-                    });
+                    }
                 });
             };
             ItemSeries.prototype.getRows = function () {

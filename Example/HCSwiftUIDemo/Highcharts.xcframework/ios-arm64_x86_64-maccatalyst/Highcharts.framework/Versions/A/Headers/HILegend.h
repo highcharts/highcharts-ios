@@ -22,7 +22,7 @@ The legend is a box containing a symbol and name for each series item or point i
 @interface HILegend: HIChartsJSONSerializable
 
 /**
-The border radius of the symbol for series types that use a rectangle in the legend. Defaults to half the `symbolHeight`.
+The border radius of the symbol for series types that use a rectangle in the legend. Defaults to half the `symbolHeight`, effectively creating a circle. For color axis scales, it defaults to 3.
 
 **Try it**
 
@@ -158,7 +158,7 @@ The width of the legend box. If a number is set, it translates to pixels. Since 
 /**
 The pixel bottom margin for each legend item.
 
-**Defaults to** `0`.
+**Defaults to** `2`.
 
 **Try it**
 
@@ -176,7 +176,7 @@ The background color of the legend.
 /**
 The pixel top margin for each legend item.
 
-**Defaults to** `0`.
+**Defaults to** `2`.
 
 **Try it**
 
@@ -196,7 +196,7 @@ A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-stri
 /**
 CSS styles for each legend item. Only a subset of CSS is supported, notably those options related to text. The default `textOverflow` property makes long texts truncate. Set it to `undefined` to wrap text instead. A `width` property can be added to control the text width.
 
-**Defaults to** `{"color": "#333333", "cursor": "pointer", "fontSize": "12px", "fontWeight": "bold", "textOverflow": "ellipsis"}`.
+**Defaults to** `{"color": "#333333", "cursor": "pointer", "fontSize": "0.75em", "fontWeight": "bold", "textOverflow": "ellipsis"}`.
 
 **Try it**
 
@@ -366,8 +366,23 @@ For a color axis with data classes, how many decimals to render in the legend. T
 **Defaults to** `-1`.
 */
 @property(nonatomic, readwrite) NSNumber *valueDecimals;
+/**
+Accessible label for the legend, for charts where there is a legend title defined. `{legendTitle}` refers to the visual text in the legend title.
+
+**Defaults to** `Chart legend: {legendTitle}`.
+*/
 @property(nonatomic, readwrite) NSString *legendLabel;
+/**
+Accessible label for the legend, for charts where there is no legend title defined.
+
+**Defaults to** `Toggle series visibility, {chartTitle}`.
+*/
 @property(nonatomic, readwrite) NSString *legendLabelNoTitle;
+/**
+Accessible label for individual legend items. `{itemName}` refers to the visual text in the legend for that item.
+
+**Defaults to** `Show {itemName}`.
+*/
 @property(nonatomic, readwrite) NSString *legendItem;
 
 -(NSDictionary *)getParams;

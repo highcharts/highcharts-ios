@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Support for parallel coordinates in Highcharts
  *
@@ -37,7 +37,7 @@
             }
         }
     }
-    _registerModule(_modules, 'Extensions/ParallelCoordinates.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Chart/Chart.js'], _modules['Core/FormatUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Defaults.js'], _modules['Core/Series/Series.js'], _modules['Core/Utilities.js']], function (Axis, Chart, F, H, D, Series, U) {
+    _registerModule(_modules, 'Extensions/ParallelCoordinates.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Chart/Chart.js'], _modules['Core/Templating.js'], _modules['Core/Globals.js'], _modules['Core/Defaults.js'], _modules['Core/Series/Series.js'], _modules['Core/Utilities.js']], function (Axis, Chart, F, H, D, Series, U) {
         /* *
          *
          *  Parallel coordinates module
@@ -51,7 +51,7 @@
          * */
         var format = F.format;
         var setOptions = D.setOptions;
-        var addEvent = U.addEvent, arrayMax = U.arrayMax, arrayMin = U.arrayMin, defined = U.defined, erase = U.erase, extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, pick = U.pick, splat = U.splat, wrap = U.wrap;
+        var addEvent = U.addEvent, arrayMax = U.arrayMax, arrayMin = U.arrayMin, defined = U.defined, erase = U.erase, extend = U.extend, insertItem = U.insertItem, isNumber = U.isNumber, merge = U.merge, pick = U.pick, splat = U.splat, wrap = U.wrap;
         /* *
          *
          *  Constants
@@ -250,7 +250,7 @@
             if (this.chart.hasParallelCoordinates) {
                 var series_1 = this;
                 this.chart.axes.forEach(function (axis) {
-                    series_1.insert(axis.series);
+                    insertItem(series_1, axis.series);
                     axis.isDirty = true;
                 });
                 series_1.xAxis = this.chart.xAxis[0];

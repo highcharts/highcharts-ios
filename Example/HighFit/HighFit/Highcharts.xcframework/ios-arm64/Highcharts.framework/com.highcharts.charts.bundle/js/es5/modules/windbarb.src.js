@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Wind barb series module
  *
@@ -104,7 +104,7 @@
              *  Properties
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             /* *
              *
              *  Functions
@@ -115,8 +115,7 @@
              * @private
              */
             function compose(SeriesClass) {
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     var seriesProto_1 = SeriesClass.prototype;
                     seriesProto_1.getPlotBox = getPlotBox;
                     seriesProto_1.translate = translate;

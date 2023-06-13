@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Dependency wheel module
  *
@@ -129,8 +129,7 @@
                     .attr({
                     x: shapeArgs.x,
                     y: shapeArgs.y,
-                    r: (shapeArgs.r +
-                        (this.dataLabel.options.distance || 0)),
+                    r: (shapeArgs.r + (label.options.distance || 0)),
                     start: (upperHalf ? start : end),
                     end: (upperHalf ? end : start),
                     clockwise: +upperHalf
@@ -511,7 +510,8 @@
              */
             DependencyWheelSeries.prototype.translate = function () {
                 var options = this.options, factor = 2 * Math.PI /
-                    (this.chart.plotHeight + this.getNodePadding()), center = this.getCenter(), startAngle = (options.startAngle - 90) * deg2rad;
+                    (this.chart.plotHeight + this.getNodePadding()), center = this.getCenter(), startAngle = (options.startAngle - 90) * deg2rad, brOption = options.borderRadius, borderRadius = typeof brOption === 'object' ?
+                    brOption.radius : brOption;
                 SankeySeries.prototype.translate.call(this);
                 this.nodeColumns[0].forEach(function (node) {
                     // Don't render the nodes if sum is 0 #12453
@@ -527,7 +527,8 @@
                             r: r,
                             innerR: innerR_1,
                             start: start,
-                            end: end
+                            end: end,
+                            borderRadius: borderRadius
                         };
                         node.dlBox = {
                             x: centerX_1 + Math.cos((start + end) / 2) * (r + innerR_1) / 2,

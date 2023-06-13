@@ -10,11 +10,11 @@
 
 
 /**
-CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of category labels. Use `textOverflow: 'none'` to prevent ellipsis (dots). In styled mode, the labels are styled with the `.highcharts-axis-labels` class.
+CSS styles for the label. In styled mode, the styles are set in the `.highcharts-stack-label` class.
 
 **Try it**
 
-* [Red X axis labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/labels-style/)
+* [Red stack total labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/stacklabels-style/)
 */
 @interface HIStyle: HIChartsJSONSerializable
 
@@ -22,12 +22,11 @@ CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of cate
 @property(nonatomic, readwrite) NSString *fontWeight;
 @property(nonatomic, readwrite) NSNumber *fontSize;
 @property(nonatomic, readwrite) NSString *color;
-@property(nonatomic, readwrite) NSString *textOutline;
+@property(nonatomic, readwrite) NSNumber *textOutline;
 @property(nonatomic, readwrite) NSString *cursor;
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 @property(nonatomic, readwrite) NSNumber *lineWidth;
 @property(nonatomic, readwrite) NSString *textOverflow;
-@property(nonatomic, readwrite) NSString *whiteSpace;
 @property(nonatomic, readwrite) NSString *stroke;
 @property(nonatomic, readwrite) NSNumber *strokeWidth;
 @property(nonatomic, readwrite) NSString *fill;

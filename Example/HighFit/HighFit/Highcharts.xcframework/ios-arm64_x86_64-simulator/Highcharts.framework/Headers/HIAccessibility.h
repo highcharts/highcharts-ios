@@ -96,10 +96,24 @@ Expose only the series element to screen readers, not its points.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *exposeAsGroupOnly;
 /**
+Format to use for describing the data series group to assistive technology - including screen readers.
+*/
+@property(nonatomic, readwrite) NSString *descriptionFormat;
+/**
 Range description for an axis. Overrides the default range description. Set to empty to disable range description for this axis.
 */
 @property(nonatomic, readwrite) NSString *rangeDescription;
+/**
+Default title of the chart for assistive technology, for charts without a chart title.
+
+**Defaults to** `Chart`.
+*/
 @property(nonatomic, readwrite) NSString *defaultChartTitle;
+/**
+Accessible label for the chart SVG element. `{chartTitle}` refers to the chart title.
+
+**Defaults to** `Interactive chart`.
+*/
 @property(nonatomic, readwrite) NSString *svgContainerLabel;
 /**
 Thousands separator to use when formatting numbers for screen readers. Note that many screen readers will not handle space as a thousands separator, and will consider "11 700" as two numbers. Set to `null` to use the separator defined in `lang.thousandsSep`.
@@ -123,7 +137,17 @@ Accessibility language options for the data table.
 Chart and map zoom accessibility language options.
 */
 @property(nonatomic, readwrite) HIZoom *zoom;
+/**
+Accessible label for the chart credits. `{creditsStr}` refers to the visual text in the credits.
+
+**Defaults to** `Chart credits: {creditsStr}`.
+*/
 @property(nonatomic, readwrite) NSString *credits;
+/**
+Accessible label for the drill-up button. `{buttonText}` refers to the visual text on the button.
+
+**Defaults to** `{buttonText}`.
+*/
 @property(nonatomic, readwrite) NSString *drillUpButton;
 /**
 Exporting menu format strings for accessibility module.
@@ -149,6 +173,11 @@ Set a label on the container wrapping the SVG.
 Language options for accessibility of the legend.
 */
 @property(nonatomic, readwrite) HIAccessibilityLegend *legend;
+/**
+Accessible label for the chart container HTML element. `{title}` refers to the chart title.
+
+**Defaults to** `{title}. Highcharts interactive chart.`.
+*/
 @property(nonatomic, readwrite) NSString *chartContainerLabel;
 /**
 Axis description format strings.

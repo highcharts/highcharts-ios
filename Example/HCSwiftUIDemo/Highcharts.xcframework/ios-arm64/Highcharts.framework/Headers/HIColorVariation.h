@@ -15,6 +15,7 @@ A configuration object to define how the color of a child varies from the parent
 **Try it**
 
 * [Sunburst with color variation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/sunburst/)
+* [Treegraph nodes with color variation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/color-variation)
 */
 @interface HIColorVariation: HIChartsJSONSerializable
 

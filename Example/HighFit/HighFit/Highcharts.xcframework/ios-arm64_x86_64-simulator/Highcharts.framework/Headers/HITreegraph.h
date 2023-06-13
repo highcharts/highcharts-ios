@@ -67,6 +67,14 @@ Flips the positions of the nodes of a treegraph along the horizontal axis (verti
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
 /**
+Whether the treegraph series should fill the entire plot area in the X axis direction, even when there are collapsed points.
+
+**Try it**
+
+* [Fill space demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/fillspace)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *fillSpace;
+/**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;

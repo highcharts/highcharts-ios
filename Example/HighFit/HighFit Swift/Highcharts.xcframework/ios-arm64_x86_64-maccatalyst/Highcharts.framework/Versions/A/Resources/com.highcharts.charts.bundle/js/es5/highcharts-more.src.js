@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * (c) 2009-2021 Torstein Honsi
  *
@@ -2349,7 +2349,7 @@
                  */
                 style: {
                     /** @ignore-option */
-                    fontSize: '10px',
+                    fontSize: '0.9em',
                     /** @ignore-option */
                     color: "#000000" /* Palette.neutralColor100 */
                 },
@@ -2452,7 +2452,7 @@
 
         return BubbleLegendDefaults;
     });
-    _registerModule(_modules, 'Series/Bubble/BubbleLegendItem.js', [_modules['Core/Color/Color.js'], _modules['Core/FormatUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (Color, F, H, U) {
+    _registerModule(_modules, 'Series/Bubble/BubbleLegendItem.js', [_modules['Core/Color/Color.js'], _modules['Core/Templating.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (Color, F, H, U) {
         /* *
          *
          *  (c) 2010-2021 Highsoft AS
@@ -2497,7 +2497,6 @@
                  *
                  * */
                 this.chart = void 0;
-                this.fontMetrics = void 0;
                 this.legend = void 0;
                 this.maxLabel = void 0;
                 this.movementX = void 0;
@@ -2548,8 +2547,6 @@
             BubbleLegendItem.prototype.drawLegendSymbol = function (legend) {
                 var chart = this.chart, itemDistance = pick(legend.options.itemDistance, 20), legendItem = this.legendItem || {}, options = this.options, ranges = options.ranges, connectorDistance = options.connectorDistance;
                 var connectorSpace;
-                // Predict label dimensions
-                this.fontMetrics = chart.renderer.fontMetrics(options.labels.style.fontSize);
                 // Do not create bubbleLegend now if ranges or ranges valeus are not
                 // specified or if are empty array.
                 if (!ranges || !ranges.length || !isNumber(ranges[0].value)) {
@@ -2573,7 +2570,7 @@
                 this.movementX = options.labels.align === 'left' ?
                     connectorSpace : 0;
                 legendItem.labelWidth = size + connectorSpace + itemDistance;
-                legendItem.labelHeight = size + this.fontMetrics.h / 2;
+                legendItem.labelHeight = size + maxLabel.height / 2;
             };
             /**
              * Set style options for each bubbleLegend range.
@@ -2647,19 +2644,20 @@
                 }
                 // Nesting SVG groups to enable handleOverflow
                 legendItem.symbol = renderer.g('bubble-legend');
-                legendItem.label = renderer.g('bubble-legend-item');
+                legendItem.label = renderer.g('bubble-legend-item')
+                    .css(this.legend.itemStyle || {});
                 // To enable default 'hideOverlappingLabels' method
                 legendItem.symbol.translateX = 0;
                 legendItem.symbol.translateY = 0;
+                // To use handleOverflow method
+                legendItem.symbol.add(legendItem.label);
+                legendItem.label.add(legendItem.group);
                 for (var _i = 0, _a = this.ranges; _i < _a.length; _i++) {
                     var range = _a[_i];
                     if (range.value >= zThreshold) {
                         this.renderRange(range);
                     }
                 }
-                // To use handleOverflow method
-                legendItem.symbol.add(legendItem.label);
-                legendItem.label.add(legendItem.group);
                 this.hideOverlappingLabels();
             };
             /**
@@ -2672,8 +2670,7 @@
              */
             BubbleLegendItem.prototype.renderRange = function (range) {
                 var mainRange = this.ranges[0], legend = this.legend, options = this.options, labelsOptions = options.labels, chart = this.chart, bubbleSeries = chart.series[options.seriesIndex], renderer = chart.renderer, symbols = this.symbols, labels = symbols.labels, elementCenter = range.center, absoluteRadius = Math.abs(range.radius), connectorDistance = options.connectorDistance || 0, labelsAlign = labelsOptions.align, rtl = legend.options.rtl, borderWidth = options.borderWidth, connectorWidth = options.connectorWidth, posX = mainRange.radius || 0, posY = elementCenter - absoluteRadius -
-                    borderWidth / 2 + connectorWidth / 2, fontMetrics = this.fontMetrics, labelMovement = fontMetrics.f / 2 -
-                    (fontMetrics.h - fontMetrics.f) / 2, crispMovement = (posY % 1 ? 1 : 0.5) -
+                    borderWidth / 2 + connectorWidth / 2, crispMovement = (posY % 1 ? 1 : 0.5) -
                     (connectorWidth % 2 ? 0 : 0.5), styledMode = renderer.styledMode;
                 var connectorLength = rtl || labelsAlign === 'left' ?
                     -connectorDistance : connectorDistance;
@@ -2683,7 +2680,6 @@
                     options.connectorDistance = 0;
                     range.labelAttribs.align = 'center';
                 }
-                var labelY = posY + options.labels.y, labelX = posX + connectorLength + options.labels.x;
                 // Render bubble symbol
                 symbols.bubbleItems.push(renderer
                     .circle(posX, elementCenter + crispMovement, absoluteRadius)
@@ -2708,18 +2704,22 @@
                     (options.connectorClassName || '')).add(this.legendItem.symbol));
                 // Render label
                 var label = renderer
-                    .text(this.formatLabel(range), labelX, labelY + labelMovement)
+                    .text(this.formatLabel(range))
                     .attr((styledMode ? {} : range.labelAttribs))
                     .css(styledMode ? {} : labelsOptions.style)
                     .addClass('highcharts-bubble-legend-labels ' +
                     (options.labels.className || '')).add(this.legendItem.symbol);
+                // Now that the label is added we can read the bounding box and
+                // vertically align
+                var position = {
+                    x: posX + connectorLength + options.labels.x,
+                    y: posY + options.labels.y + label.getBBox().height * 0.4
+                };
+                label.attr(position);
                 labels.push(label);
                 // To enable default 'hideOverlappingLabels' method
                 label.placed = true;
-                label.alignAttr = {
-                    x: labelX,
-                    y: labelY + labelMovement
-                };
+                label.alignAttr = position;
             };
             /**
              * Get the label which takes up the most space.
@@ -2834,7 +2834,7 @@
              *         Calculated min and max bubble sizes
              */
             BubbleLegendItem.prototype.predictBubbleSizes = function () {
-                var chart = this.chart, fontMetrics = this.fontMetrics, legendOptions = chart.legend.options, floating = legendOptions.floating, horizontal = legendOptions.layout === 'horizontal', lastLineHeight = horizontal ? chart.legend.lastLineHeight : 0, plotSizeX = chart.plotSizeX, plotSizeY = chart.plotSizeY, bubbleSeries = chart.series[this.options.seriesIndex], pxSizes = bubbleSeries.getPxExtremes(), minSize = Math.ceil(pxSizes.minPxSize), maxPxSize = Math.ceil(pxSizes.maxPxSize), plotSize = Math.min(plotSizeY, plotSizeX);
+                var chart = this.chart, legendOptions = chart.legend.options, floating = legendOptions.floating, horizontal = legendOptions.layout === 'horizontal', lastLineHeight = horizontal ? chart.legend.lastLineHeight : 0, plotSizeX = chart.plotSizeX, plotSizeY = chart.plotSizeY, bubbleSeries = chart.series[this.options.seriesIndex], pxSizes = bubbleSeries.getPxExtremes(), minSize = Math.ceil(pxSizes.minPxSize), maxPxSize = Math.ceil(pxSizes.maxPxSize), plotSize = Math.min(plotSizeY, plotSizeX);
                 var calculatedSize, maxSize = bubbleSeries.options.maxSize;
                 // Calculate prediceted max size of bubble
                 if (floating || !(/%$/.test(maxSize))) {
@@ -2842,8 +2842,8 @@
                 }
                 else {
                     maxSize = parseFloat(maxSize);
-                    calculatedSize = ((plotSize + lastLineHeight -
-                        fontMetrics.h / 2) * maxSize / 100) / (maxSize / 100 + 1);
+                    calculatedSize = ((plotSize + lastLineHeight) * maxSize / 100) /
+                        (maxSize / 100 + 1);
                     // Get maxPxSize from bubble series if calculated bubble legend
                     // size will not affect to bubbles series.
                     if ((horizontal && plotSizeY - calculatedSize >=
@@ -2928,7 +2928,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -3006,8 +3006,7 @@
          * Core series class to use with Bubble series.
          */
         function compose(ChartClass, LegendClass, SeriesClass) {
-            if (composedClasses.indexOf(ChartClass) === -1) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 setOptions({
                     // Set default bubble legend options
                     legend: {
@@ -3016,12 +3015,10 @@
                 });
                 wrap(ChartClass.prototype, 'drawChartBox', chartDrawChartBox);
             }
-            if (composedClasses.indexOf(LegendClass) === -1) {
-                composedClasses.push(LegendClass);
+            if (U.pushUnique(composedMembers, LegendClass)) {
                 addEvent(LegendClass, 'afterGetAllItems', onLegendAfterGetAllItems);
             }
-            if (composedClasses.indexOf(SeriesClass) === -1) {
-                composedClasses.push(SeriesClass);
+            if (U.pushUnique(composedMembers, SeriesClass)) {
                 addEvent(SeriesClass, 'legendItemClick', onSeriesLegendItemClick);
             }
         }
@@ -3114,7 +3111,11 @@
         /**
          * Toggle bubble legend depending on the visible status of bubble series.
          */
-        function onSeriesLegendItemClick() {
+        function onSeriesLegendItemClick(e) {
+            // #14080 don't fire this code if click function is prevented
+            if (e.defaultPrevented) {
+                return false;
+            }
             var series = this, chart = series.chart, visible = series.visible, legend = series.chart.legend;
             var status;
             if (legend && legend.bubbleLegend) {
@@ -3296,7 +3297,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -3390,8 +3391,7 @@
              * */
             BubbleSeries.compose = function (AxisClass, ChartClass, LegendClass, SeriesClass) {
                 BubbleLegendComposition.compose(ChartClass, LegendClass, SeriesClass);
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     AxisClass.prototype.beforePadding = axisBeforePadding;
                 }
             };
@@ -3449,8 +3449,10 @@
                             !_this.chart.options.chart.ignoreHiddenSeries)) {
                             var zExtremes_1 = (otherSeries.onPoint || otherSeries).getZExtremes();
                             if (zExtremes_1) {
-                                zMin_1 = Math.min(zMin_1 || zExtremes_1.zMin, zExtremes_1.zMin);
-                                zMax_1 = Math.max(zMax_1 || zExtremes_1.zMax, zExtremes_1.zMax);
+                                // Changed '||' to 'pick' because min or max can be 0.
+                                // #17280
+                                zMin_1 = Math.min(pick(zMin_1, zExtremes_1.zMin), zExtremes_1.zMin);
+                                zMax_1 = Math.max(pick(zMax_1, zExtremes_1.zMax), zExtremes_1.zMax);
                                 valid_1 = true;
                             }
                         }
@@ -3536,13 +3538,16 @@
                 this.translateBubble();
             };
             BubbleSeries.prototype.translateBubble = function () {
-                var _a = this, data = _a.data, radii = _a.radii;
-                var minPxSize = this.getPxExtremes().minPxSize;
+                var _a = this, data = _a.data, options = _a.options, radii = _a.radii, minPxSize = this.getPxExtremes().minPxSize;
                 // Set the shape type and arguments to be picked up in drawPoints
                 var i = data.length;
                 while (i--) {
                     var point = data[i];
                     var radius = radii ? radii[i] : 0; // #1737
+                    // Negative points means negative z values (#9728)
+                    if (this.zoneAxis === 'z') {
+                        point.negative = (point.z || 0) < (options.zThreshold || 0);
+                    }
                     if (isNumber(radius) && radius >= minPxSize / 2) {
                         // Shape arguments
                         point.marker = extend(point.marker, {
@@ -4052,7 +4057,7 @@
         })();
         var noop = H.noop;
         var _a = SeriesRegistry.seriesTypes, AreaRangeSeries = _a.arearange, ColumnSeries = _a.column, columnProto = _a.column.prototype;
-        var clamp = U.clamp, extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
+        var addEvent = U.addEvent, clamp = U.clamp, extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Constants
@@ -4074,6 +4079,9 @@
          * @optionparent plotOptions.columnrange
          */
         var columnRangeOptions = {
+            borderRadius: {
+                where: 'all'
+            },
             /**
              * Extended data labels for range series types. Range series data labels
              * have no `x` and `y` options. Instead, they have `xLow`, `xHigh`,
@@ -4125,13 +4133,44 @@
                 merge(true, arguments[0], { stacking: void 0 });
                 return AreaRangeSeries.prototype.setOptions.apply(this, arguments);
             };
-            // eslint-disable-next-line valid-jsdoc
-            /**
-             * Translate data points from raw values x and y to plotX and plotY
-             * @private
-             */
+            // Overrides from modules that may be loaded after this module
+            // @todo move to compositions
             ColumnRangeSeries.prototype.translate = function () {
+                return columnProto.translate.apply(this);
+            };
+            // public crispCol(): BBoxObject {
+            //     return columnProto.crispCol.apply(this, arguments as any);
+            // }
+            // public drawPoints(): void {
+            //     return columnProto.drawPoints.apply(this, arguments as any);
+            // }
+            // public drawTracker(): void {
+            //     return columnProto.drawTracker.apply(this, arguments as any);
+            // }
+            // public getColumnMetrics(): ColumnMetricsObject {
+            //     return columnProto.getColumnMetrics.apply(this, arguments as any);
+            // }
+            ColumnRangeSeries.prototype.pointAttribs = function () {
+                return columnProto.pointAttribs.apply(this, arguments);
+            };
+            // public adjustForMissingColumns(): number {
+            //     return columnProto.adjustForMissingColumns.apply(this, arguments);
+            // }
+            // public animate(): void {
+            //     return columnProto.animate.apply(this, arguments as any);
+            // }
+            ColumnRangeSeries.prototype.translate3dPoints = function () {
+                return columnProto.translate3dPoints.apply(this, arguments);
+            };
+            ColumnRangeSeries.prototype.translate3dShapes = function () {
+                return columnProto.translate3dShapes.apply(this, arguments);
+            };
+            ColumnRangeSeries.prototype.afterColumnTranslate = function () {
                 var _this = this;
+                /**
+                 * Translate data points from raw values x and y to plotX and plotY
+                 * @private
+                 */
                 var yAxis = this.yAxis, xAxis = this.xAxis, startAngleRad = xAxis.startAngleRad, chart = this.chart, isRadial = this.xAxis.isRadial, safeDistance = Math.max(chart.chartWidth, chart.chartHeight) + 999;
                 var height, heightDifference, start, plotHigh, y;
                 // eslint-disable-next-line valid-jsdoc
@@ -4142,7 +4181,6 @@
                 function safeBounds(pixelPos) {
                     return clamp(pixelPos, -safeDistance, safeDistance);
                 }
-                columnProto.translate.apply(this);
                 // Set plotLow and plotHigh
                 this.points.forEach(function (point) {
                     var shapeArgs = point.shapeArgs || {}, minPointLength = _this.options.minPointLength, plotY = point.plotY, plotHigh = yAxis.translate(point.high, 0, 1, 0, 1);
@@ -4172,6 +4210,9 @@
                             shapeArgs.height = height;
                             shapeArgs.y = y;
                             var _a = shapeArgs.x, x = _a === void 0 ? 0 : _a, _b = shapeArgs.width, width = _b === void 0 ? 0 : _b;
+                            // #17912, aligning column range points
+                            // merge if shapeArgs contains more properties e.g. for 3d
+                            point.shapeArgs = merge(point.shapeArgs, _this.crispCol(x, y, width, height));
                             point.tooltipPos = chart.inverted ?
                                 [
                                     yAxis.len + yAxis.pos - chart.plotLeft - y -
@@ -4188,35 +4229,6 @@
                     }
                 });
             };
-            // Overrides from modules that may be loaded after this module
-            // @todo move to compositions
-            // public crispCol(): BBoxObject {
-            //     return columnProto.crispCol.apply(this, arguments as any);
-            // }
-            // public drawPoints(): void {
-            //     return columnProto.drawPoints.apply(this, arguments as any);
-            // }
-            // public drawTracker(): void {
-            //     return columnProto.drawTracker.apply(this, arguments as any);
-            // }
-            // public getColumnMetrics(): ColumnMetricsObject {
-            //     return columnProto.getColumnMetrics.apply(this, arguments as any);
-            // }
-            ColumnRangeSeries.prototype.pointAttribs = function () {
-                return columnProto.pointAttribs.apply(this, arguments);
-            };
-            // public adjustForMissingColumns(): number {
-            //     return columnProto.adjustForMissingColumns.apply(this, arguments);
-            // }
-            // public animate(): void {
-            //     return columnProto.animate.apply(this, arguments as any);
-            // }
-            ColumnRangeSeries.prototype.translate3dPoints = function () {
-                return columnProto.translate3dPoints.apply(this, arguments);
-            };
-            ColumnRangeSeries.prototype.translate3dShapes = function () {
-                return columnProto.translate3dShapes.apply(this, arguments);
-            };
             /* *
              *
              *  Static Properties
@@ -4225,6 +4237,9 @@
             ColumnRangeSeries.defaultOptions = merge(ColumnSeries.defaultOptions, AreaRangeSeries.defaultOptions, columnRangeOptions);
             return ColumnRangeSeries;
         }(AreaRangeSeries));
+        addEvent(ColumnRangeSeries, 'afterColumnTranslate', function () {
+            ColumnRangeSeries.prototype.afterColumnTranslate.apply(this);
+        }, { order: 5 });
         extend(ColumnRangeSeries.prototype, {
             directTouch: true,
             pointClass: ColumnRangePoint,
@@ -5002,7 +5017,7 @@
         })();
         var noop = H.noop;
         var Series = SeriesRegistry.series, ColumnSeries = SeriesRegistry.seriesTypes.column;
-        var clamp = U.clamp, isNumber = U.isNumber, extend = U.extend, merge = U.merge, pick = U.pick, pInt = U.pInt;
+        var clamp = U.clamp, isNumber = U.isNumber, extend = U.extend, merge = U.merge, pick = U.pick, pInt = U.pInt, defined = U.defined;
         /* *
          *
          *  Class
@@ -5081,6 +5096,10 @@
                     // Positions for data label
                     point.plotX = center[0];
                     point.plotY = center[1];
+                    if (defined(point.y) && yAxis.max - yAxis.min) {
+                        point.percentage =
+                            (point.y - yAxis.min) / (yAxis.max - yAxis.min) * 100;
+                    }
                 });
             };
             /**
@@ -5098,11 +5117,6 @@
                     else {
                         point.graphic =
                             renderer[point.shapeType](shapeArgs)
-                                .attr({
-                                // required by VML when animation is false
-                                rotation: shapeArgs.rotation,
-                                zIndex: 1
-                            })
                                 .addClass('highcharts-dial')
                                 .add(series.group);
                     }
@@ -5581,7 +5595,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -5591,8 +5605,7 @@
          * @private
          */
         function compose(ChartClass) {
-            if (composedClasses.indexOf(ChartClass) === -1) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'load', onChartLoad);
             }
         }
@@ -5749,7 +5762,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         var integrations = {};
         var layouts = {};
         /* *
@@ -5761,8 +5774,7 @@
          * @private
          */
         function compose(ChartClass) {
-            if (composedClasses.indexOf(ChartClass)) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'afterPrint', onChartAfterPrint);
                 addEvent(ChartClass, 'beforePrint', onChartBeforePrint);
                 addEvent(ChartClass, 'predraw', onChartPredraw);
@@ -7267,7 +7279,7 @@
          *
          * */
         var win = H.win;
-        var clamp = U.clamp, defined = U.defined, isFunction = U.isFunction, pick = U.pick;
+        var clamp = U.clamp, defined = U.defined, isFunction = U.isFunction, fireEvent = U.fireEvent, pick = U.pick;
         /* *
          *
          *  Class
@@ -7383,6 +7395,9 @@
                     }
                     else {
                         this.simulation = false;
+                        this.series.forEach(function (s) {
+                            fireEvent(s, 'afterSimulation');
+                        });
                     }
                 }
             };
@@ -7817,7 +7832,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -7869,8 +7884,7 @@
                 ReingoldFruchtermanLayout.compose(ChartClass);
                 GraphLayout.integrations.packedbubble = PackedBubbleIntegration;
                 GraphLayout.layouts.packedbubble = PackedBubbleLayout;
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     addEvent(ChartClass, 'beforeRedraw', onChartBeforeRedraw);
                     var chartProto = ChartClass.prototype;
                     chartProto.getSelectedParentNodes = chartGetSelectedParentNodes;
@@ -7991,7 +8005,71 @@
 
         return PackedBubbleLayout;
     });
-    _registerModule(_modules, 'Series/PackedBubble/PackedBubbleSeries.js', [_modules['Core/Color/Color.js'], _modules['Series/DragNodesComposition.js'], _modules['Series/GraphLayoutComposition.js'], _modules['Core/Globals.js'], _modules['Series/PackedBubble/PackedBubblePoint.js'], _modules['Series/PackedBubble/PackedBubbleSeriesDefaults.js'], _modules['Series/PackedBubble/PackedBubbleLayout.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (Color, DragNodesComposition, GraphLayout, H, PackedBubblePoint, PackedBubbleSeriesDefaults, PackedBubbleLayout, SeriesRegistry, U) {
+    _registerModule(_modules, 'Series/SimulationSeriesUtilities.js', [_modules['Core/Utilities.js'], _modules['Core/Animation/AnimationUtilities.js']], function (U, A) {
+        /* *
+         *
+         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
+         *
+         * */
+        var syncTimeout = U.syncTimeout;
+        var animObject = A.animObject;
+        /**
+         * Create a setTimeout for the first drawDataLabels()
+         * based on the dataLabels.animation.defer value
+         * for series which have enabled simulation.
+         * @private
+         */
+        function initDataLabelsDefer() {
+            var _this = this;
+            var _a;
+            var dlOptions = this.options.dataLabels;
+            // drawDataLabels() fires for the first time after
+            // dataLabels.animation.defer time unless
+            // the dataLabels.animation = false or dataLabels.defer = false
+            // or if the simulation is disabled
+            if (!(dlOptions === null || dlOptions === void 0 ? void 0 : dlOptions.defer) ||
+                !((_a = this.options.layoutAlgorithm) === null || _a === void 0 ? void 0 : _a.enableSimulation)) {
+                this.deferDataLabels = false;
+            }
+            else {
+                syncTimeout(function () {
+                    _this.deferDataLabels = false;
+                }, dlOptions ? animObject(dlOptions.animation).defer : 0);
+            }
+        }
+        /**
+         * Initialize the SVG group for the DataLabels with correct opacities
+         * and correct styles so that the animation for the series that have
+         * simulation enabled works fine.
+         * @private
+         */
+        function initDataLabels() {
+            var series = this, dlOptions = series.options.dataLabels;
+            if (!series.dataLabelsGroup) {
+                var dataLabelsGroup = this.initDataLabelsGroup();
+                // Apply the dataLabels.style not only to the
+                // individual dataLabels but also to the entire group
+                if (!series.chart.styledMode && (dlOptions === null || dlOptions === void 0 ? void 0 : dlOptions.style)) {
+                    dataLabelsGroup.css(dlOptions.style);
+                }
+                // Initialize the opacity of the group to 0 (start of animation)
+                dataLabelsGroup.attr({ opacity: 0 });
+                if (series.visible) { // #2597, #3023, #3024
+                    dataLabelsGroup.show();
+                }
+                return dataLabelsGroup;
+            }
+            series.dataLabelsGroup.attr({ opacity: 1 });
+            return series.dataLabelsGroup;
+        }
+        var DataLabelsDeferUtils = {
+            initDataLabels: initDataLabels,
+            initDataLabelsDefer: initDataLabelsDefer
+        };
+
+        return DataLabelsDeferUtils;
+    });
+    _registerModule(_modules, 'Series/PackedBubble/PackedBubbleSeries.js', [_modules['Core/Color/Color.js'], _modules['Series/DragNodesComposition.js'], _modules['Series/GraphLayoutComposition.js'], _modules['Core/Globals.js'], _modules['Series/PackedBubble/PackedBubblePoint.js'], _modules['Series/PackedBubble/PackedBubbleSeriesDefaults.js'], _modules['Series/PackedBubble/PackedBubbleLayout.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/SimulationSeriesUtilities.js'], _modules['Core/Utilities.js'], _modules['Core/Animation/AnimationUtilities.js']], function (Color, DragNodesComposition, GraphLayout, H, PackedBubblePoint, PackedBubbleSeriesDefaults, PackedBubbleLayout, SeriesRegistry, D, U, A) {
         /* *
          *
          *  (c) 2010-2021 Grzegorz Blachlinski, Sebastian Bochan
@@ -8019,7 +8097,9 @@
         var color = Color.parse;
         var noop = H.noop;
         var seriesProto = SeriesRegistry.series.prototype, BubbleSeries = SeriesRegistry.seriesTypes.bubble;
-        var addEvent = U.addEvent, clamp = U.clamp, defined = U.defined, extend = U.extend, fireEvent = U.fireEvent, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
+        var initDataLabels = D.initDataLabels, initDataLabelsDefer = D.initDataLabelsDefer;
+        var addEvent = U.addEvent, clamp = U.clamp, defined = U.defined, extend = U.extend, fireEvent = U.fireEvent, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, pick = U.pick, syncTimeout = U.syncTimeout;
+        var animObject = A.animObject;
         /* *
          *
          *  Class
@@ -8053,6 +8133,7 @@
                 _this.parentNodeMass = 0;
                 _this.points = void 0;
                 _this.xData = void 0;
+                _this.deferDataLabels = true;
                 return _this;
                 /* eslint-enable valid-jsdoc */
             }
@@ -8310,6 +8391,11 @@
              * @private
              */
             PackedBubbleSeries.prototype.drawDataLabels = function () {
+                // We defer drawing the dataLabels
+                // until dataLabels.animation.defer time passes
+                if (this.deferDataLabels) {
+                    return;
+                }
                 seriesProto.drawDataLabels.call(this, this.points);
                 // Render parentNode labels:
                 if (this.parentNode) {
@@ -8322,6 +8408,7 @@
              * @private
              */
             PackedBubbleSeries.prototype.drawGraph = function () {
+                var _a;
                 // if the series is not using layout, don't add parent nodes
                 if (!this.layout || !this.layout.options.splitSeries) {
                     return;
@@ -8334,28 +8421,32 @@
                     'stroke-width': pick(nodeMarker.lineWidth, this.options.lineWidth)
                 };
                 var parentAttribs = {};
-                // create the group for parent Nodes if doesn't exist
-                if (!this.parentNodesGroup) {
-                    this.parentNodesGroup = this.plotGroup('parentNodesGroup', 'parentNode', this.visible ? 'inherit' : 'hidden', 0.1, chart.seriesGroup);
-                    this.group.attr({
-                        zIndex: 2
-                    });
-                }
+                // Create the group for parent Nodes if doesn't exist
+                // If exists it will only be adjusted to the updated plot size (#12063)
+                this.parentNodesGroup = this.plotGroup('parentNodesGroup', 'parentNode', this.visible ? 'inherit' : 'hidden', 0.1, chart.seriesGroup);
+                (_a = this.group) === null || _a === void 0 ? void 0 : _a.attr({
+                    zIndex: 2
+                });
                 this.calculateParentRadius();
-                parentAttribs = merge({
-                    x: this.parentNode.plotX -
-                        this.parentNodeRadius,
-                    y: this.parentNode.plotY -
-                        this.parentNodeRadius,
-                    width: this.parentNodeRadius * 2,
-                    height: this.parentNodeRadius * 2
-                }, parentOptions);
-                if (!this.parentNode.graphic) {
-                    this.graph = this.parentNode.graphic =
-                        chart.renderer.symbol(parentOptions.symbol)
-                            .add(this.parentNodesGroup);
+                if (this.parentNode &&
+                    defined(this.parentNode.plotX) &&
+                    defined(this.parentNode.plotY) &&
+                    defined(this.parentNodeRadius)) {
+                    parentAttribs = merge({
+                        x: this.parentNode.plotX -
+                            this.parentNodeRadius,
+                        y: this.parentNode.plotY -
+                            this.parentNodeRadius,
+                        width: this.parentNodeRadius * 2,
+                        height: this.parentNodeRadius * 2
+                    }, parentOptions);
+                    if (!this.parentNode.graphic) {
+                        this.graph = this.parentNode.graphic =
+                            chart.renderer.symbol(parentOptions.symbol)
+                                .add(this.parentNodesGroup);
+                    }
+                    this.parentNode.graphic.attr(parentAttribs);
                 }
-                this.parentNode.graphic.attr(parentAttribs);
             };
             PackedBubbleSeries.prototype.drawTracker = function () {
                 var parentNode = this.parentNode;
@@ -8425,6 +8516,7 @@
             };
             PackedBubbleSeries.prototype.init = function () {
                 seriesProto.init.apply(this, arguments);
+                initDataLabelsDefer.call(this);
                 /* eslint-disable no-invalid-this */
                 // When one series is modified, the others need to be recomputed
                 this.eventsToUnbind.push(addEvent(this, 'updatedData', function () {
@@ -8833,6 +8925,7 @@
             pointValKey: 'value',
             requireSorting: false,
             trackerGroups: ['group', 'dataLabelsGroup', 'parentNodesGroup'],
+            initDataLabels: initDataLabels,
             alignDataLabel: seriesProto.alignDataLabel,
             indexateNodes: noop,
             onMouseDown: DragNodesComposition.onMouseDown,
@@ -8890,7 +8983,7 @@
 
         return PackedBubbleSeries;
     });
-    _registerModule(_modules, 'Series/Polygon/PolygonSeries.js', [_modules['Core/Globals.js'], _modules['Core/Legend/LegendSymbol.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (H, LegendSymbol, SeriesRegistry, U) {
+    _registerModule(_modules, 'Series/Polygon/PolygonSeries.js', [_modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (H, SeriesRegistry, U) {
         /* *
          *
          *  (c) 2010-2021 Torstein Honsi
@@ -8990,13 +9083,13 @@
                     followPointer: true,
                     pointFormat: ''
                 },
-                trackByArea: true
+                trackByArea: true,
+                legendSymbol: 'rectangle'
             });
             return PolygonSeries;
         }(ScatterSeries));
         extend(PolygonSeries.prototype, {
             type: 'polygon',
-            drawLegendSymbol: LegendSymbol.drawRectangle,
             drawTracker: Series.prototype.drawTracker,
             setStackedPoints: noop // No stacking points on polygons (#5310)
         });
@@ -9332,7 +9425,7 @@
             };
         })();
         var _a = SeriesRegistry.seriesTypes, ColumnSeries = _a.column, LineSeries = _a.line;
-        var arrayMax = U.arrayMax, arrayMin = U.arrayMin, correctFloat = U.correctFloat, extend = U.extend, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach, pick = U.pick;
+        var addEvent = U.addEvent, arrayMax = U.arrayMax, arrayMin = U.arrayMin, correctFloat = U.correctFloat, extend = U.extend, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach, pick = U.pick;
         /**
          * Returns true if the key is a direct property of the object.
          * @private
@@ -9397,178 +9490,6 @@
                     }
                 }
             };
-            // Translate data points from raw values
-            WaterfallSeries.prototype.translate = function () {
-                var series = this, options = series.options, yAxis = series.yAxis, minPointLength = pick(options.minPointLength, 5), halfMinPointLength = minPointLength / 2, threshold = options.threshold || 0, stacking = options.stacking, actualStack = yAxis.waterfall.stacks[series.stackKey];
-                var previousIntermediate = threshold, previousY = threshold, y, total, yPos, hPos;
-                // run column series translate
-                ColumnSeries.prototype.translate.apply(series);
-                var points = series.points;
-                for (var i = 0; i < points.length; i++) {
-                    var point = points[i], yValue = series.processedYData[i], shapeArgs = point.shapeArgs;
-                    if (!shapeArgs || !isNumber(yValue)) {
-                        continue;
-                    }
-                    var range = [0, yValue], pointY = point.y;
-                    // code responsible for correct positions of stacked points
-                    // starts here
-                    if (stacking) {
-                        if (actualStack) {
-                            var actualStackX = actualStack[i];
-                            if (stacking === 'overlap') {
-                                total =
-                                    actualStackX.stackState[actualStackX.stateIndex--];
-                                y = pointY >= 0 ? total : total - pointY;
-                                if (ownProp(actualStackX, 'absolutePos')) {
-                                    delete actualStackX.absolutePos;
-                                }
-                                if (ownProp(actualStackX, 'absoluteNeg')) {
-                                    delete actualStackX.absoluteNeg;
-                                }
-                            }
-                            else {
-                                if (pointY >= 0) {
-                                    total = actualStackX.threshold +
-                                        actualStackX.posTotal;
-                                    actualStackX.posTotal -= pointY;
-                                    y = total;
-                                }
-                                else {
-                                    total = actualStackX.threshold +
-                                        actualStackX.negTotal;
-                                    actualStackX.negTotal -= pointY;
-                                    y = total - pointY;
-                                }
-                                if (!actualStackX.posTotal) {
-                                    if (isNumber(actualStackX.absolutePos) &&
-                                        ownProp(actualStackX, 'absolutePos')) {
-                                        actualStackX.posTotal =
-                                            actualStackX.absolutePos;
-                                        delete actualStackX.absolutePos;
-                                    }
-                                }
-                                if (!actualStackX.negTotal) {
-                                    if (isNumber(actualStackX.absoluteNeg) &&
-                                        ownProp(actualStackX, 'absoluteNeg')) {
-                                        actualStackX.negTotal =
-                                            actualStackX.absoluteNeg;
-                                        delete actualStackX.absoluteNeg;
-                                    }
-                                }
-                            }
-                            if (!point.isSum) {
-                                // the connectorThreshold property is later used in
-                                // getCrispPath function to draw a connector line in a
-                                // correct place
-                                actualStackX.connectorThreshold =
-                                    actualStackX.threshold + actualStackX.stackTotal;
-                            }
-                            if (yAxis.reversed) {
-                                yPos = (pointY >= 0) ? (y - pointY) : (y + pointY);
-                                hPos = y;
-                            }
-                            else {
-                                yPos = y;
-                                hPos = y - pointY;
-                            }
-                            point.below = yPos <= threshold;
-                            shapeArgs.y = yAxis.translate(yPos, false, true, false, true);
-                            shapeArgs.height = Math.abs(shapeArgs.y -
-                                yAxis.translate(hPos, false, true, false, true));
-                            var dummyStackItem = yAxis.waterfall.dummyStackItem;
-                            if (dummyStackItem) {
-                                dummyStackItem.x = i;
-                                dummyStackItem.label = actualStack[i].label;
-                                dummyStackItem.setOffset(series.pointXOffset || 0, series.barW || 0, series.stackedYNeg[i], series.stackedYPos[i], void 0, this.xAxis);
-                            }
-                        }
-                    }
-                    else {
-                        // up points
-                        y = Math.max(previousY, previousY + pointY) + range[0];
-                        shapeArgs.y = yAxis.translate(y, false, true, false, true);
-                        // sum points
-                        if (point.isSum) {
-                            shapeArgs.y = yAxis.translate(range[1], false, true, false, true);
-                            shapeArgs.height = Math.min(yAxis.translate(range[0], false, true, false, true), yAxis.len) - shapeArgs.y; // #4256
-                            point.below = range[1] <= threshold;
-                        }
-                        else if (point.isIntermediateSum) {
-                            if (pointY >= 0) {
-                                yPos = range[1] + previousIntermediate;
-                                hPos = previousIntermediate;
-                            }
-                            else {
-                                yPos = previousIntermediate;
-                                hPos = range[1] + previousIntermediate;
-                            }
-                            if (yAxis.reversed) {
-                                // swapping values
-                                yPos ^= hPos;
-                                hPos ^= yPos;
-                                yPos ^= hPos;
-                            }
-                            shapeArgs.y = yAxis.translate(yPos, false, true, false, true);
-                            shapeArgs.height = Math.abs(shapeArgs.y -
-                                Math.min(yAxis.translate(hPos, false, true, false, true), yAxis.len));
-                            previousIntermediate += range[1];
-                            point.below = yPos <= threshold;
-                            // If it's not the sum point, update previous stack end position
-                            // and get shape height (#3886)
-                        }
-                        else {
-                            shapeArgs.height = yValue > 0 ?
-                                yAxis.translate(previousY, false, true, false, true) - shapeArgs.y :
-                                yAxis.translate(previousY, false, true, false, true) - yAxis.translate(previousY - yValue, false, true, false, true);
-                            previousY += yValue;
-                            point.below = previousY < threshold;
-                        }
-                        // #3952 Negative sum or intermediate sum not rendered correctly
-                        if (shapeArgs.height < 0) {
-                            shapeArgs.y += shapeArgs.height;
-                            shapeArgs.height *= -1;
-                        }
-                    }
-                    point.plotY = shapeArgs.y =
-                        Math.round(shapeArgs.y || 0) - (series.borderWidth % 2) / 2;
-                    // #3151
-                    shapeArgs.height =
-                        Math.max(Math.round(shapeArgs.height || 0), 0.001);
-                    point.yBottom = shapeArgs.y + shapeArgs.height;
-                    if (shapeArgs.height <= minPointLength && !point.isNull) {
-                        shapeArgs.height = minPointLength;
-                        shapeArgs.y -= halfMinPointLength;
-                        point.plotY = shapeArgs.y;
-                        if (point.y < 0) {
-                            point.minPointLengthOffset = -halfMinPointLength;
-                        }
-                        else {
-                            point.minPointLengthOffset = halfMinPointLength;
-                        }
-                    }
-                    else {
-                        if (point.isNull) {
-                            shapeArgs.width = 0;
-                        }
-                        point.minPointLengthOffset = 0;
-                    }
-                    // Correct tooltip placement (#3014)
-                    var tooltipY = point.plotY + (point.negative ? shapeArgs.height : 0);
-                    if (point.below) { // #15334
-                        point.plotY += shapeArgs.height;
-                    }
-                    if (point.tooltipPos) {
-                        if (series.chart.inverted) {
-                            point.tooltipPos[0] = yAxis.len - tooltipY;
-                        }
-                        else {
-                            point.tooltipPos[1] = tooltipY;
-                        }
-                    }
-                    // Check point position after recalculation (#16788)
-                    point.isInside = this.isPointInside(point);
-                }
-            };
             // Call default processData then override yData to reflect waterfall's
             // extremes on yAxis
             WaterfallSeries.prototype.processData = function (force) {
@@ -9623,7 +9544,7 @@
             WaterfallSeries.prototype.pointAttribs = function (point, state) {
                 var upColor = this.options.upColor;
                 // Set or reset up color (#3710, update to negative)
-                if (upColor && !point.options.color) {
+                if (upColor && !point.options.color && isNumber(point.y)) {
                     point.color = point.y > 0 ? upColor : void 0;
                 }
                 var attr = ColumnSeries.prototype.pointAttribs.call(this, point, state);
@@ -9639,53 +9560,62 @@
             };
             // Draw columns' connector lines
             WaterfallSeries.prototype.getCrispPath = function () {
-                var data = this.data, yAxis = this.yAxis, length = data.length, graphNormalizer = Math.round(this.graph.strokeWidth()) % 2 / 2, borderNormalizer = Math.round(this.borderWidth) % 2 / 2, reversedXAxis = this.xAxis.reversed, reversedYAxis = this.yAxis.reversed, stacking = this.options.stacking, path = [], connectorThreshold, prevStack, prevStackX, prevPoint, yPos, isPos, prevArgs, pointArgs, i;
-                for (i = 1; i < length; i++) {
-                    pointArgs = data[i].shapeArgs;
-                    prevPoint = data[i - 1];
-                    prevArgs = data[i - 1].shapeArgs;
-                    prevStack = yAxis.waterfall.stacks[this.stackKey];
-                    isPos = prevPoint.y > 0 ? -prevArgs.height : 0;
-                    if (prevStack && prevArgs && pointArgs) {
-                        prevStackX = prevStack[i - 1];
+                var data = this.data.filter(function (d) {
+                    // Skip points where Y is not a number (#18636)
+                    return isNumber(d.y);
+                }), yAxis = this.yAxis, length = data.length, graphNormalizer = Math.round(this.graph.strokeWidth()) % 2 / 2, borderNormalizer = Math.round(this.borderWidth) % 2 / 2, reversedXAxis = this.xAxis.reversed, reversedYAxis = this.yAxis.reversed, stacking = this.options.stacking, path = [];
+                for (var i = 1; i < length; i++) {
+                    if (!( // Skip lines that would pass over the null point (#18636)
+                    this.options.connectNulls ||
+                        isNumber(this.data[data[i].index - 1].y))) {
+                        continue;
+                    }
+                    var box = data[i].box, prevPoint = data[i - 1], prevY = prevPoint.y || 0, prevBox = data[i - 1].box;
+                    if (!box || !prevBox) {
+                        continue;
+                    }
+                    var prevStack = yAxis.waterfall.stacks[this.stackKey], isPos = prevY > 0 ? -prevBox.height : 0;
+                    if (prevStack && prevBox && box) {
+                        var prevStackX = prevStack[i - 1];
                         // y position of the connector is different when series are
                         // stacked, yAxis is reversed and it also depends on point's
                         // value
+                        var yPos = void 0;
                         if (stacking) {
-                            connectorThreshold = prevStackX.connectorThreshold;
+                            var connectorThreshold = prevStackX.connectorThreshold;
                             yPos = Math.round((yAxis.translate(connectorThreshold, false, true, false, true) +
                                 (reversedYAxis ? isPos : 0))) - graphNormalizer;
                         }
                         else {
                             yPos =
-                                prevArgs.y + prevPoint.minPointLengthOffset +
+                                prevBox.y + prevPoint.minPointLengthOffset +
                                     borderNormalizer - graphNormalizer;
                         }
                         path.push([
                             'M',
-                            (prevArgs.x || 0) + (reversedXAxis ?
+                            (prevBox.x || 0) + (reversedXAxis ?
                                 0 :
-                                (prevArgs.width || 0)),
+                                (prevBox.width || 0)),
                             yPos
                         ], [
                             'L',
-                            (pointArgs.x || 0) + (reversedXAxis ?
-                                (pointArgs.width || 0) :
+                            (box.x || 0) + (reversedXAxis ?
+                                (box.width || 0) :
                                 0),
                             yPos
                         ]);
                     }
-                    if (prevArgs &&
+                    if (prevBox &&
                         path.length &&
-                        ((!stacking && prevPoint.y < 0 && !reversedYAxis) ||
-                            (prevPoint.y > 0 && reversedYAxis))) {
+                        ((!stacking && prevY < 0 && !reversedYAxis) ||
+                            (prevY > 0 && reversedYAxis))) {
                         var nextLast = path[path.length - 2];
                         if (nextLast && typeof nextLast[2] === 'number') {
-                            nextLast[2] += prevArgs.height || 0;
+                            nextLast[2] += prevBox.height || 0;
                         }
                         var last = path[path.length - 1];
                         if (last && typeof last[2] === 'number') {
-                            last[2] += prevArgs.height || 0;
+                            last[2] += prevBox.height || 0;
                         }
                     }
                 }
@@ -9931,6 +9861,180 @@
             });
             return WaterfallSeries;
         }(ColumnSeries));
+        // Translate data points from raw values
+        addEvent(WaterfallSeries, 'afterColumnTranslate', function () {
+            var series = this, options = series.options, points = series.points, yAxis = series.yAxis, minPointLength = pick(options.minPointLength, 5), halfMinPointLength = minPointLength / 2, threshold = options.threshold || 0, stacking = options.stacking, actualStack = yAxis.waterfall.stacks[series.stackKey];
+            var previousIntermediate = threshold, previousY = threshold, y, total, yPos, hPos;
+            for (var i = 0; i < points.length; i++) {
+                var point = points[i], yValue = series.processedYData[i], shapeArgs = point.shapeArgs, box = extend({
+                    x: 0,
+                    y: 0,
+                    width: 0,
+                    height: 0
+                }, shapeArgs || {});
+                point.box = box;
+                var range = [0, yValue], pointY = point.y || 0;
+                // code responsible for correct positions of stacked points
+                // starts here
+                if (stacking) {
+                    if (actualStack) {
+                        var actualStackX = actualStack[i];
+                        if (stacking === 'overlap') {
+                            total =
+                                actualStackX.stackState[actualStackX.stateIndex--];
+                            y = pointY >= 0 ? total : total - pointY;
+                            if (ownProp(actualStackX, 'absolutePos')) {
+                                delete actualStackX.absolutePos;
+                            }
+                            if (ownProp(actualStackX, 'absoluteNeg')) {
+                                delete actualStackX.absoluteNeg;
+                            }
+                        }
+                        else {
+                            if (pointY >= 0) {
+                                total = actualStackX.threshold +
+                                    actualStackX.posTotal;
+                                actualStackX.posTotal -= pointY;
+                                y = total;
+                            }
+                            else {
+                                total = actualStackX.threshold +
+                                    actualStackX.negTotal;
+                                actualStackX.negTotal -= pointY;
+                                y = total - pointY;
+                            }
+                            if (!actualStackX.posTotal) {
+                                if (isNumber(actualStackX.absolutePos) &&
+                                    ownProp(actualStackX, 'absolutePos')) {
+                                    actualStackX.posTotal =
+                                        actualStackX.absolutePos;
+                                    delete actualStackX.absolutePos;
+                                }
+                            }
+                            if (!actualStackX.negTotal) {
+                                if (isNumber(actualStackX.absoluteNeg) &&
+                                    ownProp(actualStackX, 'absoluteNeg')) {
+                                    actualStackX.negTotal =
+                                        actualStackX.absoluteNeg;
+                                    delete actualStackX.absoluteNeg;
+                                }
+                            }
+                        }
+                        if (!point.isSum) {
+                            // the connectorThreshold property is later used in
+                            // getCrispPath function to draw a connector line in a
+                            // correct place
+                            actualStackX.connectorThreshold =
+                                actualStackX.threshold + actualStackX.stackTotal;
+                        }
+                        if (yAxis.reversed) {
+                            yPos = (pointY >= 0) ? (y - pointY) : (y + pointY);
+                            hPos = y;
+                        }
+                        else {
+                            yPos = y;
+                            hPos = y - pointY;
+                        }
+                        point.below = yPos <= threshold;
+                        box.y = yAxis.translate(yPos, false, true, false, true);
+                        box.height = Math.abs(box.y -
+                            yAxis.translate(hPos, false, true, false, true));
+                        var dummyStackItem = yAxis.waterfall.dummyStackItem;
+                        if (dummyStackItem) {
+                            dummyStackItem.x = i;
+                            dummyStackItem.label = actualStack[i].label;
+                            dummyStackItem.setOffset(series.pointXOffset || 0, series.barW || 0, series.stackedYNeg[i], series.stackedYPos[i], void 0, this.xAxis);
+                        }
+                    }
+                }
+                else {
+                    // up points
+                    y = Math.max(previousY, previousY + pointY) + range[0];
+                    box.y = yAxis.translate(y, false, true, false, true);
+                    // sum points
+                    if (point.isSum) {
+                        box.y = yAxis.translate(range[1], false, true, false, true);
+                        box.height = Math.min(yAxis.translate(range[0], false, true, false, true), yAxis.len) - box.y; // #4256
+                        point.below = range[1] <= threshold;
+                    }
+                    else if (point.isIntermediateSum) {
+                        if (pointY >= 0) {
+                            yPos = range[1] + previousIntermediate;
+                            hPos = previousIntermediate;
+                        }
+                        else {
+                            yPos = previousIntermediate;
+                            hPos = range[1] + previousIntermediate;
+                        }
+                        if (yAxis.reversed) {
+                            // swapping values
+                            yPos ^= hPos;
+                            hPos ^= yPos;
+                            yPos ^= hPos;
+                        }
+                        box.y = yAxis.translate(yPos, false, true, false, true);
+                        box.height = Math.abs(box.y -
+                            Math.min(yAxis.translate(hPos, false, true, false, true), yAxis.len));
+                        previousIntermediate += range[1];
+                        point.below = yPos <= threshold;
+                        // If it's not the sum point, update previous stack end position
+                        // and get shape height (#3886)
+                    }
+                    else {
+                        box.height = yValue > 0 ?
+                            yAxis.translate(previousY, false, true, false, true) - box.y :
+                            yAxis.translate(previousY, false, true, false, true) - yAxis.translate(previousY - yValue, false, true, false, true);
+                        previousY += yValue;
+                        point.below = previousY < threshold;
+                    }
+                    // #3952 Negative sum or intermediate sum not rendered correctly
+                    if (box.height < 0) {
+                        box.y += box.height;
+                        box.height *= -1;
+                    }
+                }
+                point.plotY = box.y =
+                    Math.round(box.y || 0) - (series.borderWidth % 2) / 2;
+                // #3151
+                box.height =
+                    Math.max(Math.round(box.height || 0), 0.001);
+                point.yBottom = box.y + box.height;
+                if (box.height <= minPointLength && !point.isNull) {
+                    box.height = minPointLength;
+                    box.y -= halfMinPointLength;
+                    point.plotY = box.y;
+                    if (pointY < 0) {
+                        point.minPointLengthOffset = -halfMinPointLength;
+                    }
+                    else {
+                        point.minPointLengthOffset = halfMinPointLength;
+                    }
+                }
+                else {
+                    // #8024, empty gaps in the line for null data
+                    if (point.isNull) {
+                        box.width = 0;
+                    }
+                    point.minPointLengthOffset = 0;
+                }
+                // Correct tooltip placement (#3014)
+                var tooltipY = point.plotY + (point.negative ? box.height : 0);
+                if (point.below) { // #15334
+                    point.plotY += box.height;
+                }
+                if (point.tooltipPos) {
+                    if (series.chart.inverted) {
+                        point.tooltipPos[0] = yAxis.len - tooltipY;
+                    }
+                    else {
+                        point.tooltipPos[1] = tooltipY;
+                    }
+                }
+                // Check point position after recalculation (#16788)
+                point.isInside = this.isPointInside(point);
+                merge(true, point.shapeArgs, box);
+            }
+        }, { order: 2 });
         extend(WaterfallSeries.prototype, {
             getZonesGraphs: LineSeries.prototype.getZonesGraphs,
             pointValKey: 'y',
@@ -10080,7 +10184,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             /**
              * Circular axis around the perimeter of a polar chart.
              * @private
@@ -10089,7 +10193,6 @@
                 gridLineWidth: 1,
                 labels: {
                     align: void 0,
-                    distance: 15,
                     x: 0,
                     y: void 0,
                     style: {
@@ -10108,6 +10211,7 @@
             var defaultRadialGaugeOptions = {
                 labels: {
                     align: 'center',
+                    distance: -25,
                     x: 0,
                     y: void 0 // auto
                 },
@@ -10226,16 +10330,14 @@
              * Axis composition.
              */
             function compose(AxisClass, TickClass) {
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     addEvent(AxisClass, 'afterInit', onAxisAfterInit);
                     addEvent(AxisClass, 'autoLabelAlign', onAxisAutoLabelAlign);
                     addEvent(AxisClass, 'destroy', onAxisDestroy);
                     addEvent(AxisClass, 'init', onAxisInit);
                     addEvent(AxisClass, 'initialAxisTranslation', onAxisInitialAxisTranslation);
                 }
-                if (composedClasses.indexOf(TickClass) === -1) {
-                    composedClasses.push(TickClass);
+                if (U.pushUnique(composedMembers, TickClass)) {
                     addEvent(TickClass, 'afterGetLabelPosition', onTickAfterGetLabelPosition);
                     addEvent(TickClass, 'afterGetPosition', onTickAfterGetPosition);
                     wrap(TickClass.prototype, 'getMarkPath', wrapTickGetMarkPath);
@@ -10774,8 +10876,7 @@
                         // Vertically centered
                     }
                     else if (!defined(optionsY)) {
-                        optionsY = (axis.chart.renderer
-                            .fontMetrics(label.styles && label.styles.fontSize).b -
+                        optionsY = (axis.chart.renderer.fontMetrics(label).b -
                             labelBBox.height / 2);
                     }
                     // Automatic alignment
@@ -11016,7 +11117,7 @@
 
         return RadialAxis;
     });
-    _registerModule(_modules, 'Series/PolarComposition.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Globals.js'], _modules['Extensions/Pane.js'], _modules['Core/Axis/RadialAxis.js'], _modules['Core/Utilities.js']], function (A, H, Pane, RadialAxis, U) {
+    _registerModule(_modules, 'Series/PolarComposition.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Series/Series.js'], _modules['Extensions/Pane.js'], _modules['Core/Axis/RadialAxis.js'], _modules['Core/Utilities.js']], function (A, H, Series, Pane, RadialAxis, U) {
         /* *
          *
          *  (c) 2010-2021 Torstein Honsi
@@ -11036,13 +11137,13 @@
             return to.concat(ar || Array.prototype.slice.call(from));
         };
         var animObject = A.animObject;
-        var addEvent = U.addEvent, defined = U.defined, find = U.find, isNumber = U.isNumber, pick = U.pick, splat = U.splat, uniqueKey = U.uniqueKey, wrap = U.wrap;
+        var addEvent = U.addEvent, defined = U.defined, find = U.find, isNumber = U.isNumber, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength, splat = U.splat, uniqueKey = U.uniqueKey, wrap = U.wrap;
         /* *
          *
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -11358,7 +11459,7 @@
          */
         function onSeriesAfterTranslate() {
             if (this.chart.polar && this.xAxis) {
-                var series = this, chart_1 = series.chart;
+                var series = this, xAxis = series.xAxis, yAxis = series.yAxis, chart_1 = series.chart;
                 // Prepare k-d-tree handling. It searches by angle (clientX) in
                 // case of shared tooltip, and by two dimensional distance in case
                 // of non-shared.
@@ -11374,15 +11475,15 @@
                 while (i--) {
                     // Translate plotX, plotY from angle and radius to true plot
                     // coordinates
-                    if (!series.preventPostTranslate) {
+                    if (!series.is('column') && !series.is('columnrange')) {
                         series.polar.toXY(points[i]);
                     }
                     // Treat points below Y axis min as null (#10082)
                     if (!chart_1.hasParallelCoordinates &&
                         !series.yAxis.reversed) {
-                        if (pick(points[i].y, Number.MIN_VALUE) < series.yAxis.min ||
-                            points[i].x < series.xAxis.min ||
-                            points[i].x > series.xAxis.max) {
+                        if (pick(points[i].y, Number.MIN_VALUE) < yAxis.min ||
+                            points[i].x < xAxis.min ||
+                            points[i].x > xAxis.max) {
                             // Destroy markers
                             points[i].isNull = true;
                             // Destroy column's graphic
@@ -11495,24 +11596,22 @@
                             // radius
                             point.barX +
                                 point.pointWidth / 2);
-                        alignTo = {
+                        alignTo = merge(alignTo, {
                             x: labelPos.x - chart.plotLeft,
                             y: labelPos.y - chart.plotTop
-                        };
+                        });
                     }
                     else if (point.tooltipPos) {
-                        alignTo = {
+                        alignTo = merge(alignTo, {
                             x: point.tooltipPos[0],
                             y: point.tooltipPos[1]
-                        };
+                        });
                     }
                     options.align = pick(options.align, 'center');
                     options.verticalAlign =
                         pick(options.verticalAlign, 'middle');
                 }
-                Object
-                    .getPrototypeOf(Object.getPrototypeOf(this))
-                    .alignDataLabel.call(this, point, dataLabel, options, alignTo, isNew);
+                Series.prototype.alignDataLabel.call(this, point, dataLabel, options, alignTo, isNew);
                 // Hide label of a point (only inverted) that is outside the
                 // visible y range
                 if (this.isRadialBar && point.shapeArgs &&
@@ -11531,12 +11630,9 @@
          * Extend the column prototype's translate method
          * @private
          */
-        function wrapColumnSeriesTranslate(proceed) {
+        function onAfterColumnTranslate() {
             var series = this, options = series.options, stacking = options.stacking, chart = series.chart, xAxis = series.xAxis, yAxis = series.yAxis, reversed = yAxis.reversed, center = yAxis.center, startAngleRad = xAxis.startAngleRad, endAngleRad = xAxis.endAngleRad, visibleRange = endAngleRad - startAngleRad;
             var threshold = options.threshold, thresholdAngleRad = 0, points, point, i, yMin, yMax, start = 0, end = 0, tooltipPos, pointX, pointY, stackValues, stack, barX, innerR, r;
-            series.preventPostTranslate = true;
-            // Run uber method
-            proceed.call(series);
             // Postprocess plot coordinates
             if (xAxis.isRadial) {
                 points = series.points;
@@ -11628,18 +11724,21 @@
                         if (center) {
                             point.barX = barX += center[3] / 2;
                         }
-                        // In case when radius, inner radius or both are
-                        // negative, a point is rendered but partially or as
-                        // a center point
+                        // In case when radius, inner radius or both are negative, a
+                        // point is rendered but partially or as a center point
                         innerR = Math.max(barX, 0);
                         r = Math.max(barX + point.pointWidth, 0);
+                        // Handle border radius
+                        var brOption = options.borderRadius, brValue = typeof brOption === 'object' ?
+                            brOption.radius : brOption, borderRadius = relativeLength(brValue || 0, r - innerR);
                         point.shapeArgs = {
-                            x: center && center[0],
-                            y: center && center[1],
+                            x: center[0],
+                            y: center[1],
                             r: r,
                             innerR: innerR,
                             start: start,
-                            end: end
+                            end: end,
+                            borderRadius: borderRadius
                         };
                         // Fade out the points if not inside the polar "plot area"
                         point.opacity = start === end ? 0 : void 0;
@@ -11648,16 +11747,20 @@
                         point.plotY = (defined(series.translatedThreshold) &&
                             (start < series.translatedThreshold ? start : end)) -
                             startAngleRad;
+                        // Non-inverted polar columns
                     }
                     else {
                         start = barX + startAngleRad;
-                        // Changed the way polar columns are drawn in order to make
-                        // it more consistent with the drawing of inverted columns
-                        // (they are using the same function now). Also, it was
-                        // essential to make the animation work correctly (the
-                        // scaling of the group) is replaced by animating each
-                        // element separately.
                         point.shapeArgs = series.polar.arc(point.yBottom, point.plotY, start, start + point.pointWidth);
+                        // Disallow border radius on polar columns for now. It would
+                        // take some refactoring to work with the `scope` and the
+                        // `where` options. Those options would require that only
+                        // individual corners be rounded, in practice individual calls
+                        // to applyBorderRadius from the extended `arc` function. That
+                        // would be a viable solution, though it would not be perfect
+                        // until we implemented rounding that included the lower points
+                        // in the stack, like we have for cartesian column.
+                        point.shapeArgs.borderRadius = 0;
                     }
                     // Provided a correct coordinates for the tooltip
                     series.polar.toXY(point);
@@ -11790,61 +11893,57 @@
                     }
                 }
                 else {
-                    // Enable animation on polar charts only in SVG. In VML, the scaling
-                    // is different, plus animation would be so slow it would't matter.
-                    if (chart.renderer.isSVG) {
-                        animation = animObject(animation);
-                        // A different animation needed for column like series
-                        if (series.is('column')) {
-                            if (!init) {
-                                paneInnerR = center[3] / 2;
-                                series.points.forEach(function (point) {
-                                    graphic = point.graphic;
-                                    shapeArgs = point.shapeArgs;
-                                    r = shapeArgs && shapeArgs.r;
-                                    innerR = shapeArgs && shapeArgs.innerR;
-                                    if (graphic && shapeArgs) {
-                                        // start values
-                                        graphic.attr({
-                                            r: paneInnerR,
-                                            innerR: paneInnerR
-                                        });
-                                        // animate
-                                        graphic.animate({
-                                            r: r,
-                                            innerR: innerR
-                                        }, series.options.animation);
-                                    }
-                                });
+                    animation = animObject(animation);
+                    // A different animation needed for column like series
+                    if (series.is('column')) {
+                        if (!init) {
+                            paneInnerR = center[3] / 2;
+                            series.points.forEach(function (point) {
+                                graphic = point.graphic;
+                                shapeArgs = point.shapeArgs;
+                                r = shapeArgs && shapeArgs.r;
+                                innerR = shapeArgs && shapeArgs.innerR;
+                                if (graphic && shapeArgs) {
+                                    // start values
+                                    graphic.attr({
+                                        r: paneInnerR,
+                                        innerR: paneInnerR
+                                    });
+                                    // animate
+                                    graphic.animate({
+                                        r: r,
+                                        innerR: innerR
+                                    }, series.options.animation);
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        // Initialize the animation
+                        if (init) {
+                            // Scale down the group and place it in the center
+                            attribs = {
+                                translateX: center[0] + plotLeft,
+                                translateY: center[1] + plotTop,
+                                scaleX: 0.001,
+                                scaleY: 0.001
+                            };
+                            group.attr(attribs);
+                            if (markerGroup) {
+                                markerGroup.attr(attribs);
                             }
+                            // Run the animation
                         }
                         else {
-                            // Initialize the animation
-                            if (init) {
-                                // Scale down the group and place it in the center
-                                attribs = {
-                                    translateX: center[0] + plotLeft,
-                                    translateY: center[1] + plotTop,
-                                    scaleX: 0.001,
-                                    scaleY: 0.001
-                                };
-                                group.attr(attribs);
-                                if (markerGroup) {
-                                    markerGroup.attr(attribs);
-                                }
-                                // Run the animation
-                            }
-                            else {
-                                attribs = {
-                                    translateX: plotLeft,
-                                    translateY: plotTop,
-                                    scaleX: 1,
-                                    scaleY: 1
-                                };
-                                group.animate(attribs, animation);
-                                if (markerGroup) {
-                                    markerGroup.animate(attribs, animation);
-                                }
+                            attribs = {
+                                translateX: plotLeft,
+                                translateY: plotTop,
+                                scaleX: 1,
+                                scaleY: 1
+                            };
+                            group.animate(attribs, animation);
+                            if (markerGroup) {
+                                markerGroup.animate(attribs, animation);
                             }
                         }
                     }
@@ -11918,52 +12017,45 @@
              * */
             PolarAdditions.compose = function (AxisClass, ChartClass, PointerClass, SeriesClass, TickClass, AreaSplineRangeSeriesClass, ColumnSeriesClass, LineSeriesClass, SplineSeriesClass) {
                 RadialAxis.compose(AxisClass, TickClass);
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     addEvent(ChartClass, 'afterDrawChartBox', onChartAfterDrawChartBox);
                     addEvent(ChartClass, 'getAxes', onChartGetAxes);
                     addEvent(ChartClass, 'init', onChartAfterInit);
                     var chartProto = ChartClass.prototype;
                     wrap(chartProto, 'get', wrapChartGet);
                 }
-                if (composedClasses.indexOf(PointerClass) === -1) {
-                    composedClasses.push(PointerClass);
+                if (U.pushUnique(composedMembers, PointerClass)) {
                     var pointerProto = PointerClass.prototype;
                     wrap(pointerProto, 'getCoordinates', wrapPointerGetCoordinates);
                     wrap(pointerProto, 'pinch', wrapPointerPinch);
                     addEvent(PointerClass, 'getSelectionMarkerAttrs', onPointerGetSelectionMarkerAttrs);
                     addEvent(PointerClass, 'getSelectionBox', onPointerGetSelectionBox);
                 }
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     addEvent(SeriesClass, 'afterInit', onSeriesAfterInit);
                     addEvent(SeriesClass, 'afterTranslate', onSeriesAfterTranslate, { order: 2 } // Run after translation of ||-coords
                     );
+                    addEvent(SeriesClass, 'afterColumnTranslate', onAfterColumnTranslate, { order: 4 });
                     var seriesProto = SeriesClass.prototype;
                     wrap(seriesProto, 'animate', wrapSeriesAnimate);
                 }
                 if (ColumnSeriesClass &&
-                    composedClasses.indexOf(ColumnSeriesClass) === -1) {
-                    composedClasses.push(ColumnSeriesClass);
+                    U.pushUnique(composedMembers, ColumnSeriesClass)) {
                     var columnProto = ColumnSeriesClass.prototype;
                     wrap(columnProto, 'alignDataLabel', wrapColumnSeriesAlignDataLabel);
                     wrap(columnProto, 'animate', wrapSeriesAnimate);
-                    wrap(columnProto, 'translate', wrapColumnSeriesTranslate);
                 }
                 if (LineSeriesClass &&
-                    composedClasses.indexOf(LineSeriesClass) === -1) {
-                    composedClasses.push(LineSeriesClass);
+                    U.pushUnique(composedMembers, LineSeriesClass)) {
                     var lineProto = LineSeriesClass.prototype;
                     wrap(lineProto, 'getGraphPath', wrapLineSeriesGetGraphPath);
                 }
                 if (SplineSeriesClass &&
-                    composedClasses.indexOf(SplineSeriesClass) === -1) {
-                    composedClasses.push(SplineSeriesClass);
+                    U.pushUnique(composedMembers, SplineSeriesClass)) {
                     var splineProto = SplineSeriesClass.prototype;
                     wrap(splineProto, 'getPointSpline', wrapSplineSeriesGetPointSpline);
                     if (AreaSplineRangeSeriesClass &&
-                        composedClasses.indexOf(AreaSplineRangeSeriesClass) === -1) {
-                        composedClasses.push(AreaSplineRangeSeriesClass);
+                        U.pushUnique(composedMembers, AreaSplineRangeSeriesClass)) {
                         var areaSplineRangeProto = AreaSplineRangeSeriesClass.prototype;
                         // #6430 Areasplinerange series use unwrapped getPointSpline
                         // method, so we need to set this method again.

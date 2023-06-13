@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  * @module highcharts/highcharts-more
  * @requires highcharts
  *
@@ -9,7 +9,7 @@
  */
 'use strict';
 import Highcharts from '../Core/Globals.js';
-var G = Highcharts;
+const G = Highcharts;
 import SeriesRegistry from '../Core/Series/SeriesRegistry.js';
 import '../Extensions/Pane.js';
 import '../Series/AreaRange/AreaRangeSeries.js';

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * X-range series
  *
@@ -126,7 +126,7 @@
                 verticalAlign: 'middle'
             },
             tooltip: {
-                headerFormat: '<span style="font-size: 10px">{point.x} - {point.x2}</span><br/>',
+                headerFormat: '<span style="font-size: 0.8em">{point.x} - {point.x2}</span><br/>',
                 pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.yCategory}</b><br/>'
             },
             borderRadius: 3,
@@ -464,7 +464,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -544,8 +544,7 @@
              *
              * */
             XRangeSeries.compose = function (AxisClass) {
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     addEvent(AxisClass, 'afterGetSeriesExtremes', onAxisAfterGetSeriesExtremes);
                 }
             };
@@ -639,7 +638,7 @@
              * @private
              */
             XRangeSeries.prototype.translatePoint = function (point) {
-                var xAxis = this.xAxis, yAxis = this.yAxis, metrics = this.columnMetrics, options = this.options, minPointLength = options.minPointLength || 0, oldColWidth = (point.shapeArgs && point.shapeArgs.width || 0) / 2, seriesXOffset = this.pointXOffset = metrics.offset, posX = pick(point.x2, point.x + (point.len || 0));
+                var xAxis = this.xAxis, yAxis = this.yAxis, metrics = this.columnMetrics, options = this.options, borderRadius = options.borderRadius, minPointLength = options.minPointLength || 0, oldColWidth = (point.shapeArgs && point.shapeArgs.width || 0) / 2, seriesXOffset = this.pointXOffset = metrics.offset, posX = pick(point.x2, point.x + (point.len || 0));
                 var plotX = point.plotX, plotX2 = xAxis.translate(posX, 0, 0, 0, 1);
                 var length = Math.abs(plotX2 - plotX), inverted = this.chart.inverted, borderWidth = pick(options.borderWidth, 1), crisper = borderWidth % 2 / 2;
                 var widthDifference, partialFill, yOffset = metrics.offset, pointHeight = Math.round(metrics.width), dlLeft, dlRight, dlWidth, clipRectWidth;
@@ -670,10 +669,12 @@
                     x: x,
                     y: Math.floor(point.plotY + yOffset) + crisper,
                     width: x2 - x,
-                    height: pointHeight,
-                    r: this.options.borderRadius
+                    height: pointHeight
                 };
                 point.shapeArgs = shapeArgs;
+                if (isNumber(borderRadius)) {
+                    point.shapeArgs.r = borderRadius;
+                }
                 // Move tooltip to default position
                 if (!inverted) {
                     point.tooltipPos[0] -= oldColWidth +
@@ -709,7 +710,8 @@
                     -metrics.width / 2);
                 // Centering tooltip position (#14147)
                 if (!inverted) {
-                    tooltipPos[xIndex] += (xAxis.reversed ? -1 : 0) * shapeArgs.width;
+                    tooltipPos[xIndex] = clamp(tooltipPos[xIndex] +
+                        (xAxis.reversed ? -1 : 0) * shapeArgs.width, 0, xAxis.len - 1);
                 }
                 else {
                     tooltipPos[xIndex] += shapeArgs.width / 2;
@@ -726,9 +728,11 @@
                     if (!isNumber(partialFill)) {
                         partialFill = 0;
                     }
-                    point.partShapeArgs = merge(shapeArgs, {
-                        r: this.options.borderRadius
-                    });
+                    if (isNumber(borderRadius)) {
+                        point.partShapeArgs = merge(shapeArgs, {
+                            r: borderRadius
+                        });
+                    }
                     clipRectWidth = Math.max(Math.round(length * partialFill + point.plotX -
                         plotX), 0);
                     point.clipRectArgs = {
@@ -803,7 +807,7 @@
                     if (!this.chart.styledMode) {
                         graphic
                             .rect[verb](pointAttr, animation)
-                            .shadow(seriesOpts.shadow, null, cutOff);
+                            .shadow(seriesOpts.shadow);
                         if (partShapeArgs) {
                             // Ensure pfOptions is an object
                             if (!isObject(pfOptions)) {
@@ -819,7 +823,7 @@
                             pointAttr.fill = fill;
                             graphic
                                 .partRect[pointStateVerb](pointAttr, animation)
-                                .shadow(seriesOpts.shadow, null, cutOff);
+                                .shadow(seriesOpts.shadow);
                         }
                     }
                 }

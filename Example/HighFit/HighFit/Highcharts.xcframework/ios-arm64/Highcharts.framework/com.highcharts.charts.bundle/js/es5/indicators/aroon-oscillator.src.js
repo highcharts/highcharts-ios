@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -66,7 +66,7 @@
             *  Constants
             *
             * */
-            var composedClasses = [];
+            var composedMembers = [];
             /**
              * Additional lines DOCS names. Elements of linesApiNames array should
              * be consistent with DOCS line names defined in your implementation.
@@ -121,8 +121,7 @@
              * @private
              */
             function compose(IndicatorClass) {
-                if (composedClasses.indexOf(IndicatorClass) === -1) {
-                    composedClasses.push(IndicatorClass);
+                if (U.pushUnique(composedMembers, IndicatorClass)) {
                     var proto = IndicatorClass.prototype;
                     proto.linesApiNames = (proto.linesApiNames ||
                         linesApiNames.slice());
@@ -386,8 +385,9 @@
              * */
             AroonOscillatorIndicator.prototype.getValues = function (series, params) {
                 // 0- date, 1- Aroon Oscillator
-                var ARO = [], xData = [], yData = [], aroon, aroonUp, aroonDown, oscillator, i;
-                aroon = _super.prototype.getValues.call(this, series, params);
+                var ARO = [], xData = [], yData = [];
+                var aroonUp, aroonDown, oscillator, i;
+                var aroon = _super.prototype.getValues.call(this, series, params);
                 for (i = 0; i < aroon.yData.length; i++) {
                     aroonUp = aroon.yData[i][0];
                     aroonDown = aroon.yData[i][1];

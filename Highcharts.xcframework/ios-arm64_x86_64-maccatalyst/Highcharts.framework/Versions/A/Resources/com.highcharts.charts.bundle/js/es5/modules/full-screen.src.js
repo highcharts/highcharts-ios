@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Advanced Highcharts Stock tools
  *
@@ -66,7 +66,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -165,8 +165,7 @@
              * The chart class to decorate with fullscreen support.
              */
             Fullscreen.compose = function (ChartClass) {
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     // Initialize fullscreen
                     addEvent(ChartClass, 'beforeRender', onChartBeforeRender);
                 }
@@ -257,7 +256,6 @@
                         };
                         var promise = chart.renderTo[fullscreen.browserProps.requestFullscreen]();
                         if (promise) {
-                            // No dot notation because of IE8 compatibility
                             promise['catch'](function () {
                                 alert(// eslint-disable-line no-alert
                                 'Full screen is not supported inside a frame.');

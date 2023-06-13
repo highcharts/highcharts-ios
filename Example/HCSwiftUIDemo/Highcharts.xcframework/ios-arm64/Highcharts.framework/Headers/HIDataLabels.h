@@ -40,7 +40,7 @@ Decides how the data label will be rotated relative to the perimeter of the sunb
 
 **Accepted values:** `["auto", "perpendicular", "parallel", "circular"]`.
 
-**Defaults to** `auto`.
+**Defaults to** `circular`.
 
 **Try it**
 
@@ -57,13 +57,15 @@ The color of the line connecting the data label to the pie slice. The default co
 */
 @property(nonatomic, readwrite) HIColor *connectorColor;
 /**
-Works only if `connectorShape` is `'crookedLine'`. It defines how far from the vertical plot edge the coonnector path should be crooked.
+Works only if `connectorShape` is `'crookedLine'`. It defines how far from the vertical plot edge the coonnector path should be crooked. With the default, `undefined`, the crook is placed so that the horizontal line from the label intersects with the radial line extending through the center of the pie slice.
+
+**Defaults to** `undefined`.
 
 **Try it**
 
 * [crookDistance set to 90%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/pie-datalabels-crookdistance/)
 */
-@property(nonatomic, readwrite) NSNumber *crookDistance;
+@property(nonatomic, readwrite) NSString *crookDistance;
 /**
 Alignment method for data labels. Possible values are: - `plotEdges`: Each label touches the nearest vertical edge of  the plot area. - `connectors`: Connectors have the same x position and the  widest label of each half (left & right) touches the nearest  vertical edge of the plot area.
 
@@ -85,7 +87,7 @@ The width of the line connecting the data label to the pie slice. In styled mode
 */
 @property(nonatomic, readwrite) NSNumber *connectorWidth;
 /**
-Whether to render the connector as a soft arc or a line with sharp break. Works only if `connectorShape` equals to `fixedOffset`.
+Whether to render the connector as a soft arc or a line with a sharp break. Works only if `connectorShape` equals to `fixedOffset`.
 
 **Defaults to** `True`.
 
@@ -126,9 +128,9 @@ The distance from the data label to the connector. Note that data labels also ha
 */
 @property(nonatomic, readwrite) NSNumber *connectorPadding;
 /**
-Specifies the method that is used to generate the connector path. Highcharts provides 3 built-in connector shapes: `'fixedOffset'` (default), `'straight'` and `'crookedLine'`. Using `'crookedLine'` has the most sense (in most of the cases) when `'alignTo'` is set. Users can provide their own method by passing a function instead of a String. 3 arguments are passed to the callback: - Object that holds the information about the coordinates of the  label (`x` & `y` properties) and how the label is located in  relation to the pie (`alignment` property). `alignment` can by  one of the following:  `'left'` (pie on the left side of the data label),  `'right'` (pie on the right side of the data label) or  `'center'` (data label overlaps the pie). - Object that holds the information about the position of the  connector. Its `touchingSliceAt` porperty tells the position  of the place where the connector touches the slice. - Data label options The function has to return an SVG path definition in array form (see the example).
+Specifies the method that is used to generate the connector path. Highcharts provides 3 built-in connector shapes: `'crookedLine'` (default since v11), `'fixedOffset'` and `'straight'`. Users can provide their own method by passing a function instead of a string. Three arguments are passed to the callback: - An object that holds the information about the coordinates of the  label (`x` & `y` properties) and how the label is located in  relation to the pie (`alignment` property). `alignment` can by one  of the following: `'left'` (pie on the left side of the data  label), `'right'` (pie on the right side of the data label) or  `'center'` (data label overlaps the pie). - An object that holds the information about the position of the  connector. Its `touchingSliceAt` porperty tells the position of  the place where the connector touches the slice. - Data label options The function has to return an SVG path definition in array form (see the example).
 
-**Defaults to** `fixedOffset`.
+**Defaults to** `crookedLine`.
 
 **Try it**
 
@@ -327,6 +329,26 @@ Options for a label text which should follow marker's shape. Border and backgrou
 @property(nonatomic, readwrite) NSString *align;
 @property(nonatomic, readwrite) NSNumber /* Bool */ *inside;
 /**
+The format string specifying what to show for *links* in the organization chart. Best to use with ``linkTextPath`` enabled.
+
+**Try it**
+
+* [Organization chart with link labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/link-labels)
+*/
+@property(nonatomic, readwrite) NSString *linkFormat;
+/**
+Options for a _link_ label text which should follow link connection.
+
+**Try it**
+
+* [Organization chart with link labels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/link-labels)
+*/
+@property(nonatomic, readwrite) HILinkTextPath *linkTextPath;
+/**
+Callback to format data labels for _links_ in the organization chart. The `linkFormat` option takes precedence over the `linkFormatter`.
+*/
+@property(nonatomic, readwrite) HIFunction *linkFormatter;
+/**
 Y offset of the higher data labels relative to the point value.
 
 **Try it**
@@ -392,18 +414,6 @@ Whether to position data labels alternately. For example, if `distance` is set e
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alternate;
 @property(nonatomic, readwrite) NSString *color;
 @property(nonatomic, readwrite) NSNumber *width;
-/**
-Options for a _link_ label text which should follow link connection. Border and background are disabled for a label that follows a path. **Note:** Only SVG-based renderer supports this option. Setting `useHTML` to true will disable this option.
-*/
-@property(nonatomic, readwrite) HILinkTextPath *linkTextPath;
-/**
-The [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) specifying what to show for _links_ in the networkgraph. (Default: `undefined`)
-*/
-@property(nonatomic, readwrite) NSString *linkFormat;
-/**
-Callback to format data labels for _links_ in the sankey diagram. The `linkFormat` option takes precedence over the `linkFormatter`.
-*/
-@property(nonatomic, readwrite) HIFunction *linkFormatter;
 
 -(NSDictionary *)getParams;
 

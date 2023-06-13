@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -111,7 +111,8 @@
              *
              * */
             ADIndicator.prototype.getValues = function (series, params) {
-                var period = params.period, xVal = series.xData, yVal = series.yData, volumeSeriesID = params.volumeSeriesID, volumeSeries = series.chart.get(volumeSeriesID), yValVolume = volumeSeries && volumeSeries.yData, yValLen = yVal ? yVal.length : 0, AD = [], xData = [], yData = [], len, i, ADPoint;
+                var period = params.period, xVal = series.xData, yVal = series.yData, volumeSeriesID = params.volumeSeriesID, volumeSeries = series.chart.get(volumeSeriesID), yValVolume = volumeSeries && volumeSeries.yData, yValLen = yVal ? yVal.length : 0, AD = [], xData = [], yData = [];
+                var len, i, ADPoint;
                 if (xVal.length <= period &&
                     yValLen &&
                     yVal[0].length !== 4) {
@@ -269,21 +270,17 @@
              * */
             ChaikinIndicator.prototype.getValues = function (series, params) {
                 var periods = params.periods, period = params.period, 
-                // Accumulation Distribution Line data
-                ADL, 
                 // 0- date, 1- Chaikin Oscillator
-                CHA = [], xData = [], yData = [], periodsOffset, 
-                // Shorter Period EMA
-                SPE, 
-                // Longer Period EMA
-                LPE, oscillator, i;
+                CHA = [], xData = [], yData = [];
+                var oscillator, i;
                 // Check if periods are correct
                 if (periods.length !== 2 || periods[1] <= periods[0]) {
                     error('Error: "Chaikin requires two periods. Notice, first ' +
                         'period should be lower than the second one."');
                     return;
                 }
-                ADL = AD.prototype.getValues.call(this, series, {
+                // Accumulation Distribution Line data
+                var ADL = AD.prototype.getValues.call(this, series, {
                     volumeSeriesID: params.volumeSeriesID,
                     period: period
                 });
@@ -291,17 +288,19 @@
                 if (!ADL) {
                     return;
                 }
-                SPE = EMAIndicator.prototype.getValues.call(this, ADL, {
+                // Shorter Period EMA
+                var SPE = _super.prototype.getValues.call(this, ADL, {
                     period: periods[0]
                 });
-                LPE = EMAIndicator.prototype.getValues.call(this, ADL, {
+                // Longer Period EMA
+                var LPE = _super.prototype.getValues.call(this, ADL, {
                     period: periods[1]
                 });
                 // Check if ema is calculated properly, if not skip
                 if (!SPE || !LPE) {
                     return;
                 }
-                periodsOffset = periods[1] - periods[0];
+                var periodsOffset = periods[1] - periods[0];
                 for (i = 0; i < LPE.yData.length; i++) {
                     oscillator = correctFloat(SPE.yData[i + periodsOffset] -
                         LPE.yData[i]);

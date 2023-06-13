@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * ColorAxis module
  *
@@ -66,7 +66,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             /* *
              *
              *  Variables
@@ -86,8 +86,7 @@
                 if (!ColorAxisClass) {
                     ColorAxisClass = ColorAxisType;
                 }
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     var chartProto = ChartClass.prototype;
                     chartProto.collectionsWithUpdate.push('colorAxis');
                     chartProto.collectionsWithInit.colorAxis = [
@@ -96,20 +95,17 @@
                     addEvent(ChartClass, 'afterGetAxes', onChartAfterGetAxes);
                     wrapChartCreateAxis(ChartClass);
                 }
-                if (composedClasses.indexOf(FxClass) === -1) {
-                    composedClasses.push(FxClass);
+                if (U.pushUnique(composedMembers, FxClass)) {
                     var fxProto = FxClass.prototype;
                     fxProto.fillSetter = wrapFxFillSetter;
                     fxProto.strokeSetter = wrapFxStrokeSetter;
                 }
-                if (composedClasses.indexOf(LegendClass) === -1) {
-                    composedClasses.push(LegendClass);
+                if (U.pushUnique(composedMembers, LegendClass)) {
                     addEvent(LegendClass, 'afterGetAllItems', onLegendAfterGetAllItems);
                     addEvent(LegendClass, 'afterColorizeItem', onLegendAfterColorizeItem);
                     addEvent(LegendClass, 'afterUpdate', onLegendAfterUpdate);
                 }
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     extend(SeriesClass.prototype, {
                         optionalAxis: 'colorAxis',
                         translateColors: seriesTranslateColors
@@ -132,8 +128,7 @@
                 this.colorAxis = [];
                 if (options.colorAxis) {
                     options.colorAxis = splat(options.colorAxis);
-                    options.colorAxis.forEach(function (axisOptions, i) {
-                        axisOptions.index = i;
+                    options.colorAxis.forEach(function (axisOptions) {
                         new ColorAxisClass(_this, axisOptions); // eslint-disable-line no-new
                     });
                 }
@@ -547,10 +542,9 @@
              *         Grid lines demonstrated
              *
              * @type      {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
-             * @default   #e6e6e6
              * @product   highcharts highstock highmaps
-             * @apioption colorAxis.gridLineColor
              */
+            gridLineColor: "#ffffff" /* Palette.backgroundColor */,
             /**
              * The width of the grid lines extending from the axis across the
              * gradient of a scalar color axis.
@@ -637,6 +631,7 @@
              * @product highcharts highstock highmaps
              */
             labels: {
+                distance: 8,
                 /**
                  * How to handle overflowing labels on horizontal color axis. If set
                  * to `"allow"`, it will not be aligned at all. By default it
@@ -667,7 +662,7 @@
              * @type    {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              * @product highcharts highstock highmaps
              */
-            minColor: "#e6ebf5" /* Palette.highlightColor10 */,
+            minColor: "#e6e9ff" /* Palette.highlightColor10 */,
             /**
              * The color to represent the maximum of the color axis. Unless
              * [dataClasses](#colorAxis.dataClasses) or
@@ -686,7 +681,7 @@
              * @type    {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              * @product highcharts highstock highmaps
              */
-            maxColor: "#003399" /* Palette.highlightColor100 */,
+            maxColor: "#0022ff" /* Palette.highlightColor100 */,
             /**
              * Color stops for the gradient of a scalar color axis. Use this in
              * cases where a linear gradient between a `minColor` and `maxColor`
@@ -766,7 +761,7 @@
 
         return colorAxisDefaults;
     });
-    _registerModule(_modules, 'Core/Axis/Color/ColorAxis.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Color/Color.js'], _modules['Core/Axis/Color/ColorAxisComposition.js'], _modules['Core/Axis/Color/ColorAxisDefaults.js'], _modules['Core/Globals.js'], _modules['Core/Legend/LegendSymbol.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (Axis, Color, ColorAxisComposition, ColorAxisDefaults, H, LegendSymbol, SeriesRegistry, U) {
+    _registerModule(_modules, 'Core/Axis/Color/ColorAxis.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Color/Color.js'], _modules['Core/Axis/Color/ColorAxisComposition.js'], _modules['Core/Axis/Color/ColorAxisDefaults.js'], _modules['Core/Legend/LegendSymbol.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (Axis, Color, ColorAxisComposition, ColorAxisDefaults, LegendSymbol, SeriesRegistry, U) {
         /* *
          *
          *  (c) 2010-2021 Torstein Honsi
@@ -792,15 +787,13 @@
             };
         })();
         var color = Color.parse;
-        var noop = H.noop;
         var Series = SeriesRegistry.series;
-        var extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
+        var extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Class
          *
          * */
-        /* eslint-disable no-invalid-this, valid-jsdoc */
         /**
          * The ColorAxis object for inclusion in gradient legends.
          *
@@ -831,7 +824,6 @@
                 _this.chart = void 0;
                 _this.coll = 'colorAxis';
                 _this.dataClasses = void 0;
-                _this.name = ''; // Prevents 'undefined' in legend in IE8
                 _this.options = void 0;
                 _this.stops = void 0;
                 _this.visible = true;
@@ -872,16 +864,16 @@
                     title: null,
                     visible: legend.enabled && visible !== false
                 });
-                axis.coll = 'colorAxis';
                 axis.side = userOptions.side || horiz ? 2 : 1;
                 axis.reversed = userOptions.reversed || !horiz;
                 axis.opposite = !horiz;
-                _super.prototype.init.call(this, chart, options);
-                // #16053: Restore the actual userOptions.visible so the color axis
-                // doesnt stay hidden forever when hiding and showing legend
-                axis.userOptions.visible = visible;
-                // Base init() pushes it to the xAxis array, now pop it again
-                // chart[this.isXAxis ? 'xAxis' : 'yAxis'].pop();
+                _super.prototype.init.call(this, chart, options, 'colorAxis');
+                // Super.init saves the extended user options, now replace it with the
+                // originals
+                this.userOptions = userOptions;
+                if (isArray(chart.userOptions.colorAxis)) {
+                    chart.userOptions.colorAxis[this.index] = userOptions;
+                }
                 // Prepare data classes
                 if (userOptions.dataClasses) {
                     axis.initDataClasses(userOptions);
@@ -1108,14 +1100,15 @@
              * @private
              */
             ColorAxis.prototype.drawLegendSymbol = function (legend, item) {
-                var axis = this, legendItem = item.legendItem || {}, padding = legend.padding, legendOptions = legend.options, itemDistance = pick(legendOptions.itemDistance, 10), horiz = axis.horiz, width = pick(legendOptions.symbolWidth, horiz ? ColorAxis.defaultLegendLength : 12), height = pick(legendOptions.symbolHeight, horiz ? 12 : ColorAxis.defaultLegendLength), labelPadding = pick(
+                var _a;
+                var axis = this, legendItem = item.legendItem || {}, padding = legend.padding, legendOptions = legend.options, labelOptions = axis.options.labels, itemDistance = pick(legendOptions.itemDistance, 10), horiz = axis.horiz, width = pick(legendOptions.symbolWidth, horiz ? ColorAxis.defaultLegendLength : 12), height = pick(legendOptions.symbolHeight, horiz ? 12 : ColorAxis.defaultLegendLength), labelPadding = pick(
                 // @todo: This option is not documented, nor implemented when
                 // vertical
                 legendOptions.labelPadding, horiz ? 16 : 30);
                 this.setLegendColor();
                 // Create the gradient
                 if (!legendItem.symbol) {
-                    legendItem.symbol = this.chart.renderer.rect(0, legend.baseline - 11, width, height).attr({
+                    legendItem.symbol = this.chart.renderer.symbol('roundedRect', 0, legend.baseline - 11, width, height, { r: (_a = legendOptions.symbolRadius) !== null && _a !== void 0 ? _a : 3 }).attr({
                         zIndex: 1
                     }).add(legendItem.group);
                 }
@@ -1124,7 +1117,8 @@
                     padding +
                     (horiz ?
                         itemDistance :
-                        this.options.labels.x + this.maxLabelLength));
+                        pick(labelOptions.x, labelOptions.distance) +
+                            this.maxLabelLength));
                 legendItem.labelHeight = height + padding + (horiz ? labelPadding : 0);
             };
             /**
@@ -1374,7 +1368,7 @@
                             chart: chart,
                             name: name,
                             options: {},
-                            drawLegendSymbol: LegendSymbol.drawRectangle,
+                            drawLegendSymbol: LegendSymbol.rectangle,
                             visible: true,
                             isDataClass: true,
                             // Override setState to set either normal or inactive

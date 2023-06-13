@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -61,7 +61,7 @@
             };
         })();
         var LineSeries = SeriesRegistry.seriesTypes.line;
-        var addEvent = U.addEvent, error = U.error, extend = U.extend, isArray = U.isArray, merge = U.merge, pick = U.pick, splat = U.splat;
+        var addEvent = U.addEvent, fireEvent = U.fireEvent, error = U.error, extend = U.extend, isArray = U.isArray, merge = U.merge, pick = U.pick, splat = U.splat;
         /* *
          *
          *  Class
@@ -165,7 +165,13 @@
                 var indicator = this;
                 _super.prototype.init.call(indicator, chart, options);
                 // Only after series are linked indicator can be processed.
-                var linkedSeriesUnbiner = addEvent(Chart, 'afterLinkSeries', function () {
+                var linkedSeriesUnbiner = addEvent(Chart, 'afterLinkSeries', function (_a) {
+                    var isUpdating = _a.isUpdating;
+                    // #18643 indicator shouldn't recalculate
+                    // values while series updating.
+                    if (isUpdating) {
+                        return;
+                    }
                     var hasEvents = !!indicator.dataEventsToUnbind.length;
                     if (indicator.linkedParent) {
                         if (!hasEvents) {
@@ -260,10 +266,11 @@
                             }
                         }
                         indicator.updateData(croppedDataValues);
-                        // Omit addPoint() and removePoint() cases
                     }
-                    else if (processedData.xData.length !== oldDataLength - 1 &&
-                        processedData.xData.length !== oldDataLength + 1) {
+                    else if (indicator.updateAllPoints || // #18710
+                        // Omit addPoint() and removePoint() cases
+                        processedData.xData.length !== oldDataLength - 1 &&
+                            processedData.xData.length !== oldDataLength + 1) {
                         overwriteData = false;
                         indicator.updateData(processedData.values);
                     }
@@ -280,7 +287,8 @@
                     indicator.isDirty = true;
                     indicator.redraw();
                 }
-                indicator.isDirtyData = !!indicator.linkedSeries;
+                indicator.isDirtyData = !!indicator.linkedSeries.length;
+                fireEvent(indicator, 'updatedData'); // #18689
             };
             /**
              * @private

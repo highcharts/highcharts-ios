@@ -37,7 +37,7 @@ Exporting module only. The text for the PNG download menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadPNG;
 /**
-Configure the accessibility strings in the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility). For more dynamic control over the accessibility functionality, see `accessibility.point.descriptionFormatter`, `accessibility.series.descriptionFormatter`, and `accessibility.screenReaderSection.beforeChartFormatter`.
+Configure the accessibility strings in the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility). The lang options use [Format Strings](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#format-strings) with variables that are replaced at run time. These variables should be used when available, to avoid duplicating text that is defined elsewhere. For more dynamic control over the accessibility functionality, see `accessibility.point.descriptionFormatter`, `accessibility.series.descriptionFormatter`, and `accessibility.screenReaderSection.beforeChartFormatter`.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
 /**
@@ -143,6 +143,12 @@ What to show in a date field for invalid dates. Defaults to an empty string.
 */
 @property(nonatomic, readwrite) NSString *invalidDate;
 /**
+The text for the Play as sound menu item in the export menu.
+
+**Defaults to** `Play as sound`.
+*/
+@property(nonatomic, readwrite) NSString *playAsSound;
+/**
 Exporting module only. The text for the menu item to exit the chart from full screen.
 
 **Defaults to** `Exit from full screen`.
@@ -194,15 +200,21 @@ The default decimal point used in the `Highcharts.numberFormat` method unless ot
 */
 @property(nonatomic, readwrite) NSString *decimalPoint;
 /**
-Configure the Popup strings in the chart. Requires the `annotations.js` or `annotations-advanced.src.js` module to be loaded.
-*/
-@property(nonatomic, readwrite) HINavigation *navigation;
-/**
 The default thousands separator used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments. Defaults to a single space character, which is recommended in [ISO 31-0](https://en.wikipedia.org/wiki/ISO_31-0#Numbers) and works across Anglo-American and continental European languages.
 
 **Defaults to** `\u0020`.
 */
 @property(nonatomic, readwrite) NSString *thousandsSep;
+/**
+Configure the Popup strings in the chart. Requires the `annotations.js` or `annotations-advanced.src.js` module to be loaded.
+*/
+@property(nonatomic, readwrite) HINavigation *navigation;
+/**
+The text for the MIDI download menu item in the export menu.
+
+**Defaults to** `Download MIDI`.
+*/
+@property(nonatomic, readwrite) NSString *downloadMIDI;
 
 -(NSDictionary *)getParams;
 

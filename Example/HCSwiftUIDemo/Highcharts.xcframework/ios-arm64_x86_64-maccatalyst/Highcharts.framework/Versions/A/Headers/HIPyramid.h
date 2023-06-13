@@ -73,6 +73,14 @@ The center of the series. By default, it is centered in the middle of the plot a
 */
 @property(nonatomic, readwrite) NSArray /* <NSNumber, NSString> */ *center;
 /**
+The corner radius of the border surrounding all points or series. A number signifies pixels. A percentage string, like for example `50%`, signifies a size relative to the series width.
+
+**Try it**
+
+* [Funnel and pyramid with rounded border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/funnel-border-radius)
+*/
+@property(nonatomic, readwrite) NSNumber *borderRadius;
+/**
 The height of the funnel or pyramid. If it is a number it defines the pixel height, if it is a percentage string it is the percentage of the plot area height.
 
 **Defaults to** `100%`.

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -113,7 +113,8 @@
                 var period = params.period, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, decimals = params.decimals, 
                 // RSI starts calculations from the second point
                 // Cause we need to calculate change between two points
-                range = 1, RSI = [], xData = [], yData = [], index = params.index, gain = 0, loss = 0, RSIPoint, change, avgGain, avgLoss, i, values;
+                RSI = [], xData = [], yData = [];
+                var gain = 0, loss = 0, index = params.index, range = 1, RSIPoint, change, avgGain, avgLoss, i, values;
                 if ((xVal.length < period)) {
                     return;
                 }

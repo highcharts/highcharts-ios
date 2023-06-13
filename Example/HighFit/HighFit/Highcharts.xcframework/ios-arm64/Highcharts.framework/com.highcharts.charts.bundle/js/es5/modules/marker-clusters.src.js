@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Marker clusters module for Highcharts
  *
@@ -217,7 +217,7 @@
                  *         Custom algorithm
                  *
                  * @type {string|Function}
-                 * @see [cluster.minimumClusterSize](#plotOptions.scatter.marker.cluster.minimumClusterSize)
+                 * @see [cluster.minimumClusterSize](#plotOptions.scatter.cluster.minimumClusterSize)
                  * @apioption plotOptions.scatter.cluster.layoutAlgorithm.type
                  */
                 /**
@@ -257,9 +257,9 @@
             },
             /**
              * Options for the cluster marker.
+             * @type      {Highcharts.PointMarkerOptionsObject}
              * @extends   plotOptions.series.marker
              * @excluding enabledThreshold, states
-             * @type      {Highcharts.PointMarkerOptionsObject}
              */
             marker: {
                 /** @internal */
@@ -279,7 +279,7 @@
              *
              * @type      {Highcharts.MarkerClusterDrillCallbackFunction}
              * @product   highcharts highmaps
-             * @see [cluster.drillToCluster](#plotOptions.scatter.marker.cluster.drillToCluster)
+             * @see [cluster.drillToCluster](#plotOptions.scatter.cluster.drillToCluster)
              * @apioption plotOptions.scatter.cluster.events.drillToCluster
              */
             /**

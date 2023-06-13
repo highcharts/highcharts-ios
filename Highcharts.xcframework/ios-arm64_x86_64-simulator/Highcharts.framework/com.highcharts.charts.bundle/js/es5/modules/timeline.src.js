@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Timeline series
  *
@@ -111,6 +111,7 @@
                 connector[isVisible ? 'animate' : 'attr']({
                     d: point.getConnectorPath()
                 });
+                connector.addClass("highcharts-color-".concat(point.colorIndex));
                 if (!series.chart.styledMode) {
                     connector.attr({
                         stroke: dlOptions.connectorColor || point.color,
@@ -262,7 +263,7 @@
             lineWidth: 4,
             tooltip: {
                 headerFormat: '<span style="color:{point.color}">\u25CF</span> ' +
-                    '<span style="font-size: 10px"> {point.key}</span><br/>',
+                    '<span style="font-size: 0.8em"> {point.key}</span><br/>',
                 pointFormat: '{point.description}'
             },
             states: {
@@ -329,7 +330,8 @@
                  *       format = '<span style="color:' + this.point.color +
                  *           '">● </span>';
                  *   } else {
-                 *       format = '<span>● </span>';
+                 *       format = '<span class="highcharts-color-' +
+                 *          this.point.colorIndex + '">● </span>';
                  *   }
                  *   format += '<span>' + (this.key || '') + '</span><br/>' +
                  *       (this.point.label || '');
@@ -343,7 +345,8 @@
                             '">● </span>';
                     }
                     else {
-                        format = '<span>● </span>';
+                        format = '<span class="highcharts-color-' +
+                            this.point.colorIndex + '">● </span>';
                     }
                     format += '<span class="highcharts-strong">' +
                         (this.key || '') + '</span><br/>' +
@@ -356,7 +359,7 @@
                     /** @internal */
                     fontWeight: 'normal',
                     /** @internal */
-                    fontSize: '12px'
+                    fontSize: '0.8em'
                 },
                 /**
                  * Shadow options for the data label.
@@ -378,7 +381,8 @@
                 height: 15
             },
             showInLegend: false,
-            colorKey: 'x'
+            colorKey: 'x',
+            legendSymbol: 'rectangle'
         };
         /**
          * The `timeline` series. If the [type](#series.timeline.type) option is
@@ -457,7 +461,7 @@
 
         return TimelineSeriesDefaults;
     });
-    _registerModule(_modules, 'Series/Timeline/TimelineSeries.js', [_modules['Core/Legend/LegendSymbol.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Renderer/SVG/SVGElement.js'], _modules['Series/Timeline/TimelinePoint.js'], _modules['Series/Timeline/TimelineSeriesDefaults.js'], _modules['Core/Utilities.js']], function (LegendSymbol, SeriesRegistry, SVGElement, TimelinePoint, TimelineSeriesDefaults, U) {
+    _registerModule(_modules, 'Series/Timeline/TimelineSeries.js', [_modules['Core/Series/SeriesRegistry.js'], _modules['Core/Renderer/SVG/SVGElement.js'], _modules['Series/Timeline/TimelinePoint.js'], _modules['Series/Timeline/TimelineSeriesDefaults.js'], _modules['Core/Utilities.js']], function (SeriesRegistry, SVGElement, TimelinePoint, TimelineSeriesDefaults, U) {
         /* *
          *
          *  Timeline Series.
@@ -738,8 +742,6 @@
             return TimelineSeries;
         }(LineSeries));
         extend(TimelineSeries.prototype, {
-            // Use a simple symbol from LegendSymbolMixin
-            drawLegendSymbol: LegendSymbol.drawRectangle,
             // Use a group of trackers from TrackerMixin
             drawTracker: ColumnSeries.prototype.drawTracker,
             pointClass: TimelinePoint,

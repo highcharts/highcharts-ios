@@ -12,10 +12,11 @@
 #import "HIEvents.h"
 #import "HIScrollablePlotArea.h"
 #import "HIZooming.h"
-#import "HIColor.h"
+#import "HIShadowOptionsObject.h"
 #import "HIAnimationOptionsObject.h"
 #import "HICSSObject.h"
 #import "HIFunction.h"
+#import "HIColor.h"
 
 
 /**
@@ -31,6 +32,19 @@ Common options for all yAxes rendered in a parallel coordinates plot. This featu
 * [Set the same tickAmount for all yAxes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/parallelaxes/)
 */
 @property(nonatomic, readwrite) HIParallelAxes *parallelAxes;
+/**
+When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. This produces _polar charts_, also known as _radar charts_.
+
+**Defaults to** `false`.
+
+**Try it**
+
+* [Polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar/)
+* [Wind rose, stacked polar column chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-wind-rose/)
+* [Spider web chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
+* [Star plot, multivariate data in a polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/polar/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *polar;
 /**
 The corner radius of the outer chart border.
 
@@ -58,7 +72,7 @@ Whether to apply a drop shadow to the plot area. Requires that plotBackgroundCol
 
 * [Plot shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/plotshadow/)
 */
-@property(nonatomic, readwrite) HICSSObject *plotShadow;
+@property(nonatomic, readwrite) HIShadowOptionsObject *plotShadow;
 /**
 An explicit height for the chart. If a _number_, the height is given in pixels. If given a _percentage string_ (for example `'56%'`), the height is given as the percentage of the actual chart width. This allows for preserving the aspect ratio across responsive sizes. By default (when `null`) the height is calculated from the offset height of the containing element, or 400 pixels if the containing element's height is 0.
 
@@ -68,17 +82,6 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 * [Highcharts with percentage height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/height-percent/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
-/**
-Additional CSS styles to apply inline to the container `div`. Note that since the default font styles are applied in the renderer, it is ignorant of the individual chart options and must be set globally. Also note that changing the font size in the `chart.style` options only applies to those elements that do not have a specific `fontSize` setting.
-
-**Defaults to** `{"fontFamily": "\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","fontSize":"12px"}`.
-
-**Try it**
-
-* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
-* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
-*/
-@property(nonatomic, readwrite) HICSSObject *style;
 /**
 When using multiple axes, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in the axis options are set to false, then the `alignTicks ` will be disabled for the axis. Disabled for logarithmic axes.
 
@@ -140,7 +143,7 @@ The space between the right edge of the chart and the content (plot area, axis t
 /**
 The color of the outer chart border.
 
-**Defaults to** `#335cad`.
+**Defaults to** `#334eff`.
 
 **Try it**
 
@@ -152,18 +155,17 @@ A CSS class name to apply to the charts container `div`, allowing unique CSS sty
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. This produces _polar charts_, also known as _radar charts_.
+Additional CSS styles to apply inline to the container `div` and the root SVG. Since v11, the root font size is 1rem by default, and all child element are given a relative `em` font size by default. This allows implementers to control all the chart's font sizes by only setting the root level.
 
-**Defaults to** `false`.
+**Defaults to** `{"fontFamily": Helvetica, Arial, sans-serif","fontSize":"1rem"}`.
 
 **Try it**
 
-* [Polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar/)
-* [Wind rose, stacked polar column chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-wind-rose/)
-* [Spider web chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
-* [Star plot, multivariate data in a polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/polar/)
+* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
+* [Relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/relative-font-size/)
+* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *polar;
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 The HTML element where the chart will be rendered. If it is a string, the element by that id is used. The HTML element can also be passed by direct reference, or as the first argument of the chart constructor, in which case the option is not needed.
 
@@ -176,7 +178,7 @@ The HTML element where the chart will be rendered. If it is a string, the elemen
 /**
 Whether to reflow the chart to fit the width of the container div on resizing the window.
 
-**Defaults to** `true`.
+**Defaults to** `True`.
 
 **Try it**
 
@@ -214,7 +216,7 @@ An explicit width for the chart. By default (when `null`) the width is calculate
 /**
 Set the overall animation for all chart updating. Animation can be disabled throughout the chart by setting it to false here. It can be overridden for each individual API method as a function parameter. The only animation not affected by this option is the initial series animation, see `plotOptions.series.animation`. The animation can either be set as a boolean or a configuration object. If `true`, it will use the 'swing' jQuery easing and a duration of 500 ms. If used as a configuration object, the following properties are supported: - `defer`: The animation delay time in milliseconds. - `duration`: The duration of the animation in milliseconds. - `easing`: A string reference to an easing function set on the  `Math` object. See  [the easing demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-animation-easing/). When zooming on a series with less than 100 points, the chart redraw will be done with animation, but in case of more data points, it is necessary to set this option to ensure animation on zoom.
 
-**Defaults to** `undefined`.
+**Defaults to** `true`.
 
 **Try it**
 
@@ -323,7 +325,7 @@ Whether to apply a drop shadow to the outer chart area. Requires that background
 
 * [Shadow](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/shadow/)
 */
-@property(nonatomic, readwrite) HICSSObject *shadow;
+@property(nonatomic, readwrite) HIShadowOptionsObject *shadow;
 /**
 Whether to invert the axes so that the x axis is vertical and y axis is horizontal. When `true`, the x axis is `reversed` by default.
 
@@ -433,9 +435,14 @@ The margin between the outer edge of the chart and the plot area. The numbers in
 */
 @property(nonatomic, readwrite) NSArray<NSNumber *> *margin;
 /**
-Whether to apply styled mode. When in styled mode, no presentational attributes or CSS are applied to the chart SVG. Instead, CSS rules are required to style the chart. The default style sheet is available from `https://code.highcharts.com/css/highcharts.css`.
+Whether to apply styled mode. When in styled mode, no presentational attributes or CSS are applied to the chart SVG. Instead, CSS rules are required to style the chart. The default style sheet is available from `https://code.highcharts.com/css/highcharts.css`. [Read more in the docs](https://www.highcharts.com/docs/chart-design-and-style/style-by-css) on what classes and variables are available.
 
 **Defaults to** `false`.
+
+**Try it**
+
+* [Color theming with CSS](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/colors)
+* [Dynamic theme based on system settings](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/prefers-color-scheme)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *styledMode;
 

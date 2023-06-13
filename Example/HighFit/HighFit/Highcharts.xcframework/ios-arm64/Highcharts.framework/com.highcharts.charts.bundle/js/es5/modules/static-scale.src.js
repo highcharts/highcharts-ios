@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v10.3.3 (2023-01-20)
+ * @license Highcharts Gantt JS v11.1.0 (2023-06-05)
  *
  * StaticScale
  *

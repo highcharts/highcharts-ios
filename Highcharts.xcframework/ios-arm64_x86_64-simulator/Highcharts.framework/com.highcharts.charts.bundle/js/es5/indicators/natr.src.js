@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -104,7 +104,8 @@
              *
              * */
             NATRIndicator.prototype.getValues = function (series, params) {
-                var atrData = (ATRIndicator.prototype.getValues.apply(this, arguments)), atrLength = atrData.values.length, period = params.period - 1, yVal = series.yData, i = 0;
+                var atrData = (_super.prototype.getValues.apply(this, arguments)), atrLength = atrData.values.length, yVal = series.yData;
+                var i = 0, period = params.period - 1;
                 if (!atrData) {
                     return;
                 }

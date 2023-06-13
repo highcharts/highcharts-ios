@@ -76,6 +76,15 @@ The color applied to null points. In styled mode, a general CSS class is applied
 **Defaults to** `#f7f7f7`.
 */
 @property(nonatomic, readwrite) HIColor *nullColor;
+/**
+Make the heatmap render its data points as an interpolated image.
+
+**Try it**
+
+* [Interpolated heatmap image displaying user activity on a website](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/heatmap-interpolation)
+* [Interpolated heatmap toggle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-heatmap/interpolation)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *interpolation;
 
 -(NSDictionary *)getParams;
 

@@ -80,16 +80,6 @@ The color of the point marker's outline. When `undefined`, the series' or point'
 * [Inherit from series color (undefined)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-fillcolor/)
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
-/**
-Enable or disable the point marker. If `undefined`, the markers are hidden when the data is dense, and shown for more widespread data points.
-
-**Defaults to** `undefined`.
-
-**Try it**
-
-* [Disabled markers](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabled/)
-* [Disabled in normal state but enabled on hover](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-enabled-false/)
-*/
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
 The color of the marker.

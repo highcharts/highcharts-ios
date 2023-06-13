@@ -61,13 +61,14 @@ A partial fill for each point, typically used to visualize how much of a task is
 */
 @property(nonatomic, readwrite) HIPartialFill *partialFill;
 /**
-The corner radius of the border surrounding each column or bar.
+The corner radius of the border surrounding each column or bar. A number signifies pixels. A percentage string, like for example `50%`, signifies a relative size. For columns this is relative to the column width, for pies it is relative to the radius and the inner radius.
 
 **Defaults to** `3`.
 
 **Try it**
 
 * [Rounded columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderradius/)
+* [Column and pie with rounded border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-border-radius)
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**

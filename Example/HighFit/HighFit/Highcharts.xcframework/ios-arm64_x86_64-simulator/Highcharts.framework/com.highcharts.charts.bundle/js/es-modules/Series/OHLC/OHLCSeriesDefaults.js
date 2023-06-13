@@ -25,7 +25,7 @@
  * @product      highstock
  * @optionparent plotOptions.ohlc
  */
-var OHLCSeriesDefaults = {
+const OHLCSeriesDefaults = {
     /**
      * @type      {Highcharts.DataGroupingApproximationValue|Function}
      * @default   ohlc
@@ -37,6 +37,7 @@ var OHLCSeriesDefaults = {
      * be represented as `point.y`, which is later used to set dataLabel
      * position and [compare](#plotOptions.series.compare).
      *
+     * @declare    Highcharts.OptionsPointValKeyValue
      * @default    close
      * @validvalue ["open", "high", "low", "close"]
      * @product    highstock

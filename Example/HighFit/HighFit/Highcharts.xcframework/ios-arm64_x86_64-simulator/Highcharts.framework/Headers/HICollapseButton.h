@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIStyle.h"
 
 
 /**
@@ -14,6 +14,10 @@ Options applied to collapse Button. The collape button is the small button which
 */
 @interface HICollapseButton: HIChartsJSONSerializable
 
+/**
+CSS styles for the collapse button. In styled mode, the collapse button style is given in the `.highcharts-collapse-button` class.
+*/
+@property(nonatomic, readwrite) HIStyle *style;
 /**
 Whether the button should be visible.
 
@@ -29,13 +33,13 @@ The symbol of the collapse button.
 /**
 Height of the button.
 
-**Defaults to** `10`.
+**Defaults to** `18`.
 */
 @property(nonatomic, readwrite) NSNumber *height;
 /**
 Width of the button.
 
-**Defaults to** `10`.
+**Defaults to** `18`.
 */
 @property(nonatomic, readwrite) NSNumber *width;
 /**
@@ -52,6 +56,12 @@ Offset of the button in the y direction.
 Offset of the button in the x direction.
 */
 @property(nonatomic, readwrite) NSNumber *x;
+/**
+The line width of the button in pixels
+
+**Defaults to** `1`.
+*/
+@property(nonatomic, readwrite) NSNumber *lineWidth;
 
 -(NSDictionary *)getParams;
 

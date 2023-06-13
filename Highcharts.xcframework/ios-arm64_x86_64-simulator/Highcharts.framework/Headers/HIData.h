@@ -333,7 +333,7 @@ The y value of the point.
 */
 @property(nonatomic, readwrite) NSNumber *y;
 /**
-A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color is set by the `fill` attribute, so the change in class name won't have a visual effect by default.
+A specific color index to use for the point, so its graphic representations are given the class name `highcharts-color-{n}`. In styled mode this will change the color of the graphic. In non-styled mode, the color is set by the `fill` attribute, so the change in class name won't have a visual effect by default. Since v11, CSS variables on the form `--highcharts-color-{n}` make changing the color scheme very convenient.
 
 **Try it**
 

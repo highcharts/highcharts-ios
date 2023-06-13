@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Advanced Highcharts Stock tools
  *
@@ -366,8 +366,8 @@
                                     point: {
                                         x: coordsX.value,
                                         y: coordsY.value,
-                                        xAxis: coordsX.axis.options.index,
-                                        yAxis: coordsY.axis.options.index
+                                        xAxis: coordsX.axis.index,
+                                        yAxis: coordsY.axis.index
                                     },
                                     r: 5
                                 }]
@@ -417,8 +417,8 @@
                             shapes: [
                                 {
                                     type: 'ellipse',
-                                    xAxis: coordsX.axis.options.index,
-                                    yAxis: coordsY.axis.options.index,
+                                    xAxis: coordsX.axis.index,
+                                    yAxis: coordsY.axis.index,
                                     points: [{
                                             x: coordsX.value,
                                             y: coordsY.value
@@ -462,7 +462,7 @@
                         if (!coordsX || !coordsY) {
                             return;
                         }
-                        var x = coordsX.value, y = coordsY.value, xAxis = coordsX.axis.options.index, yAxis = coordsY.axis.options.index, navigation = this.chart.options.navigation;
+                        var x = coordsX.value, y = coordsY.value, xAxis = coordsX.axis.index, yAxis = coordsY.axis.index, navigation = this.chart.options.navigation;
                         return this.chart.addAnnotation(merge({
                             langKey: 'rectangle',
                             type: 'basicAnnotation',
@@ -529,8 +529,8 @@
                             },
                             labels: [{
                                     point: {
-                                        xAxis: coordsX.axis.options.index,
-                                        yAxis: coordsY.axis.options.index,
+                                        xAxis: coordsX.axis.index,
+                                        yAxis: coordsY.axis.index,
                                         x: coordsX.value,
                                         y: coordsY.value
                                     },
@@ -550,7 +550,7 @@
              * from a different server.
              *
              * @type      {string}
-             * @default   https://code.highcharts.com/10.3.3/gfx/stock-icons/
+             * @default   https://code.highcharts.com/11.1.0/gfx/stock-icons/
              * @since     7.1.3
              * @apioption navigation.iconsURL
              */
@@ -627,7 +627,7 @@
 
         return NavigationBindingDefaults;
     });
-    _registerModule(_modules, 'Extensions/Annotations/NavigationBindings.js', [_modules['Core/Chart/ChartNavigationComposition.js'], _modules['Core/Defaults.js'], _modules['Core/FormatUtilities.js'], _modules['Core/Globals.js'], _modules['Extensions/Annotations/NavigationBindingsDefaults.js'], _modules['Extensions/Annotations/NavigationBindingsUtilities.js'], _modules['Core/Utilities.js']], function (ChartNavigationComposition, D, F, H, NavigationBindingDefaults, NBU, U) {
+    _registerModule(_modules, 'Extensions/Annotations/NavigationBindings.js', [_modules['Core/Chart/ChartNavigationComposition.js'], _modules['Core/Defaults.js'], _modules['Core/Templating.js'], _modules['Core/Globals.js'], _modules['Extensions/Annotations/NavigationBindingsDefaults.js'], _modules['Extensions/Annotations/NavigationBindingsUtilities.js'], _modules['Core/Utilities.js']], function (ChartNavigationComposition, D, F, H, NavigationBindingDefaults, NBU, U) {
         /* *
          *
          *  (c) 2009-2021 Highsoft, Black Label
@@ -647,7 +647,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -818,8 +818,23 @@
                 // Let bubble event to chart.click:
                 eventArguments.activeAnnotation = true;
             }
+            // #18276, show popup on touchend, but not on touchmove
+            var touchStartX, touchStartY;
+            function saveCoords(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }
+            function checkForTouchmove(e) {
+                var hasMoved = touchStartX ? Math.sqrt(Math.pow(touchStartX - e.changedTouches[0].clientX, 2) +
+                    Math.pow(touchStartY - e.changedTouches[0].clientY, 2)) >= 4 : false;
+                if (!hasMoved) {
+                    selectAndShowPopup.call(this, e);
+                }
+            }
             merge(true, annotationType.prototype.defaultOptions.events, {
-                click: selectAndShowPopup
+                click: selectAndShowPopup,
+                touchstart: saveCoords,
+                touchend: checkForTouchmove
             });
         }
         /* *
@@ -854,8 +869,7 @@
              *
              * */
             NavigationBindings.compose = function (AnnotationClass, ChartClass) {
-                if (composedClasses.indexOf(AnnotationClass) === -1) {
-                    composedClasses.push(AnnotationClass);
+                if (U.pushUnique(composedMembers, AnnotationClass)) {
                     addEvent(AnnotationClass, 'remove', onAnnotationRemove);
                     // Basic shapes:
                     selectableAnnotation(AnnotationClass);
@@ -864,19 +878,16 @@
                         selectableAnnotation(annotationType);
                     });
                 }
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     addEvent(ChartClass, 'destroy', onChartDestroy);
                     addEvent(ChartClass, 'load', onChartLoad);
                     addEvent(ChartClass, 'render', onChartRender);
                 }
-                if (composedClasses.indexOf(NavigationBindings) === -1) {
-                    composedClasses.push(NavigationBindings);
+                if (U.pushUnique(composedMembers, NavigationBindings)) {
                     addEvent(NavigationBindings, 'closePopup', onNavigationBindingsClosePopup);
                     addEvent(NavigationBindings, 'deselectButton', onNavigationBindingsDeselectButton);
                 }
-                if (composedClasses.indexOf(setOptions) === -1) {
-                    composedClasses.push(setOptions);
+                if (U.pushUnique(composedMembers, setOptions)) {
                     setOptions(NavigationBindingDefaults);
                 }
             };
@@ -903,8 +914,8 @@
                     navigation.eventsToUnbind.push(addEvent(subContainer, 'click', function (event) {
                         var bindings = navigation.getButtonEvents(subContainer, event);
                         if (bindings &&
-                            bindings.button.className
-                                .indexOf('highcharts-disabled-btn') === -1) {
+                            (!bindings.button.classList
+                                .contains('highcharts-disabled-btn'))) {
                             navigation.bindingsButtonClick(bindings.button, bindings.events, event);
                         }
                     }));
@@ -1113,7 +1124,7 @@
                     var parsedValue = parseFloat(value), path = field.split('.'), pathLength = path.length - 1;
                     // If it's a number (not "format" options), parse it:
                     if (isNumber(parsedValue) &&
-                        !value.match(/px/g) &&
+                        !value.match(/px|em/g) &&
                         !field.match(/format/g)) {
                         value = parsedValue;
                     }
@@ -1280,7 +1291,7 @@
              */
             NavigationBindings.prototype.getClickedClassNames = function (container, event) {
                 var element = event.target, classNames = [], elemClassName;
-                while (element) {
+                while (element && element.tagName) {
                     elemClassName = attr(element, 'class');
                     if (elemClassName) {
                         classNames = classNames.concat(elemClassName
@@ -1634,8 +1645,8 @@
                     y: closestPoint.y,
                     below: y < closestPoint.y,
                     series: closestPoint.series,
-                    xAxis: closestPoint.series.xAxis.options.index || 0,
-                    yAxis: closestPoint.series.yAxis.options.index || 0
+                    xAxis: closestPoint.series.xAxis.index || 0,
+                    yAxis: closestPoint.series.yAxis.index || 0
                 };
             }
         }
@@ -1916,8 +1927,8 @@
                         langKey: 'segment',
                         type: 'crookedLine',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -1960,8 +1971,8 @@
                             line: {
                                 markerEnd: 'arrow'
                             },
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -2002,8 +2013,8 @@
                         type: 'infinityLine',
                         typeOptions: {
                             type: 'ray',
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -2047,8 +2058,8 @@
                             line: {
                                 markerEnd: 'arrow'
                             },
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -2088,8 +2099,8 @@
                         type: 'infinityLine',
                         typeOptions: {
                             type: 'line',
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -2133,8 +2144,8 @@
                             line: {
                                 markerEnd: 'arrow'
                             },
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -2176,8 +2187,8 @@
                         draggable: 'y',
                         typeOptions: {
                             type: 'horizontalLine',
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -2212,8 +2223,8 @@
                         draggable: 'x',
                         typeOptions: {
                             type: 'verticalLine',
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value
@@ -2247,8 +2258,8 @@
                         langKey: 'crooked3',
                         type: 'crookedLine',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [
                                 { x: x, y: y },
                                 { x: x, y: y },
@@ -2287,8 +2298,8 @@
                         langKey: 'crooked5',
                         type: 'crookedLine',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [
                                 { x: x, y: y },
                                 { x: x, y: y },
@@ -2331,8 +2342,8 @@
                         langKey: 'elliott3',
                         type: 'elliottWave',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [
                                 { x: x, y: y },
                                 { x: x, y: y },
@@ -2378,8 +2389,8 @@
                         langKey: 'elliott5',
                         type: 'elliottWave',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [
                                 { x: x, y: y },
                                 { x: x, y: y },
@@ -2430,8 +2441,8 @@
                         type: 'measure',
                         typeOptions: {
                             selectType: 'x',
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             point: { x: x, y: y },
                             crosshairX: {
                                 strokeWidth: 1,
@@ -2486,8 +2497,8 @@
                         type: 'measure',
                         typeOptions: {
                             selectType: 'y',
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             point: { x: x, y: y },
                             crosshairX: {
                                 enabled: false,
@@ -2542,8 +2553,8 @@
                         type: 'measure',
                         typeOptions: {
                             selectType: 'xy',
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             point: { x: x, y: y },
                             background: {
                                 width: 0,
@@ -2599,8 +2610,8 @@
                         langKey: 'fibonacci',
                         type: 'fibonacci',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [
                                 { x: x, y: y },
                                 { x: x, y: y }
@@ -2643,8 +2654,8 @@
                         langKey: 'parallelChannel',
                         type: 'tunnel',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [
                                 { x: x, y: y },
                                 { x: x, y: y }
@@ -2683,8 +2694,8 @@
                         langKey: 'pitchfork',
                         type: 'pitchfork',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value,
                                     y: coordsY.value,
@@ -2752,7 +2763,7 @@
                         labelOptions: {
                             style: {
                                 color: "#666666" /* Palette.neutralColor60 */,
-                                fontSize: '11px'
+                                fontSize: '0.7em'
                             }
                         },
                         shapeOptions: {
@@ -2835,7 +2846,7 @@
                         labelOptions: {
                             style: {
                                 color: "#666666" /* Palette.neutralColor60 */,
-                                fontSize: '11px'
+                                fontSize: '0.7em'
                             }
                         },
                         shapeOptions: {
@@ -2922,8 +2933,8 @@
                         type: 'fibonacciTimeZones',
                         langKey: 'fibonacciTimeZones',
                         typeOptions: {
-                            xAxis: coordsX.axis.options.index,
-                            yAxis: coordsY.axis.options.index,
+                            xAxis: coordsX.axis.index,
+                            yAxis: coordsY.axis.index,
                             points: [{
                                     x: coordsX.value
                                 }]
@@ -2939,8 +2950,8 @@
                         var mockPointOpts = annotation.options.typeOptions.points, x = mockPointOpts && mockPointOpts[0].x, coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
                         annotation.update({
                             typeOptions: {
-                                xAxis: coordsX.axis.options.index,
-                                yAxis: coordsY.axis.options.index,
+                                xAxis: coordsX.axis.index,
+                                yAxis: coordsY.axis.index,
                                 points: [{
                                         x: x
                                     }, {
@@ -4576,7 +4587,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -4586,8 +4597,7 @@
          * @private
          */
         function compose(NavigationBindingsClass) {
-            if (composedClasses.indexOf(NavigationBindingsClass) === -1) {
-                composedClasses.push(NavigationBindingsClass);
+            if (U.pushUnique(composedMembers, NavigationBindingsClass)) {
                 var navigationProto = NavigationBindingsClass.prototype;
                 // Extends NavigationBindings to support indicators and resizers:
                 navigationProto.getYAxisPositions = navigationGetYAxisPositions;
@@ -4603,8 +4613,7 @@
                     manageIndicators: STU.manageIndicators
                 };
             }
-            if (composedClasses.indexOf(setOptions) === -1) {
-                composedClasses.push(setOptions);
+            if (U.pushUnique(composedMembers, setOptions)) {
                 setOptions(StockToolsDefaults);
                 setOptions({
                     navigation: {
@@ -4709,7 +4718,7 @@
                         enabled: true,
                         controlledAxis: {
                             next: [
-                                pick(nextYAxis.options.id, nextYAxis.options.index)
+                                pick(nextYAxis.options.id, nextYAxis.index)
                             ]
                         }
                     };
@@ -5316,7 +5325,7 @@
             Toolbar.prototype.getIconsURL = function () {
                 return this.chart.options.navigation.iconsURL ||
                     this.options.iconsURL ||
-                    'https://code.highcharts.com/10.3.3/gfx/stock-icons/';
+                    'https://code.highcharts.com/11.1.0/gfx/stock-icons/';
             };
             return Toolbar;
         }());
@@ -5395,7 +5404,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -5416,8 +5425,7 @@
          * @private
          */
         function compose(ChartClass, NavigationBindingsClass) {
-            if (composedClasses.indexOf(ChartClass) === -1) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'afterGetContainer', onChartAfterGetContainer);
                 addEvent(ChartClass, 'beforeRedraw', onChartBeforeRedraw);
                 addEvent(ChartClass, 'beforeRender', onChartBeforeRedraw);
@@ -5427,13 +5435,11 @@
                 addEvent(ChartClass, 'render', onChartRender);
                 ChartClass.prototype.setStockTools = chartSetStockTools;
             }
-            if (composedClasses.indexOf(NavigationBindingsClass) === -1) {
-                composedClasses.push(NavigationBindingsClass);
+            if (U.pushUnique(composedMembers, NavigationBindingsClass)) {
                 addEvent(NavigationBindingsClass, 'deselectButton', onNavigationBindingsDeselectButton);
                 addEvent(NavigationBindingsClass, 'selectButton', onNavigationBindingsSelectButton);
             }
-            if (composedClasses.indexOf(setOptions) === -1) {
-                composedClasses.push(setOptions);
+            if (U.pushUnique(composedMembers, setOptions)) {
                 setOptions(StockToolsDefaults);
             }
         }

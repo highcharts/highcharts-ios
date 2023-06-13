@@ -10,7 +10,6 @@
 #import "HIOptions.h"
 #import "HIChartViewDelegate.h"
 #import "HILang.h"
-#import "HIGlobal.h"
 
 /**
  *  Highcharts Chart View Class.
@@ -56,10 +55,6 @@
  */
 @property (strong, nonatomic) HILang *lang;
 
-/**
- *  Global object. Global options that don't apply to each chart.
- */
-@property (strong, nonatomic) HIGlobal *global;
 
 /**
  *  Theme name to load.

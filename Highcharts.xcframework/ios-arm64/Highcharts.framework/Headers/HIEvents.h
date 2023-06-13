@@ -73,6 +73,7 @@ Fires when the chart is finished loading. Since v4.2.2, it also waits for images
 **Try it**
 
 * [Alert on chart load](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-load/)
+* [Load vs Redraw vs Render](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-render/)
 */
 @property(nonatomic, readwrite) HIFunction *load;
 /**
@@ -94,6 +95,10 @@ Fires when an area of the chart has been selected. Selection is enabled by setti
 @property(nonatomic, readwrite) HIFunction *selection;
 /**
 Fires after initial load of the chart (directly after the `load` event), and after each redraw (directly after the `redraw` event).
+
+**Try it**
+
+* [Load vs Redraw vs Render](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-render/)
 */
 @property(nonatomic, readwrite) HIFunction *render;
 /**
@@ -146,6 +151,7 @@ Fires when the chart is redrawn, either after a call to `chart.redraw()` or afte
 **Try it**
 
 * [Alert on chart redraw](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-redraw/)
+* [Load vs Redraw vs Render](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/events-render/)
 */
 @property(nonatomic, readwrite) HIFunction *redraw;
 /**
@@ -233,6 +239,10 @@ Fires when the cluster point is clicked and `drillToCluster` is enabled. One par
 */
 @property(nonatomic, readwrite) HIFunction *drillToCluster;
 /**
+Fires after the simulation is ended and the layout is stable.
+*/
+@property(nonatomic, readwrite) HIFunction *afterSimulation;
+/**
 Fires on a request for change of root node for the tree, before the update is made. An event object is passed to the function, containing additional properties `newRootId`, `previousRootId`, `redraw` and `trigger`.
 
 **Defaults to** `undefined`.
@@ -269,6 +279,42 @@ Event fired when button state should change, for example after adding an annotat
 */
 @property(nonatomic, readwrite) HIFunction *deselectButton;
 /**
+Called on pause, cancel, or if play is completed. A context object is passed to the function, with properties `chart`, `timeline` and `pointsPlayed`. `pointsPlayed` is an array of `Point` objects, referencing data points that were related to the audio events played.
+*/
+@property(nonatomic, readwrite) HIFunction *onStop;
+/**
+Called before updating the sonification. A context object is passed to the function, with properties `chart` and `timeline`.
+*/
+@property(nonatomic, readwrite) HIFunction *beforeUpdate;
+/**
+Called on play. A context object is passed to the function, with properties `chart` and `timeline`.
+*/
+@property(nonatomic, readwrite) HIFunction *onPlay;
+/**
+Called when finished playing a series. A context object is passed to the function, with properties `series` and `timeline`.
+*/
+@property(nonatomic, readwrite) HIFunction *onSeriesEnd;
+/**
+Called when attempting to play an adjacent point or series, and there is none. By default a percussive sound is played. A context object is passed to the function, with properties `chart`, `timeline`, and `attemptedNext`. `attemptedNext` is a boolean property that is `true` if the boundary hit was from trying to play the next series/point, and `false` if it was from trying to play the previous.
+*/
+@property(nonatomic, readwrite) HIFunction *onBoundaryHit;
+/**
+Called after updating the sonification. A context object is passed to the function, with properties `chart` and `timeline`.
+*/
+@property(nonatomic, readwrite) HIFunction *afterUpdate;
+/**
+Called immediately when a play is requested. A context object is passed to the function, with properties `chart` and `timeline`.
+*/
+@property(nonatomic, readwrite) HIFunction *beforePlay;
+/**
+Called on the beginning of playing a series. A context object is passed to the function, with properties `series` and `timeline`.
+*/
+@property(nonatomic, readwrite) HIFunction *onSeriesStart;
+/**
+Called when play is completed. A context object is passed to the function, with properties `chart`, `timeline` and `pointsPlayed`. `pointsPlayed` is an array of `Point` objects, referencing data points that were related to the audio events played.
+*/
+@property(nonatomic, readwrite) HIFunction *onEnd;
+/**
 Fires when the legend item belonging to the colorAxis is clicked. One parameter, `event`, is passed to the function.
 */
 @property(nonatomic, readwrite) HIFunction *legendItemClick;
@@ -300,10 +346,6 @@ Fires after the series has finished its initial animation, or in case animation 
 Event callback when annotation is added to the chart.
 */
 @property(nonatomic, readwrite) HIFunction *add;
-/**
-Event callback when annotation is updated (e.g.draganddropppedorresizedbycontrolpoints).
-*/
-@property(nonatomic, readwrite) HIFunction *afterUpdate;
 
 -(NSDictionary *)getParams;
 

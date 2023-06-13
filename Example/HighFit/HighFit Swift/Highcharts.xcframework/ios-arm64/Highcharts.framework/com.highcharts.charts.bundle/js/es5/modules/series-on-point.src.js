@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Series on point module
  *
@@ -67,7 +67,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             /* *
              *
              *  Functions
@@ -95,8 +95,7 @@
                 // - pie
                 // - sunburst
                 pie.prototype.onPointSupported = true;
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     addEvent(Series, 'afterInit', seriesAfterInit);
                     addEvent(Series, 'afterRender', seriesAfterRender);
                     addEvent(Series, 'afterGetCenter', seriesGetCenter);
@@ -104,8 +103,7 @@
                     addEvent(Series, 'show', seriesShowOrHide);
                     addEvent(Series, 'translate', seriesTranslate);
                 }
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     addEvent(ChartClass, 'beforeRender', chartGetZData);
                     addEvent(ChartClass, 'beforeRedraw', chartGetZData);
                 }

@@ -7,58 +7,43 @@
 */
 
 #import "HIDataLabels.h"
+#import "HIMarker.h"
 #import "HIColor.h"
 
 
 /**
-A collection of options for the individual nodes. The nodes in a sankey diagram are auto-generated instances of `Highcharts.Point`, but options can be applied here and linked by the `id`.
+A collection of options for the individual nodes. The nodes in a networkgraph diagram are auto-generated instances of `Highcharts.Point`, but options can be applied here and linked by the `id`.
 
 **Try it**
 
-* [Sankey diagram with node options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/sankey/)
+* [Networkgraph diagram with node options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/data-options/)
 */
 @interface HINodes: HIChartsJSONSerializable
 
-/**
-The vertical offset of a node. Positive values shift the node down, negative shift it up. If a percantage string is given, the node is offset by the percentage of the node size.
-
-**Try it**
-
-* [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ offsetVertical;
 /**
 The color index of the auto generated node, especially for use in styled mode.
 */
 @property(nonatomic, readwrite) NSNumber *colorIndex;
 /**
-An optional level index of where to place the node. The default behaviour is to place it next to the preceding node. Alias of `nodes.column`, but in inverted sankeys and org charts, the levels are laid out as rows.
-*/
-@property(nonatomic, readwrite) NSNumber *level;
-/**
 The color of the auto generated node.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
-The horizontal offset of a node. Positive values shift the node right, negative shift it left. If a percantage string is given, the node is offset by the percentage of the node size.
-
-**Try it**
-
-* [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ offsetHorizontal;
-/**
-Individual data label for each node. The options are the same as the ones for `series.sankey.dataLabels`.
+Individual data label for each node. The options are the same as the ones for `series.networkgraph.dataLabels`.
 */
 @property(nonatomic, readwrite) NSArray <HIDataLabels *> *dataLabels;
 /**
-An optional column index of where to place the node. The default behaviour is to place it next to the preceding node. Note that this option name is counter intuitive in inverted charts, like for example an organization chart rendered top down. In this case the "columns" are horizontal.
+Mass of the node. By default, each node has mass equal to it's marker radius . Mass is used to determine how two connected nodes should affect each other: Attractive force is multiplied by the ratio of two connected nodes; if a big node has weights twice as the small one, then the small one will move towards the big one twice faster than the big one to the small one .
 
 **Try it**
 
-* [Specified node column](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
+* [Mass determined by marker.radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/ragdoll/)
 */
-@property(nonatomic, readwrite) NSNumber *column;
+@property(nonatomic, readwrite) NSNumber *mass;
+/**
+Options for the node markers.
+*/
+@property(nonatomic, readwrite) HIMarker *marker;
 /**
 The id of the auto-generated node, refering to the `from` or `to` setting of the link.
 */
@@ -68,9 +53,37 @@ The name to display for the node in data labels and tooltips. Use this when the 
 
 **Try it**
 
-* [Sankey diagram with node options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/sankey/)
+* [Networkgraph diagram with node options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/data-options/)
 */
 @property(nonatomic, readwrite) NSString *name;
+/**
+The vertical offset of a node. Positive values shift the node down, negative shift it up. If a percantage string is given, the node is offset by the percentage of the node size.
+
+**Try it**
+
+* [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ offsetVertical;
+/**
+An optional level index of where to place the node. The default behaviour is to place it next to the preceding node. Alias of `nodes.column`, but in inverted sankeys and org charts, the levels are laid out as rows.
+*/
+@property(nonatomic, readwrite) NSNumber *level;
+/**
+The horizontal offset of a node. Positive values shift the node right, negative shift it left. If a percantage string is given, the node is offset by the percentage of the node size.
+
+**Try it**
+
+* [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ offsetHorizontal;
+/**
+An optional column index of where to place the node. The default behaviour is to place it next to the preceding node. Note that this option name is counter intuitive in inverted charts, like for example an organization chart rendered top down. In this case the "columns" are horizontal.
+
+**Try it**
+
+* [Specified node column](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
+*/
+@property(nonatomic, readwrite) NSNumber *column;
 /**
 An image for the node card, will be inserted by the default `dataLabel.nodeFormatter`.
 
@@ -105,14 +118,6 @@ The job description for the node card, will be inserted by the default `dataLabe
 * [Org chart with job descriptions](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/organization-chart)
 */
 @property(nonatomic, readwrite) NSString *definition;
-/**
-Mass of the node. By default, each node has mass equal to it's marker radius . Mass is used to determine how two connected nodes should affect each other: Attractive force is multiplied by the ratio of two connected nodes; if a big node has weights twice as the small one, then the small one will move towards the big one twice faster than the big one to the small one .
-
-**Try it**
-
-* [Mass determined by marker.radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-networkgraph/ragdoll/)
-*/
-@property(nonatomic, readwrite) NSNumber *mass;
 
 -(NSDictionary *)getParams;
 

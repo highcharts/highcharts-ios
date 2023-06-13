@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -70,7 +70,8 @@
          * @private
          */
         function destroyExtraLabels(point, functionName) {
-            var props = point.series.pointArrayMap, prop, i = props.length;
+            var props = point.series.pointArrayMap;
+            var prop, i = props.length;
             SeriesRegistry.seriesTypes.sma.prototype.pointClass.prototype[functionName].call(point);
             while (i--) {
                 prop = 'dataLabel' + props[i];
@@ -192,7 +193,7 @@
             };
             PivotPointsIndicator.prototype.translate = function () {
                 var indicator = this;
-                SeriesRegistry.seriesTypes.sma.prototype.translate.apply(indicator);
+                _super.prototype.translate.apply(indicator);
                 indicator.points.forEach(function (point) {
                     indicator.pointArrayMap.forEach(function (value) {
                         if (defined(point[value])) {
@@ -206,7 +207,8 @@
                 indicator.plotEndPoint = indicator.xAxis.toPixels(indicator.endPoint, true);
             };
             PivotPointsIndicator.prototype.getGraphPath = function (points) {
-                var indicator = this, pointsLength = points.length, allPivotPoints = ([[], [], [], [], [], [], [], [], []]), path = [], endPoint = indicator.plotEndPoint, pointArrayMapLength = indicator.pointArrayMap.length, position, point, i;
+                var indicator = this, allPivotPoints = ([[], [], [], [], [], [], [], [], []]), pointArrayMapLength = indicator.pointArrayMap.length;
+                var endPoint = indicator.plotEndPoint, path = [], position, point, pointsLength = points.length, i;
                 while (pointsLength--) {
                     point = points[pointsLength];
                     for (i = 0; i < pointArrayMapLength; i++) {
@@ -233,13 +235,14 @@
                     endPoint = point.plotX;
                 }
                 allPivotPoints.forEach(function (pivotPoints) {
-                    path = path.concat(SeriesRegistry.seriesTypes.sma.prototype.getGraphPath.call(indicator, pivotPoints));
+                    path = path.concat(_super.prototype.getGraphPath.call(indicator, pivotPoints));
                 });
                 return path;
             };
             // TODO: Rewrite this logic to use multiple datalabels
             PivotPointsIndicator.prototype.drawDataLabels = function () {
-                var indicator = this, pointMapping = indicator.pointArrayMap, currentLabel, pointsLength, point, i;
+                var indicator = this, pointMapping = indicator.pointArrayMap;
+                var currentLabel, pointsLength, point, i;
                 if (indicator.options.dataLabels.enabled) {
                     pointsLength = indicator.points.length;
                     // For every Ressitance/Support group we need to render labels.
@@ -273,7 +276,7 @@
                                             null;
                             }
                         }
-                        SeriesRegistry.seriesTypes.sma.prototype.drawDataLabels
+                        _super.prototype.drawDataLabels
                             .call(indicator);
                     });
                 }
@@ -281,7 +284,8 @@
             PivotPointsIndicator.prototype.getValues = function (series, params) {
                 var period = params.period, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, placement = this[params.algorithm + 'Placement'], 
                 // 0- from, 1- to, 2- R1, 3- R2, 4- pivot, 5- S1 etc.
-                PP = [], endTimestamp, xData = [], yData = [], slicedXLen, slicedX, slicedY, lastPP, pivot, avg, i;
+                PP = [], xData = [], yData = [];
+                var endTimestamp, slicedXLen, slicedX, slicedY, lastPP, pivot, avg, i;
                 // Pivot Points requires high, low and close values
                 if (xVal.length < period ||
                     !isArray(yVal[0]) ||
@@ -313,12 +317,13 @@
                 };
             };
             PivotPointsIndicator.prototype.getPivotAndHLC = function (values) {
-                var high = -Infinity, low = Infinity, close = values[values.length - 1][3], pivot;
+                var close = values[values.length - 1][3];
+                var high = -Infinity, low = Infinity;
                 values.forEach(function (p) {
                     high = Math.max(high, p[1]);
                     low = Math.min(low, p[2]);
                 });
-                pivot = (high + low + close) / 3;
+                var pivot = (high + low + close) / 3;
                 return [pivot, high, low, close];
             };
             PivotPointsIndicator.prototype.standardPlacement = function (values) {

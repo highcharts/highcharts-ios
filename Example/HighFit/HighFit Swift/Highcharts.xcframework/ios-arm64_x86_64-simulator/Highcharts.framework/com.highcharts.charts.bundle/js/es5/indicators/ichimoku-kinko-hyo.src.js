@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -62,7 +62,7 @@
         })();
         var color = Color.parse;
         var SMAIndicator = SeriesRegistry.seriesTypes.sma;
-        var defined = U.defined, extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach;
+        var defined = U.defined, extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, getClosestDistance = U.getClosestDistance, merge = U.merge, objectEach = U.objectEach;
         /* *
          *
          *  Functions
@@ -92,26 +92,6 @@
                 high: maxHigh(arr),
                 low: minLow(arr)
             };
-        }
-        /**
-         * @private
-         */
-        function getClosestPointRange(axis) {
-            var closestDataRange, loopLength, distance, xData, i;
-            axis.series.forEach(function (series) {
-                if (series.xData) {
-                    xData = series.xData;
-                    loopLength = series.xIncrement ? 1 : xData.length - 1;
-                    for (i = loopLength; i > 0; i--) {
-                        distance = xData[i] - xData[i - 1];
-                        if (typeof closestDataRange === 'undefined' ||
-                            distance < closestDataRange) {
-                            closestDataRange = distance;
-                        }
-                    }
-                }
-            });
-            return closestDataRange;
         }
         /**
          * Check two lines intersection (line a1-a2 and b1-b2)
@@ -481,7 +461,7 @@
                 return path;
             };
             IKHIndicator.prototype.getValues = function (series, params) {
-                var period = params.period, periodTenkan = params.periodTenkan, periodSenkouSpanB = params.periodSenkouSpanB, xVal = series.xData, yVal = series.yData, xAxis = series.xAxis, yValLen = (yVal && yVal.length) || 0, closestPointRange = getClosestPointRange(xAxis), IKH = [], xData = [];
+                var period = params.period, periodTenkan = params.periodTenkan, periodSenkouSpanB = params.periodSenkouSpanB, xVal = series.xData, yVal = series.yData, xAxis = series.xAxis, yValLen = (yVal && yVal.length) || 0, closestPointRange = getClosestDistance(xAxis.series.map(function (s) { return s.xData || []; })), IKH = [], xData = [];
                 var date, slicedTSY, slicedKSY, slicedSSBY, pointTS, pointKS, pointSSB, i, TS, KS, CS, SSA, SSB;
                 // Ikh requires close value
                 if (xVal.length <= period ||

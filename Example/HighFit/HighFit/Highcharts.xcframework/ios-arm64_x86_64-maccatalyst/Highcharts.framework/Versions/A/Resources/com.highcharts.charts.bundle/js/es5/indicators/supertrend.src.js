@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -68,6 +68,9 @@
          *
          * */
         // Utils:
+        /**
+         * @private
+         */
         function createPointObj(mainSeries, index, close) {
             return {
                 index: index,
@@ -115,21 +118,19 @@
              *
              * */
             SupertrendIndicator.prototype.init = function () {
-                var options, parentOptions;
-                SMAIndicator.prototype.init.apply(this, arguments);
                 var indicator = this;
+                _super.prototype.init.apply(indicator, arguments);
                 // Only after series are linked add some additional logic/properties.
                 var unbinder = addEvent(StockChart, 'afterLinkSeries', function () {
                     // Protection for a case where the indicator is being updated,
                     // for a brief moment the indicator is deleted.
                     if (indicator.options) {
-                        var options_1 = indicator.options;
-                        parentOptions = indicator.linkedParent.options;
+                        var options = indicator.options, parentOptions = indicator.linkedParent.options;
                         // Indicator cropThreshold has to be equal linked series one
                         // reduced by period due to points comparison in drawGraph
                         // (#9787)
-                        options_1.cropThreshold = (parentOptions.cropThreshold -
-                            (options_1.params.period - 1));
+                        options.cropThreshold = (parentOptions.cropThreshold -
+                            (options.params.period - 1));
                     }
                     unbinder();
                 }, {
@@ -139,9 +140,9 @@
             SupertrendIndicator.prototype.drawGraph = function () {
                 var indicator = this, indicOptions = indicator.options, 
                 // Series that indicator is linked to
-                mainSeries = indicator.linkedParent, mainLinePoints = (mainSeries ? mainSeries.points : []), indicPoints = indicator.points, indicPath = indicator.graph, indicPointsLen = indicPoints.length, 
+                mainSeries = indicator.linkedParent, mainLinePoints = (mainSeries ? mainSeries.points : []), indicPoints = indicator.points, indicPath = indicator.graph, 
                 // Points offset between lines
-                tempOffset = mainLinePoints.length - indicPointsLen, offset = tempOffset > 0 ? tempOffset : 0, 
+                tempOffset = mainLinePoints.length - indicPoints.length, offset = tempOffset > 0 ? tempOffset : 0, 
                 // @todo: fix when ichi-moku indicator is merged to master.
                 gappedExtend = {
                     options: {
@@ -173,8 +174,8 @@
                         }
                     },
                     intersect: indicOptions.changeTrendLine
-                }, close = 3, 
-                // Supertrend line point
+                }, close = 3;
+                var // Supertrend line point
                 point, 
                 // Supertrend line next point (has smaller x pos than point)
                 nextPoint, 
@@ -186,7 +187,7 @@
                 // Used when particular point color is set
                 pointColor, 
                 // Temporary points that fill groupedPoitns array
-                newPoint, newNextPoint;
+                newPoint, newNextPoint, indicPointsLen = indicPoints.length;
                 // Loop which sort supertrend points
                 while (indicPointsLen--) {
                     point = indicPoints[indicPointsLen];
@@ -355,18 +356,19 @@
             //      Current Close > Current FINAL LOWERBAND
             //     ) THAN Current FINAL LOWERBAND
             SupertrendIndicator.prototype.getValues = function (series, params) {
-                var period = params.period, multiplier = params.multiplier, xVal = series.xData, yVal = series.yData, ATRData = [], 
+                var period = params.period, multiplier = params.multiplier, xVal = series.xData, yVal = series.yData, 
                 // 0- date, 1- Supertrend indicator
-                ST = [], xData = [], yData = [], close = 3, low = 2, high = 1, periodsOffset = (period === 0) ? 0 : period - 1, basicUp, basicDown, finalUp = [], finalDown = [], supertrend, prevFinalUp, prevFinalDown, prevST, // previous Supertrend
+                st = [], xData = [], yData = [], close = 3, low = 2, high = 1, periodsOffset = (period === 0) ? 0 : period - 1, finalUp = [], finalDown = [];
+                var atrData = [], basicUp, basicDown, supertrend, prevFinalUp, prevFinalDown, prevST, // previous Supertrend
                 prevY, y, i;
                 if ((xVal.length <= period) || !isArray(yVal[0]) ||
                     yVal[0].length !== 4 || period < 0) {
                     return;
                 }
-                ATRData = ATRIndicator.prototype.getValues.call(this, series, {
+                atrData = ATRIndicator.prototype.getValues.call(this, series, {
                     period: period
                 }).yData;
-                for (i = 0; i < ATRData.length; i++) {
+                for (i = 0; i < atrData.length; i++) {
                     y = yVal[periodsOffset + i];
                     prevY = yVal[periodsOffset + i - 1] || [];
                     prevFinalUp = finalUp[i - 1];
@@ -375,8 +377,8 @@
                     if (i === 0) {
                         prevFinalUp = prevFinalDown = prevST = 0;
                     }
-                    basicUp = correctFloat((y[high] + y[low]) / 2 + multiplier * ATRData[i]);
-                    basicDown = correctFloat((y[high] + y[low]) / 2 - multiplier * ATRData[i]);
+                    basicUp = correctFloat((y[high] + y[low]) / 2 + multiplier * atrData[i]);
+                    basicDown = correctFloat((y[high] + y[low]) / 2 - multiplier * atrData[i]);
                     if ((basicUp < prevFinalUp) ||
                         (prevY[close] > prevFinalUp)) {
                         finalUp[i] = basicUp;
@@ -399,12 +401,12 @@
                         prevST === prevFinalDown && y[close] > finalDown[i]) {
                         supertrend = finalDown[i];
                     }
-                    ST.push([xVal[periodsOffset + i], supertrend]);
+                    st.push([xVal[periodsOffset + i], supertrend]);
                     xData.push(xVal[periodsOffset + i]);
                     yData.push(supertrend);
                 }
                 return {
-                    values: ST,
+                    values: st,
                     xData: xData,
                     yData: yData
                 };

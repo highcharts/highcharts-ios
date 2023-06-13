@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * (c) 2010-2021 Highsoft AS
  * Author: Sebastian Domas
@@ -66,7 +66,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             DerivedComposition.hasDerivedData = true;
             /**
              * Method to be implemented - inside the method the series has already
@@ -86,8 +86,7 @@
              * @private
              */
             function compose(SeriesClass) {
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     var seriesProto = SeriesClass.prototype;
                     seriesProto.addBaseSeriesEvents = addBaseSeriesEvents;
                     seriesProto.addEvents = addEvents;
@@ -381,7 +380,7 @@
                 pointPlacement: 'between',
                 tooltip: {
                     headerFormat: '',
-                    pointFormat: ('<span style="font-size: 10px">{point.x} - {point.x2}' +
+                    pointFormat: ('<span style="font-size: 0.8em">{point.x} - {point.x2}' +
                         '</span><br/>' +
                         '<span style="color:{point.color}">\u25CF</span>' +
                         ' {series.name} <b>{point.y}</b><br/>')

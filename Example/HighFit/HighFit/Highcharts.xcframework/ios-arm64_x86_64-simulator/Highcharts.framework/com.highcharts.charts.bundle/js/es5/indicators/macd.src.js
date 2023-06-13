@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -86,18 +86,10 @@
                  *
                  * */
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                /* *
-                 *
-                 *  Properties
-                 *
-                 * */
                 _this.data = void 0;
+                _this.macdZones = void 0;
                 _this.options = void 0;
                 _this.points = void 0;
-                _this.currentLineZone = void 0;
-                _this.graphmacd = void 0;
-                _this.graphsignal = void 0;
-                _this.macdZones = void 0;
                 _this.signalZones = void 0;
                 return _this;
             }
@@ -108,17 +100,17 @@
              * */
             MACDIndicator.prototype.init = function () {
                 SeriesRegistry.seriesTypes.sma.prototype.init.apply(this, arguments);
-                var originalColor = this.color, originalColorIndex = this.userOptions._colorIndex;
+                var originalColor = this.color;
                 // Check whether series is initialized. It may be not initialized,
                 // when any of required indicators is missing.
                 if (this.options) {
                     // If the default colour doesn't set, get the next available from
                     // the array and apply it #15608.
-                    if (defined(this.userOptions._colorIndex)) {
+                    if (defined(this.colorIndex)) {
                         if (this.options.signalLine &&
                             this.options.signalLine.styles &&
                             !this.options.signalLine.styles.lineColor) {
-                            this.userOptions._colorIndex++;
+                            this.options.colorIndex = this.colorIndex + 1;
                             this.getCyclic('color', void 0, this.chart.options.colors);
                             this.options.signalLine.styles.lineColor =
                                 this.color;
@@ -126,7 +118,7 @@
                         if (this.options.macdLine &&
                             this.options.macdLine.styles &&
                             !this.options.macdLine.styles.lineColor) {
-                            this.userOptions._colorIndex++;
+                            this.options.colorIndex = this.colorIndex + 1;
                             this.getCyclic('color', void 0, this.chart.options.colors);
                             this.options.macdLine.styles.lineColor =
                                 this.color;
@@ -146,7 +138,6 @@
                 }
                 // Reset color and index #15608.
                 this.color = originalColor;
-                this.userOptions._colorIndex = originalColorIndex;
             };
             MACDIndicator.prototype.toYData = function (point) {
                 return [point.y, point.signal, point.MACD];
@@ -171,11 +162,12 @@
                 SeriesRegistry.seriesTypes.sma.prototype.destroy.apply(this, arguments);
             };
             MACDIndicator.prototype.drawGraph = function () {
-                var indicator = this, mainLinePoints = indicator.points, pointsLength = mainLinePoints.length, mainLineOptions = indicator.options, histogramZones = indicator.zones, gappedExtend = {
+                var indicator = this, mainLinePoints = indicator.points, mainLineOptions = indicator.options, histogramZones = indicator.zones, gappedExtend = {
                     options: {
                         gapSize: mainLineOptions.gapSize
                     }
-                }, otherSignals = [[], []], point;
+                }, otherSignals = [[], []];
+                var point, pointsLength = mainLinePoints.length;
                 // Generate points for top and bottom lines:
                 while (pointsLength--) {
                     point = mainLinePoints[pointsLength];
@@ -210,11 +202,12 @@
                 indicator.points = mainLinePoints;
                 indicator.options = mainLineOptions;
                 indicator.zones = histogramZones;
-                indicator.currentLineZone = null;
+                indicator.currentLineZone = void 0;
                 // indicator.graph = null;
             };
             MACDIndicator.prototype.getZonesGraphs = function (props) {
-                var allZones = _super.prototype.getZonesGraphs.call(this, props), currentZones = allZones;
+                var allZones = _super.prototype.getZonesGraphs.call(this, props);
+                var currentZones = allZones;
                 if (this.currentLineZone) {
                     currentZones = allZones.splice(this[this.currentLineZone].startIndex + 1);
                     if (!currentZones.length) {
@@ -243,7 +236,8 @@
             };
             MACDIndicator.prototype.getValues = function (series, params) {
                 var indexToShift = (params.longPeriod - params.shortPeriod), // #14197
-                j = 0, MACD = [], xMACD = [], yMACD = [], signalLine = [], shortEMA, longEMA, i;
+                MACD = [], xMACD = [], yMACD = [];
+                var shortEMA, longEMA, i, j = 0, signalLine = [];
                 if (series.xData.length <
                     params.longPeriod + params.signalPeriod) {
                     return;

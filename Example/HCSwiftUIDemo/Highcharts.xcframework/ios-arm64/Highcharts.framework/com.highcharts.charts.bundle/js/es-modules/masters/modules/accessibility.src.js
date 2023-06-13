@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  * @module highcharts/modules/accessibility
  * @requires highcharts
  *
@@ -18,7 +18,7 @@ import ChartUtilities from '../../Accessibility/Utils/ChartUtilities.js';
 import HTMLUtilities from '../../Accessibility/Utils/HTMLUtilities.js';
 import KeyboardNavigationHandler from '../../Accessibility/KeyboardNavigationHandler.js';
 import SeriesDescriber from '../../Accessibility/Components/SeriesComponent/SeriesDescriber.js';
-var G = Highcharts;
+const G = Highcharts;
 G.i18nFormat = Accessibility.i18nFormat;
 G.A11yChartUtilities = ChartUtilities;
 G.A11yHTMLUtilities = HTMLUtilities;

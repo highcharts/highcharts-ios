@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  * Organization chart series type
  *
  * (c) 2019-2021 Torstein Honsi
@@ -113,6 +113,14 @@
              *  Functions
              *
              * */
+            OrganizationPoint.prototype.init = function () {
+                SankeyPointClass.prototype.init.apply(this, arguments);
+                if (!this.isNode) {
+                    this.dataLabelOnNull = true;
+                    this.formatPrefix = 'link';
+                }
+                return this;
+            };
             /**
              * All nodes in an org chart are equal width.
              * @private
@@ -385,9 +393,15 @@
                     /** @internal */
                     fontWeight: 'normal',
                     /** @internal */
-                    fontSize: '13px'
+                    fontSize: '0.9em'
                 },
-                useHTML: true
+                useHTML: true,
+                linkTextPath: {
+                    attributes: {
+                        startOffset: '95%',
+                        textAnchor: 'end'
+                    }
+                }
             },
             /**
              * The indentation in pixels of hanging nodes, nodes which parent has
@@ -530,6 +544,42 @@
          * @apioption series.organization.nodes.image
          */
         /**
+         * The format string specifying what to show for *links* in the
+         * organization chart.
+         *
+         * Best to use with [`linkTextPath`](#series.organization.dataLabels.linkTextPath) enabled.
+         *
+         * @sample highcharts/series-organization/link-labels
+         *         Organization chart with link labels
+         *
+         * @type      {string}
+         * @product   highcharts
+         * @apioption series.organization.dataLabels.linkFormat
+         * @since 11.0.0
+         */
+        /**
+         * Callback to format data labels for _links_ in the
+         * organization chart. The `linkFormat` option takes
+         * precedence over the `linkFormatter`.
+         *
+         * @type      {OrganizationDataLabelsFormatterCallbackFunction}
+         * @product   highcharts
+         * @apioption series.organization.dataLabels.linkFormatter
+         * @since 11.0.0
+         */
+        /**
+         * Options for a _link_ label text which should follow link
+         * connection.
+         *
+         * @sample highcharts/series-organization/link-labels
+         *         Organization chart with link labels
+         *
+         * @type { DataLabelTextPathOptions }
+         * @product highcharts
+         * @apioption series.organization.dataLabels.linkTextPath
+         * @since 11.0.0
+         */
+        /**
          * Layout for the node's children. If `hanging`, this node's children will hang
          * below their parent, allowing a tighter packing of nodes in the diagram.
          *
@@ -600,16 +650,69 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        /* *
-         *
-         *  Functions
-         *
-         * */
+        var getLinkPath = {
+            'default': getDefaultPath,
+            straight: getStraightPath,
+            curved: getCurvedPath
+        };
+        function getDefaultPath(pathParams) {
+            var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, radius = pathParams.radius, parentVisible = pathParams.parentVisible;
+            var path = [
+                ['M', x1, y1],
+                ['L', x1, y1],
+                ['C', x1, y1, x1, y2, x1, y2],
+                ['L', x1, y2],
+                ['C', x1, y1, x1, y2, x1, y2],
+                ['L', x1, y2]
+            ];
+            return parentVisible ?
+                applyRadius([
+                    ['M', x1, y1],
+                    ['L', x1 + width * (inverted ? -0.5 : 0.5), y1],
+                    ['L', x1 + width * (inverted ? -0.5 : 0.5), y2],
+                    ['L', x2, y2]
+                ], radius) :
+                path;
+        }
+        function getStraightPath(pathParams) {
+            var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, parentVisible = pathParams.parentVisible;
+            return parentVisible ? [
+                ['M', x1, y1],
+                ['L', x1 + width * (inverted ? -1 : 1), y2],
+                ['L', x2, y2]
+            ] : [
+                ['M', x1, y1],
+                ['L', x1, y2],
+                ['L', x1, y2]
+            ];
+        }
+        function getCurvedPath(pathParams) {
+            var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.offset, offset = _a === void 0 ? 0 : _a, _b = pathParams.width, width = _b === void 0 ? 0 : _b, _c = pathParams.inverted, inverted = _c === void 0 ? false : _c, parentVisible = pathParams.parentVisible;
+            return parentVisible ?
+                [
+                    ['M', x1, y1],
+                    [
+                        'C',
+                        x1 + offset,
+                        y1,
+                        x1 - offset + width * (inverted ? -1 : 1),
+                        y2,
+                        x1 + width * (inverted ? -1 : 1),
+                        y2
+                    ],
+                    ['L', x2, y2]
+                ] :
+                [
+                    ['M', x1, y1],
+                    ['C', x1, y1, x1, y2, x1, y2],
+                    ['L', x2, y2]
+                ];
+        }
         /**
          * General function to apply corner radius to a path
          * @private
          */
-        function curvedPath(path, r) {
+        function applyRadius(path, r) {
             var d = [];
             for (var i = 0; i < path.length; i++) {
                 var x = path[i][1];
@@ -661,7 +764,8 @@
             return d;
         }
         var PathUtilities = {
-            curvedPath: curvedPath
+            applyRadius: applyRadius,
+            getLinkPath: getLinkPath
         };
 
         return PathUtilities;
@@ -694,7 +798,7 @@
             };
         })();
         var SankeySeries = SeriesRegistry.seriesTypes.sankey;
-        var css = U.css, extend = U.extend, merge = U.merge, pick = U.pick;
+        var css = U.css, extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Class
@@ -792,7 +896,7 @@
                     delete attribs.fill;
                 }
                 else {
-                    if (borderRadius) {
+                    if (isNumber(borderRadius)) {
                         attribs.r = borderRadius;
                     }
                 }
@@ -863,7 +967,7 @@
                     }
                     else {
                         point.shapeArgs = {
-                            d: PathUtilities.curvedPath([
+                            d: PathUtilities.applyRadius([
                                 ['M', x1, y1],
                                 ['L', xMiddle, y1],
                                 ['L', xMiddle, y2],
@@ -912,6 +1016,16 @@
                 node.nodeHeight = this.chart.inverted ?
                     shapeArgs.width :
                     shapeArgs.height;
+            };
+            OrganizationSeries.prototype.drawDataLabels = function () {
+                var dlOptions = this.options.dataLabels;
+                if (dlOptions.linkTextPath && dlOptions.linkTextPath.enabled) {
+                    for (var _i = 0, _a = this.points; _i < _a.length; _i++) {
+                        var link = _a[_i];
+                        link.options.dataLabels = merge(link.options.dataLabels, { useHTML: false });
+                    }
+                }
+                _super.prototype.drawDataLabels.call(this);
             };
             OrganizationSeries.defaultOptions = merge(SankeySeries.defaultOptions, OrganizationSeriesDefaults);
             return OrganizationSeries;

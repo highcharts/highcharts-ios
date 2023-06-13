@@ -80,7 +80,9 @@ Whether to group non-stacked columns or to let them render independent of each o
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *grouping;
 /**
-The corner radius of the border surrounding each column or bar.
+The corner radius of the border surrounding each column or bar. A number signifies pixels. A percentage string, like for example `50%`, signifies a relative size. For columns this is relative to the column width, for pies it is relative to the radius and the inner radius.
+
+**Defaults to** `3`.
 
 **Try it**
 

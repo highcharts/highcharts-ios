@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Parabolic SAR Indicator for Highcharts Stock
  *
@@ -65,7 +65,7 @@
             };
         })();
         var SMAIndicator = SeriesRegistry.seriesTypes.sma;
-        var merge = U.merge, extend = U.extend;
+        var merge = U.merge;
         /* *
          *
          *  Functions
@@ -170,6 +170,7 @@
                  *
                  * */
                 _this.data = void 0;
+                _this.nameComponents = void 0;
                 _this.points = void 0;
                 _this.options = void 0;
                 return _this;
@@ -180,12 +181,13 @@
              *
              * */
             PSARIndicator.prototype.getValues = function (series, params) {
-                var xVal = series.xData, yVal = series.yData, 
+                var xVal = series.xData, yVal = series.yData, maxAccelerationFactor = params.maxAccelerationFactor, increment = params.increment, 
+                // Set initial acc factor (for every new trend!)
+                initialAccelerationFactor = params.initialAccelerationFactor, decimals = params.decimals, index = params.index, PSARArr = [], xData = [], yData = [];
+                var accelerationFactor = params.initialAccelerationFactor, direction, 
                 // Extreme point is the lowest low for falling and highest high
                 // for rising psar - and we are starting with falling
-                extremePoint = yVal[0][1], accelerationFactor = params.initialAccelerationFactor, maxAccelerationFactor = params.maxAccelerationFactor, increment = params.increment, 
-                // Set initial acc factor (for every new trend!)
-                initialAccelerationFactor = params.initialAccelerationFactor, PSAR = yVal[0][2], decimals = params.decimals, index = params.index, PSARArr = [], xData = [], yData = [], previousDirection = 1, direction, EPMinusPSAR, accelerationFactorMultiply, newDirection, prevLow, prevPrevLow, prevHigh, prevPrevHigh, newExtremePoint, high, low, ind;
+                extremePoint = yVal[0][1], EPMinusPSAR, accelerationFactorMultiply, newDirection, previousDirection = 1, prevLow, prevPrevLow, prevHigh, prevPrevHigh, PSAR = yVal[0][2], newExtremePoint, high, low, ind;
                 if (index >= yVal.length) {
                     return;
                 }
@@ -302,9 +304,6 @@
             });
             return PSARIndicator;
         }(SMAIndicator));
-        extend(PSARIndicator.prototype, {
-            nameComponents: void 0
-        });
         SeriesRegistry.registerSeriesType('psar', PSARIndicator);
         /* *
          *

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -102,7 +102,8 @@
              *
              * */
             AOIndicator.prototype.drawGraph = function () {
-                var indicator = this, options = indicator.options, points = indicator.points, userColor = indicator.userOptions.color, positiveColor = options.greaterBarColor, negativeColor = options.lowerBarColor, firstPoint = points[0], i;
+                var indicator = this, options = indicator.options, points = indicator.points, userColor = indicator.userOptions.color, positiveColor = options.greaterBarColor, negativeColor = options.lowerBarColor, firstPoint = points[0];
+                var i;
                 if (!userColor && firstPoint) {
                     firstPoint.color = positiveColor;
                     for (i = 1; i < points.length; i++) {
@@ -120,9 +121,10 @@
             };
             AOIndicator.prototype.getValues = function (series) {
                 var shortPeriod = 5, longPeriod = 34, xVal = series.xData || [], yVal = series.yData || [], yValLen = yVal.length, AO = [], // 0- date, 1- Awesome Oscillator
-                xData = [], yData = [], high = 1, low = 2, shortSum = 0, longSum = 0, shortSMA, // Shorter Period SMA
+                xData = [], yData = [], high = 1, low = 2;
+                var shortSMA, // Shorter Period SMA
                 longSMA, // Longer Period SMA
-                awesome, shortLastIndex, longLastIndex, price, i, j;
+                awesome, shortLastIndex, longLastIndex, price, i, j, longSum = 0, shortSum = 0;
                 if (xVal.length <= longPeriod ||
                     !isArray(yVal[0]) ||
                     yVal[0].length !== 4) {

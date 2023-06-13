@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * (c) 2016-2021 Highsoft AS
  * Authors: Jon Arild Nygard
@@ -42,6 +42,17 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
+        var __assign = (this && this.__assign) || function () {
+            __assign = Object.assign || function(t) {
+                for (var s, i = 1, n = arguments.length; i < n; i++) {
+                    s = arguments[i];
+                    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+                }
+                return t;
+            };
+            return __assign.apply(this, arguments);
+        };
         var isNumber = U.isNumber;
         /* *
          *
@@ -67,10 +78,7 @@
                 (point.series &&
                     point.series.options.animation);
             var graphic = point.graphic;
-            params.attribs = params.attribs || {};
-            // Assigning class in dot notation does go well in IE8
-            // eslint-disable-next-line dot-notation
-            params.attribs['class'] = point.getClassName();
+            params.attribs = __assign(__assign({}, params.attribs), { 'class': point.getClassName() }) || {};
             if ((point.shouldDraw())) {
                 if (!graphic) {
                     point.graphic = graphic = params.shapeType === 'text' ?

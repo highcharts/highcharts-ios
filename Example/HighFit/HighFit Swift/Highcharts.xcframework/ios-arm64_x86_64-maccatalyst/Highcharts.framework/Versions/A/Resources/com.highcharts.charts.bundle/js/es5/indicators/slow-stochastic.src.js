@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Slow Stochastic series type for Highcharts Stock
  *
@@ -60,7 +60,7 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
-        var _a = SeriesRegistry.seriesTypes, smaProto = _a.sma.prototype, StochasticIndicator = _a.stochastic;
+        var _a = SeriesRegistry.seriesTypes, SMAIndicator = _a.sma, StochasticIndicator = _a.stochastic;
         var extend = U.extend, merge = U.merge;
         /* *
          *
@@ -106,14 +106,13 @@
                     xData: [],
                     yData: []
                 };
-                var i = 0;
                 if (!fastValues) {
                     return;
                 }
                 slowValues.xData = fastValues.xData.slice(periods[1] - 1);
                 var fastYData = fastValues.yData.slice(periods[1] - 1);
                 // Get SMA(%D)
-                var smoothedValues = smaProto.getValues.call(this, {
+                var smoothedValues = SMAIndicator.prototype.getValues.call(this, {
                     xData: slowValues.xData,
                     yData: fastYData
                 }, {
@@ -123,9 +122,8 @@
                 if (!smoothedValues) {
                     return;
                 }
-                var xDataLen = slowValues.xData.length;
                 // Format data
-                for (; i < xDataLen; i++) {
+                for (var i = 0, xDataLen = slowValues.xData.length; i < xDataLen; i++) {
                     slowValues.yData[i] = [
                         fastYData[i][1],
                         smoothedValues.yData[i - periods[2] + 1] || null

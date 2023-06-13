@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Sankey diagram module
  *
@@ -62,7 +62,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             /* *
              *
              *  Functions
@@ -72,15 +72,13 @@
              * @private
              */
             function compose(PointClass, SeriesClass) {
-                if (composedClasses.indexOf(PointClass) === -1) {
-                    composedClasses.push(PointClass);
+                if (U.pushUnique(composedMembers, PointClass)) {
                     var pointProto_1 = PointClass.prototype;
                     pointProto_1.setNodeState = setNodeState;
                     pointProto_1.setState = setNodeState;
                     pointProto_1.update = updateNode;
                 }
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     var seriesProto_1 = SeriesClass.prototype;
                     seriesProto_1.destroy = destroy;
                     seriesProto_1.setData = setData;
@@ -723,7 +721,7 @@
                  * the item.
                  */
                 followPointer: true,
-                headerFormat: '<span style="font-size: 10px">{series.name}</span><br/>',
+                headerFormat: '<span style="font-size: 0.8em">{series.name}</span><br/>',
                 pointFormat: '{point.fromNode.name} \u2192 {point.toNode.name}: <b>{point.weight}</b><br/>',
                 /**
                  * The
@@ -1391,7 +1389,7 @@
         })();
         var Series = SeriesRegistry.series, ColumnSeries = SeriesRegistry.seriesTypes.column;
         var getLevelOptions = TU.getLevelOptions;
-        var defined = U.defined, extend = U.extend, isObject = U.isObject, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength, stableSort = U.stableSort;
+        var clamp = U.clamp, extend = U.extend, isObject = U.isObject, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength, stableSort = U.stableSort;
         /* *
          *
          *  Class
@@ -1767,9 +1765,9 @@
              * @private
              */
             SankeySeries.prototype.translateNode = function (node, column) {
-                var translationFactor = this.translationFactor, chart = this.chart, options = this.options, sum = node.getSum(), nodeHeight = Math.max(Math.round(sum * translationFactor), this.options.minLinkWidth), nodeWidth = Math.round(this.nodeWidth), crisp = Math.round(options.borderWidth) % 2 / 2, nodeOffset = column.sankeyColumn.offset(node, translationFactor), fromNodeTop = Math.floor(pick(nodeOffset.absoluteTop, (column.sankeyColumn.top(translationFactor) +
+                var translationFactor = this.translationFactor, chart = this.chart, options = this.options, borderRadius = options.borderRadius, _a = options.borderWidth, borderWidth = _a === void 0 ? 0 : _a, sum = node.getSum(), nodeHeight = Math.max(Math.round(sum * translationFactor), this.options.minLinkWidth), nodeWidth = Math.round(this.nodeWidth), crisp = Math.round(borderWidth) % 2 / 2, nodeOffset = column.sankeyColumn.offset(node, translationFactor), fromNodeTop = Math.floor(pick(nodeOffset.absoluteTop, (column.sankeyColumn.top(translationFactor) +
                     nodeOffset.relativeTop))) + crisp, left = Math.floor(this.colDistance * node.column +
-                    options.borderWidth / 2) + relativeLength(node.options.offsetHorizontal || 0, nodeWidth) +
+                    borderWidth / 2) + relativeLength(node.options.offsetHorizontal || 0, nodeWidth) +
                     crisp, nodeLeft = chart.inverted ?
                     chart.plotSizeX - left :
                     left;
@@ -1777,10 +1775,15 @@
                 // If node sum is 0, don't render the rect #12453
                 if (sum) {
                     // Draw the node
-                    node.shapeType = 'rect';
+                    node.shapeType = 'roundedRect';
                     node.nodeX = nodeLeft;
                     node.nodeY = fromNodeTop;
                     var x = nodeLeft, y = fromNodeTop, width = node.options.width || options.width || nodeWidth, height = node.options.height || options.height || nodeHeight;
+                    // border radius should not greater than half the height of the node
+                    // #18956
+                    var r = clamp(relativeLength((typeof borderRadius === 'object' ?
+                        borderRadius.radius :
+                        borderRadius || 0), width), 0, nodeHeight / 2);
                     if (chart.inverted) {
                         x = nodeLeft - nodeWidth;
                         y = chart.plotSizeY - fromNodeTop - nodeHeight;
@@ -1808,6 +1811,7 @@
                         y: y,
                         width: width,
                         height: height,
+                        r: r,
                         display: node.hasShape() ? '' : 'none'
                     };
                 }

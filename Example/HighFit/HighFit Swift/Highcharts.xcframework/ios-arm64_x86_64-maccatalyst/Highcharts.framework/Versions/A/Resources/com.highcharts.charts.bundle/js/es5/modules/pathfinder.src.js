@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v10.3.3 (2023-01-20)
+ * @license Highcharts Gantt JS v11.1.0 (2023-06-05)
  *
  * Pathfinder
  *
@@ -37,173 +37,6 @@
             }
         }
     }
-    _registerModule(_modules, 'Extensions/ArrowSymbols.js', [_modules['Core/Renderer/SVG/SVGRenderer.js']], function (SVGRenderer) {
-        /* *
-         *
-         *  (c) 2017 Highsoft AS
-         *  Authors: Lars A. V. Cabrera
-         *
-         *  License: www.highcharts.com/license
-         *
-         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
-         *
-         * */
-        var symbols = SVGRenderer.prototype.symbols;
-        /* *
-         *
-         *  Functions
-         *
-         * */
-        /**
-         * Creates an arrow symbol. Like a triangle, except not filled.
-         * ```
-         *                   o
-         *             o
-         *       o
-         * o
-         *       o
-         *             o
-         *                   o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the arrow
-         *
-         * @param {number} y
-         *        y position of the arrow
-         *
-         * @param {number} w
-         *        width of the arrow
-         *
-         * @param {number} h
-         *        height of the arrow
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function arrow(x, y, w, h) {
-            return [
-                ['M', x, y + h / 2],
-                ['L', x + w, y],
-                ['L', x, y + h / 2],
-                ['L', x + w, y + h]
-            ];
-        }
-        /**
-         * Creates a half-width arrow symbol. Like a triangle, except not filled.
-         * ```
-         *       o
-         *    o
-         * o
-         *    o
-         *       o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the arrow
-         *
-         * @param {number} y
-         *        y position of the arrow
-         *
-         * @param {number} w
-         *        width of the arrow
-         *
-         * @param {number} h
-         *        height of the arrow
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function arrowHalf(x, y, w, h) {
-            return arrow(x, y, w / 2, h);
-        }
-        /**
-         * Creates a left-oriented triangle.
-         * ```
-         *             o
-         *       ooooooo
-         * ooooooooooooo
-         *       ooooooo
-         *             o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the triangle
-         *
-         * @param {number} y
-         *        y position of the triangle
-         *
-         * @param {number} w
-         *        width of the triangle
-         *
-         * @param {number} h
-         *        height of the triangle
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function triangleLeft(x, y, w, h) {
-            return [
-                ['M', x + w, y],
-                ['L', x, y + h / 2],
-                ['L', x + w, y + h],
-                ['Z']
-            ];
-        }
-        /**
-         * Creates a half-width, left-oriented triangle.
-         * ```
-         *       o
-         *    oooo
-         * ooooooo
-         *    oooo
-         *       o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the triangle
-         *
-         * @param {number} y
-         *        y position of the triangle
-         *
-         * @param {number} w
-         *        width of the triangle
-         *
-         * @param {number} h
-         *        height of the triangle
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function triangleLeftHalf(x, y, w, h) {
-            return triangleLeft(x, y, w / 2, h);
-        }
-        symbols.arrow = arrow;
-        symbols['arrow-filled'] = triangleLeft;
-        symbols['arrow-filled-half'] = triangleLeftHalf;
-        symbols['arrow-half'] = arrowHalf;
-        symbols['triangle-left'] = triangleLeft;
-        symbols['triangle-left-half'] = triangleLeftHalf;
-        /* *
-         *
-         *  Default Export
-         *
-         * */
-
-        return symbols;
-    });
     _registerModule(_modules, 'Gantt/Connection.js', [_modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Core/Series/Point.js'], _modules['Core/Utilities.js']], function (D, H, Point, U) {
         /* *
          *
@@ -749,7 +582,8 @@
                         // Create new marker element
                         connection.graphics[type] = renderer
                             .symbol(options.symbol)
-                            .addClass('highcharts-point-connecting-path-' + type + '-marker')
+                            .addClass('highcharts-point-connecting-path-' + type + '-marker' +
+                            ' highcharts-color-' + this.fromPoint.colorIndex)
                             .attr(box)
                             .add(pathfinder.group);
                         if (!renderer.styledMode) {
@@ -2510,8 +2344,193 @@
 
         return Pathfinder;
     });
-    _registerModule(_modules, 'masters/modules/pathfinder.src.js', [], function () {
+    _registerModule(_modules, 'Extensions/ArrowSymbols.js', [_modules['Core/Utilities.js']], function (U) {
+        /* *
+         *
+         *  (c) 2017 Highsoft AS
+         *  Authors: Lars A. V. Cabrera
+         *
+         *  License: www.highcharts.com/license
+         *
+         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
+         *
+         * */
+        /* *
+         *
+         *  Constants
+         *
+         * */
+        var composedMembers = [];
+        /* *
+         *
+         *  Functions
+         *
+         * */
+        /**
+         * Creates an arrow symbol. Like a triangle, except not filled.
+         * ```
+         *                   o
+         *             o
+         *       o
+         * o
+         *       o
+         *             o
+         *                   o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the arrow
+         *
+         * @param {number} y
+         *        y position of the arrow
+         *
+         * @param {number} w
+         *        width of the arrow
+         *
+         * @param {number} h
+         *        height of the arrow
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function arrow(x, y, w, h) {
+            return [
+                ['M', x, y + h / 2],
+                ['L', x + w, y],
+                ['L', x, y + h / 2],
+                ['L', x + w, y + h]
+            ];
+        }
+        /**
+         * Creates a half-width arrow symbol. Like a triangle, except not filled.
+         * ```
+         *       o
+         *    o
+         * o
+         *    o
+         *       o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the arrow
+         *
+         * @param {number} y
+         *        y position of the arrow
+         *
+         * @param {number} w
+         *        width of the arrow
+         *
+         * @param {number} h
+         *        height of the arrow
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function arrowHalf(x, y, w, h) {
+            return arrow(x, y, w / 2, h);
+        }
+        /**
+         * @private
+         */
+        function compose(SVGRendererClass) {
+            if (U.pushUnique(composedMembers, SVGRendererClass)) {
+                var symbols = SVGRendererClass.prototype.symbols;
+                symbols.arrow = arrow;
+                symbols['arrow-filled'] = triangleLeft;
+                symbols['arrow-filled-half'] = triangleLeftHalf;
+                symbols['arrow-half'] = arrowHalf;
+                symbols['triangle-left'] = triangleLeft;
+                symbols['triangle-left-half'] = triangleLeftHalf;
+            }
+        }
+        /**
+         * Creates a left-oriented triangle.
+         * ```
+         *             o
+         *       ooooooo
+         * ooooooooooooo
+         *       ooooooo
+         *             o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the triangle
+         *
+         * @param {number} y
+         *        y position of the triangle
+         *
+         * @param {number} w
+         *        width of the triangle
+         *
+         * @param {number} h
+         *        height of the triangle
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function triangleLeft(x, y, w, h) {
+            return [
+                ['M', x + w, y],
+                ['L', x, y + h / 2],
+                ['L', x + w, y + h],
+                ['Z']
+            ];
+        }
+        /**
+         * Creates a half-width, left-oriented triangle.
+         * ```
+         *       o
+         *    oooo
+         * ooooooo
+         *    oooo
+         *       o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the triangle
+         *
+         * @param {number} y
+         *        y position of the triangle
+         *
+         * @param {number} w
+         *        width of the triangle
+         *
+         * @param {number} h
+         *        height of the triangle
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function triangleLeftHalf(x, y, w, h) {
+            return triangleLeft(x, y, w / 2, h);
+        }
+        /* *
+         *
+         *  Default Export
+         *
+         * */
+        var ArrowSymbols = {
+            compose: compose
+        };
 
+        return ArrowSymbols;
+    });
+    _registerModule(_modules, 'masters/modules/pathfinder.src.js', [_modules['Core/Globals.js'], _modules['Extensions/ArrowSymbols.js']], function (Highcharts, ArrowSymbols) {
+
+        var G = Highcharts;
+        ArrowSymbols.compose(G.SVGRenderer);
 
     });
 }));

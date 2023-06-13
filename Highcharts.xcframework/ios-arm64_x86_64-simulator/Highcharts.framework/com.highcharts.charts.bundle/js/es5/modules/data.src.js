@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Data module
  *
@@ -1259,7 +1259,7 @@
                 if (typeof str === 'string') {
                     str = str.replace(/^\s+|\s+$/g, '');
                     // Clear white space insdie the string, like thousands separators
-                    if (inside && /^[0-9\s]+$/.test(str)) {
+                    if (inside && /^-?[0-9\s]+$/.test(str)) {
                         str = str.replace(/\s/g, '');
                     }
                     if (this.decimalRegex) {
@@ -1742,7 +1742,6 @@
              */
             SeriesBuilder.prototype.read = function (columns, rowIndex) {
                 var builder = this, pointIsArray = builder.pointIsArray, point = pointIsArray ? [] : {};
-                var columnIndexes;
                 // Loop each reader and ask it to read its value.
                 // Then, build an array or point based on the readers names.
                 builder.readers.forEach(function (reader) {
@@ -1762,16 +1761,25 @@
                 });
                 // The name comes from the first column (excluding the x column)
                 if (typeof this.name === 'undefined' && builder.readers.length >= 2) {
-                    columnIndexes = builder.getReferencedColumnIndexes();
-                    if (columnIndexes.length >= 2) {
+                    var columnIndexes_1 = [];
+                    builder.readers.forEach(function (reader) {
+                        if (reader.configName === 'x' ||
+                            reader.configName === 'name' ||
+                            reader.configName === 'y') {
+                            if (typeof reader.columnIndex !== 'undefined') {
+                                columnIndexes_1.push(reader.columnIndex);
+                            }
+                        }
+                    });
+                    if (columnIndexes_1.length >= 2) {
                         // remove the first one (x col)
-                        columnIndexes.shift();
+                        columnIndexes_1.shift();
                         // Sort the remaining
-                        columnIndexes.sort(function (a, b) {
+                        columnIndexes_1.sort(function (a, b) {
                             return a - b;
                         });
                         // Now use the lowest index as name column
-                        this.name = columns[columnIndexes.shift()].name;
+                        this.name = columns[columnIndexes_1.shift()].name;
                     }
                 }
                 return point;

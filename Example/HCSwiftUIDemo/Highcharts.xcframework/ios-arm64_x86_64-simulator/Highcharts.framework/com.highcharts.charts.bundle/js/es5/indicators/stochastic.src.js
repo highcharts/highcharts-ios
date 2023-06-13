@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -115,7 +115,7 @@
             *  Constants
             *
             * */
-            var composedClasses = [];
+            var composedMembers = [];
             /**
              * Additional lines DOCS names. Elements of linesApiNames array should
              * be consistent with DOCS line names defined in your implementation.
@@ -170,8 +170,7 @@
              * @private
              */
             function compose(IndicatorClass) {
-                if (composedClasses.indexOf(IndicatorClass) === -1) {
-                    composedClasses.push(IndicatorClass);
+                if (U.pushUnique(composedMembers, IndicatorClass)) {
                     var proto = IndicatorClass.prototype;
                     proto.linesApiNames = (proto.linesApiNames ||
                         linesApiNames.slice());
@@ -434,7 +433,7 @@
              *
              * */
             StochasticIndicator.prototype.init = function () {
-                SeriesRegistry.seriesTypes.sma.prototype.init.apply(this, arguments);
+                _super.prototype.init.apply(this, arguments);
                 // Set default color for lines:
                 this.options = merge({
                     smoothedLine: {
@@ -447,13 +446,17 @@
             StochasticIndicator.prototype.getValues = function (series, params) {
                 var periodK = params.periods[0], periodD = params.periods[1], xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, 
                 // 0- date, 1-%K, 2-%D
-                SO = [], xData = [], yData = [], slicedY, close = 3, low = 2, high = 1, CL, HL, LL, K, D = null, points, extremes, i;
+                SO = [], xData = [], yData = [], close = 3, low = 2, high = 1;
+                var slicedY, CL, HL, LL, K, D = null, points, extremes, i;
                 // Stochastic requires close value
                 if (yValLen < periodK ||
                     !isArray(yVal[0]) ||
                     yVal[0].length !== 4) {
                     return;
                 }
+                // If the value of initial points is constant, wait until it changes
+                // to calculate correct Stochastic values
+                var constantValues = true, j = 0;
                 // For a N-period, we start from N-1 point, to calculate Nth point
                 // That is why we later need to comprehend slice() elements list
                 // with (+1)
@@ -465,12 +468,31 @@
                     CL = yVal[i][close] - LL;
                     HL = extremes[1] - LL;
                     K = CL / HL * 100;
-                    xData.push(xVal[i]);
-                    yData.push([K, null]);
+                    if (isNaN(K) && constantValues) {
+                        j++;
+                        continue;
+                    }
+                    else if (constantValues && !isNaN(K)) {
+                        constantValues = false;
+                    }
+                    var length_1 = xData.push(xVal[i]);
+                    // If N-period previous values are constant which results in NaN %K,
+                    // we need to use previous %K value if it is a number,
+                    // otherwise we should use null
+                    if (isNaN(K)) {
+                        yData.push([
+                            yData[length_1 - 2] &&
+                                typeof yData[length_1 - 2][0] === 'number' ?
+                                yData[length_1 - 2][0] : null,
+                            null
+                        ]);
+                    }
+                    else {
+                        yData.push([K, null]);
+                    }
                     // Calculate smoothed %D, which is SMA of %K
-                    if (i >= (periodK - 1) + (periodD - 1)) {
-                        points = SeriesRegistry.seriesTypes.sma.prototype.getValues
-                            .call(this, {
+                    if (i >= j + (periodK - 1) + (periodD - 1)) {
+                        points = _super.prototype.getValues.call(this, {
                             xData: xData.slice(-periodD),
                             yData: yData.slice(-periodD)
                         }, {
@@ -479,7 +501,7 @@
                         D = points.yData[0];
                     }
                     SO.push([xVal[i], K, D]);
-                    yData[yData.length - 1][1] = D;
+                    yData[length_1 - 1][1] = D;
                 }
                 return {
                     values: SO,

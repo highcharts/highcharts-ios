@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Exporting module
  *
@@ -741,7 +741,7 @@
                  *
                  * @since 2.0
                  */
-                symbolX: 12.5,
+                symbolX: 14.5,
                 /**
                  * The y position of the center of the symbol inside the button.
                  *
@@ -750,7 +750,7 @@
                  *
                  * @since 2.0
                  */
-                symbolY: 10.5,
+                symbolY: 13.5,
                 /**
                  * Alignment for the buttons.
                  *
@@ -775,7 +775,7 @@
                  *
                  * @since 2.0
                  */
-                height: 22,
+                height: 28,
                 /**
                  * A text string to add to the individual button.
                  *
@@ -834,7 +834,7 @@
                  *
                  * @since 2.0
                  */
-                width: 24,
+                width: 28,
                 /**
                  * Fill color for the symbol within the button.
                  *
@@ -909,16 +909,18 @@
              *         Light gray menu background
              *
              * @type    {Highcharts.CSSObject}
-             * @default {"border": "1px solid #999999", "background": "#ffffff", "padding": "5px 0"}
+             * @default {"background": "#ffffff", "borderRadius": "3px", "padding": "0.5em"}
              * @since   2.0
              */
             menuStyle: {
                 /** @ignore-option */
-                border: "1px solid ".concat("#999999" /* Palette.neutralColor40 */),
+                border: 'none',
+                /** @ignore-option */
+                borderRadius: '3px',
                 /** @ignore-option */
                 background: "#ffffff" /* Palette.backgroundColor */,
                 /** @ignore-option */
-                padding: '5px 0'
+                padding: '0.5em'
             },
             /**
              * CSS styles for the individual items within the popup menu appearing
@@ -933,18 +935,20 @@
              *         Add a grey stripe to the left
              *
              * @type    {Highcharts.CSSObject}
-             * @default {"padding": "0.5em 1em", "color": "#333333", "background": "none", "fontSize": "11px/14px", "transition": "background 250ms, color 250ms"}
+             * @default {"padding": "0.5em", "color": "#333333", "background": "none", "borderRadius": "3px", "fontSize": "0.8em", "transition": "background 250ms, color 250ms"}
              * @since   2.0
              */
             menuItemStyle: {
                 /** @ignore-option */
-                padding: '0.5em 1em',
+                background: 'none',
+                /** @ignore-option */
+                borderRadius: '3px',
                 /** @ignore-option */
                 color: "#333333" /* Palette.neutralColor80 */,
                 /** @ignore-option */
-                background: 'none',
+                padding: '0.5em',
                 /** @ignore-option */
-                fontSize: isTouchDevice ? '14px' : '11px',
+                fontSize: isTouchDevice ? '0.9em' : '0.8em',
                 /** @ignore-option */
                 transition: 'background 250ms, color 250ms'
             },
@@ -960,14 +964,12 @@
              *         Bold text on hover
              *
              * @type    {Highcharts.CSSObject}
-             * @default {"background": "#335cad", "color": "#ffffff"}
+             * @default {"background": "#f2f2f2" }
              * @since   2.0
              */
             menuItemHoverStyle: {
                 /** @ignore-option */
-                background: "#335cad" /* Palette.highlightColor80 */,
-                /** @ignore-option */
-                color: "#ffffff" /* Palette.backgroundColor */
+                background: "#f2f2f2" /* Palette.neutralColor5 */
             }
         };
         /* *
@@ -1086,7 +1088,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -1185,8 +1187,7 @@
              * The chart class to decorate with fullscreen support.
              */
             Fullscreen.compose = function (ChartClass) {
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     // Initialize fullscreen
                     addEvent(ChartClass, 'beforeRender', onChartBeforeRender);
                 }
@@ -1277,7 +1278,6 @@
                         };
                         var promise = chart.renderTo[fullscreen.browserProps.requestFullscreen]();
                         if (promise) {
-                            // No dot notation because of IE8 compatibility
                             promise['catch'](function () {
                                 alert(// eslint-disable-line no-alert
                                 'Full screen is not supported inside a frame.');
@@ -1644,7 +1644,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             // These CSS properties are not inlined. Remember camelCase.
             var inlineDenylist = [
                 /-/,
@@ -1914,8 +1914,7 @@
             function compose(ChartClass, SVGRendererClass) {
                 ExportingSymbols.compose(SVGRendererClass);
                 Fullscreen.compose(ChartClass);
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     var chartProto = ChartClass.prototype;
                     chartProto.afterPrint = afterPrint;
                     chartProto.exportChart = exportChart;
@@ -1948,8 +1947,7 @@
                         });
                     }
                 }
-                if (composedClasses.indexOf(setOptions) === -1) {
-                    composedClasses.push(setOptions);
+                if (U.pushUnique(composedMembers, setOptions)) {
                     defaultOptions.exporting = merge(ExportingDefaults.exporting, defaultOptions.exporting);
                     defaultOptions.lang = merge(ExportingDefaults.lang, defaultOptions.lang);
                     // Buttons and menus are collected in a separate config option set
@@ -1993,7 +1991,7 @@
                             padding: menuPadding + 'px',
                             pointerEvents: 'auto'
                         }, chart.fixedDiv || chart.container);
-                    innerMenu = createElement('ul', { className: 'highcharts-menu' }, {
+                    innerMenu = createElement('ul', { className: 'highcharts-menu' }, chart.styledMode ? {} : {
                         listStyle: 'none',
                         margin: 0,
                         padding: 0
@@ -2207,8 +2205,7 @@
                         exportingOptions.filename.replace(/\//g, '-') :
                         this.getFilename(),
                     type: exportingOptions.type,
-                    // IE8 fails to post undefined correctly, so use 0
-                    width: exportingOptions.width || 0,
+                    width: exportingOptions.width,
                     scale: exportingOptions.scale,
                     svg: svg
                 }, exportingOptions.formAttributes);
@@ -2700,7 +2697,7 @@
             }
             /**
              * Exporting module only. A collection of fixes on the produced SVG to
-             * account for expando properties, browser bugs, VML problems and other.
+             * account for expando properties, browser bugs.
              * Returns a cleaned SVG.
              *
              * @private
@@ -2747,10 +2744,6 @@
                     // Replace HTML entities, issue #347
                     .replace(/&nbsp;/g, '\u00A0') // no-break space
                     .replace(/&shy;/g, '\u00AD'); // soft hyphen
-                // Further sanitize for oldIE
-                if (this.ieSanitizeSVG) {
-                    svg = this.ieSanitizeSVG(svg);
-                }
                 return svg;
             }
         })(Exporting || (Exporting = {}));

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -125,14 +125,15 @@
                     return val + accX;
                 }, 0), ySum = yData.reduce(function (accY, val) {
                     return getSingleYValue(val, yIndex) + accY;
-                }, 0), xMean = xSum / xData.length, yMean = ySum / yData.length, xError, yError, formulaNumerator = 0, formulaDenominator = 0, i, slope;
+                }, 0), xMean = xSum / xData.length, yMean = ySum / yData.length;
+                var xError, yError, i, formulaNumerator = 0, formulaDenominator = 0;
                 for (i = 0; i < xData.length; i++) {
                     xError = xData[i] - xMean;
                     yError = getSingleYValue(yData[i], yIndex) - yMean;
                     formulaNumerator += xError * yError;
                     formulaDenominator += Math.pow(xError, 2);
                 }
-                slope = formulaDenominator ?
+                var slope = formulaDenominator ?
                     formulaNumerator / formulaDenominator : 0; // don't divide by 0
                 return {
                     slope: slope,
@@ -198,14 +199,15 @@
             };
             // Required to be implemented - starting point for indicator's logic
             LinearRegressionIndicator.prototype.getValues = function (baseSeries, regressionSeriesParams) {
-                var xData = baseSeries.xData, yData = baseSeries.yData, period = regressionSeriesParams.period, lineParameters, i, periodStart, periodEnd, 
+                var xData = baseSeries.xData, yData = baseSeries.yData, period = regressionSeriesParams.period, 
                 // format required to be returned
                 indicatorData = {
                     xData: [],
                     yData: [],
                     values: []
-                }, endPointX, endPointY, periodXData, periodYData, periodTransformedXData, xAxisUnit = this.options.params.xAxisUnit ||
+                }, xAxisUnit = this.options.params.xAxisUnit ||
                     this.findClosestDistance(xData);
+                var lineParameters, i, periodStart, periodEnd, endPointX, endPointY, periodXData, periodYData, periodTransformedXData;
                 // Iteration logic: x value of the last point within the period
                 // (end point) is used to represent the y value (regression)
                 // of the entire period.

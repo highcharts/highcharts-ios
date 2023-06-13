@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -66,7 +66,7 @@
             *  Constants
             *
             * */
-            var composedClasses = [];
+            var composedMembers = [];
             /**
              * Additional lines DOCS names. Elements of linesApiNames array should
              * be consistent with DOCS line names defined in your implementation.
@@ -121,8 +121,7 @@
              * @private
              */
             function compose(IndicatorClass) {
-                if (composedClasses.indexOf(IndicatorClass) === -1) {
-                    composedClasses.push(IndicatorClass);
+                if (U.pushUnique(composedMembers, IndicatorClass)) {
                     var proto = IndicatorClass.prototype;
                     proto.linesApiNames = (proto.linesApiNames ||
                         linesApiNames.slice());
@@ -356,7 +355,8 @@
          * @private
          */
         function getStandardDeviation(arr, index, isOHLC, mean) {
-            var variance = 0, arrLen = arr.length, std = 0, i = 0, value;
+            var arrLen = arr.length;
+            var i = 0, std = 0, value, variance = 0;
             for (; i < arrLen; i++) {
                 value = (isOHLC ? arr[i][index] : arr[i]) - mean;
                 variance += value * value;
@@ -420,15 +420,15 @@
                 }, this.options);
             };
             BBIndicator.prototype.getValues = function (series, params) {
-                var period = params.period, standardDeviation = params.standardDeviation, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, 
+                var period = params.period, standardDeviation = params.standardDeviation, xData = [], yData = [], xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, 
                 // 0- date, 1-middle line, 2-top line, 3-bottom line
-                BB = [], 
+                BB = [];
                 // middle line, top line and bottom line
-                ML, TL, BL, date, xData = [], yData = [], slicedX, slicedY, stdDev, isOHLC, point, i;
+                var ML, TL, BL, date, slicedX, slicedY, stdDev, point, i;
                 if (xVal.length < period) {
                     return;
                 }
-                isOHLC = isArray(yVal[0]);
+                var isOHLC = isArray(yVal[0]);
                 for (i = period; i <= yValLen; i++) {
                     slicedX = xVal.slice(i - period, i);
                     slicedY = yVal.slice(i - period, i);

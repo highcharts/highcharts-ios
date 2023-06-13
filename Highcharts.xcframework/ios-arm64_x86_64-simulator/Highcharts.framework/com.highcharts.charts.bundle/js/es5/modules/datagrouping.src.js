@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Data grouping module
  *
@@ -259,34 +259,34 @@
             // dealing with a range
             dateTimeLabelFormats: {
                 millisecond: [
-                    '%A, %b %e, %H:%M:%S.%L',
-                    '%A, %b %e, %H:%M:%S.%L',
+                    '%A, %e %b, %H:%M:%S.%L',
+                    '%A, %e %b, %H:%M:%S.%L',
                     '-%H:%M:%S.%L'
                 ],
                 second: [
-                    '%A, %b %e, %H:%M:%S',
-                    '%A, %b %e, %H:%M:%S',
+                    '%A, %e %b, %H:%M:%S',
+                    '%A, %e %b, %H:%M:%S',
                     '-%H:%M:%S'
                 ],
                 minute: [
-                    '%A, %b %e, %H:%M',
-                    '%A, %b %e, %H:%M',
+                    '%A, %e %b, %H:%M',
+                    '%A, %e %b, %H:%M',
                     '-%H:%M'
                 ],
                 hour: [
-                    '%A, %b %e, %H:%M',
-                    '%A, %b %e, %H:%M',
+                    '%A, %e %b, %H:%M',
+                    '%A, %e %b, %H:%M',
                     '-%H:%M'
                 ],
                 day: [
-                    '%A, %b %e, %Y',
-                    '%A, %b %e',
-                    '-%A, %b %e, %Y'
+                    '%A, %e %b %Y',
+                    '%A, %e %b',
+                    '-%A, %e %b %Y'
                 ],
                 week: [
-                    'Week from %A, %b %e, %Y',
-                    '%A, %b %e',
-                    '-%A, %b %e, %Y'
+                    'Week from %A, %e %b %Y',
+                    '%A, %e %b',
+                    '-%A, %e %b %Y'
                 ],
                 month: [
                     '%B %Y',
@@ -434,8 +434,7 @@
          */
         function compose(AxisClass) {
             AxisConstructor = AxisClass;
-            if (composedMembers.indexOf(AxisClass) === -1) {
-                composedMembers.push(AxisClass);
+            if (U.pushUnique(composedMembers, AxisClass)) {
                 addEvent(AxisClass, 'afterSetScale', onAfterSetScale);
                 // When all series are processed, calculate the group pixel width and
                 // then if this value is different than zero apply groupings.
@@ -770,8 +769,7 @@
          */
         function compose(SeriesClass) {
             var PointClass = SeriesClass.prototype.pointClass;
-            if (composedMembers.indexOf(PointClass) === -1) {
-                composedMembers.push(PointClass);
+            if (U.pushUnique(composedMembers, PointClass)) {
                 // Override point prototype to throw a warning when trying to update
                 // grouped points.
                 addEvent(PointClass, 'update', function () {
@@ -781,8 +779,7 @@
                     }
                 });
             }
-            if (composedMembers.indexOf(SeriesClass) === -1) {
-                composedMembers.push(SeriesClass);
+            if (U.pushUnique(composedMembers, SeriesClass)) {
                 addEvent(SeriesClass, 'afterSetOptions', onAfterSetOptions);
                 addEvent(SeriesClass, 'destroy', destroyGroupedData);
                 extend(SeriesClass.prototype, {
@@ -840,7 +837,11 @@
             if (this.is('hlc')) {
                 return 'hlc';
             }
-            if (this.is('column')) {
+            if (
+            // #18974, default approximation for cumulative
+            // should be `sum` when `dataGrouping` is enabled
+            this.is('column') ||
+                this.options.cumulative) {
                 return 'sum';
             }
             return 'average';
@@ -1026,7 +1027,7 @@
 
         return DataGroupingSeriesComposition;
     });
-    _registerModule(_modules, 'Extensions/DataGrouping/DataGrouping.js', [_modules['Extensions/DataGrouping/DataGroupingAxisComposition.js'], _modules['Extensions/DataGrouping/DataGroupingDefaults.js'], _modules['Extensions/DataGrouping/DataGroupingSeriesComposition.js'], _modules['Core/FormatUtilities.js'], _modules['Core/Utilities.js']], function (DataGroupingAxisComposition, DataGroupingDefaults, DataGroupingSeriesComposition, F, U) {
+    _registerModule(_modules, 'Extensions/DataGrouping/DataGrouping.js', [_modules['Extensions/DataGrouping/DataGroupingAxisComposition.js'], _modules['Extensions/DataGrouping/DataGroupingDefaults.js'], _modules['Extensions/DataGrouping/DataGroupingSeriesComposition.js'], _modules['Core/Templating.js'], _modules['Core/Utilities.js']], function (DataGroupingAxisComposition, DataGroupingDefaults, DataGroupingSeriesComposition, F, U) {
         /* *
          *
          *  (c) 2010-2021 Torstein Honsi
@@ -1055,8 +1056,8 @@
         function compose(AxisClass, SeriesClass, TooltipClass) {
             DataGroupingAxisComposition.compose(AxisClass);
             DataGroupingSeriesComposition.compose(SeriesClass);
-            if (composedMembers.indexOf(TooltipClass) === -1) {
-                composedMembers.push(TooltipClass);
+            if (TooltipClass &&
+                U.pushUnique(composedMembers, TooltipClass)) {
                 addEvent(TooltipClass, 'headerFormatter', onTooltipHeaderFormatter);
             }
         }
@@ -1287,13 +1288,13 @@
          * ```js
          * {
          *     millisecond: [
-         *         '%A, %b %e, %H:%M:%S.%L', '%A, %b %e, %H:%M:%S.%L', '-%H:%M:%S.%L'
+         *         '%A, %e %b, %H:%M:%S.%L', '%A, %e %b, %H:%M:%S.%L', '-%H:%M:%S.%L'
          *     ],
-         *     second: ['%A, %b %e, %H:%M:%S', '%A, %b %e, %H:%M:%S', '-%H:%M:%S'],
-         *     minute: ['%A, %b %e, %H:%M', '%A, %b %e, %H:%M', '-%H:%M'],
-         *     hour: ['%A, %b %e, %H:%M', '%A, %b %e, %H:%M', '-%H:%M'],
-         *     day: ['%A, %b %e, %Y', '%A, %b %e', '-%A, %b %e, %Y'],
-         *     week: ['Week from %A, %b %e, %Y', '%A, %b %e', '-%A, %b %e, %Y'],
+         *     second: ['%A, %e %b, %H:%M:%S', '%A, %e %b, %H:%M:%S', '-%H:%M:%S'],
+         *     minute: ['%A, %e %b, %H:%M', '%A, %e %b, %H:%M', '-%H:%M'],
+         *     hour: ['%A, %e %b, %H:%M', '%A, %e %b, %H:%M', '-%H:%M'],
+         *     day: ['%A, %e %b %Y', '%A, %e %b', '-%A, %e %b %Y'],
+         *     week: ['Week from %A, %e %b %Y', '%A, %e %b', '-%A, %e %b %Y'],
          *     month: ['%B %Y', '%B', '-%B %Y'],
          *     year: ['%Y', '%Y', '-%Y']
          * }

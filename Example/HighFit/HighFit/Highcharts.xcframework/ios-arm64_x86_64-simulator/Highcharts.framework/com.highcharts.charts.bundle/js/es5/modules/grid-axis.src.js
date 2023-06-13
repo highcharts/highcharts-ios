@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v10.3.3 (2023-01-20)
+ * @license Highcharts Gantt JS v11.1.0 (2023-06-05)
  *
  * GridAxis
  *
@@ -37,7 +37,7 @@
             }
         }
     }
-    _registerModule(_modules, 'Core/Axis/GridAxis.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Axis/AxisDefaults.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (Axis, AxisDefaults, H, U) {
+    _registerModule(_modules, 'Core/Axis/GridAxis.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (Axis, H, U) {
         /* *
          *
          *  (c) 2016 Highsoft AS
@@ -71,7 +71,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -121,8 +121,7 @@
          * @private
          */
         function compose(AxisClass, ChartClass, TickClass) {
-            if (composedClasses.indexOf(AxisClass) === -1) {
-                composedClasses.push(AxisClass);
+            if (U.pushUnique(composedMembers, AxisClass)) {
                 AxisClass.keepProps.push('grid');
                 AxisClass.prototype.getMaxLabelDimensions = getMaxLabelDimensions;
                 wrap(AxisClass.prototype, 'unsquish', wrapUnsquish);
@@ -140,10 +139,10 @@
                 addEvent(AxisClass, 'trimTicks', onTrimTicks);
                 addEvent(AxisClass, 'destroy', onDestroy);
             }
-            if (composedClasses.indexOf(ChartClass) === -1) {
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'afterSetChartSize', onChartAfterSetChartSize);
             }
-            if (composedClasses.indexOf(TickClass) === -1) {
+            if (U.pushUnique(composedMembers, TickClass)) {
                 addEvent(TickClass, 'afterGetLabelPosition', onTickAfterGetLabelPosition);
                 addEvent(TickClass, 'labelFormat', onTickLabelFormat);
             }
@@ -230,7 +229,7 @@
                 var xOption = options_1.title.x;
                 var yOption = options_1.title.y;
                 var titleMargin = pick(options_1.title.margin, horiz ? 5 : 10);
-                var titleFontSize = axis.chart.renderer.fontMetrics(options_1.title.style.fontSize, axisTitle).f;
+                var titleFontSize = axisTitle ? axis.chart.renderer.fontMetrics(axisTitle).f : 0;
                 var crispCorr = tickSize ? tickSize[0] / 2 : 0;
                 // TODO account for alignment
                 // the position in the perpendicular direction of the axis
@@ -266,6 +265,7 @@
                 // Handle columns, each column is a grid axis
                 while (++columnIndex < gridOptions.columns.length) {
                     var columnOptions = merge(userOptions, gridOptions.columns[gridOptions.columns.length - columnIndex - 1], {
+                        isInternal: true,
                         linkedTo: 0,
                         // Force to behave like category axis
                         type: 'category',
@@ -275,13 +275,13 @@
                         }
                     });
                     delete columnOptions.grid.columns; // Prevent recursion
-                    var column = new Axis(axis.chart, columnOptions);
+                    var column = new Axis(axis.chart, columnOptions, 'yAxis');
                     column.grid.isColumn = true;
                     column.grid.columnIndex = columnIndex;
                     // Remove column axis from chart axes array, and place it
                     // in the columns array.
                     erase(chart.axes, column);
-                    erase(chart[axis.coll], column);
+                    erase(chart[axis.coll] || [], column);
                     columns.push(column);
                 }
             }
@@ -526,7 +526,7 @@
                     labels: {
                         padding: 2,
                         style: {
-                            fontSize: '13px'
+                            fontSize: '0.9em'
                         }
                     },
                     margin: 0,
@@ -664,10 +664,9 @@
          * @private
          */
         function onAfterTickSize(e) {
-            var defaultLeftAxisOptions = AxisDefaults.defaultLeftAxisOptions;
             var _a = this, horiz = _a.horiz, maxLabelDimensions = _a.maxLabelDimensions, _b = _a.options.grid, gridOptions = _b === void 0 ? {} : _b;
             if (gridOptions.enabled && maxLabelDimensions) {
-                var labelPadding = (Math.abs(defaultLeftAxisOptions.labels.x) * 2);
+                var labelPadding = this.options.labels.distance * 2;
                 var distance = horiz ?
                     (gridOptions.cellHeight ||
                         labelPadding + maxLabelDimensions.height) :
@@ -727,21 +726,21 @@
             side = GridAxisSide[axis.side], tickmarkOffset = e.tickmarkOffset, tickPositions = axis.tickPositions, tickPos = tick.pos - tickmarkOffset, nextTickPos = (isNumber(tickPositions[e.index + 1]) ?
                 tickPositions[e.index + 1] - tickmarkOffset :
                 (axis.max || 0) + tickmarkOffset), tickSize = axis.tickSize('tick'), tickWidth = tickSize ? tickSize[0] : 0, crispCorr = tickSize ? tickSize[1] / 2 : 0;
-            var labelHeight, lblMetrics, lines, bottom, top, left, right;
             // Only center tick labels in grid axes
             if (gridOptions.enabled === true) {
+                var bottom = void 0, top_1, left = void 0, right = void 0;
                 // Calculate top and bottom positions of the cell.
                 if (side === 'top') {
                     bottom = axis.top + axis.offset;
-                    top = bottom - tickWidth;
+                    top_1 = bottom - tickWidth;
                 }
                 else if (side === 'bottom') {
-                    top = chart.chartHeight - axis.bottom + axis.offset;
-                    bottom = top + tickWidth;
+                    top_1 = chart.chartHeight - axis.bottom + axis.offset;
+                    bottom = top_1 + tickWidth;
                 }
                 else {
                     bottom = axis.top + axis.len - (axis.translate(reversed ? nextTickPos : tickPos) || 0);
-                    top = axis.top + axis.len - (axis.translate(reversed ? tickPos : nextTickPos) || 0);
+                    top_1 = axis.top + axis.len - (axis.translate(reversed ? tickPos : nextTickPos) || 0);
                 }
                 // Calculate left and right positions of the cell.
                 if (side === 'right') {
@@ -767,30 +766,31 @@
                         left + ((right - left) / 2) // default to center
                 );
                 e.pos.y = (verticalAlign === 'top' ?
-                    top :
+                    top_1 :
                     verticalAlign === 'bottom' ?
                         bottom :
-                        top + ((bottom - top) / 2) // default to middle
+                        top_1 + ((bottom - top_1) / 2) // default to middle
                 );
-                lblMetrics = chart.renderer.fontMetrics(labelOpts.style.fontSize, label && label.element);
-                labelHeight = label ? label.getBBox().height : 0;
-                // Adjustment to y position to align the label correctly.
-                // Would be better to have a setter or similar for this.
-                if (!labelOpts.useHTML) {
-                    lines = Math.round(labelHeight / lblMetrics.h);
-                    e.pos.y += (
-                    // Center the label
-                    // TODO: why does this actually center the label?
-                    ((lblMetrics.b - (lblMetrics.h - lblMetrics.f)) / 2) +
-                        // Adjust for height of additional lines.
-                        -(((lines - 1) * lblMetrics.h) / 2));
-                }
-                else {
-                    e.pos.y += (
-                    // Readjust yCorr in htmlUpdateTransform
-                    lblMetrics.b +
-                        // Adjust for height of html label
-                        -(labelHeight / 2));
+                if (label) {
+                    var lblMetrics = chart.renderer.fontMetrics(label), labelHeight = label.getBBox().height;
+                    // Adjustment to y position to align the label correctly.
+                    // Would be better to have a setter or similar for this.
+                    if (!labelOpts.useHTML) {
+                        var lines = Math.round(labelHeight / lblMetrics.h);
+                        e.pos.y += (
+                        // Center the label
+                        // TODO: why does this actually center the label?
+                        ((lblMetrics.b - (lblMetrics.h - lblMetrics.f)) / 2) +
+                            // Adjust for height of additional lines.
+                            -(((lines - 1) * lblMetrics.h) / 2));
+                    }
+                    else {
+                        e.pos.y += (
+                        // Readjust yCorr in htmlUpdateTransform
+                        lblMetrics.b +
+                            // Adjust for height of html label
+                            -(labelHeight / 2));
+                    }
                 }
                 e.pos.x += (axis.horiz && labelOpts.x) || 0;
             }

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -103,22 +103,21 @@
             PPOIndicator.prototype.getValues = function (series, params) {
                 var periods = params.periods, index = params.index, 
                 // 0- date, 1- Percentage Price Oscillator
-                PPO = [], xData = [], yData = [], periodsOffset, 
-                // Shorter Period EMA
-                SPE, 
-                // Longer Period EMA
-                LPE, oscillator, i;
+                PPO = [], xData = [], yData = [];
+                var oscillator, i;
                 // Check if periods are correct
                 if (periods.length !== 2 || periods[1] <= periods[0]) {
                     error('Error: "PPO requires two periods. Notice, first period ' +
                         'should be lower than the second one."');
                     return;
                 }
-                SPE = EMAIndicator.prototype.getValues.call(this, series, {
+                // Shorter Period EMA
+                var SPE = _super.prototype.getValues.call(this, series, {
                     index: index,
                     period: periods[0]
                 });
-                LPE = EMAIndicator.prototype.getValues.call(this, series, {
+                // Longer Period EMA
+                var LPE = _super.prototype.getValues.call(this, series, {
                     index: index,
                     period: periods[1]
                 });
@@ -126,7 +125,7 @@
                 if (!SPE || !LPE) {
                     return;
                 }
-                periodsOffset = periods[1] - periods[0];
+                var periodsOffset = periods[1] - periods[0];
                 for (i = 0; i < LPE.yData.length; i++) {
                     oscillator = correctFloat((SPE.yData[i + periodsOffset] -
                         LPE.yData[i]) /

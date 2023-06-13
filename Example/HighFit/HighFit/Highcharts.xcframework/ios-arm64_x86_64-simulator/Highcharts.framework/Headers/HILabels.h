@@ -20,13 +20,13 @@ The axis labels show the number or category for each tick. Since v8.0.0: Labels 
 @interface HILabels: HIChartsJSONSerializable
 
 /**
-Angular gauges and solid gauges only. The label's pixel distance from the perimeter of the plot area. Since v7.1.2: If it's a percentage string, it is interpreted the same as `series.radius`, so label can be aligned under the gauge's shape.
+The label's pixel distance from the perimeter of the plot area. On cartesian charts, this is overridden if the `labels.y` setting is set. On polar charts, if it's a percentage string, it is interpreted the same as `series.radius`, so the label can be aligned under the gauge's shape.
 
-**Defaults to** `-25`.
+**Defaults to** `15`.
 
 **Try it**
 
-* [Labels centered under the arc](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/labels-distance/)
+* [Polar chart, labels centered under the arc](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/labels-distance/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ distance;
 /**
@@ -50,8 +50,6 @@ The y position offset of all labels relative to the tick positions on the axis. 
 @property(nonatomic, readwrite) NSNumber *y;
 /**
 The x position offset of all labels relative to the tick positions on the axis. Defaults to -15 for left axis, 15 for right axis.
-
-**Defaults to** `-8`.
 
 **Try it**
 

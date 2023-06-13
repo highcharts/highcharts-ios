@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * (c) 2009-2021 Torstein Honsi
  *
@@ -161,13 +161,13 @@
                     // We flip whether or not we update the top or bottom of the guide
                     // box at threshold, but if we drag the mouse fast, the top has not
                     // reached threshold before we cross over and update the bottom.
-                    var threshold = point.series.translatedThreshold, y = guideBox.attr('y'), height, diff;
-                    if (pointVals.y >= point.series.options.threshold || 0) {
+                    var plotThreshold = pick(point.yBottom, // Added support for stacked series. (#18741)
+                    point.series.translatedThreshold), plotY = guideBox.attr('y'), threshold = isNumber(point.stackY) ? (point.stackY - (point.y || 0)) : point.series.options.threshold || 0, y = threshold + pointVals.y;
+                    var height, diff;
+                    if (point.series.yAxis.reversed ? y < threshold : y >= threshold) {
                         // Above threshold - always set height to hit the threshold
                         height = guideBox.attr('height');
-                        diff = threshold ?
-                            threshold - (y + height) :
-                            0;
+                        diff = plotThreshold ? plotThreshold - plotY - height : 0;
                         guideBox.attr({
                             height: Math.max(0, Math.round(height + diff))
                         });
@@ -175,7 +175,7 @@
                     else {
                         // Below - always set y to start at threshold
                         guideBox.attr({
-                            y: Math.round(y + (threshold ? threshold - y : 0))
+                            y: Math.round(plotY + (plotThreshold ? plotThreshold - plotY : 0))
                         });
                     }
                 },
@@ -185,7 +185,7 @@
                     var chart = point.series.chart, dragHandles = chart.dragHandles, side = pointVals.y >= (point.series.options.threshold || 0) ?
                         'top' : 'bottom', flipSide = flipResizeSide(side);
                     // Force remove handle on other side
-                    if (dragHandles[flipSide]) {
+                    if (dragHandles && dragHandles[flipSide]) {
                         dragHandles[flipSide].destroy();
                         delete dragHandles[flipSide];
                     }
@@ -621,11 +621,11 @@
             // x value. shapeArgs does not take yAxis reversed etc into account, so we
             // use axis.toPixels to handle positioning.
             var xrangeHandlePositioner_1 = function (point, xProp) {
-                var series = point.series, xAxis = series.xAxis, yAxis = series.yAxis, inverted = series.chart.inverted, 
+                var series = point.series, xAxis = series.xAxis, yAxis = series.yAxis, inverted = series.chart.inverted, offsetY = series.columnMetrics ? series.columnMetrics.offset :
+                    -point.shapeArgs.height / 2;
                 // Using toPixels handles axis.reversed, but doesn't take
                 // chart.inverted into account.
-                newX = xAxis.toPixels(point[xProp], true), newY = yAxis.toPixels(point.y, true), offsetY = series.columnMetrics ? series.columnMetrics.offset :
-                    -point.shapeArgs.height / 2;
+                var newX = xAxis.toPixels(point[xProp], true), newY = yAxis.toPixels(point.y, true);
                 // Handle chart inverted
                 if (inverted) {
                     newX = xAxis.len - newX;
@@ -758,14 +758,21 @@
          * [point.drag](plotOptions.series.point.events.drag) and
          * [point.drop](plotOptions.series.point.events.drop).
          *
-         * @sample highcharts/dragdrop/resize-column
+         * @sample {highcharts|highstock}
+         *         highcharts/dragdrop/resize-column
          *         Draggable column and line series
-         * @sample highcharts/dragdrop/bar-series
+         * @sample {highcharts|highstock}
+         *         highcharts/dragdrop/bar-series
          *         Draggable bar
-         * @sample highcharts/dragdrop/drag-bubble
+         * @sample {highcharts|highstock}
+         *         highcharts/dragdrop/drag-bubble
          *         Draggable bubbles
-         * @sample highcharts/dragdrop/drag-xrange
+         * @sample {highcharts|highstock}
+         *         highcharts/dragdrop/drag-xrange
          *         Draggable X range series
+         * @sample {highmaps}
+         *         maps/series/draggable-mappoint
+         *         Draggable Map Point series
          *
          * @declare   Highcharts.SeriesDragDropOptionsObject
          * @since     6.2.0
@@ -1094,7 +1101,7 @@
          *         True if the series is using drag/drop.
          */
         function isSeriesDraggable(series) {
-            var props = ['draggableX', 'draggableY'], i;
+            var props = ['draggableX', 'draggableY'];
             // Add optionNames from dragDropProps to the array of props to check for
             objectEach(series.dragDropProps, function (val) {
                 if (val.optionName) {
@@ -1103,7 +1110,7 @@
             });
             // Loop over all options we have that could enable dragDrop for this
             // series. If any of them are truthy, this series is draggable.
-            i = props.length;
+            var i = props.length;
             while (i--) {
                 if (series.options.dragDrop[props[i]]) {
                     return true;
@@ -1123,7 +1130,8 @@
          */
         function isChartDraggable(chart) {
             var i = chart.series ? chart.series.length : 0;
-            if (chart.hasCartesianSeries && !chart.polar) {
+            if ((chart.hasCartesianSeries && !chart.polar) ||
+                chart.mapView) {
                 while (i--) {
                     if (chart.series[i].options.dragDrop &&
                         isSeriesDraggable(chart.series[i])) {
@@ -1144,7 +1152,8 @@
          *         True if the point is movable.
          */
         function isPointMovable(point) {
-            var series = point.series, seriesDragDropOptions = series.options.dragDrop || {}, pointDragDropOptions = point.options && point.options.dragDrop, updateProps = series.dragDropProps, hasMovableX, hasMovableY;
+            var series = point.series, chart = series.chart, seriesDragDropOptions = series.options.dragDrop || {}, pointDragDropOptions = point.options && point.options.dragDrop, updateProps = series.dragDropProps;
+            var hasMovableX, hasMovableY;
             objectEach(updateProps, function (p) {
                 if (p.axis === 'x' && p.move) {
                     hasMovableX = true;
@@ -1160,8 +1169,8 @@
                 !(pointDragDropOptions &&
                     pointDragDropOptions.draggableX === false &&
                     pointDragDropOptions.draggableY === false) &&
-                series.yAxis &&
-                series.xAxis);
+                ((series.yAxis && series.xAxis) ||
+                    chart.mapView));
         }
         /**
          * Take a mouse/touch event and return the event object with chartX/chartY.
@@ -1280,10 +1289,17 @@
                     // This later will be used to calculate new value according to the
                     // current position of the cursor.
                     // e.g. `high` value is translated to `highOffset`
-                    pointProps[key + 'Offset'] =
-                        // e.g. yAxis.toPixels(point.high), xAxis.toPixels(point.end)
-                        axis.toPixels(point[key]) -
-                            (axis.horiz ? e.chartX : e.chartY);
+                    if (point.series.chart.mapView && point.plotX && point.plotY) {
+                        pointProps[key + 'Offset'] = key === 'x' ?
+                            point.plotX : point.plotY;
+                    }
+                    else {
+                        pointProps[key + 'Offset'] =
+                            // e.g. yAxis.toPixels(point.high), xAxis.toPixels
+                            // (point.end)
+                            axis.toPixels(point[key]) -
+                                (axis.horiz ? e.chartX : e.chartY);
+                    }
                 });
                 pointProps.point = point; // Store reference to point
                 res.points[point.id] = pointProps;
@@ -1302,7 +1318,8 @@
          *         Array of points in this group.
          */
         function getGroupedPoints(point) {
-            var series = point.series, points = [], groupKey = series.options.dragDrop.groupBy;
+            var series = point.series, groupKey = series.options.dragDrop.groupBy;
+            var points = [];
             if (series.boosted) { // #11156
                 series.options.data.forEach(function (pointOptions, i) {
                     points.push((new series.pointClass()).init(// eslint-disable-line new-cap
@@ -1378,7 +1395,8 @@
          * @return {void}
          */
         function initDragDrop(e, point) {
-            var groupedPoints = getGroupedPoints(point), series = point.series, chart = series.chart, guideBox;
+            var groupedPoints = getGroupedPoints(point), series = point.series, chart = series.chart;
+            var guideBox;
             // If liveRedraw is disabled, show the guide box with the default state
             if (!pick(series.options.dragDrop && series.options.dragDrop.liveRedraw, true)) {
                 chart.dragGuideBox = guideBox = series.getGuideBox(groupedPoints);
@@ -1412,7 +1430,7 @@
          *         reference, as well as the new data values.
          */
         function getNewPoints(dragDropData, newPos) {
-            var point = dragDropData.point, series = point.series, options = merge(series.options.dragDrop, point.options.dragDrop), updateProps = {}, resizeProp = dragDropData.updateProp, hashmap = {};
+            var point = dragDropData.point, series = point.series, chart = series.chart, options = merge(series.options.dragDrop, point.options.dragDrop), updateProps = {}, resizeProp = dragDropData.updateProp, hashmap = {};
             // Go through the data props that can be updated on this series and find out
             // which ones we want to update.
             objectEach(point.series.dragDropProps, function (val, key) {
@@ -1429,7 +1447,12 @@
                 if (resizeProp || (val.move &&
                     (val.axis === 'x' && options.draggableX ||
                         val.axis === 'y' && options.draggableY))) {
-                    updateProps[key] = val;
+                    if (chart.mapView) {
+                        updateProps[key === 'x' ? 'lon' : 'lat'] = val;
+                    }
+                    else {
+                        updateProps[key] = val;
+                    }
                 }
             });
             // Go through the points to be updated and get new options for each of them
@@ -1487,10 +1510,9 @@
          *        Difference in Y position.
          */
         function resizeGuideBox(point, dX, dY) {
-            var series = point.series, chart = series.chart, dragDropData = chart.dragDropData, resizeSide, newPoint, resizeProp = series.dragDropProps[dragDropData.updateProp];
+            var series = point.series, chart = series.chart, dragDropData = chart.dragDropData, resizeProp = series.dragDropProps[dragDropData.updateProp], 
             // dragDropProp.resizeSide holds info on which side to resize.
-            newPoint = dragDropData.newPoints[point.id].newValues;
-            resizeSide = typeof resizeProp.resizeSide === 'function' ?
+            newPoint = dragDropData.newPoints[point.id].newValues, resizeSide = typeof resizeProp.resizeSide === 'function' ?
                 resizeProp.resizeSide(newPoint, point) : resizeProp.resizeSide;
             // Call resize hook if it is defined
             if (resizeProp.beforeResize) {
@@ -1518,7 +1540,9 @@
          *        The point that is dragged.
          */
         function dragMove(e, point) {
-            var series = point.series, chart = series.chart, data = chart.dragDropData, options = merge(series.options.dragDrop, point.options.dragDrop), draggableX = options.draggableX, draggableY = options.draggableY, origin = data.origin, dX = e.chartX - origin.chartX, dY = e.chartY - origin.chartY, oldDx = dX, updateProp = data.updateProp;
+            var series = point.series, chart = series.chart, data = chart.dragDropData, options = merge(series.options.dragDrop, point.options.dragDrop), draggableX = options.draggableX, draggableY = options.draggableY, origin = data.origin, updateProp = data.updateProp;
+            var dX = e.chartX - origin.chartX, dY = e.chartY - origin.chartY;
+            var oldDx = dX;
             // Handle inverted
             if (chart.inverted) {
                 dX = -dY;
@@ -1563,7 +1587,7 @@
             guideBoxOptions[state]);
             return guideBox
                 .attr({
-                className: stateOptions.className,
+                'class': stateOptions.className,
                 stroke: stateOptions.lineColor,
                 strokeWidth: stateOptions.lineWidth,
                 fill: stateOptions.color,
@@ -1602,7 +1626,8 @@
          *         An object with updated data values.
          */
         Point.prototype.getDropValues = function (origin, newPos, updateProps) {
-            var point = this, series = point.series, options = merge(series.options.dragDrop, point.options.dragDrop), result = {}, updateSingleProp, pointOrigin = origin.points[point.id];
+            var point = this, series = point.series, chart = series.chart, mapView = chart.mapView, options = merge(series.options.dragDrop, point.options.dragDrop), result = {}, pointOrigin = origin.points[point.id];
+            var updateSingleProp;
             // Find out if we only have one prop to update
             for (var key in updateProps) {
                 if (Object.hasOwnProperty.call(updateProps, key)) {
@@ -1626,22 +1651,83 @@
              */
             var limitToRange = function (val, direction) {
                 var defaultPrecision = series[direction.toLowerCase() + 'Axis']
-                    .categories ? 1 : 0, precision = pick(options['dragPrecision' + direction], defaultPrecision), min = pick(options['dragMin' + direction], -Infinity), max = pick(options['dragMax' + direction], Infinity), res = val;
+                    .categories ? 1 : 0, precision = pick(options['dragPrecision' + direction], defaultPrecision), min = pick(options['dragMin' + direction], -Infinity), max = pick(options['dragMax' + direction], Infinity);
+                var res = val;
                 if (precision) {
                     res = Math.round(res / precision) * precision;
                 }
                 return clamp(res, min, max);
             };
+            /**
+             * Utility function to apply precision and limit a value within the
+             * draggable range used only for Highcharts Maps.
+             * @private
+             * @param {PointerEvent} newPos
+             *        PointerEvent, which is used to get the value
+             * @param {string} direction
+             *        Axis direction
+             * @param {string} key
+             *        Key for choosing between longitude and latitude
+             * @return {number | undefined}
+             *         Limited value
+             */
+            var limitToMapRange = function (newPos, direction, key) {
+                if (mapView) {
+                    var precision = pick(options['dragPrecision' + direction], 0), lonLatMin = mapView.pixelsToLonLat({
+                        x: 0,
+                        y: 0
+                    }), lonLatMax = mapView.pixelsToLonLat({
+                        x: chart.plotBox.width,
+                        y: chart.plotBox.height
+                    });
+                    var min = pick(options['dragMin' + direction], lonLatMin &&
+                        lonLatMin[key], -Infinity), max = pick(options['dragMax' + direction], lonLatMax &&
+                        lonLatMax[key], Infinity), res = newPos[key];
+                    if (mapView.projection.options.name === 'Orthographic') {
+                        return res;
+                    }
+                    if (key === 'lat') {
+                        // if map is bigger than possible projection range
+                        if (isNaN(min) || min > mapView.projection.maxLatitude) {
+                            min = mapView.projection.maxLatitude;
+                        }
+                        if (isNaN(max) || max < -1 * mapView.projection.maxLatitude) {
+                            max = -1 * mapView.projection.maxLatitude;
+                        }
+                        // swap for latitude
+                        var temp = max;
+                        max = min;
+                        min = temp;
+                    }
+                    if (!mapView.projection.hasCoordinates) {
+                        // establish y value
+                        var lonLatRes = mapView.pixelsToLonLat({
+                            x: newPos.chartX - chart.plotLeft,
+                            y: chart.plotHeight - newPos.chartY + chart.plotTop
+                        });
+                        if (lonLatRes) {
+                            res = lonLatRes[key];
+                        }
+                    }
+                    if (precision) {
+                        res = Math.round(res / precision) * precision;
+                    }
+                    return clamp(res, min, max);
+                }
+            };
             // Assign new value to property. Adds dX/YValue to the old value, limiting
             // it within min/max ranges.
             objectEach(updateProps, function (val, key) {
-                var oldVal = pointOrigin[key], axis = series[val.axis + 'Axis'], newVal = limitToRange(axis.toValue((axis.horiz ? newPos.chartX : newPos.chartY) +
-                    pointOrigin[key + 'Offset']), val.axis.toUpperCase());
+                var oldVal = pointOrigin.point[key], axis = series[val.axis + 'Axis'], newVal = mapView ?
+                    limitToMapRange(newPos, val.axis.toUpperCase(), key) :
+                    limitToRange(axis.toValue((axis.horiz ? newPos.chartX : newPos.chartY) +
+                        pointOrigin[key + 'Offset']), val.axis.toUpperCase());
                 // If we are updating a single prop, and it has a validation function
                 // for the prop, run it. If it fails, don't update the value.
-                if (!(updateSingleProp &&
-                    val.propValidate &&
-                    !val.propValidate(newVal, point)) &&
+                if (isNumber(newVal) &&
+                    !(updateSingleProp &&
+                        val.propValidate &&
+                        !val.propValidate(newVal, point)) &&
                     typeof oldVal !== 'undefined') {
                     result[key] = newVal;
                 }
@@ -1661,7 +1747,8 @@
          *         An SVG element for the guide box, not added to DOM.
          */
         Series.prototype.getGuideBox = function (points) {
-            var chart = this.chart, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, changed;
+            var chart = this.chart;
+            var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, changed;
             // Find bounding box of all points
             points.forEach(function (point) {
                 var bBox = (point.graphic && point.graphic.getBBox() || point.shapeArgs);
@@ -1767,11 +1854,12 @@
                     'stroke-width': handleOptions.lineWidth,
                     fill: handleOptions.color,
                     stroke: handleOptions.lineColor
-                }, pathFormatter = handleOptions.pathFormatter || val.handleFormatter, handlePositioner = val.handlePositioner, pos, handle, path, 
+                }, pathFormatter = handleOptions.pathFormatter || val.handleFormatter, handlePositioner = val.handlePositioner, 
                 // Run validation function on whether or not we allow individual
                 // updating of this prop.
                 validate = val.validateIndividualDrag ?
                     val.validateIndividualDrag(point) : true;
+                var pos, handle, path;
                 if (val.resize &&
                     validate &&
                     val.resizeSide &&
@@ -1934,7 +2022,8 @@
             if (chart.zoomOrPanKeyPressed(e)) {
                 return;
             }
-            var dragDropData = chart.dragDropData, point, seriesDragDropOpts, newPoints, numNewPoints = 0, newPoint;
+            var dragDropData = chart.dragDropData;
+            var point, seriesDragDropOpts, newPoints, numNewPoints = 0, newPoint;
             if (dragDropData && dragDropData.isDragging && dragDropData.point.series) {
                 point = dragDropData.point;
                 seriesDragDropOpts = point.series.options.dragDrop;
@@ -2096,7 +2185,7 @@
          */
         Chart.prototype.zoomOrPanKeyPressed = function (e) {
             // Check whether the panKey and zoomKey are set in chart.userOptions
-            var chartOptions = this.options.chart || {}, panKey = chartOptions.panKey && chartOptions.panKey + 'Key', zoomKey = chartOptions.zooming.key && chartOptions.zooming.key + 'Key';
+            var chartOptions = this.options.chart || {}, panKey = chartOptions.panKey && chartOptions.panKey + 'Key', zoomKey = this.zooming.key && this.zooming.key + 'Key';
             return (e[zoomKey] || e[panKey]);
         };
         /**

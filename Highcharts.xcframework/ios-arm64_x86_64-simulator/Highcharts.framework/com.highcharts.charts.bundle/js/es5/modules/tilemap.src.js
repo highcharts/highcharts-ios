@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v10.3.3 (2023-01-20)
+ * @license Highmaps JS v11.1.0 (2023-06-05)
  *
  * Tilemap module
  *
@@ -557,7 +557,9 @@
                     padding.yPad, 0, 1, 0, 1));
                 coord2 = Math.round(axis.translate(isX ? padding.xPad : 0, 0, 1, 0, 1));
                 return {
-                    padding: Math.abs(coord1 - coord2) || 0,
+                    padding: (axis.single ? // if there is only one tick adjust padding #18647
+                        Math.abs(coord1 - coord2) / 2 :
+                        Math.abs(coord1 - coord2)) || 0,
                     // Offset the yAxis length to compensate for shift. Setting the
                     // length factor to 2 would add the same margin to max as min.
                     // Now we only add a slight bit of the min margin to max, as we

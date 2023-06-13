@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Solid angular gauge module
  *
@@ -247,7 +247,11 @@
              * @apioption plotOptions.solidgauge.radius
              */
             /**
-             * Whether to draw rounded edges on the gauge.
+             * Whether to draw rounded edges on the gauge. This options adds the radius
+             * of the rounding to the ends of the arc, so it extends past the actual
+             * values. When `borderRadius` is set, it takes precedence over `rounded`. A
+             * `borderRadius` of 50% behaves like `rounded`, except the shape is not
+             * extended past its value.
              *
              * @sample {highcharts} highcharts/demo/gauge-activity/
              *         Activity Gauge
@@ -365,70 +369,7 @@
 
         return SolidGaugeSeriesDefaults;
     });
-    _registerModule(_modules, 'Series/SolidGauge/SolidGaugeComposition.js', [_modules['Core/Renderer/SVG/SVGRenderer.js']], function (SVGRenderer) {
-        /* *
-         *
-         *  Solid angular gauge module
-         *
-         *  (c) 2010-2021 Torstein Honsi
-         *
-         *  License: www.highcharts.com/license
-         *
-         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
-         *
-         * */
-        var _a = SVGRenderer.prototype, symbols = _a.symbols, arc = _a.symbols.arc;
-        /**
-         * Additional options, depending on the actual symbol drawn.
-         *
-         * @interface Highcharts.SymbolOptionsObject
-         */ /**
-        * Whether to draw rounded edges.
-        * @name Highcharts.SymbolOptionsObject#rounded
-        * @type {boolean|undefined}
-        */
-        /**
-         * Symbol definition of an arc with round edges.
-         *
-         * @private
-         * @function Highcharts.Renderer#symbols.arc
-         *
-         * @param {number} x
-         *        The X coordinate for the top left position.
-         *
-         * @param {number} y
-         *        The Y coordinate for the top left position.
-         *
-         * @param {number} w
-         *        The pixel width.
-         *
-         * @param {number} h
-         *        The pixel height.
-         *
-         * @param {Highcharts.SymbolOptionsObject} [options]
-         *        Additional options, depending on the actual symbol drawn.
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path of the created arc.
-         */
-        symbols.arc = function (x, y, w, h, options) {
-            var path = arc(x, y, w, h, options);
-            if (options && options.rounded) {
-                var r = options.r || w, smallR = (r - (options.innerR || 0)) / 2, outerArcStart = path[0], innerArcStart = path[2];
-                if (outerArcStart[0] === 'M' && innerArcStart[0] === 'L') {
-                    var x1 = outerArcStart[1], y1 = outerArcStart[2], x2 = innerArcStart[1], y2 = innerArcStart[2], roundStart = [
-                        'A', smallR, smallR, 0, 1, 1, x1, y1
-                    ], roundEnd = ['A', smallR, smallR, 0, 1, 1, x2, y2];
-                    // Replace the line segment and the last close segment
-                    path[2] = roundEnd;
-                    path[4] = roundStart;
-                }
-            }
-            return path;
-        };
-
-    });
-    _registerModule(_modules, 'Series/SolidGauge/SolidGaugeSeries.js', [_modules['Core/Legend/LegendSymbol.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Axis/SolidGaugeAxis.js'], _modules['Series/SolidGauge/SolidGaugeSeriesDefaults.js'], _modules['Core/Utilities.js']], function (LegendSymbol, SeriesRegistry, SolidGaugeAxis, SolidGaugeSeriesDefaults, U) {
+    _registerModule(_modules, 'Series/SolidGauge/SolidGaugeSeries.js', [_modules['Extensions/BorderRadius.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Axis/SolidGaugeAxis.js'], _modules['Series/SolidGauge/SolidGaugeSeriesDefaults.js'], _modules['Core/Utilities.js']], function (BorderRadius, SeriesRegistry, SolidGaugeAxis, SolidGaugeSeriesDefaults, U) {
         /* *
          *
          *  Solid angular gauge module
@@ -514,7 +455,7 @@
             };
             // Draw the points where each point is one needle.
             SolidGaugeSeries.prototype.drawPoints = function () {
-                var series = this, yAxis = series.yAxis, center = yAxis.center, options = series.options, renderer = series.chart.renderer, overshoot = options.overshoot, overshootVal = isNumber(overshoot) ?
+                var series = this, yAxis = series.yAxis, center = yAxis.center, options = series.options, renderer = series.chart.renderer, overshoot = options.overshoot, rounded = options.rounded && options.borderRadius === void 0, overshootVal = isNumber(overshoot) ?
                     overshoot / 180 * Math.PI :
                     0;
                 var thresholdAngleRad;
@@ -531,7 +472,7 @@
                         )) * center[2]) / 200), innerRadius = ((pInt(pick(point.options.innerRadius, options.innerRadius, 60 // %
                         )) * center[2]) / 200), axisMinAngle = Math.min(yAxis.startAngleRad, yAxis.endAngleRad), axisMaxAngle = Math.max(yAxis.startAngleRad, yAxis.endAngleRad);
                         var graphic = point.graphic, rotation = (yAxis.startAngleRad +
-                            yAxis.translate(point.y, void 0, void 0, void 0, true)), shapeArgs = void 0, d = void 0, toColor = yAxis.toColor(point.y, point), minAngle = void 0, maxAngle = void 0;
+                            yAxis.translate(point.y, void 0, void 0, void 0, true)), shapeArgs = void 0, d = void 0, toColor = yAxis.toColor(point.y, point);
                         if (toColor === 'none') { // #3708
                             toColor = point.color || series.color || 'none';
                         }
@@ -544,19 +485,27 @@
                         if (options.wrap === false) {
                             rotation = clamp(rotation, axisMinAngle, axisMaxAngle);
                         }
-                        minAngle = Math.min(rotation, series.thresholdAngleRad);
-                        maxAngle = Math.max(rotation, series.thresholdAngleRad);
-                        if (maxAngle - minAngle > 2 * Math.PI) {
-                            maxAngle = minAngle + 2 * Math.PI;
+                        var angleOfRounding = rounded ?
+                            ((radius - innerRadius) / 2) / radius :
+                            0, start = Math.min(rotation, series.thresholdAngleRad) -
+                            angleOfRounding;
+                        var end = Math.max(rotation, series.thresholdAngleRad) +
+                            angleOfRounding;
+                        if (end - start > 2 * Math.PI) {
+                            end = start + 2 * Math.PI;
+                        }
+                        var borderRadius = rounded ? '50%' : 0;
+                        if (options.borderRadius) {
+                            borderRadius = BorderRadius.optionsToObject(options.borderRadius).radius;
                         }
                         point.shapeArgs = shapeArgs = {
                             x: center[0],
                             y: center[1],
                             r: radius,
                             innerR: innerRadius,
-                            start: minAngle,
-                            end: maxAngle,
-                            rounded: options.rounded
+                            start: start,
+                            end: end,
+                            borderRadius: borderRadius
                         };
                         point.startR = radius; // For PieSeries.animate
                         if (graphic) {
@@ -602,9 +551,6 @@
             SolidGaugeSeries.defaultOptions = merge(GaugeSeries.defaultOptions, SolidGaugeSeriesDefaults);
             return SolidGaugeSeries;
         }(GaugeSeries));
-        extend(SolidGaugeSeries.prototype, {
-            drawLegendSymbol: LegendSymbol.drawRectangle
-        });
         SeriesRegistry.registerSeriesType('solidgauge', SolidGaugeSeries);
         /* *
          *

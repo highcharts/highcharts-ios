@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * (c) 2017-2021 Highsoft AS
  * Authors: Jon Arild Nygard
@@ -514,6 +514,17 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
+        var __assign = (this && this.__assign) || function () {
+            __assign = Object.assign || function(t) {
+                for (var s, i = 1, n = arguments.length; i < n; i++) {
+                    s = arguments[i];
+                    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+                }
+                return t;
+            };
+            return __assign.apply(this, arguments);
+        };
         var isNumber = U.isNumber;
         /* *
          *
@@ -539,10 +550,7 @@
                 (point.series &&
                     point.series.options.animation);
             var graphic = point.graphic;
-            params.attribs = params.attribs || {};
-            // Assigning class in dot notation does go well in IE8
-            // eslint-disable-next-line dot-notation
-            params.attribs['class'] = point.getClassName();
+            params.attribs = __assign(__assign({}, params.attribs), { 'class': point.getClassName() }) || {};
             if ((point.shouldDraw())) {
                 if (!graphic) {
                     point.graphic = graphic = params.shapeType === 'text' ?
@@ -677,6 +685,17 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
+        var __assign = (this && this.__assign) || function () {
+            __assign = Object.assign || function(t) {
+                for (var s, i = 1, n = arguments.length; i < n; i++) {
+                    s = arguments[i];
+                    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+                }
+                return t;
+            };
+            return __assign.apply(this, arguments);
+        };
         var getAreaOfCircle = CU.getAreaOfCircle, getCircleCircleIntersection = CU.getCircleCircleIntersection, getOverlapBetweenCirclesByDistance = CU.getOverlapBetweenCircles, isPointInsideAllCircles = CU.isPointInsideAllCircles, isPointInsideCircle = CU.isPointInsideCircle, isPointOutsideAllCircles = CU.isPointOutsideAllCircles;
         var getDistanceBetweenPoints = GU.getDistanceBetweenPoints;
         var extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, isObject = U.isObject, isString = U.isString;
@@ -701,23 +720,27 @@
          */
         function addOverlapToSets(relations) {
             // Calculate the amount of overlap per set.
-            var mapOfIdToProps = relations
+            var mapOfIdToProps = {};
+            relations
                 // Filter out relations consisting of 2 sets.
                 .filter(function (relation) { return (relation.sets.length === 2); })
                 // Sum up the amount of overlap for each set.
-                .reduce(function (map, relation) {
+                .forEach(function (relation) {
                 relation.sets.forEach(function (set, i, arr) {
-                    if (!isObject(map[set])) {
-                        map[set] = {
-                            overlapping: {},
-                            totalOverlap: 0
+                    var _a;
+                    if (!isObject(mapOfIdToProps[set])) {
+                        mapOfIdToProps[set] = {
+                            totalOverlap: 0,
+                            overlapping: {}
                         };
                     }
-                    map[set].totalOverlap += relation.value;
-                    map[set].overlapping[arr[1 - i]] = relation.value;
+                    mapOfIdToProps[set] = {
+                        totalOverlap: (mapOfIdToProps[set].totalOverlap || 0) +
+                            relation.value,
+                        overlapping: __assign(__assign({}, (mapOfIdToProps[set].overlapping || {})), (_a = {}, _a[arr[1 - i]] = relation.value, _a))
+                    };
                 });
-                return map;
-            }, {});
+            });
             relations
                 // Filter out single sets
                 .filter(isSet)
@@ -969,8 +992,10 @@
              */
             var positionSet = function positionSet(set, coordinates) {
                 var circle = set.circle;
-                circle.x = coordinates.x;
-                circle.y = coordinates.y;
+                if (circle) {
+                    circle.x = coordinates.x;
+                    circle.y = coordinates.y;
+                }
                 positionedSets.push(set);
             };
             // Find overlap between sets. Ignore relations with more then 2 sets.
@@ -986,9 +1011,17 @@
             });
             // Iterate and position the remaining sets.
             sortedByOverlap.forEach(function (set) {
-                var circle = set.circle, radius = circle.r, overlapping = set.overlapping;
+                var circle = set.circle;
+                if (!circle) {
+                    return;
+                }
+                var radius = circle.r, overlapping = set.overlapping;
                 var bestPosition = positionedSets.reduce(function (best, positionedSet, i) {
-                    var positionedCircle = positionedSet.circle, overlap = overlapping[positionedSet.sets[0]];
+                    var positionedCircle = positionedSet.circle;
+                    if (!positionedCircle || !overlapping) {
+                        return best;
+                    }
+                    var overlap = overlapping[positionedSet.sets[0]];
                     // Calculate the distance between the sets to get the
                     // correct overlap
                     var distance = getDistanceBetweenCirclesByOverlap(radius, positionedCircle.r, overlap);
@@ -1003,7 +1036,11 @@
                     // If there are more circles overlapping, then add the
                     // intersection points as possible positions.
                     positionedSets.slice(i + 1).forEach(function (positionedSet2) {
-                        var positionedCircle2 = positionedSet2.circle, overlap2 = overlapping[positionedSet2.sets[0]], distance2 = getDistanceBetweenCirclesByOverlap(radius, positionedCircle2.r, overlap2);
+                        var positionedCircle2 = positionedSet2.circle, overlap2 = overlapping[positionedSet2.sets[0]];
+                        if (!positionedCircle2) {
+                            return;
+                        }
+                        var distance2 = getDistanceBetweenCirclesByOverlap(radius, positionedCircle2.r, overlap2);
                         // Add intersections to list of coordinates.
                         possibleCoordinates = possibleCoordinates.concat(getCircleCircleIntersection({
                             x: positionedCircle.x,
@@ -1187,37 +1224,40 @@
          * @param {Array<object>} data The raw input data.
          * @return {Array<object>} Returns an array of valid venn data.
          */
-        function processVennData(data) {
+        function processVennData(data, splitter) {
             var d = isArray(data) ? data : [];
             var validSets = d
                 .reduce(function (arr, x) {
                 // Check if x is a valid set, and that it is not an duplicate.
-                if (isValidSet(x) && arr.indexOf(x.sets[0]) === -1) {
+                if (x.sets && isValidSet(x) && arr.indexOf(x.sets[0]) === -1) {
                     arr.push(x.sets[0]);
                 }
                 return arr;
             }, [])
                 .sort();
             var mapOfIdToRelation = d.reduce(function (mapOfIdToRelation, relation) {
-                if (isValidRelation(relation) &&
+                if (relation.sets &&
+                    isValidRelation(relation) &&
                     !relation.sets.some(function (set) {
                         return validSets.indexOf(set) === -1;
                     })) {
-                    mapOfIdToRelation[relation.sets.sort().join()] =
-                        relation;
+                    mapOfIdToRelation[relation.sets.sort().join(splitter)] = {
+                        sets: relation.sets,
+                        value: relation.value || 0
+                    };
                 }
                 return mapOfIdToRelation;
             }, {});
             validSets.reduce(function (combinations, set, i, arr) {
                 var remaining = arr.slice(i + 1);
                 remaining.forEach(function (set2) {
-                    combinations.push(set + ',' + set2);
+                    combinations.push(set + splitter + set2);
                 });
                 return combinations;
             }, []).forEach(function (combination) {
                 if (!mapOfIdToRelation[combination]) {
                     var obj = {
-                        sets: combination.split(','),
+                        sets: combination.split(splitter),
                         value: 0
                     };
                     mapOfIdToRelation[combination] = obj;
@@ -1241,7 +1281,11 @@
          * Returns 0 if a and b are equal, <0 if a is greater, >0 if b is greater.
          */
         function sortByTotalOverlap(a, b) {
-            return b.totalOverlap - a.totalOverlap;
+            if (typeof b.totalOverlap !== 'undefined' &&
+                typeof a.totalOverlap !== 'undefined') {
+                return b.totalOverlap - a.totalOverlap;
+            }
+            return NaN;
         }
         /* *
          *
@@ -1266,7 +1310,7 @@
 
         return VennUtils;
     });
-    _registerModule(_modules, 'Series/Venn/VennSeries.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Color/Color.js'], _modules['Core/Geometry/CircleUtilities.js'], _modules['Series/DrawPointUtilities.js'], _modules['Core/Geometry/GeometryUtilities.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/Venn/VennPoint.js'], _modules['Series/Venn/VennUtils.js'], _modules['Core/Legend/LegendSymbol.js'], _modules['Core/Utilities.js']], function (A, Color, CU, DPU, GU, SeriesRegistry, VennPoint, VennUtils, LegendSymbol, U) {
+    _registerModule(_modules, 'Series/Venn/VennSeries.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Color/Color.js'], _modules['Core/Geometry/CircleUtilities.js'], _modules['Series/DrawPointUtilities.js'], _modules['Core/Geometry/GeometryUtilities.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/Venn/VennPoint.js'], _modules['Series/Venn/VennUtils.js'], _modules['Core/Utilities.js']], function (A, Color, CU, DPU, GU, SeriesRegistry, VennPoint, VennUtils, U) {
         /* *
          *
          *  Experimental Highcharts module which enables visualization of a Venn
@@ -1431,7 +1475,9 @@
                     var isInternal = sets.indexOf(set.sets[0]) > -1;
                     var property = isInternal ? 'internal' : 'external';
                     // Add the circle to the list.
-                    data[property].push(set.circle);
+                    if (set.circle) {
+                        data[property].push(set.circle);
+                    }
                     return data;
                 }, {
                     internal: [],
@@ -1646,7 +1692,7 @@
                 this.processedXData = this.xData;
                 this.generatePoints();
                 // Process the data before passing it into the layout function.
-                var relations = VennUtils.processVennData(this.options.data);
+                var relations = VennUtils.processVennData(this.options.data, VennSeries.splitter);
                 // Calculate the positions of each circle.
                 var _a = VennSeries.layout(relations), mapOfIdToShape = _a.mapOfIdToShape, mapOfIdToLabelValues = _a.mapOfIdToLabelValues;
                 // Calculate the scale, and center of the plot area.
@@ -1715,6 +1761,7 @@
                     point.name = point.options.name || sets.join('∩');
                 });
             };
+            VennSeries.splitter = 'highcharts-split';
             /**
              * A Venn diagram displays all possible logical relations between a
              * collection of different sets. The sets are represented by circles, and
@@ -1795,14 +1842,14 @@
                 },
                 tooltip: {
                     pointFormat: '{point.name}: {point.value}'
-                }
+                },
+                legendSymbol: 'rectangle'
             });
             return VennSeries;
         }(ScatterSeries));
         extend(VennSeries.prototype, {
             axisTypes: [],
             directTouch: true,
-            drawLegendSymbol: LegendSymbol.drawRectangle,
             isCartesian: false,
             pointArrayMap: ['value'],
             pointClass: VennPoint,

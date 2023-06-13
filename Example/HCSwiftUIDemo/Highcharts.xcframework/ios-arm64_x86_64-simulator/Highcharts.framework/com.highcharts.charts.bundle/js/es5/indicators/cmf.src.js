@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * (c) 2010-2021 Highsoft AS
  * Author: Sebastian Domas
@@ -171,7 +171,8 @@
              * object containing computed money flow data
              */
             CMFIndicator.prototype.getMoneyFlow = function (xData, seriesYData, volumeSeriesYData, period) {
-                var len = seriesYData.length, moneyFlowVolume = [], sumVolume = 0, sumMoneyFlowVolume = 0, moneyFlowXData = [], moneyFlowYData = [], values = [], i, point, nullIndex = -1;
+                var len = seriesYData.length, moneyFlowVolume = [], moneyFlowXData = [], moneyFlowYData = [], values = [];
+                var i, point, nullIndex = -1, sumVolume = 0, sumMoneyFlowVolume = 0;
                 /**
                  * Calculates money flow volume, changes i, nullIndex vars from
                  * upper scope!

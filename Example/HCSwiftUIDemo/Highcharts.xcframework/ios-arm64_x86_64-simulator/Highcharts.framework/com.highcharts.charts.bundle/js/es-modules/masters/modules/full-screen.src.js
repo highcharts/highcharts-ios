@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  * @module highcharts/modules/full-screen
  * @requires highcharts
  *
@@ -13,6 +13,6 @@
 'use strict';
 import Highcharts from '../../Core/Globals.js';
 import Fullscreen from '../../Extensions/Exporting/Fullscreen.js';
-var G = Highcharts;
+const G = Highcharts;
 G.Fullscreen = Fullscreen;
 Fullscreen.compose(G.Chart);

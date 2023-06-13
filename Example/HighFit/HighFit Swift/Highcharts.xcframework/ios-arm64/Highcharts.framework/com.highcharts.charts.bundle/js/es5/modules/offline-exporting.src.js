@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Client side exporting module
  *
@@ -160,7 +160,7 @@
          *
          * */
         var OfflineExportingDefaults = {
-            libURL: 'https://code.highcharts.com/10.3.3/lib/',
+            libURL: 'https://code.highcharts.com/11.1.0/lib/',
             // When offline-exporting is loaded, redefine the menu item definitions
             // related to download.
             menuItemDefinitions: {
@@ -221,7 +221,7 @@
         var downloadURL = DownloadURL.downloadURL;
         var win = H.win, doc = H.doc;
         var ajax = HU.ajax;
-        var addEvent = U.addEvent, error = U.error, extend = U.extend, fireEvent = U.fireEvent, pick = U.pick, merge = U.merge;
+        var addEvent = U.addEvent, error = U.error, extend = U.extend, fireEvent = U.fireEvent, merge = U.merge;
         AST.allowedAttributes.push('data-z-index', 'fill-opacity', 'rx', 'ry', 'stroke-dasharray', 'stroke-linejoin', 'text-anchor', 'transform', 'version', 'viewBox', 'visibility', 'xmlns', 'xmlns:xlink');
         AST.allowedTags.push('desc', 'clippath', 'g');
         /* *
@@ -229,7 +229,7 @@
          * Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Composition
@@ -262,8 +262,7 @@
              * @private
              */
             function compose(ChartClass) {
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     var chartProto = ChartClass.prototype;
                     chartProto.getSVGForLocalExport = getSVGForLocalExport;
                     chartProto.exportChartLocal = exportChartLocal;
@@ -398,8 +397,11 @@
                         var curParent = el;
                         while (curParent && curParent !== dummySVGContainer) {
                             if (curParent.style[propName]) {
-                                el.style[propName] =
-                                    curParent.style[propName];
+                                var value = curParent.style[propName];
+                                if (propName === 'fontSize' && /em$/.test(value)) {
+                                    value = Math.round(parseFloat(value) * 16) + 'px';
+                                }
+                                el.style[propName] = value;
                                 break;
                             }
                             curParent = curParent.parentNode;
@@ -411,7 +413,8 @@
                     [].forEach.call(textElements, function (el) {
                         // Workaround for the text styling. making sure it does pick up
                         // the root element
-                        ['font-family', 'font-size'].forEach(function (property) {
+                        ['fontFamily', 'fontSize']
+                            .forEach(function (property) {
                             setStylePropertyFromParents(el, property);
                         });
                         el.style.fontFamily = pdfFont && pdfFont.normal ?
@@ -449,8 +452,8 @@
                     // SVG download. In this case, we want to use Microsoft specific
                     // Blob if available
                     try {
-                        if (typeof win.navigator.msSaveOrOpenBlob !== 'undefined') {
-                            blob = new MSBlobBuilder();
+                        if (typeof win.MSBlobBuilder !== 'undefined') {
+                            blob = new win.MSBlobBuilder();
                             blob.append(svg);
                             svgurl = blob.getBlob('image/svg+xml');
                         }

@@ -78,7 +78,7 @@ A configuration object for the button theme. The object accepts SVG properties l
 /**
 Pixel height of the buttons.
 
-**Defaults to** `22`.
+**Defaults to** `28`.
 
 **Try it**
 
@@ -88,7 +88,7 @@ Pixel height of the buttons.
 /**
 The pixel width of the button.
 
-**Defaults to** `24`.
+**Defaults to** `28`.
 
 **Try it**
 
@@ -134,7 +134,7 @@ The vertical alignment of the buttons. Can be one of `"top"`, `"middle"` or `"bo
 /**
 The y position of the center of the symbol inside the button.
 
-**Defaults to** `10.5`.
+**Defaults to** `13.5`.
 
 **Try it**
 
@@ -144,7 +144,7 @@ The y position of the center of the symbol inside the button.
 /**
 The x position of the center of the symbol inside the button.
 
-**Defaults to** `12.5`.
+**Defaults to** `14.5`.
 
 **Try it**
 

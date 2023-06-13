@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  * Treegraph chart series type
  *
  *  (c) 2010-2022 Pawel Lysy Grzegorz Blachlinski
@@ -46,16 +46,69 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        /* *
-         *
-         *  Functions
-         *
-         * */
+        var getLinkPath = {
+            'default': getDefaultPath,
+            straight: getStraightPath,
+            curved: getCurvedPath
+        };
+        function getDefaultPath(pathParams) {
+            var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, radius = pathParams.radius, parentVisible = pathParams.parentVisible;
+            var path = [
+                ['M', x1, y1],
+                ['L', x1, y1],
+                ['C', x1, y1, x1, y2, x1, y2],
+                ['L', x1, y2],
+                ['C', x1, y1, x1, y2, x1, y2],
+                ['L', x1, y2]
+            ];
+            return parentVisible ?
+                applyRadius([
+                    ['M', x1, y1],
+                    ['L', x1 + width * (inverted ? -0.5 : 0.5), y1],
+                    ['L', x1 + width * (inverted ? -0.5 : 0.5), y2],
+                    ['L', x2, y2]
+                ], radius) :
+                path;
+        }
+        function getStraightPath(pathParams) {
+            var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, parentVisible = pathParams.parentVisible;
+            return parentVisible ? [
+                ['M', x1, y1],
+                ['L', x1 + width * (inverted ? -1 : 1), y2],
+                ['L', x2, y2]
+            ] : [
+                ['M', x1, y1],
+                ['L', x1, y2],
+                ['L', x1, y2]
+            ];
+        }
+        function getCurvedPath(pathParams) {
+            var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.offset, offset = _a === void 0 ? 0 : _a, _b = pathParams.width, width = _b === void 0 ? 0 : _b, _c = pathParams.inverted, inverted = _c === void 0 ? false : _c, parentVisible = pathParams.parentVisible;
+            return parentVisible ?
+                [
+                    ['M', x1, y1],
+                    [
+                        'C',
+                        x1 + offset,
+                        y1,
+                        x1 - offset + width * (inverted ? -1 : 1),
+                        y2,
+                        x1 + width * (inverted ? -1 : 1),
+                        y2
+                    ],
+                    ['L', x2, y2]
+                ] :
+                [
+                    ['M', x1, y1],
+                    ['C', x1, y1, x1, y2, x1, y2],
+                    ['L', x2, y2]
+                ];
+        }
         /**
          * General function to apply corner radius to a path
          * @private
          */
-        function curvedPath(path, r) {
+        function applyRadius(path, r) {
             var d = [];
             for (var i = 0; i < path.length; i++) {
                 var x = path[i][1];
@@ -107,7 +160,8 @@
             return d;
         }
         var PathUtilities = {
-            curvedPath: curvedPath
+            applyRadius: applyRadius,
+            getLinkPath: getLinkPath
         };
 
         return PathUtilities;
@@ -378,10 +432,17 @@
              * */
             TreegraphPoint.prototype.draw = function () {
                 _super.prototype.draw.apply(this, arguments);
+                // run animation of hiding/showing of the point.
+                var graphic = this.graphic;
+                if (graphic) {
+                    graphic.animate({
+                        visibility: this.visible ? 'inherit' : 'hidden'
+                    });
+                }
                 this.renderCollapseButton();
             };
             TreegraphPoint.prototype.renderCollapseButton = function () {
-                var point = this, series = point.series, parentGroup = point.graphic && point.graphic.parentGroup, levelOptions = series.mapOptionsToLevel[point.node.level || 0] || {}, btnOptions = merge(series.options.collapseButton, levelOptions.collapseButton, point.series.options.collapseButton), width = btnOptions.width, height = btnOptions.height, shape = btnOptions.shape, style = btnOptions.style, padding = 2, chart = this.series.chart;
+                var point = this, series = point.series, parentGroup = point.graphic && point.graphic.parentGroup, levelOptions = series.mapOptionsToLevel[point.node.level || 0] || {}, btnOptions = merge(series.options.collapseButton, levelOptions.collapseButton, point.options.collapseButton), width = btnOptions.width, height = btnOptions.height, shape = btnOptions.shape, style = btnOptions.style, padding = 2, chart = this.series.chart;
                 if (!point.shapeArgs) {
                     return;
                 }
@@ -390,19 +451,21 @@
                     if (!point.node.children.length || !btnOptions.enabled) {
                         return;
                     }
-                    var _a = this.getCollapseBtnPosition(btnOptions), x = _a.x, y = _a.y;
+                    var _a = this.getCollapseBtnPosition(btnOptions), x = _a.x, y = _a.y, fill = (btnOptions.fillColor ||
+                        point.color ||
+                        "#cccccc" /* Palette.neutralColor20 */);
                     point.collapseButton = chart.renderer
                         .label(point.collapsed ? '+' : '-', x, y, shape)
                         .attr({
                         height: height - 2 * padding,
                         width: width - 2 * padding,
                         padding: padding,
-                        fill: "#cccccc" /* Palette.neutralColor20 */,
+                        fill: fill,
                         rotation: chart.inverted ? 90 : 0,
                         rotationOriginX: width / 2,
                         rotationOriginY: height / 2,
-                        stroke: "#333333" /* Palette.neutralColor80 */,
-                        'stroke-width': 1,
+                        stroke: btnOptions.lineColor || "#ffffff" /* Palette.backgroundColor */,
+                        'stroke-width': btnOptions.lineWidth,
                         'text-align': 'center',
                         align: 'center',
                         zIndex: 1
@@ -410,11 +473,15 @@
                         .addClass('highcharts-tracker')
                         .addClass('highcharts-collapse-button')
                         .removeClass('highcharts-no-tooltip')
-                        .css(style || {})
+                        .css(merge({
+                        color: typeof fill === 'string' ?
+                            chart.renderer.getContrast(fill) :
+                            "#333333" /* Palette.neutralColor80 */
+                    }, style))
                         .add(parentGroup);
                     point.collapseButton.element.point = point;
                     if (btnOptions.onlyOnHover && !point.collapsed) {
-                        point.collapseButton.hide();
+                        point.collapseButton.attr({ opacity: 0 });
                     }
                 }
                 else {
@@ -429,15 +496,15 @@
                             text: point.collapsed ? '+' : '-',
                             rotation: chart.inverted ? 90 : 0,
                             rotationOriginX: width / 2,
-                            rotationOriginY: height / 2,
-                            visibility: point.visible &&
-                                (!btnOptions.onlyOnHover ||
-                                    point.state === 'hover' ||
-                                    point.collapsed) ?
-                                'inherit' :
-                                'hidden'
+                            rotationOriginY: height / 2
                         })
-                            .animate({ x: x, y: y });
+                            .animate({
+                            x: x,
+                            y: y,
+                            opacity: point.visible && (!btnOptions.onlyOnHover ||
+                                point.state === 'hover' ||
+                                point.collapsed) ? 1 : 0
+                        });
                     }
                 }
             };
@@ -445,9 +512,6 @@
                 this.collapsed = pick(state, !this.collapsed);
                 fireEvent(this.series, 'toggleCollapse');
                 this.series.redraw();
-            };
-            TreegraphPoint.prototype.shouldDraw = function () {
-                return _super.prototype.shouldDraw.call(this) && this.visible;
             };
             TreegraphPoint.prototype.destroy = function () {
                 if (this.collapseButton) {
@@ -471,12 +535,14 @@
         addEvent(TreegraphPoint, 'mouseOut', function () {
             var btn = this.collapseButton, btnOptions = this.collapseButtonOptions;
             if (btn && btnOptions && btnOptions.onlyOnHover && !this.collapsed) {
-                btn.hide();
+                btn.animate({ opacity: 0 });
             }
         });
         addEvent(TreegraphPoint, 'mouseOver', function () {
             if (this.collapseButton) {
-                this.collapseButton.show();
+                this.collapseButton.animate({ opacity: 1 }, this.series.options.states &&
+                    this.series.options.states.hover &&
+                    this.series.options.states.hover.animation);
             }
         });
         // Handle showing and hiding of the points
@@ -1050,6 +1116,10 @@
                  */
                 enabled: true,
                 /**
+                 * The line width of the button in pixels
+                 */
+                lineWidth: 1,
+                /**
                  * Offset of the button in the x direction.
                  */
                 x: 0,
@@ -1060,26 +1130,37 @@
                 /**
                  * Height of the button.
                  */
-                height: 10,
+                height: 18,
                 /**
                  * Width of the button.
                  */
-                width: 10,
+                width: 18,
                 /**
                  * The symbol of the collapse button.
                  */
-                shape: 'circle'
+                shape: 'circle',
                 /**
                  * CSS styles for the collapse button.
                  *
                  * In styled mode, the collapse button style is given in the
                  * `.highcharts-collapse-button` class.
-                 *
-                 *
-                 * @type      {Highcharts.CSSObject}
-                 * @apioption series.treegraph.collapseButton.style
                  */
+                style: {
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    fontSize: '1em'
+                }
             },
+            /**
+             * Whether the treegraph series should fill the entire plot area in the X
+             * axis direction, even when there are collapsed points.
+             *
+             * @sample  highcharts/series-treegraph/fillspace
+             *          Fill space demonstrated
+             *
+             * @product highcharts
+             */
+            fillSpace: false,
             /**
              * @extends plotOptions.series.tooltip
              */
@@ -1120,6 +1201,7 @@
              * @declare Highcharts.SeriesTreegraphDataLabelsOptionsObject
              */
             dataLabels: {
+                defer: true,
                 /**
                  * Options for a _link_ label text which should follow link
                  * connection. Border and background are disabled for a label
@@ -1141,8 +1223,8 @@
                 },
                 enabled: true,
                 linkFormatter: function () { return ''; },
-                formatter: function () {
-                    return this.point.id;
+                style: {
+                    textOverflow: 'none'
                 }
             }
         };
@@ -1179,11 +1261,11 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
-        var curvedPath = PU.curvedPath;
+        var getLinkPath = PU.getLinkPath;
         var seriesProto = SeriesRegistry.series.prototype, _a = SeriesRegistry.seriesTypes, TreemapSeries = _a.treemap, ColumnSeries = _a.column;
         var symbols = SVGRenderer.prototype.symbols;
         var getLevelOptions = TU.getLevelOptions;
-        var extend = U.extend, isArray = U.isArray, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength;
+        var extend = U.extend, isArray = U.isArray, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength, splat = U.splat;
         /* *
          *
          *  Class
@@ -1244,6 +1326,11 @@
                 var chart = this.chart, series = this, plotSizeX = chart.plotSizeX, plotSizeY = chart.plotSizeY;
                 var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, maxXSize = 0, minXSize = 0, maxYSize = 0, minYSize = 0;
                 this.points.forEach(function (point) {
+                    // When fillSpace is on, stop the layout calculation when the hidden
+                    // points are reached. (#19038)
+                    if (_this.options.fillSpace && !point.visible) {
+                        return;
+                    }
                     var node = point.node, level = series.mapOptionsToLevel[point.node.level] || {}, markerOptions = merge(_this.options.marker, level.marker, point.options.marker), radius = relativeLength(markerOptions.radius || 0, Math.min(plotSizeX, plotSizeY)), symbol = markerOptions.symbol, nodeSizeY = (symbol === 'circle' || !markerOptions.height) ?
                         radius * 2 :
                         relativeLength(markerOptions.height, plotSizeY), nodeSizeX = symbol === 'circle' || !markerOptions.width ?
@@ -1289,12 +1376,12 @@
                     var levelOptions = series.mapOptionsToLevel[point.node.level || 0] || {};
                     if (point.node.parent) {
                         var pointOptions = merge(levelOptions, point.options);
-                        if (!point.linkToParent || !point.linkToParent.update) {
+                        if (!point.linkToParent || point.linkToParent.destroyed) {
                             var link = new series.LinkClass().init(series, pointOptions, void 0, point);
                             point.linkToParent = link;
                         }
                         else {
-                            point.linkToParent.update(pointOptions, false);
+                            point.linkToParent.update({ collapsed: pointOptions.collapsed }, false);
                         }
                         point.linkToParent.index = links.push(point.linkToParent) - 1;
                     }
@@ -1375,6 +1462,9 @@
                         _this.translateLink(point.linkToParent);
                     }
                 });
+                if (!options.colorByPoint) {
+                    series.setColorRecursive(series.tree);
+                }
             };
             TreegraphSeries.prototype.translateLink = function (link) {
                 var fromNode = link.fromNode, toNode = link.toNode, linkWidth = this.options.link.lineWidth, crisp = (Math.round(linkWidth) % 2) / 2, factor = pick(this.options.link.curveFactor, 0.5), type = pick(link.options.link && link.options.link.type, this.options.link.type);
@@ -1394,42 +1484,19 @@
                     var xMiddle = Math.floor((x2 + x1) / 2) + crisp;
                     link.plotX = xMiddle;
                     link.plotY = y2;
-                    if (type === 'straight') {
-                        link.shapeArgs = {
-                            d: [
-                                ['M', x1, y1],
-                                ['L', x1 + width * (inverted ? -1 : 1), y2],
-                                ['L', x2, y2]
-                            ]
-                        };
-                    }
-                    else if (type === 'curved') {
-                        link.shapeArgs = {
-                            d: [
-                                ['M', x1, y1],
-                                [
-                                    'C',
-                                    x1 + offset,
-                                    y1,
-                                    x1 - offset + width * (inverted ? -1 : 1),
-                                    y2,
-                                    x1 + width * (inverted ? -1 : 1),
-                                    y2
-                                ],
-                                ['L', x2, y2]
-                            ]
-                        };
-                    }
-                    else {
-                        link.shapeArgs = {
-                            d: curvedPath([
-                                ['M', x1, y1],
-                                ['L', x1 + width * (inverted ? -0.5 : 0.5), y1],
-                                ['L', x1 + width * (inverted ? -0.5 : 0.5), y2],
-                                ['L', x2, y2]
-                            ], this.options.link.radius)
-                        };
-                    }
+                    link.shapeArgs = {
+                        d: getLinkPath[type]({
+                            x1: x1,
+                            y1: y1,
+                            x2: x2,
+                            y2: y2,
+                            width: width,
+                            offset: offset,
+                            inverted: inverted,
+                            parentVisible: toNode.visible,
+                            radius: this.options.link.radius
+                        })
+                    };
                     link.dlBox = {
                         x: (x1 + x2) / 2,
                         y: (y1 + y2) / 2,
@@ -1463,7 +1530,8 @@
                         series._hasPointLabels = true;
                     }
                     // Set dataLabel width to the width of the point shape.
-                    if (point.shapeArgs) {
+                    if (point.shapeArgs &&
+                        !splat(series.options.dataLabels)[0].style.width) {
                         options.style.width = point.shapeArgs.width;
                         if (point.dataLabel) {
                             point.dataLabel.css({
@@ -1477,14 +1545,32 @@
                 seriesProto.drawDataLabels.call(this, points);
             };
             /**
+             * Override alignDataLabel so that position is always calculated and the
+             * label is faded in and out instead of hidden/shown when collapsing and
+             * expanding nodes.
+             */
+            TreegraphSeries.prototype.alignDataLabel = function (point, dataLabel) {
+                var visible = point.visible;
+                // Force position calculation and visibility
+                point.visible = true;
+                _super.prototype.alignDataLabel.apply(this, arguments);
+                // Fade in or out
+                dataLabel.animate({
+                    opacity: visible === false ? 0 : 1
+                }, void 0, function () {
+                    // Hide data labels that belong to hidden points (#18891)
+                    visible || dataLabel.hide();
+                });
+                // Reset
+                point.visible = visible;
+            };
+            /**
              * Treegraph has two separate collecions of nodes and lines,
              * render dataLabels for both sets.
              */
             TreegraphSeries.prototype.drawDataLabels = function () {
                 if (this.options.dataLabels) {
-                    if (!isArray(this.options.dataLabels)) {
-                        this.options.dataLabels = [this.options.dataLabels];
-                    }
+                    this.options.dataLabels = splat(this.options.dataLabels);
                     // Render node labels.
                     this.drawNodeLabels(this.points);
                     // Render link labels.
@@ -1493,9 +1579,12 @@
             };
             TreegraphSeries.prototype.destroy = function () {
                 // Links must also be destroyed.
-                for (var _i = 0, _a = this.links; _i < _a.length; _i++) {
-                    var link = _a[_i];
-                    link.destroy();
+                if (this.links) {
+                    for (var _i = 0, _a = this.links; _i < _a.length; _i++) {
+                        var link = _a[_i];
+                        link.destroy();
+                    }
+                    this.links.length = 0;
                 }
                 return seriesProto.destroy.apply(this, arguments);
             };
@@ -1508,21 +1597,19 @@
                     levelOptions.states[state]) ||
                     {};
                 point.options.marker = merge(series.options.marker, levelOptions.marker, point.options.marker);
-                var borderRadius = pick(stateOptions.borderRadius, options.borderRadius, levelOptions.borderRadius, series.options.borderRadius), linkColor = pick(stateOptions.link && stateOptions.link.color, options.link && options.link.color, levelOptions.link && levelOptions.link.color, series.options.link && series.options.link.color), linkLineWidth = pick(stateOptions.link && stateOptions.link.lineWidth, options.link && options.link.lineWidth, levelOptions.link && levelOptions.link.lineWidth, series.options.link && series.options.link.lineWidth), attribs = seriesProto.pointAttribs.call(series, point, state);
+                var linkColor = pick(stateOptions.link && stateOptions.link.color, options.link && options.link.color, levelOptions.link && levelOptions.link.color, series.options.link && series.options.link.color), linkLineWidth = pick(stateOptions.link && stateOptions.link.lineWidth, options.link && options.link.lineWidth, levelOptions.link && levelOptions.link.lineWidth, series.options.link && series.options.link.lineWidth), attribs = seriesProto.pointAttribs.call(series, point, state);
                 if (point.isLink) {
                     attribs.stroke = linkColor;
                     attribs['stroke-width'] = linkLineWidth;
                     delete attribs.fill;
                 }
-                else {
-                    if (borderRadius) {
-                        attribs.r = borderRadius;
-                    }
+                if (!point.visible) {
+                    attribs.opacity = 0;
                 }
                 return attribs;
             };
             TreegraphSeries.prototype.drawPoints = function () {
-                _super.prototype.drawPoints.apply(this, arguments);
+                TreemapSeries.prototype.drawPoints.apply(this, arguments);
                 ColumnSeries.prototype.drawPoints.call(this, this.links);
             };
             /**
@@ -1536,18 +1623,36 @@
                     plotSizeX - width / 2 - x :
                     x - width / 2), nodeY = node.y = (!reversed ?
                     plotSizeY - y - height / 2 :
-                    y - height / 2);
+                    y - height / 2), borderRadius = pick(point.options.borderRadius, level.borderRadius, this.options.borderRadius);
                 point.shapeType = 'path';
-                point.plotX = nodeX;
-                point.plotY = nodeY;
-                point.shapeArgs = {
-                    d: symbols[symbol || 'circle'](nodeX, nodeY, width, height),
-                    x: nodeX,
-                    y: nodeY,
-                    width: width,
-                    height: height,
-                    cursor: !point.node.isLeaf ? 'pointer' : 'default'
-                };
+                if (!point.visible && point.linkToParent) {
+                    var parentNode = point.linkToParent.fromNode;
+                    if (parentNode) {
+                        var parentShapeArgs = parentNode.shapeArgs || {}, _b = parentShapeArgs.x, x_1 = _b === void 0 ? 0 : _b, _c = parentShapeArgs.y, y_1 = _c === void 0 ? 0 : _c, _d = parentShapeArgs.width, width_1 = _d === void 0 ? 0 : _d, _e = parentShapeArgs.height, height_1 = _e === void 0 ? 0 : _e;
+                        if (!point.shapeArgs) {
+                            point.shapeArgs = {};
+                        }
+                        extend(point.shapeArgs, {
+                            d: symbols[symbol || 'circle'](x_1, y_1, width_1, height_1, borderRadius ? { r: borderRadius } : void 0),
+                            x: x_1,
+                            y: y_1
+                        });
+                        point.plotX = parentNode.plotX;
+                        point.plotY = parentNode.plotY;
+                    }
+                }
+                else {
+                    point.plotX = nodeX;
+                    point.plotY = nodeY;
+                    point.shapeArgs = {
+                        d: symbols[symbol || 'circle'](nodeX, nodeY, width, height, borderRadius ? { r: borderRadius } : void 0),
+                        x: nodeX,
+                        y: nodeY,
+                        width: width,
+                        height: height,
+                        cursor: !point.node.isLeaf ? 'pointer' : 'default'
+                    };
+                }
                 // Set the anchor position for tooltip.
                 point.tooltipPos = chart.inverted ?
                     [plotSizeY - nodeY - height / 2, plotSizeX - nodeX - width / 2] :
@@ -1602,7 +1707,7 @@
          * @sample highcharts/series-treegraph/level-options
          *          Treegraph chart with level options applied
          *
-         * @excluding layoutStartingDirection, layoutAlgorithm, colorVariation
+         * @excluding layoutStartingDirection, layoutAlgorithm
          * @apioption series.treegraph.levels
          */
         /**

@@ -7,14 +7,14 @@
 */
 
 #import "HIButtonOptions.h"
-#import "HIAnnotationsOptions.h"
 #import "HIBreadcrumbs.h"
 #import "HIBindings.h"
 #import "HIEvents.h"
 #import "HIPopup.h"
-#import "HIColor.h"
+#import "HIAnnotationsOptions.h"
 #import "HIAnimationOptionsObject.h"
 #import "HICSSObject.h"
+#import "HIColor.h"
 
 
 /**
@@ -25,7 +25,7 @@ A collection of options for buttons and menus appearing in the exporting module 
 /**
 CSS styles for the popup menu appearing by default when the export icon is clicked. This menu is rendered in HTML.
 
-**Defaults to** `{"border": "1px solid #999999", "background": "#ffffff", "padding": "5px 0"}`.
+**Defaults to** `{"background": "#ffffff", "borderRadius": "3px", "padding": "0.5em"}`.
 
 **Try it**
 
@@ -57,7 +57,7 @@ Options for breadcrumbs. Breadcrumbs general options are defined in `navigation.
 /**
 CSS styles for the hover state of the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML.
 
-**Defaults to** `{"background": "#335cad", "color": "#ffffff"}`.
+**Defaults to** `{"background": "#f2f2f2" }`.
 
 **Try it**
 
@@ -67,7 +67,7 @@ CSS styles for the hover state of the individual items within the popup menu app
 /**
 CSS styles for the individual items within the popup menu appearing by default when the export icon is clicked. The menu items are rendered in HTML. Font size defaults to `11px` on desktop and `14px` on touch devices.
 
-**Defaults to** `{"padding": "0.5em 1em", "color": "#333333", "background": "none", "fontSize": "11px/14px", "transition": "background 250ms, color 250ms"}`.
+**Defaults to** `{"padding": "0.5em", "color": "#333333", "background": "none", "borderRadius": "3px", "fontSize": "0.8em", "transition": "background 250ms, color 250ms"}`.
 
 **Try it**
 
@@ -133,7 +133,7 @@ How to animate the pages when navigating up or down. A value of `true` applies t
 /**
 The color for the active up or down arrow in the legend page navigation.
 
-**Defaults to** `#003399`.
+**Defaults to** `#0022ff`.
 
 **Try it**
 

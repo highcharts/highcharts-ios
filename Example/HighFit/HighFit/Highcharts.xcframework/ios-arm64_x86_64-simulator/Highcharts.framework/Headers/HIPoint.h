@@ -50,6 +50,14 @@ Prefix to add to the values in the point descriptions. Uses `tooltip.valuePrefix
 */
 @property(nonatomic, readwrite) NSString *valuePrefix;
 /**
+A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) to use instead of the default for point descriptions. The context of the format string is the point instance. As opposed to `accessibility.point.valueDescriptionFormat`, this option replaces the whole description.
+
+**Try it**
+
+* [Description format](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/advanced-accessible)
+*/
+@property(nonatomic, readwrite) NSString *descriptionFormat;
+/**
 Decimals to use for the values in the point descriptions. Uses `tooltip.valueDecimals` if not defined.
 */
 @property(nonatomic, readwrite) NSNumber *valueDecimals;

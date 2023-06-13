@@ -1,3 +1,84 @@
+# Version 11.1.0
+
+## Framework:
+
+1. Added support for mouse wheel zooming through chart.zooming.mouseWheel. This feature is embedded in the Highcharts Stock bundle, but requires an additional module file for the Highcharts bundle.
+2. Added the heatmap.interpolation option for creating smooth heatmaps.
+3. Added new function, Chart.getOptions(), to get the current active configuration options for the chart.
+4. Added the treegraph.fillSpace option for treegraphs to fill the whole plot area even when some points are collaped.
+5. Added `borderRadius` option support for funnel and pyramid series. See #18839.
+6. Added new option, xAxis.crossing and yAxis.crossing, making it easier to create axis layout for mathematical plots.
+7. Added new option, series.legendSymbol. See #18753.
+8. Design facelift with clearer, more vivid palette, added contrast for text labels and many minor visual changes.
+9. Added new series type, treegraph. Read more in the docs.
+10. Added new series type, pictorial.
+11. Removed support for IE 8 and older.
+12. Changed the default builds to ECMAScript version ES2016.
+13. Replaced SASS files for styledMode with updated CSS files. Highcharts theming is now easier by supporting CSS variables as well as `prefers-color-scheme`. See style by CSS.
+14. Sonification module v2 with many new features for audio charts, now part of the official API.
+15. Changed default rotationMode to `circular` for sunburst data labels.
+16. Added minorTicksPerMajor option for axes, see #13338.
+17. Added the `point.percentage` property for gauge charts, see #18433.
+18. Added `ResizeObserver` to the chart so it could adjust reflow on container size change, closes #17924.
+
+## Framework upgrade notes:
+1. To revert to the old design, use the theme defined in the v10 theme sample.
+2. Font sizes of the chart are now using rem by default. This may cause too small or too big fonts if your web page is using non-default root element font size. To avoid that, set chart.style.fontSize to 16px or any other values you see fit.
+3. The top-level labels option has been deprecated for a long time and is now removed. Use Annotations instead.
+4. Time-related settings on the global options structure are removed. Use the time options instead.
+5. The new version of the sonification module is not backwards compatible with the old, experimental module.
+6. The default builds were changed to ECMAScript version ES2016. See the system requirements on how to support IE11 and other legacy browsers.
+7. If you're using chart.styledMode, and your end users have prefers-color-scheme set to dark in their browsers, they may now be presented with dark-themed charts. The exception is if your CSS overrides the default coloring.
+8. Changed default rotationMode to circular for sunburst data labels.
+
+## Framework bug fixes:
+
+1. Fixed #18869, redundant chart redraws on changing title, subtitle or caption font size, or top level chart font size.
+2. Fixed #19017, failure in parsing negative numbers with spaces in the data module.
+3. Fixed #19053, a regression since 10.3 causing item series update not to work correctly.
+4. Fixed #19051, axis crossing was not always correct.
+5. Fixed #18985, updating enableMouseTracking from `true` to `false` didn't work.
+6. Fixed #17589, update of multiple data labels didn't work in specific conditions.
+7. Fixed #17791, `pointRange` wasn't calculated for multiple series with single points.
+8. Fixed #19028, border radius was wrongly applied for negative column points when the zoneAxis option was `x`.
+9. Fixed #12063, packed bubble parent nodes had a bad position after width update.
+10. Fixed #18891, invisible data labels in treegraph series reacted to hover.
+11. Fixed #18960, a regression in v11, wrong placement for data labels in dumbbell series.
+12. Fixed #18110, `yAxis.maxPadding` was ignored when yAxis.softMin was set.
+13. Fixed #18956, a regression causing small sankey nodes rendering as circles.
+14. Fixed #18876, updating the `tooltip` didn't work when wasn't declared in the chart configuration.
+15. Fixed #18884, sunburst circular labels did not work when the difference in value was small.
+16. Fixed #18928, a regression in v11 causing the tooltip to not display in subsequent charts when the first chart in the web page was hidden.
+17. Fixed #18821, hidden overlapped data labels with `useHTML` on were still active for the mouseover event.
+18. Fixed sonification issue where resuming after pause ignored the original onEnd argument.
+19. Fixed too low contrast for credits in High Contrast theme.
+20. Fixed #14602, arearange series.label.onArea was not implemented.
+21. Fixed #18856, the last point wasn't displayed while hovering in the boost module.
+22. Fixed #18790, custom symbols were incorrectly positioned in some cases.
+23. Fixed #18103, Y zoom while panning on top of the plot when chart inverted was not working.
+24. Fixed #18066, after updating the series data to one point with category xAxis there were unwanted labels.
+25. Fixed #17720, the tooltip with enabled outside and split properties was badly positioned for some series.
+26. Fixed #18693, tooltip.stickOnContact threw errors on hover between one series with `followPointer` set to true and the second series `followPointer` set to false.
+27. Fixed #18741, incorrect guide box behaviour while dragging stacked bars.
+28. Fixed #14080, bubble legend didn't work correctly if the `legendItemClick` event for one series was prevented.
+29. Fixed #18635, bad tooltip position in an inverted chart inside a scrollable container when tooltip.outside was true.
+30. Fixed #17614, timeline styled mode default colors.
+31. Fixed #18617, stack labels in inverted charts were mispositioned in the y axis.
+32. Fixed #18636, waterfall lines missing when there was a `null` point.
+33. Fixed #17168, the Sunburst series didn’t work properly when the chart was inverted.
+34. Fixed #17257, item chart points color wasn't updating.
+35. Fixed #17280, bubbles with `z: 0` caused points to disappear.
+36. Fixed #16516, legend symbol height didn't accept 0 as a value.
+37. Fixed #18501, vertical alignment of stack labels didn't work with logarithmic axes.
+38. Fixed #18502, `pointPadding` for heatmap series wasn't working with reversed axes.
+39. Fixed #18444, a polar chart with type "bar" and data labels caused JavaScript error.
+40. Fixed #17912, column range points were not aligned with column points.
+41. Fixed #18443, the `className` property in guideBox didn't work for drag & drop.
+42. Fixed #10005, wrong series name and legend item by using data.seriesMapping property.
+43. Fixed #18422, stacked polar column chart with zero value rendered a wedge across the whole y axis.
+44. Fixed #16675, adding annotation from a custom button was not possible if the button had a custom SVG symbol.
+45. Fixed #18305, updating series marker size was not working if the initial size was not set.
+
 # Version 10.3.3
 
 ## Framework:

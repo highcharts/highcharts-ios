@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * 3D features for Highcharts JS
  *
@@ -3008,7 +3008,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -3032,9 +3032,6 @@
             }
             this.zAxis = [];
             zAxisOptions.forEach(function (axisOptions, i) {
-                axisOptions.index = i;
-                // Z-Axis is shown horizontally, so it's kind of a X-Axis
-                axisOptions.isX = true;
                 _this.addZAxis(axisOptions).setScale();
             });
         }
@@ -3048,30 +3045,34 @@
          */
         var ZAxis = /** @class */ (function (_super) {
             __extends(ZAxis, _super);
-            /* *
-             *
-             *  Constructor
-             *
-             * */
-            function ZAxis(chart, userOptions) {
-                var _this = _super.call(this, chart, userOptions) || this;
+            function ZAxis() {
+                /* *
+                 *
+                 *  Static Properties
+                 *
+                 * */
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 _this.isZAxis = true;
                 return _this;
             }
-            /* *
-             *
-             *  Static Properties
-             *
-             * */
             ZAxis.compose = function (ChartClass) {
-                if (composedClasses.indexOf(ChartClass) === -1) {
-                    composedClasses.push(ChartClass);
+                if (U.pushUnique(composedMembers, ChartClass)) {
                     addEvent(ChartClass, 'afterGetAxes', onChartAfterGetAxes);
                     var chartProto = ChartClass.prototype;
                     chartProto.addZAxis = chartAddZAxis;
                     chartProto.collectionsWithInit.zAxis = [chartProto.addZAxis];
                     chartProto.collectionsWithUpdate.push('zAxis');
                 }
+            };
+            /* *
+             *
+             *  Constructor
+             *
+             * */
+            ZAxis.prototype.init = function (chart, userOptions) {
+                // #14793, this used to be set on the prototype
+                this.isZAxis = true;
+                _super.prototype.init.call(this, chart, userOptions, 'zAxis');
             };
             /* *
              *
@@ -3123,10 +3124,7 @@
                     offset: 0,
                     lineWidth: 0
                 }, userOptions);
-                // #14793, this used to be set on the prototype
-                this.isZAxis = true;
                 _super.prototype.setOptions.call(this, userOptions);
-                this.coll = 'zAxis';
             };
             return ZAxis;
         }(Axis));
@@ -3288,7 +3286,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -3298,8 +3296,7 @@
          * @private
          */
         function compose(TickClass) {
-            if (composedClasses.indexOf(TickClass) === -1) {
-                composedClasses.push(TickClass);
+            if (U.pushUnique(composedMembers, TickClass)) {
                 addEvent(TickClass, 'afterGetLabelPosition', onTickAfterGetLabelPosition);
                 wrap(TickClass.prototype, 'getMarkPath', wrapTickGetMarkPath);
             }
@@ -3362,7 +3359,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -3608,8 +3605,7 @@
              */
             Axis3DAdditions.compose = function (AxisClass, TickClass) {
                 Tick3D.compose(TickClass);
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     merge(true, AxisClass.defaultOptions, Axis3DDefaults);
                     AxisClass.keepProps.push('axis3D');
                     addEvent(AxisClass, 'init', onAxisInit);
@@ -3979,21 +3975,20 @@
          * */
         var perspective = Math3D.perspective;
         var lineProto = SeriesRegistry.seriesTypes.line.prototype;
-        var pick = U.pick, wrap = U.wrap;
+        var wrap = U.wrap;
         /* *
          *
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
          *
          * */
         function compose(AreaSeriesClass) {
-            if (composedClasses.indexOf(AreaSeriesClass) === -1) {
-                composedClasses.push(AreaSeriesClass);
+            if (U.pushUnique(composedMembers, AreaSeriesClass)) {
                 wrap(AreaSeriesClass.prototype, 'getGraphPath', wrapAreaSeriesGetGraphPath);
             }
         }
@@ -4058,7 +4053,7 @@
 
         return Area3DSeries;
     });
-    _registerModule(_modules, 'Series/Column3D/Column3DComposition.js', [_modules['Series/Column/ColumnSeries.js'], _modules['Core/Globals.js'], _modules['Core/Series/Series.js'], _modules['Core/Math3D.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Axis/Stacking/StackItem.js'], _modules['Core/Utilities.js']], function (ColumnSeries, H, Series, Math3D, SeriesRegistry, StackItem, U) {
+    _registerModule(_modules, 'Series/Column3D/Column3DComposition.js', [_modules['Series/Column/ColumnSeries.js'], _modules['Core/Series/Series.js'], _modules['Core/Math3D.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Axis/Stacking/StackItem.js'], _modules['Core/Utilities.js']], function (ColumnSeries, Series, Math3D, SeriesRegistry, StackItem, U) {
         /* *
          *
          *  (c) 2010-2021 Torstein Honsi
@@ -4069,9 +4064,8 @@
          *
          * */
         var columnProto = ColumnSeries.prototype;
-        var svg = H.svg;
         var perspective = Math3D.perspective;
-        var addEvent = U.addEvent, pick = U.pick, wrap = U.wrap;
+        var addEvent = U.addEvent, extend = U.extend, pick = U.pick, wrap = U.wrap;
         /* *
          *
          *  Functions
@@ -4131,10 +4125,11 @@
                 // #7103 Reset outside3dPlot flag
                 point.outside3dPlot = null;
                 if (point.y !== null) {
-                    var shapeArgs_1 = point.shapeArgs, tooltipPos = point.tooltipPos, 
+                    var shapeArgs_1 = extend({ x: 0, y: 0, width: 0, height: 0 }, point.shapeArgs || {}), 
                     // Array for final shapeArgs calculation.
                     // We are checking two dimensions (x and y).
-                    dimensions = [['x', 'width'], ['y', 'height']], borderlessBase_1; // Crisped rects can have +/- 0.5 pixels offset.
+                    dimensions = [['x', 'width'], ['y', 'height']], tooltipPos = point.tooltipPos;
+                    var borderlessBase_1; // Crisped rects can have +/- 0.5 pixels offset.
                     // #3131 We need to check if column is inside plotArea.
                     dimensions.forEach(function (d) {
                         borderlessBase_1 = shapeArgs_1[d[0]] - borderCrisp;
@@ -4142,8 +4137,7 @@
                             // If borderLessBase is smaller than 0, it is needed to set
                             // its value to 0 or 0.5 depending on borderWidth
                             // borderWidth may be even or odd.
-                            shapeArgs_1[d[1]] +=
-                                shapeArgs_1[d[0]] + borderCrisp;
+                            shapeArgs_1[d[1]] += shapeArgs_1[d[0]] + borderCrisp;
                             shapeArgs_1[d[0]] = -borderCrisp;
                             borderlessBase_1 = 0;
                         }
@@ -4157,11 +4151,9 @@
                         }
                         if (
                         // Do not remove columns with zero height/width.
-                        (shapeArgs_1[d[1]] !== 0) &&
-                            (shapeArgs_1[d[0]] >=
-                                series[d[0] + 'Axis'].len ||
-                                shapeArgs_1[d[0]] + shapeArgs_1[d[1]] <=
-                                    borderCrisp)) {
+                        shapeArgs_1[d[1]] !== 0 &&
+                            (shapeArgs_1[d[0]] >= series[d[0] + 'Axis'].len ||
+                                shapeArgs_1[d[0]] + shapeArgs_1[d[1]] <= borderCrisp)) {
                             // Set args to 0 if column is outside the chart.
                             for (var key in shapeArgs_1) { // eslint-disable-line guard-for-in
                                 // #13840
@@ -4173,12 +4165,14 @@
                         }
                     });
                     // Change from 2d to 3d
-                    if (point.shapeType === 'rect') {
+                    if (point.shapeType === 'roundedRect') {
                         point.shapeType = 'cuboid';
                     }
-                    shapeArgs_1.z = z;
-                    shapeArgs_1.depth = depth;
-                    shapeArgs_1.insidePlotArea = true;
+                    point.shapeArgs = extend(shapeArgs_1, {
+                        z: z,
+                        depth: depth,
+                        insidePlotArea: true
+                    });
                     // Point's position in 2D
                     point2dPos = {
                         x: shapeArgs_1.x + shapeArgs_1.width / 2,
@@ -4188,18 +4182,20 @@
                     // Recalculate point positions for inverted graphs
                     if (chart.inverted) {
                         point2dPos.x = shapeArgs_1.height;
-                        point2dPos.y = point.clientX;
+                        point2dPos.y = point.clientX || 0;
                     }
                     // Calculate and store point's position in 3D,
                     // using perspective method.
                     point.plot3d = perspective([point2dPos], chart, true, false)[0];
                     // Translate the tooltip position in 3d space
-                    tooltipPos = perspective([{
-                            x: tooltipPos[0],
-                            y: tooltipPos[1],
-                            z: z + depth / 2 // The center of column in Z dimension
-                        }], chart, true, false)[0];
-                    point.tooltipPos = [tooltipPos.x, tooltipPos.y];
+                    if (tooltipPos) {
+                        var translatedTTPos = perspective([{
+                                x: tooltipPos[0],
+                                y: tooltipPos[1],
+                                z: z + depth / 2 // The center of column in Z dimension
+                            }], chart, true, false)[0];
+                        point.tooltipPos = [translatedTTPos.x, translatedTTPos.y];
+                    }
                 }
             });
             // store for later use #4067
@@ -4211,46 +4207,44 @@
             }
             else {
                 var args = arguments, init = args[1], yAxis_1 = this.yAxis, series_1 = this, reversed_1 = this.yAxis.reversed;
-                if (svg) { // VML is too slow anyway
-                    if (init) {
-                        series_1.data.forEach(function (point) {
-                            if (point.y !== null) {
-                                point.height = point.shapeArgs.height;
-                                point.shapey = point.shapeArgs.y; // #2968
-                                point.shapeArgs.height = 1;
-                                if (!reversed_1) {
-                                    if (point.stackY) {
-                                        point.shapeArgs.y =
-                                            point.plotY +
-                                                yAxis_1.translate(point.stackY);
-                                    }
-                                    else {
-                                        point.shapeArgs.y =
-                                            point.plotY +
-                                                (point.negative ?
-                                                    -point.height :
-                                                    point.height);
-                                    }
+                if (init) {
+                    series_1.data.forEach(function (point) {
+                        if (point.y !== null) {
+                            point.height = point.shapeArgs.height;
+                            point.shapey = point.shapeArgs.y; // #2968
+                            point.shapeArgs.height = 1;
+                            if (!reversed_1) {
+                                if (point.stackY) {
+                                    point.shapeArgs.y =
+                                        point.plotY +
+                                            yAxis_1.translate(point.stackY);
+                                }
+                                else {
+                                    point.shapeArgs.y =
+                                        point.plotY +
+                                            (point.negative ?
+                                                -point.height :
+                                                point.height);
                                 }
                             }
-                        });
-                    }
-                    else { // run the animation
-                        series_1.data.forEach(function (point) {
-                            if (point.y !== null) {
-                                point.shapeArgs.height = point.height;
-                                point.shapeArgs.y = point.shapey; // #2968
-                                // null value do not have a graphic
-                                if (point.graphic) {
-                                    point.graphic[point.outside3dPlot ?
-                                        'attr' :
-                                        'animate'](point.shapeArgs, series_1.options.animation);
-                                }
+                        }
+                    });
+                }
+                else { // run the animation
+                    series_1.data.forEach(function (point) {
+                        if (point.y !== null) {
+                            point.shapeArgs.height = point.height;
+                            point.shapeArgs.y = point.shapey; // #2968
+                            // null value do not have a graphic
+                            if (point.graphic) {
+                                point.graphic[point.outside3dPlot ?
+                                    'attr' :
+                                    'animate'](point.shapeArgs, series_1.options.animation);
                             }
-                        });
-                        // redraw datalabels to the correct position
-                        this.drawDataLabels();
-                    }
+                        }
+                    });
+                    // redraw datalabels to the correct position
+                    this.drawDataLabels();
                 }
             }
         });
@@ -4624,7 +4618,8 @@
              * @private
              */
             Pie3DPoint.prototype.haloPath = function () {
-                return this.series.chart.is3d() ?
+                var _a;
+                return ((_a = this.series) === null || _a === void 0 ? void 0 : _a.chart.is3d()) ?
                     [] : superHaloPath.apply(this, arguments);
             };
             return Pie3DPoint;
@@ -4664,7 +4659,7 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
-        var deg2rad = H.deg2rad, svg = H.svg;
+        var deg2rad = H.deg2rad;
         var PieSeries = SeriesRegistry.seriesTypes.pie;
         var extend = U.extend, pick = U.pick;
         /* *
@@ -4702,39 +4697,37 @@
                 }
                 else {
                     var animation = this.options.animation, attribs = void 0, center = this.center, group = this.group, markerGroup = this.markerGroup;
-                    if (svg) { // VML is too slow anyway
-                        if (animation === true) {
-                            animation = {};
+                    if (animation === true) {
+                        animation = {};
+                    }
+                    // Initialize the animation
+                    if (init) {
+                        // Scale down the group and place it in the center
+                        group.oldtranslateX = pick(group.oldtranslateX, group.translateX);
+                        group.oldtranslateY = pick(group.oldtranslateY, group.translateY);
+                        attribs = {
+                            translateX: center[0],
+                            translateY: center[1],
+                            scaleX: 0.001,
+                            scaleY: 0.001
+                        };
+                        group.attr(attribs);
+                        if (markerGroup) {
+                            markerGroup.attrSetters = group.attrSetters;
+                            markerGroup.attr(attribs);
                         }
-                        // Initialize the animation
-                        if (init) {
-                            // Scale down the group and place it in the center
-                            group.oldtranslateX = pick(group.oldtranslateX, group.translateX);
-                            group.oldtranslateY = pick(group.oldtranslateY, group.translateY);
-                            attribs = {
-                                translateX: center[0],
-                                translateY: center[1],
-                                scaleX: 0.001,
-                                scaleY: 0.001
-                            };
-                            group.attr(attribs);
-                            if (markerGroup) {
-                                markerGroup.attrSetters = group.attrSetters;
-                                markerGroup.attr(attribs);
-                            }
-                            // Run the animation
-                        }
-                        else {
-                            attribs = {
-                                translateX: group.oldtranslateX,
-                                translateY: group.oldtranslateY,
-                                scaleX: 1,
-                                scaleY: 1
-                            };
-                            group.animate(attribs, animation);
-                            if (markerGroup) {
-                                markerGroup.animate(attribs, animation);
-                            }
+                        // Run the animation
+                    }
+                    else {
+                        attribs = {
+                            translateX: group.oldtranslateX,
+                            translateY: group.oldtranslateY,
+                            scaleX: 1,
+                            scaleY: 1
+                        };
+                        group.animate(attribs, animation);
+                        if (markerGroup) {
+                            markerGroup.animate(attribs, animation);
                         }
                     }
                 }

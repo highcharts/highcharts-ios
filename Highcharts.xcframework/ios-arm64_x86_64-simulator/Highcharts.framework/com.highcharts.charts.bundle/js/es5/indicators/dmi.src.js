@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -66,7 +66,7 @@
             *  Constants
             *
             * */
-            var composedClasses = [];
+            var composedMembers = [];
             /**
              * Additional lines DOCS names. Elements of linesApiNames array should
              * be consistent with DOCS line names defined in your implementation.
@@ -121,8 +121,7 @@
              * @private
              */
             function compose(IndicatorClass) {
-                if (composedClasses.indexOf(IndicatorClass) === -1) {
-                    composedClasses.push(IndicatorClass);
+                if (U.pushUnique(composedMembers, IndicatorClass)) {
                     var proto = IndicatorClass.prototype;
                     proto.linesApiNames = (proto.linesApiNames ||
                         linesApiNames.slice());

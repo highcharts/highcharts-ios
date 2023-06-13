@@ -70,7 +70,7 @@ The start position of the plot band in axis units.
 /**
 The color of the plot band.
 
-**Defaults to** `#e6ebf5`.
+**Defaults to** `#e6e9ff`.
 
 **Try it**
 

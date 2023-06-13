@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Boost module
  *
@@ -141,8 +141,7 @@
          * @private
          */
         function compose(ChartClass, wglMode) {
-            if (wglMode && composedClasses.indexOf(ChartClass) === -1) {
-                composedClasses.push(ChartClass);
+            if (wglMode && U.pushUnique(composedClasses, ChartClass)) {
                 ChartClass.prototype.callbacks.push(onChartCallback);
             }
             return ChartClass;
@@ -178,14 +177,11 @@
         }
         /**
          * Returns true if the chart is in series boost mode.
-         *
-         * @function Highcharts.Chart#isChartSeriesBoosting
-         *
+         * @private
          * @param {Highcharts.Chart} chart
-         *        the chart to check
-         *
+         * Chart to check.
          * @return {boolean}
-         *         true if the chart is in series boost mode
+         * `true` if the chart is in series boost mode.
          */
         function isChartSeriesBoosting(chart) {
             var allSeries = chart.series, boost = chart.boost = chart.boost || {}, boostOptions = chart.options.boost || {}, threshold = pick(boostOptions.seriesThreshold, 50);
@@ -2266,7 +2262,7 @@
          *
          * */
         var CHUNK_SIZE = 3000;
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Variables
@@ -2310,8 +2306,7 @@
          * @private
          */
         function compose(SeriesClass, seriesTypes, wglMode) {
-            if (composedClasses.indexOf(SeriesClass) === -1) {
-                composedClasses.push(SeriesClass);
+            if (U.pushUnique(composedMembers, SeriesClass)) {
                 addEvent(SeriesClass, 'destroy', onSeriesDestroy);
                 addEvent(SeriesClass, 'hide', onSeriesHide);
                 var seriesProto_1 = SeriesClass.prototype;
@@ -2331,8 +2326,7 @@
                     return wrapSeriesFunctions(seriesProto_1, seriesTypes, method);
                 });
             }
-            if (composedClasses.indexOf(getOptions) === -1) {
-                composedClasses.push(getOptions);
+            if (U.pushUnique(composedMembers, getOptions)) {
                 var plotOptions_1 = getOptions().plotOptions;
                 // Set default options
                 Boostables.forEach(function (type) {
@@ -2347,8 +2341,7 @@
             if (wglMode) {
                 var AreaSeries = seriesTypes.area, AreaSplineSeries = seriesTypes.areaspline, BubbleSeries = seriesTypes.bubble, ColumnSeries = seriesTypes.column, HeatmapSeries = seriesTypes.heatmap, ScatterSeries = seriesTypes.scatter, TreemapSeries = seriesTypes.treemap;
                 if (AreaSeries &&
-                    composedClasses.indexOf(AreaSeries) === -1) {
-                    composedClasses.push(AreaSeries);
+                    U.pushUnique(composedMembers, AreaSeries)) {
                     extend(AreaSeries.prototype, {
                         fill: true,
                         fillOpacity: true,
@@ -2356,8 +2349,7 @@
                     });
                 }
                 if (AreaSplineSeries &&
-                    composedClasses.indexOf(AreaSplineSeries) === -1) {
-                    composedClasses.push(AreaSplineSeries);
+                    U.pushUnique(composedMembers, AreaSplineSeries)) {
                     extend(AreaSplineSeries.prototype, {
                         fill: true,
                         fillOpacity: true,
@@ -2365,8 +2357,7 @@
                     });
                 }
                 if (BubbleSeries &&
-                    composedClasses.indexOf(BubbleSeries) === -1) {
-                    composedClasses.push(BubbleSeries);
+                    U.pushUnique(composedMembers, BubbleSeries)) {
                     var bubbleProto_1 = BubbleSeries.prototype;
                     // By default, the bubble series does not use the KD-tree, so force
                     // it to.
@@ -2381,24 +2372,21 @@
                     });
                 }
                 if (ColumnSeries &&
-                    composedClasses.indexOf(ColumnSeries) === -1) {
-                    composedClasses.push(ColumnSeries);
+                    U.pushUnique(composedMembers, ColumnSeries)) {
                     extend(ColumnSeries.prototype, {
                         fill: true,
                         sampling: true
                     });
                 }
                 if (ScatterSeries &&
-                    composedClasses.indexOf(ScatterSeries) === -1) {
-                    composedClasses.push(ScatterSeries);
+                    U.pushUnique(composedMembers, ScatterSeries)) {
                     ScatterSeries.prototype.fill = true;
                 }
                 // We need to handle heatmaps separatly, since we can't perform the
                 // size/color calculations in the shader easily.
                 // @todo This likely needs future optimization.
                 [HeatmapSeries, TreemapSeries].forEach(function (SC) {
-                    if (SC && composedClasses.indexOf(SC) === -1) {
-                        composedClasses.push(SC);
+                    if (SC && U.pushUnique(composedMembers, SC)) {
                         wrap(SC.prototype, 'drawPoints', wrapSeriesDrawPoints);
                     }
                 });
@@ -2782,7 +2770,7 @@
          */
         function seriesRenderCanvas() {
             var _this = this;
-            var options = this.options || {}, chart = this.chart, xAxis = this.xAxis, yAxis = this.yAxis, xData = options.xData || this.processedXData, yData = options.yData || this.processedYData, rawData = options.data, xExtremes = xAxis.getExtremes(), xMin = xExtremes.min, xMax = xExtremes.max, yExtremes = yAxis.getExtremes(), yMin = yExtremes.min, yMax = yExtremes.max, pointTaken = {}, sampling = !!this.sampling, enableMouseTracking = options.enableMouseTracking !== false, threshold = options.threshold, isRange = this.pointArrayMap &&
+            var options = this.options || {}, chart = this.chart, xAxis = this.xAxis, yAxis = this.yAxis, xData = options.xData || this.processedXData, yData = options.yData || this.processedYData, rawData = options.data, xExtremes = xAxis.getExtremes(), xMin = xExtremes.min, xMax = xExtremes.max, yExtremes = yAxis.getExtremes(), yMin = yExtremes.min, yMax = yExtremes.max, pointTaken = {}, sampling = !!this.sampling, enableMouseTracking = options.enableMouseTracking, threshold = options.threshold, isRange = this.pointArrayMap &&
                 this.pointArrayMap.join(',') === 'low,high', isStacked = !!options.stacking, cropStart = this.cropStart || 0, requireSorting = this.requireSorting, useRaw = !xData, compareX = options.findNearestPointBy === 'x', xDataFull = (this.xData ||
                 this.options.xData ||
                 this.processedXData ||
@@ -2825,6 +2813,21 @@
                 }
             }
             var points = this.points = [], addKDPoint = function (clientX, plotY, i, percentage) {
+                var x = xDataFull ? xDataFull[cropStart + i] : false, pushPoint = function (plotX) {
+                    if (chart.inverted) {
+                        plotX = xAxis.len - plotX;
+                        plotY = yAxis.len - plotY;
+                    }
+                    points.push({
+                        destroy: noop,
+                        x: x,
+                        clientX: plotX,
+                        plotX: plotX,
+                        plotY: plotY,
+                        i: cropStart + i,
+                        percentage: percentage
+                    });
+                };
                 // We need to do ceil on the clientX to make things
                 // snap to pixel values. The renderer will frequently
                 // draw stuff on "sub-pixels".
@@ -2834,20 +2837,17 @@
                 // The k-d tree requires series points.
                 // Reduce the amount of points, since the time to build the
                 // tree increases exponentially.
-                if (enableMouseTracking && !pointTaken[index]) {
-                    pointTaken[index] = true;
-                    if (chart.inverted) {
-                        clientX = xAxis.len - clientX;
-                        plotY = yAxis.len - plotY;
+                if (enableMouseTracking) {
+                    if (!pointTaken[index]) {
+                        pointTaken[index] = true;
+                        pushPoint(clientX);
                     }
-                    points.push({
-                        x: xDataFull ? xDataFull[cropStart + i] : false,
-                        clientX: clientX,
-                        plotX: clientX,
-                        plotY: plotY,
-                        i: cropStart + i,
-                        percentage: percentage
-                    });
+                    else if (x === xDataFull[xDataFull.length - 1]) {
+                        // If the last point is on the same pixel as the last
+                        // tracked point, swap them. (#18856)
+                        points.length--;
+                        pushPoint(clientX);
+                    }
                 }
             };
             // Do not start building while drawing
@@ -2895,7 +2895,7 @@
                     if (!requireSorting) {
                         isYInside = (y || 0) >= yMin && y <= yMax;
                     }
-                    if (y !== null && x >= xMin && x <= xMax && isYInside) {
+                    if (x >= xMin && x <= xMax && isYInside) {
                         clientX = xAxis.toPixels(x, true);
                         if (sampling) {
                             if (typeof minI === 'undefined' ||
@@ -3124,6 +3124,7 @@
         var BoostSeries = {
             compose: compose,
             destroyGraphics: destroyGraphics,
+            eachAsync: eachAsync,
             getPoint: getPoint
         };
 
@@ -3194,10 +3195,6 @@
                     else {
                         this.chart.showLoading('Your browser doesn\'t support HTML5 canvas, <br>' +
                             'please use a modern browser');
-                        // Uncomment this to provide low-level (slow) support in oldIE.
-                        // It will cause script errors on charts with more than a few
-                        // thousand points.
-                        // arguments[0].call(this);
                     }
                 });
             }
@@ -3300,7 +3297,7 @@
                         timeSetup: activeBoostSettings.timeSetup || false
                     }, ctx, c = 0, xData = series.processedXData, yData = series.processedYData, rawData = options.data, xExtremes = xAxis.getExtremes(), xMin = xExtremes.min, xMax = xExtremes.max, yExtremes = yAxis.getExtremes(), yMin = yExtremes.min, yMax = yExtremes.max, pointTaken = {}, lastClientX, sampling = !!series.sampling, points, r = options.marker && options.marker.radius, cvsDrawPoint = this.cvsDrawPoint, cvsLineTo = options.lineWidth ? this.cvsLineTo : void 0, cvsMarker = (r && r <= 1 ?
                         this.cvsMarkerSquare :
-                        this.cvsMarkerCircle), strokeBatch = this.cvsStrokeBatch || 1000, enableMouseTracking = options.enableMouseTracking !== false, lastPoint, threshold = options.threshold, yBottom = yAxis.getThreshold(threshold), hasThreshold = isNumber(threshold), translatedThreshold = yBottom, doFill = this.fill, isRange = (series.pointArrayMap &&
+                        this.cvsMarkerCircle), strokeBatch = this.cvsStrokeBatch || 1000, enableMouseTracking = options.enableMouseTracking, lastPoint, threshold = options.threshold, yBottom = yAxis.getThreshold(threshold), hasThreshold = isNumber(threshold), translatedThreshold = yBottom, doFill = this.fill, isRange = (series.pointArrayMap &&
                         series.pointArrayMap.join(',') === 'low,high'), isStacked = !!options.stacking, cropStart = series.cropStart || 0, loadingOptions = chart.options.loading, requireSorting = series.requireSorting, wasNull, connectNulls = options.connectNulls, useRaw = !xData, minVal, maxVal, minI, maxI, index, sdata = (isStacked ?
                         series.data :
                         (xData || rawData)), fillColor = (series.fillOpacity ?
@@ -3450,7 +3447,7 @@
                         console.time('canvas rendering'); // eslint-disable-line no-console
                     }
                     // Loop over the points
-                    H.eachAsync(sdata, function (d, i) {
+                    BoostSeries.eachAsync(sdata, function (d, i) {
                         var x, y, clientX, plotY, isNull, low, isNextInside = false, isPrevInside = false, nx = false, px = false, chartDestroyed = typeof chart.index === 'undefined', isYInside = true;
                         if (!chartDestroyed) {
                             if (useRaw) {
@@ -3884,8 +3881,7 @@
                     error(26);
                 }
             }
-            if (ColorClass && composedClasses.indexOf(ColorClass) === -1) {
-                composedClasses.push(ColorClass);
+            if (ColorClass && U.pushUnique(composedClasses, ColorClass)) {
                 ColorClass.names = __assign(__assign({}, ColorClass.names), NamedColors.defaultHTMLColorMap);
             }
             // WebGL support is alright, and we're good to go.
@@ -3893,8 +3889,14 @@
             BoostSeries.compose(SeriesClass, seriesTypes, wglMode);
         }
         /**
-         * Returns true if the current browser supports webgl
-         * @private
+         * Returns true if the current browser supports WebGL.
+         *
+         * @requires module:modules/boost
+         *
+         * @function Highcharts.hasWebGLSupport
+         *
+         * @return {boolean}
+         * `true` if the browser supports WebGL.
          */
         function hasWebGLSupport() {
             var canvas, gl = false;

@@ -16,6 +16,7 @@
 #import "HIOnPoint.h"
 #import "HIEvents.h"
 #import "HIAccessibility.h"
+#import "HISonification.h"
 #import "HIZones.h"
 #import "HIDataLabels.h"
 #import "HIColor.h"
@@ -164,7 +165,7 @@ Whether or not to add series descriptions to charts with a single series.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *describeSingleSeries;
 /**
-User supplied description text. This is added in the point comment description by default if present.
+User supplied description text. This is added in the point comment description by default if present. `{description}` refers to the value given in `point.accessibility.description`.
 
 **Defaults to** `{description}`.
 */
@@ -184,7 +185,7 @@ yAxis description for series if there are multiple yAxes in the chart.
 /**
 Description for annotations on a point, as it is made available to assistive technology.
 
-**Defaults to** `{Annotation: #each(annotations). }`.
+**Defaults to** `{#each annotations}Annotation: {this}{/each}`.
 */
 @property(nonatomic, readwrite) NSString *pointAnnotationsDescription;
 /**
@@ -202,7 +203,7 @@ When set to `false` will prevent the series data from being included in any form
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
-Styled mode only. A specific color index to use for the series, so its graphic representations are given the class name `highcharts-color-{n}`.
+Styled mode only. A specific color index to use for the series, so its graphic representations are given the class name `highcharts-color-{n}`. Since v11, CSS variables on the form `--highcharts-color-{n}` make changing the color scheme very convenient.
 
 **Try it**
 
@@ -349,7 +350,7 @@ Possible values: `"on"`, `"between"`, `number`. In a column chart, when pointPla
 */
 @property(nonatomic, readwrite) id /* NSString, NSNumber */ pointPlacement;
 /**
-Whether to connect a graph line across null points, or render a gap between the two points on either side of the null.
+Whether to connect a graph line across null points, or render a gap between the two points on either side of the null. In stacked area chart, if `connectNulls` is set to true, null points are interpreted as 0.
 
 **Defaults to** `false`.
 
@@ -461,9 +462,25 @@ Sets the color blending in the boost module.
 */
 @property(nonatomic, readwrite) NSString *boostBlending;
 /**
+What type of legend symbol to render for this series. Can be one of `lineMarker` or `rectangle`.
+
+**Accepted values:** `["lineMarker", "rectangle"]`.
+
+**Defaults to** `rectangle`.
+
+**Try it**
+
+* [Change the legend symbol](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series/legend-symbol/)
+*/
+@property(nonatomic, readwrite) NSString *legendSymbol;
+/**
 General event handlers for the series items. These event hooks can also be attached to the series at run time using the `Highcharts.addEvent` function.
 */
 @property(nonatomic, readwrite) HIEvents *events;
+/**
+Same as `accessibility.point.descriptionFormat`, but for an individual series. Overrides the chart wide configuration.
+*/
+@property(nonatomic, readwrite) HIFunction *pointDescriptionFormat;
 /**
 Opacity of a series parts: line, fill (e.g.area) and dataLabels.
 
@@ -529,7 +546,11 @@ Whether to use the Y extremes of the total chart width or only the zoomed area w
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *getExtremesFromAll;
 /**
-Whether to apply a drop shadow to the graph line. Since 2.3 the shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`.
+Sonification/audio chart options for a series.
+*/
+@property(nonatomic, readwrite) HISonification *sonification;
+/**
+Whether to apply a drop shadow to the graph line. Since 2.3 the shadow can be an object configuration containing `color`, `offsetX`, `offsetY`, `opacity` and `width`. Note that in some cases, like stacked columns or other dense layouts, the series may cast shadows on each other. In that case, the `chart.seriesGroupShadow` allows applying a common drop shadow to the whole series group.
 
 **Defaults to** `false`.
 
@@ -591,7 +612,7 @@ On datetime series, this allows for setting the `pointInterval` to irregular tim
 /**
 Pixel width of the graph line.
 
-**Defaults to** `2`.
+**Defaults to** `1`.
 
 **Try it**
 

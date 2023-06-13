@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Force directed graph module
  *
@@ -55,7 +55,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -65,8 +65,7 @@
          * @private
          */
         function compose(ChartClass) {
-            if (composedClasses.indexOf(ChartClass) === -1) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'load', onChartLoad);
             }
         }
@@ -223,7 +222,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         var integrations = {};
         var layouts = {};
         /* *
@@ -235,8 +234,7 @@
          * @private
          */
         function compose(ChartClass) {
-            if (composedClasses.indexOf(ChartClass)) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'afterPrint', onChartAfterPrint);
                 addEvent(ChartClass, 'beforePrint', onChartBeforePrint);
                 addEvent(ChartClass, 'predraw', onChartPredraw);
@@ -359,7 +357,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             /* *
              *
              *  Functions
@@ -369,15 +367,13 @@
              * @private
              */
             function compose(PointClass, SeriesClass) {
-                if (composedClasses.indexOf(PointClass) === -1) {
-                    composedClasses.push(PointClass);
+                if (U.pushUnique(composedMembers, PointClass)) {
                     var pointProto_1 = PointClass.prototype;
                     pointProto_1.setNodeState = setNodeState;
                     pointProto_1.setState = setNodeState;
                     pointProto_1.update = updateNode;
                 }
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     var seriesProto_1 = SeriesClass.prototype;
                     seriesProto_1.destroy = destroy;
                     seriesProto_1.setData = setData;
@@ -1079,6 +1075,10 @@
                 },
                 style: {
                     transition: 'opacity 2000ms'
+                },
+                defer: true,
+                animation: {
+                    defer: 1000
                 }
             },
             /**
@@ -1309,6 +1309,13 @@
          *
          * */
         /**
+         * Fires after the simulation is ended and the layout is stable.
+         *
+         * @type      {Highcharts.NetworkgraphAfterSimulationCallbackFunction}
+         * @product   highcharts
+         * @apioption series.networkgraph.events.afterSimulation
+         */
+        /**
          * A `networkgraph` series. If the [type](#series.networkgraph.type) option is
          * not specified, it is inherited from [chart.type](#chart.type).
          *
@@ -1440,6 +1447,12 @@
          * @type      {number}
          * @product   highcharts
          * @apioption series.networkgraph.nodes.mass
+         */
+        /**
+         * Options for the node markers.
+         *
+         * @extends   plotOptions.networkgraph.marker
+         * @apioption series.networkgraph.nodes.marker
          */
         /**
          * Individual data label for each node. The options are the same as
@@ -2282,7 +2295,7 @@
          *
          * */
         var win = H.win;
-        var clamp = U.clamp, defined = U.defined, isFunction = U.isFunction, pick = U.pick;
+        var clamp = U.clamp, defined = U.defined, isFunction = U.isFunction, fireEvent = U.fireEvent, pick = U.pick;
         /* *
          *
          *  Class
@@ -2398,6 +2411,9 @@
                     }
                     else {
                         this.simulation = false;
+                        this.series.forEach(function (s) {
+                            fireEvent(s, 'afterSimulation');
+                        });
                     }
                 }
             };
@@ -2801,7 +2817,71 @@
 
         return ReingoldFruchtermanLayout;
     });
-    _registerModule(_modules, 'Series/Networkgraph/NetworkgraphSeries.js', [_modules['Series/DragNodesComposition.js'], _modules['Series/GraphLayoutComposition.js'], _modules['Core/Globals.js'], _modules['Series/Networkgraph/NetworkgraphPoint.js'], _modules['Series/Networkgraph/NetworkgraphSeriesDefaults.js'], _modules['Series/NodesComposition.js'], _modules['Series/Networkgraph/ReingoldFruchtermanLayout.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (DragNodesComposition, GraphLayout, H, NetworkgraphPoint, NetworkgraphSeriesDefaults, NodesComposition, ReingoldFruchtermanLayout, SeriesRegistry, U) {
+    _registerModule(_modules, 'Series/SimulationSeriesUtilities.js', [_modules['Core/Utilities.js'], _modules['Core/Animation/AnimationUtilities.js']], function (U, A) {
+        /* *
+         *
+         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
+         *
+         * */
+        var syncTimeout = U.syncTimeout;
+        var animObject = A.animObject;
+        /**
+         * Create a setTimeout for the first drawDataLabels()
+         * based on the dataLabels.animation.defer value
+         * for series which have enabled simulation.
+         * @private
+         */
+        function initDataLabelsDefer() {
+            var _this = this;
+            var _a;
+            var dlOptions = this.options.dataLabels;
+            // drawDataLabels() fires for the first time after
+            // dataLabels.animation.defer time unless
+            // the dataLabels.animation = false or dataLabels.defer = false
+            // or if the simulation is disabled
+            if (!(dlOptions === null || dlOptions === void 0 ? void 0 : dlOptions.defer) ||
+                !((_a = this.options.layoutAlgorithm) === null || _a === void 0 ? void 0 : _a.enableSimulation)) {
+                this.deferDataLabels = false;
+            }
+            else {
+                syncTimeout(function () {
+                    _this.deferDataLabels = false;
+                }, dlOptions ? animObject(dlOptions.animation).defer : 0);
+            }
+        }
+        /**
+         * Initialize the SVG group for the DataLabels with correct opacities
+         * and correct styles so that the animation for the series that have
+         * simulation enabled works fine.
+         * @private
+         */
+        function initDataLabels() {
+            var series = this, dlOptions = series.options.dataLabels;
+            if (!series.dataLabelsGroup) {
+                var dataLabelsGroup = this.initDataLabelsGroup();
+                // Apply the dataLabels.style not only to the
+                // individual dataLabels but also to the entire group
+                if (!series.chart.styledMode && (dlOptions === null || dlOptions === void 0 ? void 0 : dlOptions.style)) {
+                    dataLabelsGroup.css(dlOptions.style);
+                }
+                // Initialize the opacity of the group to 0 (start of animation)
+                dataLabelsGroup.attr({ opacity: 0 });
+                if (series.visible) { // #2597, #3023, #3024
+                    dataLabelsGroup.show();
+                }
+                return dataLabelsGroup;
+            }
+            series.dataLabelsGroup.attr({ opacity: 1 });
+            return series.dataLabelsGroup;
+        }
+        var DataLabelsDeferUtils = {
+            initDataLabels: initDataLabels,
+            initDataLabelsDefer: initDataLabelsDefer
+        };
+
+        return DataLabelsDeferUtils;
+    });
+    _registerModule(_modules, 'Series/Networkgraph/NetworkgraphSeries.js', [_modules['Series/DragNodesComposition.js'], _modules['Series/GraphLayoutComposition.js'], _modules['Core/Globals.js'], _modules['Series/Networkgraph/NetworkgraphPoint.js'], _modules['Series/Networkgraph/NetworkgraphSeriesDefaults.js'], _modules['Series/NodesComposition.js'], _modules['Series/Networkgraph/ReingoldFruchtermanLayout.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/SimulationSeriesUtilities.js'], _modules['Core/Utilities.js']], function (DragNodesComposition, GraphLayout, H, NetworkgraphPoint, NetworkgraphSeriesDefaults, NodesComposition, ReingoldFruchtermanLayout, SeriesRegistry, D, U) {
         /* *
          *
          *  Networkgraph series
@@ -2830,6 +2910,7 @@
         })();
         var noop = H.noop;
         var Series = SeriesRegistry.series, _a = SeriesRegistry.seriesTypes, columnProto = _a.column.prototype, lineProto = _a.line.prototype;
+        var initDataLabels = D.initDataLabels, initDataLabelsDefer = D.initDataLabelsDefer;
         var addEvent = U.addEvent, defined = U.defined, extend = U.extend, merge = U.merge, pick = U.pick;
         /* *
          *
@@ -2861,6 +2942,7 @@
                 _this.nodes = void 0;
                 _this.options = void 0;
                 _this.points = void 0;
+                _this.deferDataLabels = true;
                 return _this;
             }
             /* *
@@ -2929,14 +3011,28 @@
              * @private
              */
             NetworkgraphSeries.prototype.drawDataLabels = function () {
-                var textPath = this.options.dataLabels.textPath;
+                // We defer drawing the dataLabels
+                // until dataLabels.animation.defer time passes
+                if (this.deferDataLabels) {
+                    return;
+                }
+                var dlOptions = this.options.dataLabels;
+                var textPath;
+                if (dlOptions === null || dlOptions === void 0 ? void 0 : dlOptions.textPath) {
+                    textPath = dlOptions.textPath;
+                }
                 // Render node labels:
                 Series.prototype.drawDataLabels.call(this, this.nodes);
                 // Render link labels:
-                this.options.dataLabels.textPath =
-                    this.options.dataLabels.linkTextPath;
+                if (dlOptions === null || dlOptions === void 0 ? void 0 : dlOptions.linkTextPath) {
+                    // If linkTextPath is set, render link labels with linkTextPath
+                    dlOptions.textPath = dlOptions.linkTextPath;
+                }
                 Series.prototype.drawDataLabels.call(this, this.data);
-                this.options.dataLabels.textPath = textPath;
+                // Go back to textPath for nodes
+                if (dlOptions === null || dlOptions === void 0 ? void 0 : dlOptions.textPath) {
+                    dlOptions.textPath = textPath;
+                }
             };
             /**
              * Extend generatePoints by adding the nodes, which are Point objects
@@ -2998,6 +3094,7 @@
             NetworkgraphSeries.prototype.init = function (chart, options) {
                 var _this = this;
                 _super.prototype.init.call(this, chart, options);
+                initDataLabelsDefer.call(this);
                 addEvent(this, 'updatedData', function () {
                     if (_this.layout) {
                         _this.layout.stop();
@@ -3009,6 +3106,13 @@
                             node.resolveColor();
                         }
                     });
+                });
+                // If the dataLabels.animation.defer time is longer than
+                // the time it takes for the layout to become stable then
+                // drawDataLabels would never be called (that's why we force it here)
+                addEvent(this, 'afterSimulation', function () {
+                    this.deferDataLabels = false;
+                    this.drawDataLabels();
                 });
                 return this;
             };
@@ -3134,6 +3238,7 @@
             pointArrayMap: ['from', 'to'],
             requireSorting: false,
             trackerGroups: ['group', 'markerGroup', 'dataLabelsGroup'],
+            initDataLabels: initDataLabels,
             buildKDTree: noop,
             createNode: NodesComposition.createNode,
             drawTracker: columnProto.drawTracker,
@@ -3188,6 +3293,18 @@
         * @type {string}
         * @since 7.0.0
         */
+        /**
+         * Callback that fires after the end of Networkgraph series simulation
+         * when the layout is stable.
+         *
+         * @callback Highcharts.NetworkgraphAfterSimulationCallbackFunction
+         *
+         * @param {Highcharts.Series} this
+         *        The series where the event occured.
+         *
+         * @param {global.Event} event
+         *        The event that occured.
+         */
         ''; // detach doclets above
 
         return NetworkgraphSeries;

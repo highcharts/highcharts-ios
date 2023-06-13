@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v10.3.3 (2023-01-20)
+ * @license Highcharts Gantt JS v11.1.0 (2023-06-05)
  *
  * Gantt series
  *
@@ -54,7 +54,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -76,7 +76,7 @@
          * @private
          */
         function onAxisZoom(e) {
-            var axis = this, chart = axis.chart, chartOptions = chart.options, navigator = chartOptions.navigator, navigatorAxis = axis.navigatorAxis, pinchType = chartOptions.chart.zooming.pinchType, rangeSelector = chartOptions.rangeSelector, zoomType = chartOptions.chart.zooming.type;
+            var axis = this, chart = axis.chart, chartOptions = chart.options, navigator = chartOptions.navigator, navigatorAxis = axis.navigatorAxis, pinchType = chart.zooming.pinchType, rangeSelector = chartOptions.rangeSelector, zoomType = chart.zooming.type;
             if (axis.isXAxis && ((navigator && navigator.enabled) ||
                 (rangeSelector && rangeSelector.enabled))) {
                 // For y only zooming, ignore the X axis completely
@@ -133,8 +133,7 @@
              * @private
              */
             NavigatorAxisAdditions.compose = function (AxisClass) {
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     AxisClass.keepProps.push('navigatorAxis');
                     addEvent(AxisClass, 'init', onAxisInit);
                     addEvent(AxisClass, 'zoom', onAxisZoom);
@@ -161,7 +160,7 @@
             NavigatorAxisAdditions.prototype.toFixedRange = function (pxMin, pxMax, fixedMin, fixedMax) {
                 var axis = this.axis, chart = axis.chart;
                 var newMin = pick(fixedMin, axis.translate(pxMin, true, !axis.horiz)), newMax = pick(fixedMax, axis.translate(pxMax, true, !axis.horiz));
-                var fixedRange = chart && chart.fixedRange, halfPointRange = (axis.pointRange || 0) / 2, changeRatio = fixedRange && (newMax - newMin) / fixedRange;
+                var fixedRange = chart && chart.fixedRange, halfPointRange = (axis.pointRange || 0) / 2;
                 // Add/remove half point range to/from the extremes (#1172)
                 if (!defined(fixedMin)) {
                     newMin = correctFloat(newMin + halfPointRange);
@@ -169,15 +168,13 @@
                 if (!defined(fixedMax)) {
                     newMax = correctFloat(newMax - halfPointRange);
                 }
-                // If the difference between the fixed range and the actual requested
-                // range is too great, the user is dragging across an ordinal gap, and
-                // we need to release the range selector button.
-                if (changeRatio > 0.7 && changeRatio < 1.3) {
-                    if (fixedMax) {
-                        newMin = newMax - fixedRange;
+                // Make sure panning to the edges does not decrease the zoomed range
+                if (fixedRange && axis.dataMin && axis.dataMax) {
+                    if (newMax >= axis.dataMax) {
+                        newMin = correctFloat(axis.dataMax - fixedRange);
                     }
-                    else {
-                        newMax = newMin + fixedRange;
+                    if (newMin <= axis.dataMin) {
+                        newMax = correctFloat(axis.dataMin + fixedRange);
                     }
                 }
                 if (!isNumber(newMin) || !isNumber(newMax)) { // #1195, #7411
@@ -386,7 +383,7 @@
              * @type    {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              * @default rgba(102,133,194,0.3)
              */
-            maskFill: color("#6685c2" /* Palette.highlightColor60 */).setOpacity(0.3).get(),
+            maskFill: color("#667aff" /* Palette.highlightColor60 */).setOpacity(0.3).get(),
             /**
              * The color of the line marking the currently zoomed area in the
              * navigator.
@@ -397,7 +394,7 @@
              * @type    {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              * @default #cccccc
              */
-            outlineColor: "#cccccc" /* Palette.neutralColor20 */,
+            outlineColor: "#999999" /* Palette.neutralColor40 */,
             /**
              * The width of the line marking the currently zoomed area in the
              * navigator.
@@ -474,6 +471,12 @@
                  * @ignore-option
                  */
                 compare: null,
+                /**
+                 * @ignore-option
+                 */
+                sonification: {
+                    enabled: false
+                },
                 /**
                  * Unless data is explicitly defined, the data is borrowed from the
                  * first series in the chart.
@@ -612,7 +615,13 @@
                      */
                     style: {
                         /** @ignore */
-                        color: "#999999" /* Palette.neutralColor40 */
+                        color: "#000000" /* Palette.neutralColor100 */,
+                        /** @ignore */
+                        fontSize: '0.7em',
+                        /** @ignore */
+                        opacity: 0.6,
+                        /** @ignore */
+                        textOutline: '2px contrast'
                     },
                     x: 3,
                     y: -4
@@ -753,7 +762,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Variables
@@ -771,8 +780,7 @@
         function compose(AxisClass, ChartClass, NavigatorClass, SeriesClass) {
             NavigatorAxisAdditions.compose(AxisClass);
             NavigatorConstructor = NavigatorClass;
-            if (composedClasses.indexOf(ChartClass) === -1) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 var chartProto = ChartClass.prototype;
                 chartProto.callbacks.push(onChartCallback);
                 addEvent(ChartClass, 'afterAddSeries', onChartAfterAddSeries);
@@ -782,16 +790,13 @@
                 addEvent(ChartClass, 'beforeShowResetZoom', onChartBeforeShowResetZoom);
                 addEvent(ChartClass, 'update', onChartUpdate);
             }
-            if (composedClasses.indexOf(SeriesClass) === -1) {
-                composedClasses.push(SeriesClass);
+            if (U.pushUnique(composedMembers, SeriesClass)) {
                 addEvent(SeriesClass, 'afterUpdate', onSeriesAfterUpdate);
             }
-            if (composedClasses.indexOf(getRendererType) === -1) {
-                composedClasses.push(getRendererType);
+            if (U.pushUnique(composedMembers, getRendererType)) {
                 extend(getRendererType().prototype.symbols, NavigatorSymbols);
             }
-            if (composedClasses.indexOf(setOptions) === -1) {
-                composedClasses.push(setOptions);
+            if (U.pushUnique(composedMembers, setOptions)) {
                 extend(defaultOptions, { navigator: NavigatorDefaults });
             }
         }
@@ -813,27 +818,29 @@
          * @private
          */
         function onChartAfterSetChartSize() {
+            var _a;
             var legend = this.legend, navigator = this.navigator;
-            var scrollbarHeight, legendOptions, xAxis, yAxis;
+            var legendOptions, xAxis, yAxis;
             if (navigator) {
                 legendOptions = legend && legend.options;
                 xAxis = navigator.xAxis;
                 yAxis = navigator.yAxis;
-                scrollbarHeight = navigator.scrollbarHeight;
+                var scrollbarHeight = navigator.scrollbarHeight, scrollButtonSize = navigator.scrollButtonSize;
                 // Compute the top position
                 if (this.inverted) {
                     navigator.left = navigator.opposite ?
                         this.chartWidth - scrollbarHeight -
                             navigator.height :
                         this.spacing[3] + scrollbarHeight;
-                    navigator.top = this.plotTop + scrollbarHeight;
+                    navigator.top = this.plotTop + scrollButtonSize;
                 }
                 else {
-                    navigator.left = pick(xAxis.left, this.plotLeft + scrollbarHeight);
+                    navigator.left = pick(xAxis.left, this.plotLeft + scrollButtonSize);
                     navigator.top = navigator.navigatorOptions.top ||
                         this.chartHeight -
                             navigator.height -
                             scrollbarHeight -
+                            (((_a = this.scrollbar) === null || _a === void 0 ? void 0 : _a.options.margin) || 0) -
                             this.spacing[2] -
                             (this.rangeSelector && this.extraBottomMargin ?
                                 this.rangeSelector.getHeight() :
@@ -896,9 +903,8 @@
             if (((navigator && navigator.enabled) ||
                 (rangeSelector && rangeSelector.enabled)) &&
                 ((!isTouchDevice &&
-                    chartOptions.chart.zooming.type === 'x') ||
-                    (isTouchDevice &&
-                        chartOptions.chart.zooming.pinchType === 'x'))) {
+                    this.zooming.type === 'x') ||
+                    (isTouchDevice && this.zooming.pinchType === 'x'))) {
                 return false;
             }
         }
@@ -960,6 +966,12 @@
         var addEvent = U.addEvent, defined = U.defined, pick = U.pick;
         /* *
          *
+         *  Constants
+         *
+         * */
+        var composedMembers = [];
+        /* *
+         *
          *  Composition
          *
          * */
@@ -971,6 +983,11 @@
         var ScrollbarAxis = /** @class */ (function () {
             function ScrollbarAxis() {
             }
+            /* *
+             *
+             *  Static Properties
+             *
+             * */
             /**
              * Attaches to axis events to create scrollbars if enabled.
              *
@@ -983,10 +1000,7 @@
              * Scrollbar class to use.
              */
             ScrollbarAxis.compose = function (AxisClass, ScrollbarClass) {
-                if (ScrollbarAxis.composed.indexOf(AxisClass) === -1) {
-                    ScrollbarAxis.composed.push(AxisClass);
-                }
-                else {
+                if (!U.pushUnique(composedMembers, AxisClass)) {
                     return AxisClass;
                 }
                 var getExtremes = function (axis) {
@@ -1029,8 +1043,10 @@
                                 from = unitedMin + range * (1 - this.to);
                             }
                             if (this.shouldUpdateExtremes(e.DOMType)) {
-                                axis.setExtremes(from, to, true, (e.DOMType !== 'mousemove' &&
-                                    e.DOMType !== 'touchmove'), e);
+                                // #17977, set animation to undefined instead of true
+                                var animate = e.DOMType === 'mousemove' ||
+                                    e.DOMType === 'touchmove' ? false : void 0;
+                                axis.setExtremes(from, to, true, animate, e);
                             }
                             else {
                                 // When live redraw is disabled, don't change extremes
@@ -1084,7 +1100,7 @@
                             offsetsIndex = 0;
                         }
                         scrollbarsOffsets[offsetsIndex] += scrollbar.size +
-                            scrollbar.options.margin;
+                            (scrollbar.options.margin || 0);
                         if (isNaN(scrollMin) ||
                             isNaN(scrollMax) ||
                             !defined(axis.min) ||
@@ -1114,17 +1130,16 @@
                 });
                 // Make space for a scrollbar:
                 addEvent(AxisClass, 'afterGetOffset', function () {
-                    var axis = this, opposite = axis.scrollbar && !axis.scrollbar.options.opposite, index = axis.horiz ? 2 : opposite ? 3 : 1, scrollbar = axis.scrollbar;
+                    var axis = this, scrollbar = axis.scrollbar, opposite = scrollbar && !scrollbar.options.opposite, index = axis.horiz ? 2 : opposite ? 3 : 1;
                     if (scrollbar) {
                         // reset scrollbars offsets
                         axis.chart.scrollbarsOffsets = [0, 0];
                         axis.chart.axisOffset[index] +=
-                            scrollbar.size + scrollbar.options.margin;
+                            scrollbar.size + (scrollbar.options.margin || 0);
                     }
                 });
                 return AxisClass;
             };
-            ScrollbarAxis.composed = [];
             return ScrollbarAxis;
         }());
 
@@ -1170,24 +1185,23 @@
          */
         var ScrollbarDefaults = {
             /**
-             * The height of the scrollbar. The height also applies to the width
-             * of the scroll arrows so that they are always squares. Defaults to
-             * 20 for touch devices and 14 for mouse devices.
+             * The height of the scrollbar. If `buttonsEnabled` is true , the height
+             * also applies to the width of the scroll arrows so that they are always
+             * squares.
              *
-             * @sample stock/scrollbar/height/
-             *         A 30px scrollbar
+             * @sample stock/scrollbar/style/
+             *         Non-default height
              *
              * @type    {number}
-             * @default 20/14
              */
-            height: isTouchDevice ? 20 : 14,
+            height: 10,
             /**
              * The border rounding radius of the bar.
              *
              * @sample stock/scrollbar/style/
              *         Scrollbar styling
              */
-            barBorderRadius: 0,
+            barBorderRadius: 5,
             /**
              * The corner radius of the scrollbar buttons.
              *
@@ -1195,6 +1209,12 @@
              *         Scrollbar styling
              */
             buttonBorderRadius: 0,
+            /**
+             * Enable or disable the buttons at the end of the scrollbar.
+             *
+             * @since 11.0.0
+             */
+            buttonsEnabled: false,
             /**
              * Enable or disable the scrollbar.
              *
@@ -1219,9 +1239,12 @@
             liveRedraw: void 0,
             /**
              * The margin between the scrollbar and its axis when the scrollbar is
-             * applied directly to an axis.
+             * applied directly to an axis, or the navigator in case that is enabled.
+             * Defaults to 10 for axis, 0 for navigator.
+             *
+             * @type {number|undefined}
              */
-            margin: 10,
+            margin: void 0,
             /**
              * The minimum width of the scrollbar.
              *
@@ -1258,7 +1281,7 @@
              * @sample stock/scrollbar/style/
              *         Scrollbar styling
              */
-            barBorderWidth: 1,
+            barBorderWidth: 0,
             /**
              * The color of the scrollbar's border.
              *
@@ -1304,7 +1327,7 @@
              *
              * @type {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              */
-            rifleColor: "#333333" /* Palette.neutralColor80 */,
+            rifleColor: 'none',
             /**
              * The color of the track background.
              *
@@ -1313,7 +1336,7 @@
              *
              * @type {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              */
-            trackBackgroundColor: "#f2f2f2" /* Palette.neutralColor5 */,
+            trackBackgroundColor: 'rgba(255, 255, 255, 0.001)',
             /**
              * The color of the border of the scrollbar track.
              *
@@ -1322,17 +1345,14 @@
              *
              * @type {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              */
-            trackBorderColor: "#f2f2f2" /* Palette.neutralColor5 */,
+            trackBorderColor: "#cccccc" /* Palette.neutralColor20 */,
             /**
              * The corner radius of the border of the scrollbar track.
              *
              * @sample stock/scrollbar/style/
              *         Scrollbar styling
-             *
-             * @type      {number}
-             * @default   0
-             * @apioption scrollbar.trackBorderRadius
              */
+            trackBorderRadius: 5,
             /**
              * The width of the border of the scrollbar track.
              *
@@ -1583,49 +1603,51 @@
              */
             Scrollbar.prototype.drawScrollbarButton = function (index) {
                 var scroller = this, renderer = scroller.renderer, scrollbarButtons = scroller.scrollbarButtons, options = scroller.options, size = scroller.size, group = renderer.g().add(scroller.group);
-                var tempElem;
                 scrollbarButtons.push(group);
-                // Create a rectangle for the scrollbar button
-                tempElem = renderer.rect()
-                    .addClass('highcharts-scrollbar-button')
-                    .add(group);
-                // Presentational attributes
-                if (!scroller.chart.styledMode) {
-                    tempElem.attr({
-                        stroke: options.buttonBorderColor,
-                        'stroke-width': options.buttonBorderWidth,
-                        fill: options.buttonBackgroundColor
-                    });
-                }
-                // Place the rectangle based on the rendered stroke width
-                tempElem.attr(tempElem.crisp({
-                    x: -0.5,
-                    y: -0.5,
-                    width: size + 1,
-                    height: size + 1,
-                    r: options.buttonBorderRadius
-                }, tempElem.strokeWidth()));
-                // Button arrow
-                tempElem = renderer
-                    .path(Scrollbar.swapXY([[
-                        'M',
-                        size / 2 + (index ? -1 : 1),
-                        size / 2 - 3
-                    ], [
-                        'L',
-                        size / 2 + (index ? -1 : 1),
-                        size / 2 + 3
-                    ], [
-                        'L',
-                        size / 2 + (index ? 2 : -2),
-                        size / 2
-                    ]], options.vertical))
-                    .addClass('highcharts-scrollbar-arrow')
-                    .add(scrollbarButtons[index]);
-                if (!scroller.chart.styledMode) {
-                    tempElem.attr({
-                        fill: options.buttonArrowColor
-                    });
+                if (options.buttonsEnabled) {
+                    // Create a rectangle for the scrollbar button
+                    var rect = renderer.rect()
+                        .addClass('highcharts-scrollbar-button')
+                        .add(group);
+                    // Presentational attributes
+                    if (!scroller.chart.styledMode) {
+                        rect.attr({
+                            stroke: options.buttonBorderColor,
+                            'stroke-width': options.buttonBorderWidth,
+                            fill: options.buttonBackgroundColor
+                        });
+                    }
+                    // Place the rectangle based on the rendered stroke width
+                    rect.attr(rect.crisp({
+                        x: -0.5,
+                        y: -0.5,
+                        // +1 to compensate for crispifying in rect method
+                        width: size + 1,
+                        height: size + 1,
+                        r: options.buttonBorderRadius
+                    }, rect.strokeWidth()));
+                    // Button arrow
+                    var arrow = renderer
+                        .path(Scrollbar.swapXY([[
+                            'M',
+                            size / 2 + (index ? -1 : 1),
+                            size / 2 - 3
+                        ], [
+                            'L',
+                            size / 2 + (index ? -1 : 1),
+                            size / 2 + 3
+                        ], [
+                            'L',
+                            size / 2 + (index ? 2 : -2),
+                            size / 2
+                        ]], options.vertical))
+                        .addClass('highcharts-scrollbar-arrow')
+                        .add(scrollbarButtons[index]);
+                    if (!scroller.chart.styledMode) {
+                        arrow.attr({
+                            fill: options.buttonArrowColor
+                        });
+                    }
                 }
             };
             /**
@@ -1641,6 +1663,7 @@
                 scroller.renderer = renderer;
                 scroller.userOptions = options;
                 scroller.options = merge(ScrollbarDefaults, defaultOptions.scrollbar, options);
+                scroller.options.margin = pick(scroller.options.margin, 10);
                 scroller.chart = chart;
                 // backward compatibility
                 scroller.size = pick(scroller.options.size, scroller.options.height);
@@ -1723,7 +1746,7 @@
              *        height of the scorllbar
              */
             Scrollbar.prototype.position = function (x, y, width, height) {
-                var scroller = this, options = scroller.options, vertical = options.vertical, method = scroller.rendered ? 'animate' : 'attr';
+                var scroller = this, options = scroller.options, buttonsEnabled = options.buttonsEnabled, _a = options.margin, margin = _a === void 0 ? 0 : _a, vertical = options.vertical, method = scroller.rendered ? 'animate' : 'attr';
                 var xOffset = height, yOffset = 0;
                 // Make the scrollbar visible when it is repositioned, #15763.
                 scroller.group.show();
@@ -1737,14 +1760,17 @@
                 if (vertical) {
                     scroller.width = scroller.yOffset = width = yOffset = scroller.size;
                     scroller.xOffset = xOffset = 0;
-                    scroller.barWidth = height - width * 2; // width without buttons
-                    scroller.x = x = x + scroller.options.margin;
+                    scroller.yOffset = yOffset = buttonsEnabled ? scroller.size : 0;
+                    // width without buttons
+                    scroller.barWidth = height - (buttonsEnabled ? width * 2 : 0);
+                    scroller.x = x = x + margin;
                 }
                 else {
-                    scroller.height = scroller.xOffset = height = xOffset =
-                        scroller.size;
-                    scroller.barWidth = width - height * 2; // width without buttons
-                    scroller.y = scroller.y + scroller.options.margin;
+                    scroller.height = height = scroller.size;
+                    scroller.xOffset = xOffset = buttonsEnabled ? scroller.size : 0;
+                    // width without buttons
+                    scroller.barWidth = width - (buttonsEnabled ? height * 2 : 0);
+                    scroller.y = scroller.y + margin;
                 }
                 // Set general position for a group:
                 scroller.group[method]({
@@ -1756,7 +1782,7 @@
                     width: width,
                     height: height
                 });
-                // Move right/bottom button ot it's place:
+                // Move right/bottom button to its place:
                 scroller.scrollbarButtons[1][method]({
                     translateX: vertical ? 0 : width - xOffset,
                     translateY: vertical ? height - yOffset : 0
@@ -1793,7 +1819,6 @@
                 scroller.track = renderer.rect()
                     .addClass('highcharts-scrollbar-track')
                     .attr({
-                    x: 0,
                     r: options.trackBorderRadius || 0,
                     height: size,
                     width: size
@@ -1805,17 +1830,19 @@
                         'stroke-width': options.trackBorderWidth
                     });
                 }
-                scroller.trackBorderWidth = scroller.track.strokeWidth();
+                var trackBorderWidth = scroller.trackBorderWidth =
+                    scroller.track.strokeWidth();
                 scroller.track.attr({
-                    y: -this.trackBorderWidth % 2 / 2
+                    x: -trackBorderWidth % 2 / 2,
+                    y: -trackBorderWidth % 2 / 2
                 });
                 // Draw the scrollbar itself
                 scroller.scrollbarGroup = renderer.g().add(group);
                 scroller.scrollbar = renderer.rect()
                     .addClass('highcharts-scrollbar-thumb')
                     .attr({
-                    height: size,
-                    width: size,
+                    height: size - trackBorderWidth,
+                    width: size - trackBorderWidth,
                     r: options.barBorderRadius || 0
                 }).add(scroller.scrollbarGroup);
                 scroller.scrollbarRifles = renderer
@@ -2083,9 +2110,10 @@
                 this.navigatorSize = void 0;
                 this.opposite = void 0;
                 this.outline = void 0;
-                this.outlineHeight = void 0;
                 this.range = void 0;
                 this.rendered = void 0;
+                this.scrollbarHeight = 0;
+                this.scrollButtonSize = void 0;
                 this.shades = void 0;
                 this.size = void 0;
                 this.top = void 0;
@@ -2157,65 +2185,68 @@
              */
             Navigator.prototype.drawOutline = function (zoomedMin, zoomedMax, inverted, verb) {
                 var navigator = this, maskInside = navigator.navigatorOptions.maskInside, outlineWidth = navigator.outline.strokeWidth(), halfOutline = outlineWidth / 2, outlineCorrection = (outlineWidth % 2) / 2, // #5800
-                outlineHeight = navigator.outlineHeight, scrollbarHeight = navigator.scrollbarHeight || 0, navigatorSize = navigator.size;
-                var left = navigator.left - scrollbarHeight, navigatorTop = navigator.top, verticalMin, path;
+                scrollButtonSize = navigator.scrollButtonSize, navigatorSize = navigator.size, navigatorTop = navigator.top, height = navigator.height, lineTop = navigatorTop - halfOutline, lineBtm = navigatorTop + height;
+                var left = navigator.left, verticalMin, path;
                 if (inverted) {
-                    left -= halfOutline;
                     verticalMin = navigatorTop + zoomedMax + outlineCorrection;
                     zoomedMax = navigatorTop + zoomedMin + outlineCorrection;
                     path = [
                         [
                             'M',
-                            left + outlineHeight,
-                            navigatorTop - scrollbarHeight - outlineCorrection
+                            left + height,
+                            navigatorTop - scrollButtonSize - outlineCorrection
                         ],
                         // top right of zoomed range
-                        ['L', left + outlineHeight, verticalMin],
+                        ['L', left + height, verticalMin],
                         ['L', left, verticalMin],
-                        ['L', left, zoomedMax],
-                        ['L', left + outlineHeight, zoomedMax],
+                        ['M', left, zoomedMax],
+                        ['L', left + height, zoomedMax],
                         [
                             'L',
-                            left + outlineHeight,
-                            navigatorTop + navigatorSize + scrollbarHeight
+                            left + height,
+                            navigatorTop + navigatorSize + scrollButtonSize
                         ]
                     ];
                     if (maskInside) {
                         path.push(
                         // upper left of zoomed range
-                        ['M', left + outlineHeight, verticalMin - halfOutline], 
+                        ['M', left + height, verticalMin - halfOutline], 
                         // upper right of z.r.
                         [
                             'L',
-                            left + outlineHeight,
+                            left + height,
                             zoomedMax + halfOutline
                         ]);
                     }
                 }
                 else {
-                    zoomedMin += left + scrollbarHeight - outlineCorrection;
-                    zoomedMax += left + scrollbarHeight - outlineCorrection;
-                    navigatorTop += halfOutline;
+                    left -= scrollButtonSize;
+                    zoomedMin += left + scrollButtonSize - outlineCorrection;
+                    zoomedMax += left + scrollButtonSize - outlineCorrection;
                     path = [
                         // left
-                        ['M', left, navigatorTop],
+                        ['M', left, lineTop],
                         // upper left of zoomed range
-                        ['L', zoomedMin, navigatorTop],
+                        ['L', zoomedMin, lineTop],
                         // lower left of z.r.
-                        ['L', zoomedMin, navigatorTop + outlineHeight],
+                        ['L', zoomedMin, lineBtm],
                         // lower right of z.r.
-                        ['L', zoomedMax, navigatorTop + outlineHeight],
+                        ['M', zoomedMax, lineBtm],
                         // upper right of z.r.
-                        ['L', zoomedMax, navigatorTop],
+                        ['L', zoomedMax, lineTop],
                         // right
-                        ['L', left + navigatorSize + scrollbarHeight * 2, navigatorTop]
+                        [
+                            'L',
+                            left + navigatorSize + scrollButtonSize * 2,
+                            navigatorTop + halfOutline
+                        ]
                     ];
                     if (maskInside) {
                         path.push(
                         // upper left of zoomed range
-                        ['M', zoomedMin - halfOutline, navigatorTop], 
+                        ['M', zoomedMin - halfOutline, lineTop], 
                         // upper right of z.r.
-                        ['L', zoomedMax + halfOutline, navigatorTop]);
+                        ['L', zoomedMax + halfOutline, lineTop]);
                     }
                 }
                 navigator.outline[verb]({
@@ -2399,7 +2430,7 @@
              *        Pixel value maximum
              */
             Navigator.prototype.render = function (min, max, pxMin, pxMax) {
-                var navigator = this, chart = navigator.chart, xAxis = navigator.xAxis, pointRange = xAxis.pointRange || 0, scrollbarXAxis = xAxis.navigatorAxis.fake ? chart.xAxis[0] : xAxis, navigatorEnabled = navigator.navigatorEnabled, rendered = navigator.rendered, inverted = chart.inverted, minRange = chart.xAxis[0].minRange, maxRange = chart.xAxis[0].options.maxRange;
+                var navigator = this, chart = navigator.chart, xAxis = navigator.xAxis, pointRange = xAxis.pointRange || 0, scrollbarXAxis = xAxis.navigatorAxis.fake ? chart.xAxis[0] : xAxis, navigatorEnabled = navigator.navigatorEnabled, rendered = navigator.rendered, inverted = chart.inverted, minRange = chart.xAxis[0].minRange, maxRange = chart.xAxis[0].options.maxRange, scrollButtonSize = navigator.scrollButtonSize;
                 var navigatorWidth, scrollbarLeft, scrollbarTop, scrollbarHeight = navigator.scrollbarHeight, navigatorSize, verb;
                 // Don't redraw while moving the handles (#4703).
                 if (this.hasDragged && !defined(pxMin)) {
@@ -2421,15 +2452,15 @@
                 }
                 navigator.left = pick(xAxis.left, 
                 // in case of scrollbar only, without navigator
-                chart.plotLeft + scrollbarHeight +
+                chart.plotLeft + scrollButtonSize +
                     (inverted ? chart.plotWidth : 0));
                 var zoomedMax = navigator.size = navigatorSize = pick(xAxis.len, (inverted ? chart.plotHeight : chart.plotWidth) -
-                    2 * scrollbarHeight);
+                    2 * scrollButtonSize);
                 if (inverted) {
                     navigatorWidth = scrollbarHeight;
                 }
                 else {
-                    navigatorWidth = navigatorSize + 2 * scrollbarHeight;
+                    navigatorWidth = navigatorSize + 2 * scrollButtonSize;
                 }
                 // Get the pixel position of the handles
                 pxMin = pick(pxMin, xAxis.toPixels(min, true));
@@ -2481,20 +2512,20 @@
                 }
                 if (navigator.scrollbar) {
                     if (inverted) {
-                        scrollbarTop = navigator.top - scrollbarHeight;
+                        scrollbarTop = navigator.top - scrollButtonSize;
                         scrollbarLeft = navigator.left - scrollbarHeight +
                             (navigatorEnabled || !scrollbarXAxis.opposite ? 0 :
                                 // Multiple axes has offsets:
                                 (scrollbarXAxis.titleOffset || 0) +
                                     // Self margin from the axis.title
                                     scrollbarXAxis.axisTitleMargin);
-                        scrollbarHeight = navigatorSize + 2 * scrollbarHeight;
+                        scrollbarHeight = navigatorSize + 2 * scrollButtonSize;
                     }
                     else {
                         scrollbarTop = navigator.top + (navigatorEnabled ?
                             navigator.height :
                             -scrollbarHeight);
-                        scrollbarLeft = navigator.left - scrollbarHeight;
+                        scrollbarLeft = navigator.left - scrollButtonSize;
                     }
                     // Reposition scrollbar
                     navigator.scrollbar.position(scrollbarLeft, scrollbarTop, navigatorWidth, scrollbarHeight);
@@ -2707,12 +2738,11 @@
                     if (navigator.hasDragged &&
                         navigator.scrollbar &&
                         pick(navigator.scrollbar.options.liveRedraw, 
-                        // By default, don't run live redraw on VML, on touch
+                        // By default, don't run live redraw on touch
                         // devices or if the chart is in boost.
-                        H.svg &&
-                            !isTouchDevice &&
+                        !isTouchDevice &&
                             !this.chart.boosted)) {
-                        e.DOMType = e.type; // DOMType is for IE8
+                        e.DOMType = e.type;
                         setTimeout(function () {
                             navigator.onMouseUp(e);
                         }, 0);
@@ -2838,18 +2868,18 @@
              * @function Highcharts.Navigator#init
              */
             Navigator.prototype.init = function (chart) {
-                var chartOptions = chart.options, navigatorOptions = chartOptions.navigator || {}, navigatorEnabled = navigatorOptions.enabled, scrollbarOptions = chartOptions.scrollbar || {}, scrollbarEnabled = scrollbarOptions.enabled, height = navigatorEnabled && navigatorOptions.height || 0, scrollbarHeight = scrollbarEnabled && scrollbarOptions.height || 0;
+                var chartOptions = chart.options, navigatorOptions = chartOptions.navigator || {}, navigatorEnabled = navigatorOptions.enabled, scrollbarOptions = chartOptions.scrollbar || {}, scrollbarEnabled = scrollbarOptions.enabled, height = navigatorEnabled && navigatorOptions.height || 0, scrollbarHeight = scrollbarEnabled && scrollbarOptions.height || 0, scrollButtonSize = scrollbarOptions.buttonsEnabled && scrollbarHeight || 0;
                 this.handles = [];
                 this.shades = [];
                 this.chart = chart;
                 this.setBaseSeries();
                 this.height = height;
                 this.scrollbarHeight = scrollbarHeight;
+                this.scrollButtonSize = scrollButtonSize;
                 this.scrollbarEnabled = scrollbarEnabled;
                 this.navigatorEnabled = navigatorEnabled;
                 this.navigatorOptions = navigatorOptions;
                 this.scrollbarOptions = scrollbarOptions;
-                this.outlineHeight = height + scrollbarHeight;
                 this.opposite = pick(navigatorOptions.opposite, Boolean(!navigatorEnabled && chart.inverted)); // #6262
                 var navigator = this, baseSeries = navigator.baseSeries, xAxisIndex = chart.xAxis.length, yAxisIndex = chart.yAxis.length, baseXaxis = baseSeries && baseSeries[0] && baseSeries[0].xAxis ||
                     chart.xAxis[0] || { options: {} };
@@ -2863,7 +2893,6 @@
                     }, navigatorOptions.xAxis, {
                         id: 'navigator-x-axis',
                         yAxis: 'navigator-y-axis',
-                        isX: true,
                         type: 'datetime',
                         index: xAxisIndex,
                         isInternal: true,
@@ -2875,12 +2904,12 @@
                         maxPadding: 0,
                         zoomEnabled: false
                     }, chart.inverted ? {
-                        offsets: [scrollbarHeight, 0, -scrollbarHeight, 0],
+                        offsets: [scrollButtonSize, 0, -scrollButtonSize, 0],
                         width: height
                     } : {
-                        offsets: [0, -scrollbarHeight, 0, scrollbarHeight],
+                        offsets: [0, -scrollButtonSize, 0, scrollButtonSize],
                         height: height
-                    }));
+                    }), 'xAxis');
                     navigator.yAxis = new Axis(chart, merge(navigatorOptions.yAxis, {
                         id: 'navigator-y-axis',
                         alignTicks: false,
@@ -2894,7 +2923,7 @@
                         width: height
                     } : {
                         height: height
-                    }));
+                    }), 'yAxis');
                     // If we have a base series, initialize the navigator series
                     if (baseSeries || navigatorOptions.series.data) {
                         navigator.updateNavigatorSeries(false);
@@ -2923,7 +2952,7 @@
                             fake: true
                         },
                         translate: function (value, reverse) {
-                            var axis = chart.xAxis[0], ext = axis.getExtremes(), scrollTrackWidth = axis.len - 2 * scrollbarHeight, min = numExt('min', axis.options.min, ext.dataMin), valueRange = numExt('max', axis.options.max, ext.dataMax) - min;
+                            var axis = chart.xAxis[0], ext = axis.getExtremes(), scrollTrackWidth = axis.len - 2 * scrollButtonSize, min = numExt('min', axis.options.min, ext.dataMin), valueRange = numExt('max', axis.options.max, ext.dataMax) - min;
                             return reverse ?
                                 // from pixel to value
                                 (value * valueRange / scrollTrackWidth) + min :
@@ -2942,10 +2971,11 @@
                 }
                 // Initialize the scrollbar
                 if (chart.options.scrollbar.enabled) {
-                    chart.scrollbar = navigator.scrollbar = new Scrollbar(chart.renderer, merge(chart.options.scrollbar, {
-                        margin: navigator.navigatorEnabled ? 0 : 10,
-                        vertical: chart.inverted
-                    }), chart);
+                    var options = merge(chart.options.scrollbar, { vertical: chart.inverted });
+                    if (!isNumber(options.margin) && navigator.navigatorEnabled) {
+                        options.margin = chart.inverted ? -3 : 3;
+                    }
+                    chart.scrollbar = navigator.scrollbar = new Scrollbar(chart.renderer, options, chart);
                     addEvent(navigator.scrollbar, 'changed', function (e) {
                         var range = navigator.size, to = range * this.to, from = range * this.from;
                         navigator.hasDragged = navigator.scrollbar.hasDragged;
@@ -3361,7 +3391,7 @@
                     }
                     chart[marginName] =
                         (chart[marginName] || 0) + (navigator.navigatorEnabled || !chart.inverted ?
-                            navigator.outlineHeight :
+                            navigator.height + navigator.scrollbarHeight :
                             0) + navigator.navigatorOptions.margin;
                 }));
             };
@@ -3776,7 +3806,7 @@
             inputBoxWidth: void 0,
             /**
              * The date format in the input boxes when not selected for editing.
-             * Defaults to `%b %e, %Y`.
+             * Defaults to `%e %b %Y`.
              *
              * This is used to determine which type of input to show,
              * `datetime-local`, `date` or `time` and falling back to `text` when
@@ -3789,7 +3819,7 @@
              *         Milliseconds in the range selector
              *
              */
-            inputDateFormat: '%b %e, %Y',
+            inputDateFormat: '%e %b %Y',
             /**
              * A custom callback function to parse values entered in the input boxes
              * and return a valid JavaScript time as milliseconds since 1970.
@@ -3906,9 +3936,11 @@
              */
             inputStyle: {
                 /** @ignore */
-                color: "#335cad" /* Palette.highlightColor80 */,
+                color: "#334eff" /* Palette.highlightColor80 */,
                 /** @ignore */
-                cursor: 'pointer'
+                cursor: 'pointer',
+                /** @ignore */
+                fontSize: '0.8em'
             },
             /**
              * CSS styles for the labels - the Zoom, From and To texts.
@@ -3923,7 +3955,9 @@
              */
             labelStyle: {
                 /** @ignore */
-                color: "#666666" /* Palette.neutralColor60 */
+                color: "#666666" /* Palette.neutralColor60 */,
+                /** @ignore */
+                fontSize: '0.8em'
             }
         };
         /* *
@@ -4031,12 +4065,10 @@
          */
         function compose(AxisClass, ChartClass, RangeSelectorClass) {
             RangeSelectorConstructor = RangeSelectorClass;
-            if (composedMembers.indexOf(AxisClass) === -1) {
-                composedMembers.push(AxisClass);
+            if (U.pushUnique(composedMembers, AxisClass)) {
                 AxisClass.prototype.minFromRange = axisMinFromRange;
             }
-            if (composedMembers.indexOf(ChartClass) === -1) {
-                composedMembers.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'afterGetContainer', onChartAfterGetContainer);
                 addEvent(ChartClass, 'beforeRender', onChartBeforeRender);
                 addEvent(ChartClass, 'destroy', onChartDestroy);
@@ -4046,7 +4078,7 @@
                 var chartProto = ChartClass.prototype;
                 chartProto.callbacks.push(onChartCallback);
             }
-            if (composedMembers.indexOf(setOptions) === -1) {
+            if (U.pushUnique(composedMembers, setOptions)) {
                 extend(defaultOptions, { rangeSelector: RangeSelectorDefaults.rangeSelector });
                 extend(defaultOptions.lang, RangeSelectorDefaults.lang);
             }
@@ -4707,7 +4739,7 @@
                         width: isTextInput ?
                             ((dateBox.width + (inputBoxWidth ? -2 : 20)) + 'px') :
                             'auto',
-                        height: isTextInput ? ((dateBox.height - 2) + 'px') : 'auto',
+                        height: (dateBox.height - 2) + 'px',
                         border: '2px solid silver'
                     });
                     if (isTextInput && inputBoxWidth) {
@@ -4767,7 +4799,7 @@
                 }
                 var date = Date.parse(input);
                 // If the value isn't parsed directly to a value by the
-                // browser's Date.parse method, like YYYY-MM-DD in IE8, try
+                // browser's Date.parse method, try
                 // parsing it a different way
                 if (!isNumber(date)) {
                     var parts = inputDate.split('-');
@@ -4864,7 +4896,7 @@
                 }, void 0, div);
                 // #14788: Setting input.type to an unsupported type throws in IE, so
                 // we need to use setAttribute instead
-                input.setAttribute('type', preferredInputType(options.inputDateFormat || '%b %e, %Y'));
+                input.setAttribute('type', preferredInputType(options.inputDateFormat || '%e %b %Y'));
                 if (!chart.styledMode) {
                     // Styles
                     label.css(merge(chartStyle, options.labelStyle));
@@ -5830,7 +5862,7 @@
                 verticalAlign: 'middle'
             },
             tooltip: {
-                headerFormat: '<span style="font-size: 10px">{point.x} - {point.x2}</span><br/>',
+                headerFormat: '<span style="font-size: 0.8em">{point.x} - {point.x2}</span><br/>',
                 pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.yCategory}</b><br/>'
             },
             borderRadius: 3,
@@ -6168,7 +6200,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -6248,8 +6280,7 @@
              *
              * */
             XRangeSeries.compose = function (AxisClass) {
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     addEvent(AxisClass, 'afterGetSeriesExtremes', onAxisAfterGetSeriesExtremes);
                 }
             };
@@ -6343,7 +6374,7 @@
              * @private
              */
             XRangeSeries.prototype.translatePoint = function (point) {
-                var xAxis = this.xAxis, yAxis = this.yAxis, metrics = this.columnMetrics, options = this.options, minPointLength = options.minPointLength || 0, oldColWidth = (point.shapeArgs && point.shapeArgs.width || 0) / 2, seriesXOffset = this.pointXOffset = metrics.offset, posX = pick(point.x2, point.x + (point.len || 0));
+                var xAxis = this.xAxis, yAxis = this.yAxis, metrics = this.columnMetrics, options = this.options, borderRadius = options.borderRadius, minPointLength = options.minPointLength || 0, oldColWidth = (point.shapeArgs && point.shapeArgs.width || 0) / 2, seriesXOffset = this.pointXOffset = metrics.offset, posX = pick(point.x2, point.x + (point.len || 0));
                 var plotX = point.plotX, plotX2 = xAxis.translate(posX, 0, 0, 0, 1);
                 var length = Math.abs(plotX2 - plotX), inverted = this.chart.inverted, borderWidth = pick(options.borderWidth, 1), crisper = borderWidth % 2 / 2;
                 var widthDifference, partialFill, yOffset = metrics.offset, pointHeight = Math.round(metrics.width), dlLeft, dlRight, dlWidth, clipRectWidth;
@@ -6374,10 +6405,12 @@
                     x: x,
                     y: Math.floor(point.plotY + yOffset) + crisper,
                     width: x2 - x,
-                    height: pointHeight,
-                    r: this.options.borderRadius
+                    height: pointHeight
                 };
                 point.shapeArgs = shapeArgs;
+                if (isNumber(borderRadius)) {
+                    point.shapeArgs.r = borderRadius;
+                }
                 // Move tooltip to default position
                 if (!inverted) {
                     point.tooltipPos[0] -= oldColWidth +
@@ -6413,7 +6446,8 @@
                     -metrics.width / 2);
                 // Centering tooltip position (#14147)
                 if (!inverted) {
-                    tooltipPos[xIndex] += (xAxis.reversed ? -1 : 0) * shapeArgs.width;
+                    tooltipPos[xIndex] = clamp(tooltipPos[xIndex] +
+                        (xAxis.reversed ? -1 : 0) * shapeArgs.width, 0, xAxis.len - 1);
                 }
                 else {
                     tooltipPos[xIndex] += shapeArgs.width / 2;
@@ -6430,9 +6464,11 @@
                     if (!isNumber(partialFill)) {
                         partialFill = 0;
                     }
-                    point.partShapeArgs = merge(shapeArgs, {
-                        r: this.options.borderRadius
-                    });
+                    if (isNumber(borderRadius)) {
+                        point.partShapeArgs = merge(shapeArgs, {
+                            r: borderRadius
+                        });
+                    }
                     clipRectWidth = Math.max(Math.round(length * partialFill + point.plotX -
                         plotX), 0);
                     point.clipRectArgs = {
@@ -6507,7 +6543,7 @@
                     if (!this.chart.styledMode) {
                         graphic
                             .rect[verb](pointAttr, animation)
-                            .shadow(seriesOpts.shadow, null, cutOff);
+                            .shadow(seriesOpts.shadow);
                         if (partShapeArgs) {
                             // Ensure pfOptions is an object
                             if (!isObject(pfOptions)) {
@@ -6523,7 +6559,7 @@
                             pointAttr.fill = fill;
                             graphic
                                 .partRect[pointStateVerb](pointAttr, animation)
-                                .shadow(seriesOpts.shadow, null, cutOff);
+                                .shadow(seriesOpts.shadow);
                         }
                     }
                 }
@@ -6735,7 +6771,7 @@
              *  Constants
              *
              * */
-            var composedClasses = [];
+            var composedMembers = [];
             /* *
              *
              *  Functions
@@ -6747,16 +6783,14 @@
              * @private
              */
             function compose(AxisClass, SeriesClass) {
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     AxisClass.keepProps.push('brokenAxis');
                     addEvent(AxisClass, 'init', onAxisInit);
                     addEvent(AxisClass, 'afterInit', onAxisAfterInit);
                     addEvent(AxisClass, 'afterSetTickPositions', onAxisAfterSetTickPositions);
                     addEvent(AxisClass, 'afterSetOptions', onAxisAfterSetOptions);
                 }
-                if (composedClasses.indexOf(SeriesClass) === -1) {
-                    composedClasses.push(SeriesClass);
+                if (U.pushUnique(composedMembers, SeriesClass)) {
                     var seriesProto = SeriesClass.prototype;
                     seriesProto.drawBreaks = seriesDrawBreaks;
                     seriesProto.gappedPath = seriesGappedPath;
@@ -7156,7 +7190,9 @@
                     var hasBreaks = (isArray(breaks) && !!breaks.length);
                     axis.isDirty = brokenAxis.hasBreaks !== hasBreaks;
                     brokenAxis.hasBreaks = hasBreaks;
-                    axis.options.breaks = axis.userOptions.breaks = breaks;
+                    if (breaks !== axis.options.breaks) {
+                        axis.options.breaks = axis.userOptions.breaks = breaks;
+                    }
                     axis.forceRedraw = true; // Force recalculation in setScale
                     // Recalculate series related to the axis.
                     axis.series.forEach(function (series) {
@@ -7304,7 +7340,7 @@
 
         return BrokenAxis;
     });
-    _registerModule(_modules, 'Core/Axis/GridAxis.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Axis/AxisDefaults.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (Axis, AxisDefaults, H, U) {
+    _registerModule(_modules, 'Core/Axis/GridAxis.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (Axis, H, U) {
         /* *
          *
          *  (c) 2016 Highsoft AS
@@ -7338,7 +7374,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -7388,8 +7424,7 @@
          * @private
          */
         function compose(AxisClass, ChartClass, TickClass) {
-            if (composedClasses.indexOf(AxisClass) === -1) {
-                composedClasses.push(AxisClass);
+            if (U.pushUnique(composedMembers, AxisClass)) {
                 AxisClass.keepProps.push('grid');
                 AxisClass.prototype.getMaxLabelDimensions = getMaxLabelDimensions;
                 wrap(AxisClass.prototype, 'unsquish', wrapUnsquish);
@@ -7407,10 +7442,10 @@
                 addEvent(AxisClass, 'trimTicks', onTrimTicks);
                 addEvent(AxisClass, 'destroy', onDestroy);
             }
-            if (composedClasses.indexOf(ChartClass) === -1) {
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 addEvent(ChartClass, 'afterSetChartSize', onChartAfterSetChartSize);
             }
-            if (composedClasses.indexOf(TickClass) === -1) {
+            if (U.pushUnique(composedMembers, TickClass)) {
                 addEvent(TickClass, 'afterGetLabelPosition', onTickAfterGetLabelPosition);
                 addEvent(TickClass, 'labelFormat', onTickLabelFormat);
             }
@@ -7497,7 +7532,7 @@
                 var xOption = options_1.title.x;
                 var yOption = options_1.title.y;
                 var titleMargin = pick(options_1.title.margin, horiz ? 5 : 10);
-                var titleFontSize = axis.chart.renderer.fontMetrics(options_1.title.style.fontSize, axisTitle).f;
+                var titleFontSize = axisTitle ? axis.chart.renderer.fontMetrics(axisTitle).f : 0;
                 var crispCorr = tickSize ? tickSize[0] / 2 : 0;
                 // TODO account for alignment
                 // the position in the perpendicular direction of the axis
@@ -7533,6 +7568,7 @@
                 // Handle columns, each column is a grid axis
                 while (++columnIndex < gridOptions.columns.length) {
                     var columnOptions = merge(userOptions, gridOptions.columns[gridOptions.columns.length - columnIndex - 1], {
+                        isInternal: true,
                         linkedTo: 0,
                         // Force to behave like category axis
                         type: 'category',
@@ -7542,13 +7578,13 @@
                         }
                     });
                     delete columnOptions.grid.columns; // Prevent recursion
-                    var column = new Axis(axis.chart, columnOptions);
+                    var column = new Axis(axis.chart, columnOptions, 'yAxis');
                     column.grid.isColumn = true;
                     column.grid.columnIndex = columnIndex;
                     // Remove column axis from chart axes array, and place it
                     // in the columns array.
                     erase(chart.axes, column);
-                    erase(chart[axis.coll], column);
+                    erase(chart[axis.coll] || [], column);
                     columns.push(column);
                 }
             }
@@ -7793,7 +7829,7 @@
                     labels: {
                         padding: 2,
                         style: {
-                            fontSize: '13px'
+                            fontSize: '0.9em'
                         }
                     },
                     margin: 0,
@@ -7931,10 +7967,9 @@
          * @private
          */
         function onAfterTickSize(e) {
-            var defaultLeftAxisOptions = AxisDefaults.defaultLeftAxisOptions;
             var _a = this, horiz = _a.horiz, maxLabelDimensions = _a.maxLabelDimensions, _b = _a.options.grid, gridOptions = _b === void 0 ? {} : _b;
             if (gridOptions.enabled && maxLabelDimensions) {
-                var labelPadding = (Math.abs(defaultLeftAxisOptions.labels.x) * 2);
+                var labelPadding = this.options.labels.distance * 2;
                 var distance = horiz ?
                     (gridOptions.cellHeight ||
                         labelPadding + maxLabelDimensions.height) :
@@ -7994,21 +8029,21 @@
             side = GridAxisSide[axis.side], tickmarkOffset = e.tickmarkOffset, tickPositions = axis.tickPositions, tickPos = tick.pos - tickmarkOffset, nextTickPos = (isNumber(tickPositions[e.index + 1]) ?
                 tickPositions[e.index + 1] - tickmarkOffset :
                 (axis.max || 0) + tickmarkOffset), tickSize = axis.tickSize('tick'), tickWidth = tickSize ? tickSize[0] : 0, crispCorr = tickSize ? tickSize[1] / 2 : 0;
-            var labelHeight, lblMetrics, lines, bottom, top, left, right;
             // Only center tick labels in grid axes
             if (gridOptions.enabled === true) {
+                var bottom = void 0, top_1, left = void 0, right = void 0;
                 // Calculate top and bottom positions of the cell.
                 if (side === 'top') {
                     bottom = axis.top + axis.offset;
-                    top = bottom - tickWidth;
+                    top_1 = bottom - tickWidth;
                 }
                 else if (side === 'bottom') {
-                    top = chart.chartHeight - axis.bottom + axis.offset;
-                    bottom = top + tickWidth;
+                    top_1 = chart.chartHeight - axis.bottom + axis.offset;
+                    bottom = top_1 + tickWidth;
                 }
                 else {
                     bottom = axis.top + axis.len - (axis.translate(reversed ? nextTickPos : tickPos) || 0);
-                    top = axis.top + axis.len - (axis.translate(reversed ? tickPos : nextTickPos) || 0);
+                    top_1 = axis.top + axis.len - (axis.translate(reversed ? tickPos : nextTickPos) || 0);
                 }
                 // Calculate left and right positions of the cell.
                 if (side === 'right') {
@@ -8034,30 +8069,31 @@
                         left + ((right - left) / 2) // default to center
                 );
                 e.pos.y = (verticalAlign === 'top' ?
-                    top :
+                    top_1 :
                     verticalAlign === 'bottom' ?
                         bottom :
-                        top + ((bottom - top) / 2) // default to middle
+                        top_1 + ((bottom - top_1) / 2) // default to middle
                 );
-                lblMetrics = chart.renderer.fontMetrics(labelOpts.style.fontSize, label && label.element);
-                labelHeight = label ? label.getBBox().height : 0;
-                // Adjustment to y position to align the label correctly.
-                // Would be better to have a setter or similar for this.
-                if (!labelOpts.useHTML) {
-                    lines = Math.round(labelHeight / lblMetrics.h);
-                    e.pos.y += (
-                    // Center the label
-                    // TODO: why does this actually center the label?
-                    ((lblMetrics.b - (lblMetrics.h - lblMetrics.f)) / 2) +
-                        // Adjust for height of additional lines.
-                        -(((lines - 1) * lblMetrics.h) / 2));
-                }
-                else {
-                    e.pos.y += (
-                    // Readjust yCorr in htmlUpdateTransform
-                    lblMetrics.b +
-                        // Adjust for height of html label
-                        -(labelHeight / 2));
+                if (label) {
+                    var lblMetrics = chart.renderer.fontMetrics(label), labelHeight = label.getBBox().height;
+                    // Adjustment to y position to align the label correctly.
+                    // Would be better to have a setter or similar for this.
+                    if (!labelOpts.useHTML) {
+                        var lines = Math.round(labelHeight / lblMetrics.h);
+                        e.pos.y += (
+                        // Center the label
+                        // TODO: why does this actually center the label?
+                        ((lblMetrics.b - (lblMetrics.h - lblMetrics.f)) / 2) +
+                            // Adjust for height of additional lines.
+                            -(((lines - 1) * lblMetrics.h) / 2));
+                    }
+                    else {
+                        e.pos.y += (
+                        // Readjust yCorr in htmlUpdateTransform
+                        lblMetrics.b +
+                            // Adjust for height of html label
+                            -(labelHeight / 2));
+                    }
                 }
                 e.pos.x += (axis.horiz && labelOpts.x) || 0;
             }
@@ -8476,7 +8512,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Functions
@@ -8669,8 +8705,7 @@
              * @private
              */
             TreeGridTickAdditions.compose = function (TickClass) {
-                if (composedClasses.indexOf(TickClass) === -1) {
-                    composedClasses.push(TickClass);
+                if (U.pushUnique(composedMembers, TickClass)) {
                     addEvent(TickClass, 'init', onTickInit);
                     wrap(TickClass.prototype, 'getLabelPosition', wrapGetLabelPosition);
                     wrap(TickClass.prototype, 'renderLabel', wrapRenderLabel);
@@ -8982,7 +9017,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         /* *
          *
          *  Variables
@@ -9311,7 +9346,7 @@
         /**
          * @private
          */
-        function wrapInit(proceed, chart, userOptions) {
+        function wrapInit(proceed, chart, userOptions, coll) {
             var axis = this, isTreeGrid = userOptions.type === 'treegrid';
             if (!axis.treeGrid) {
                 axis.treeGrid = new TreeGridAxisAdditions(axis);
@@ -9442,9 +9477,9 @@
                     }
                 });
             }
-            // Now apply the original function with the original arguments,
-            // which are sliced off this function's arguments
-            proceed.apply(axis, [chart, userOptions]);
+            // Now apply the original function with the original arguments, which are
+            // sliced off this function's arguments
+            proceed.apply(axis, [chart, userOptions, coll]);
             if (isTreeGrid) {
                 axis.hasNames = true;
                 axis.options.showLastLabel = true;
@@ -9508,8 +9543,7 @@
              * @private
              */
             TreeGridAxisAdditions.compose = function (AxisClass, ChartClass, SeriesClass, TickClass) {
-                if (composedClasses.indexOf(AxisClass) === -1) {
-                    composedClasses.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     if (AxisClass.keepProps.indexOf('treeGrid') === -1) {
                         AxisClass.keepProps.push('treeGrid');
                     }
@@ -9522,8 +9556,7 @@
                         getNode: Tree.getNode
                     };
                 }
-                if (composedClasses.indexOf(TickClass) === -1) {
-                    composedClasses.push(TickClass);
+                if (U.pushUnique(composedMembers, TickClass)) {
                     if (!TickConstructor) {
                         TickConstructor = TickClass;
                     }
@@ -9692,105 +9725,6 @@
 
         return TreeGridAxisAdditions;
     });
-    _registerModule(_modules, 'Extensions/CurrentDateIndication.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Axis/PlotLineOrBand/PlotLineOrBand.js'], _modules['Core/Utilities.js']], function (Axis, PlotLineOrBand, U) {
-        /* *
-         *
-         *  (c) 2016-2021 Highsoft AS
-         *
-         *  Author: Lars A. V. Cabrera
-         *
-         *  License: www.highcharts.com/license
-         *
-         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
-         *
-         * */
-        var addEvent = U.addEvent, merge = U.merge, wrap = U.wrap;
-        /**
-         * Show an indicator on the axis for the current date and time. Can be a
-         * boolean or a configuration object similar to
-         * [xAxis.plotLines](#xAxis.plotLines).
-         *
-         * @sample gantt/current-date-indicator/demo
-         *         Current date indicator enabled
-         * @sample gantt/current-date-indicator/object-config
-         *         Current date indicator with custom options
-         *
-         * @declare   Highcharts.CurrentDateIndicatorOptions
-         * @type      {boolean|CurrentDateIndicatorOptions}
-         * @default   true
-         * @extends   xAxis.plotLines
-         * @excluding value
-         * @product   gantt
-         * @apioption xAxis.currentDateIndicator
-         */
-        var defaultOptions = {
-            color: "#ccd6eb" /* Palette.highlightColor20 */,
-            width: 2,
-            /**
-             * @declare Highcharts.AxisCurrentDateIndicatorLabelOptions
-             */
-            label: {
-                /**
-                 * Format of the label. This options is passed as the fist argument to
-                 * [dateFormat](/class-reference/Highcharts.Time#dateFormat) function.
-                 *
-                 * @type      {string}
-                 * @default   %a, %b %d %Y, %H:%M
-                 * @product   gantt
-                 * @apioption xAxis.currentDateIndicator.label.format
-                 */
-                format: '%a, %b %d %Y, %H:%M',
-                formatter: function (value, format) {
-                    return this.axis.chart.time.dateFormat(format || '', value);
-                },
-                rotation: 0,
-                /**
-                 * @type {Highcharts.CSSObject}
-                 */
-                style: {
-                    /** @internal */
-                    fontSize: '10px'
-                }
-            }
-        };
-        /* eslint-disable no-invalid-this */
-        addEvent(Axis, 'afterSetOptions', function () {
-            var options = this.options, cdiOptions = options.currentDateIndicator;
-            if (cdiOptions) {
-                var plotLineOptions = typeof cdiOptions === 'object' ?
-                    merge(defaultOptions, cdiOptions) :
-                    merge(defaultOptions);
-                plotLineOptions.value = Date.now();
-                plotLineOptions.className = 'highcharts-current-date-indicator';
-                if (!options.plotLines) {
-                    options.plotLines = [];
-                }
-                options.plotLines.push(plotLineOptions);
-            }
-        });
-        addEvent(PlotLineOrBand, 'render', function () {
-            // If the label already exists, update its text
-            if (this.label) {
-                this.label.attr({
-                    text: this.getLabelText(this.options.label)
-                });
-            }
-        });
-        wrap(PlotLineOrBand.prototype, 'getLabelText', function (defaultMethod, defaultLabelOptions) {
-            var options = this.options;
-            if (options &&
-                options.className &&
-                options.className.indexOf('highcharts-current-date-indicator') !== -1 &&
-                options.label &&
-                typeof options.label.formatter === 'function') {
-                options.value = Date.now();
-                return options.label.formatter
-                    .call(this, options.value, options.label.format);
-            }
-            return defaultMethod.call(this, defaultLabelOptions);
-        });
-
-    });
     _registerModule(_modules, 'Extensions/StaticScale.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Chart/Chart.js'], _modules['Core/Utilities.js']], function (Axis, Chart, U) {
         /* *
          *
@@ -9865,173 +9799,6 @@
         };
         addEvent(Chart, 'render', Chart.prototype.adjustHeight);
 
-    });
-    _registerModule(_modules, 'Extensions/ArrowSymbols.js', [_modules['Core/Renderer/SVG/SVGRenderer.js']], function (SVGRenderer) {
-        /* *
-         *
-         *  (c) 2017 Highsoft AS
-         *  Authors: Lars A. V. Cabrera
-         *
-         *  License: www.highcharts.com/license
-         *
-         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
-         *
-         * */
-        var symbols = SVGRenderer.prototype.symbols;
-        /* *
-         *
-         *  Functions
-         *
-         * */
-        /**
-         * Creates an arrow symbol. Like a triangle, except not filled.
-         * ```
-         *                   o
-         *             o
-         *       o
-         * o
-         *       o
-         *             o
-         *                   o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the arrow
-         *
-         * @param {number} y
-         *        y position of the arrow
-         *
-         * @param {number} w
-         *        width of the arrow
-         *
-         * @param {number} h
-         *        height of the arrow
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function arrow(x, y, w, h) {
-            return [
-                ['M', x, y + h / 2],
-                ['L', x + w, y],
-                ['L', x, y + h / 2],
-                ['L', x + w, y + h]
-            ];
-        }
-        /**
-         * Creates a half-width arrow symbol. Like a triangle, except not filled.
-         * ```
-         *       o
-         *    o
-         * o
-         *    o
-         *       o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the arrow
-         *
-         * @param {number} y
-         *        y position of the arrow
-         *
-         * @param {number} w
-         *        width of the arrow
-         *
-         * @param {number} h
-         *        height of the arrow
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function arrowHalf(x, y, w, h) {
-            return arrow(x, y, w / 2, h);
-        }
-        /**
-         * Creates a left-oriented triangle.
-         * ```
-         *             o
-         *       ooooooo
-         * ooooooooooooo
-         *       ooooooo
-         *             o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the triangle
-         *
-         * @param {number} y
-         *        y position of the triangle
-         *
-         * @param {number} w
-         *        width of the triangle
-         *
-         * @param {number} h
-         *        height of the triangle
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function triangleLeft(x, y, w, h) {
-            return [
-                ['M', x + w, y],
-                ['L', x, y + h / 2],
-                ['L', x + w, y + h],
-                ['Z']
-            ];
-        }
-        /**
-         * Creates a half-width, left-oriented triangle.
-         * ```
-         *       o
-         *    oooo
-         * ooooooo
-         *    oooo
-         *       o
-         * ```
-         *
-         * @private
-         * @function
-         *
-         * @param {number} x
-         *        x position of the triangle
-         *
-         * @param {number} y
-         *        y position of the triangle
-         *
-         * @param {number} w
-         *        width of the triangle
-         *
-         * @param {number} h
-         *        height of the triangle
-         *
-         * @return {Highcharts.SVGPathArray}
-         *         Path array
-         */
-        function triangleLeftHalf(x, y, w, h) {
-            return triangleLeft(x, y, w / 2, h);
-        }
-        symbols.arrow = arrow;
-        symbols['arrow-filled'] = triangleLeft;
-        symbols['arrow-filled-half'] = triangleLeftHalf;
-        symbols['arrow-half'] = arrowHalf;
-        symbols['triangle-left'] = triangleLeft;
-        symbols['triangle-left-half'] = triangleLeftHalf;
-        /* *
-         *
-         *  Default Export
-         *
-         * */
-
-        return symbols;
     });
     _registerModule(_modules, 'Gantt/Connection.js', [_modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Core/Series/Point.js'], _modules['Core/Utilities.js']], function (D, H, Point, U) {
         /* *
@@ -10578,7 +10345,8 @@
                         // Create new marker element
                         connection.graphics[type] = renderer
                             .symbol(options.symbol)
-                            .addClass('highcharts-point-connecting-path-' + type + '-marker')
+                            .addClass('highcharts-point-connecting-path-' + type + '-marker' +
+                            ' highcharts-color-' + this.fromPoint.colorIndex)
                             .attr(box)
                             .add(pathfinder.group);
                         if (!renderer.styledMode) {
@@ -12485,7 +12253,7 @@
                     enabled: true
                 },
                 tooltip: {
-                    headerFormat: '<span style="font-size: 10px">{series.name}</span><br/>',
+                    headerFormat: '<span style="font-size: 0.8em">{series.name}</span><br/>',
                     pointFormat: null,
                     pointFormatter: function () {
                         var point = this, series = point.series, xAxis = series.xAxis, formats = series.tooltipOptions.dateTimeLabelFormats, startOfWeek = xAxis.options.startOfWeek, ttOptions = series.tooltipOptions, format = ttOptions.xDateFormat, start, end, milestone = point.options.milestone, retVal = '<b>' + (point.name || point.yCategory) + '</b>';
@@ -12862,7 +12630,329 @@
 
         return GanttChart;
     });
-    _registerModule(_modules, 'masters/modules/gantt.src.js', [_modules['Core/Globals.js'], _modules['Stock/Navigator/Navigator.js'], _modules['Stock/Scrollbar/Scrollbar.js'], _modules['Stock/RangeSelector/RangeSelector.js'], _modules['Series/XRange/XRangeSeries.js'], _modules['Core/Chart/GanttChart.js']], function (Highcharts, Navigator, Scrollbar, RangeSelector, XRangeSeries, GanttChart) {
+    _registerModule(_modules, 'Extensions/ArrowSymbols.js', [_modules['Core/Utilities.js']], function (U) {
+        /* *
+         *
+         *  (c) 2017 Highsoft AS
+         *  Authors: Lars A. V. Cabrera
+         *
+         *  License: www.highcharts.com/license
+         *
+         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
+         *
+         * */
+        /* *
+         *
+         *  Constants
+         *
+         * */
+        var composedMembers = [];
+        /* *
+         *
+         *  Functions
+         *
+         * */
+        /**
+         * Creates an arrow symbol. Like a triangle, except not filled.
+         * ```
+         *                   o
+         *             o
+         *       o
+         * o
+         *       o
+         *             o
+         *                   o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the arrow
+         *
+         * @param {number} y
+         *        y position of the arrow
+         *
+         * @param {number} w
+         *        width of the arrow
+         *
+         * @param {number} h
+         *        height of the arrow
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function arrow(x, y, w, h) {
+            return [
+                ['M', x, y + h / 2],
+                ['L', x + w, y],
+                ['L', x, y + h / 2],
+                ['L', x + w, y + h]
+            ];
+        }
+        /**
+         * Creates a half-width arrow symbol. Like a triangle, except not filled.
+         * ```
+         *       o
+         *    o
+         * o
+         *    o
+         *       o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the arrow
+         *
+         * @param {number} y
+         *        y position of the arrow
+         *
+         * @param {number} w
+         *        width of the arrow
+         *
+         * @param {number} h
+         *        height of the arrow
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function arrowHalf(x, y, w, h) {
+            return arrow(x, y, w / 2, h);
+        }
+        /**
+         * @private
+         */
+        function compose(SVGRendererClass) {
+            if (U.pushUnique(composedMembers, SVGRendererClass)) {
+                var symbols = SVGRendererClass.prototype.symbols;
+                symbols.arrow = arrow;
+                symbols['arrow-filled'] = triangleLeft;
+                symbols['arrow-filled-half'] = triangleLeftHalf;
+                symbols['arrow-half'] = arrowHalf;
+                symbols['triangle-left'] = triangleLeft;
+                symbols['triangle-left-half'] = triangleLeftHalf;
+            }
+        }
+        /**
+         * Creates a left-oriented triangle.
+         * ```
+         *             o
+         *       ooooooo
+         * ooooooooooooo
+         *       ooooooo
+         *             o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the triangle
+         *
+         * @param {number} y
+         *        y position of the triangle
+         *
+         * @param {number} w
+         *        width of the triangle
+         *
+         * @param {number} h
+         *        height of the triangle
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function triangleLeft(x, y, w, h) {
+            return [
+                ['M', x + w, y],
+                ['L', x, y + h / 2],
+                ['L', x + w, y + h],
+                ['Z']
+            ];
+        }
+        /**
+         * Creates a half-width, left-oriented triangle.
+         * ```
+         *       o
+         *    oooo
+         * ooooooo
+         *    oooo
+         *       o
+         * ```
+         *
+         * @private
+         * @function
+         *
+         * @param {number} x
+         *        x position of the triangle
+         *
+         * @param {number} y
+         *        y position of the triangle
+         *
+         * @param {number} w
+         *        width of the triangle
+         *
+         * @param {number} h
+         *        height of the triangle
+         *
+         * @return {Highcharts.SVGPathArray}
+         *         Path array
+         */
+        function triangleLeftHalf(x, y, w, h) {
+            return triangleLeft(x, y, w / 2, h);
+        }
+        /* *
+         *
+         *  Default Export
+         *
+         * */
+        var ArrowSymbols = {
+            compose: compose
+        };
+
+        return ArrowSymbols;
+    });
+    _registerModule(_modules, 'Extensions/CurrentDateIndication.js', [_modules['Core/Utilities.js']], function (U) {
+        /* *
+         *
+         *  (c) 2016-2021 Highsoft AS
+         *
+         *  Author: Lars A. V. Cabrera
+         *
+         *  License: www.highcharts.com/license
+         *
+         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
+         *
+         * */
+        var addEvent = U.addEvent, merge = U.merge, wrap = U.wrap;
+        /* *
+         *
+         *  Constants
+         *
+         * */
+        var composedMembers = [];
+        /**
+         * Show an indicator on the axis for the current date and time. Can be a
+         * boolean or a configuration object similar to
+         * [xAxis.plotLines](#xAxis.plotLines).
+         *
+         * @sample gantt/current-date-indicator/demo
+         *         Current date indicator enabled
+         * @sample gantt/current-date-indicator/object-config
+         *         Current date indicator with custom options
+         *
+         * @declare   Highcharts.CurrentDateIndicatorOptions
+         * @type      {boolean|CurrentDateIndicatorOptions}
+         * @default   true
+         * @extends   xAxis.plotLines
+         * @excluding value
+         * @product   gantt
+         * @apioption xAxis.currentDateIndicator
+         */
+        var defaultOptions = {
+            color: "#ccd3ff" /* Palette.highlightColor20 */,
+            width: 2,
+            /**
+             * @declare Highcharts.AxisCurrentDateIndicatorLabelOptions
+             */
+            label: {
+                /**
+                 * Format of the label. This options is passed as the fist argument to
+                 * [dateFormat](/class-reference/Highcharts.Time#dateFormat) function.
+                 *
+                 * @type      {string}
+                 * @default   %a, %b %d %Y, %H:%M
+                 * @product   gantt
+                 * @apioption xAxis.currentDateIndicator.label.format
+                 */
+                format: '%a, %b %d %Y, %H:%M',
+                formatter: function (value, format) {
+                    return this.axis.chart.time.dateFormat(format || '', value);
+                },
+                rotation: 0,
+                /**
+                 * @type {Highcharts.CSSObject}
+                 */
+                style: {
+                    /** @internal */
+                    fontSize: '0.7em'
+                }
+            }
+        };
+        /* *
+         *
+         *  Functions
+         *
+         * */
+        /**
+         * @private
+         */
+        function compose(AxisClass, PlotLineOrBandClass) {
+            if (U.pushUnique(composedMembers, AxisClass)) {
+                addEvent(AxisClass, 'afterSetOptions', onAxisAfterSetOptions);
+            }
+            if (U.pushUnique(composedMembers, PlotLineOrBandClass)) {
+                addEvent(PlotLineOrBandClass, 'render', onPlotLineOrBandRender);
+                wrap(PlotLineOrBandClass.prototype, 'getLabelText', wrapPlotLineOrBandGetLabelText);
+            }
+        }
+        /**
+         * @private
+         */
+        function onAxisAfterSetOptions() {
+            var options = this.options, cdiOptions = options.currentDateIndicator;
+            if (cdiOptions) {
+                var plotLineOptions = typeof cdiOptions === 'object' ?
+                    merge(defaultOptions, cdiOptions) :
+                    merge(defaultOptions);
+                plotLineOptions.value = Date.now();
+                plotLineOptions.className = 'highcharts-current-date-indicator';
+                if (!options.plotLines) {
+                    options.plotLines = [];
+                }
+                options.plotLines.push(plotLineOptions);
+            }
+        }
+        /**
+         * @private
+         */
+        function onPlotLineOrBandRender() {
+            // If the label already exists, update its text
+            if (this.label) {
+                this.label.attr({
+                    text: this.getLabelText(this.options.label)
+                });
+            }
+        }
+        /**
+         * @private
+         */
+        function wrapPlotLineOrBandGetLabelText(defaultMethod, defaultLabelOptions) {
+            var options = this.options;
+            if (options &&
+                options.className &&
+                options.className.indexOf('highcharts-current-date-indicator') !== -1 &&
+                options.label &&
+                typeof options.label.formatter === 'function') {
+                options.value = Date.now();
+                return options.label.formatter
+                    .call(this, options.value, options.label.format);
+            }
+            return defaultMethod.call(this, defaultLabelOptions);
+        }
+        /* *
+         *
+         *  Default Export
+         *
+         * */
+        var CurrentDateIndication = {
+            compose: compose
+        };
+
+        return CurrentDateIndication;
+    });
+    _registerModule(_modules, 'masters/modules/gantt.src.js', [_modules['Core/Globals.js'], _modules['Stock/Navigator/Navigator.js'], _modules['Stock/Scrollbar/Scrollbar.js'], _modules['Stock/RangeSelector/RangeSelector.js'], _modules['Series/XRange/XRangeSeries.js'], _modules['Core/Chart/GanttChart.js'], _modules['Extensions/ArrowSymbols.js'], _modules['Extensions/CurrentDateIndication.js']], function (Highcharts, Navigator, Scrollbar, RangeSelector, XRangeSeries, GanttChart, ArrowSymbols, CurrentDateIndication) {
 
         var G = Highcharts;
         // Classes
@@ -12872,6 +12962,8 @@
         G.RangeSelector = RangeSelector;
         G.Scrollbar = Scrollbar;
         // Compositions
+        ArrowSymbols.compose(G.SVGRenderer);
+        CurrentDateIndication.compose(G.Axis, G.PlotLineOrBand);
         Navigator.compose(G.Axis, G.Chart, G.Series);
         RangeSelector.compose(G.Axis, G.Chart);
         Scrollbar.compose(G.Axis);

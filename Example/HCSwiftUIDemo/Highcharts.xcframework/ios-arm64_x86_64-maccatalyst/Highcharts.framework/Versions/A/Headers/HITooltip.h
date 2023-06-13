@@ -51,7 +51,7 @@ The radius of the rounded border corners.
 
 **Try it**
 
-* [5px by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/bordercolor-default/)
+* [Default border radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/bordercolor-default/)
 * [Square borders](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/borderradius-0/)
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
@@ -156,7 +156,7 @@ Enable or disable animation of the tooltip.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *animation;
 /**
-Split the tooltip into one label per series, with the header close to the axis. This is recommended over `shared` tooltips for charts with multiple line series, generally making them easier to read. This option takes precedence over `tooltip.shared`.
+Split the tooltip into one label per series, with the header close to the axis. This is recommended over `shared` tooltips for charts with multiple line series, generally making them easier to read. This option takes precedence over `tooltip.shared`. Not supported for `polar` and `inverted` charts.
 
 **Try it**
 
@@ -166,6 +166,8 @@ Split the tooltip into one label per series, with the header close to the axis. 
 @property(nonatomic, readwrite) NSNumber /* Bool */ *split;
 /**
 The background color or gradient for the tooltip. In styled mode, the stroke width is set in the `.highcharts-tooltip-box` class.
+
+**Defaults to** `#ffffff`.
 
 **Try it**
 
@@ -215,6 +217,16 @@ The HTML of the null point's line in the tooltip. Works analogously to `pointFor
 * [Format data label and tooltip for null point.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-nullformat)
 */
 @property(nonatomic, readwrite) NSString *nullFormat;
+/**
+A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting) for the whole tooltip. When format strings are a requirement, it is usually more convenient to use `headerFormat`, `pointFormat` and `footerFormat`, but the `format` option allows combining them into one setting. The context of the format string is the same as that of the `formatter` callback.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [Format for shared tooltip](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/format-shared/)
+*/
+@property(nonatomic, readwrite) NSString *format;
 /**
 The HTML of the point's line in the tooltip. Variables are enclosed by curly brackets. Available variables are `point.x`, `point.y`, `series.name` and `series.color` and other properties on the same form. Furthermore, `point.y` can be extended by the `tooltip.valuePrefix` and `tooltip.valueSuffix` variables. This can also be overridden for each series, which makes it a good hook for displaying units. In styled mode, the dot is colored by a class name rather than the point color.
 
@@ -285,19 +297,21 @@ A CSS class name to apply to the tooltip's container div, allowing unique CSS st
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-The pixel width of the tooltip border. In styled mode, the stroke width is set in the `.highcharts-tooltip-box` class.
-
-**Defaults to** `1`.
+The pixel width of the tooltip border. Defaults to 0 for single tooltips and 1 for split tooltips. In styled mode, the stroke width is set in the `.highcharts-tooltip-box` class.
 
 **Try it**
 
-* [2px by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/bordercolor-default/)
+* [2 pixels](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/bordercolor-default/)
 * [No border (shadow only)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/borderwidth/)
 * [Tooltip in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/tooltip-border-background/)
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
 /**
 Whether the tooltip should follow the mouse as it moves across columns, pie slices and other point types with an extent. By default it behaves this way for pie, polygon, map, sankey and wordcloud series by override in the `plotOptions` for those series types. Does not apply if `split` is `true`. For touch moves to behave the same way, `followTouchMove` must be `true` also.
+
+**Try it**
+
+* [Tooltip follow pointer comparison](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/tooltip/followpointer/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *followPointer;
 /**

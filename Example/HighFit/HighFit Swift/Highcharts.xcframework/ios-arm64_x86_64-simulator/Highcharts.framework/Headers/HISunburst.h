@@ -103,6 +103,16 @@ When enabled the user can click on a point which is a parent and zoom in on its 
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowTraversingTree;
 /**
+The corner radius of the border surrounding each slice. A number signifies pixels. A percentage string, like for example `50%`, signifies a size relative to the radius and the inner radius.
+
+**Defaults to** `3`.
+
+**Try it**
+
+* [Column and pie with rounded border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-border-radius)
+*/
+@property(nonatomic, readwrite) NSNumber *borderRadius;
+/**
 A series specific or series type specific color set to use instead of the global `colors`.
 
 **Try it**

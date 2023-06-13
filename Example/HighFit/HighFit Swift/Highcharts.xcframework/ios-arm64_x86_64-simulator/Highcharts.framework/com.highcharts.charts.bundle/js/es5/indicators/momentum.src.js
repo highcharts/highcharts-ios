@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -67,6 +67,9 @@
          *  Functions
          *
          * */
+        /**
+         * @private
+         */
         function populateAverage(xVal, yVal, i, period, index) {
             var mmY = yVal[i - 1][index] - yVal[i - period - 1][index], mmX = xVal[i - 1];
             return [mmX, mmY];
@@ -110,15 +113,13 @@
              *
              * */
             MomentumIndicator.prototype.getValues = function (series, params) {
-                var period = params.period, index = params.index, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, yValue = yVal[0], MM = [], xData = [], yData = [], i, MMPoint;
+                var period = params.period, index = params.index, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, MM = [], xData = [], yData = [];
+                var i, MMPoint;
                 if (xVal.length <= period) {
                     return;
                 }
                 // Switch index for OHLC / Candlestick / Arearange
-                if (isArray(yVal[0])) {
-                    yValue = yVal[0][index];
-                }
-                else {
+                if (!isArray(yVal[0])) {
                     return;
                 }
                 // Calculate value one-by-one for each period in visible data

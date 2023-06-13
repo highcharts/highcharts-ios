@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  * @module highcharts/modules/stock
  * @requires highcharts
  *
@@ -12,6 +12,7 @@
 'use strict';
 import './broken-axis.src.js';
 import './datagrouping.src.js';
+import './mouse-wheel-zoom.src.js';
 import Highcharts from '../../Core/Globals.js';
 import DataModifyComposition from '../../Series/DataModifyComposition.js';
 import Navigator from '../../Stock/Navigator/Navigator.js';
@@ -23,7 +24,7 @@ import OHLCSeries from '../../Series/OHLC/OHLCSeries.js';
 import '../../Series/Candlestick/CandlestickSeries.js';
 import FlagsSeries from '../../Series/Flags/FlagsSeries.js';
 import StockChart from '../../Core/Chart/StockChart.js';
-var G = Highcharts;
+const G = Highcharts;
 // Classes
 G.Navigator = Navigator;
 G.RangeSelector = RangeSelector;

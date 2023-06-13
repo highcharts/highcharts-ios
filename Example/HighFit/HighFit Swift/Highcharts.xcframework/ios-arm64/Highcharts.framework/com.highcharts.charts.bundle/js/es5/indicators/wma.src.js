@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -137,7 +137,8 @@
              *
              * */
             WMAIndicator.prototype.getValues = function (series, params) {
-                var period = params.period, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, range = 1, xValue = xVal[0], yValue = yVal[0], WMA = [], xData = [], yData = [], index = -1, i, points, WMAPoint;
+                var period = params.period, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, xValue = xVal[0], wma = [], xData = [], yData = [];
+                var range = 1, index = -1, i, wmaPoint, yValue = yVal[0];
                 if (xVal.length < period) {
                     return;
                 }
@@ -147,7 +148,7 @@
                     yValue = yVal[0][index];
                 }
                 // Starting point
-                points = [[xValue, yValue]];
+                var points = [[xValue, yValue]];
                 // Accumulate first N-points
                 while (range !== period) {
                     accumulateAverage(points, xVal, yVal, range, index);
@@ -155,18 +156,18 @@
                 }
                 // Calculate value one-by-one for each period in visible data
                 for (i = range; i < yValLen; i++) {
-                    WMAPoint = populateAverage(points, xVal, yVal, i);
-                    WMA.push(WMAPoint);
-                    xData.push(WMAPoint[0]);
-                    yData.push(WMAPoint[1]);
+                    wmaPoint = populateAverage(points, xVal, yVal, i);
+                    wma.push(wmaPoint);
+                    xData.push(wmaPoint[0]);
+                    yData.push(wmaPoint[1]);
                     accumulateAverage(points, xVal, yVal, i, index);
                 }
-                WMAPoint = populateAverage(points, xVal, yVal, i);
-                WMA.push(WMAPoint);
-                xData.push(WMAPoint[0]);
-                yData.push(WMAPoint[1]);
+                wmaPoint = populateAverage(points, xVal, yVal, i);
+                wma.push(wmaPoint);
+                xData.push(wmaPoint[0]);
+                yData.push(wmaPoint[1]);
                 return {
-                    values: WMA,
+                    values: wma,
                     xData: xData,
                     yData: yData
                 };

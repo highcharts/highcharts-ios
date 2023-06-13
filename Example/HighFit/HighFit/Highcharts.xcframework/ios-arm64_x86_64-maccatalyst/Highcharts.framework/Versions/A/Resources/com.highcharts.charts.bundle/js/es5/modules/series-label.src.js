@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * (c) 2009-2021 Torstein Honsi
  *
@@ -143,6 +143,8 @@
              */
             style: {
                 /** @internal */
+                fontSize: '0.8em',
+                /** @internal */
                 fontWeight: 'bold'
             },
             /**
@@ -234,7 +236,7 @@
 
         return SeriesLabelUtilities;
     });
-    _registerModule(_modules, 'Extensions/SeriesLabel/SeriesLabel.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Chart/Chart.js'], _modules['Core/FormatUtilities.js'], _modules['Core/Defaults.js'], _modules['Extensions/SeriesLabel/SeriesLabelDefaults.js'], _modules['Extensions/SeriesLabel/SeriesLabelUtilities.js'], _modules['Core/Utilities.js']], function (A, Chart, FU, D, SeriesLabelDefaults, SLU, U) {
+    _registerModule(_modules, 'Extensions/SeriesLabel/SeriesLabel.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Chart/Chart.js'], _modules['Core/Templating.js'], _modules['Core/Defaults.js'], _modules['Extensions/SeriesLabel/SeriesLabelDefaults.js'], _modules['Extensions/SeriesLabel/SeriesLabelUtilities.js'], _modules['Core/Utilities.js']], function (A, Chart, T, D, SeriesLabelDefaults, SLU, U) {
         /* *
          *
          *  (c) 2009-2021 Torstein Honsi
@@ -266,7 +268,7 @@
             return to.concat(ar || Array.prototype.slice.call(from));
         };
         var animObject = A.animObject;
-        var format = FU.format;
+        var format = T.format;
         var setOptions = D.setOptions;
         var boxIntersectLine = SLU.boxIntersectLine, intersectRect = SLU.intersectRect;
         var addEvent = U.addEvent, extend = U.extend, fireEvent = U.fireEvent, isNumber = U.isNumber, pick = U.pick, syncTimeout = U.syncTimeout;
@@ -275,7 +277,7 @@
          *  Constants
          *
          * */
-        var composedClasses = [];
+        var composedMembers = [];
         var labelDistance = 3;
         /* *
          *
@@ -395,18 +397,15 @@
          * @private
          */
         function compose(ChartClass, SVGRendererClass) {
-            if (composedClasses.indexOf(ChartClass) === -1) {
-                composedClasses.push(ChartClass);
+            if (U.pushUnique(composedMembers, ChartClass)) {
                 // Leave both events, we handle animation differently (#9815)
                 addEvent(Chart, 'load', onChartRedraw);
                 addEvent(Chart, 'redraw', onChartRedraw);
             }
-            if (composedClasses.indexOf(SVGRendererClass) === -1) {
-                composedClasses.push(SVGRendererClass);
+            if (U.pushUnique(composedMembers, SVGRendererClass)) {
                 SVGRendererClass.prototype.symbols.connector = symbolConnector;
             }
-            if (composedClasses.indexOf(setOptions) === -1) {
-                composedClasses.push(setOptions);
+            if (U.pushUnique(composedMembers, setOptions)) {
                 setOptions({ plotOptions: { series: { label: SeriesLabelDefaults } } });
             }
         }
@@ -723,7 +722,7 @@
                 len = points.length;
                 var last = void 0;
                 for (i = 0; i < len; i += 1) {
-                    var point = points[i], plotX = point.plotX, plotY = point.plotY;
+                    var point = points[i], plotX = point.plotX, plotY = point.plotY, plotHigh = point.plotHigh;
                     if (isNumber(plotX) && isNumber(plotY)) {
                         var ctlPoint = {
                             plotX: plotX,
@@ -734,7 +733,12 @@
                         };
                         if (onArea) {
                             // Vertically centered inside area
-                            ctlPoint.chartCenterY = paneTop + (plotY + pick(point.yBottom, translatedThreshold)) / 2;
+                            if (plotHigh) {
+                                ctlPoint.plotY = plotHigh;
+                                ctlPoint.chartY = paneTop + plotHigh;
+                            }
+                            ctlPoint.chartCenterY = paneTop + ((plotHigh ? plotHigh : plotY) +
+                                pick(point.yBottom, translatedThreshold)) / 2;
                         }
                         // Add interpolated points
                         if (last) {

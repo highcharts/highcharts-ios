@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -128,15 +128,31 @@
         var WilliamsRIndicator = /** @class */ (function (_super) {
             __extends(WilliamsRIndicator, _super);
             function WilliamsRIndicator() {
+                /* *
+                 *
+                 *  Static Properties
+                 *
+                 * */
                 var _this = _super !== null && _super.apply(this, arguments) || this;
+                /* *
+                 *
+                 *  Properties
+                 *
+                 * */
                 _this.data = void 0;
                 _this.options = void 0;
                 _this.points = void 0;
                 return _this;
             }
+            /* *
+             *
+             *  Functions
+             *
+             * */
             WilliamsRIndicator.prototype.getValues = function (series, params) {
                 var period = params.period, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, WR = [], // 0- date, 1- Williams %R
-                xData = [], yData = [], slicedY, close = 3, low = 2, high = 1, extremes, R, HH, // Highest high value in period
+                xData = [], yData = [], close = 3, low = 2, high = 1;
+                var slicedY, extremes, R, HH, // Highest high value in period
                 LL, // Lowest low value in period
                 CC, // Current close value
                 i;

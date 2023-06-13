@@ -14,17 +14,18 @@
 @interface HIAttributes: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSNumber *startOffset;
-@property(nonatomic, readwrite) NSNumber *refX;
-@property(nonatomic, readwrite) NSNumber *markerWidth;
-@property(nonatomic, readwrite) NSNumber *refY;
-@property(nonatomic, readwrite) NSString *id;
-@property(nonatomic, readwrite) NSNumber *markerHeight;
 /**
 Text path shift along its y-axis.
 
 **Defaults to** `5`.
 */
 @property(nonatomic, readwrite) HISVGAttributes *dy;
+@property(nonatomic, readwrite) NSNumber *refX;
+@property(nonatomic, readwrite) NSNumber *markerWidth;
+@property(nonatomic, readwrite) NSNumber *refY;
+@property(nonatomic, readwrite) NSString *id;
+@property(nonatomic, readwrite) NSNumber *markerHeight;
+@property(nonatomic, readwrite) NSString *textAnchor;
 @property(nonatomic, readwrite) NSNumber *zIndex;
 
 -(NSDictionary *)getParams;

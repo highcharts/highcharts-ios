@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v10.3.3 (2023-01-20)
+ * @license Highstock JS v11.1.0 (2023-06-05)
  *
  * HeikinAshi series type for Highcharts Stock
  *
@@ -318,12 +318,10 @@
                     _args[_i - 2] = arguments[_i];
                 }
                 CandlestickSeries.compose(SeriesClass);
-                if (composedMembers.indexOf(AxisClass) === -1) {
-                    composedMembers.push(AxisClass);
+                if (U.pushUnique(composedMembers, AxisClass)) {
                     addEvent(AxisClass, 'postProcessData', onAxisPostProcessData);
                 }
-                if (composedMembers.indexOf(HeikinAshiSeries) === -1) {
-                    composedMembers.push(HeikinAshiSeries);
+                if (U.pushUnique(composedMembers, HeikinAshiSeries)) {
                     addEvent(HeikinAshiSeries, 'afterTranslate', onHeikinAshiSeriesAfterTranslate);
                     addEvent(HeikinAshiSeries, 'updatedData', onHeikinAshiSeriesUpdatedData);
                 }

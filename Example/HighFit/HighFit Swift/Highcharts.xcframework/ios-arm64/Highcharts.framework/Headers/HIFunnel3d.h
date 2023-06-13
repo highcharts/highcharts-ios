@@ -118,7 +118,9 @@ Padding between each column or bar, in x axis units.
 */
 @property(nonatomic, readwrite) NSNumber *pointPadding;
 /**
-The corner radius of the border surrounding each column or bar.
+The corner radius of the border surrounding each column or bar. A number signifies pixels. A percentage string, like for example `50%`, signifies a relative size. For columns this is relative to the column width, for pies it is relative to the radius and the inner radius.
+
+**Defaults to** `3`.
 
 **Try it**
 

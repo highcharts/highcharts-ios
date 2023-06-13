@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v10.3.3 (2023-01-20)
+ * @license Highcharts JS v11.1.0 (2023-06-05)
  *
  * Variable Pie module for Highcharts
  *
@@ -275,7 +275,7 @@
                             y: positions[1] + pointRadiusY +
                                 Math.sin(angle) * point.labelDistance
                         },
-                        'final': {
+                        computed: {
                         // used for generating connector path -
                         // initialized later in drawDataLabels function
                         // x: undefined,

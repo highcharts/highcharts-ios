@@ -36,7 +36,7 @@
  *
  * @private
  */
-var NetworkgraphSeriesDefaults = {
+const NetworkgraphSeriesDefaults = {
     stickyTracking: false,
     /**
      * @ignore-option
@@ -173,6 +173,10 @@ var NetworkgraphSeriesDefaults = {
         },
         style: {
             transition: 'opacity 2000ms'
+        },
+        defer: true,
+        animation: {
+            defer: 1000
         }
     },
     /**
@@ -404,6 +408,13 @@ export default NetworkgraphSeriesDefaults;
  *
  * */
 /**
+ * Fires after the simulation is ended and the layout is stable.
+ *
+ * @type      {Highcharts.NetworkgraphAfterSimulationCallbackFunction}
+ * @product   highcharts
+ * @apioption series.networkgraph.events.afterSimulation
+ */
+/**
  * A `networkgraph` series. If the [type](#series.networkgraph.type) option is
  * not specified, it is inherited from [chart.type](#chart.type).
  *
@@ -535,6 +546,12 @@ export default NetworkgraphSeriesDefaults;
  * @type      {number}
  * @product   highcharts
  * @apioption series.networkgraph.nodes.mass
+ */
+/**
+ * Options for the node markers.
+ *
+ * @extends   plotOptions.networkgraph.marker
+ * @apioption series.networkgraph.nodes.marker
  */
 /**
  * Individual data label for each node. The options are the same as

@@ -19,7 +19,7 @@ Allow panning in a chart. Best used with `panKey` to combine zooming and panning
 @interface HIPanning: HIChartsJSONSerializable
 
 /**
-Decides in what dimensions the user can pan the chart. Can be one of `x`, `y`, or `xy`.
+Decides in what dimensions the user can pan the chart. Can be one of `x`, `y`, or `xy`. When this option is set to `y` or `xy`, `yAxis.startOnTick` and `yAxis.endOnTick` are overwritten to `false`.
 
 **Accepted values:** `["x", "y", "xy"]`.
 
