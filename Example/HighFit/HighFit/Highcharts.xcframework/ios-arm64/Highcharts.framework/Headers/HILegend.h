@@ -106,6 +106,11 @@ The pixel width of the legend item symbol. When the `squareSymbol` option is set
 Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the legend item texts. Prior to 4.1.7, when using HTML, `legend.navigation` was disabled.
 
 **Defaults to** `false`.
+
+**Try it**
+
+* [Legend with vertical scrollable extension](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/scrollable-vertical/)
+* [Legend with horizontal scrollable extension](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/scrollable-horizontal/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
@@ -269,6 +274,11 @@ In a legend with horizontal layout, the itemDistance defines the pixel distance 
 @property(nonatomic, readwrite) NSNumber *itemDistance;
 /**
 Options for the paging or navigation appearing when the legend is overflown. Navigation works well on screen, but not in static exported images. One way of working around that is to [increase the chart height in export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation-enabled-false/).
+
+**Try it**
+
+* [Legend with vertical scrollable extension](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/scrollable-vertical/)
+* [Legend with horizontal scrollable extension](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/scrollable-horizontal/)
 */
 @property(nonatomic, readwrite) HINavigation *navigation;
 /**

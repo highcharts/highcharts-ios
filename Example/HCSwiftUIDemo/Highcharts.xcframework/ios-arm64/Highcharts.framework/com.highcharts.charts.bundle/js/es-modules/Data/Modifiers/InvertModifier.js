@@ -34,7 +34,7 @@ class InvertModifier extends DataModifier {
     /**
      * Constructs an instance of the invert modifier.
      *
-     * @param {InvertModifier.Options} [options]
+     * @param {Partial<InvertModifier.Options>} [options]
      * Options to configure the invert modifier.
      */
     constructor(options) {
@@ -222,7 +222,7 @@ class InvertModifier extends DataModifier {
  * Default options for the invert modifier.
  */
 InvertModifier.defaultOptions = {
-    modifier: 'Invert'
+    type: 'Invert'
 };
 DataModifier.registerType('Invert', InvertModifier);
 /* *

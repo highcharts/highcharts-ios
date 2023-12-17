@@ -1,3 +1,66 @@
+# Version 11.2.0
+
+## Framework:
+
+1. Upgraded the build pipeline to benefit from new language features. Bundles are now compiled to ES2020 by the TypeScript compiler (`*.src.js` files), and minified by swc (`*.js` files).
+2. Added support for multiple data labels on pie slices.
+3. Added new option, `sankey.nodeAlignment` for the Sankey series to specify which side of the chart nodes should align.
+4. Added new option, `sankey.linkColorMode`.
+5. Added feature to allow different symbols for upper/lower markers in area range and dumbbell charts. See #14024.
+6. Set the default `series.lineWidth` of line graphs to to 2px for better accessibility.
+
+## Framework bug fixes:
+
+1. Fixed #19552, treegraph was losing node parent during export.
+2. Fixed #19885, `axis.breaks` didn't work with zooming.
+3. Fixed #13240, using default data labels alignment for bubble series.
+4. Fixed #19826, Lollipop grouping didn't work correctly.
+5. Fixed #19934, CSV export was broken in Safari.
+6. Fixed #19480, added missing TypeScript definitions for `PlotLineOrBand` properties.
+7. Fixed #17820, clip rect did not take into account boosted navigator.
+8. Fixed #17014, `boostTreshold` with null point threw an error.
+9. Fixed #19762, offline export PDF documents didn't scale.
+10. Fixed #19671, treegraph was throwing an error when setting `legendSymbol` to `lineMarker`.
+11. Fixed #14108, start and end dates in exported CSV data for X-range series.
+12. Fixed #19744, series' `clip` option was not working in polar charts.
+13. Fixed #19725, drilling between cartesian and non-cartesian series didn’t work properly.
+14. Fixed #19692, mouse wheel zoom was enabled even when general zoom was not.
+15. Fixed #19253, Offline Export did not work for boosted series.
+16. Fixed #18062, pinch to zoom didn't work on Android Mobile devices after any click on the chart.
+17. Fixed #19314, tooltip chevron was cut off when `outside` was enabled.
+18. Fixed #19616, breadcrumbs disappeared when invoking `chart.update` in sunburst and treemap.
+19. Fixed #19362, x-range series tooltip lost its correct default date and time formatting.
+20. Fixed #19148, NaN x value disabled area chart graphic elements.
+21. Fixed #19457, multiple `dataLabels` enabled/disabled threw render (console) error.
+22. Fixed #19524, treegraph links weren't dissappearing after calling `setData`.
+23. Fixed #19343, tooltip positioning on xrange points lying on shifted axes.
+24. Fixed #19368, `TreeGraph` chart displayed extra node expander for hidden child when levels collapsed. Also fixed `collapseButton` visibility.
+25. Fixed #19341, null points could be hovered in the boost module.
+26. Fixed issue with missing points in boosted heatmap with interpolation set to true.
+27. Fixed #18988 and #17594, vertical and horizontal offsets for inverted Sankey and Organization charts didn't work correctly.
+28. Fixed #19516, read-only CSS properties weren't excluded during the export of the chart.
+29. Fixed #19217, mobile pinch on inverted charts flipped the chart.
+30. Fixed #19203, `plotOptions.series.pointStart` couldn't be updated more than once.
+31. Fixed #18815, `boostThreshold` set for one series boosted all series.
+32. Fixed #19374, disabled `keyboardNavigation` didn't remove the exit anchor.
+33. Fixed #19465, wrong property in `numberFormatter` API demo.
+34. Fixed #19412, `chart.zooming.resetZoom` position settings were overwritten by the deprecated parameter.
+35. Fixed #19110, chart's height, and `minLinkWidth` misaligned sankey links.
+36. Fixed #19178, some `yAxis` options were dissappearing after mouse wheel zoom.
+37. Fixed #19200, styles were not applied to the annotation label when `useHTML` was enabled.
+38. Fixed #19202, excluded `events.legendItemClick` from item series API.
+39. Fixed #19179, changing the crop property on annotations through `annotationOptions` in the chart config did not work.
+40. Fixed #15441, auto-scroll did not follow tooltip when navigating with keyboard while zoomed in.
+41. Fixed #17170, data labels with outline or shadow were misplaced in PDF files exported using the offline exporting module.
+42. Fixed #19002, with `a11y` enabled `<` sign was stripped, causing issues with screen readers.
+43. Fixed #19027, a regression in v11 causing the chart to redraw twice on updates that triggered a resize of the container.
+44. Fixed #19078, proximate legend did not work after updating the `legend.enabled` property.
+45. Fixed #19093, SVG `<filter>` issue with shadow enabled on line series when points had the same `x` or `y` value.
+46. Fixed #19134, color and symbol changed constantly for the same series after every drill-up.
+47. Fixed #19127, `centerInCategory` was not working for column pyramid.
+48. Fixed #19035, tooltip tap or click stopped working after pinch zoom in iOS.
+49. Fixed #19143, a regression causing incorrect series name from CSV for packed bubble series.
+
 # Version 11.1.0
 
 ## Framework:

@@ -76,47 +76,49 @@ class GoogleSheetsConnector extends DataConnector {
      * Same connector instance with modified table.
      */
     load(eventDetail) {
-        const connector = this, { dataRefreshRate, enablePolling, firstRowAsNames, googleAPIKey, googleSpreadsheetKey } = connector.options, url = GoogleSheetsConnector.buildFetchURL(googleAPIKey, googleSpreadsheetKey, connector.options);
-        // If already loaded, clear the current table
-        connector.table.deleteColumns();
+        const connector = this, converter = connector.converter, table = connector.table, { dataModifier, dataRefreshRate, enablePolling, firstRowAsNames, googleAPIKey, googleSpreadsheetKey } = connector.options, url = GoogleSheetsConnector.buildFetchURL(googleAPIKey, googleSpreadsheetKey, connector.options);
         connector.emit({
             type: 'load',
             detail: eventDetail,
-            table: connector.table,
+            table,
             url
         });
+        // If already loaded, clear the current table
+        table.deleteColumns();
         return fetch(url)
-            .then((response) => response
-            .json()
+            .then((response) => (response.json()))
             .then((json) => {
             if (isGoogleError(json)) {
                 throw new Error(json.error.message);
             }
-            connector.converter.parse({
+            converter.parse({
                 firstRowAsNames,
-                json: json
+                json
             });
-            connector.table.setColumns(connector.converter.getTable().getColumns());
+            table.setColumns(converter.getTable().getColumns());
+            return connector.setModifierOptions(dataModifier);
+        })
+            .then(() => {
             connector.emit({
                 type: 'afterLoad',
                 detail: eventDetail,
-                table: connector.table,
+                table,
                 url
             });
             // Polling
             if (enablePolling) {
                 setTimeout(() => connector.load(), Math.max(dataRefreshRate || 0, 1) * 1000);
             }
-        }))['catch']((error) => {
+            return connector;
+        })['catch']((error) => {
             connector.emit({
                 type: 'loadError',
                 detail: eventDetail,
                 error,
-                table: connector.table
+                table
             });
-            return Promise.reject(error);
-        })
-            .then(() => connector);
+            throw error;
+        });
     }
 }
 /* *

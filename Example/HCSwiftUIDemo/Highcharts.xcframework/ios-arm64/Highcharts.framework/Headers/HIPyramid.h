@@ -41,28 +41,6 @@
 @interface HIPyramid: HISeries
 
 /**
-The pyramid is reversed by default, as opposed to the funnel, which shares the layout engine, and is not reversed.
-
-**Defaults to** `True`.
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
-/**
-The pyramid neck width is zero by default, as opposed to the funnel, which shares the same layout logic.
-
-**Defaults to** `30%`.
-
-**Try it**
-
-* [Funnel demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/funnel/)
-*/
-@property(nonatomic, readwrite) NSNumber *neckWidth;
-/**
-The pyramid neck width is zero by default, as opposed to the funnel, which shares the same layout logic.
-
-**Defaults to** `25%`.
-*/
-@property(nonatomic, readwrite) NSNumber *neckHeight;
-/**
 The center of the series. By default, it is centered in the middle of the plot area, so it fills the plot area height.
 
 **Defaults to** `["50%", "50%"]`.
@@ -81,6 +59,16 @@ The corner radius of the border surrounding all points or series. A number signi
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
+A reversed funnel has the widest area down. A reversed funnel with no neck width and neck height is a pyramid.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
+/**
+The height of the neck, the lower part of the funnel. A number defines pixel width, a percentage string defines a percentage of the plot area height.
+
+**Defaults to** `25%`.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ neckHeight;
+/**
 The height of the funnel or pyramid. If it is a number it defines the pixel height, if it is a percentage string it is the percentage of the plot area height.
 
 **Defaults to** `100%`.
@@ -96,6 +84,16 @@ The width of the funnel compared to the width of the plot area, or the pixel wid
 **Defaults to** `90%`.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
+/**
+The width of the neck, the lower part of the funnel. A number defines pixel width, a percentage string defines a percentage of the plot area width.
+
+**Defaults to** `30%`.
+
+**Try it**
+
+* [Funnel demo](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/funnel/)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ neckWidth;
 /**
 Equivalent to `chart.ignoreHiddenSeries`, this option tells whether the series shall be redrawn as if the hidden point were `null`. The default value changed from `false` to `true` with Highcharts 3.0.
 

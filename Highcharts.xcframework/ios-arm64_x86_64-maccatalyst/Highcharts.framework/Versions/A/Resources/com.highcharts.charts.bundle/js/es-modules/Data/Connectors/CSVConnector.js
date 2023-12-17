@@ -64,64 +64,45 @@ class CSVConnector extends DataConnector {
      * @emits CSVConnector#afterLoad
      */
     load(eventDetail) {
-        const connector = this, converter = connector.converter, table = connector.table, { csv, csvURL } = connector.options;
-        if (csv) {
-            // If already loaded, clear the current rows
-            table.deleteRows();
-            connector.emit({
-                type: 'load',
-                csv,
-                detail: eventDetail,
-                table
-            });
-            converter.parse({ csv });
-            table.setColumns(converter.getTable().getColumns());
+        const connector = this, converter = connector.converter, table = connector.table, { csv, csvURL, dataModifier } = connector.options;
+        connector.emit({
+            type: 'load',
+            csv,
+            detail: eventDetail,
+            table
+        });
+        // If already loaded, clear the current rows
+        table.deleteRows();
+        return Promise
+            .resolve(csvURL ?
+            fetch(csvURL).then((response) => response.text()) :
+            csv || '')
+            .then((csv) => {
+            if (csv) {
+                converter.parse({ csv });
+                table.setColumns(converter.getTable().getColumns());
+            }
+            return connector
+                .setModifierOptions(dataModifier)
+                .then(() => csv);
+        })
+            .then((csv) => {
             connector.emit({
                 type: 'afterLoad',
                 csv,
                 detail: eventDetail,
                 table
             });
-        }
-        else if (csvURL) {
-            // Clear the table
-            connector.table.deleteColumns();
-            connector.emit({
-                type: 'load',
-                detail: eventDetail,
-                table: connector.table
-            });
-            return fetch(csvURL || '')
-                .then((response) => response.text().then((csv) => {
-                connector.converter.parse({ csv });
-                // On inital fetch we need to set the columns
-                connector.table.setColumns(connector.converter.getTable().getColumns());
-                connector.emit({
-                    type: 'afterLoad',
-                    csv,
-                    detail: eventDetail,
-                    table: connector.table
-                });
-            }))['catch']((error) => {
-                connector.emit({
-                    type: 'loadError',
-                    detail: eventDetail,
-                    error,
-                    table: connector.table
-                });
-                return Promise.reject(error);
-            })
-                .then(() => connector);
-        }
-        else {
+            return connector;
+        })['catch']((error) => {
             connector.emit({
                 type: 'loadError',
                 detail: eventDetail,
-                error: 'Unable to load: no CSV string or URL was provided',
+                error,
                 table
             });
-        }
-        return Promise.resolve(connector);
+            throw error;
+        });
     }
 }
 /* *
@@ -133,7 +114,8 @@ CSVConnector.defaultOptions = {
     csv: '',
     csvURL: '',
     enablePolling: false,
-    dataRefreshRate: 1
+    dataRefreshRate: 1,
+    firstRowAsNames: true
 };
 DataConnector.registerType('CSV', CSVConnector);
 /* *

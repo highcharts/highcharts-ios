@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		201EF17B1EAA1373008ACC11 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201EF1791EAA1373008ACC11 /* Fabric.framework */; };
-		201EF17C1EAA1373008ACC11 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201EF17A1EAA1373008ACC11 /* Crashlytics.framework */; };
 		341658331D67310100D6FF2A /* OptionsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 341658321D67310100D6FF2A /* OptionsProvider.m */; };
 		3424054F1D6AFBEA001CD7AF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3424054E1D6AFBEA001CD7AF /* Launch Screen.storyboard */; };
 		342CEC591D63163700661D50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CEC581D63163700661D50 /* main.m */; };
@@ -46,8 +44,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		201EF1791EAA1373008ACC11 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		201EF17A1EAA1373008ACC11 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		341658311D67310100D6FF2A /* OptionsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsProvider.h; sourceTree = "<group>"; };
 		341658321D67310100D6FF2A /* OptionsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsProvider.m; sourceTree = "<group>"; };
 		3424054E1D6AFBEA001CD7AF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -82,9 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				201EF17C1EAA1373008ACC11 /* Crashlytics.framework in Frameworks */,
 				CDE0D16525CE9B2D0055467B /* Highcharts.xcframework in Frameworks */,
-				201EF17B1EAA1373008ACC11 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				CDE0D16425CE9B2D0055467B /* Highcharts.xcframework */,
-				201EF1791EAA1373008ACC11 /* Fabric.framework */,
-				201EF17A1EAA1373008ACC11 /* Crashlytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -193,7 +185,6 @@
 				342CEC511D63163700661D50 /* Frameworks */,
 				342CEC521D63163700661D50 /* Resources */,
 				345F5D4A1D631B3A007BC569 /* Embed Frameworks */,
-				201EF1781EAA1348008ACC11 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -258,22 +249,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		201EF1781EAA1348008ACC11 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 112bef3bdec791a7739aeb94e74bf6d43edf2c0d 644f7e73deb0e81eb81b416feadaa46307ae7f9ff1e0d900ea4d034222c85505\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		342CEC501D63163700661D50 /* Sources */ = {

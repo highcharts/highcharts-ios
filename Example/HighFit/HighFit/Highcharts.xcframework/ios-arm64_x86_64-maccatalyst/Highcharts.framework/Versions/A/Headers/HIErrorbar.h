@@ -43,6 +43,8 @@
 /**
 The line width of the whiskers, the horizontal lines marking low and high values. When `null`, the general `lineWidth` applies.
 
+**Defaults to** `2`.
+
 **Try it**
 
 * [Error bar styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/error-bar-styling/)

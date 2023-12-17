@@ -169,8 +169,6 @@ An array of lines stretching across the plot area, marking a specific value on o
 /**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
 
-**Accepted values:** `["circle", "polygon"]`.
-
 **Try it**
 
 * [Polygon grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)

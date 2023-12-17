@@ -174,7 +174,7 @@ class CSVConverter extends DataConverter {
                 const headers = lines[0].split(itemDelimiter || converter.guessedItemDelimiter || ',');
                 // Remove ""s from the headers
                 for (let i = 0; i < headers.length; i++) {
-                    headers[i] = headers[i].replace(/^["']|["']$/g, '');
+                    headers[i] = headers[i].trim().replace(/^["']|["']$/g, '');
                 }
                 converter.headers = headers;
                 startRow++;
@@ -303,12 +303,10 @@ class CSVConverter extends DataConverter {
             if (c === '"') {
                 read(++i);
                 while (i < columnStr.length) {
-                    if (c === '"' && cl !== '"' && cn !== '"') {
+                    if (c === '"') {
                         break;
                     }
-                    if (c !== '"' || (c === '"' && cl !== '"')) {
-                        token += c;
-                    }
+                    token += c;
                     read(++i);
                 }
             }
@@ -432,7 +430,10 @@ class CSVConverter extends DataConverter {
 /**
  * Default options
  */
-CSVConverter.defaultOptions = Object.assign(Object.assign({}, DataConverter.defaultOptions), { lineDelimiter: '\n' });
+CSVConverter.defaultOptions = {
+    ...DataConverter.defaultOptions,
+    lineDelimiter: '\n'
+};
 /* *
  *
  *  Default Export

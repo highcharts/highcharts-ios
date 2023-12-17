@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HILowMarker.h"
 #import "HIColor.h"
 
 
@@ -45,20 +46,11 @@ Color of the line that connects the dumbbell point's values. By default it is th
 */
 @property(nonatomic, readwrite) NSString *connectorColor;
 /**
-Pixel width of the line that connects the dumbbell point's values.
+Options for the lower markers of the dumbbell-like series. When `lowMarker` is not defined, options inherit form the marker.
 
-**Defaults to** `1`.
+**Defaults to** `undefined`.
 */
-@property(nonatomic, readwrite) NSNumber *connectorWidth;
-@property(nonatomic, readwrite) NSNumber *pointPadding;
-@property(nonatomic, readwrite) NSNumber *pointRange;
-@property(nonatomic, readwrite) NSNumber *groupPadding;
-/**
-Color of the start markers in a dumbbell graph.
-
-**Defaults to** `#333333`.
-*/
-@property(nonatomic, readwrite) HIColor *lowColor;
+@property(nonatomic, readwrite) HILowMarker *lowMarker;
 /**
 A separate color for the negative part of the area. In styled mode, a negative color is set with the `.highcharts-negative` class name.
 

@@ -9,8 +9,6 @@
  * */
 'use strict';
 import ChartDefaults from './Chart/ChartDefaults.js';
-import Color from './Color/Color.js';
-const { parse: color } = Color;
 import H from './Globals.js';
 const { isTouchDevice, svg } = H;
 import Palettes from './Color/Palettes.js';
@@ -60,7 +58,7 @@ const defaultOptions = {
      *     "#2ee0ca",
      *     "#fa4b42",
      *     "#feb56a",
-     *     "#91e8e12
+     *     "#91e8e1"
      * ]
      */
     colors: Palettes.colors,
@@ -1148,6 +1146,12 @@ const defaultOptions = {
          * exported images. One way of working around that is to
          * [increase the chart height in
          * export](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/navigation-enabled-false/).
+         *
+         * @sample highcharts/legend/scrollable-vertical/
+         *         Legend with vertical scrollable extension
+         * @sample highcharts/legend/scrollable-horizontal/
+         *         Legend with horizontal scrollable extension
+         *
          */
         navigation: {
             /**
@@ -1489,6 +1493,11 @@ const defaultOptions = {
          *
          * Prior to 4.1.7, when using HTML, [legend.navigation](
          * #legend.navigation) was disabled.
+         *
+         * @sample highcharts/legend/scrollable-vertical/
+         *         Legend with vertical scrollable extension
+         * @sample highcharts/legend/scrollable-horizontal/
+         *         Legend with horizontal scrollable extension
          *
          * @type      {boolean}
          * @default   false
@@ -2174,7 +2183,7 @@ const defaultOptions = {
          *         Different shapes for header and split boxes
          *
          * @type       {Highcharts.TooltipShapeValue}
-         * @validvalue ["callout", "square"]
+         * @validvalue ["callout", "rect"]
          * @since      7.0
          */
         headerShape: 'callout',

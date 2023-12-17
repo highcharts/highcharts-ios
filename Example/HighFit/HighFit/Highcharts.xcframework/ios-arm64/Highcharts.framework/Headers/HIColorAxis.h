@@ -82,8 +82,6 @@ Color stops for the gradient of a scalar color axis. Use this in cases where a l
 /**
 Determines how to set each data class' color if no individual color is set. The default value, `tween`, computes intermediate colors between `minColor` and `maxColor`. The other possible value, `category`, pulls colors from the global or chart specific `colors` array.
 
-**Accepted values:** `["tween", "category"]`.
-
 **Defaults to** `tween`.
 */
 @property(nonatomic, readwrite) NSString *dataClassColor;
@@ -285,8 +283,6 @@ Color of the minor, secondary grid lines. In styled mode, the stroke width is gi
 @property(nonatomic, readwrite) HIColor *minorGridLineColor;
 /**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
-
-**Accepted values:** `["circle", "polygon"]`.
 
 **Try it**
 

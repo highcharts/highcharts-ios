@@ -71,6 +71,12 @@ class BaseForm {
         ['click', 'touchstart'].forEach((eventName) => {
             addEvent(closeButton, eventName, popup.closeButtonEvents.bind(popup));
         });
+        // close popup when press ESC
+        addEvent(document, 'keydown', function (event) {
+            if (event.code === 'Escape') {
+                popup.closeButtonEvents();
+            }
+        });
         return closeButton;
     }
     /**

@@ -395,7 +395,7 @@ A line series displays information as a series of data points connected by strai
 
 **Try it**
 
-* [Line chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-basic/)
+* [Line chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-chart/)
 */
 @property(nonatomic, readwrite) HILine *line;
 /**
@@ -440,7 +440,7 @@ A pie chart is a circular graphic which is divided into slices to illustrate num
 
 **Try it**
 
-* [Pie chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-basic/)
+* [Pie chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/pie-chart/)
 */
 @property(nonatomic, readwrite) HIPie *pie;
 /**

@@ -110,8 +110,6 @@ Whether bubbles should interact with their parentNode to keep them inside.
 /**
 Integration type. Available options are `'euler'` and `'verlet'`. Integration determines how forces are applied on particles. In Euler integration, force is applied direct as `newPosition += velocity;`. In Verlet integration, new position is based on a previous posittion without velocity: `newPosition += previousPosition - newPosition`. Note that different integrations give different results as forces are different. In Highcharts v7.0.x only `'euler'` integration was supported.
 
-**Accepted values:** `["euler", "verlet"]`.
-
 **Defaults to** `euler`.
 
 **Try it**
@@ -129,8 +127,6 @@ Ideal length (px) of the link between two nodes. When not defined, length is cal
 @property(nonatomic, readwrite) NSNumber *linkLength;
 /**
 Type of the algorithm used when positioning nodes.
-
-**Accepted values:** `["reingold-fruchterman"]`.
 
 **Defaults to** `reingold-fruchterman`.
 */
@@ -159,8 +155,6 @@ When `type` is set to `kmeans`, `iterations` are the number of iterations that t
 @property(nonatomic, readwrite) NSNumber *iterations;
 /**
 Approximation used to calculate repulsive forces affecting nodes. By default, when calculateing net force, nodes are compared against each other, which gives O(N^2) complexity. Using Barnes-Hut approximation, we decrease this to O(N log N), but the resulting graph will have different layout. Barnes-Hut approximation divides space into rectangles via quad tree, where forces exerted on nodes are calculated directly for nearby cells, and for all others, cells are treated as a separate node with center of mass.
-
-**Accepted values:** `["barnes-hut", "none"]`.
 
 **Defaults to** `none`.
 

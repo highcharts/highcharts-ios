@@ -52,7 +52,7 @@ Whether to draw rounded edges on the gauge. This options adds the radius of the 
 
 **Try it**
 
-* [Activity Gauge](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-activity/)
+* [Gauge showing multiple KPIs](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-multiple-kpi/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *rounded;
 /**

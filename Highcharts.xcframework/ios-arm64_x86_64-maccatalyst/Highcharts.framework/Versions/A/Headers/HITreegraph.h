@@ -51,7 +51,7 @@ Set options on specific levels. Takes precedence over series options, but not po
 
 * [Treegraph chart with level options applied](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/level-options)
 */
-@property(nonatomic, readwrite) HILevels *levels;
+@property(nonatomic, readwrite) NSArray <HILevels *> *levels;
 /**
 Options applied to collapse Button. The collape button is the small button which indicates, that the node is collapsable.
 */

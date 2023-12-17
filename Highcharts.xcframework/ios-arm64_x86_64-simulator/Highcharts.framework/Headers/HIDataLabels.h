@@ -9,8 +9,8 @@
 #import "HICSSObject.h"
 #import "HIFilter.h"
 #import "HITextPath.h"
-#import "HIParentNodeTextPath.h"
 #import "HILinkTextPath.h"
+#import "HIParentNodeTextPath.h"
 #import "HISVGAttributes.h"
 #import "HIColor.h"
 #import "HIFunction.h"
@@ -36,9 +36,7 @@ Styles for the label. The default `color` setting is `"contrast"`, which is a ps
 */
 @property(nonatomic, readwrite) HICSSObject *style;
 /**
-Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `auto`, `circular`, `parallel` and `perpendicular`. When `auto`, the best fit will be computed for the point. The `circular` option works similiar to `auto`, but uses the `textPath` feature - labels are curved, resulting in a better layout, however multiple lines and `textOutline` are not supported. The `series.rotation` option takes precedence over `rotationMode`.
-
-**Accepted values:** `["auto", "perpendicular", "parallel", "circular"]`.
+Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `circular`, `auto`, `parallel` and `perpendicular`. When `circular`, the best fit will be computed for the point, so that the label is curved around the center when there is room for it, otherwise perpendicular. The legacy `auto` option works similiar to `circular`, but instead of curving the labels they are tangent to the perimiter. The `rotation` option takes precedence over `rotationMode`.
 
 **Defaults to** `circular`.
 

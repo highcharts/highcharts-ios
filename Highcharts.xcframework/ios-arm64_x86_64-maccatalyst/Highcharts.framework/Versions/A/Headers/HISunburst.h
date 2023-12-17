@@ -11,6 +11,7 @@
 #import "HIBreadcrumbs.h"
 #import "HILevels.h"
 #import "HIColor.h"
+#import "HIBorderRadiusOptionsObject.h"
 
 
 /**
@@ -111,7 +112,7 @@ The corner radius of the border surrounding each slice. A number signifies pixel
 
 * [Column and pie with rounded border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-border-radius)
 */
-@property(nonatomic, readwrite) NSNumber *borderRadius;
+@property(nonatomic, readwrite) HIBorderRadiusOptionsObject *borderRadius;
 /**
 A series specific or series type specific color set to use instead of the global `colors`.
 

@@ -10,7 +10,7 @@
 
 
 /**
-The mouse wheel zoom is a feature included in Highcharts Stock, but is also available for Highcharts Core as a module. Zooming with the mouse wheel is enabled by default. It can be disabled by setting this option to `false`.
+The mouse wheel zoom is a feature included in Highcharts Stock, but is also available for Highcharts Core as a module. Zooming with the mouse wheel is enabled by default in Highcharts Stock. In Highcharts Core it is enabled if `chart.zooming.type` is set. It can be disabled by setting this option to `false`.
 
 **Try it**
 
@@ -19,11 +19,9 @@ The mouse wheel zoom is a feature included in Highcharts Stock, but is also avai
 @interface HIMouseWheel: HIChartsJSONSerializable
 
 /**
-Decides in what dimensions the user can zoom scrolling the wheel. Can be one of `x`, `y` or `xy`. If not specified here, it will inherit the type from `chart.zooming.type`. Note that particularly with mouse wheel in the y direction, the zoom is affected by the default `yAxis.startOnTick` and `endOnTick`) settings. In order to respect these settings, the zoom level will adjust after the user has stopped zooming. To prevent this, consider setting `startOnTick` and `endOnTick` to `false`.
+Decides in what dimensions the user can zoom scrolling the wheel. Can be one of `x`, `y` or `xy`. In Highcharts Core, if not specified here, it will inherit the type from `chart.zooming.type`. In Highcharts Stock, it defaults to `x`. Note that particularly with mouse wheel in the y direction, the zoom is affected by the default `yAxis.startOnTick` and `endOnTick`) settings. In order to respect these settings, the zoom level will adjust after the user has stopped zooming. To prevent this, consider setting `startOnTick` and `endOnTick` to `false`.
 
-**Accepted values:** `["x", "y", "xy"]`.
-
-**Defaults to** `x`.
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *type;
 /**

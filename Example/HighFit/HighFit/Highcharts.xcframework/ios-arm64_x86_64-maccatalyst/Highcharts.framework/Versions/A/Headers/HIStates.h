@@ -6,8 +6,8 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIInactive.h"
 #import "HIHover.h"
+#import "HIInactive.h"
 #import "HISelect.h"
 #import "HINormal.h"
 
@@ -17,11 +17,11 @@ States for a single point marker.
 */
 @interface HIStates: HIChartsJSONSerializable
 
+@property(nonatomic, readwrite) HIHover *hover;
 /**
 The opposite state of a hover for a single point node/link.
 */
 @property(nonatomic, readwrite) HIInactive *inactive;
-@property(nonatomic, readwrite) HIHover *hover;
 @property(nonatomic, readwrite) HISelect *select;
 /**
 The normal state of a series, or for point items in column, pie and similar series. Currently only used for setting animation when returning to normal state from hover.

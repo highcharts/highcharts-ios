@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HILowMarker.h"
 #import "HIColor.h"
 
 
@@ -59,6 +60,12 @@ Fill opacity for the area. When you set an explicit `fillColor`, the `fillOpacit
 * [Automatic fill color and fill opacity of 0.1](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillopacity/)
 */
 @property(nonatomic, readwrite) NSNumber *fillOpacity;
+/**
+Options for the lower markers of the arearange-like series. When `lowMarker` is not defined, options inherit form the marker.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) HILowMarker *lowMarker;
 /**
 Whether the whole area or just the line should respond to mouseover tooltips and other mouse or touch events.
 

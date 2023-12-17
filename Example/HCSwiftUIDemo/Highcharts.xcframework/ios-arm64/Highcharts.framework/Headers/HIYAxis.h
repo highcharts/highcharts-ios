@@ -382,8 +382,6 @@ Color of the minor, secondary grid lines. In styled mode, the stroke width is gi
 /**
 Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either `circle` or `polygon`. Since v8.0.0 this option is also applicable for X axis (inverted polar).
 
-**Accepted values:** `["circle", "polygon"]`.
-
 **Try it**
 
 * [Polygon grid lines](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)

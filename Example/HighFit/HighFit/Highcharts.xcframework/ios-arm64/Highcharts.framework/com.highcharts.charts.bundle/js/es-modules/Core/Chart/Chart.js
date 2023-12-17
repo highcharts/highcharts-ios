@@ -172,7 +172,14 @@ class Chart {
      */
     setZoomOptions() {
         const chart = this, options = chart.options.chart, zooming = options.zooming;
-        chart.zooming = Object.assign(Object.assign({}, zooming), { type: pick(options.zoomType, zooming.type), key: pick(options.zoomKey, zooming.key), pinchType: pick(options.pinchType, zooming.pinchType), singleTouch: pick(options.zoomBySingleTouch, zooming.singleTouch, false), resetButton: merge(zooming.resetButton, options.resetZoomButton) });
+        chart.zooming = {
+            ...zooming,
+            type: pick(options.zoomType, zooming.type),
+            key: pick(options.zoomKey, zooming.key),
+            pinchType: pick(options.pinchType, zooming.pinchType),
+            singleTouch: pick(options.zoomBySingleTouch, zooming.singleTouch, false),
+            resetButton: merge(zooming.resetButton, options.resetZoomButton)
+        };
     }
     /**
      * Overridable function that initializes the chart. The constructor's
@@ -543,7 +550,7 @@ class Chart {
                     redrawLegend = true;
                 }
                 else if (legendUserOptions &&
-                    (legendUserOptions.labelFormatter ||
+                    (!!legendUserOptions.labelFormatter ||
                         legendUserOptions.labelFormat)) {
                     redrawLegend = true; // #2165
                 }
@@ -1204,13 +1211,12 @@ class Chart {
      *        internally as a response to window resize.
      */
     reflow(e) {
-        const chart = this, optionsChart = chart.options.chart, hasUserSize = (defined(optionsChart.width) &&
-            defined(optionsChart.height)), oldBox = chart.containerBox, containerBox = chart.getContainerBox();
+        const chart = this, oldBox = chart.containerBox, containerBox = chart.getContainerBox();
         delete chart.pointer.chartPosition;
         // Width and height checks for display:none. Target is doc in Opera
         // and win in Firefox, Chrome and IE9.
-        if (!hasUserSize &&
-            !chart.isPrinting &&
+        if (!chart.isPrinting &&
+            !chart.isResizing &&
             oldBox &&
             // When fired by resize observer inside hidden container
             containerBox.width) {
@@ -1240,8 +1246,7 @@ class Chart {
     setReflow() {
         const chart = this;
         const runReflow = (e) => {
-            var _a;
-            if (((_a = chart.options) === null || _a === void 0 ? void 0 : _a.chart.reflow) && chart.hasLoaded) {
+            if (chart.options?.chart.reflow && chart.hasLoaded) {
                 chart.reflow(e);
             }
         };
@@ -1326,10 +1331,11 @@ class Chart {
         chart.oldChartHeight = null;
         fireEvent(chart, 'resize');
         // Fire endResize and set isResizing back. If animation is disabled,
-        // fire without delay
-        syncTimeout(function () {
+        // fire without delay, but in a new thread to avoid triggering the
+        // resize observer (#19027).
+        setTimeout(() => {
             if (chart) {
-                fireEvent(chart, 'endResize', null, function () {
+                fireEvent(chart, 'endResize', void 0, () => {
                     chart.isResizing -= 1;
                 });
             }
@@ -2529,14 +2535,20 @@ class Chart {
             });
             pointer.initiated = false; // #6804
         }
-        else { // else, zoom in on all axes
+        else { // Else, zoom in on all axes
             event.xAxis.concat(event.yAxis).forEach(function (axisData) {
-                const axis = axisData.axis, isXAxis = axis.isXAxis;
-                // don't zoom more than minRange
+                const axis = axisData.axis, isXAxis = axis.isXAxis, { hasPinched, mouseDownX, mouseDownY } = pointer;
+                // Don't zoom more than minRange
                 if (pointer[isXAxis ? 'zoomX' : 'zoomY'] &&
-                    (defined(pointer.mouseDownX) &&
-                        defined(pointer.mouseDownY) &&
-                        chart.isInsidePlot(pointer.mouseDownX - chart.plotLeft, pointer.mouseDownY - chart.plotTop, { axis })) || !defined(chart.inverted ? pointer.mouseDownX : pointer.mouseDownY)) {
+                    (defined(mouseDownX) &&
+                        defined(mouseDownY) &&
+                        chart.isInsidePlot(mouseDownX - chart.plotLeft, mouseDownY - chart.plotTop, {
+                            axis,
+                            // Ignore touch positions if pinched on mobile
+                            // #18062
+                            ignoreX: hasPinched,
+                            ignoreY: hasPinched
+                        })) || !defined(chart.inverted ? mouseDownX : mouseDownY)) {
                     hasZoomed = axis.zoom(axisData.min, axisData.max);
                     if (axis.displayBtn) {
                         displayButton = true;

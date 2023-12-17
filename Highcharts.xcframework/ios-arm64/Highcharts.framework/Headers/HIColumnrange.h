@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HIBorderRadius.h"
 #import "HIColor.h"
 
 
@@ -41,6 +42,17 @@
 @interface HIColumnrange: HISeries
 
 /**
+The corner radius of the border surrounding each column or bar. A number signifies pixels. A percentage string, like for example `50%`, signifies a relative size. For columns this is relative to the column width, for pies it is relative to the radius and the inner radius.
+
+**Defaults to** `3`.
+
+**Try it**
+
+* [Rounded columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderradius/)
+* [Column and pie with rounded border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-border-radius)
+*/
+@property(nonatomic, readwrite) HIBorderRadius *borderRadius;
+/**
 The X axis range that each point is valid for. This determines the width of the column. On a categorized axis, the range will be 1 by default (one category unit). On linear and datetime axes, the range will be computed as the distance between the two closest data points. The default `null` means it is computed automatically, but this option can be used to override the automatic value. This option is set by default to 1 if data sorting is enabled.
 
 **Try it**
@@ -60,14 +72,6 @@ Padding between each column or bar, in x axis units.
 * [0 for tightly packed columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointpadding-none/)
 */
 @property(nonatomic, readwrite) NSNumber *pointPadding;
-/**
-The corner radius of the border surrounding each column or bar.
-
-**Try it**
-
-* [Rounded columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderradius/)
-*/
-@property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
 The minimal height for a column or width for a bar. By default, 0 values are not shown. To visualize a 0 (or close to zero) point, set the minimal point length to a pixel value like 3\. In stacked column charts, minPointLength might not be respected for tightly packed values.
 

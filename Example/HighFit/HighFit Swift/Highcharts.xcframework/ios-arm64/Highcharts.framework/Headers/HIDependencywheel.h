@@ -124,6 +124,17 @@ Opacity for the links between nodes in the sankey diagram.
 */
 @property(nonatomic, readwrite) NSNumber *linkOpacity;
 /**
+Determines color mode for sankey links. Available options: - `from` color of the sankey link will be the same as the 'from node' - `gradient` color of the sankey link will be set to gradient between colors of 'from node' and 'to node' - `to` color of the sankey link will be same as the 'to node'.
+
+**Defaults to** `from`.
+
+**Try it**
+
+* [Vertical sankey diagram with gradients](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/vertical-sankey)
+* [Sankey diagram with gradients and explanation](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-sankey/link-color-mode)
+*/
+@property(nonatomic, readwrite) NSString *linkColorMode;
+/**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;

@@ -572,7 +572,8 @@ const ChartDefaults = {
     spacing: [10, 10, 15, 10],
     /**
      * The button that appears after a selection zoom, allowing the user
-     * to reset zoom.
+     * to reset zoom. This option is deprecated in favor of
+     * [zooming](#chart.zooming).
      *
      * @since      2.2
      * @deprecated 10.2.1
@@ -588,7 +589,6 @@ const ChartDefaults = {
          *         Relative to the chart
          *
          * @type      {Highcharts.ButtonRelativeToValue}
-         * @default   plot
          * @apioption chart.resetZoomButton.relativeTo
          */
         /**
@@ -606,10 +606,12 @@ const ChartDefaults = {
          * @type {Highcharts.SVGAttributes}
          */
         theme: {
-            /**
-             * @internal
-             */
-            zIndex: 6
+        /**
+         * zIndex of the button.
+         *
+         * @type {number}
+         * @apioption chart.resetZoomButton.theme.zIndex
+         */
         },
         /**
          * The position of the button.
@@ -624,25 +626,30 @@ const ChartDefaults = {
          * @type {Highcharts.AlignObject}
          */
         position: {
-            /**
-             * The horizontal alignment of the button.
-             */
-            align: 'right',
-            /**
-             * The horizontal offset of the button.
-             */
-            x: -10,
-            /**
-             * The vertical alignment of the button.
-             *
-             * @type      {Highcharts.VerticalAlignValue}
-             * @default   top
-             * @apioption chart.resetZoomButton.position.verticalAlign
-             */
-            /**
-             * The vertical offset of the button.
-             */
-            y: 10
+        /**
+         * The horizontal alignment of the button.
+         *
+         * @type {number}
+         * @apioption chart.resetZoomButton.position.align
+         */
+        /**
+         * The horizontal offset of the button.
+         *
+         * @type {number}
+         * @apioption chart.resetZoomButton.position.x
+         */
+        /**
+         * The vertical alignment of the button.
+         *
+         * @type      {Highcharts.VerticalAlignValue}
+         * @apioption chart.resetZoomButton.position.verticalAlign
+         */
+        /**
+         * The vertical offset of the button.
+         *
+         * @type {number}
+         * @apioption chart.resetZoomButton.position.y
+         */
         }
     },
     /**

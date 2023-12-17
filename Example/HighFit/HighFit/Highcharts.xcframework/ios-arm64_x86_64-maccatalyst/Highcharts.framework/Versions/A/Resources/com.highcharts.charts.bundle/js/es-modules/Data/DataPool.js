@@ -22,7 +22,6 @@ import U from '../Core/Utilities.js';
 /**
  * Data pool to load connectors on-demand.
  *
- * @private
  * @class
  * @name Data.DataPool
  *
@@ -37,8 +36,9 @@ class DataPool {
      * */
     constructor(options = DataPoolDefaults) {
         options.connectors = (options.connectors || []);
-        this.options = options;
         this.connectors = {};
+        this.options = options;
+        this.waiting = {};
     }
     /* *
      *
@@ -69,31 +69,68 @@ class DataPool {
      */
     getConnector(name) {
         const connector = this.connectors[name];
+        // already loaded
         if (connector) {
-            // already loaded
             return Promise.resolve(connector);
         }
-        const connectorOptions = this.getConnectorOptions(name);
-        if (connectorOptions) {
-            return this.loadConnector(connectorOptions);
+        let waitingList = this.waiting[name];
+        // start loading
+        if (!waitingList) {
+            waitingList = this.waiting[name] = [];
+            const connectorOptions = this.getConnectorOptions(name);
+            if (!connectorOptions) {
+                throw new Error(`Connector not found. (${name})`);
+            }
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            this
+                .loadConnector(connectorOptions)
+                .then((connector) => {
+                delete this.waiting[name];
+                for (let i = 0, iEnd = waitingList.length; i < iEnd; ++i) {
+                    waitingList[i][0](connector);
+                }
+            })['catch']((error) => {
+                delete this.waiting[name];
+                for (let i = 0, iEnd = waitingList.length; i < iEnd; ++i) {
+                    waitingList[i][1](error);
+                }
+            });
         }
-        throw new Error(`Connector not found. (${name})`);
+        // add request to waiting list
+        return new Promise((resolve, reject) => {
+            waitingList.push([resolve, reject]);
+        });
+    }
+    /**
+     * Returns the names of all connectors.
+     *
+     * @private
+     *
+     * @return {Array<string>}
+     * Names of all connectors.
+     */
+    getConnectorIds() {
+        const connectors = this.options.connectors, connectorIds = [];
+        for (let i = 0, iEnd = connectors.length; i < iEnd; ++i) {
+            connectorIds.push(connectors[i].id);
+        }
+        return connectorIds;
     }
     /**
      * Loads the options of the connector.
      *
      * @private
      *
-     * @param {string} name
+     * @param {string} id
      * Name of the connector.
      *
      * @return {DataPoolConnectorOptions|undefined}
      * Returns the options of the connector, or `undefined` if not found.
      */
-    getConnectorOptions(name) {
+    getConnectorOptions(id) {
         const connectors = this.options.connectors;
         for (let i = 0, iEnd = connectors.length; i < iEnd; ++i) {
-            if (connectors[i].name === name) {
+            if (connectors[i].id === id) {
                 return connectors[i];
             }
         }
@@ -103,15 +140,15 @@ class DataPool {
      *
      * @function Data.DataPool#getConnectorTable
      *
-     * @param {string} name
+     * @param {string} connectorId
      * Name of the connector.
      *
      * @return {Promise<Data.DataTable>}
      * Returns the connector table.
      */
-    getConnectorTable(name) {
+    getConnectorTable(connectorId) {
         return this
-            .getConnector(name)
+            .getConnector(connectorId)
             .then((connector) => connector.table);
     }
     /**
@@ -136,9 +173,11 @@ class DataPool {
                 throw new Error(`Connector type not found. (${options.type})`);
             }
             const connector = new ConnectorClass(options.options);
-            this.connectors[options.name] = connector;
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            connector.load().then((connector) => {
+            connector
+                .load()
+                .then((connector) => {
+                this.connectors[options.id] = connector;
                 this.emit({
                     type: 'afterLoad',
                     options
@@ -177,7 +216,7 @@ class DataPool {
             options
         });
         for (let i = 0, iEnd = connectors.length; i < iEnd; ++i) {
-            if (connectors[i].name === options.name) {
+            if (connectors[i].id === options.id) {
                 connectors.splice(i, 1);
                 break;
             }
@@ -189,6 +228,16 @@ class DataPool {
         });
     }
 }
+/* *
+ *
+ *  Static Properties
+ *
+ * */
+/**
+ * Semantic version string of the DataPool class.
+ * @internal
+ */
+DataPool.version = '1.0.0';
 /* *
  *
  *  Default Export

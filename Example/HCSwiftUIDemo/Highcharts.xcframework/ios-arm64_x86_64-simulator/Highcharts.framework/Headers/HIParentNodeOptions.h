@@ -70,8 +70,6 @@ Friction applied on forces to prevent nodes rushing to fast to the desired posit
 /**
 Integration type. Available options are `'euler'` and `'verlet'`. Integration determines how forces are applied on particles. In Euler integration, force is applied direct as `newPosition += velocity;`. In Verlet integration, new position is based on a previous posittion without velocity: `newPosition += previousPosition - newPosition`. Note that different integrations give different results as forces are different. In Highcharts v7.0.x only `'euler'` integration was supported.
 
-**Accepted values:** `["euler", "verlet"]`.
-
 **Defaults to** `euler`.
 
 **Try it**
@@ -89,8 +87,6 @@ Ideal length (px) of the link between two nodes. When not defined, length is cal
 @property(nonatomic, readwrite) NSNumber *linkLength;
 /**
 Type of the algorithm used when positioning nodes.
-
-**Accepted values:** `["reingold-fruchterman"]`.
 
 **Defaults to** `reingold-fruchterman`.
 */

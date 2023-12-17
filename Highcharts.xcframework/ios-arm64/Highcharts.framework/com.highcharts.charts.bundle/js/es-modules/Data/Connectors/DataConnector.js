@@ -13,6 +13,7 @@
  *
  * */
 'use strict';
+import DataModifier from '../Modifiers/DataModifier.js';
 import DataTable from '../DataTable.js';
 import U from '../../Core/Utilities.js';
 const { addEvent, fireEvent, merge, pick } = U;
@@ -169,8 +170,17 @@ class DataConnector {
             connector.describeColumn(columnNames[i], { index: i });
         }
     }
+    setModifierOptions(modifierOptions) {
+        const ModifierClass = (modifierOptions &&
+            DataModifier.types[modifierOptions.type]);
+        return this.table
+            .setModifier(ModifierClass ?
+            new ModifierClass(modifierOptions) :
+            void 0)
+            .then(() => this);
+    }
     /**
-     * Starts polling new data after the specific timespan in milliseconds.
+     * Starts polling new data after the specific time span in milliseconds.
      *
      * @param {number} refreshTime
      * Refresh time in milliseconds between polls.

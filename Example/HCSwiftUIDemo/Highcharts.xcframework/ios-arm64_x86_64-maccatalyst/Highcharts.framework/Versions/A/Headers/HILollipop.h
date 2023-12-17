@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HILowMarker.h"
 #import "HIColor.h"
 
 
@@ -40,19 +41,28 @@
  */
 @interface HILollipop: HISeries
 
+/**
+Whether to group non-stacked lollipop points or to let them render independent of each other. Non-grouped lollipop points will be laid out individually and overlap each other.
+
+**Defaults to** `true`.
+
+**Try it**
+
+* [Multiple lollipop series with grouping](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-lollipop/enabled-grouping/)
+* [Multiple lollipop series with disabled grouping](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-lollipop/disabled-grouping/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *grouping;
 @property(nonatomic, readwrite) NSNumber *pointRange;
 /**
 Color of the line that connects the dumbbell point's values. By default it is the series' color.
 */
 @property(nonatomic, readwrite) NSString *connectorColor;
 /**
-Pixel width of the line that connects the dumbbell point's values.
+Options for the lower markers of the dumbbell-like series. When `lowMarker` is not defined, options inherit form the marker.
 
-**Defaults to** `1`.
+**Defaults to** `undefined`.
 */
-@property(nonatomic, readwrite) NSNumber *connectorWidth;
-@property(nonatomic, readwrite) NSNumber *pointPadding;
-@property(nonatomic, readwrite) NSNumber *groupPadding;
+@property(nonatomic, readwrite) HILowMarker *lowMarker;
 /**
 A separate color for the negative part of the area. In styled mode, a negative color is set with the `.highcharts-negative` class name.
 

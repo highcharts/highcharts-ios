@@ -17,15 +17,11 @@ Options for the drag handles available in column series.
 @interface HIDragHandle: HIChartsJSONSerializable
 
 /**
-The mouse cursor to use for the drag handles. By default this is intelligently switching between `ew-resize` and `ns-resize` depending on the direction the point is being dragged.
-*/
-@property(nonatomic, readwrite) NSString *cursor;
-/**
-The z index for the drag handles.
+The class name of the drag handles. Defaults to `highcharts-drag-handle`.
 
-**Defaults to** `901`.
+**Defaults to** `highcharts-drag-handle`.
 */
-@property(nonatomic, readwrite) NSNumber *zIndex;
+@property(nonatomic, readwrite) NSString *className;
 /**
 The fill color of the drag handles.
 
@@ -33,15 +29,17 @@ The fill color of the drag handles.
 */
 @property(nonatomic, readwrite) HIColor *color;
 /**
-The class name of the drag handles. Defaults to `highcharts-drag-handle`.
+The line width for the drag handles.
 
-**Defaults to** `highcharts-drag-handle`.
+**Defaults to** `1`.
 */
-@property(nonatomic, readwrite) NSString *className;
+@property(nonatomic, readwrite) NSNumber *lineWidth;
 /**
-Function to define the SVG path to use for the drag handles. Takes the point as argument. Should return an SVG path in array format. The SVG path is automatically positioned on the point.
+The z index for the drag handles.
+
+**Defaults to** `901`.
 */
-@property(nonatomic, readwrite) HIFunction *pathFormatter;
+@property(nonatomic, readwrite) NSNumber *zIndex;
 /**
 The line color of the drag handles.
 
@@ -49,11 +47,13 @@ The line color of the drag handles.
 */
 @property(nonatomic, readwrite) HIColor *lineColor;
 /**
-The line width for the drag handles.
-
-**Defaults to** `1`.
+The mouse cursor to use for the drag handles. By default this is intelligently switching between `ew-resize` and `ns-resize` depending on the direction the point is being dragged.
 */
-@property(nonatomic, readwrite) NSNumber *lineWidth;
+@property(nonatomic, readwrite) NSString *cursor;
+/**
+Function to define the SVG path to use for the drag handles. Takes the point as argument. Should return an SVG path in array format. The SVG path is automatically positioned on the point.
+*/
+@property(nonatomic, readwrite) HIFunction *pathFormatter;
 
 -(NSDictionary *)getParams;
 

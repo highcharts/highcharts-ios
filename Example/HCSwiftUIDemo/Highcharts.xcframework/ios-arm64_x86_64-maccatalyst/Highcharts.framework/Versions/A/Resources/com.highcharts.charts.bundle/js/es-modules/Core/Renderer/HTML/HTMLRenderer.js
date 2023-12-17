@@ -156,7 +156,7 @@ class HTMLRenderer extends SVGRenderer {
                     // Ensure dynamically updating position when any parent
                     // is translated
                     parents.reverse().forEach(function (parentGroup) {
-                        const cls = attr(parentGroup.element, 'class');
+                        const cls = attr(parentGroup.element, 'class'), parentProtoCss = parentGroup.css;
                         /**
                          * Common translate setter for X and Y on the HTML
                          * group. Reverted the fix for #6957 du to
@@ -207,7 +207,10 @@ class HTMLRenderer extends SVGRenderer {
                             // updating the shadow div counterpart with the same
                             // style.
                             css: function (styles) {
-                                wrapper.css.call(parentGroup, styles);
+                                // Call the base css method. The `parentGroup`
+                                // can be either an SVGElement or an SVGLabel,
+                                // in which the css method is extended (#19200).
+                                parentProtoCss.call(parentGroup, styles);
                                 [
                                     // #6794
                                     'cursor',

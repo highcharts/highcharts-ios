@@ -33,7 +33,7 @@ class ChainModifier extends DataModifier {
     /**
      * Constructs an instance of the modifier chain.
      *
-     * @param {DeepPartial<ChainModifier.Options>} [options]
+     * @param {Partial<ChainModifier.Options>} [options]
      * Options to configure the modifier chain.
      *
      * @param {...DataModifier} [chain]
@@ -44,10 +44,14 @@ class ChainModifier extends DataModifier {
         this.chain = chain;
         this.options = merge(ChainModifier.defaultOptions, options);
         const optionsChain = this.options.chain || [];
-        for (let i = 0, iEnd = optionsChain.length, ModifierClass; i < iEnd; ++i) {
-            ModifierClass = DataModifier.types[optionsChain[i].modifier];
+        for (let i = 0, iEnd = optionsChain.length, modifierOptions, ModifierClass; i < iEnd; ++i) {
+            modifierOptions = optionsChain[i];
+            if (!modifierOptions.type) {
+                continue;
+            }
+            ModifierClass = DataModifier.types[modifierOptions.type];
             if (ModifierClass) {
-                chain.unshift(new ModifierClass(optionsChain[i]));
+                chain.push(new ModifierClass(modifierOptions));
             }
         }
     }
@@ -113,13 +117,17 @@ class ChainModifier extends DataModifier {
         const modifiers = (this.options.reverse ?
             this.chain.slice().reverse() :
             this.chain.slice());
+        if (table.modified === table) {
+            table.modified = table.clone(false, eventDetail);
+        }
         let promiseChain = Promise.resolve(table);
         for (let i = 0, iEnd = modifiers.length; i < iEnd; ++i) {
             const modifier = modifiers[i];
             promiseChain = promiseChain.then((chainTable) => modifier.modify(chainTable.modified, eventDetail));
         }
         promiseChain = promiseChain.then((chainTable) => {
-            table.modified = chainTable.modified;
+            table.modified.deleteColumns();
+            table.modified.setColumns(chainTable.modified.getColumns());
             return table;
         });
         promiseChain = promiseChain['catch']((error) => {
@@ -313,7 +321,7 @@ class ChainModifier extends DataModifier {
  * Default option for the ordered modifier chain.
  */
 ChainModifier.defaultOptions = {
-    modifier: 'Chain'
+    type: 'Chain'
 };
 DataModifier.registerType('Chain', ChainModifier);
 /* *

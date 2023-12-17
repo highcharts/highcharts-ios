@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2022 Highsoft AS. All rights reserved.
+//  Copyright © 2023 Highsoft AS. All rights reserved.
 //
 
 #import "OptionsProvider.h"
@@ -163,7 +163,8 @@
         HIPlotOptions *plotOptions = [[HIPlotOptions alloc]init];
         plotOptions.column = [[HIColumn alloc]init];
         plotOptions.column.color = [[HIColor alloc]initWithRGBA:255 green:255 blue:255 alpha:0.6];
-        plotOptions.column.borderRadius = @2;
+        plotOptions.column.borderRadius = [[HIBorderRadiusOptionsObject alloc]init];
+        plotOptions.column.borderRadius.radius = @2;
         plotOptions.column.borderWidth = @0;
         hioptions.plotOptions = plotOptions;
         

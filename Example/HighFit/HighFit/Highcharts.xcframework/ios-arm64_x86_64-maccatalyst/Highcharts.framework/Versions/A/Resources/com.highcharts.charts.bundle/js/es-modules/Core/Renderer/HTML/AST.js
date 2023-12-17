@@ -340,6 +340,7 @@ AST.allowedAttributes = [
     'dy',
     'disabled',
     'fill',
+    'filterUnits',
     'flood-color',
     'flood-opacity',
     'height',

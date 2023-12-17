@@ -19,6 +19,7 @@ The draggable-points module allows points to be moved around or modified in the 
 * [Draggable bar](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/bar-series)
 * [Draggable bubbles](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-bubble)
 * [Draggable X range series](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
+* [Dragging disabled for specific points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/undraggable-points)
 */
 @interface HIDragDrop: HIChartsJSONSerializable
 
@@ -89,13 +90,13 @@ Set the maximum Y value the points can be moved to.
 */
 @property(nonatomic, readwrite) NSNumber *dragMaxY;
 /**
-The X precision value to drag to for this series. Set to 0 to disable. By default this is disabled, except for category axes, where the default is 1.
+The X precision value to drag to for this series. Set to 0 to disable. By default this is disabled, except for category axes, where the default is `1`.
 
 **Defaults to** `0`.
 */
 @property(nonatomic, readwrite) NSNumber *dragPrecisionX;
 /**
-The Y precision value to drag to for this series. Set to 0 to disable. By default this is disabled, except for category axes, where the default is 1.
+The Y precision value to drag to for this series. Set to 0 to disable. By default this is disabled, except for category axes, where the default is `1`.
 
 **Defaults to** `0`.
 */

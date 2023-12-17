@@ -95,48 +95,24 @@ class DataCursor {
                 e.cursor.type
             ]).join('\0');
     }
-    /**
-     * This function emits a state cursor related to a table. It will provide
-     * lasting state cursors of the table to listeners.
-     *
-     * @example
-     * ```TypeScript
-     * dataCursor.emit(myTable, {
-     *     type: 'position',
-     *     column: 'city',
-     *     row: 4,
-     *     state: 'hover',
-     * });
-     * ```
-     *
-     * @function #emitCursor
-     *
-     * @param {Data.DataTable} table
-     * The related table of the cursor.
-     *
-     * @param {Data.DataCursor.Type} cursor
-     * The state cursor to emit.
-     *
-     * @param {Event} [event]
-     * Optional event information from a related source.
-     *
-     * @param {boolean} [lasting]
-     * Whether this state cursor should be kept until it is cleared with
-     * {@link DataCursor#remitCursor}.
-     *
-     * @return {Data.DataCursor}
-     * Returns the DataCursor instance for a call chain.
-     */
-    emitCursor(table, cursor, event, lasting) {
-        const tableId = table.id, state = cursor.state, listeners = (this.listenerMap[tableId] &&
+    // Implementation
+    emitCursor(table, groupOrCursor, cursorOrEvent, eventOrLasting, lasting) {
+        const cursor = (typeof groupOrCursor === 'object' ?
+            groupOrCursor :
+            cursorOrEvent), event = (typeof eventOrLasting === 'object' ?
+            eventOrLasting :
+            cursorOrEvent), group = (typeof groupOrCursor === 'string' ?
+            groupOrCursor :
+            void 0), tableId = table.id, state = cursor.state, listeners = (this.listenerMap[tableId] &&
             this.listenerMap[tableId][state]);
+        lasting = (lasting || eventOrLasting === true);
         if (listeners) {
             const stateMap = this.stateMap[tableId] = (this.stateMap[tableId] ||
                 {});
-            let cursors = stateMap[cursor.state];
+            const cursors = stateMap[cursor.state] || [];
             if (lasting) {
-                if (!cursors) {
-                    cursors = stateMap[cursor.state] = [];
+                if (!cursors.length) {
+                    stateMap[cursor.state] = cursors;
                 }
                 if (DataCursor.getIndex(cursor, cursors) === -1) {
                     cursors.push(cursor);
@@ -144,11 +120,14 @@ class DataCursor {
             }
             const e = {
                 cursor,
-                cursors: cursors || [],
+                cursors,
                 table
             };
             if (event) {
                 e.event = event;
+            }
+            if (group) {
+                e.group = group;
             }
             const emittingRegister = this.emittingRegister, emittingTag = this.buildEmittingTag(e);
             if (emittingRegister.indexOf(emittingTag) >= 0) {
@@ -224,6 +203,16 @@ class DataCursor {
         return this;
     }
 }
+/* *
+ *
+ *  Static Properties
+ *
+ * */
+/**
+ * Semantic version string of the DataCursor class.
+ * @internal
+ */
+DataCursor.version = '1.0.0';
 /* *
  *
  *  Class Namespace
@@ -349,14 +338,17 @@ class DataCursor {
      * @private
      */
     function toRange(cursor, defaultRange) {
-        var _a, _b, _c, _d;
         if (cursor.type === 'range') {
             return cursor;
         }
         const range = {
             type: 'range',
-            firstRow: ((_b = (_a = cursor.row) !== null && _a !== void 0 ? _a : (defaultRange && defaultRange.firstRow)) !== null && _b !== void 0 ? _b : 0),
-            lastRow: ((_d = (_c = cursor.row) !== null && _c !== void 0 ? _c : (defaultRange && defaultRange.lastRow)) !== null && _d !== void 0 ? _d : Number.MAX_VALUE),
+            firstRow: (cursor.row ??
+                (defaultRange && defaultRange.firstRow) ??
+                0),
+            lastRow: (cursor.row ??
+                (defaultRange && defaultRange.lastRow) ??
+                Number.MAX_VALUE),
             state: cursor.state
         };
         if (typeof cursor.column !== 'undefined') {
@@ -372,65 +364,3 @@ class DataCursor {
  *
  * */
 export default DataCursor;
-/* *
- *
- *  API Declarations
- *
- * */
-/**
- * @typedef {
- *     Data.DataCursor.Position|
- *     Data.DataCursor.Range
- * } Data.DataCursor.Type
- */
-/**
- * @interface Data.DataCursor.Position
- */
-/**
- * @name Data.DataCursor.Position#type
- * @type {'position'}
- */
-/**
- * @name Data.DataCursor.Position#column
- * @type {string|undefined}
- */
-/**
- * @name Data.DataCursor.Position#row
- * @type {number|undefined}
- */
-/**
- * @name Data.DataCursor.Position#state
- * @type {string}
- */
-/**
- * @name Data.DataCursor.Position#tableScope
- * @type {'original'|'modified'}
- */
-/**
- * @interface Data.DataCursor.Range
- */
-/**
- * @name Data.DataCursor.Range#type
- * @type {'range'}
- */
-/**
- * @name Data.DataCursor.Range#columns
- * @type {Array<string>|undefined}
- */
-/**
- * @name Data.DataCursor.Range#firstRow
- * @type {number}
- */
-/**
- * @name Data.DataCursor.Range#lastRow
- * @type {number}
- */
-/**
- * @name Data.DataCursor.Range#state
- * @type {string}
- */
-/**
- * @name Data.DataCursor.Range#tableScope
- * @type {'original'|'modified'}
- */
-'';

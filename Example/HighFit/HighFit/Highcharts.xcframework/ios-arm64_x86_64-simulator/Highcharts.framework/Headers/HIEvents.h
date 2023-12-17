@@ -24,9 +24,9 @@ Fires when the checkbox next to the point name in the legend is clicked. One par
 */
 @property(nonatomic, readwrite) HIFunction *checkboxClick;
 /**
-An event fired when a point falls inside a break from this axis.
+Fires when the minimum and maximum is set for the axis, either by calling the `.setExtremes()` method or by selecting an area in the chart. One parameter, `event`, is passed to the function, containing common event information. The new user set minimum and maximum values can be found by `event.min` and `event.max`. These reflect the axis minimum and maximum in data values. When an axis is zoomed all the way out from the "Reset zoom" button, `event.min` and `event.max` are null, and the new extremes are set based on `this.dataMin` and `this.dataMax`.
 */
-@property(nonatomic, readwrite) HIFunction *pointInBreak;
+@property(nonatomic, readwrite) HIFunction *setExtremes;
 /**
 An event fired after the breaks have rendered.
 
@@ -36,6 +36,10 @@ An event fired after the breaks have rendered.
 */
 @property(nonatomic, readwrite) HIFunction *afterBreaks;
 /**
+An event fired when a point is outside a break after zoom.
+*/
+@property(nonatomic, readwrite) HIFunction *pointBreakOut;
+/**
 An event fired when a break from this axis occurs on a point.
 
 **Try it**
@@ -44,9 +48,9 @@ An event fired when a break from this axis occurs on a point.
 */
 @property(nonatomic, readwrite) HIFunction *pointBreak;
 /**
-Fires when the minimum and maximum is set for the axis, either by calling the `.setExtremes()` method or by selecting an area in the chart. One parameter, `event`, is passed to the function, containing common event information. The new user set minimum and maximum values can be found by `event.min` and `event.max`. These reflect the axis minimum and maximum in data values. When an axis is zoomed all the way out from the "Reset zoom" button, `event.min` and `event.max` are null, and the new extremes are set based on `this.dataMin` and `this.dataMax`.
+An event fired when a point falls inside a break from this axis.
 */
-@property(nonatomic, readwrite) HIFunction *setExtremes;
+@property(nonatomic, readwrite) HIFunction *pointInBreak;
 /**
 As opposed to the `setExtremes` event, this event fires after the final min and max values are computed and corrected for `minRange`. Fires when the minimum and maximum is set for the axis, either by calling the `.setExtremes()` method or by selecting an area in the chart. One parameter, `event`, is passed to the function, containing common event information. The new user set minimum and maximum values can be found by `event.min` and `event.max`. These reflect the axis minimum and maximum in axis values. The actual data extremes are found in `event.dataMin` and `event.dataMax`.
 */
@@ -176,6 +180,7 @@ Callback that fires when the point is dropped. The parameters passed are the sam
 **Try it**
 
 * [Drag events](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
+* [Dragging disabled for specific points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/undraggable-points)
 */
 @property(nonatomic, readwrite) HIFunction *drop;
 /**
@@ -200,6 +205,7 @@ Callback that fires while dragging a point. The mouse event is passed in as para
 **Try it**
 
 * [Drag events](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
+* [Dragging disabled for specific points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/undraggable-points)
 */
 @property(nonatomic, readwrite) HIFunction *drag;
 /**

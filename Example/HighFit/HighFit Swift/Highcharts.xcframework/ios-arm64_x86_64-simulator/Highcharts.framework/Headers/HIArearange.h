@@ -7,6 +7,7 @@
 */
 
 #import "HISeries.h"
+#import "HILowMarker.h"
 #import "HIColor.h"
 
 
@@ -40,6 +41,12 @@
  */
 @interface HIArearange: HISeries
 
+/**
+Options for the lower markers of the arearange-like series. When `lowMarker` is not defined, options inherit form the marker.
+
+**Defaults to** `undefined`.
+*/
+@property(nonatomic, readwrite) HILowMarker *lowMarker;
 /**
 Fill color or gradient for the area. When `null`, the series' `color` is used with the series' `fillOpacity`. In styled mode, the fill color can be set with the `.highcharts-area` class name.
 

@@ -26,7 +26,7 @@ const { merge } = U;
  *
  * */
 /**
- * Class that handles creating a dataconnector from an HTML table.
+ * Class that handles creating a data connector from an HTML table.
  *
  * @private
  */
@@ -59,16 +59,15 @@ class HTMLTableConnector extends DataConnector {
      * @emits HTMLTableConnector#loadError
      */
     load(eventDetail) {
-        const connector = this;
-        // If already loaded, clear the current rows
-        connector.table.deleteColumns();
+        const connector = this, converter = connector.converter, table = connector.table, { dataModifier, table: tableHTML } = connector.options;
         connector.emit({
             type: 'load',
             detail: eventDetail,
-            table: connector.table,
+            table,
             tableElement: connector.tableElement
         });
-        const { table: tableHTML } = connector.options;
+        // If already loaded, clear the current rows
+        table.deleteColumns();
         let tableElement;
         if (typeof tableHTML === 'string') {
             connector.tableID = tableHTML;
@@ -85,19 +84,23 @@ class HTMLTableConnector extends DataConnector {
                 type: 'loadError',
                 detail: eventDetail,
                 error,
-                table: connector.table
+                table
             });
             return Promise.reject(new Error(error));
         }
-        connector.converter.parse(merge({ tableElement: connector.tableElement }, connector.options), eventDetail);
-        connector.table.setColumns(connector.converter.getTable().getColumns());
-        connector.emit({
-            type: 'afterLoad',
-            detail: eventDetail,
-            table: connector.table,
-            tableElement: connector.tableElement
+        converter.parse(merge({ tableElement: connector.tableElement }, connector.options), eventDetail);
+        table.setColumns(converter.getTable().getColumns());
+        return connector
+            .setModifierOptions(dataModifier)
+            .then(() => {
+            connector.emit({
+                type: 'afterLoad',
+                detail: eventDetail,
+                table,
+                tableElement: connector.tableElement
+            });
+            return connector;
         });
-        return Promise.resolve(this);
     }
 }
 /* *
