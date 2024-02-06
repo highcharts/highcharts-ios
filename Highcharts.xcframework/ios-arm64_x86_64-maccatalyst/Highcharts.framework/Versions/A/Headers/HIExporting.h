@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -124,10 +124,6 @@ Caption for the data table. Same as chart title by default. Set to `false` to di
 */
 @property(nonatomic, readwrite) id /* Bool, NSString */ tableCaption;
 /**
-An object containing additional key value data for the POST form that sends the SVG to the export server. For example, a `target` can be set to make sure the generated image is received in another frame, or a custom `enctype` or `encoding` can be set.
-*/
-@property(nonatomic, readwrite) NSDictionary *formAttributes;
-/**
 Use multi level headers in data table. If `csv.columnHeaderFormatter` is defined, it has to return objects in order for multi level headers to work.
 
 **Defaults to** `True`.
@@ -175,6 +171,16 @@ Experimental setting to allow HTML inside the chart (added through the `useHTML`
 **Defaults to** `false`.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *allowHTML;
+/**
+Options for the fetch request used when sending the SVG to the export server. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/fetch) for more information
+*/
+@property(nonatomic, readwrite) id fetchOptions;
+/**
+Display a message when export is in progress. Uses `Chart.setLoading()` The message can be altered by changing [](#lang.exporting.exportInProgress)
+
+**Defaults to** `True`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *showExportInProgress;
 /**
 Settings for a custom font for the exported PDF, when using the `offline-exporting` module. This is used for languages containing non-ASCII characters, like Chinese, Russian, Japanese etc. As described in the [jsPDF docs](https://github.com/parallax/jsPDF#use-of-unicode-characters--utf-8), the 14 standard fonts in PDF are limited to the ASCII-codepage. Therefore, in order to support other text in the exported PDF, one or more TTF font files have to be passed on to the exporting module. See more in [the docs](https://www.highcharts.com/docs/export-module/client-side-export).
 

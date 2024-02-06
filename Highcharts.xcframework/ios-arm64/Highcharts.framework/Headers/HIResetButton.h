@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -16,7 +16,7 @@ The button that appears after a selection zoom, allowing the user to reset zoom.
 @interface HIResetButton: HIChartsJSONSerializable
 
 /**
-The position of the button.
+The position of the button. Note: Adjusting position values might cause overlap with chart elements. Ensure coordinates do not obstruct other components or data visibility.
 
 **Try it**
 

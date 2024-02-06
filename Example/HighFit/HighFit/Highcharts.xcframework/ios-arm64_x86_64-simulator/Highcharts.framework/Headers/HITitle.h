@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -110,16 +110,6 @@ Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
-The rotation of the text in degrees. 0 is horizontal, 270 is vertical reading from bottom to top.
-
-**Defaults to** `270`.
-
-**Try it**
-
-* [Horizontal](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/title-offset/)
-*/
-@property(nonatomic, readwrite) NSNumber *rotation;
-/**
 Whether to reserve space for the title when laying out the axis.
 
 **Defaults to** `true`.
@@ -149,6 +139,16 @@ The distance of the axis title from the axis line. By default, this distance is 
 * [Place the axis title on top of the axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/title-offset/)
 */
 @property(nonatomic, readwrite) NSNumber *offset;
+/**
+The rotation of the text in degrees. 0 is horizontal, 270 is vertical reading from bottom to top. Defaults to 0 for horizontal axes, 270 for left-side axes and 90 for right-side axes.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [Horizontal](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/title-offset/)
+*/
+@property(nonatomic, readwrite) NSNumber *rotation;
 /**
 Alignment of the text, can be `"left"`, `"right"` or `"center"`. Default alignment depends on the `title.align`: Horizontal axes: - for `align` = `"low"`, `textAlign` is set to `left` - for `align` = `"middle"`, `textAlign` is set to `center` - for `align` = `"high"`, `textAlign` is set to `right` Vertical axes: - for `align` = `"low"` and `opposite` = `true`, `textAlign` is  set to `right` - for `align` = `"low"` and `opposite` = `false`, `textAlign` is  set to `left` - for `align` = `"middle"`, `textAlign` is set to `center` - for `align` = `"high"` and `opposite` = `true` `textAlign` is  set to `left` - for `align` = `"high"` and `opposite` = `false` `textAlign` is  set to `right`
 */

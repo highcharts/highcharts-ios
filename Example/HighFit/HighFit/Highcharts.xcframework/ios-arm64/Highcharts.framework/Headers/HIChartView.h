@@ -1,5 +1,5 @@
 /**
- * (c) 2009-2021 Highsoft AS
+ * (c) 2009-2024 Highsoft AS
  *
  * License: www.highcharts.com/license
  * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -565,10 +565,51 @@ Add a color axis to the chart after render time. Note that this method should ne
  
  * [Update chart geometry](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-update/)
  
- @param options A configuration object for the new chart options.
+ @param options A configuration object for the new chart options in JSON format.
+ */
+-(void)updateJSONOptions:(NSDictionary *)options;
+
+/**
+ A generic function to update any element of the chart. Elements can be enabled and disabled, moved, re-styled, re-formatted etc.
+ 
+ A special case is configuration objects that take arrays, for example [xAxis](https://api.highcharts.com/highcharts/xAxis), [yAxis](https://api.highcharts.com/highcharts/yAxis) or [series](https://api.highcharts.com/highcharts/series). For these collections, an `id` option is used to map the new option set to an existing object. If an existing object of the same id is not found, the corresponding item is updated. So for example, running `chart.update` with a series item without an id, will cause the existing chart's series with the same index in the series array to be updated. When the `oneToOne` parameter is true, `chart.update` will also take care of adding and removing items from the collection. Read more under the parameter description below.
+ 
+ See also the [responsive option set](https://api.highcharts.com/highcharts/responsive). Switching between `responsive.rules` basically runs `chart.update` under the hood.
+ 
+ **Fires:**
+ 
+ * Highcharts.Chart#event:update
+ * Highcharts.Chart#event:afterUpdate
+ 
+ **Try it**
+ 
+ * [Update chart geometry](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-update/)
+ 
+ @param options A configuration object for the new chart options
  @param redraw Whether to redraw the chart.
  */
 -(void)update:(HIOptions *)options redraw:(NSNumber /* Bool */ *)redraw;
+
+/**
+ A generic function to update any element of the chart. Elements can be enabled and disabled, moved, re-styled, re-formatted etc.
+ 
+ A special case is configuration objects that take arrays, for example [xAxis](https://api.highcharts.com/highcharts/xAxis), [yAxis](https://api.highcharts.com/highcharts/yAxis) or [series](https://api.highcharts.com/highcharts/series). For these collections, an `id` option is used to map the new option set to an existing object. If an existing object of the same id is not found, the corresponding item is updated. So for example, running `chart.update` with a series item without an id, will cause the existing chart's series with the same index in the series array to be updated. When the `oneToOne` parameter is true, `chart.update` will also take care of adding and removing items from the collection. Read more under the parameter description below.
+ 
+ See also the [responsive option set](https://api.highcharts.com/highcharts/responsive). Switching between `responsive.rules` basically runs `chart.update` under the hood.
+ 
+ **Fires:**
+ 
+ * Highcharts.Chart#event:update
+ * Highcharts.Chart#event:afterUpdate
+ 
+ **Try it**
+ 
+ * [Update chart geometry](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-update/)
+ 
+ @param options A configuration object for the new chart options in JSON format.
+ @param redraw Whether to redraw the chart.
+ */
+-(void)updateJSONOptions:(NSDictionary *)options redraw:(NSNumber /* Bool */ *)redraw;
 
 /**
  A generic function to update any element of the chart. Elements can be enabled and disabled, moved, re-styled, re-formatted etc.
@@ -608,12 +649,57 @@ Add a color axis to the chart after render time. Note that this method should ne
  
  * [Update chart geometry](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-update/)
  
+ @param options A configuration object for the new chart options in JSON format.
+ @param redraw Whether to redraw the chart.
+ @param oneToOne When `true`, the `series`, `xAxis` and `yAxis` collections will be updated one to one, and items will be either added or removed to match the new updated options. For example, if the chart has two series and we call `chart.update` with a configuration containing three series, one will be added. If we call `chart.update` with one series, one will be removed. Setting an empty `series` array will remove all series, but leaving out the `series` property will leave all series untouched. If the series have id's, the new series options will be matched by id, and the remaining ones removed.
+ */
+-(void)updateJSONOptions:(NSDictionary *)options redraw:(NSNumber /* Bool */ *)redraw oneToOne:(NSNumber /* Bool */ *)oneToOne;
+
+/**
+ A generic function to update any element of the chart. Elements can be enabled and disabled, moved, re-styled, re-formatted etc.
+ 
+ A special case is configuration objects that take arrays, for example [xAxis](https://api.highcharts.com/highcharts/xAxis), [yAxis](https://api.highcharts.com/highcharts/yAxis) or [series](https://api.highcharts.com/highcharts/series). For these collections, an `id` option is used to map the new option set to an existing object. If an existing object of the same id is not found, the corresponding item is updated. So for example, running `chart.update` with a series item without an id, will cause the existing chart's series with the same index in the series array to be updated. When the `oneToOne` parameter is true, `chart.update` will also take care of adding and removing items from the collection. Read more under the parameter description below.
+ 
+ See also the [responsive option set](https://api.highcharts.com/highcharts/responsive). Switching between `responsive.rules` basically runs `chart.update` under the hood.
+ 
+ **Fires:**
+ 
+ * Highcharts.Chart#event:update
+ * Highcharts.Chart#event:afterUpdate
+ 
+ **Try it**
+ 
+ * [Update chart geometry](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-update/)
+ 
  @param options A configuration object for the new chart options.
  @param redraw Whether to redraw the chart.
  @param oneToOne When `true`, the `series`, `xAxis` and `yAxis` collections will be updated one to one, and items will be either added or removed to match the new updated options. For example, if the chart has two series and we call `chart.update` with a configuration containing three series, one will be added. If we call `chart.update` with one series, one will be removed. Setting an empty `series` array will remove all series, but leaving out the `series` property will leave all series untouched. If the series have id's, the new series options will be matched by id, and the remaining ones removed.
  @param animation Whether to apply animation, and optionally animation configuration.
  */
 -(void)update:(HIOptions *)options redraw:(NSNumber /* Bool */ *)redraw oneToOne:(NSNumber /* Bool */ *)oneToOne animation:(HIAnimationOptionsObject *)animation;
+
+/**
+ A generic function to update any element of the chart. Elements can be enabled and disabled, moved, re-styled, re-formatted etc.
+ 
+ A special case is configuration objects that take arrays, for example [xAxis](https://api.highcharts.com/highcharts/xAxis), [yAxis](https://api.highcharts.com/highcharts/yAxis) or [series](https://api.highcharts.com/highcharts/series). For these collections, an `id` option is used to map the new option set to an existing object. If an existing object of the same id is not found, the corresponding item is updated. So for example, running `chart.update` with a series item without an id, will cause the existing chart's series with the same index in the series array to be updated. When the `oneToOne` parameter is true, `chart.update` will also take care of adding and removing items from the collection. Read more under the parameter description below.
+ 
+ See also the [responsive option set](https://api.highcharts.com/highcharts/responsive). Switching between `responsive.rules` basically runs `chart.update` under the hood.
+ 
+ **Fires:**
+ 
+ * Highcharts.Chart#event:update
+ * Highcharts.Chart#event:afterUpdate
+ 
+ **Try it**
+ 
+ * [Update chart geometry](http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/chart-update/)
+ 
+ @param options A configuration object for the new chart options in JSON format.
+ @param redraw Whether to redraw the chart.
+ @param oneToOne When `true`, the `series`, `xAxis` and `yAxis` collections will be updated one to one, and items will be either added or removed to match the new updated options. For example, if the chart has two series and we call `chart.update` with a configuration containing three series, one will be added. If we call `chart.update` with one series, one will be removed. Setting an empty `series` array will remove all series, but leaving out the `series` property will leave all series untouched. If the series have id's, the new series options will be matched by id, and the remaining ones removed.
+ @param animation Whether to apply animation, and optionally animation configuration.
+ */
+-(void)updateJSONOptions:(NSDictionary *)options redraw:(NSNumber /* Bool */ *)redraw oneToOne:(NSNumber /* Bool */ *)oneToOne animation:(NSDictionary *)animation;
 
 /**
  Export-data module required. View the data in a table below the chart.

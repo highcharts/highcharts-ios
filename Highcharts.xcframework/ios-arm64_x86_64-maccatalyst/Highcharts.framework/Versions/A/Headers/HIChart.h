@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -32,19 +32,6 @@ Common options for all yAxes rendered in a parallel coordinates plot. This featu
 * [Set the same tickAmount for all yAxes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/parallelaxes/)
 */
 @property(nonatomic, readwrite) HIParallelAxes *parallelAxes;
-/**
-When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. This produces _polar charts_, also known as _radar charts_.
-
-**Defaults to** `false`.
-
-**Try it**
-
-* [Polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar/)
-* [Wind rose, stacked polar column chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-wind-rose/)
-* [Spider web chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
-* [Star plot, multivariate data in a polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/polar/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *polar;
 /**
 The corner radius of the outer chart border.
 
@@ -82,6 +69,18 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 * [Highcharts with percentage height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/height-percent/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
+/**
+Additional CSS styles to apply inline to the container `div` and the root SVG. Since v11, the root font size is 1rem by default, and all child element are given a relative `em` font size by default. This allows implementers to control all the chart's font sizes by only setting the root level.
+
+**Defaults to** `{"fontFamily": Helvetica, Arial, sans-serif","fontSize":"1rem"}`.
+
+**Try it**
+
+* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
+* [Relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/relative-font-size/)
+* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
+*/
+@property(nonatomic, readwrite) HICSSObject *style;
 /**
 When using multiple axes, the ticks of two or more opposite axes will automatically be aligned by adding ticks to the axis or axes with the least ticks, as if `tickAmount` were specified. This can be prevented by setting `alignTicks` to false. If the grid lines look messy, it's a good idea to hide them for the secondary axis by setting `gridLineWidth` to 0. If `startOnTick` or `endOnTick` in the axis options are set to false, then the `alignTicks ` will be disabled for the axis. Disabled for logarithmic axes.
 
@@ -155,17 +154,18 @@ A CSS class name to apply to the charts container `div`, allowing unique CSS sty
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-Additional CSS styles to apply inline to the container `div` and the root SVG. Since v11, the root font size is 1rem by default, and all child element are given a relative `em` font size by default. This allows implementers to control all the chart's font sizes by only setting the root level.
+When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. This produces _polar charts_, also known as _radar charts_.
 
-**Defaults to** `{"fontFamily": Helvetica, Arial, sans-serif","fontSize":"1rem"}`.
+**Defaults to** `false`.
 
 **Try it**
 
-* [Using a serif type font](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/style-serif-font/)
-* [Relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/relative-font-size/)
-* [Styled mode with relative font sizes](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/em/)
+* [Polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar/)
+* [Wind rose, stacked polar column chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-wind-rose/)
+* [Spider web chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/polar-spider/)
+* [Star plot, multivariate data in a polar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/parallel-coordinates/polar/)
 */
-@property(nonatomic, readwrite) HICSSObject *style;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *polar;
 /**
 The HTML element where the chart will be rendered. If it is a string, the element by that id is used. The HTML element can also be passed by direct reference, or as the first argument of the chart constructor, in which case the option is not needed.
 
@@ -281,6 +281,12 @@ The space between the left edge of the chart and the content (plot area, axis ti
 * [Spacing left set to 100](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/spacingleft/)
 */
 @property(nonatomic, readwrite) NSNumber *spacingLeft;
+/**
+When a chart with an x and a y-axis is rendered, we first pre-render the labels of both in order to measure them. Then, if either of the axis labels take up so much space that it significantly affects the length of the other axis, we repeat the process. By default we stop at two axis layout runs, but it may be that the second run also alter the space required by either axis, for example if it causes the labels to rotate. In this situation, a subsequent redraw of the chart may cause the tick and label placement to change for apparently no reason. Use the `axisLayoutRuns` option to set the maximum allowed number of repetitions. But keep in mind that the default value of 2 is set because every run costs performance time. **Note:** Changing that option to higher than the default might decrease performance significantly, especially with bigger sets of data.
+
+**Defaults to** `2`.
+*/
+@property(nonatomic, readwrite) NSNumber *axisLayoutRuns;
 /**
 The distance between the outer edge of the chart and the content, like title or legend, or axis title and labels if present. The numbers in the array designate top, right, bottom and left respectively. Use the options spacingTop, spacingRight, spacingBottom and spacingLeft options for shorthand setting of one option.
 

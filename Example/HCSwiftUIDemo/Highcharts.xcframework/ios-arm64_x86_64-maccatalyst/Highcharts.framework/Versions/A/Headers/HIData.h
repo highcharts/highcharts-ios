@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -239,6 +239,16 @@ Switch rows and columns of the input data, so that `this.columns` effectively be
 * [Switch rows and columns](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/switchrowsandcolumns/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *switchRowsAndColumns;
+/**
+An array option that specifies the data type for each column in the series loaded within the data module. Possible values: `"string"`, `"number"`, `"float"`, `"date"`.
+
+**Accepted values:** `["string", "number", "float", "date"]`.
+
+**Try it**
+
+* [X-axis categories based on CSV data](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/data/column-types/)
+*/
+@property(nonatomic, readwrite) NSArray *columnTypes;
 /**
 The decimal point used for parsing numbers in the CSV. If both this and data.delimiter is set to `undefined`, the parser will attempt to deduce the decimal point automatically.
 

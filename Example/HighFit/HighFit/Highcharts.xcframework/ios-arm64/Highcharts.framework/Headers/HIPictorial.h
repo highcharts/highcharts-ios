@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -163,7 +163,7 @@ Whether to group non-stacked columns or to let them render independent of each o
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *grouping;
 /**
-The paths include options describing the point image.
+The paths include options describing the series image. For further details on preparing the SVG image, please refer to the [pictorial documentation](https://www.highcharts.com/docs/chart-and-series-types/pictorial).
 
 **Try it**
 

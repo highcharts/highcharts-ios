@@ -1,6 +1,6 @@
 // swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
-// Copyright (c) 2009-2023 Highsoft AS
+// Copyright (c) 2009-2024 Highsoft AS
 
 import PackageDescription
 

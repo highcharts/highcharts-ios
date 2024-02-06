@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -42,6 +42,14 @@ The axis labels show the number for each tick. For more live examples on label o
 */
 @property(nonatomic, readwrite) HILabels *labels;
 /**
+The height of the color axis. If it's a number, it is interpreted as pixels. If it's a percentage string, it is interpreted as percentages of the total plot height.
+
+**Try it**
+
+* [Percentage width and pixel height for color axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/width-and-height)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
+/**
 The color to represent the maximum of the color axis. Unless `dataClasses` or `stops` are set, the gradient ends at this value. If dataClasses are set, the color is based on minColor and maxColor unless a color is set for each data class, or the `dataClassColor` is set.
 
 **Defaults to** `#0022ff`.
@@ -79,6 +87,14 @@ Color stops for the gradient of a scalar color axis. Use this in cases where a l
 * [Color axis stops with custom colorKey](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/color-key-with-stops/)
 */
 @property(nonatomic, readwrite) NSArray<NSArray *> /* <NSNumber, NSString> */ *stops;
+/**
+The width of the color axis. If it's a number, it is interpreted as pixels. If it's a percentage string, it is interpreted as percentages of the total plot width.
+
+**Try it**
+
+* [Percentage width and pixel height for color axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/coloraxis/width-and-height)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**
 Determines how to set each data class' color if no individual color is set. The default value, `tween`, computes intermediate colors between `minColor` and `maxColor`. The other possible value, `category`, pulls colors from the global or chart specific `colors` array.
 
@@ -335,11 +351,11 @@ The pixel width of the minor tick mark.
 */
 @property(nonatomic, readwrite) NSNumber *minorTickWidth;
 /**
-Specific tick interval in axis units for the minor ticks. On a linear axis, if `"auto"`, the minor tick interval is calculated as a fifth of the tickInterval. If `null` or `undefined`, minor ticks are not shown. On logarithmic axes, the unit is the power of the value. For example, setting the minorTickInterval to 1 puts one tick on each of 0.1, 1, 10, 100 etc. Setting the minorTickInterval to 0.1 produces 9 ticks between 1 and 10, 10 and 100 etc. If user settings dictate minor ticks to become too dense, they don't make sense, and will be ignored to prevent performance problems.
+Specific tick interval in axis units for the minor ticks. On a linear axis, if `"auto"`, the minor tick interval is calculated as a fifth of the tickInterval. If `undefined`, minor ticks are not shown. On logarithmic axes, the unit is the power of the value. For example, setting the minorTickInterval to 1 puts one tick on each of 0.1, 1, 10, 100 etc. Setting the minorTickInterval to 0.1 produces 9 ticks between 1 and 10, 10 and 100 etc. If user settings dictate minor ticks to become too dense, they don't make sense, and will be ignored to prevent performance problems.
 
 **Try it**
 
-* [Null by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickinterval-null/)
+* [Undefined by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickinterval-null/)
 * [5 units](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickinterval-5/)
 * ["auto"](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickinterval-log-auto/)
 * [0.1](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/yaxis/minortickinterval-log/)
@@ -373,7 +389,7 @@ Whether to show the first tick label.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *showFirstLabel;
 /**
-For categorized axes only. If `on` the tick mark is placed in the center of the category, if `between` the tick mark is placed between categories. The default is `between` if the `tickInterval` is 1, else `on`.
+For categorized axes only. If `on` the tick mark is placed in the center of the category, if `between` the tick mark is placed between categories. The default is `between` if the `tickInterval` is 1, else `on`. In order to render tick marks on a category axis it is necessary to provide a `tickWidth`.
 
 **Accepted values:** `["on", "between"]`.
 

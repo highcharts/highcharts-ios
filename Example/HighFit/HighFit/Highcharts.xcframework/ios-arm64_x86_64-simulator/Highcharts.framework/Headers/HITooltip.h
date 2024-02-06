@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -107,7 +107,7 @@ Use HTML to render the contents of the tooltip instead of SVG. Using HTML allows
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
-The color of the tooltip border. When `undefined`, the border takes the color of the corresponding series or point.
+The color of the tooltip border. When `undefined`, the border takes the color of the corresponding series or point. Note that the `borderWidth` is usually 0 by default, so the border color may not be visible until a border width is set.
 
 **Try it**
 

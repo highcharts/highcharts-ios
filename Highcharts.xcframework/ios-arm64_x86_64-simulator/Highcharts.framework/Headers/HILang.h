@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -31,11 +31,11 @@ The text for the menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadXLS;
 /**
-Exporting module only. The text for the PNG download menu item.
+Text to show when export is in progress.
 
-**Defaults to** `Share image`.
+**Defaults to** `Exporting...`.
 */
-@property(nonatomic, readwrite) NSString *downloadPNG;
+@property(nonatomic, readwrite) NSString *exportInProgress;
 /**
 Configure the accessibility strings in the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility). The lang options use [Format Strings](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#format-strings) with variables that are replaced at run time. These variables should be used when available, to avoid duplicating text that is defined elsewhere. For more dynamic control over the accessibility functionality, see `accessibility.point.descriptionFormatter`, `accessibility.series.descriptionFormatter`, and `accessibility.screenReaderSection.beforeChartFormatter`.
 */
@@ -82,7 +82,13 @@ The loading text that appears when the chart is set into the loading state follo
 */
 @property(nonatomic, readwrite) NSString *loading;
 /**
-[Metric prefixes](https://en.wikipedia.org/wiki/Metric_prefix) used to shorten high numbers in axis labels. Replacing any of the positions with `null` causes the full number to be written. Setting `numericSymbols` to `null` disables shortening altogether.
+Exporting module only. The text for the PNG download menu item.
+
+**Defaults to** `Share image`.
+*/
+@property(nonatomic, readwrite) NSString *downloadPNG;
+/**
+[Metric prefixes](https://en.wikipedia.org/wiki/Metric_prefix) used to shorten high numbers in axis labels. Replacing any of the positions with `null` causes the full number to be written. Setting `numericSymbols` to `undefined` disables shortening altogether.
 
 **Defaults to** `["k", "M", "G", "T", "P", "E"]`.
 

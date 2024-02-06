@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -19,7 +19,7 @@ A declarative filter to control of which data labels to display. The declarative
 @interface HIFilter: HIChartsJSONSerializable
 
 /**
-The operator to compare by. Can be one of `>`, `<`, `>=`, `<=`, `==`, and `===`.
+The operator to compare by. Can be one of `>`, `<`, `>=`, `<=`, `==`, `===`, `!=` and `!==`.
 */
 @property(nonatomic, readwrite) NSString *operator;
 /**

@@ -1,5 +1,5 @@
 /**
-* (c) 2009-2021 Highsoft AS
+* (c) 2009-2024 Highsoft AS
 *
 * License: www.highcharts.com/license
 * For commercial usage, a valid license is required. To purchase a license for Highcharts iOS, please see our website: https://shop.highsoft.com/
@@ -95,7 +95,7 @@ When the legend is floating, the plot area ignores it and is allowed to be place
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
 /**
-The pixel width of the legend item symbol. When the `squareSymbol` option is set, this defaults to the `symbolHeight`, otherwise 16.
+The pixel width of the legend item symbol. When the `squareSymbol` option is set, this defaults to the `symbolHeight`, otherwise 16. Note: This option is a default source of color axis width, if the [colorAxis.width](https://api.highcharts.com/highcharts/colorAxis.width) option is not set.
 
 **Try it**
 
@@ -322,7 +322,7 @@ If the `layout` is `horizontal` and the legend items span over two lines or more
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *alignColumns;
 /**
-The pixel height of the symbol for series types that use a rectangle in the legend. Defaults to the font size of legend items.
+The pixel height of the symbol for series types that use a rectangle in the legend. Defaults to the font size of legend items. Note: This option is a default source of color axis height, if the [colorAxis.height](https://api.highcharts.com/highcharts/colorAxis.height) option is not set.
 */
 @property(nonatomic, readwrite) NSNumber *symbolHeight;
 /**

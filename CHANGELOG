@@ -1,3 +1,47 @@
+# Version 11.3.0
+
+## iOS:
+
+1. Added methods for updating the chart options with JSON to `HIChartView`, #429
+
+## Framework:
+
+1. Implemented native handling of the `time.timezone` option, making the dependency on moment.js redundant.
+2. Added new options `colorAxis.width` and `colorAxis.height`, allowing absolute or relative size. See #17870.
+3. Added new option `chart.axisLayoutRuns`. It allows opting in for more predictable axis tick and label layout, at the cost of performance. See #19794.
+4. Added new default `legendSymbol` for area series and its derivatives.
+
+## Framework upgrade notes:
+1. The `exporting.formAttributes` no longer works because the internal `post` function was replaced by the `fetch` API. The `formAttributes` option can for some purposes be replaced with `exporting.fetchOptions`. See `the fetch article on MDN` for more information about possible options.
+
+## Framework bug fixes:
+
+1. Fixed #19169, the `focusBorder` was not removed from `SVGElement` after the element had been unfocused.
+2. Fixed #20319, funnel point path not rendered properly when the point's top coordinates were within top boundaries of the funnel neck.
+3. Fixed #20291, y-axis crosshair was missing for 3d column.
+4. Fixed #20340, histogram bins `x2` value was wrongly calculated.
+5. Fixed #20191, exporting a chart using the export module caused `beforeunload` event to fire.
+6. Fixed #20142, pie selected point was semi-transparent on legend hover in styled mode.
+7. Fixed #18744, a point covered by an area series should be fully clickable if the tooltip shows.
+8. Fixed #20129, the lack of root and window in the NX environment was causing an error on load.
+9. Fixed #20097, script errors and invisible series in error bar with certain extremes.
+10. Fixed #19857, short x-axis labels disappeared in some edge cases when `labels.autoRotation` was set.
+11. Fixed #18804, zooming in below `boostThreshold` didn't disable boost on scatter series.
+12. Fixed #20120, data labels in packed bubble series were misaligned after updating the series position.
+13. Fixed #16920, formalized and fixed the `data.columnTypes` option.
+14. Fixed #17545, misplaced funnel and pyramid data labels after legend item click when `dataLabels.inside` set to false.
+15. Fixed #19497, some points disappeared when changing extremes of the category axes in boost.
+16. Fixed #20098, multiple data labels were not rendered when enabled in `plotOptions`.
+17. Fixed #19895, removing a series while rendering in boost mode could cause a TypeError.
+18. Fixed #20002, stroke wasn't applied to annotations during offline PDF export.
+19. Fixed #19976, columns threw off center when using mouse wheel zoom.
+20. Fixed #19621, errors instead of expected behavior when using arrow-keys to navigate first and last items in legend.
+21. Fixed #19130, `negativeColor` was applied to positive graphs for the part of the line that extended below the threshold.
+22. Fixed #19604, ticks were sometimes differently calculated after a series update.
+23. Fixed #20007, contrast color setting for data labels did not respect their background colors.
+24. Fixed #19946, nodes in the organization chart weren’t centered while using node width or height options.
+25. Fixed #19917, setting options in a series without `series.data` would add default aria-label.
+
 # Version 11.2.0
 
 ## Framework:

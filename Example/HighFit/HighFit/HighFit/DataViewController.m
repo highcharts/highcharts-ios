@@ -3,7 +3,7 @@
 //  HighFit
 //
 //  License: www.highcharts.com/license
-//  Copyright © 2023 Highsoft AS. All rights reserved.
+//  Copyright © 2024 Highsoft AS. All rights reserved.
 //
 
 #import "DataViewController.h"
