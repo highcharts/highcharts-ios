@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v11.3.0 (2024-01-10)
+ * @license Highmaps JS v11.4.0 (2024-03-04)
  *
  * Tilemap module
  *
@@ -705,7 +705,7 @@
              *
              * */
             TilemapSeries.compose = function (AxisClass) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'TilemapSeries')) {
                     addEvent(AxisClass, 'afterSetAxisTranslation', onAxisAfterSetAxisTranslation);
                 }
             };
@@ -794,7 +794,7 @@
             getSymbol: noop,
             // Use drawPoints, markerAttribs, pointAttribs methods from the old
             // heatmap implementation.
-            // TODO: Consider standarizing heatmap and tilemap into more
+            // TODO: Consider standardizing heatmap and tilemap into more
             // consistent form.
             markerAttribs: ScatterSeries.prototype.markerAttribs,
             pointAttribs: ColumnSeries.prototype.pointAttribs,
@@ -823,5 +823,6 @@
         var G = Highcharts;
         TilemapSeries.compose(G.Axis);
 
+        return Highcharts;
     });
 }));

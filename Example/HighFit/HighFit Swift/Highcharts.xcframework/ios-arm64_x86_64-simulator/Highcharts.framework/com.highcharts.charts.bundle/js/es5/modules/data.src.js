@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Data module
  *
@@ -56,8 +56,8 @@
             };
             return __assign.apply(this, arguments);
         };
-        var doc = G.doc, win = G.win;
-        var createElement = U.createElement, discardElement = U.discardElement, merge = U.merge, objectEach = U.objectEach;
+        var win = G.win;
+        var discardElement = U.discardElement, objectEach = U.objectEach;
         /* *
          *
          *  Functions
@@ -72,7 +72,7 @@
          *        The Ajax settings to use.
          *
          * @return {false|undefined}
-         *         Returns false, if error occured.
+         *         Returns false, if error occurred.
          */
         function ajax(settings) {
             var headers = {
@@ -87,7 +87,7 @@
              * @param {XMLHttpRequest} xhr
              * Internal request object.
              * @param {string|Error} err
-             * Occured error.
+             * Occurred error.
              */
             function handleError(xhr, err) {
                 if (settings.error) {
@@ -620,7 +620,7 @@
                     it's stable and passes all the test.
 
                     It's also not written with speed in mind, instead everything is
-                    very seggregated, and there a several redundant loops.
+                    very segregated, and there a several redundant loops.
                     This is to make it easier to stabilize the code initially.
 
                     We do a pre-pass on the first 4 rows to make some intelligent
@@ -642,7 +642,7 @@
                     General rules:
                         - Quoting is allowed, e.g: "Col 1",123,321
                         - Quoting is optional, e.g.: Col1,123,321
-                        - Doubble quoting is escaping, e.g. "Col ""Hello world""",123
+                        - Double quoting is escaping, e.g. "Col ""Hello world""",123
                         - Spaces are considered part of the data: Col1 ,123
                         - New line is always the row delimiter
                         - Potential column delimiters are , ; \t
@@ -704,7 +704,7 @@
                             columns.push([]);
                         }
                         if (!noAdd) {
-                            // Don't push - if there's a varrying amount of columns
+                            // Don't push - if there's a varying amount of columns
                             // for each row, pushing will skew everything down n slots
                             columns[column][rowNumber] = token;
                         }
@@ -931,7 +931,7 @@
                             guessedFormat[2] = 'YY';
                         }
                         calculatedFormat = guessedFormat.join('/');
-                        // If the caculated format is not valid, we need to present an
+                        // If the calculated format is not valid, we need to present an
                         // error.
                         if (!(options.dateFormats || self.dateFormats)[calculatedFormat]) {
                             // This should emit an event instead
@@ -1219,7 +1219,7 @@
                 if (googleSpreadsheetKey) {
                     delete options.googleSpreadsheetKey;
                     fetchSheet(function (json) {
-                        // Prepare the data from the spreadsheat
+                        // Prepare the data from the spreadsheet
                         var columns = json.values;
                         if (!columns || columns.length === 0) {
                             return false;
@@ -1267,7 +1267,7 @@
             Data.prototype.trim = function (str, inside) {
                 if (typeof str === 'string') {
                     str = str.replace(/^\s+|\s+$/g, '');
-                    // Clear white space insdie the string, like thousands separators
+                    // Clear white space inside the string, like thousands separators
                     if (inside && /^-?[0-9\s]+$/.test(str)) {
                         str = str.replace(/\s/g, '');
                     }
@@ -1832,7 +1832,7 @@
             /**
              * Returns true if the builder has a reader for the given configName.
              *
-             * @function SeriesBuider#hasReader
+             * @function SeriesBuilder#hasReader
              */
             SeriesBuilder.prototype.hasReader = function (configName) {
                 var i, columnReader;
@@ -1876,7 +1876,7 @@
          *        The chart options that were used.
          */
         /**
-         * Callback function that returns the correspondig Date object to a match.
+         * Callback function that returns the corresponding Date object to a match.
          *
          * @callback Highcharts.DataDateFormatCallbackFunction
          *
@@ -1915,7 +1915,7 @@
          *         Timestamp (milliseconds since 1.1.1970) as integer for Date class.
          */
         /**
-         * Callback function to access the parsed columns, the two-dimentional
+         * Callback function to access the parsed columns, the two-dimensional
          * input data array directly, before they are interpreted into series
          * data and categories.
          *
@@ -2186,7 +2186,7 @@
          * @apioption data.lineDelimiter
          */
         /**
-         * A callback function to access the parsed columns, the two-dimentional
+         * A callback function to access the parsed columns, the two-dimensional
          * input data array directly, before they are interpreted into series
          * data and categories. Return `false` to stop completion, or call
          * `this.complete()` to continue async.
@@ -2211,7 +2211,7 @@
          * @apioption data.parseDate
          */
         /**
-         * The same as the columns input option, but defining rows intead of
+         * The same as the columns input option, but defining rows instead of
          * columns.
          *
          * @see [data.columns](#data.columns)
@@ -2356,14 +2356,15 @@
     _registerModule(_modules, 'masters/modules/data.src.js', [_modules['Core/Globals.js'], _modules['Core/HttpUtilities.js'], _modules['Extensions/Data.js']], function (Highcharts, HttpUtilities, Data) {
 
         var G = Highcharts;
-        // Functions
-        G.ajax = HttpUtilities.ajax;
-        G.data = Data.data;
-        G.getJSON = HttpUtilities.getJSON;
-        G.post = HttpUtilities.post;
         // Classes
-        G.Data = Data;
-        G.HttpUtilities = HttpUtilities;
+        G.Data = G.Data || Data;
+        G.HttpUtilities = G.HttpUtilities || HttpUtilities;
+        // Functions
+        G.ajax = G.HttpUtilities.ajax;
+        G.data = G.Data.data;
+        G.getJSON = G.HttpUtilities.getJSON;
+        G.post = G.HttpUtilities.post;
 
+        return Highcharts;
     });
 }));

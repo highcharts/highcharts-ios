@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Drag-panes module
  *
@@ -212,7 +212,7 @@
 
         return AxisResizerDefaults;
     });
-    _registerModule(_modules, 'Extensions/DragPanes/AxisResizer.js', [_modules['Extensions/DragPanes/AxisResizerDefaults.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (AxisResizerDefaults, H, U) {
+    _registerModule(_modules, 'Extensions/DragPanes/AxisResizer.js', [_modules['Extensions/DragPanes/AxisResizerDefaults.js'], _modules['Core/Utilities.js']], function (AxisResizerDefaults, U) {
         /* *
          *
          *  Plugin for resizing axes / panes in a chart.
@@ -226,7 +226,6 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var hasTouch = H.hasTouch;
         var addEvent = U.addEvent, clamp = U.clamp, isNumber = U.isNumber, relativeLength = U.relativeLength;
         /* *
          *
@@ -322,14 +321,13 @@
                 // Make them as separate functions to enable wrapping them:
                 resizer.mouseMoveHandler = mouseMoveHandler = function (e) { return (resizer.onMouseMove(e)); };
                 resizer.mouseUpHandler = mouseUpHandler = function (e) { return (resizer.onMouseUp(e)); };
-                resizer.mouseDownHandler = mouseDownHandler = function (e) { return (resizer.onMouseDown(e)); };
-                // Add mouse move and mouseup events. These are bind to doc/container,
+                resizer.mouseDownHandler = mouseDownHandler = function () { return (resizer.onMouseDown()); };
+                eventsToUnbind.push(
+                // Add mouse move and mouseup events. These are bind to doc/div,
                 // because resizer.grabbed flag is stored in mousedown events.
-                eventsToUnbind.push(addEvent(container, 'mousemove', mouseMoveHandler), addEvent(container.ownerDocument, 'mouseup', mouseUpHandler), addEvent(ctrlLineElem, 'mousedown', mouseDownHandler));
+                addEvent(container, 'mousemove', mouseMoveHandler), addEvent(container.ownerDocument, 'mouseup', mouseUpHandler), addEvent(ctrlLineElem, 'mousedown', mouseDownHandler), 
                 // Touch events.
-                if (hasTouch) {
-                    eventsToUnbind.push(addEvent(container, 'touchmove', mouseMoveHandler), addEvent(container.ownerDocument, 'touchend', mouseUpHandler), addEvent(ctrlLineElem, 'touchstart', mouseDownHandler));
-                }
+                addEvent(container, 'touchmove', mouseMoveHandler), addEvent(container.ownerDocument, 'touchend', mouseUpHandler), addEvent(ctrlLineElem, 'touchstart', mouseDownHandler));
                 resizer.eventsToUnbind = eventsToUnbind;
             };
             /**
@@ -347,11 +345,11 @@
                  * be ignored. Borrowed from Navigator.
                  */
                 if (!e.touches || e.touches[0].pageX !== 0) {
+                    var pointer = this.axis.chart.pointer;
                     // Drag the control line
-                    if (this.grabbed) {
+                    if (this.grabbed && pointer) {
                         this.hasDragged = true;
-                        this.updateAxes(this.axis.chart.pointer.normalize(e).chartY -
-                            this.options.y);
+                        this.updateAxes(pointer.normalize(e).chartY - (this.options.y || 0));
                     }
                 }
             };
@@ -364,9 +362,9 @@
              *        Mouse event.
              */
             AxisResizer.prototype.onMouseUp = function (e) {
-                if (this.hasDragged) {
-                    this.updateAxes(this.axis.chart.pointer.normalize(e).chartY -
-                        this.options.y);
+                var pointer = this.axis.chart.pointer;
+                if (this.hasDragged && pointer) {
+                    this.updateAxes(pointer.normalize(e).chartY - (this.options.y || 0));
                 }
                 // Restore runPointActions.
                 this.grabbed = this.hasDragged = this.axis.chart.activeResizer = void 0;
@@ -377,9 +375,10 @@
              *
              * @function Highcharts.AxisResizer#onMouseDown
              */
-            AxisResizer.prototype.onMouseDown = function (e) {
+            AxisResizer.prototype.onMouseDown = function () {
+                var _a;
                 // Clear all hover effects.
-                this.axis.chart.pointer.reset(false, 0);
+                (_a = this.axis.chart.pointer) === null || _a === void 0 ? void 0 : _a.reset(false, 0);
                 // Disable runPointActions.
                 this.grabbed = this.axis.chart.activeResizer = true;
             };
@@ -532,7 +531,7 @@
 
         return AxisResizer;
     });
-    _registerModule(_modules, 'Extensions/DragPanes/DragPanes.js', [_modules['Extensions/DragPanes/AxisResizer.js'], _modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (AxisResizer, D, H, U) {
+    _registerModule(_modules, 'Extensions/DragPanes/DragPanes.js', [_modules['Extensions/DragPanes/AxisResizer.js'], _modules['Core/Defaults.js'], _modules['Core/Utilities.js']], function (AxisResizer, D, U) {
         /* *
          *
          *  Plugin for resizing axes / panes in a chart.
@@ -547,8 +546,7 @@
          *
          * */
         var defaultOptions = D.defaultOptions;
-        var composed = H.composed;
-        var addEvent = U.addEvent, merge = U.merge, pushUnique = U.pushUnique, wrap = U.wrap;
+        var addEvent = U.addEvent, merge = U.merge, wrap = U.wrap;
         /* *
          *
          *  Functions
@@ -558,7 +556,7 @@
          * @private
          */
         function compose(AxisClass, PointerClass) {
-            if (pushUnique(composed, compose)) {
+            if (!AxisClass.keepProps.includes('resizer')) {
                 merge(true, defaultOptions.yAxis, AxisResizer.resizerOptions);
                 // Keep resizer reference on axis update
                 AxisClass.keepProps.push('resizer');
@@ -646,5 +644,6 @@
         G.AxisResizer = AxisResizer;
         DragPanes.compose(G.Axis, G.Pointer);
 
+        return Highcharts;
     });
 }));

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Hollow Candlestick series type for Highcharts Stock
  *
@@ -240,7 +240,7 @@
             };
             /**
              * @private
-             * @function Highcarts.seriesTypes.hollowcandlestick#init
+             * @function Highcharts.seriesTypes.hollowcandlestick#init
              */
             HollowCandlestickSeries.prototype.init = function () {
                 _super.prototype.init.apply(this, arguments);
@@ -463,12 +463,13 @@
          * @product   highstock
          * @apioption series.hollowcandlestick.data
          */
-        ''; // adds doclets above to transpilat
+        ''; // adds doclets above to transpiled
 
         return HollowCandlestickSeries;
     });
-    _registerModule(_modules, 'masters/modules/hollowcandlestick.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/hollowcandlestick.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

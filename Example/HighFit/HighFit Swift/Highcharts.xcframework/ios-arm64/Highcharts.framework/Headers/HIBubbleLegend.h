@@ -110,7 +110,7 @@ Options for specific range. One range consists of bubble, label and connector.
 */
 @property(nonatomic, readwrite) NSArray <HIRanges *> *ranges;
 /**
-Miximum bubble legend range size. If values for ranges are not specified, the `minSize` and the `maxSize` are calculated from bubble series.
+Maximum bubble legend range size. If values for ranges are not specified, the `minSize` and the `maxSize` are calculated from bubble series.
 
 **Defaults to** `60`.
 */
@@ -138,7 +138,7 @@ An additional class name to apply to the bubble legend's connector graphical ele
 */
 @property(nonatomic, readwrite) NSString *connectorClassName;
 /**
-Ranges with with lower value than zThreshold, are skipped.
+Ranges with lower value than zThreshold are skipped.
 */
 @property(nonatomic, readwrite) NSNumber *zThreshold;
 /**

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * All technical indicators for Highcharts Stock
  *
@@ -355,7 +355,7 @@
                  */
                 compareToMain: false,
                 /**
-                 * Paramters used in calculation of regression series' points.
+                 * Parameters used in calculation of regression series' points.
                  */
                 params: {
                     /**
@@ -614,7 +614,9 @@
              *  Static Functions
              *
              * */
-            ADIndicator.populateAverage = function (xVal, yVal, yValVolume, i, _period) {
+            ADIndicator.populateAverage = function (xVal, yVal, yValVolume, i, 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            _period) {
                 var high = yVal[i][1], low = yVal[i][2], close = yVal[i][3], volume = yValVolume[i], adY = close === high && close === low || high === low ?
                     0 :
                     ((2 * close - low - high) / (high - low)) * volume, adX = xVal[i];
@@ -966,10 +968,10 @@
              *
              * */
             /* *
-            *
-            *  Constants
-            *
-            * */
+             *
+             *  Constants
+             *
+             * */
             /**
              * Additional lines DOCS names. Elements of linesApiNames array should
              * be consistent with DOCS line names defined in your implementation.
@@ -992,7 +994,7 @@
              */
             var pointArrayMap = ['top', 'bottom'];
             /**
-             * Names of the lines, bewteen which the area should be plotted.
+             * Names of the lines, between which the area should be plotted.
              * If the drawing of the area should
              * be disabled for some indicators, leave this option as an empty array.
              * Names should be the same as the names in the pointArrayMap.
@@ -1009,10 +1011,10 @@
              */
             var pointValKey = 'top';
             /* *
-            *
-            *  Functions
-            *
-            * */
+             *
+             *  Functions
+             *
+             * */
             /**
              * Composition useful for all indicators that have more than one line.
              * Compose it with your implementation where you will provide the
@@ -1346,7 +1348,7 @@
              */
             AroonIndicator.defaultOptions = merge(SMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of aroon series points.
+                 * Parameters used in calculation of aroon series points.
                  *
                  * @excluding index
                  */
@@ -2361,7 +2363,7 @@
                     index: void 0,
                     /**
                      * The id of another series to use its data as volume data for the
-                     * indiator calculation.
+                     * indicator calculation.
                      */
                     volumeSeriesID: 'volume'
                 }
@@ -2760,7 +2762,7 @@
                     sum = accumulatePoints(sum, yVal, periodIndex, index);
                     price = pick(yVal[rangeIndex][index], yVal[rangeIndex]);
                     oscillator = price - sum / period;
-                    // substracting the first period point
+                    // subtracting the first period point
                     sum = accumulatePoints(sum, yVal, j, index, true);
                     DPO.push([xVal[rangeIndex], oscillator]);
                     xData.push(xVal[rangeIndex]);
@@ -2961,7 +2963,7 @@
              */
             ChaikinIndicator.defaultOptions = merge(EMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of Chaikin Oscillator
+                 * Parameters used in calculation of Chaikin Oscillator
                  * series points.
                  *
                  * @excluding index
@@ -3100,7 +3102,7 @@
                         sumOfLowerValues += values[j - 1] - values[j];
                     }
                 }
-                // You might devide by 0 if all values are equal,
+                // You might divide by 0 if all values are equal,
                 // so return 0 in this case.
                 y =
                     sumOfHigherValues + sumOfLowerValues > 0 ?
@@ -3119,7 +3121,7 @@
                         sumOfLowerValues += values[i - 1] - values[i];
                     }
                     // Check, to which sum was the first value added to,
-                    // and substract this value from given sum.
+                    // and subtract this value from given sum.
                     if (values[i - period] > values[i - period - 1]) {
                         sumOfHigherValues -= firstAddedSum;
                     }
@@ -3792,7 +3794,7 @@
              */
             APOIndicator.defaultOptions = merge(EMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of Absolute Price Oscillator
+                 * Parameters used in calculation of Absolute Price Oscillator
                  * series points.
                  *
                  * @excluding period
@@ -4966,7 +4968,7 @@
              */
             KlingerIndicator.defaultOptions = merge(SMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of Klinger Oscillator.
+                 * Parameters used in calculation of Klinger Oscillator.
                  *
                  * @excluding index, period
                  */
@@ -6050,7 +6052,7 @@
                     period: void 0,
                     /**
                      * The id of another series to use its data as volume data for the
-                     * indiator calculation.
+                     * indicator calculation.
                      */
                     volumeSeriesID: 'volume'
                 },
@@ -6273,7 +6275,7 @@
                 var currentLabel, pointsLength, point, i;
                 if (indicator.options.dataLabels.enabled) {
                     pointsLength = indicator.points.length;
-                    // For every Ressitance/Support group we need to render labels.
+                    // For every Resistance/Support group we need to render labels.
                     // Add one more item, which will just store dataLabels from
                     // previous iteration
                     pointMapping.concat([false]).forEach(function (position, k) {
@@ -6423,7 +6425,7 @@
                     index: void 0,
                     period: 28,
                     /**
-                     * Algorithm used to calculate ressistance and support lines based
+                     * Algorithm used to calculate resistance and support lines based
                      * on pivot points. Implemented algorithms: `'standard'`,
                      * `'fibonacci'` and `'camarilla'`
                      */
@@ -6596,7 +6598,7 @@
              */
             PPOIndicator.defaultOptions = merge(EMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of Percentage Price Oscillator series
+                 * Parameters used in calculation of Percentage Price Oscillator series
                  * points.
                  *
                  * @excluding period
@@ -8149,7 +8151,7 @@
 
         return SlowStochasticIndicator;
     });
-    _registerModule(_modules, 'Stock/Indicators/Supertrend/SupertrendIndicator.js', [_modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js'], _modules['Core/Chart/StockChart.js']], function (SeriesRegistry, U, StockChart) {
+    _registerModule(_modules, 'Stock/Indicators/Supertrend/SupertrendIndicator.js', [_modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (SeriesRegistry, U) {
         /* *
          *
          *  License: www.highcharts.com/license
@@ -8218,7 +8220,7 @@
                 var indicator = this;
                 _super.prototype.init.apply(indicator, arguments);
                 // Only after series are linked add some additional logic/properties.
-                var unbinder = addEvent(StockChart, 'afterLinkSeries', function () {
+                var unbinder = addEvent(this.chart.constructor, 'afterLinkSeries', function () {
                     // Protection for a case where the indicator is being updated,
                     // for a brief moment the indicator is deleted.
                     if (indicator.options) {
@@ -8247,7 +8249,7 @@
                     }
                 }, 
                 // Sorted supertrend points array
-                groupedPoitns = {
+                groupedPoints = {
                     top: [],
                     bottom: [],
                     intersect: [] // Change trend line points
@@ -8283,7 +8285,7 @@
                 prevMainPoint, prevPrevMainPoint, 
                 // Used when particular point color is set
                 pointColor, 
-                // Temporary points that fill groupedPoitns array
+                // Temporary points that fill groupedPoints array
                 newPoint, newNextPoint, indicPointsLen = indicPoints.length;
                 // Loop which sort supertrend points
                 while (indicPointsLen--) {
@@ -8354,19 +8356,19 @@
                             nextPoint.y >= nextMainPoint.close) {
                             point.color = (pointColor || indicOptions.fallingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.top.push(newPoint);
+                            groupedPoints.top.push(newPoint);
                         }
                         else if (point.y < mainPoint.close &&
                             nextPoint.y < nextMainPoint.close) {
                             point.color = (pointColor || indicOptions.risingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.bottom.push(newPoint);
+                            groupedPoints.bottom.push(newPoint);
                         }
                         else {
-                            groupedPoitns.intersect.push(newPoint);
-                            groupedPoitns.intersect.push(newNextPoint);
+                            groupedPoints.intersect.push(newPoint);
+                            groupedPoints.intersect.push(newNextPoint);
                             // Additional null point to make a gap in line
-                            groupedPoitns.intersect.push(merge(newNextPoint, {
+                            groupedPoints.intersect.push(merge(newNextPoint, {
                                 isNull: true
                             }));
                             if (point.y >= mainPoint.close &&
@@ -8375,8 +8377,8 @@
                                     indicOptions.color);
                                 nextPoint.color = (pointColor || indicOptions.risingTrendColor ||
                                     indicOptions.color);
-                                groupedPoitns.top.push(newPoint);
-                                groupedPoitns.top.push(merge(newNextPoint, {
+                                groupedPoints.top.push(newPoint);
+                                groupedPoints.top.push(merge(newNextPoint, {
                                     isNull: true
                                 }));
                             }
@@ -8386,8 +8388,8 @@
                                     indicOptions.color);
                                 nextPoint.color = (pointColor || indicOptions.fallingTrendColor ||
                                     indicOptions.color);
-                                groupedPoitns.bottom.push(newPoint);
-                                groupedPoitns.bottom.push(merge(newNextPoint, {
+                                groupedPoints.bottom.push(newPoint);
+                                groupedPoints.bottom.push(merge(newNextPoint, {
                                     isNull: true
                                 }));
                             }
@@ -8397,17 +8399,17 @@
                         if (point.y >= mainPoint.close) {
                             point.color = (pointColor || indicOptions.fallingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.top.push(newPoint);
+                            groupedPoints.top.push(newPoint);
                         }
                         else {
                             point.color = (pointColor || indicOptions.risingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.bottom.push(newPoint);
+                            groupedPoints.bottom.push(newPoint);
                         }
                     }
                 }
                 // Generate lines:
-                objectEach(groupedPoitns, function (values, lineName) {
+                objectEach(groupedPoints, function (values, lineName) {
                     indicator.points = values;
                     indicator.options = merge(supertrendLineOptions[lineName].styles, gappedExtend);
                     indicator.graph = indicator['graph' + lineName + 'Line'];
@@ -8534,7 +8536,7 @@
              */
             SupertrendIndicator.defaultOptions = merge(SMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of Supertrend indicator series points.
+                 * Parameters used in calculation of Supertrend indicator series points.
                  *
                  * @excluding index
                  */
@@ -8697,7 +8699,7 @@
 
         return VBPPoint;
     });
-    _registerModule(_modules, 'Stock/Indicators/VBP/VBPIndicator.js', [_modules['Stock/Indicators/VBP/VBPPoint.js'], _modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js'], _modules['Core/Chart/StockChart.js']], function (VBPPoint, A, H, SeriesRegistry, U, StockChart) {
+    _registerModule(_modules, 'Stock/Indicators/VBP/VBPIndicator.js', [_modules['Stock/Indicators/VBP/VBPPoint.js'], _modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (VBPPoint, A, H, SeriesRegistry, U) {
         /* *
          *
          *  (c) 2010-2024 Paweł Dalek
@@ -8791,7 +8793,7 @@
                 delete options.data;
                 _super.prototype.init.apply(indicator, arguments);
                 // Only after series are linked add some additional logic/properties.
-                var unbinder = addEvent(StockChart, 'afterLinkSeries', function () {
+                var unbinder = addEvent(this.chart.constructor, 'afterLinkSeries', function () {
                     // Protection for a case where the indicator is being updated,
                     // for a brief moment the indicator is deleted.
                     if (indicator.options) {
@@ -9005,7 +9007,7 @@
                     yData: yData
                 };
             };
-            // Specifing where each zone should start ans end
+            // Specifying where each zone should start ans end
             VBPIndicator.prototype.specifyZones = function (isOHLC, xValues, yValues, ranges, volumeSeries) {
                 var indicator = this, rangeExtremes = (isOHLC ? arrayExtremesOHLC(yValues) : false), zoneStarts = indicator.zoneStarts = [], priceZones = [];
                 var lowRange = rangeExtremes ?
@@ -9057,7 +9059,7 @@
                 // Checks if each point has a corresponding volume value
                 if (abs(baseSeriesLength - volumeSeriesLength)) {
                     // If the first point don't have volume, add 0 value at the
-                    // beggining of the volume array
+                    // beginning of the volume array
                     if (xValues[0] !== volumeXData[0]) {
                         volumeYData.unshift(0);
                     }
@@ -9116,7 +9118,7 @@
                 });
                 return priceZones;
             };
-            // Function responsoble for drawing additional lines indicating zones
+            // Function responsible for drawing additional lines indicating zones
             VBPIndicator.prototype.drawZones = function (chart, yAxis, zonesValues, zonesStyles) {
                 var indicator = this, renderer = chart.renderer, leftLinePos = 0, rightLinePos = chart.plotWidth, verticalOffset = chart.plotTop;
                 var zoneLinesSVG = indicator.zoneLinesSVG, zoneLinesPath = [], verticalLinePos;
@@ -9605,7 +9607,7 @@
              */
             WilliamsRIndicator.defaultOptions = merge(SMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of Williams %R series points.
+                 * Parameters used in calculation of Williams %R series points.
                  * @excluding index
                  */
                 params: {
@@ -9882,7 +9884,7 @@
                     'high': 1 - deviation
                 }, xVal = series.xData, yVal = series.yData, yValLen = yVal ? yVal.length : 0, zigzag = [], xData = [], yData = [];
                 var i, j, zigzagPoint, directionUp, exitLoop = false, yIndex = false;
-                // Exit if not enught points or no low or high values
+                // Exit if not enough points or no low or high values
                 if (!xVal || xVal.length <= 1 ||
                     (yValLen &&
                         (typeof yVal[0][lowIndex] === 'undefined' ||
@@ -9894,7 +9896,7 @@
                 // Search for a second zigzag point candidate,
                 // this will also set first zigzag point
                 for (i = 1; i < yValLen; i++) {
-                    // requried change to go down
+                    // required change to go down
                     if (yVal[i][lowIndex] <= firstZigzagHigh * deviations.high) {
                         zigzag.push([xVal[0], firstZigzagHigh]);
                         // second zigzag point candidate
@@ -9902,7 +9904,7 @@
                         // next line will be going up
                         directionUp = true;
                         exitLoop = true;
-                        // requried change to go up
+                        // required change to go up
                     }
                     else if (yVal[i][highIndex] >= firstZigzagLow * deviations.low) {
                         zigzag.push([xVal[0], firstZigzagLow]);
@@ -9926,7 +9928,7 @@
                         if (yVal[i][lowIndex] <= zigzagPoint[1]) {
                             zigzagPoint = [xVal[i], yVal[i][lowIndex]];
                         }
-                        // requried change to go down -> new zigzagpoint and
+                        // required change to go down -> new zigzagpoint and
                         // direction change
                         if (yVal[i][highIndex] >=
                             zigzagPoint[1] * deviations.low) {
@@ -9938,7 +9940,7 @@
                         if (yVal[i][highIndex] >= zigzagPoint[1]) {
                             zigzagPoint = [xVal[i], yVal[i][highIndex]];
                         }
-                        // requried change to go down -> new zigzagpoint and
+                        // required change to go down -> new zigzagpoint and
                         // direction change
                         if (yVal[i][lowIndex] <=
                             zigzagPoint[1] * deviations.high) {
@@ -10259,10 +10261,10 @@
                 params: {
                     /**
                      * Unit (in milliseconds) for the x axis distances used to
-                     * compute the regression line paramters (slope & intercept) for
-                     * every range. In Highcharts Stock the x axis values are always
-                     * represented in milliseconds which may cause that distances
-                     * between points are "big" integer numbers.
+                     * compute the regression line parameters (slope & intercept)
+                     * for every range. In Highcharts Stock the x axis values are
+                     * always represented in milliseconds which may cause that
+                     * distances between points are "big" integer numbers.
                      *
                      * Highcharts Stock's linear regression algorithm (least squares
                      * method) will utilize these "big" integers for finding the
@@ -10270,10 +10272,10 @@
                      * period. In consequence, this value may be a very "small"
                      * decimal number that's hard to interpret by a human.
                      *
-                     * For instance: `xAxisUnit` equealed to `86400000` ms (1 day)
+                     * For instance: `xAxisUnit` equaled to `86400000` ms (1 day)
                      * forces the algorithm to treat `86400000` as `1` while
-                     * computing the slope and the intercept. This may enchance the
-                     * legiblitity of the indicator's values.
+                     * computing the slope and the intercept. This may enhance the
+                     * legibility of the indicator's values.
                      *
                      * Default value is the closest distance between two data
                      * points.
@@ -11245,8 +11247,9 @@
 
         return DisparityIndexIndicator;
     });
-    _registerModule(_modules, 'masters/indicators/indicators-all.src.js', [], function () {
+    _registerModule(_modules, 'masters/indicators/indicators-all.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

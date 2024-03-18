@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Advanced Highcharts Stock tools
  *
@@ -252,7 +252,8 @@
                     className: 'highcharts-circle-annotation',
                     /** @ignore-option */
                     start: function (e) {
-                        var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis), navigation = this.chart.options.navigation;
+                        var _a;
+                        var coords = (_a = this.chart.pointer) === null || _a === void 0 ? void 0 : _a.getCoordinates(e), coordsX = coords && getAssignedAxis(coords.xAxis), coordsY = coords && getAssignedAxis(coords.yAxis), navigation = this.chart.options.navigation;
                         // Exit if clicked out of axes area
                         if (!coordsX || !coordsY) {
                             return;
@@ -306,7 +307,8 @@
                 ellipseAnnotation: {
                     className: 'highcharts-ellipse-annotation',
                     start: function (e) {
-                        var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis), navigation = this.chart.options.navigation;
+                        var _a;
+                        var coords = (_a = this.chart.pointer) === null || _a === void 0 ? void 0 : _a.getCoordinates(e), coordsX = coords && getAssignedAxis(coords.xAxis), coordsY = coords && getAssignedAxis(coords.yAxis), navigation = this.chart.options.navigation;
                         if (!coordsX || !coordsY) {
                             return;
                         }
@@ -356,7 +358,8 @@
                     className: 'highcharts-rectangle-annotation',
                     /** @ignore-option */
                     start: function (e) {
-                        var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                        var _a;
+                        var coords = (_a = this.chart.pointer) === null || _a === void 0 ? void 0 : _a.getCoordinates(e), coordsX = coords && getAssignedAxis(coords.xAxis), coordsY = coords && getAssignedAxis(coords.yAxis);
                         // Exit if clicked out of axes area
                         if (!coordsX || !coordsY) {
                             return;
@@ -384,8 +387,9 @@
                     /** @ignore-option */
                     steps: [
                         function (e, annotation) {
+                            var _a;
                             var shapes = annotation.options.shapes, points = ((shapes && shapes[0] && shapes[0].points) ||
-                                []), coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                                []), coords = (_a = this.chart.pointer) === null || _a === void 0 ? void 0 : _a.getCoordinates(e), coordsX = coords && getAssignedAxis(coords.xAxis), coordsY = coords && getAssignedAxis(coords.yAxis);
                             if (coordsX && coordsY) {
                                 var x = coordsX.value, y = coordsY.value;
                                 // Top right point
@@ -415,7 +419,8 @@
                     className: 'highcharts-label-annotation',
                     /** @ignore-option */
                     start: function (e) {
-                        var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis), navigation = this.chart.options.navigation;
+                        var _a;
+                        var coords = (_a = this.chart.pointer) === null || _a === void 0 ? void 0 : _a.getCoordinates(e), coordsX = coords && getAssignedAxis(coords.xAxis), coordsY = coords && getAssignedAxis(coords.yAxis), navigation = this.chart.options.navigation;
                         // Exit if clicked out of axes area
                         if (!coordsX || !coordsY) {
                             return;
@@ -449,7 +454,7 @@
              * from a different server.
              *
              * @type      {string}
-             * @default   https://code.highcharts.com/11.3.0/gfx/stock-icons/
+             * @default   https://code.highcharts.com/11.4.0/gfx/stock-icons/
              * @since     7.1.3
              * @apioption navigation.iconsURL
              */
@@ -539,7 +544,7 @@
         var setOptions = D.setOptions;
         var format = F.format;
         var composed = H.composed, doc = H.doc, win = H.win;
-        var getFieldType = NBU.getFieldType;
+        var getAssignedAxis = NBU.getAssignedAxis, getFieldType = NBU.getFieldType;
         var addEvent = U.addEvent, attr = U.attr, defined = U.defined, fireEvent = U.fireEvent, isArray = U.isArray, isFunction = U.isFunction, isNumber = U.isNumber, isObject = U.isObject, merge = U.merge, objectEach = U.objectEach, pick = U.pick, pushUnique = U.pushUnique;
         /* *
          *
@@ -614,7 +619,7 @@
                     this.navigationBindings.container[0]) {
                     var container_1 = this.navigationBindings.container[0];
                     objectEach(navigationBindings.boundClassNames, function (value, key) {
-                        // Get the HTML element coresponding to the className taken
+                        // Get the HTML element corresponding to the className taken
                         // from StockToolsBindings.
                         var buttonNode = container_1.querySelectorAll('.' + key);
                         if (buttonNode) {
@@ -761,7 +766,7 @@
              *
              * */
             NavigationBindings.compose = function (AnnotationClass, ChartClass) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'NavigationBindings')) {
                     addEvent(AnnotationClass, 'remove', onAnnotationRemove);
                     // Basic shapes:
                     selectableAnnotation(AnnotationClass);
@@ -782,8 +787,16 @@
              *  Functions
              *
              * */
+            NavigationBindings.prototype.getCoords = function (e) {
+                var _a;
+                var coords = (_a = this.chart.pointer) === null || _a === void 0 ? void 0 : _a.getCoordinates(e);
+                return [
+                    coords && getAssignedAxis(coords.xAxis),
+                    coords && getAssignedAxis(coords.yAxis)
+                ];
+            };
             /**
-             * Initi all events conencted to NavigationBindings.
+             * Init all events connected to NavigationBindings.
              *
              * @private
              * @function Highcharts.NavigationBindings#initEvents
@@ -838,7 +851,7 @@
                 });
             };
             /**
-             * Hook for click on a button, method selcts/unselects buttons,
+             * Hook for click on a button, method selects/unselects buttons,
              * then calls `bindings.init` callback.
              *
              * @private
@@ -1018,19 +1031,23 @@
                     if (value !== 'undefined') {
                         var parent_1 = config;
                         path.forEach(function (name, index) {
-                            var nextName = pick(path[index + 1], '');
-                            if (pathLength === index) {
-                                // Last index, put value:
-                                parent_1[name] = value;
-                            }
-                            else if (!parent_1[name]) {
-                                // Create middle property:
-                                parent_1[name] = nextName.match(/\d/g) ? [] : {};
-                                parent_1 = parent_1[name];
-                            }
-                            else {
-                                // Jump into next property
-                                parent_1 = parent_1[name];
+                            if (name !== '__proto__' && name !== 'constructor') {
+                                var nextName = pick(path[index + 1], '');
+                                if (pathLength === index) {
+                                    // Last index, put value:
+                                    parent_1[name] = value;
+                                }
+                                else if (!parent_1[name]) {
+                                    // Create middle property:
+                                    parent_1[name] = nextName.match(/\d/g) ?
+                                        [] :
+                                        {};
+                                    parent_1 = parent_1[name];
+                                }
+                                else {
+                                    // Jump into next property
+                                    parent_1 = parent_1[name];
+                                }
                             }
                         });
                     }
@@ -1502,9 +1519,10 @@
          * Consider using getHoverData(), but always kdTree (columns?)
          */
         function attractToPoint(e, chart) {
-            var coords = chart.pointer.getCoordinates(e);
+            var _a;
+            var coords = (_a = chart.pointer) === null || _a === void 0 ? void 0 : _a.getCoordinates(e);
             var coordsX, coordsY, distX = Number.MAX_VALUE, closestPoint;
-            if (chart.navigationBindings) {
+            if (chart.navigationBindings && coords) {
                 coordsX = getAssignedAxis(coords.xAxis);
                 coordsY = getAssignedAxis(coords.yAxis);
             }
@@ -1517,12 +1535,11 @@
             // Search by 'x' but only in yAxis' series.
             coordsY.axis.series.forEach(function (series) {
                 if (series.points) {
-                    series.points.forEach(function (point) {
-                        if (point && distX > Math.abs(point.x - x)) {
-                            distX = Math.abs(point.x - x);
-                            closestPoint = point;
-                        }
-                    });
+                    var point = series.searchPoint(e, true);
+                    if (point && distX > Math.abs(point.x - x)) {
+                        distX = Math.abs(point.x - x);
+                        closestPoint = point;
+                    }
                 }
             });
             if (closestPoint && closestPoint.x && closestPoint.y) {
@@ -1689,7 +1706,7 @@
          * @function bindingsUtils.updateNthPoint
          *
          * @param {number} startIndex
-         *        Index from each point should udpated
+         *        Index from which point should update
          *
          * @return {Function}
          *         Callback to be used in steps array
@@ -1760,7 +1777,7 @@
 
         return StockToolsUtilities;
     });
-    _registerModule(_modules, 'Stock/StockTools/StockToolsBindings.js', [_modules['Core/Globals.js'], _modules['Extensions/Annotations/NavigationBindingsUtilities.js'], _modules['Stock/StockTools/StockToolsUtilities.js'], _modules['Core/Utilities.js']], function (H, NBU, STU, U) {
+    _registerModule(_modules, 'Stock/StockTools/StockToolsBindings.js', [_modules['Core/Globals.js'], _modules['Stock/StockTools/StockToolsUtilities.js'], _modules['Core/Utilities.js']], function (H, STU, U) {
         /**
          *
          *  Events generator for Stock tools
@@ -1772,7 +1789,6 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var getAssignedAxis = NBU.getAssignedAxis;
         var addFlagFromForm = STU.addFlagFromForm, attractToPoint = STU.attractToPoint, isNotNavigatorYAxis = STU.isNotNavigatorYAxis, isPriceIndicatorEnabled = STU.isPriceIndicatorEnabled, manageIndicators = STU.manageIndicators, updateHeight = STU.updateHeight, updateNthPoint = STU.updateNthPoint, updateRectSize = STU.updateRectSize;
         var fireEvent = U.fireEvent, merge = U.merge;
         /* *
@@ -1804,7 +1820,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -1845,7 +1861,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -1889,7 +1905,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -1931,7 +1947,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -1975,7 +1991,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2017,7 +2033,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2062,7 +2078,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2098,7 +2114,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2135,7 +2151,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2175,7 +2191,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2219,7 +2235,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2266,7 +2282,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2317,7 +2333,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2373,7 +2389,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2429,7 +2445,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2486,7 +2502,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2530,7 +2546,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2570,7 +2586,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2809,7 +2825,7 @@
                 // eslint-disable-next-line valid-jsdoc
                 /** @ignore-option */
                 start: function (e) {
-                    var coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
+                    var _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
                     // Exit if clicked out of axes area
                     if (!coordsX || !coordsY) {
                         return;
@@ -2832,18 +2848,20 @@
                 // eslint-disable-next-line valid-jsdoc
                 steps: [
                     function (e, annotation) {
-                        var mockPointOpts = annotation.options.typeOptions.points, x = mockPointOpts && mockPointOpts[0].x, coords = this.chart.pointer.getCoordinates(e), coordsX = getAssignedAxis(coords.xAxis), coordsY = getAssignedAxis(coords.yAxis);
-                        annotation.update({
-                            typeOptions: {
-                                xAxis: coordsX.axis.index,
-                                yAxis: coordsY.axis.index,
-                                points: [{
-                                        x: x
-                                    }, {
-                                        x: coordsX.value
-                                    }]
-                            }
-                        });
+                        var mockPointOpts = annotation.options.typeOptions.points, x = mockPointOpts && mockPointOpts[0].x, _a = this.getCoords(e), coordsX = _a[0], coordsY = _a[1];
+                        if (coordsX && coordsY) {
+                            annotation.update({
+                                typeOptions: {
+                                    xAxis: coordsX.axis.index,
+                                    yAxis: coordsY.axis.index,
+                                    points: [{
+                                            x: x
+                                        }, {
+                                            x: coordsX.value
+                                        }]
+                                }
+                            });
+                        }
                     }
                 ]
             },
@@ -3876,6 +3894,7 @@
                  */
                 definitions: {
                     separator: {
+                        elementType: 'span',
                         /**
                          * A predefined background symbol for the button.
                          */
@@ -4235,7 +4254,7 @@
                         },
                         timeCycles: {
                             /**
-                             * A predefined backgroud symbol for the button.
+                             * A predefined background symbol for the button.
                              *
                              * @type {string}
                              */
@@ -4451,7 +4470,7 @@
 
         return StockToolsDefaults;
     });
-    _registerModule(_modules, 'Stock/StockTools/StockTools.js', [_modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Extensions/Annotations/NavigationBindingsUtilities.js'], _modules['Stock/StockTools/StockToolsBindings.js'], _modules['Stock/StockTools/StockToolsDefaults.js'], _modules['Stock/StockTools/StockToolsUtilities.js'], _modules['Core/Utilities.js']], function (D, H, NBU, StockToolsBindings, StockToolsDefaults, STU, U) {
+    _registerModule(_modules, 'Stock/StockTools/StockTools.js', [_modules['Core/Defaults.js'], _modules['Extensions/Annotations/NavigationBindingsUtilities.js'], _modules['Stock/StockTools/StockToolsBindings.js'], _modules['Stock/StockTools/StockToolsDefaults.js'], _modules['Stock/StockTools/StockToolsUtilities.js'], _modules['Core/Utilities.js']], function (D, NBU, StockToolsBindings, StockToolsDefaults, STU, U) {
         /**
          *
          *  Events generator for Stock tools
@@ -4464,10 +4483,9 @@
          *
          * */
         var setOptions = D.setOptions;
-        var composed = H.composed;
         var getAssignedAxis = NBU.getAssignedAxis;
         var isNotNavigatorYAxis = STU.isNotNavigatorYAxis, isPriceIndicatorEnabled = STU.isPriceIndicatorEnabled;
-        var correctFloat = U.correctFloat, defined = U.defined, isNumber = U.isNumber, pick = U.pick, pushUnique = U.pushUnique;
+        var correctFloat = U.correctFloat, defined = U.defined, isNumber = U.isNumber, pick = U.pick;
         /* *
          *
          *  Functions
@@ -4477,21 +4495,21 @@
          * @private
          */
         function compose(NavigationBindingsClass) {
-            if (pushUnique(composed, compose)) {
-                var navigationProto = NavigationBindingsClass.prototype;
+            var _a;
+            var navigationProto = NavigationBindingsClass.prototype;
+            if (!((_a = navigationProto.utils) === null || _a === void 0 ? void 0 : _a.manageIndicators)) {
                 // Extends NavigationBindings to support indicators and resizers:
                 navigationProto.getYAxisPositions = navigationGetYAxisPositions;
                 navigationProto.getYAxisResizers = navigationGetYAxisResizers;
                 navigationProto.recalculateYAxisPositions =
                     navigationRecalculateYAxisPositions;
                 navigationProto.resizeYAxes = navigationResizeYAxes;
-                navigationProto.utils = {
-                    indicatorsWithAxes: STU.indicatorsWithAxes,
-                    indicatorsWithVolume: STU.indicatorsWithVolume,
-                    getAssignedAxis: getAssignedAxis,
-                    isPriceIndicatorEnabled: isPriceIndicatorEnabled,
-                    manageIndicators: STU.manageIndicators
-                };
+                navigationProto.utils = navigationProto.utils || {};
+                navigationProto.utils.indicatorsWithAxes = STU.indicatorsWithAxes;
+                navigationProto.utils.indicatorsWithVolume = STU.indicatorsWithVolume;
+                navigationProto.utils.getAssignedAxis = getAssignedAxis;
+                navigationProto.utils.isPriceIndicatorEnabled = isPriceIndicatorEnabled;
+                navigationProto.utils.manageIndicators = STU.manageIndicators;
                 setOptions(StockToolsDefaults);
                 setOptions({
                     navigation: {
@@ -4645,7 +4663,7 @@
          * axes it is placed there. If not, current plot area is scaled
          * to make room for new axis.
          *
-         * If axis is removed, the current plot area streaches to fit into 100%
+         * If axis is removed, the current plot area stretches to fit into 100%
          * of the plot area.
          *
          * @private
@@ -4889,7 +4907,7 @@
                 });
             };
             /**
-             * Create single button. Consist of HTML elements `li`, `span`, and (if
+             * Create single button. Consist of HTML elements `li`, `button`, and (if
              * exists) submenu container.
              *
              * @private
@@ -4918,13 +4936,14 @@
                     title: lang[btnName] || btnName
                 }, void 0, target);
                 // single button
-                var mainButton = createElement('span', {
+                var elementType = (btnOptions.elementType || 'button');
+                var mainButton = createElement(elementType, {
                     className: 'highcharts-menu-item-btn'
                 }, void 0, buttonWrapper);
                 // submenu
                 if (items && items.length) {
                     // arrow is a hook to show / hide submenu
-                    var submenuArrow = createElement('span', {
+                    var submenuArrow = createElement('button', {
                         className: 'highcharts-submenu-item-arrow ' +
                             'highcharts-arrow-right'
                     }, void 0, buttonWrapper);
@@ -5013,9 +5032,7 @@
                         return e.stopPropagation();
                     });
                 });
-                addEvent(wrapper, 'mouseover', function (e) {
-                    return chart.pointer.onContainerMouseLeave(e);
-                });
+                addEvent(wrapper, 'mouseover', function (e) { var _a; return (_a = chart.pointer) === null || _a === void 0 ? void 0 : _a.onContainerMouseLeave(e); });
                 // toolbar
                 this.toolbar = toolbar = createElement('ul', {
                     className: 'highcharts-stocktools-toolbar ' +
@@ -5190,7 +5207,7 @@
             Toolbar.prototype.getIconsURL = function () {
                 return this.chart.options.navigation.iconsURL ||
                     this.options.iconsURL ||
-                    'https://code.highcharts.com/11.3.0/gfx/stock-icons/';
+                    'https://code.highcharts.com/11.4.0/gfx/stock-icons/';
             };
             return Toolbar;
         }());
@@ -5250,7 +5267,7 @@
 
         return Toolbar;
     });
-    _registerModule(_modules, 'Stock/StockTools/StockToolsGui.js', [_modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Stock/StockTools/StockToolsDefaults.js'], _modules['Stock/StockTools/StockToolbar.js'], _modules['Core/Utilities.js']], function (D, H, StockToolsDefaults, Toolbar, U) {
+    _registerModule(_modules, 'Stock/StockTools/StockToolsGui.js', [_modules['Core/Defaults.js'], _modules['Stock/StockTools/StockToolsDefaults.js'], _modules['Stock/StockTools/StockToolbar.js'], _modules['Core/Utilities.js']], function (D, StockToolsDefaults, Toolbar, U) {
         /* *
          *
          *  GUI generator for Stock tools
@@ -5263,8 +5280,7 @@
          *
          * */
         var setOptions = D.setOptions;
-        var composed = H.composed;
-        var addEvent = U.addEvent, getStyle = U.getStyle, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique;
+        var addEvent = U.addEvent, getStyle = U.getStyle, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Functions
@@ -5285,7 +5301,8 @@
          * @private
          */
         function compose(ChartClass, NavigationBindingsClass) {
-            if (pushUnique(composed, compose)) {
+            var chartProto = ChartClass.prototype;
+            if (!chartProto.setStockTools) {
                 addEvent(ChartClass, 'afterGetContainer', onChartAfterGetContainer);
                 addEvent(ChartClass, 'beforeRedraw', onChartBeforeRedraw);
                 addEvent(ChartClass, 'beforeRender', onChartBeforeRedraw);
@@ -5293,7 +5310,7 @@
                 addEvent(ChartClass, 'getMargins', onChartGetMargins, { order: 0 });
                 addEvent(ChartClass, 'redraw', onChartRedraw);
                 addEvent(ChartClass, 'render', onChartRender);
-                ChartClass.prototype.setStockTools = chartSetStockTools;
+                chartProto.setStockTools = chartSetStockTools;
                 addEvent(NavigationBindingsClass, 'deselectButton', onNavigationBindingsDeselectButton);
                 addEvent(NavigationBindingsClass, 'selectButton', onNavigationBindingsSelectButton);
                 setOptions(StockToolsDefaults);
@@ -5368,6 +5385,7 @@
          * @private
          */
         function onChartRender() {
+            var _a, _b;
             var stockTools = this.stockTools, button = stockTools &&
                 stockTools.toolbar &&
                 stockTools.toolbar.querySelector('.highcharts-current-price-indicator');
@@ -5376,8 +5394,7 @@
                 this.navigationBindings &&
                 this.options.series &&
                 button) {
-                if (this.navigationBindings.constructor.prototype.utils
-                    .isPriceIndicatorEnabled(this.series)) {
+                if ((_b = (_a = this.navigationBindings.utils) === null || _a === void 0 ? void 0 : _a.isPriceIndicatorEnabled) === null || _b === void 0 ? void 0 : _b.call(_a, this.series)) {
                     button.firstChild.style['background-image'] =
                         'url("' + stockTools.getIconsURL() + 'current-price-hide.svg")';
                 }
@@ -5410,7 +5427,7 @@
             var className = 'highcharts-submenu-wrapper', gui = this.chart.stockTools;
             if (gui && gui.guiEnabled) {
                 var button = event.button;
-                // Unslect other active buttons
+                // Unselect other active buttons
                 gui.unselectAllButtons(event.button);
                 // If clicked on a submenu, select state for it's parent
                 if (button.parentNode.className.indexOf(className) >= 0) {
@@ -5434,9 +5451,11 @@
     _registerModule(_modules, 'masters/modules/stock-tools.src.js', [_modules['Core/Globals.js'], _modules['Extensions/Annotations/NavigationBindings.js'], _modules['Stock/StockTools/StockTools.js'], _modules['Stock/StockTools/StockToolsGui.js'], _modules['Stock/StockTools/StockToolbar.js']], function (Highcharts, NavigationBindings, StockTools, StockToolsGui, Toolbar) {
 
         var G = Highcharts;
+        G.NavigationBindings = G.NavigationBindings || NavigationBindings;
         G.Toolbar = Toolbar;
-        StockTools.compose(NavigationBindings);
-        StockToolsGui.compose(G.Chart, NavigationBindings);
+        StockTools.compose(G.NavigationBindings);
+        StockToolsGui.compose(G.Chart, G.NavigationBindings);
 
+        return Highcharts;
     });
 }));

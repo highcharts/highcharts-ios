@@ -57,6 +57,16 @@ Options applied to collapse Button. The collape button is the small button which
 */
 @property(nonatomic, readwrite) HICollapseButton *collapseButton;
 /**
+The pixel width of each node in a, or the height in case the chart is inverted. For tree graphs, the node width is only applied if the marker symbol is `rect`, otherwise the `marker` sizing options apply. Can be a number or a percentage string, or `auto`. If `auto`, the nodes are sized to fill up the plot area in the longitudinal direction, regardless of the number of levels.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [Node width is auto and combined with node distance](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/node-distance)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ nodeWidth;
+/**
 Flips the positions of the nodes of a treegraph along the horizontal axis (vertical if chart is inverted).
 
 **Defaults to** `false`.
@@ -66,6 +76,16 @@ Flips the positions of the nodes of a treegraph along the horizontal axis (verti
 * [Treegraph series with reversed nodes.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/reversed-nodes)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *reversed;
+/**
+The distance between nodes in a tree graph in the longitudinal direction. The longitudinal direction means the direction that the chart flows - in a horizontal chart the distance is horizontal, in an inverted chart (vertical), the distance is vertical. If a number is given, it denotes pixels. If a percentage string is given, the distance is a percentage of the rendered node width. A `nodeDistance` of `100%` will render equal widths for the nodes and the gaps between them. This option applies only when the `nodeWidth` option is `auto`, making the node width respond to the number of columns.
+
+**Defaults to** `30`.
+
+**Try it**
+
+* [Node distance of 100% means equal to node width](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-treegraph/node-distance)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ nodeDistance;
 /**
 Whether the treegraph series should fill the entire plot area in the X axis direction, even when there are collapsed points.
 

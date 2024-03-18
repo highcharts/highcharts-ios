@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Exporting module
  *
@@ -452,7 +452,7 @@
 
         return ExportDataDefaults;
     });
-    _registerModule(_modules, 'Extensions/ExportData/ExportData.js', [_modules['Core/Renderer/HTML/AST.js'], _modules['Core/Defaults.js'], _modules['Extensions/DownloadURL.js'], _modules['Extensions/ExportData/ExportDataDefaults.js'], _modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (AST, D, DownloadURL, ExportDataDefaults, H, SeriesRegistry, U) {
+    _registerModule(_modules, 'Extensions/ExportData/ExportData.js', [_modules['Core/Renderer/HTML/AST.js'], _modules['Core/Defaults.js'], _modules['Extensions/DownloadURL.js'], _modules['Extensions/ExportData/ExportDataDefaults.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (AST, D, DownloadURL, ExportDataDefaults, H, U) {
         /* *
          *
          *  Experimental data export module for Highcharts
@@ -478,9 +478,8 @@
         };
         var getOptions = D.getOptions, setOptions = D.setOptions;
         var downloadURL = DownloadURL.downloadURL;
-        var composed = H.composed, doc = H.doc, win = H.win;
-        var SeriesClass = SeriesRegistry.series, _a = SeriesRegistry.seriesTypes, AreaRangeSeries = _a.arearange, GanttSeries = _a.gantt, MapSeries = _a.map, MapBubbleSeries = _a.mapbubble, TreemapSeries = _a.treemap, XRangeSeries = _a.xrange;
-        var addEvent = U.addEvent, defined = U.defined, extend = U.extend, find = U.find, fireEvent = U.fireEvent, isNumber = U.isNumber, pick = U.pick, pushUnique = U.pushUnique;
+        var doc = H.doc, win = H.win;
+        var addEvent = U.addEvent, defined = U.defined, extend = U.extend, find = U.find, fireEvent = U.fireEvent, isNumber = U.isNumber, pick = U.pick;
         /* *
          *
          *  Functions
@@ -647,9 +646,11 @@
                 if (!item) {
                     return categoryHeader;
                 }
-                if (!(item instanceof SeriesClass)) {
-                    return (item.options.title && item.options.title.text) ||
-                        (item.dateTime ? categoryDatetimeHeader : categoryHeader);
+                if (!item.bindAxes) {
+                    return (item.options.title &&
+                        item.options.title.text) || (item.dateTime ?
+                        categoryDatetimeHeader :
+                        categoryHeader);
                 }
                 if (multiLevelHeaders) {
                     return {
@@ -732,7 +733,6 @@
                         pointArrayMap: series.pointArrayMap,
                         index: series.index
                     };
-                    var seriesIndex = mockSeries.index;
                     // Export directly from options.data because we need the uncropped
                     // data (#7913), and we need to support Boost (#7026).
                     series.options.data.forEach(function eachData(options, pIdx) {
@@ -768,7 +768,7 @@
                             for (var i_1 = 0; i_1 < series.chart.series.length; i_1++) {
                                 arr[i_1] = 0;
                             }
-                            // Create poiners array, holding information how many
+                            // Create pointers array, holding information how many
                             // duplicates of specific x occurs in each series.
                             // Used for creating rows with duplicates.
                             rows[key].pointers = arr;
@@ -1158,12 +1158,14 @@
         /**
          * @private
          */
-        function compose(ChartClass) {
-            if (pushUnique(composed, compose)) {
-                var chartProto = ChartClass.prototype, exportingOptions = getOptions().exporting;
+        function compose(ChartClass, SeriesClass) {
+            var chartProto = ChartClass.prototype;
+            if (!chartProto.getCSV) {
+                var exportingOptions = getOptions().exporting;
                 // Add an event listener to handle the showTable option
                 addEvent(ChartClass, 'afterViewData', onChartAfterViewData);
                 addEvent(ChartClass, 'render', onChartRenderer);
+                addEvent(ChartClass, 'destroy', onChartDestroy);
                 chartProto.downloadCSV = chartDownloadCSV;
                 chartProto.downloadXLS = chartDownloadXLS;
                 chartProto.getCSV = chartGetCSV;
@@ -1202,6 +1204,7 @@
                     }
                 }
                 setOptions(ExportDataDefaults);
+                var _a = SeriesClass.types, AreaRangeSeries = _a.arearange, GanttSeries = _a.gantt, MapSeries = _a.map, MapBubbleSeries = _a.mapbubble, TreemapSeries = _a.treemap, XRangeSeries = _a.xrange;
                 if (AreaRangeSeries) {
                     AreaRangeSeries.prototype.keyToAxis = {
                         low: 'y',
@@ -1215,11 +1218,6 @@
                         end: 'x'
                     };
                 }
-                if (XRangeSeries) {
-                    XRangeSeries.prototype.keyToAxis = {
-                        x2: 'x'
-                    };
-                }
                 if (MapSeries) {
                     MapSeries.prototype.exportKey = 'name';
                 }
@@ -1228,6 +1226,11 @@
                 }
                 if (TreemapSeries) {
                     TreemapSeries.prototype.exportKey = 'name';
+                }
+                if (XRangeSeries) {
+                    XRangeSeries.prototype.keyToAxis = {
+                        x2: 'x'
+                    };
                 }
             }
         }
@@ -1315,6 +1318,14 @@
                 this.viewData();
             }
         }
+        /**
+         * Clean up
+         * @private
+         */
+        function onChartDestroy() {
+            var _a;
+            (_a = this.dataTableDiv) === null || _a === void 0 ? void 0 : _a.remove();
+        }
         /* *
          *
          *  Default Export
@@ -1337,7 +1348,7 @@
          * @extends Highcharts.EventCallbackFunction<Highcharts.Chart>
          *
          * @param {Highcharts.Chart} this
-         * Chart context where the event occured.
+         * Chart context where the event occurred.
          *
          * @param {Highcharts.ExportDataEventObject} event
          * Event object with data rows that can be modified.
@@ -1359,10 +1370,11 @@
 
         var G = Highcharts;
         // Compatibility
-        G.dataURLtoBlob = DownloadURL.dataURLtoBlob;
-        G.downloadURL = DownloadURL.downloadURL;
+        G.dataURLtoBlob = G.dataURLtoBlob || DownloadURL.dataURLtoBlob;
+        G.downloadURL = G.downloadURL || DownloadURL.downloadURL;
         // Compose
-        ExportData.compose(G.Chart);
+        ExportData.compose(G.Chart, G.Series);
 
+        return Highcharts;
     });
 }));

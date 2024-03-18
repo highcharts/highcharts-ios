@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Highcharts
  *
@@ -184,7 +184,11 @@
              * @return {Highcharts.DataTable}
              * Table with `modified` property as a reference.
              */
-            DataModifier.prototype.modifyCell = function (table, columnName, rowIndex, cellValue, eventDetail) {
+            DataModifier.prototype.modifyCell = function (table, 
+            /* eslint-disable @typescript-eslint/no-unused-vars */
+            columnName, rowIndex, cellValue, eventDetail
+            /* eslint-enable @typescript-eslint/no-unused-vars */
+            ) {
                 return this.modifyTable(table);
             };
             /**
@@ -206,7 +210,11 @@
              * @return {Highcharts.DataTable}
              * Table with `modified` property as a reference.
              */
-            DataModifier.prototype.modifyColumns = function (table, columns, rowIndex, eventDetail) {
+            DataModifier.prototype.modifyColumns = function (table, 
+            /* eslint-disable @typescript-eslint/no-unused-vars */
+            columns, rowIndex, eventDetail
+            /* eslint-enable @typescript-eslint/no-unused-vars */
+            ) {
                 return this.modifyTable(table);
             };
             /**
@@ -228,7 +236,11 @@
              * @return {Highcharts.DataTable}
              * Table with `modified` property as a reference.
              */
-            DataModifier.prototype.modifyRows = function (table, rows, rowIndex, eventDetail) {
+            DataModifier.prototype.modifyRows = function (table, 
+            /* eslint-disable @typescript-eslint/no-unused-vars */
+            rows, rowIndex, eventDetail
+            /* eslint-enable @typescript-eslint/no-unused-vars */
+            ) {
                 return this.modifyTable(table);
             };
             /**
@@ -335,7 +347,6 @@
          * to add, remove, and manipulate columns and rows, as well as to retrieve data
          * from specific cells.
          *
-         * @private
          * @class
          * @name Highcharts.DataTable
          *
@@ -1213,7 +1224,7 @@
              * @emits #afterSetColumns
              */
             DataTable.prototype.setColumns = function (columns, rowIndex, eventDetail) {
-                var table = this, tableColumns = table.columns, tableModifier = table.modifier, tableRowCount = table.rowCount, reset = (typeof rowIndex === 'undefined'), columnNames = Object.keys(columns);
+                var table = this, tableColumns = table.columns, tableModifier = table.modifier, reset = (typeof rowIndex === 'undefined'), columnNames = Object.keys(columns);
                 table.emit({
                     type: 'setColumns',
                     columns: columns,
@@ -1539,14 +1550,16 @@
              * @return {Array<string>|undefined}
              * Order of columns.
              */
-            DataConnector.prototype.getColumnOrder = function (usePresentationState) {
+            DataConnector.prototype.getColumnOrder = function (
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            usePresentationState) {
                 var connector = this, columns = connector.metadata.columns, names = Object.keys(columns || {});
                 if (names.length) {
                     return names.sort(function (a, b) { return (pick(columns[a].index, 0) - pick(columns[b].index, 0)); });
                 }
             };
             /**
-             * Retrieves the columns of the the dataTable,
+             * Retrieves the columns of the dataTable,
              * applies column order from meta.
              *
              * @param {boolean} [usePresentationOrder]
@@ -2068,7 +2081,11 @@
              * @param {DataConverter.Options} [options]
              * Options for the export.
              */
-            DataConverter.prototype.export = function (connector, options) {
+            DataConverter.prototype.export = function (
+            /* eslint-disable @typescript-eslint/no-unused-vars */
+            connector, options
+            /* eslint-enable @typescript-eslint/no-unused-vars */
+            ) {
                 this.emit({
                     type: 'exportError',
                     columns: [],
@@ -2143,7 +2160,9 @@
              * @param {DataConverter.UserOptions} options
              * Options of the DataConverter.
              */
-            DataConverter.prototype.parse = function (options) {
+            DataConverter.prototype.parse = function (
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            options) {
                 this.emit({
                     type: 'parseError',
                     columns: [],
@@ -3929,7 +3948,7 @@
             return isValue(x) ? x : NaN;
         }
         /**
-         * Process a function  on the give table. If the arguments do not contain
+         * Process a function on the given table. If the arguments do not contain
          * references or ranges, then no table has to be provided.
          *
          * @private
@@ -3946,7 +3965,9 @@
          * @return {Highcharts.FormulaValue|Array<Highcharts.FormulaValue>}
          * Result value (or values) of the process. `NaN` indicates an error.
          */
-        function processFunction(formulaFunction, table, reference // @todo
+        function processFunction(formulaFunction, table, 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        reference // @todo
         ) {
             var processor = processorFunctions[formulaFunction.name];
             if (processor) {
@@ -5662,11 +5683,9 @@
                 if (!decimalPoint || decimalPoint === itemDelimiter) {
                     decimalPoint = converter.guessedDecimalPoint || '.';
                 }
-                var i = 0, c = '', cl = '', cn = '', token = '', actualColumn = 0, column = 0;
+                var i = 0, c = '', token = '', actualColumn = 0, column = 0;
                 var read = function (j) {
                     c = columnStr[j];
-                    cl = columnStr[j - 1];
-                    cn = columnStr[j + 1];
                 };
                 var pushType = function (type) {
                     if (dataTypes.length < column + 1) {
@@ -5964,14 +5983,14 @@
                     detail: eventDetail,
                     table: table
                 });
-                // If already loaded, clear the current rows
-                table.deleteRows();
                 return Promise
                     .resolve(csvURL ?
                     fetch(csvURL).then(function (response) { return response.text(); }) :
                     csv || '')
                     .then(function (csv) {
                     if (csv) {
+                        // If already loaded, clear the current rows
+                        table.deleteColumns();
                         converter.parse({ csv: csv });
                         table.setColumns(converter.getTable().getColumns());
                     }
@@ -6123,6 +6142,7 @@
                 if (!data) {
                     return;
                 }
+                converter.columns = [];
                 converter.emit({
                     type: 'parse',
                     columns: converter.columns,
@@ -6316,20 +6336,18 @@
                     detail: eventDetail,
                     table: table
                 });
-                // If already loaded, clear the current rows
-                table.deleteRows();
                 return Promise
                     .resolve(dataUrl ?
                     fetch(dataUrl).then(function (json) { return json.json(); }) :
                     data || [])
                     .then(function (data) {
                     if (data) {
+                        // If already loaded, clear the current rows
+                        table.deleteColumns();
                         converter.parse({ data: data });
                         table.setColumns(converter.getTable().getColumns());
                     }
-                    return connector
-                        .setModifierOptions(dataModifier)
-                        .then(function () { return data; });
+                    return connector.setModifierOptions(dataModifier).then(function () { return data; });
                 })
                     .then(function (data) {
                     connector.emit({
@@ -6630,8 +6648,6 @@
                     table: table,
                     url: url
                 });
-                // If already loaded, clear the current table
-                table.deleteColumns();
                 return fetch(url)
                     .then(function (response) { return (response.json()); })
                     .then(function (json) {
@@ -6642,6 +6658,8 @@
                         firstRowAsNames: firstRowAsNames,
                         json: json
                     });
+                    // If already loaded, clear the current table
+                    table.deleteColumns();
                     table.setColumns(converter.getTable().getColumns());
                     return connector.setModifierOptions(dataModifier);
                 })
@@ -6959,9 +6977,7 @@
                 if (topheaders === void 0) { topheaders = []; }
                 if (subheaders === void 0) { subheaders = []; }
                 if (options === void 0) { options = this.options; }
-                var useMultiLevelHeaders = options.useMultiLevelHeaders, useRowspanHeaders = options.useRowspanHeaders, decimalPoint = (options.useLocalDecimalPoint ?
-                    (1.1).toLocaleString()[1] :
-                    '.');
+                var useMultiLevelHeaders = options.useMultiLevelHeaders, useRowspanHeaders = options.useRowspanHeaders;
                 var html = '<thead>', i = 0, len = subheaders && subheaders.length, next, cur, curColspan = 0, rowspan;
                 // Clean up multiple table headers. Chart.getDataRows() returns two
                 // levels of headers when using multilevel, not merged. We need to
@@ -7224,8 +7240,6 @@
                     table: table,
                     tableElement: connector.tableElement
                 });
-                // If already loaded, clear the current rows
-                table.deleteColumns();
                 var tableElement;
                 if (typeof tableHTML === 'string') {
                     connector.tableID = tableHTML;
@@ -7247,6 +7261,8 @@
                     return Promise.reject(new Error(error));
                 }
                 converter.parse(merge({ tableElement: connector.tableElement }, connector.options), eventDetail);
+                // If already loaded, clear the current rows
+                table.deleteColumns();
                 table.setColumns(converter.getTable().getColumns());
                 return connector
                     .setModifierOptions(dataModifier)
@@ -8513,13 +8529,14 @@
     _registerModule(_modules, 'masters/modules/data-tools.src.js', [_modules['Core/Globals.js'], _modules['Data/Connectors/DataConnector.js'], _modules['Data/Converters/DataConverter.js'], _modules['Data/DataCursor.js'], _modules['Data/Modifiers/DataModifier.js'], _modules['Data/DataPool.js'], _modules['Data/DataTable.js'], _modules['Data/Formula/Formula.js']], function (Highcharts, DataConnector, DataConverter, DataCursor, DataModifier, DataPool, DataTable, Formula) {
 
         var G = Highcharts;
-        G.DataConnector = DataConnector;
-        G.DataConverter = DataConverter;
-        G.DataCursor = DataCursor;
-        G.DataModifier = DataModifier;
-        G.DataPool = DataPool;
-        G.DataTable = DataTable;
-        G.Formula = Formula;
+        G.DataConnector = G.DataConnector || DataConnector;
+        G.DataConverter = G.DataConverter || DataConverter;
+        G.DataCursor = G.DataCursor || DataCursor;
+        G.DataModifier = G.DataModifier || DataModifier;
+        G.DataPool = G.DataPool || DataPool;
+        G.DataTable = G.DataTable || DataTable;
+        G.Formula = G.Formula || Formula;
 
+        return Highcharts;
     });
 }));

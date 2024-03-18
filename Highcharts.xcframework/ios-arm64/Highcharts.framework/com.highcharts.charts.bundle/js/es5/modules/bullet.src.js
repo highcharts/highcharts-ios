@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Bullet graph series type for Highcharts
  *
@@ -127,7 +127,7 @@
          */
         var BulletSeriesDefaults = {
             /**
-             * All options related with look and positiong of targets.
+             * All options related with look and positioning of targets.
              *
              * @since 6.0.0
              */
@@ -148,7 +148,7 @@
                 height: 3,
                 /**
                  * The border color of the rectangle representing the target. When
-                 * not set, the  point's border color is used.
+                 * not set, the point's border color is used.
                  *
                  * In styled mode, use class `highcharts-bullet-target` instead.
                  *
@@ -459,8 +459,9 @@
 
         return BulletSeries;
     });
-    _registerModule(_modules, 'masters/modules/bullet.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/bullet.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

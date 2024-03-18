@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2009-2024 Sebastian Bochan, Rafal Sebestjanski
  *
@@ -59,7 +59,7 @@
             };
         })();
         var _a = SeriesRegistry.seriesTypes.area.prototype, AreaPoint = _a.pointClass, areaProto = _a.pointClass.prototype;
-        var defined = U.defined, isNumber = U.isNumber, merge = U.merge;
+        var defined = U.defined, isNumber = U.isNumber;
         /* *
          *
          *  Class
@@ -89,7 +89,7 @@
              * @private
              */
             AreaRangePoint.prototype.setState = function () {
-                var prevState = this.state, series = this.series, isPolar = series.chart.polar, seriesOptionsMarker = series.options.marker, seriesDefaultSymbol = series.symbol;
+                var prevState = this.state, series = this.series, isPolar = series.chart.polar;
                 if (!defined(this.plotHigh)) {
                     // Boost doesn't calculate plotHigh
                     this.plotHigh = series.yAxis.toPixels(this.high, true);
@@ -768,8 +768,9 @@
 
         return DumbbellSeries;
     });
-    _registerModule(_modules, 'masters/modules/dumbbell.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/dumbbell.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

@@ -51,7 +51,7 @@ Enable or disable boost on a chart.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *enabled;
 /**
-Set the series threshold for when the boost should kick in globally. Setting to e.g. 20 will cause the whole chart to enter boost mode if there are 20 or more series active. When the chart is in boost mode, every series in it will be rendered to a common canvas. This offers a significant speed improvment in charts with a very high amount of series.
+Set the series threshold for when the boost should kick in globally. Setting to e.g. 20 will cause the whole chart to enter boost mode if there are 20 or more series active. When the chart is in boost mode, every series in it will be rendered to a common canvas. This offers a significant speed improvement in charts with a very high amount of series.
 
 **Defaults to** `50`.
 */
@@ -63,7 +63,7 @@ Enable or disable pre-allocation of vertex buffers. Enabling this will make it s
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *usePreallocated;
 /**
-Enable or disable GPU translations. GPU translations are faster than doing the translation in JavaScript. This option may cause rendering issues with certain datasets. Namely, if your dataset has large numbers with small increments (such as timestamps), it won't work correctly. This is due to floating point precission.
+Enable or disable GPU translations. GPU translations are faster than doing the translation in JavaScript. This option may cause rendering issues with certain datasets. Namely, if your dataset has large numbers with small increments (such as timestamps), it won't work correctly. This is due to floating point precision.
 
 **Defaults to** `false`.
 */

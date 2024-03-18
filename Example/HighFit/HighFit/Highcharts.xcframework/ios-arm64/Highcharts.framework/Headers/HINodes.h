@@ -45,7 +45,7 @@ Options for the node markers.
 */
 @property(nonatomic, readwrite) HIMarker *marker;
 /**
-The id of the auto-generated node, refering to the `from` or `to` setting of the link.
+The id of the auto-generated node, referring to the `from` or `to` setting of the link.
 */
 @property(nonatomic, readwrite) NSString *id;
 /**
@@ -57,7 +57,7 @@ The name to display for the node in data labels and tooltips. Use this when the 
 */
 @property(nonatomic, readwrite) NSString *name;
 /**
-The vertical offset of a node. Positive values shift the node down, negative shift it up. If a percantage string is given, the node is offset by the percentage of the node size.
+The vertical offset of a node. Positive values shift the node down, negative shift it up. If a percentage string is given, the node is offset by the percentage of the node size.
 
 **Try it**
 
@@ -69,13 +69,21 @@ An optional level index of where to place the node. The default behaviour is to 
 */
 @property(nonatomic, readwrite) NSNumber *level;
 /**
-The horizontal offset of a node. Positive values shift the node right, negative shift it left. If a percantage string is given, the node is offset by the percentage of the node size.
+The horizontal offset of a node. Positive values shift the node right, negative shift it left. If a percentage string is given, the node is offset by the percentage of the node size.
 
 **Try it**
 
 * [Specified node offset](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/sankey-node-column/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ offsetHorizontal;
+/**
+The height of the node.
+
+**Try it**
+
+* [Sankey diagram with height options](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-sankey/height/)
+*/
+@property(nonatomic, readwrite) NSNumber *height;
 /**
 An optional column index of where to place the node. The default behaviour is to place it next to the preceding node. Note that this option name is counter intuitive in inverted charts, like for example an organization chart rendered top down. In this case the "columns" are horizontal.
 

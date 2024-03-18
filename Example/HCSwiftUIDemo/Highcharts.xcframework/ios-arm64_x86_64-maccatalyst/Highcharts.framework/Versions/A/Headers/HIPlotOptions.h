@@ -483,6 +483,8 @@ A box plot is a convenient way of depicting groups of data through their five-nu
 **Try it**
 
 * [Box plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/box-plot/)
+* [Box plot in styled mode](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/css/boxplot/)
+* [Jittered scatter plot on top of a box plot](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-scatter/jitter-boxplot)
 */
 @property(nonatomic, readwrite) HIBoxplot *boxplot;
 /**

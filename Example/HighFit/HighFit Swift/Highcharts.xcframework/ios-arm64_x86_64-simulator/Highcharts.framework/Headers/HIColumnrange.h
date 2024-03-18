@@ -42,6 +42,14 @@
 @interface HIColumnrange: HISeries
 
 /**
+The X axis range that each point is valid for. This determines the width of the column. On a categorized axis, the range will be 1 by default (one category unit). On linear and datetime axes, the range will be computed as the distance between the two closest data points. The default `null` means it is computed automatically, but this option can be used to override the automatic value. This option is set by default to 1 if data sorting is enabled.
+
+**Try it**
+
+* [Set the point range to one day on a data set with one week between the points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointrange/)
+*/
+@property(nonatomic, readwrite) id pointRange;
+/**
 The corner radius of the border surrounding each column or bar. A number signifies pixels. A percentage string, like for example `50%`, signifies a relative size. For columns this is relative to the column width, for pies it is relative to the radius and the inner radius.
 
 **Defaults to** `3`.
@@ -52,14 +60,6 @@ The corner radius of the border surrounding each column or bar. A number signifi
 * [Column and pie with rounded border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-border-radius)
 */
 @property(nonatomic, readwrite) HIBorderRadius *borderRadius;
-/**
-The X axis range that each point is valid for. This determines the width of the column. On a categorized axis, the range will be 1 by default (one category unit). On linear and datetime axes, the range will be computed as the distance between the two closest data points. The default `null` means it is computed automatically, but this option can be used to override the automatic value. This option is set by default to 1 if data sorting is enabled.
-
-**Try it**
-
-* [Set the point range to one day on a data set with one week between the points](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-pointrange/)
-*/
-@property(nonatomic, readwrite) id pointRange;
 /**
 Padding between each column or bar, in x axis units.
 
@@ -122,7 +122,7 @@ The maximum allowed pixel width for a column, translated to the height of a bar 
 */
 @property(nonatomic, readwrite) NSNumber *maxPointWidth;
 /**
-A pixel value specifying a fixed width for each column or bar point. When set to `undefined`, the width is calculated from the `pointPadding` and `groupPadding`. The width effects the dimension that is not based on the point value. For column series it is the hoizontal length and for bar series it is the vertical length.
+A pixel value specifying a fixed width for each column or bar point. When set to `undefined`, the width is calculated from the `pointPadding` and `groupPadding`. The width effects the dimension that is not based on the point value. For column series it is the horizontal length and for bar series it is the vertical length.
 
 **Try it**
 

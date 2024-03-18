@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2016-2024 Highsoft AS
  * Authors: Jon Arild Nygard
@@ -34,7 +34,7 @@
             }
         }
     }
-    _registerModule(_modules, 'Series/DrawPointUtilities.js', [_modules['Core/Utilities.js']], function (U) {
+    _registerModule(_modules, 'Series/DrawPointUtilities.js', [], function () {
         /* *
          *
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
@@ -51,7 +51,6 @@
             };
             return __assign.apply(this, arguments);
         };
-        var isNumber = U.isNumber;
         /* *
          *
          *  Functions
@@ -605,7 +604,7 @@
             return result;
         }
         /**
-         * Gives a set of cordinates for an rectangular spiral.
+         * Gives a set of coordinates for an rectangular spiral.
          *
          * @private
          * @function squareSpiral
@@ -620,7 +619,9 @@
          * Resulting coordinates, x and y. False if the word should be dropped from
          * the visualization.
          */
-        function squareSpiral(attempt, params) {
+        function squareSpiral(attempt, 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        params) {
             var a = attempt * 4, k = Math.ceil((Math.sqrt(a) - 1) / 2), isBoolean = function (x) { return (typeof x === 'boolean'); };
             var t = 2 * k + 1, m = Math.pow(t, 2), result = false;
             t -= 1;
@@ -659,7 +660,7 @@
             return result;
         }
         /**
-         * Gives a set of cordinates for an rectangular spiral.
+         * Gives a set of coordinates for an rectangular spiral.
          *
          * @private
          * @function rectangularSpiral
@@ -830,7 +831,7 @@
         function getSpiral(fn, params) {
             var length = 10000, arr = [];
             for (var i = 1; i < length; i++) {
-                // @todo unnecessary amount of precaclulation
+                // @todo unnecessary amount of precalculation
                 arr.push(fn(i, params));
             }
             return function (attempt) { return (attempt <= length ? arr[attempt - 1] : false); };
@@ -1406,8 +1407,9 @@
 
         return WordcloudSeries;
     });
-    _registerModule(_modules, 'masters/modules/wordcloud.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/wordcloud.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

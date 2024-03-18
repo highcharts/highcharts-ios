@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2009-2024
  *
@@ -480,7 +480,7 @@
                     chart.tooltip.options.enabled) {
                     if (
                     // If user drags map do not build k-d-tree
-                    chart.pointer.hasDragged === false &&
+                    !chart.pointer.hasDragged &&
                         // If user zooms in/out map do not build k-d-tree
                         (+series.image.attr('animator') <= 0.01 ||
                             +series.image.attr('animator') >= 0.99)) {
@@ -611,11 +611,11 @@
                     /**
                      * Represents how much blur should be added to the interpolated
                      * image. Works best in the range of 0-1, all higher values
-                     * would need a lot more perfomance of the machine to calculate
+                     * would need a lot more performance of the machine to calculate
                      * more detailed interpolation.
                      *
                      *  * **Note:** Useful, if the data is spread into wide range of
-                     *  longitue and latitude values.
+                     *  longitude and latitude values.
                      *
                      * @sample maps/series-geoheatmap/turkey-fire-areas
                      *         Simple demo of GeoHeatmap interpolation
@@ -713,7 +713,7 @@
          * @apioption series.geoheatmap.data.color
          */
         /**
-         * The value of the point, resulting in a color controled by options
+         * The value of the point, resulting in a color controlled by options
          * as set in the [colorAxis](#colorAxis) configuration.
          *
          * @type      {number|null}
@@ -732,7 +732,7 @@
         */ /**
         * Represents how much blur should be added to the interpolated
         * image. Works best in the range of 0-1, all higher values
-        * would need a lot more perfomance of the machine to calculate
+        * would need a lot more performance of the machine to calculate
         * more detailed interpolation.
         *
         * @name Highcharts.InterpolationOptionsObject#blur
@@ -742,8 +742,9 @@
 
         return GeoHeatmapSeries;
     });
-    _registerModule(_modules, 'masters/modules/geoheatmap.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/geoheatmap.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

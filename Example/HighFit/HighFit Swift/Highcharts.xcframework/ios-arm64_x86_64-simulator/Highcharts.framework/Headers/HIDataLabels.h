@@ -36,7 +36,7 @@ Styles for the label. The default `color` setting is `"contrast"`, which is a ps
 */
 @property(nonatomic, readwrite) HICSSObject *style;
 /**
-Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `circular`, `auto`, `parallel` and `perpendicular`. When `circular`, the best fit will be computed for the point, so that the label is curved around the center when there is room for it, otherwise perpendicular. The legacy `auto` option works similiar to `circular`, but instead of curving the labels they are tangent to the perimiter. The `rotation` option takes precedence over `rotationMode`.
+Decides how the data label will be rotated relative to the perimeter of the sunburst. Valid values are `circular`, `auto`, `parallel` and `perpendicular`. When `circular`, the best fit will be computed for the point, so that the label is curved around the center when there is room for it, otherwise perpendicular. The legacy `auto` option works similar to `circular`, but instead of curving the labels they are tangent to the perimeter. The `rotation` option takes precedence over `rotationMode`.
 
 **Defaults to** `circular`.
 

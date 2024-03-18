@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -83,7 +83,9 @@
              *  Static Functions
              *
              * */
-            ADIndicator.populateAverage = function (xVal, yVal, yValVolume, i, _period) {
+            ADIndicator.populateAverage = function (xVal, yVal, yValVolume, i, 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            _period) {
                 var high = yVal[i][1], low = yVal[i][2], close = yVal[i][3], volume = yValVolume[i], adY = close === high && close === low || high === low ?
                     0 :
                     ((2 * close - low - high) / (high - low)) * volume, adX = xVal[i];
@@ -194,8 +196,9 @@
 
         return ADIndicator;
     });
-    _registerModule(_modules, 'masters/indicators/accumulation-distribution.src.js', [], function () {
+    _registerModule(_modules, 'masters/indicators/accumulation-distribution.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

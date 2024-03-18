@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Module for adding patterns and images as point fills.
  *
@@ -36,7 +36,7 @@
             }
         }
     }
-    _registerModule(_modules, 'Extensions/PatternFill.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (A, D, H, U) {
+    _registerModule(_modules, 'Extensions/PatternFill.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Defaults.js'], _modules['Core/Utilities.js']], function (A, D, U) {
         /* *
          *
          *  Module for using patterns or images as point fills.
@@ -51,8 +51,7 @@
          * */
         var animObject = A.animObject;
         var getOptions = D.getOptions;
-        var composed = H.composed;
-        var addEvent = U.addEvent, defined = U.defined, erase = U.erase, extend = U.extend, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique, removeEvent = U.removeEvent, wrap = U.wrap;
+        var addEvent = U.addEvent, defined = U.defined, erase = U.erase, extend = U.extend, merge = U.merge, pick = U.pick, removeEvent = U.removeEvent, wrap = U.wrap;
         /* *
          *
          *  Constants
@@ -66,11 +65,11 @@
          * */
         /** @private */
         function compose(ChartClass, SeriesClass, SVGRendererClass) {
-            var PointClass = SeriesClass.prototype.pointClass;
-            if (pushUnique(composed, compose)) {
+            var PointClass = SeriesClass.prototype.pointClass, pointProto = PointClass.prototype;
+            if (!pointProto.calculatePatternDimensions) {
                 addEvent(ChartClass, 'endResize', onChartEndResize);
                 addEvent(ChartClass, 'redraw', onChartRedraw);
-                extend(PointClass.prototype, {
+                extend(pointProto, {
                     calculatePatternDimensions: pointCalculatePatternDimensions
                 });
                 addEvent(PointClass, 'afterInit', onPointAfterInit);
@@ -556,7 +555,7 @@
          */
         function wrapSeriesGetColor(proceed) {
             var oldColor = this.options.color;
-            // Temporarely remove color options to get defaults
+            // Temporarily remove color options to get defaults
             if (oldColor &&
                 oldColor.pattern &&
                 !oldColor.pattern.color) {
@@ -574,7 +573,7 @@
             }
         }
         /**
-         * Scale patterns inversly to the series it's used in.
+         * Scale patterns inversely to the series it's used in.
          * Maintains a visual (1,1) scale regardless of size.
          * @private
          */
@@ -615,28 +614,24 @@
                         .replace(renderer.url, '')
                         .replace('url(#', '')
                         .replace(')', '');
-                    return [
-                        id,
-                        {
-                            x: ((_d = point.group) === null || _d === void 0 ? void 0 : _d.scaleX) || 1,
-                            y: ((_e = point.group) === null || _e === void 0 ? void 0 : _e.scaleY) || 1
-                        }
-                    ];
+                    return {
+                        id: id,
+                        x: ((_d = point.group) === null || _d === void 0 ? void 0 : _d.scaleX) || 1,
+                        y: ((_e = point.group) === null || _e === void 0 ? void 0 : _e.scaleY) || 1
+                    };
                 })
                     // Filter out colors and other non-patterns, as well as duplicates.
-                    .filter(function (_a, index, arr) {
-                    var id = _a[0], _ = _a[1];
-                    return id !== '' &&
-                        id.indexOf('highcharts-pattern-') !== -1 &&
-                        !arr.some(function (_a, otherIndex) {
-                            var otherID = _a[0], _ = _a[1];
-                            return otherID === id && otherIndex < index;
+                    .filter(function (pointInfo, index, arr) {
+                    return pointInfo.id !== '' &&
+                        pointInfo.id.indexOf('highcharts-pattern-') !== -1 &&
+                        !arr.some(function (otherInfo, otherIndex) {
+                            return otherInfo.id === pointInfo.id && otherIndex < index;
                         });
                 })
-                    .forEach(function (_a) {
-                    var id = _a[0], scale = _a[1];
-                    patterns[id].scaleX = 1 / scale.x;
-                    patterns[id].scaleY = 1 / scale.y;
+                    .forEach(function (pointInfo) {
+                    var id = pointInfo.id;
+                    patterns[id].scaleX = 1 / pointInfo.x;
+                    patterns[id].scaleY = 1 / pointInfo.y;
                     patterns[id].updateTransform('patternTransform');
                 });
             }
@@ -772,5 +767,6 @@
         G.patterns = PatternFill.patterns;
         PatternFill.compose(G.Chart, G.Series, G.SVGRenderer);
 
+        return Highcharts;
     });
 }));

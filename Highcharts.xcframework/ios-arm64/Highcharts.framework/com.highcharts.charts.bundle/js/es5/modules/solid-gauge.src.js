@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Solid angular gauge module
  *
@@ -595,8 +595,9 @@
 
         return SolidGaugeSeries;
     });
-    _registerModule(_modules, 'masters/modules/solid-gauge.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/solid-gauge.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

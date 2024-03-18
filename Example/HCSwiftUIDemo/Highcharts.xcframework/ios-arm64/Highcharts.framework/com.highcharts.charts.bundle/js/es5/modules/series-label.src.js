@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -395,7 +395,7 @@
          * @private
          */
         function compose(ChartClass, SVGRendererClass) {
-            if (pushUnique(composed, compose)) {
+            if (pushUnique(composed, 'SeriesLabel')) {
                 // Leave both events, we handle animation differently (#9815)
                 addEvent(ChartClass, 'load', onChartRedraw);
                 addEvent(ChartClass, 'redraw', onChartRedraw);
@@ -436,6 +436,7 @@
                 boxesToAvoid.push.apply(boxesToAvoid, (seriesLabelOptions.boxesToAvoid || []));
             });
             chart.series.forEach(function (series) {
+                var _a, _b;
                 var labelOptions = series.options.label;
                 if (!labelOptions || (!series.xAxis && !series.yAxis)) {
                     return;
@@ -518,8 +519,10 @@
                     for (i = points.length - 1; i > 0; i -= 1) {
                         if (onArea) {
                             // Centered
-                            x = points[i].chartX - bBox.width / 2;
-                            y = (points[i].chartCenterY || 0) - bBox.height / 2;
+                            x = ((_a = points[i].chartCenterX) !== null && _a !== void 0 ? _a : points[i].chartX) -
+                                bBox.width / 2;
+                            y = ((_b = points[i].chartCenterY) !== null && _b !== void 0 ? _b : points[i].chartY) -
+                                bBox.height / 2;
                             if (insidePane(x, y, bBox)) {
                                 best = checkClearPoint(series, x, y, bBox);
                             }
@@ -657,10 +660,11 @@
          * @function Highcharts.Series#getPointsOnGraph
          */
         function getPointsOnGraph(series) {
+            var _a;
             if (!series.xAxis && !series.yAxis) {
                 return;
             }
-            var distance = 16, points = series.points, interpolated = [], graph = series.graph || series.area, node = graph && graph.element, inverted = series.chart.inverted, xAxis = series.xAxis, yAxis = series.yAxis, paneLeft = inverted ? yAxis.pos : xAxis.pos, paneTop = inverted ? xAxis.pos : yAxis.pos, seriesLabelOptions = series.options.label || {}, onArea = pick(seriesLabelOptions.onArea, !!series.area), translatedThreshold = yAxis.getThreshold(series.options.threshold), grid = {};
+            var distance = 16, points = series.points, interpolated = [], graph = series.graph || series.area, node = graph && graph.element, inverted = series.chart.inverted, xAxis = series.xAxis, yAxis = series.yAxis, paneLeft = inverted ? yAxis.pos : xAxis.pos, paneTop = inverted ? xAxis.pos : yAxis.pos, paneHeight = inverted ? xAxis.len : yAxis.len, paneWidth = inverted ? yAxis.len : xAxis.len, seriesLabelOptions = series.options.label || {}, onArea = pick(seriesLabelOptions.onArea, !!series.area), translatedThreshold = yAxis.getThreshold(series.options.threshold), grid = {}, chartCenterKey = inverted ? 'chartCenterX' : 'chartCenterY';
             var i, deltaX, deltaY, delta, len, n, j;
             /**
              * Push the point to the interpolated points, but only if that position in
@@ -693,22 +697,22 @@
                 }
                 len = node.getTotalLength();
                 for (i = 0; i < len; i += distance) {
-                    var domPoint = node.getPointAtLength(i);
+                    var domPoint = node.getPointAtLength(i), plotX = inverted ? paneWidth - domPoint.y : domPoint.x, plotY = inverted ? paneHeight - domPoint.x : domPoint.y;
                     pushDiscrete({
-                        chartX: paneLeft + domPoint.x,
-                        chartY: paneTop + domPoint.y,
-                        plotX: domPoint.x,
-                        plotY: domPoint.y
+                        chartX: paneLeft + plotX,
+                        chartY: paneTop + plotY,
+                        plotX: plotX,
+                        plotY: plotY
                     });
                 }
                 if (d) {
                     graph.attr({ d: d });
                 }
                 // Last point
-                var point = points[points.length - 1];
+                var point = points[points.length - 1], pos = point.pos();
                 pushDiscrete({
-                    chartX: paneLeft + (point.plotX || 0),
-                    chartY: paneTop + (point.plotY || 0)
+                    chartX: paneLeft + ((pos === null || pos === void 0 ? void 0 : pos[0]) || 0),
+                    chartY: paneTop + ((pos === null || pos === void 0 ? void 0 : pos[1]) || 0)
                 });
                 // Interpolate
             }
@@ -716,7 +720,7 @@
                 len = points.length;
                 var last = void 0;
                 for (i = 0; i < len; i += 1) {
-                    var point = points[i], plotX = point.plotX, plotY = point.plotY, plotHigh = point.plotHigh;
+                    var point = points[i], _b = point.pos() || [], plotX = _b[0], plotY = _b[1], plotHigh = point.plotHigh;
                     if (isNumber(plotX) && isNumber(plotY)) {
                         var ctlPoint = {
                             plotX: plotX,
@@ -731,8 +735,14 @@
                                 ctlPoint.plotY = plotHigh;
                                 ctlPoint.chartY = paneTop + plotHigh;
                             }
-                            ctlPoint.chartCenterY = paneTop + ((plotHigh ? plotHigh : plotY) +
-                                pick(point.yBottom, translatedThreshold)) / 2;
+                            if (inverted) {
+                                ctlPoint.chartCenterX = paneLeft + paneWidth - ((plotHigh ? plotHigh : point.plotY || 0) +
+                                    pick(point.yBottom, translatedThreshold)) / 2;
+                            }
+                            else {
+                                ctlPoint.chartCenterY = paneTop + ((plotHigh ? plotHigh : plotY) +
+                                    pick(point.yBottom, translatedThreshold)) / 2;
+                            }
                         }
                         // Add interpolated points
                         if (last) {
@@ -742,19 +752,20 @@
                             if (delta > distance) {
                                 n = Math.ceil(delta / distance);
                                 for (j = 1; j < n; j += 1) {
-                                    pushDiscrete({
-                                        chartX: last.chartX +
-                                            (ctlPoint.chartX - last.chartX) * (j / n),
-                                        chartY: last.chartY +
-                                            (ctlPoint.chartY - last.chartY) * (j / n),
-                                        chartCenterY: (last.chartCenterY || 0) +
-                                            ((ctlPoint.chartCenterY || 0) -
-                                                (last.chartCenterY || 0)) * (j / n),
-                                        plotX: (last.plotX || 0) +
+                                    pushDiscrete((_a = {
+                                            chartX: last.chartX +
+                                                (ctlPoint.chartX - last.chartX) * (j / n),
+                                            chartY: last.chartY +
+                                                (ctlPoint.chartY - last.chartY) * (j / n)
+                                        },
+                                        _a[chartCenterKey] = (last[chartCenterKey] || 0) +
+                                            ((ctlPoint[chartCenterKey] || 0) -
+                                                (last[chartCenterKey] || 0)) * (j / n),
+                                        _a.plotX = (last.plotX || 0) +
                                             (plotX - (last.plotX || 0)) * (j / n),
-                                        plotY: (last.plotY || 0) +
-                                            (plotY - (last.plotY || 0)) * (j / n)
-                                    });
+                                        _a.plotY = (last.plotY || 0) +
+                                            (plotY - (last.plotY || 0)) * (j / n),
+                                        _a));
                                 }
                             }
                         }
@@ -913,5 +924,6 @@
         var G = Highcharts;
         SeriesLabel.compose(G.Chart, G.SVGRenderer);
 
+        return Highcharts;
     });
 }));

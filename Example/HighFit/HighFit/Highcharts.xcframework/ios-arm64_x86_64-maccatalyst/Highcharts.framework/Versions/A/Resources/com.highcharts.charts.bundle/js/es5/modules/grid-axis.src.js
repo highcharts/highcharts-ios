@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v11.3.0 (2024-01-10)
+ * @license Highcharts Gantt JS v11.4.0 (2024-03-04)
  *
  * GridAxis
  *
@@ -46,8 +46,8 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var composed = H.composed, dateFormats = H.dateFormats;
-        var addEvent = U.addEvent, defined = U.defined, erase = U.erase, find = U.find, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique, timeUnits = U.timeUnits, wrap = U.wrap;
+        var dateFormats = H.dateFormats;
+        var addEvent = U.addEvent, defined = U.defined, erase = U.erase, find = U.find, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, pick = U.pick, timeUnits = U.timeUnits, wrap = U.wrap;
         /* *
          *
          *  Enums
@@ -115,7 +115,7 @@
          * @private
          */
         function compose(AxisClass, ChartClass, TickClass) {
-            if (pushUnique(composed, compose)) {
+            if (!AxisClass.keepProps.includes('grid')) {
                 AxisClass.keepProps.push('grid');
                 AxisClass.prototype.getMaxLabelDimensions = getMaxLabelDimensions;
                 wrap(AxisClass.prototype, 'unsquish', wrapUnsquish);
@@ -319,7 +319,7 @@
                     !axis.options.title.style.width) {
                     axisTitle.css({ width: "".concat(firstTick.slotWidth, "px") });
                 }
-                // @todo acutual label padding (top, bottom, left, right)
+                // @todo actual label padding (top, bottom, left, right)
                 axis.maxLabelDimensions = axis.getMaxLabelDimensions(axis.ticks, axis.tickPositions);
                 // Remove right wall before rendering if updating
                 if (axis.rightWall) {
@@ -520,7 +520,7 @@
             var gridAxisOptions;
             if (gridOptions.enabled === true) {
                 // Merge the user options into default grid axis options so
-                // that when a user option is set, it takes presedence.
+                // that when a user option is set, it takes precedence.
                 gridAxisOptions = merge(true, {
                     className: ('highcharts-grid-axis ' + (userOptions.className || '')),
                     dateTimeLabelFormats: {
@@ -556,7 +556,7 @@
                         }
                     },
                     // In a grid axis, only allow one unit of certain types,
-                    // for example we shouln't have one grid cell spanning
+                    // for example we shouldn't have one grid cell spanning
                     // two days.
                     units: [[
                             'millisecond',
@@ -865,7 +865,7 @@
          *       ticks and not the labels directly?
          */
         function onTrimTicks() {
-            var axis = this, chart = axis.chart, options = axis.options, gridOptions = options.grid || {}, categoryAxis = axis.categories, tickPositions = axis.tickPositions, firstPos = tickPositions[0], secondPos = tickPositions[1], lastPos = tickPositions[tickPositions.length - 1], beforeLastPos = tickPositions[tickPositions.length - 2], linkedMin = axis.linkedParent && axis.linkedParent.min, linkedMax = axis.linkedParent && axis.linkedParent.max, min = linkedMin || axis.min, max = linkedMax || axis.max, tickInterval = axis.tickInterval, startLessThanMin = ( // #19845
+            var axis = this, options = axis.options, gridOptions = options.grid || {}, categoryAxis = axis.categories, tickPositions = axis.tickPositions, firstPos = tickPositions[0], secondPos = tickPositions[1], lastPos = tickPositions[tickPositions.length - 1], beforeLastPos = tickPositions[tickPositions.length - 2], linkedMin = axis.linkedParent && axis.linkedParent.min, linkedMax = axis.linkedParent && axis.linkedParent.max, min = linkedMin || axis.min, max = linkedMax || axis.max, tickInterval = axis.tickInterval, startLessThanMin = ( // #19845
             isNumber(min) &&
                 min >= firstPos + tickInterval &&
                 min < secondPos), endMoreThanMin = (isNumber(min) &&
@@ -1113,5 +1113,6 @@
         // Compositions
         GridAxis.compose(G.Axis, G.Chart, G.Tick);
 
+        return Highcharts;
     });
 }));

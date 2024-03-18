@@ -11,7 +11,7 @@
 
 
 /**
-All options related with look and positiong of targets.
+All options related with look and positioning of targets.
 */
 @interface HITargetOptions: HIChartsJSONSerializable
 

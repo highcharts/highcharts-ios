@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -33,7 +33,7 @@
             }
         }
     }
-    _registerModule(_modules, 'Core/Axis/BrokenAxis.js', [_modules['Core/Globals.js'], _modules['Core/Axis/Stacking/StackItem.js'], _modules['Core/Utilities.js']], function (H, StackItem, U) {
+    _registerModule(_modules, 'Core/Axis/BrokenAxis.js', [_modules['Core/Axis/Stacking/StackItem.js'], _modules['Core/Utilities.js']], function (StackItem, U) {
         /* *
          *
          *  (c) 2009-2024 Torstein Honsi
@@ -43,8 +43,7 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var composed = H.composed;
-        var addEvent = U.addEvent, find = U.find, fireEvent = U.fireEvent, isArray = U.isArray, isNumber = U.isNumber, pick = U.pick, pushUnique = U.pushUnique;
+        var addEvent = U.addEvent, find = U.find, fireEvent = U.fireEvent, isArray = U.isArray, isNumber = U.isNumber, pick = U.pick;
         /* *
          *
          *  Composition
@@ -71,7 +70,7 @@
              * @private
              */
             function compose(AxisClass, SeriesClass) {
-                if (pushUnique(composed, compose)) {
+                if (!AxisClass.keepProps.includes('brokenAxis')) {
                     AxisClass.keepProps.push('brokenAxis');
                     addEvent(AxisClass, 'init', onAxisInit);
                     addEvent(AxisClass, 'afterInit', onAxisAfterInit);
@@ -476,7 +475,7 @@
                 };
                 /**
                  * Dynamically set or unset breaks in an axis. This function in lighter
-                 * than usin Axis.update, and it also preserves animation.
+                 * than using Axis.update, and it also preserves animation.
                  *
                  * @private
                  * @function Highcharts.Axis#setBreaks
@@ -604,7 +603,7 @@
                                 });
                                 brokenAxis.breakArray = breakArray_1;
                                 // Used with staticScale, and below the actual axis
-                                // length, when breaks are substracted.
+                                // length, when breaks are subtracted.
                                 if (isNumber(min_1) &&
                                     isNumber(max_1) &&
                                     isNumber(axis.min)) {
@@ -648,8 +647,9 @@
     _registerModule(_modules, 'masters/modules/broken-axis.src.js', [_modules['Core/Globals.js'], _modules['Core/Axis/BrokenAxis.js']], function (Highcharts, BrokenAxis) {
 
         var G = Highcharts;
-        // Compositions
-        BrokenAxis.compose(G.Axis, G.Series);
+        G.BrokenAxis = G.BrokenAxis || BrokenAxis;
+        G.BrokenAxis.compose(G.Axis, G.Series);
 
+        return Highcharts;
     });
 }));

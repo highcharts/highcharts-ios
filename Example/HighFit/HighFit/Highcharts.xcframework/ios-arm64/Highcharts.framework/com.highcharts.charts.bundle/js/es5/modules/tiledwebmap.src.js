@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2009-2024
  *
@@ -623,8 +623,8 @@
          *
          * */
         /** @private */
-        function onChartBeforeMapViewInit(e) {
-            var twm = (this.options.series || []).filter(function (s) { return s.type === 'tiledwebmap'; })[0], geoBounds = e.geoBounds;
+        function onRecommendMapView(e) {
+            var geoBounds = e.geoBounds, chart = e.chart, twm = (chart.options.series || []).filter(function (s) { return s.type === 'tiledwebmap'; })[0];
             if (twm && twm.provider && twm.provider.type && !twm.provider.url) {
                 var ProviderDefinition = TilesProvidersRegistry[twm.provider.type];
                 if (!defined(ProviderDefinition)) {
@@ -633,25 +633,23 @@
                 }
                 else {
                     var def = new ProviderDefinition(), providerProjectionName = def.initialProjectionName;
-                    if (this.options.mapView) {
-                        if (geoBounds) {
-                            var x1 = geoBounds.x1, y1 = geoBounds.y1, x2 = geoBounds.x2, y2 = geoBounds.y2;
-                            this.options.mapView.recommendedMapView = {
-                                projection: {
-                                    name: providerProjectionName,
-                                    parallels: [y1, y2],
-                                    rotation: [-(x1 + x2) / 2]
-                                }
-                            };
-                        }
-                        else {
-                            this.options.mapView.recommendedMapView = {
-                                projection: {
-                                    name: providerProjectionName
-                                },
-                                minZoom: 0
-                            };
-                        }
+                    if (geoBounds) {
+                        var x1 = geoBounds.x1, y1 = geoBounds.y1, x2 = geoBounds.x2, y2 = geoBounds.y2;
+                        this.recommendedMapView = {
+                            projection: {
+                                name: providerProjectionName,
+                                parallels: [y1, y2],
+                                rotation: [-(x1 + x2) / 2]
+                            }
+                        };
+                    }
+                    else {
+                        this.recommendedMapView = {
+                            projection: {
+                                name: providerProjectionName
+                            },
+                            minZoom: 0
+                        };
                     }
                     return false;
                 }
@@ -690,9 +688,9 @@
              *  Static Functions
              *
              * */
-            TiledWebMapSeries.compose = function (ChartClass) {
-                if (pushUnique(composed, this.compose)) {
-                    addEvent(ChartClass, 'beforeMapViewInit', onChartBeforeMapViewInit);
+            TiledWebMapSeries.compose = function (MapViewClass) {
+                if (pushUnique(composed, 'TiledWebMapSeries')) {
+                    addEvent(MapViewClass, 'onRecommendMapView', onRecommendMapView);
                 }
             };
             /* *
@@ -1089,6 +1087,7 @@
                 }
             };
             TiledWebMapSeries.prototype.update = function () {
+                var _a;
                 var series = this, transformGroups = series.transformGroups, chart = this.chart, mapView = chart.mapView, options = arguments[0], provider = options.provider;
                 if (transformGroups) {
                     transformGroups.forEach(function (group) {
@@ -1099,7 +1098,7 @@
                     this.transformGroups = [];
                 }
                 if (mapView &&
-                    !defined(mapView.options.projection) &&
+                    !defined((_a = chart.userOptions.mapView) === null || _a === void 0 ? void 0 : _a.projection) &&
                     provider &&
                     provider.type) {
                     var ProviderDefinition = TilesProvidersRegistry[provider.type];
@@ -1126,11 +1125,12 @@
 
         return TiledWebMapSeries;
     });
-    _registerModule(_modules, 'masters/modules/tiledwebmap.src.js', [_modules['Core/Globals.js'], _modules['Series/TiledWebMap/TiledWebMapSeries.js'], _modules['Maps/TilesProviders/TilesProviderRegistry.js']], function (Highcharts, TiledWebMapSeries, TilesProviderRegistry) {
+    _registerModule(_modules, 'masters/modules/tiledwebmap.src.js', [_modules['Core/Globals.js'], _modules['Maps/TilesProviders/TilesProviderRegistry.js'], _modules['Series/TiledWebMap/TiledWebMapSeries.js']], function (Highcharts, TilesProviderRegistry, TiledWebMapSeries) {
 
         var G = Highcharts;
-        G.TilesProviderRegistry = TilesProviderRegistry;
-        TiledWebMapSeries.compose(G.Chart);
+        G.TilesProviderRegistry = G.TilesProviderRegistry || TilesProviderRegistry;
+        TiledWebMapSeries.compose(G.MapView);
 
+        return Highcharts;
     });
 }));

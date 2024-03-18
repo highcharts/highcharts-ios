@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -127,9 +127,10 @@
          *         The normalized event.
          */
         function getNormalizedEvent(e, chart) {
+            var _a;
             return (typeof e.chartX === 'undefined' ||
                 typeof e.chartY === 'undefined' ?
-                chart.pointer.normalize(e) :
+                ((_a = chart.pointer) === null || _a === void 0 ? void 0 : _a.normalize(e)) || e :
                 e);
         }
         /* *
@@ -452,8 +453,9 @@
              * Style options for the guide box. The guide box has one state by default,
              * the `default` state.
              *
-             * @type  {Highcharts.Dictionary<Highcharts.DragDropGuideBoxOptionsObject>}
+             * @declare Highcharts.PlotOptionsSeriesDragDropGuideBoxOptions
              * @since 6.2.0
+             * @type  {Highcharts.Dictionary<Highcharts.DragDropGuideBoxOptionsObject>}
              */
             guideBox: {
                 /**
@@ -527,8 +529,8 @@
          * */
         var animObject = A.animObject;
         var addEvents = DDU.addEvents, countProps = DDU.countProps, getFirstProp = DDU.getFirstProp, getNormalizedEvent = DDU.getNormalizedEvent;
-        var composed = H.composed, doc = H.doc;
-        var addEvent = U.addEvent, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique;
+        var doc = H.doc;
+        var addEvent = U.addEvent, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Functions
@@ -643,8 +645,8 @@
          *        Class constructor of chart.
          */
         function compose(ChartClass) {
-            if (pushUnique(composed, compose)) {
-                var chartProto = ChartClass.prototype;
+            var chartProto = ChartClass.prototype;
+            if (!chartProto.hideDragHandles) {
                 chartProto.hideDragHandles = chartHideDragHandles;
                 chartProto.setGuideBoxState = chartSetGuideBoxState;
                 chartProto.zoomOrPanKeyPressed = chartZoomOrPanKeyPressed;
@@ -1876,7 +1878,7 @@
 
         return DragDropProps;
     });
-    _registerModule(_modules, 'Extensions/DraggablePoints/DraggablePoints.js', [_modules['Extensions/DraggablePoints/DragDropUtilities.js'], _modules['Extensions/DraggablePoints/DraggableChart.js'], _modules['Extensions/DraggablePoints/DragDropDefaults.js'], _modules['Extensions/DraggablePoints/DragDropProps.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (DDU, DraggableChart, DragDropDefaults, DragDropProps, H, U) {
+    _registerModule(_modules, 'Extensions/DraggablePoints/DraggablePoints.js', [_modules['Extensions/DraggablePoints/DragDropUtilities.js'], _modules['Extensions/DraggablePoints/DraggableChart.js'], _modules['Extensions/DraggablePoints/DragDropDefaults.js'], _modules['Extensions/DraggablePoints/DragDropProps.js'], _modules['Core/Utilities.js']], function (DDU, DraggableChart, DragDropDefaults, DragDropProps, U) {
         /* *
          *
          *  (c) 2009-2024 Highsoft AS
@@ -1890,8 +1892,7 @@
          * */
         var addEvents = DDU.addEvents, getNormalizedEvent = DDU.getNormalizedEvent;
         var initDragDrop = DraggableChart.initDragDrop;
-        var composed = H.composed;
-        var addEvent = U.addEvent, clamp = U.clamp, isNumber = U.isNumber, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique;
+        var addEvent = U.addEvent, clamp = U.clamp, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Functions
@@ -1901,7 +1902,7 @@
         Add drag/drop support to specific data props for different series types.
 
         The dragDrop.draggableX/Y user options on series enable/disable all of these per
-        irection unless they are specifically set in options using
+        direction unless they are specifically set in options using
         dragDrop.{optionName}. If the prop does not specify an optionName here, it can
         only be enabled/disabled by the user with draggableX/Y.
 
@@ -1942,8 +1943,9 @@
         /** @private */
         function compose(ChartClass, SeriesClass) {
             DraggableChart.compose(ChartClass);
-            if (pushUnique(composed, compose)) {
-                var PointClass = SeriesClass.prototype.pointClass, seriesTypes = SeriesClass.types, seriesProto = SeriesClass.prototype, pointProto = PointClass.prototype;
+            var seriesProto = SeriesClass.prototype;
+            if (!seriesProto.dragDropProps) {
+                var PointClass = SeriesClass.prototype.pointClass, seriesTypes = SeriesClass.types, pointProto = PointClass.prototype;
                 pointProto.getDropValues = pointGetDropValues;
                 pointProto.showDragHandles = pointShowDragHandles;
                 addEvent(PointClass, 'mouseOut', onPointMouseOut);
@@ -2432,7 +2434,7 @@
          * @callback Highcharts.PointDragCallbackFunction
          *
          * @param {Highcharts.Point} this
-         *        Point where the event occured.
+         *        Point where the event occurred.
          *
          * @param {Highcharts.PointDragEventObject} event
          *        Event arguments.
@@ -2489,7 +2491,7 @@
          * @callback Highcharts.PointDragStartCallbackFunction
          *
          * @param {Highcharts.Point} this
-         *        Point where the event occured.
+         *        Point where the event occurred.
          *
          * @param {Highcharts.PointDragStartEventObject} event
          *        Event arguments.
@@ -2510,7 +2512,7 @@
          * @callback Highcharts.PointDropCallbackFunction
          *
          * @param {Highcharts.Point} this
-         *        Point where the event occured.
+         *        Point where the event occurred.
          *
          * @param {Highcharts.PointDropEventObject} event
          *        Event arguments.
@@ -2561,5 +2563,6 @@
         var G = Highcharts;
         DraggablePoints.compose(G.Chart, G.Series);
 
+        return Highcharts;
     });
 }));

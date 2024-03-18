@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2014-2024 Highsoft AS
  * Authors: Jon Arild Nygard / Oystein Moseng
@@ -429,7 +429,7 @@
              *
              * */
             Breadcrumbs.compose = function (ChartClass, highchartsDefaultOptions) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'Breadcrumbs')) {
                     addEvent(ChartClass, 'destroy', onChartDestroy);
                     addEvent(ChartClass, 'afterShowResetZoom', onChartAfterShowResetZoom);
                     addEvent(ChartClass, 'getMargins', onChartGetMargins);
@@ -473,7 +473,7 @@
                 this.list = list;
             };
             /**
-             * Calcule level on which chart currently is.
+             * Calculate level on which chart currently is.
              *
              * @requires  modules/breadcrumbs
              *
@@ -528,7 +528,7 @@
             /**
              * Redraw.
              *
-             * @requires  modules/breadcrums
+             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#redraw
              * @param {Highcharts.Breadcrumbs} this
@@ -602,7 +602,7 @@
                 var breadcrumbs = this, chart = breadcrumbs.chart, list = breadcrumbs.list, breadcrumbsOptions = breadcrumbs.options, buttonSpacing = breadcrumbsOptions.buttonSpacing;
                 // Make sure that only one type of button is visible.
                 this.destroyListElements();
-                // Draw breadcrumbs. Inital position for calculating the breadcrumbs
+                // Draw breadcrumbs. Initial position for calculating the breadcrumbs
                 // group.
                 var posX = breadcrumbs.group ?
                     breadcrumbs.group.getBBox().width :
@@ -636,7 +636,7 @@
                     var breadcrumbsOptions = breadcrumbs.options, buttonTheme = breadcrumbsOptions.buttonTheme, positionOptions = breadcrumbsOptions.position, alignTo = (breadcrumbsOptions.relativeTo === 'chart' ||
                         breadcrumbsOptions.relativeTo === 'spacingBox' ?
                         void 0 :
-                        'scrollablePlotBox'), bBox = breadcrumbs.group.getBBox(), additionalSpace = 2 * (buttonTheme.padding || 0) +
+                        'plotBox'), bBox = breadcrumbs.group.getBBox(), additionalSpace = 2 * (buttonTheme.padding || 0) +
                         breadcrumbsOptions.buttonSpacing;
                     // Store positionOptions
                     positionOptions.width = bBox.width + additionalSpace;
@@ -656,7 +656,7 @@
             /**
              * Render a button.
              *
-             * @requires  modules/breadcrums
+             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#renderButton
              * @param {Highcharts.Breadcrumbs} this
@@ -704,7 +704,7 @@
             /**
              * Render a separator.
              *
-             * @requires  modules/breadcrums
+             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#renderSeparator
              * @param {Highcharts.Breadcrumbs} this
@@ -773,7 +773,7 @@
              */
             Breadcrumbs.prototype.destroy = function () {
                 this.destroySingleButton();
-                // Destroy elements one by one. It's necessary beacause
+                // Destroy elements one by one. It's necessary because
                 // g().destroy() does not remove added HTML
                 this.destroyListElements(true);
                 // Then, destroy the group itself.
@@ -854,7 +854,7 @@
                 }, adjustToRTL = function (element, posX, posY) {
                     element.translate(posX - element.getBBox().width, posY);
                 };
-                // Inital position for calculating the breadcrumbs group.
+                // Initial position for calculating the breadcrumbs group.
                 var posX = breadcrumbs.group ?
                     updateXPosition(breadcrumbs.group, buttonSpacing) :
                     buttonSpacing, currentBreadcrumb, breadcrumb;
@@ -1089,7 +1089,7 @@
                     (this.value === void 0 || !isNaN(this.value)));
             }
             /**
-             * Get the color attibutes to apply on the graphic
+             * Get the color attributes to apply on the graphic
              * @private
              * @function Highcharts.colorMapSeriesMixin.colorAttribs
              * @param {Highcharts.Point} point
@@ -1258,7 +1258,7 @@
 
         return TreemapNode;
     });
-    _registerModule(_modules, 'Series/DrawPointUtilities.js', [_modules['Core/Utilities.js']], function (U) {
+    _registerModule(_modules, 'Series/DrawPointUtilities.js', [], function () {
         /* *
          *
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
@@ -1275,7 +1275,6 @@
             };
             return __assign.apply(this, arguments);
         };
-        var isNumber = U.isNumber;
         /* *
          *
          *  Functions
@@ -2007,7 +2006,7 @@
 
         return TreemapSeriesDefaults;
     });
-    _registerModule(_modules, 'Series/Treemap/TreemapUtilities.js', [_modules['Core/Utilities.js']], function (U) {
+    _registerModule(_modules, 'Series/Treemap/TreemapUtilities.js', [], function () {
         /* *
          *
          *  (c) 2014-2024 Highsoft AS
@@ -2019,12 +2018,6 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        /* *
-         *
-         *  Imports
-         *
-         * */
-        var objectEach = U.objectEach;
         /* *
          *
          *  Namespace
@@ -2075,7 +2068,7 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, isObject = U.isObject, merge = U.merge, pick = U.pick;
+        var extend = U.extend, isArray = U.isArray, isNumber = U.isNumber, isObject = U.isObject, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength;
         /* *
          *
          *  Functions
@@ -2240,6 +2233,27 @@
             }
             return rootId;
         }
+        /**
+         * Get the node width, which relies on the plot width and the nodeDistance
+         * option.
+         *
+         * @private
+         */
+        function getNodeWidth(series, columnCount) {
+            var chart = series.chart, options = series.options, _a = options.nodeDistance, nodeDistance = _a === void 0 ? 0 : _a, _b = options.nodeWidth, nodeWidth = _b === void 0 ? 0 : _b, _c = chart.plotSizeX, plotSizeX = _c === void 0 ? 1 : _c;
+            // Node width auto means they are evenly distributed along the width of
+            // the plot area
+            if (nodeWidth === 'auto') {
+                if (typeof nodeDistance === 'string' && /%$/.test(nodeDistance)) {
+                    var fraction = parseFloat(nodeDistance) / 100, total = columnCount + fraction * (columnCount - 1);
+                    return plotSizeX / total;
+                }
+                var nDistance = Number(nodeDistance);
+                return ((plotSizeX + nDistance) /
+                    (columnCount || 1)) - nDistance;
+            }
+            return relativeLength(nodeWidth, plotSizeX);
+        }
         /* *
          *
          *  Default Export
@@ -2248,6 +2262,7 @@
         var TreeUtilities = {
             getColor: getColor,
             getLevelOptions: getLevelOptions,
+            getNodeWidth: getNodeWidth,
             setTreeValues: setTreeValues,
             updateRootId: updateRootId
         };
@@ -2357,7 +2372,7 @@
              *
              * */
             TreemapSeries.compose = function (SeriesClass) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'TreemapSeries')) {
                     addEvent(SeriesClass, 'afterBindAxes', onSeriesAfterBindAxes);
                 }
             };
@@ -2866,7 +2881,9 @@
                             chart.breadcrumbs.updateProperties(series.createList(e));
                         }
                     }));
-                    series.eventsToUnbind.push(addEvent(series, 'update', function (e, redraw) {
+                    series.eventsToUnbind.push(addEvent(series, 'update', 
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    function (e, redraw) {
                         var breadcrumbs = this.chart.breadcrumbs;
                         if (breadcrumbs && e.options.breadcrumbs) {
                             breadcrumbs.update(e.options.breadcrumbs);
@@ -3252,12 +3269,13 @@
 
         return TreemapSeries;
     });
-    _registerModule(_modules, 'masters/modules/treemap.src.js', [_modules['Core/Globals.js'], _modules['Series/Treemap/TreemapSeries.js'], _modules['Extensions/Breadcrumbs/Breadcrumbs.js']], function (Highcharts, TreemapSeries, Breadcrumbs) {
+    _registerModule(_modules, 'masters/modules/treemap.src.js', [_modules['Core/Globals.js'], _modules['Extensions/Breadcrumbs/Breadcrumbs.js'], _modules['Series/Treemap/TreemapSeries.js']], function (Highcharts, Breadcrumbs, TreemapSeries) {
 
         var G = Highcharts;
-        G.Breadcrumbs = Breadcrumbs;
-        Breadcrumbs.compose(G.Chart, G.defaultOptions);
+        G.Breadcrumbs = G.Breadcrumbs || Breadcrumbs;
+        G.Breadcrumbs.compose(G.Chart, G.defaultOptions);
         TreemapSeries.compose(G.Series);
 
+        return Highcharts;
     });
 }));

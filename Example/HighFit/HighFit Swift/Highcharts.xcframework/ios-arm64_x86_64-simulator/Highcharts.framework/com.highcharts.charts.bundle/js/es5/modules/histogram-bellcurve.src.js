@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2010-2024 Highsoft AS
  * Author: Sebastian Domas
@@ -655,7 +655,7 @@
                 if (((_b = (_a = series.baseSeries) === null || _a === void 0 ? void 0 : _a.yData) === null || _b === void 0 ? void 0 : _b.length) || 0 > 1) {
                     series.setMean();
                     series.setStandardDeviation();
-                    series.setData(series.derivedData(series.mean || 0, series.standardDeviation || 0), false);
+                    series.setData(series.derivedData(series.mean || 0, series.standardDeviation || 0), false, void 0, false);
                 }
                 return (void 0);
             };
@@ -685,8 +685,9 @@
 
         return BellcurveSeries;
     });
-    _registerModule(_modules, 'masters/modules/histogram-bellcurve.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/histogram-bellcurve.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

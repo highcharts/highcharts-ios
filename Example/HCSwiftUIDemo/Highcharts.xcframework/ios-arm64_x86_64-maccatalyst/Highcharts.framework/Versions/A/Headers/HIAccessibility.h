@@ -29,6 +29,10 @@ Options for configuring accessibility for the chart. Requires the [accessibility
 @interface HIAccessibility: HIChartsJSONSerializable
 
 /**
+Options for descriptions of individual data points.
+*/
+@property(nonatomic, readwrite) HIPoint *point;
+/**
 Amount of landmarks/regions to create for screen reader users. More landmarks can make navigation with screen readers easier, but can be distracting if there are lots of charts on the page. Three modes are available: - `all`: Adds regions for all series, legend, information   region. - `one`: Adds a single landmark per chart. - `disabled`: No landmarks are added.
 
 **Accepted values:** `["all", "one", "disabled"]`.
@@ -55,9 +59,11 @@ Link the chart to an HTML element describing the contents of the chart. It is al
 */
 @property(nonatomic, readwrite) NSString *linkedDescription;
 /**
-Options for descriptions of individual data points.
+Controls how `highContrastTheme` is applied. The default option is `auto`, which applies the high contrast theme the user's system has a high contrast theme active.
+
+**Defaults to** `auto`.
 */
-@property(nonatomic, readwrite) HIPoint *point;
+@property(nonatomic, readwrite) NSString *highContrastMode;
 /**
 Accessibility options global to all data series. Individual series can also have specific `accessibility options` set.
 */
@@ -85,7 +91,7 @@ A text description of the chart type. If the Accessibility module is loaded, thi
 */
 @property(nonatomic, readwrite) NSString *typeDescription;
 /**
-Theme to apply to the chart when Windows High Contrast Mode is detected. By default, a high contrast theme matching the high contrast system system colors is used.
+Theme to apply to the chart when Windows High Contrast Mode is detected. By default, a high contrast theme matching the high contrast system colors is used.
 */
 @property(nonatomic, readwrite) id highContrastTheme;
 /**

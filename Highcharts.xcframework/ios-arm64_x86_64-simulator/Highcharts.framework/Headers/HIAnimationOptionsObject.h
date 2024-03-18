@@ -16,7 +16,7 @@ An animation configuration. Animation configurations can also be defined as bool
 @interface HIAnimationOptionsObject: HIChartsJSONSerializable
 
 /**
-A callback function to exectute when the animation finishes.
+A callback function to execute when the animation finishes.
 */
 @property(nonatomic, readwrite) HIFunction *complete;
 /**

@@ -126,7 +126,7 @@ Defines additional snapping area around an annotation making this annotation to 
 */
 @property(nonatomic, readwrite) NSNumber *snap;
 /**
-The type of the shape. Avaliable options are circle, rect and ellipse.
+The type of the shape. Available options are circle, rect and ellipse.
 
 **Defaults to** `rect`.
 

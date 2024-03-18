@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Advanced Highcharts Stock tools
  *
@@ -53,11 +53,6 @@
          * Used in StockTools too.
          * Based on default solutions in browsers.
          */
-        /* *
-         *
-         *  Imports
-         *
-         * */
         var composed = H.composed;
         var addEvent = U.addEvent, fireEvent = U.fireEvent, pushUnique = U.pushUnique;
         /* *
@@ -158,7 +153,7 @@
              * The chart class to decorate with fullscreen support.
              */
             Fullscreen.compose = function (ChartClass) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'Fullscreen')) {
                     // Initialize fullscreen
                     addEvent(ChartClass, 'beforeRender', onChartBeforeRender);
                 }
@@ -328,10 +323,10 @@
          * @callback Highcharts.FullScreenfullscreenCloseCallbackFunction
          *
          * @param {Highcharts.Chart} chart
-         *        The chart on which the event occured.
+         *        The chart on which the event occurred.
          *
          * @param {global.Event} event
-         *        The event that occured.
+         *        The event that occurred.
          */
         /**
          * Gets fired when opening the fullscreen
@@ -339,10 +334,10 @@
          * @callback Highcharts.FullScreenfullscreenOpenCallbackFunction
          *
          * @param {Highcharts.Chart} chart
-         *        The chart on which the event occured.
+         *        The chart on which the event occurred.
          *
          * @param {global.Event} event
-         *        The event that occured.
+         *        The event that occurred.
          */
         (''); // keeps doclets above separated from following code
         /* *
@@ -384,8 +379,9 @@
     _registerModule(_modules, 'masters/modules/full-screen.src.js', [_modules['Core/Globals.js'], _modules['Extensions/Exporting/Fullscreen.js']], function (Highcharts, Fullscreen) {
 
         var G = Highcharts;
-        G.Fullscreen = Fullscreen;
-        Fullscreen.compose(G.Chart);
+        G.Fullscreen = G.Fullscreen || Fullscreen;
+        G.Fullscreen.compose(G.Chart);
 
+        return Highcharts;
     });
 }));

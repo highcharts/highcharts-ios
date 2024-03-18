@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Highcharts variwide module
  *
@@ -58,7 +58,7 @@
          * @private
          */
         function compose(AxisClass, TickClass) {
-            if (pushUnique(composed, compose)) {
+            if (pushUnique(composed, 'Variwide')) {
                 var tickProto = TickClass.prototype;
                 addEvent(AxisClass, 'afterDrawCrosshair', onAxisAfterDrawCrosshair);
                 addEvent(AxisClass, 'afterRender', onAxisAfterRender);
@@ -122,7 +122,11 @@
         /**
          * @private
          */
-        function wrapTickGetLabelPosition(proceed, _x, _y, _label, horiz, _labelOptions, _tickmarkOffset, _index) {
+        function wrapTickGetLabelPosition(proceed, _x, _y, _label, horiz, 
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        _labelOptions, _tickmarkOffset, _index
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+        ) {
             var args = Array.prototype.slice.call(arguments, 1), xOrY = horiz ? 'x' : 'y';
             // Replace the x with the original x
             if (this.axis.variwide &&
@@ -480,7 +484,7 @@
             VariwideSeries.defaultOptions = merge(ColumnSeries.defaultOptions, VariwideSeriesDefaults);
             return VariwideSeries;
         }(ColumnSeries));
-        // Extend translation by distoring X position based on Z.
+        // Extend translation by distorting X position based on Z.
         addEvent(VariwideSeries, 'afterColumnTranslate', function () {
             // Temporarily disable crisping when computing original shapeArgs
             var xAxis = this.xAxis, inverted = this.chart.inverted, crisp = this.borderWidth % 2 / 2;
@@ -543,5 +547,6 @@
         var G = Highcharts;
         VariwideSeries.compose(G.Axis, G.Tick);
 
+        return Highcharts;
     });
 }));

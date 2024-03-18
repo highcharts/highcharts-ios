@@ -224,7 +224,7 @@ Whether the annotation is visible in the exported data table.
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *includeInDataExport;
 /**
-The border radius in pixels for the annotaiton's label.
+The border radius in pixels for the annotation's label.
 
 **Defaults to** `3`.
 

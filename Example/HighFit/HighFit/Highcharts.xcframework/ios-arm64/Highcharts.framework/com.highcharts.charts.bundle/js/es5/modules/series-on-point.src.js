@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Series on point module
  *
@@ -47,7 +47,7 @@
          *
          * */
         var composed = H.composed;
-        var _a = SeriesRegistry.seriesTypes, bubble = _a.bubble, pie = _a.pie, sunburst = _a.sunburst;
+        var bubble = SeriesRegistry.seriesTypes.bubble;
         var addEvent = U.addEvent, defined = U.defined, find = U.find, isNumber = U.isNumber, pushUnique = U.pushUnique;
         /* *
          *
@@ -78,7 +78,7 @@
              * Chart class to use.
              */
             function compose(SeriesClass, ChartClass) {
-                if (pushUnique(composed, compose)) {
+                if (pushUnique(composed, 'SeriesOnPoint')) {
                     var _a = Additions.prototype, chartGetZData = _a.chartGetZData, seriesAfterInit = _a.seriesAfterInit, seriesAfterRender = _a.seriesAfterRender, seriesGetCenter = _a.seriesGetCenter, seriesShowOrHide = _a.seriesShowOrHide, seriesTranslate = _a.seriesTranslate;
                     // We can mark support for pie series here because it's in the core.
                     // But all other series outside the core should be marked in its
@@ -265,7 +265,7 @@
                             return id === point.id;
                         });
                         // And also toggle series that are on toggled points. Redraw is
-                        // not needed because it's fired later after showOrhide event
+                        // not needed because it's fired later after showOrHide event
                         series && series.setVisible(!series.visible, false);
                     });
                 };
@@ -423,5 +423,6 @@
         var G = Highcharts;
         SeriesOnPointComposition.compose(G.Series, G.Chart);
 
+        return Highcharts;
     });
 }));

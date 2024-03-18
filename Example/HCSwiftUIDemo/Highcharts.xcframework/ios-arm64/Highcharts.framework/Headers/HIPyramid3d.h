@@ -79,7 +79,7 @@ The max width of the series compared to the width of the plot area, or the pixel
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ width;
 /**
-By deafult sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
+By default sides fill is set to a gradient through this option being set to `true`. Set to `false` to get solid color for the sides.
 
 **Defaults to** `True`.
 */
@@ -169,7 +169,7 @@ The maximum allowed pixel width for a column, translated to the height of a bar 
 */
 @property(nonatomic, readwrite) NSNumber *maxPointWidth;
 /**
-A pixel value specifying a fixed width for each column or bar point. When set to `undefined`, the width is calculated from the `pointPadding` and `groupPadding`. The width effects the dimension that is not based on the point value. For column series it is the hoizontal length and for bar series it is the vertical length.
+A pixel value specifying a fixed width for each column or bar point. When set to `undefined`, the width is calculated from the `pointPadding` and `groupPadding`. The width effects the dimension that is not based on the point value. For column series it is the horizontal length and for bar series it is the vertical length.
 
 **Try it**
 

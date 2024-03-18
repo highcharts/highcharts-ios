@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v11.3.0 (2024-01-10)
+ * @license Highmaps JS v11.4.0 (2024-03-04)
  *
  * Highmaps as a plugin for Highcharts or Highcharts Stock.
  *
@@ -35,7 +35,7 @@
             }
         }
     }
-    _registerModule(_modules, 'Core/Axis/Color/ColorAxisComposition.js', [_modules['Core/Color/Color.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (Color, H, U) {
+    _registerModule(_modules, 'Core/Axis/Color/ColorAxisComposition.js', [_modules['Core/Color/Color.js'], _modules['Core/Utilities.js']], function (Color, U) {
         /* *
          *
          *  (c) 2010-2024 Torstein Honsi
@@ -46,8 +46,7 @@
          *
          * */
         var color = Color.parse;
-        var composed = H.composed;
-        var addEvent = U.addEvent, extend = U.extend, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique, splat = U.splat;
+        var addEvent = U.addEvent, extend = U.extend, merge = U.merge, pick = U.pick, splat = U.splat;
         /* *
          *
          *  Composition
@@ -75,9 +74,9 @@
              * @private
              */
             function compose(ColorAxisClass, ChartClass, FxClass, LegendClass, SeriesClass) {
-                if (pushUnique(composed, compose)) {
+                var chartProto = ChartClass.prototype, fxProto = FxClass.prototype, seriesProto = SeriesClass.prototype;
+                if (!chartProto.collectionsWithUpdate.includes('colorAxis')) {
                     ColorAxisConstructor = ColorAxisClass;
-                    var chartProto = ChartClass.prototype, fxProto = FxClass.prototype, seriesProto = SeriesClass.prototype;
                     chartProto.collectionsWithUpdate.push('colorAxis');
                     chartProto.collectionsWithInit.colorAxis = [
                         chartProto.addColorAxis
@@ -1174,7 +1173,7 @@
                     (horiz ?
                         itemDistance :
                         pick(labelOptions.x, labelOptions.distance) +
-                            this.maxLabelLength));
+                            (this.maxLabelLength || 0)));
                 legendItem.labelHeight = height + padding + (horiz ? labelPadding : 0);
             };
             /**
@@ -1444,6 +1443,7 @@
                                 for (var _i = 0, _a = getPointsInDataClass(i); _i < _a.length; _i++) {
                                     var point = _a[_i];
                                     point.setVisible(vis);
+                                    point.hiddenInDataClass = !vis; // #20441
                                     if (affectedSeries.indexOf(point.series) === -1) {
                                         affectedSeries.push(point.series);
                                     }
@@ -1511,6 +1511,14 @@
         ''; // detach doclet above
 
         return ColorAxis;
+    });
+    _registerModule(_modules, 'masters/modules/coloraxis.src.js', [_modules['Core/Globals.js'], _modules['Core/Axis/Color/ColorAxis.js']], function (Highcharts, ColorAxis) {
+
+        var G = Highcharts;
+        G.ColorAxis = G.ColorAxis || ColorAxis;
+        G.ColorAxis.compose(G.Chart, G.Fx, G.Legend, G.Series);
+
+        return Highcharts;
     });
     _registerModule(_modules, 'Maps/MapNavigationDefaults.js', [], function () {
         /* *
@@ -1777,7 +1785,7 @@
 
         return mapNavigationDefaults;
     });
-    _registerModule(_modules, 'Maps/MapPointer.js', [_modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (H, U) {
+    _registerModule(_modules, 'Maps/MapPointer.js', [_modules['Core/Utilities.js']], function (U) {
         /* *
          *
          *  (c) 2010-2024 Torstein Honsi
@@ -1787,8 +1795,7 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var composed = H.composed;
-        var defined = U.defined, extend = U.extend, pick = U.pick, pushUnique = U.pushUnique, wrap = U.wrap;
+        var defined = U.defined, extend = U.extend, pick = U.pick, wrap = U.wrap;
         /* *
          *
          *  Composition
@@ -1813,14 +1820,13 @@
              * @private
              */
             function compose(PointerClass) {
-                if (pushUnique(composed, compose)) {
-                    var pointerProto = PointerClass.prototype;
+                var pointerProto = PointerClass.prototype;
+                if (!pointerProto.onContainerDblClick) {
                     extend(pointerProto, {
                         onContainerDblClick: onContainerDblClick,
                         onContainerMouseWheel: onContainerMouseWheel
                     });
                     wrap(pointerProto, 'normalize', wrapNormalize);
-                    wrap(pointerProto, 'pinchTranslate', wrapPinchTranslate);
                     wrap(pointerProto, 'zoomOption', wrapZoomOption);
                 }
             }
@@ -1895,19 +1901,6 @@
                 return e;
             }
             /**
-             * Extend the pinchTranslate method to preserve fixed ratio when zooming.
-             * @private
-             */
-            function wrapPinchTranslate(proceed, pinchDown, touches, transform, selectionMarker, clip, lastValidTouch) {
-                var xBigger;
-                proceed.call(this, pinchDown, touches, transform, selectionMarker, clip, lastValidTouch);
-                // Keep ratio
-                if (this.chart.options.chart.type === 'map' && this.hasZoom) {
-                    xBigger = transform.scaleX > transform.scaleY;
-                    this.pinchTranslateDirection(!xBigger, pinchDown, touches, transform, selectionMarker, clip, lastValidTouch, xBigger ? transform.scaleX : transform.scaleY);
-                }
-            }
-            /**
              * The pinchType is inferred from mapNavigation options.
              * @private
              */
@@ -1929,7 +1922,7 @@
 
         return MapPointer;
     });
-    _registerModule(_modules, 'Maps/MapSymbols.js', [_modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (H, U) {
+    _registerModule(_modules, 'Maps/MapSymbols.js', [], function () {
         /* *
          *
          *  (c) 2010-2024 Torstein Honsi
@@ -1939,8 +1932,6 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var composed = H.composed;
-        var pushUnique = U.pushUnique;
         /* *
          *
          *  Variables
@@ -1961,11 +1952,9 @@
             return symbols.roundedRect(x, y, w, h, options);
         }
         function compose(SVGRendererClass) {
-            if (pushUnique(composed, compose)) {
-                symbols = SVGRendererClass.prototype.symbols;
-                symbols.bottombutton = bottomButton;
-                symbols.topbutton = topButton;
-            }
+            symbols = SVGRendererClass.prototype.symbols;
+            symbols.bottombutton = bottomButton;
+            symbols.topbutton = topButton;
         }
         function topButton(x, y, w, h, options) {
             if (options) {
@@ -2051,7 +2040,7 @@
             MapNavigation.compose = function (MapChartClass, PointerClass, SVGRendererClass) {
                 MapPointer.compose(PointerClass);
                 MapSymbols.compose(SVGRendererClass);
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'Map.Navigation')) {
                     // Extend the Chart.render method to add zooming and panning
                     addEvent(MapChartClass, 'beforeRender', function () {
                         // Render the plus and minus buttons. Doing this before the
@@ -2097,7 +2086,7 @@
                     if (!mapNav.navButtonsGroup) {
                         mapNav.navButtonsGroup = chart.renderer.g()
                             .attr({
-                            zIndex: 4 // #4955, // #8392
+                            zIndex: 7 // #4955, #8392, #20476
                         })
                             .add();
                     }
@@ -2339,7 +2328,7 @@
                     (this.value === void 0 || !isNaN(this.value)));
             }
             /**
-             * Get the color attibutes to apply on the graphic
+             * Get the color attributes to apply on the graphic
              * @private
              * @function Highcharts.colorMapSeriesMixin.colorAttribs
              * @param {Highcharts.Point} point
@@ -2389,6 +2378,15 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
+        var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+            if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+            return to.concat(ar || Array.prototype.slice.call(from));
+        };
         var getOptions = D.getOptions;
         var isNumber = U.isNumber, merge = U.merge, pick = U.pick;
         /* *
@@ -2425,7 +2423,7 @@
              *        Custom options.
              *
              * @param {Function} [callback]
-             *        Function to run when the chart has loaded and and all external
+             *        Function to run when the chart has loaded and all external
              *        images are loaded.
              *
              *
@@ -2498,6 +2496,16 @@
                         [chartX, chartY] :
                         void 0);
                 }
+            };
+            MapChart.prototype.update = function (options) {
+                var _a;
+                // Calculate and set the recommended map view if map option is set
+                if (options.chart && 'map' in options.chart) {
+                    (_a = this.mapView) === null || _a === void 0 ? void 0 : _a.recommendMapView(this, __spreadArray([
+                        options.chart.map
+                    ], (this.options.series || []).map(function (s) { return s.mapData; }), true), true);
+                }
+                _super.prototype.update.apply(this, arguments);
             };
             return MapChart;
         }(Chart));
@@ -2582,7 +2590,7 @@
                     // specific styled mode files.
                     var split = path.split(/[ ,;]+/);
                     arr = split.map(function (item) {
-                        if (!/[A-za-z]/.test(item)) {
+                        if (!/[A-Za-z]/.test(item)) {
                             return parseFloat(item);
                         }
                         return item;
@@ -2686,6 +2694,17 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
+        var __assign = (this && this.__assign) || function () {
+            __assign = Object.assign || function(t) {
+                for (var s, i = 1, n = arguments.length; i < n; i++) {
+                    s = arguments[i];
+                    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+                }
+                return t;
+            };
+            return __assign.apply(this, arguments);
+        };
         var boundsFromPath = MU.boundsFromPath;
         var ScatterPoint = SeriesRegistry.seriesTypes.scatter.prototype.pointClass;
         var extend = U.extend, isNumber = U.isNumber, pick = U.pick;
@@ -2733,12 +2752,14 @@
              * @private
              */
             MapPoint.prototype.applyOptions = function (options, x) {
+                var _a;
                 var series = this.series, point = _super.prototype.applyOptions.call(this, options, x), joinBy = series.joinBy;
                 if (series.mapData && series.mapMap) {
                     var joinKey = joinBy[1], mapKey = _super.prototype.getNestedProperty.call(this, joinKey), mapPoint = typeof mapKey !== 'undefined' &&
                         series.mapMap[mapKey];
                     if (mapPoint) {
-                        extend(point, mapPoint); // copy over properties
+                        // Copy over properties; #20231 prioritize point.name
+                        extend(point, __assign(__assign({}, mapPoint), { name: (_a = point.name) !== null && _a !== void 0 ? _a : mapPoint.name }));
                     }
                     else if (series.pointArrayMap.indexOf('value') !== -1) {
                         point.value = point.value || null;
@@ -2916,7 +2937,9 @@
                 formatter: function () {
                     var numberFormatter = this.series.chart.numberFormatter;
                     var value = this.point.value;
-                    return isNumber(value) ? numberFormatter(value, -1) : '';
+                    return isNumber(value) ?
+                        numberFormatter(value, -1) :
+                        this.point.name; // #20231
                 },
                 inside: true,
                 overflow: false,
@@ -3384,7 +3407,7 @@
          */
         /**
          * For map and mapline series types, the SVG path for the shape. For
-         * compatibily with old IE, not all SVG path definitions are supported,
+         * compatibility with old IE, not all SVG path definitions are supported,
          * but M, L and C operators are safe.
          *
          * To achieve a better separation between the structure and the data,
@@ -3738,9 +3761,9 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var composed = H.composed, win = H.win;
+        var win = H.win;
         var format = T.format;
-        var error = U.error, extend = U.extend, merge = U.merge, pushUnique = U.pushUnique, wrap = U.wrap;
+        var error = U.error, extend = U.extend, merge = U.merge, wrap = U.wrap;
         /* *
          *
          *  Composition
@@ -3887,13 +3910,13 @@
             }
             /** @private */
             function compose(ChartClass) {
-                if (pushUnique(composed, compose)) {
-                    var proto = ChartClass.prototype;
-                    proto.fromLatLonToPoint = chartFromLatLonToPoint;
-                    proto.fromPointToLatLon = chartFromPointToLatLon;
-                    proto.transformFromLatLon = chartTransformFromLatLon;
-                    proto.transformToLatLon = chartTransformToLatLon;
-                    wrap(proto, 'addCredits', wrapChartAddCredit);
+                var chartProto = ChartClass.prototype;
+                if (!chartProto.transformFromLatLon) {
+                    chartProto.fromLatLonToPoint = chartFromLatLonToPoint;
+                    chartProto.fromPointToLatLon = chartFromPointToLatLon;
+                    chartProto.transformFromLatLon = chartTransformFromLatLon;
+                    chartProto.transformToLatLon = chartTransformToLatLon;
+                    wrap(chartProto, 'addCredits', wrapChartAddCredit);
                 }
             }
             GeoJSONComposition.compose = compose;
@@ -3991,8 +4014,9 @@
                     objectName = Object.keys(topology.objects)[0];
                 }
                 var obj = topology.objects[objectName];
-                // Already decoded => return cache
-                if (obj['hc-decoded-geojson']) {
+                // Already decoded with the same title => return cache
+                if (obj['hc-decoded-geojson'] &&
+                    obj['hc-decoded-geojson'].title === topology.title) {
                     return obj['hc-decoded-geojson'];
                 }
                 // Do the initial transform
@@ -4014,7 +4038,7 @@
                         }
                     }
                 }
-                // Recurse down any depth of multi-dimentional arrays of arcs and insert
+                // Recurse down any depth of multi-dimensional arrays of arcs and insert
                 // the coordinates
                 var arcsToCoordinates = function (arcs) {
                     if (typeof arcs[0] === 'number') {
@@ -4152,7 +4176,7 @@
         * @name Highcharts.GeoJSONTranslation#crs
         * @type {string}
         */ /**
-        * Define the portion of the map that this defintion applies to. Defined as a
+        * Define the portion of the map that this definition applies to. Defined as a
         * GeoJSON polygon feature object, with `type` and `coordinates` properties.
         * @name Highcharts.GeoJSONTranslation#hitZone
         * @type {Highcharts.Dictionary<*>|undefined}
@@ -4225,6 +4249,12 @@
          * An array of longitude, latitude.
          *
          * @typedef {Array<number>} Highcharts.LonLatArray
+         */
+        /**
+         * An array of GeoJSON or TopoJSON objects or strings used as map data for
+         * series.
+         *
+         * @typedef {Array<*>|GeoJSON|TopoJSON|string} Highcharts.MapDataType
          */
         /**
          * A TopoJSON object, see description on the
@@ -5357,6 +5387,20 @@
             var width = playingField.width, height = playingField.height, scaleToField = Math.max((b.x2 - b.x1) / (width / tileSize), (b.y2 - b.y1) / (height / tileSize));
             return Math.log(worldSize / scaleToField) / Math.log(2);
         }
+        /**
+         * Calculate and set the recommended map view drilldown or drillup if mapData
+         * is set for the series.
+         * @private
+         */
+        function recommendedMapViewAfterDrill(e) {
+            var _a, _b;
+            if (e.seriesOptions.mapData) {
+                (_a = this.mapView) === null || _a === void 0 ? void 0 : _a.recommendMapView(this, [
+                    this.options.chart.map,
+                    e.seriesOptions.mapData
+                ], (_b = this.options.drilldown) === null || _b === void 0 ? void 0 : _b.mapZooming);
+            }
+        }
         /*
         const mergeCollections = <
             T extends Array<AnyRecord|undefined>
@@ -5407,6 +5451,7 @@
              * */
             function MapView(chart, options) {
                 var _this = this;
+                var _a;
                 /* *
                  *
                  *  Properties
@@ -5416,64 +5461,16 @@
                 this.eventsToUnbind = [];
                 this.insets = [];
                 this.padding = [0, 0, 0, 0];
-                var recommendedMapView;
-                var recommendedProjection;
+                this.recommendedMapView = {};
                 if (!(this instanceof MapViewInset)) {
-                    // Handle the global map and series-level mapData
-                    var geoMaps = __spreadArray([
+                    this.recommendMapView(chart, __spreadArray([
                         chart.options.chart.map
-                    ], (chart.options.series || []).map(function (s) { return s.mapData; }), true).map(function (mapData) { return _this.getGeoMap(mapData); });
-                    var allGeoBounds_1 = [];
-                    geoMaps.forEach(function (geoMap) {
-                        if (geoMap) {
-                            // Use the first geo map as main
-                            if (!recommendedMapView) {
-                                recommendedMapView =
-                                    geoMap['hc-recommended-mapview'];
-                            }
-                            // Combine the bounding boxes of all loaded maps
-                            if (geoMap.bbox) {
-                                var _a = geoMap.bbox, x1 = _a[0], y1 = _a[1], x2 = _a[2], y2 = _a[3];
-                                allGeoBounds_1.push({ x1: x1, y1: y1, x2: x2, y2: y2 });
-                            }
-                        }
-                    });
-                    // Get the composite bounds
-                    var geoBounds_1 = (allGeoBounds_1.length &&
-                        MapView.compositeBounds(allGeoBounds_1));
-                    // Provide a best-guess recommended projection if not set in
-                    // the map or in user options
-                    fireEvent(chart, 'beforeMapViewInit', {
-                        geoBounds: geoBounds_1
-                    }, function () {
-                        if (geoBounds_1) {
-                            var x1 = geoBounds_1.x1, y1 = geoBounds_1.y1, x2 = geoBounds_1.x2, y2 = geoBounds_1.y2;
-                            recommendedProjection =
-                                (x2 - x1 > 180 && y2 - y1 > 90) ?
-                                    // Wide angle, go for the world view
-                                    {
-                                        name: 'EqualEarth'
-                                    } :
-                                    // Narrower angle, use a projection better
-                                    // suited for local view
-                                    {
-                                        name: 'LambertConformalConic',
-                                        parallels: [y1, y2],
-                                        rotation: [-(x1 + x2) / 2]
-                                    };
-                        }
-                    });
-                    // Register the main geo map (from options.chart.map) if set
-                    this.geoMap = geoMaps[0];
+                    ], (chart.options.series || []).map(function (s) { return s.mapData; }), true));
                 }
                 this.userOptions = options || {};
-                if (chart.options.mapView &&
-                    chart.options.mapView.recommendedMapView) {
-                    recommendedMapView = chart.options.mapView.recommendedMapView;
-                }
-                var o = merge(MapViewDefaults, { projection: recommendedProjection }, recommendedMapView, options);
+                var o = merge(MapViewDefaults, this.recommendedMapView, options);
                 // Merge the inset collections by id, or index if id missing
-                var recInsets = recommendedMapView && recommendedMapView.insets, optInsets = options && options.insets;
+                var recInsets = (_a = this.recommendedMapView) === null || _a === void 0 ? void 0 : _a.insets, optInsets = options && options.insets;
                 if (recInsets && optInsets) {
                     o.insets = MapView.mergeInsets(recInsets, optInsets);
                 }
@@ -5527,7 +5524,7 @@
              *
              * */
             MapView.compose = function (MapChartClass) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'MapView')) {
                     maps = MapChartClass.maps;
                     // Initialize MapView after initialization, but before firstRender
                     addEvent(MapChartClass, 'afterInit', function () {
@@ -5540,6 +5537,8 @@
                          */
                         this.mapView = new MapView(this, this.options.mapView);
                     }, { order: 0 });
+                    addEvent(MapChartClass, 'addSeriesAsDrilldown', recommendedMapViewAfterDrill);
+                    addEvent(MapChartClass, 'afterDrillUp', recommendedMapViewAfterDrill);
                 }
             };
             /**
@@ -5833,6 +5832,95 @@
                 var coordinates = this.projection.inverse([point.x, point.y]);
                 return { lon: coordinates[0], lat: coordinates[1] };
             };
+            /**
+             * Calculate and set the recommended map view based on provided map data
+             * from series.
+             *
+             * @requires modules/map
+             *
+             * @function Highcharts.MapView#recommendMapView
+             *
+             * @since @next
+             *
+             * @param {Highcharts.Chart} chart
+             *        Chart object
+             *
+             * @param {Array<MapDataType | undefined>} mapDataArray
+             *        Array of map data from all series.
+             *
+             * @param {boolean} [update=false]
+             *        Whether to update the chart with recommended map view.
+             *
+             * @return {Highcharts.MapViewOptions|undefined} Best suitable map view.
+             */
+            MapView.prototype.recommendMapView = function (chart, mapDataArray, update) {
+                var _this = this;
+                var _a;
+                if (update === void 0) { update = false; }
+                // Reset recommended map view
+                this.recommendedMapView = {};
+                // Handle the global map and series-level mapData
+                var geoMaps = mapDataArray.map(function (mapData) {
+                    return _this.getGeoMap(mapData);
+                });
+                var allGeoBounds = [];
+                geoMaps.forEach(function (geoMap) {
+                    if (geoMap) {
+                        // Use the first geo map as main
+                        if (!Object.keys(_this.recommendedMapView).length) {
+                            _this.recommendedMapView =
+                                geoMap['hc-recommended-mapview'] || {};
+                        }
+                        // Combine the bounding boxes of all loaded maps
+                        if (geoMap.bbox) {
+                            var _a = geoMap.bbox, x1 = _a[0], y1 = _a[1], x2 = _a[2], y2 = _a[3];
+                            allGeoBounds.push({ x1: x1, y1: y1, x2: x2, y2: y2 });
+                        }
+                    }
+                });
+                // Get the composite bounds
+                var geoBounds = (allGeoBounds.length &&
+                    MapView.compositeBounds(allGeoBounds));
+                // Provide a best-guess recommended projection if not set in
+                // the map or in user options
+                fireEvent(this, 'onRecommendMapView', {
+                    geoBounds: geoBounds,
+                    chart: chart
+                }, function () {
+                    if (geoBounds &&
+                        this.recommendedMapView) {
+                        if (!this.recommendedMapView.projection) {
+                            var x1 = geoBounds.x1, y1 = geoBounds.y1, x2 = geoBounds.x2, y2 = geoBounds.y2;
+                            this.recommendedMapView.projection =
+                                (x2 - x1 > 180 && y2 - y1 > 90) ?
+                                    // Wide angle, go for the world view
+                                    {
+                                        name: 'EqualEarth',
+                                        parallels: [0, 0],
+                                        rotation: [0]
+                                    } :
+                                    // Narrower angle, use a projection better
+                                    // suited for local view
+                                    {
+                                        name: 'LambertConformalConic',
+                                        parallels: [y1, y2],
+                                        rotation: [-(x1 + x2) / 2]
+                                    };
+                        }
+                        if (!this.recommendedMapView.insets) {
+                            this.recommendedMapView.insets = void 0; // Reset insets
+                        }
+                    }
+                });
+                // Register the main geo map (from options.chart.map) if set
+                this.geoMap = geoMaps[0];
+                if (update &&
+                    chart.hasRendered &&
+                    !((_a = chart.userOptions.mapView) === null || _a === void 0 ? void 0 : _a.projection) &&
+                    this.recommendedMapView) {
+                    this.update(this.recommendedMapView);
+                }
+            };
             MapView.prototype.redraw = function (animation) {
                 this.chart.series.forEach(function (s) {
                     if (s.useMapGeometry) {
@@ -5982,21 +6070,34 @@
             MapView.prototype.setUpEvents = function () {
                 var _this = this;
                 var chart = this.chart;
-                // Set up panning for maps. In orthographic projections the globe will
-                // rotate, otherwise adjust the map center.
-                var mouseDownCenterProjected;
-                var mouseDownKey;
-                var mouseDownRotation;
+                // Set up panning and touch zoom for maps. In orthographic projections
+                // the globe will rotate, otherwise adjust the map center and zoom.
+                var mouseDownCenterProjected, mouseDownKey, mouseDownRotation;
                 var onPan = function (e) {
-                    var pinchDown = chart.pointer.pinchDown, projection = _this.projection;
-                    var mouseDownX = chart.mouseDownX, mouseDownY = chart.mouseDownY;
-                    if (pinchDown.length === 1) {
+                    var _a = chart.pointer, lastTouches = _a.lastTouches, pinchDown = _a.pinchDown, projection = _this.projection, touches = e.touches;
+                    var mouseDownX = chart.mouseDownX, mouseDownY = chart.mouseDownY, howMuch = 0;
+                    if ((pinchDown === null || pinchDown === void 0 ? void 0 : pinchDown.length) === 1) {
                         mouseDownX = pinchDown[0].chartX;
                         mouseDownY = pinchDown[0].chartY;
                     }
-                    if (typeof mouseDownX === 'number' &&
-                        typeof mouseDownY === 'number') {
-                        var key = "".concat(mouseDownX, ",").concat(mouseDownY), _a = e.originalEvent, chartX = _a.chartX, chartY = _a.chartY;
+                    else if ((pinchDown === null || pinchDown === void 0 ? void 0 : pinchDown.length) === 2) {
+                        mouseDownX = (pinchDown[0].chartX + pinchDown[1].chartX) / 2;
+                        mouseDownY = (pinchDown[0].chartY + pinchDown[1].chartY) / 2;
+                    }
+                    // How much has the distance between the fingers changed?
+                    if ((touches === null || touches === void 0 ? void 0 : touches.length) === 2 && lastTouches) {
+                        var startDistance = Math.sqrt(Math.pow(lastTouches[0].chartX - lastTouches[1].chartX, 2) +
+                            Math.pow(lastTouches[0].chartY - lastTouches[1].chartY, 2)), endDistance = Math.sqrt(Math.pow(touches[0].chartX - touches[1].chartX, 2) +
+                            Math.pow(touches[0].chartY - touches[1].chartY, 2));
+                        howMuch = Math.log(startDistance / endDistance) / Math.log(0.5);
+                    }
+                    if (isNumber(mouseDownX) && isNumber(mouseDownY)) {
+                        var key = "".concat(mouseDownX, ",").concat(mouseDownY);
+                        var _b = e.originalEvent, chartX = _b.chartX, chartY = _b.chartY;
+                        if ((touches === null || touches === void 0 ? void 0 : touches.length) === 2) {
+                            chartX = (touches[0].chartX + touches[1].chartX) / 2;
+                            chartY = (touches[0].chartY + touches[1].chartY) / 2;
+                        }
                         // Reset starting position
                         if (key !== mouseDownKey) {
                             mouseDownKey = key;
@@ -6010,6 +6111,7 @@
                             zoomFromBounds(worldBounds, _this.playingField)) || -Infinity;
                         // Panning rotates the globe
                         if (projection.options.name === 'Orthographic' &&
+                            ((touches === null || touches === void 0 ? void 0 : touches.length) || 0) < 2 &&
                             // ... but don't rotate if we're loading only a part of the
                             // world
                             (_this.minZoom || Infinity) < worldZoom * 1.3) {
@@ -6043,7 +6145,7 @@
                             ]);
                             // #19190 Skip NaN coords
                             if (!isNaN(newCenter[0] + newCenter[1])) {
-                                _this.setView(newCenter, void 0, true, false);
+                                _this.zoomBy(howMuch, newCenter, void 0, false);
                             }
                         }
                         e.preventDefault();
@@ -6174,13 +6276,10 @@
              *        The animation to apply to a the redraw
              */
             MapView.prototype.zoomBy = function (howMuch, coords, chartCoords, animation) {
-                var chart = this.chart;
-                var projectedCenter = this.projection.forward(this.center);
-                // let { x, y } = coords || {};
-                var _a = coords ? this.projection.forward(coords) : [], x = _a[0], y = _a[1];
+                var chart = this.chart, projectedCenter = this.projection.forward(this.center);
                 if (typeof howMuch === 'number') {
                     var zoom = this.zoom + howMuch;
-                    var center = void 0;
+                    var center = void 0, x = void 0, y = void 0;
                     // Keep chartX and chartY stationary - convert to lat and lng
                     if (chartCoords) {
                         var chartX = chartCoords[0], chartY = chartCoords[1];
@@ -6193,14 +6292,13 @@
                     // Keep lon and lat stationary by adjusting the center
                     if (typeof x === 'number' && typeof y === 'number') {
                         var scale = 1 - Math.pow(2, this.zoom) / Math.pow(2, zoom);
-                        // const projectedCenter = this.projection.forward(this.center);
                         var offsetX = projectedCenter[0] - x;
                         var offsetY = projectedCenter[1] - y;
                         projectedCenter[0] -= offsetX * scale;
                         projectedCenter[1] += offsetY * scale;
                         center = this.projection.inverse(projectedCenter);
                     }
-                    this.setView(center, zoom, void 0, animation);
+                    this.setView(coords || center, zoom, void 0, animation);
                     // Undefined howMuch => reset zoom
                 }
                 else {
@@ -6394,6 +6492,15 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
+        var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+            if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+            return to.concat(ar || Array.prototype.slice.call(from));
+        };
         var animObject = A.animObject, stop = A.stop;
         var noop = H.noop;
         var splitPath = MapChart.splitPath;
@@ -6512,7 +6619,7 @@
                 if (this.doFullTranslate()) {
                     // Individual point actions.
                     this.points.forEach(function (point) {
-                        var graphic = point.graphic, shapeArgs = point.shapeArgs;
+                        var graphic = point.graphic;
                         // Points should be added in the corresponding transform group
                         point.group = transformGroups[typeof point.insetIndex === 'number' ?
                             point.insetIndex + 1 :
@@ -6548,6 +6655,13 @@
                             if (chart.styledMode) {
                                 graphic.css(_this.pointAttribs(point, point.selected && 'select' || void 0));
                             }
+                            // If the map point is not visible and is not null (e.g.
+                            // hidden by data classes), then the point should be
+                            // visible, but without value
+                            graphic.attr({
+                                visibility: (point.visible ||
+                                    (!point.visible && !point.isNull)) ? 'inherit' : 'hidden'
+                            });
                             graphic.animate = function (params, options, complete) {
                                 var animateIn = (isNumber(params['stroke-width']) &&
                                     !isNumber(graphic['stroke-width'])), animateOut = (isNumber(graphic['stroke-width']) &&
@@ -6674,7 +6788,7 @@
                     // Find the bounding box of each point
                     (this.points || []).forEach(function (point) {
                         if (point.path || point.geometry) {
-                            // @todo Try to puth these two conversions in
+                            // @todo Try to put these two conversions in
                             // MapPoint.applyOptions
                             if (typeof point.path === 'string') {
                                 point.path = splitPath(point.path);
@@ -7020,15 +7134,34 @@
                                 d: MapPoint.getProjectedPath(point, projection)
                             };
                         }
-                        if (point.projectedPath && !point.projectedPath.length) {
-                            point.setVisible(false);
-                        }
-                        else if (!point.visible) {
-                            point.setVisible(true);
+                        if (!point.hiddenInDataClass) { // #20441
+                            if (point.projectedPath && !point.projectedPath.length) {
+                                point.setVisible(false);
+                            }
+                            else if (!point.visible) {
+                                point.setVisible(true);
+                            }
                         }
                     });
                 }
                 fireEvent(series, 'afterTranslate');
+            };
+            MapSeries.prototype.update = function (options) {
+                var _this = this;
+                var _a;
+                // Calculate and set the recommended map view after every series update
+                // if new mapData is set
+                if (options.mapData) {
+                    (_a = this.chart.mapView) === null || _a === void 0 ? void 0 : _a.recommendMapView(this.chart, __spreadArray([
+                        this.chart.options.chart.map
+                    ], (this.chart.options.series || []).map(function (s, i) {
+                        if (i === _this._i) {
+                            return options.mapData;
+                        }
+                        return s.mapData;
+                    }), true), true);
+                }
+                _super.prototype.update.apply(this, arguments);
             };
             MapSeries.defaultOptions = merge(ScatterSeries.defaultOptions, MapSeriesDefaults);
             return MapSeries;
@@ -7944,7 +8077,7 @@
                 y: 0
             },
             /**
-             * Miximum bubble legend range size. If values for ranges are
+             * Maximum bubble legend range size. If values for ranges are
              * not specified, the `minSize` and the `maxSize` are calculated
              * from bubble series.
              */
@@ -8019,7 +8152,7 @@
              */
             zIndex: 1,
             /**
-             * Ranges with with lower value than zThreshold, are skipped.
+             * Ranges with lower value than zThreshold are skipped.
              */
             zThreshold: 0
         };
@@ -8110,9 +8243,9 @@
              *        Legend instance
              */
             BubbleLegendItem.prototype.drawLegendSymbol = function (legend) {
-                var chart = this.chart, itemDistance = pick(legend.options.itemDistance, 20), legendItem = this.legendItem || {}, options = this.options, ranges = options.ranges, connectorDistance = options.connectorDistance;
+                var itemDistance = pick(legend.options.itemDistance, 20), legendItem = this.legendItem || {}, options = this.options, ranges = options.ranges, connectorDistance = options.connectorDistance;
                 var connectorSpace;
-                // Do not create bubbleLegend now if ranges or ranges valeus are not
+                // Do not create bubbleLegend now if ranges or ranges values are not
                 // specified or if are empty array.
                 if (!ranges || !ranges.length || !isNumber(ranges[0].value)) {
                     legend.options.bubbleLegend.autoRanges = true;
@@ -8401,7 +8534,7 @@
             BubbleLegendItem.prototype.predictBubbleSizes = function () {
                 var chart = this.chart, legendOptions = chart.legend.options, floating = legendOptions.floating, horizontal = legendOptions.layout === 'horizontal', lastLineHeight = horizontal ? chart.legend.lastLineHeight : 0, plotSizeX = chart.plotSizeX, plotSizeY = chart.plotSizeY, bubbleSeries = chart.series[this.options.seriesIndex], pxSizes = bubbleSeries.getPxExtremes(), minSize = Math.ceil(pxSizes.minPxSize), maxPxSize = Math.ceil(pxSizes.maxPxSize), plotSize = Math.min(plotSizeY, plotSizeX);
                 var calculatedSize, maxSize = bubbleSeries.options.maxSize;
-                // Calculate prediceted max size of bubble
+                // Calculate predicted max size of bubble
                 if (floating || !(/%$/.test(maxSize))) {
                     calculatedSize = maxPxSize;
                 }
@@ -8566,7 +8699,7 @@
          * Core series class to use with Bubble series.
          */
         function compose(ChartClass, LegendClass, SeriesClass) {
-            if (pushUnique(composed, compose)) {
+            if (pushUnique(composed, 'Series.BubbleLegend')) {
                 setOptions({
                     // Set default bubble legend options
                     legend: {
@@ -8915,7 +9048,7 @@
              * */
             BubbleSeries.compose = function (AxisClass, ChartClass, LegendClass, SeriesClass) {
                 BubbleLegendComposition.compose(ChartClass, LegendClass, SeriesClass);
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'Series.Bubble')) {
                     addEvent(AxisClass, 'foundExtremes', onAxisFoundExtremes);
                 }
             };
@@ -10414,7 +10547,7 @@
          * @apioption series.heatmap.data.color
          */
         /**
-         * The value of the point, resulting in a color controled by options
+         * The value of the point, resulting in a color controlled by options
          * as set in the [colorAxis](#colorAxis) configuration.
          *
          * @type      {number}
@@ -11078,7 +11211,7 @@
          */
         /**
          * Heatmap series only. The value of the point, resulting in a color
-         * controled by options as set in the colorAxis configuration.
+         * controlled by options as set in the colorAxis configuration.
          * @name Highcharts.Point#value
          * @type {number|null|undefined}
          */
@@ -11089,7 +11222,7 @@
         * @name Highcharts.PointOptionsObject#pointPadding
         * @type {number|undefined}
         */ /**
-        * Heatmap series only. The value of the point, resulting in a color controled
+        * Heatmap series only. The value of the point, resulting in a color controlled
         * by options as set in the colorAxis configuration.
         * @name Highcharts.PointOptionsObject#value
         * @type {number|null|undefined}
@@ -11098,23 +11231,27 @@
 
         return HeatmapSeries;
     });
-    _registerModule(_modules, 'masters/modules/map.src.js', [_modules['Core/Globals.js'], _modules['Core/Axis/Color/ColorAxis.js'], _modules['Maps/MapNavigation.js'], _modules['Series/MapBubble/MapBubbleSeries.js'], _modules['Maps/GeoJSONComposition.js'], _modules['Core/Chart/MapChart.js'], _modules['Maps/MapView.js'], _modules['Maps/Projection.js']], function (Highcharts, ColorAxis, MapNavigation, MapBubbleSeries, GeoJSONComposition, MapChart, MapView, Projection) {
+    _registerModule(_modules, 'masters/modules/map.src.js', [_modules['Core/Globals.js'], _modules['Maps/MapNavigation.js'], _modules['Series/ColorMapComposition.js'], _modules['Series/MapBubble/MapBubbleSeries.js'], _modules['Maps/GeoJSONComposition.js'], _modules['Core/Chart/MapChart.js'], _modules['Maps/MapView.js'], _modules['Maps/Projection.js']], function (Highcharts, MapNavigation, ColorMapComposition, MapBubbleSeries, GeoJSONComposition, MapChart, MapView, Projection) {
 
         var G = Highcharts;
-        G.ColorAxis = ColorAxis;
-        G.MapChart = MapChart;
-        G.mapChart = G.Map = MapChart.mapChart;
-        G.MapNavigation = MapNavigation;
-        G.MapView = MapView;
-        G.maps = MapChart.maps;
-        G.Projection = Projection;
+        // Classes
+        G.ColorMapComposition = ColorMapComposition;
+        G.MapChart = G.MapChart || MapChart;
+        G.MapNavigation = G.MapNavigation || MapNavigation;
+        G.MapView = G.MapView || MapView;
+        G.Projection = G.Projection || Projection;
+        // Functions
+        G.mapChart = G.Map = G.MapChart.mapChart;
+        G.maps = G.MapChart.maps;
         G.geojson = GeoJSONComposition.geojson;
         G.topo2geo = GeoJSONComposition.topo2geo;
-        ColorAxis.compose(G.Chart, G.Fx, G.Legend, G.Series);
+        // Compositions
         GeoJSONComposition.compose(G.Chart);
         MapBubbleSeries.compose(G.Axis, G.Chart, G.Legend, G.Series);
         MapNavigation.compose(MapChart, G.Pointer, G.SVGRenderer);
         MapView.compose(MapChart);
+        // Default Export
 
+        return Highcharts;
     });
 }));

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2017-2024 Highsoft AS
  * Authors: Jon Arild Nygard
@@ -254,7 +254,7 @@
              * The first circle.
              *
              * @param {Highcharts.CircleObject} c2
-             * The second sircle.
+             * The second circle.
              *
              * @return {Array<Highcharts.PositionObject>}
              * Returns the resulting intersection points.
@@ -293,7 +293,7 @@
                 return circles.reduce(function (points, c1, i, arr) {
                     var additional = arr
                         .slice(i + 1)
-                        .reduce(function (points, c2, j, arr) {
+                        .reduce(function (points, c2, j) {
                         var indexes = [i, j + i + 1];
                         return points.concat(getCircleCircleIntersection(c1, c2).map(function (p) {
                             p.indexes = indexes;
@@ -314,7 +314,7 @@
              * The first circle.
              *
              * @param {Highcharts.CircleObject} circle2
-             * The The second circle.
+             * The second circle.
              *
              * @return {boolean}
              * Returns true if circle1 is completely overlapping circle2, false if not.
@@ -506,7 +506,7 @@
 
         return CircleUtilities;
     });
-    _registerModule(_modules, 'Series/DrawPointUtilities.js', [_modules['Core/Utilities.js']], function (U) {
+    _registerModule(_modules, 'Series/DrawPointUtilities.js', [], function () {
         /* *
          *
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
@@ -523,7 +523,6 @@
             };
             return __assign.apply(this, arguments);
         };
-        var isNumber = U.isNumber;
         /* *
          *
          *  Functions
@@ -1009,7 +1008,7 @@
          * @param {number} r1
          * Radius of the first circle.
          * @param {number} r2
-         * Radiues of the second circle.
+         * Radius of the second circle.
          * @param {number} overlap
          * The wanted overlap between the two circles.
          * @return {number}
@@ -1030,7 +1029,7 @@
             else {
                 distance = bisect(function (x) {
                     var actualOverlap = getOverlapBetweenCirclesByDistance(r1, r2, x);
-                    // Return the differance between wanted and actual overlap.
+                    // Return the difference between wanted and actual overlap.
                     return overlap - actualOverlap;
                 }, 0, maxDistance);
             }
@@ -1063,8 +1062,7 @@
                     }, isValid = (isPointInsideAllCircles(testPos, internal) &&
                         isPointOutsideAllCircles(testPos, filteredExternals));
                     // If the position is valid, then we want to move towards the
-                    // max distance. If not, then we want to  away from the max
-                    // distance.
+                    // max distance. If not, then we want to away from the max distance.
                     return -(maxDistance - x) + (isValid ? 0 : Number.MAX_VALUE);
                 }, 0, maxDistance);
             };
@@ -1072,7 +1070,7 @@
             return Math.min(findDistance(radius, -1), findDistance(radius, 1)) * 2;
         }
         /**
-         * Calculates a margin for a point based on the iternal and external
+         * Calculates a margin for a point based on the internal and external
          * circles. The margin describes if the point is well placed within the
          * internal circles, and away from the external.
          * @private
@@ -1303,7 +1301,7 @@
          * @param {Highcharts.NelderMeadPointArray} initial
          *        The initial point to optimize.
          * @return {Highcharts.NelderMeadPointArray}
-         *         Returns the opimized position of a point.
+         *         Returns the optimized position of a point.
          */
         function nelderMead(fn, initial) {
             var maxIterations = 100, sortByFx = function (a, b) {
@@ -1557,7 +1555,7 @@
              * */
             /**
              * Finds the optimal label position by looking for a position that has a low
-             * distance from the internal circles, and as large possible distane to the
+             * distance from the internal circles, and as large possible distance to the
              * external circles.
              * @private
              * @todo Optimize the intial position.
@@ -1626,7 +1624,7 @@
                 return best;
             };
             /**
-             * Calulates data label values for a given relations object.
+             * Calculates data label values for a given relations object.
              *
              * @private
              * @todo add unit tests
@@ -1660,7 +1658,7 @@
                         return !isCircle1CompletelyOverlappingCircle2(externalCircle, internalCircle);
                     });
                 });
-                // Calulate the label position.
+                // Calculate the label position.
                 var position = VennSeries.getLabelPosition(data.internal, data.external);
                 // Calculate the label width
                 var width = VennUtils.getLabelWidth(position, data.internal, data.external);
@@ -1677,7 +1675,7 @@
              * @todo Add support for constrained MDS.
              * @param {Array<Highchats.VennRelationObject>} relations
              * List of the overlap between two or more sets, or the size of a single
-             * sset.
+             * set.
              * @return {Highcharts.Dictionary<*>}
              * List of circles and their calculated positions.
              */
@@ -1978,8 +1976,9 @@
 
         return VennSeries;
     });
-    _registerModule(_modules, 'masters/modules/venn.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/venn.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

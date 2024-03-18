@@ -62,9 +62,24 @@ The border color of the node cards.
 */
 @property(nonatomic, readwrite) HIColor *borderColor;
 /**
-In a horizontal chart, the width of the nodes in pixels. Note that most organization charts are vertical, so the name of this option is counterintuitive.
+Whether links connecting hanging nodes should be drawn on the left or right side. Useful for RTL layouts. **Note:** Only effects inverted charts (vertical layout).
+
+**Defaults to** `'left'`.
+
+**Try it**
+
+* [Nodes hanging from right side.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/hanging-side)
+*/
+@property(nonatomic, readwrite) NSString *hangingSide;
+/**
+In a horizontal chart, the width of the nodes in pixels. Note that most organization charts are inverted (vertical), so the name of this option is counterintuitive.
 
 **Defaults to** `50`.
+
+**Try it**
+
+* [Sankey with auto node width combined with node distance](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-sankey/node-distance)
+* [Organization chart with node distance of 50%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/node-distance)
 */
 @property(nonatomic, readwrite) NSNumber *nodeWidth;
 /**
@@ -128,11 +143,22 @@ The minimal width for a line of a sankey. By default, 0 values are not shown.
 */
 @property(nonatomic, readwrite) NSNumber *minLinkWidth;
 /**
-The padding between nodes in a sankey diagram or dependency wheel, in pixels. If the number of nodes is so great that it is possible to lay them out within the plot area with the given `nodePadding`, they will be rendered with a smaller padding as a strategy to avoid overflow.
+The padding between nodes in a sankey diagram or dependency wheel, in pixels. For sankey charts, this applies to the nodes of the same column, so vertical distance by default, or horizontal distance in an inverted (vertical) sankey. If the number of nodes is so great that it is impossible to lay them out within the plot area with the given `nodePadding`, they will be rendered with a smaller padding as a strategy to avoid overflow.
 
 **Defaults to** `10`.
 */
 @property(nonatomic, readwrite) NSNumber *nodePadding;
+/**
+The distance between nodes in a sankey diagram in the longitudinal direction. The longitudinal direction means the direction that the chart flows - in a horizontal chart the distance is horizontal, in an inverted chart (vertical), the distance is vertical. If a number is given, it denotes pixels. If a percentage string is given, the distance is a percentage of the rendered node width. A `nodeDistance` of `100%` will render equal widths for the nodes and the gaps between them. This option applies only when the `nodeWidth` option is `auto`, making the node width respond to the number of columns.
+
+**Defaults to** `30`.
+
+**Try it**
+
+* [Sankey with dnode distance of 100% means equal to node width](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-sankey/node-distance)
+* [Organization chart with node distance of 50%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/node-distance)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ nodeDistance;
 /**
 Set options on specific levels. Takes precedence over series options, but not node and link options.
 

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -92,7 +92,7 @@
 
         return VBPPoint;
     });
-    _registerModule(_modules, 'Stock/Indicators/VBP/VBPIndicator.js', [_modules['Stock/Indicators/VBP/VBPPoint.js'], _modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js'], _modules['Core/Chart/StockChart.js']], function (VBPPoint, A, H, SeriesRegistry, U, StockChart) {
+    _registerModule(_modules, 'Stock/Indicators/VBP/VBPIndicator.js', [_modules['Stock/Indicators/VBP/VBPPoint.js'], _modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (VBPPoint, A, H, SeriesRegistry, U) {
         /* *
          *
          *  (c) 2010-2024 Paweł Dalek
@@ -186,7 +186,7 @@
                 delete options.data;
                 _super.prototype.init.apply(indicator, arguments);
                 // Only after series are linked add some additional logic/properties.
-                var unbinder = addEvent(StockChart, 'afterLinkSeries', function () {
+                var unbinder = addEvent(this.chart.constructor, 'afterLinkSeries', function () {
                     // Protection for a case where the indicator is being updated,
                     // for a brief moment the indicator is deleted.
                     if (indicator.options) {
@@ -400,7 +400,7 @@
                     yData: yData
                 };
             };
-            // Specifing where each zone should start ans end
+            // Specifying where each zone should start ans end
             VBPIndicator.prototype.specifyZones = function (isOHLC, xValues, yValues, ranges, volumeSeries) {
                 var indicator = this, rangeExtremes = (isOHLC ? arrayExtremesOHLC(yValues) : false), zoneStarts = indicator.zoneStarts = [], priceZones = [];
                 var lowRange = rangeExtremes ?
@@ -452,7 +452,7 @@
                 // Checks if each point has a corresponding volume value
                 if (abs(baseSeriesLength - volumeSeriesLength)) {
                     // If the first point don't have volume, add 0 value at the
-                    // beggining of the volume array
+                    // beginning of the volume array
                     if (xValues[0] !== volumeXData[0]) {
                         volumeYData.unshift(0);
                     }
@@ -511,7 +511,7 @@
                 });
                 return priceZones;
             };
-            // Function responsoble for drawing additional lines indicating zones
+            // Function responsible for drawing additional lines indicating zones
             VBPIndicator.prototype.drawZones = function (chart, yAxis, zonesValues, zonesStyles) {
                 var indicator = this, renderer = chart.renderer, leftLinePos = 0, rightLinePos = chart.plotWidth, verticalOffset = chart.plotTop;
                 var zoneLinesSVG = indicator.zoneLinesSVG, zoneLinesPath = [], verticalLinePos;
@@ -694,8 +694,9 @@
 
         return VBPIndicator;
     });
-    _registerModule(_modules, 'masters/indicators/volume-by-price.src.js', [], function () {
+    _registerModule(_modules, 'masters/indicators/volume-by-price.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

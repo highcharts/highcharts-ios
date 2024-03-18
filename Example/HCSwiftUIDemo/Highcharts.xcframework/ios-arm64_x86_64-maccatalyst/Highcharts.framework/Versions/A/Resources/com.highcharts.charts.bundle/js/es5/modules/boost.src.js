@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Boost module
  *
@@ -134,7 +134,7 @@
          * @private
          */
         function compose(ChartClass, wglMode) {
-            if (wglMode && pushUnique(composed, compose)) {
+            if (wglMode && pushUnique(composed, 'Boost.Chart')) {
                 ChartClass.prototype.callbacks.push(onChartCallback);
             }
             return ChartClass;
@@ -156,7 +156,7 @@
                     chart.navigator.top + chart.navigator.height - chart.plotTop :
                     chart.plotHeight
             };
-            // Clipping of individal series (#11906, #19039).
+            // Clipping of individual series (#11906, #19039).
             if (target.getClipBox) {
                 var _a = target, xAxis = _a.xAxis, yAxis = _a.yAxis;
                 clipBox = target.getClipBox();
@@ -276,13 +276,14 @@
              * @private
              */
             function preRender() {
+                var _a, _b;
                 // Reset force state
                 chart.boost = chart.boost || {};
                 chart.boost.forceChartBoost = void 0;
                 chart.boosted = false;
                 // Clear the canvas
-                if (chart.boost.clear) {
-                    chart.boost.clear();
+                if (!chart.axes.some(function (axis) { return axis.isPanning; })) {
+                    (_b = (_a = chart.boost).clear) === null || _b === void 0 ? void 0 : _b.call(_a);
                 }
                 if (chart.boost.canvas &&
                     chart.boost.wgl &&
@@ -959,7 +960,7 @@
              * @param {string} attrib
              * Name of the Attribute to bind the buffer to
              * @param {number} dataComponents
-             * Mumber of components per. indice
+             * Number of components per. indice
              */
             WGLVertexBuffer.prototype.build = function (dataIn, attrib, dataComponents) {
                 var farray;
@@ -1667,8 +1668,8 @@
                         // y = plotHeight;
                         // }
                         if (x > plotWidth) {
-                            // If this is  rendered as a point, just skip drawing it
-                            // entirely, as we're not dependandt on lineTo'ing to it.
+                            // If this is rendered as a point, just skip drawing it
+                            // entirely, as we're not dependant on lineTo'ing to it.
                             // See #8197
                             if (inst.drawMode === 'POINTS') {
                                 return "continue";
@@ -1793,7 +1794,7 @@
             };
             /**
              * Push a series to the renderer
-             * If we render the series immediatly, we don't have to loop later
+             * If we render the series immediately, we don't have to loop later
              * @private
              * @param {Highchart.Series} s
              * The series to push.
@@ -2327,7 +2328,7 @@
          * @private
          */
         function compose(SeriesClass, seriesTypes, wglMode) {
-            if (pushUnique(composed, compose)) {
+            if (pushUnique(composed, 'Boost.Series')) {
                 var plotOptions_1 = getOptions().plotOptions, seriesProto_1 = SeriesClass.prototype;
                 addEvent(SeriesClass, 'destroy', onSeriesDestroy);
                 addEvent(SeriesClass, 'hide', onSeriesHide);
@@ -2394,7 +2395,7 @@
                     if (ScatterSeries) {
                         ScatterSeries.prototype.fill = true;
                     }
-                    // We need to handle heatmaps separatly, since we can't perform the
+                    // We need to handle heatmaps separately, since we can't perform the
                     // size/color calculations in the shader easily.
                     // @todo This likely needs future optimization.
                     [HeatmapSeries, TreemapSeries].forEach(function (SC) {
@@ -2510,8 +2511,7 @@
                     // it will cover the most common use case of one or more
                     // successive boosted or non-boosted series (#9819).
                     zIndex: series.options.zIndex
-                })
-                    .clip(boost.clipRect);
+                });
                 if (target instanceof ChartClass) {
                     target.boost.markerGroup = target.renderer
                         .g()
@@ -2522,7 +2522,15 @@
             boost.canvas.width = width;
             boost.canvas.height = height;
             if (boost.clipRect) {
-                boost.clipRect.attr(getBoostClipRect(chart, target));
+                var box = getBoostClipRect(chart, target), 
+                // When using panes, the image itself must be clipped. When not
+                // using panes, it is better to clip the target group, because then
+                // we preserve clipping on touch- and mousewheel zoom preview.
+                clippedElement = (box.width === chart.clipBox.width &&
+                    box.height === chart.clipBox.height) ? targetGroup :
+                    (boost.targetFo || boost.target);
+                boost.clipRect.attr(box);
+                clippedElement === null || clippedElement === void 0 ? void 0 : clippedElement.clip(boost.clipRect);
             }
             boost.resize();
             boost.clear();
@@ -2574,7 +2582,10 @@
                     series[prop] = seriesProp.destroy();
                 }
             });
-            series.zones.forEach(destroyObjectProperties);
+            for (var _i = 0, _a = series.zones; _i < _a.length; _i++) {
+                var zone = _a[_i];
+                destroyObjectProperties(zone, void 0, true);
+            }
         }
         /**
          * An "async" foreach loop. Uses a setTimeout to keep the loop from blocking the
@@ -2807,7 +2818,8 @@
          * @private
          */
         function scatterProcessData(force) {
-            var _a, _b, _c, _d, _e, _f;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+            var _q, _r, _s, _t;
             var series = this, options = series.options, xAxis = series.xAxis, yAxis = series.yAxis;
             // Process only on changes
             if (!series.isDirty &&
@@ -2819,17 +2831,17 @@
             // Required to get tick-based zoom ranges that take options into account
             // like `minPadding`, `maxPadding`, `startOnTick`, `endOnTick`.
             series.yAxis.setTickInterval();
-            var boostThreshold = options.boostThreshold || 0, cropThreshold = options.cropThreshold, data = options.data || series.data, xData = series.xData, xExtremes = xAxis.getExtremes(), xMax = xExtremes.max, xMin = xExtremes.min, yData = series.yData, yExtremes = yAxis.getExtremes(), yMax = yExtremes.max, yMin = yExtremes.min;
+            var boostThreshold = options.boostThreshold || 0, cropThreshold = options.cropThreshold, data = options.data || series.data, xData = series.xData, xExtremes = xAxis.getExtremes(), xMax = (_a = xExtremes.max) !== null && _a !== void 0 ? _a : Number.MAX_VALUE, xMin = (_b = xExtremes.min) !== null && _b !== void 0 ? _b : -Number.MAX_VALUE, yData = series.yData, yExtremes = yAxis.getExtremes(), yMax = (_c = yExtremes.max) !== null && _c !== void 0 ? _c : Number.MAX_VALUE, yMin = (_d = yExtremes.min) !== null && _d !== void 0 ? _d : -Number.MAX_VALUE;
             // Skip processing in non-boost zoom
             if (!series.boosted &&
                 xAxis.old &&
                 yAxis.old &&
-                xMin >= ((_a = xAxis.old.min) !== null && _a !== void 0 ? _a : -Number.MAX_VALUE) &&
-                xMax <= ((_b = xAxis.old.max) !== null && _b !== void 0 ? _b : Number.MAX_VALUE) &&
-                yMin >= ((_c = yAxis.old.min) !== null && _c !== void 0 ? _c : -Number.MAX_VALUE) &&
-                yMax <= ((_d = yAxis.old.max) !== null && _d !== void 0 ? _d : Number.MAX_VALUE)) {
-                (_e = series.processedXData) !== null && _e !== void 0 ? _e : (series.processedXData = xData);
-                (_f = series.processedYData) !== null && _f !== void 0 ? _f : (series.processedYData = yData);
+                xMin >= ((_e = xAxis.old.min) !== null && _e !== void 0 ? _e : -Number.MAX_VALUE) &&
+                xMax <= ((_f = xAxis.old.max) !== null && _f !== void 0 ? _f : Number.MAX_VALUE) &&
+                yMin >= ((_g = yAxis.old.min) !== null && _g !== void 0 ? _g : -Number.MAX_VALUE) &&
+                yMax <= ((_h = yAxis.old.max) !== null && _h !== void 0 ? _h : Number.MAX_VALUE)) {
+                (_j = series.processedXData) !== null && _j !== void 0 ? _j : (series.processedXData = xData);
+                (_k = series.processedYData) !== null && _k !== void 0 ? _k : (series.processedYData = yData);
                 return true;
             }
             // Without thresholds just assign data
@@ -2845,8 +2857,8 @@
                 return true;
             }
             // Filter unsorted scatter data for ranges
-            var processedData = [], processedXData = [], processedYData = [];
-            var cropped = false, x, y;
+            var processedData = [], processedXData = [], processedYData = [], xRangeNeeded = !(isNumber(xExtremes.max) || isNumber(xExtremes.min)), yRangeNeeded = !(isNumber(yExtremes.max) || isNumber(yExtremes.min));
+            var cropped = false, x, xDataMax = xData[0], xDataMin = xData[0], y, yDataMax = yData[0], yDataMin = yData[0];
             for (var i = 0, iEnd = xData.length; i < iEnd; ++i) {
                 x = xData[i];
                 y = yData[i];
@@ -2855,10 +2867,26 @@
                     processedData.push({ x: x, y: y });
                     processedXData.push(x);
                     processedYData.push(y);
+                    if (xRangeNeeded) {
+                        xDataMax = Math.max(xDataMax, x);
+                        xDataMin = Math.min(xDataMin, x);
+                    }
+                    if (yRangeNeeded) {
+                        yDataMax = Math.max(yDataMax, y);
+                        yDataMin = Math.min(yDataMin, y);
+                    }
                 }
                 else {
                     cropped = true;
                 }
+            }
+            if (xRangeNeeded) {
+                (_l = (_q = xAxis.options).max) !== null && _l !== void 0 ? _l : (_q.max = xDataMax);
+                (_m = (_r = xAxis.options).min) !== null && _m !== void 0 ? _m : (_r.min = xDataMin);
+            }
+            if (yRangeNeeded) {
+                (_o = (_s = yAxis.options).max) !== null && _o !== void 0 ? _o : (_s.max = yDataMax);
+                (_p = (_t = yAxis.options).min) !== null && _p !== void 0 ? _p : (_t.min = yDataMin);
             }
             // Set properties as base processData
             series.cropped = cropped;
@@ -2884,6 +2912,13 @@
                 this.processedXData ||
                 false);
             var renderer = false, lastClientX, yBottom = yAxis.getThreshold(threshold), minVal, maxVal, minI, maxI;
+            // When touch-zooming or mouse-panning, re-rendering the canvas would not
+            // perform fast enough. Instead, let the axes redraw, but not the series.
+            // The series is scale-translated in an event handler for an approximate
+            // preview.
+            if (xAxis.isPanning || yAxis.isPanning) {
+                return;
+            }
             // Get or create the renderer
             renderer = createAndAttachRenderer(chart, this);
             chart.boosted = true;
@@ -2906,7 +2941,7 @@
                 this.markerGroup = this.plotGroup('markerGroup', 'markers', true, 1, chart.seriesGroup);
             }
             else {
-                // If series has a private markeGroup, remove that
+                // If series has a private markerGroup, remove that
                 // and use common markerGroup
                 if (this.markerGroup &&
                     this.markerGroup !== chart.boost.markerGroup) {
@@ -2960,6 +2995,7 @@
             };
             // Do not start building while drawing
             this.buildKDTree = noop;
+            fireEvent(this, 'renderCanvas');
             if (renderer) {
                 allocateIfNotSeriesBoosting(renderer, this);
                 renderer.pushSeries(this);
@@ -3146,9 +3182,16 @@
          * @private
          */
         function wrapSeriesGetExtremes(proceed) {
-            if (this.boosted &&
-                hasExtremes(this)) {
-                return {};
+            if (this.boosted) {
+                if (hasExtremes(this)) {
+                    return {};
+                }
+                if (this.xAxis.isPanning || this.yAxis.isPanning) {
+                    // Do not re-compute the extremes during panning, because looping
+                    // the data is expensive. The `this` contains the `dataMin` and
+                    // `dataMax` to use.
+                    return this;
+                }
             }
             return proceed.apply(this, [].slice.call(arguments, 1));
         }
@@ -3159,6 +3202,7 @@
          * @private
          */
         function wrapSeriesProcessData(proceed) {
+            var _a, _b;
             var dataToMeasure = this.options.data;
             if (boostEnabled(this.chart) && BoostableMap[this.type]) {
                 var series = this, isScatter = series.is('scatter') && !series.is('bubble');
@@ -3172,6 +3216,10 @@
                     // Use processedYData for the stack (#7481):
                     series.options.stacking ||
                     !hasExtremes(series, true)) {
+                    // Do nothing until the panning stops
+                    if (series.boosted && (((_a = series.xAxis) === null || _a === void 0 ? void 0 : _a.isPanning) || ((_b = series.yAxis) === null || _b === void 0 ? void 0 : _b.isPanning))) {
+                        return;
+                    }
                     // Extra check for zoomed scatter data
                     if (isScatter && !series.yAxis.treeGrid) {
                         scatterProcessData.call(series, arguments[1]);
@@ -3428,8 +3476,17 @@
             };
             return __assign.apply(this, arguments);
         };
-        var composed = H.composed, doc = H.doc, win = H.win;
-        var error = U.error, pushUnique = U.pushUnique;
+        var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+            if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+            return to.concat(ar || Array.prototype.slice.call(from));
+        };
+        var doc = H.doc, win = H.win;
+        var addEvent = U.addEvent, error = U.error;
         /* *
          *
          *  Constants
@@ -3449,7 +3506,7 @@
         /**
          * @private
          */
-        function compose(ChartClass, SeriesClass, seriesTypes, ColorClass) {
+        function compose(ChartClass, AxisClass, SeriesClass, seriesTypes, ColorClass) {
             var wglMode = hasWebGLSupport();
             if (!wglMode) {
                 if (typeof H.initCanvasBoost !== 'undefined') {
@@ -3460,12 +3517,44 @@
                     error(26);
                 }
             }
-            if (ColorClass && pushUnique(composed, compose)) {
+            if (ColorClass && !ColorClass.names.lightgoldenrodyellow) {
                 ColorClass.names = __assign(__assign({}, ColorClass.names), NamedColors.defaultHTMLColorMap);
             }
             // WebGL support is alright, and we're good to go.
             BoostChart.compose(ChartClass, wglMode);
             BoostSeries.compose(SeriesClass, seriesTypes, wglMode);
+            // Handle zooming by touch/pinch or mouse wheel. Assume that boosted charts
+            // are too slow for a live preview while dragging. Instead, just scale the
+            // div while `isPanning`.
+            addEvent(AxisClass, 'setExtremes', function (e) {
+                var _a;
+                var _b, _c;
+                // Render targets can be either chart-wide or series-specific
+                var renderTargets = __spreadArray([this.chart], this.series, true).map(function (item) { return item.renderTarget; })
+                    .filter(Boolean);
+                for (var _i = 0, renderTargets_1 = renderTargets; _i < renderTargets_1.length; _i++) {
+                    var renderTarget = renderTargets_1[_i];
+                    var _d = this, horiz = _d.horiz, pos = _d.pos, scaleKey = horiz ? 'scaleX' : 'scaleY', translateKey = horiz ? 'translateX' : 'translateY', lastScale = (_b = renderTarget === null || renderTarget === void 0 ? void 0 : renderTarget[scaleKey]) !== null && _b !== void 0 ? _b : 1;
+                    var scale = 1, translate = 0, opacity = 1, filter = 'none';
+                    if (this.isPanning) {
+                        scale = ((_c = e.scale) !== null && _c !== void 0 ? _c : 1) * lastScale;
+                        translate = ((renderTarget === null || renderTarget === void 0 ? void 0 : renderTarget[translateKey]) || 0) -
+                            scale * (e.move || 0) +
+                            lastScale * pos -
+                            scale * pos;
+                        opacity = 0.7;
+                        filter = 'blur(3px)';
+                    }
+                    renderTarget === null || renderTarget === void 0 ? void 0 : renderTarget.attr((_a = {},
+                        _a[scaleKey] = scale,
+                        _a[translateKey] = translate,
+                        _a)).css({
+                        transition: '250ms filter, 250ms opacity',
+                        filter: filter,
+                        opacity: opacity
+                    });
+                }
+            });
         }
         /**
          * Returns true if the current browser supports WebGL.
@@ -3596,7 +3685,7 @@
          * @apioption boost.debug.timeSeriesProcessing
          */
         /**
-         * Time the the WebGL setup.
+         * Time the WebGL setup.
          *
          * This outputs the time spent on setting up the WebGL context,
          * creating shaders, and textures.
@@ -3674,7 +3763,7 @@
          * Setting to e.g. 20 will cause the whole chart to enter boost mode
          * if there are 20 or more series active. When the chart is in boost mode,
          * every series in it will be rendered to a common canvas. This offers
-         * a significant speed improvment in charts with a very high
+         * a significant speed improvement in charts with a very high
          * amount of series.
          *
          * @type      {number}
@@ -3688,7 +3777,7 @@
          * This option may cause rendering issues with certain datasets.
          * Namely, if your dataset has large numbers with small increments (such as
          * timestamps), it won't work correctly. This is due to floating point
-         * precission.
+         * precision.
          *
          * @type      {boolean}
          * @default   false
@@ -3748,7 +3837,8 @@
 
         var G = Highcharts;
         G.hasWebGLSupport = Boost.hasWebGLSupport;
-        Boost.compose(G.Chart, G.Series, G.seriesTypes, G.Color);
+        Boost.compose(G.Chart, G.Axis, G.Series, G.seriesTypes, G.Color);
 
+        return Highcharts;
     });
 }));

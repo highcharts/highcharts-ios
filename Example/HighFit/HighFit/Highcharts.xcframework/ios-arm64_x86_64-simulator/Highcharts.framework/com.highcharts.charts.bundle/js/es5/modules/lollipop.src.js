@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * (c) 2009-2024 Sebastian Bochan, Rafal Sebestjanski
  *
@@ -110,7 +110,9 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
-        var _a = SeriesRegistry.seriesTypes, colProto = _a.column.prototype, dumbbellProto = _a.dumbbell.prototype, ScatterSeries = _a.scatter;
+        var _a = SeriesRegistry.seriesTypes, colProto = _a.column.prototype, dumbbellProto = _a.dumbbell.prototype, 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        ScatterSeries = _a.scatter;
         var extend = U.extend, merge = U.merge;
         /* *
          *
@@ -344,8 +346,9 @@
 
         return LollipopSeries;
     });
-    _registerModule(_modules, 'masters/modules/lollipop.src.js', [], function () {
+    _registerModule(_modules, 'masters/modules/lollipop.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

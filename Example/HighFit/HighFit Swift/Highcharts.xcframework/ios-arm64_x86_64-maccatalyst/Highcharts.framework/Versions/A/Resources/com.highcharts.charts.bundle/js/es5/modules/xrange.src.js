@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * X-range series
  *
@@ -346,8 +346,8 @@
                         this.colorIndex = colorByPoint.colorIndex;
                     }
                 }
-                else if (!this.color) {
-                    this.color = series.color;
+                else {
+                    this.color = this.options.color || series.color;
                 }
             };
             /**
@@ -505,7 +505,7 @@
              *
              * */
             XRangeSeries.compose = function (AxisClass) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'Series.XRange')) {
                     addEvent(AxisClass, 'afterGetSeriesExtremes', onAxisAfterGetSeriesExtremes);
                 }
             };
@@ -865,5 +865,6 @@
         var G = Highcharts;
         XRangeSeries.compose(G.Axis);
 
+        return Highcharts;
     });
 }));

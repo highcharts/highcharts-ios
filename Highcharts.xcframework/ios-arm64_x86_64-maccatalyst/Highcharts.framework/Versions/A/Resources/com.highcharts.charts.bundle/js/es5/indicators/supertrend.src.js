@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -35,7 +35,7 @@
             }
         }
     }
-    _registerModule(_modules, 'Stock/Indicators/Supertrend/SupertrendIndicator.js', [_modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js'], _modules['Core/Chart/StockChart.js']], function (SeriesRegistry, U, StockChart) {
+    _registerModule(_modules, 'Stock/Indicators/Supertrend/SupertrendIndicator.js', [_modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (SeriesRegistry, U) {
         /* *
          *
          *  License: www.highcharts.com/license
@@ -104,7 +104,7 @@
                 var indicator = this;
                 _super.prototype.init.apply(indicator, arguments);
                 // Only after series are linked add some additional logic/properties.
-                var unbinder = addEvent(StockChart, 'afterLinkSeries', function () {
+                var unbinder = addEvent(this.chart.constructor, 'afterLinkSeries', function () {
                     // Protection for a case where the indicator is being updated,
                     // for a brief moment the indicator is deleted.
                     if (indicator.options) {
@@ -133,7 +133,7 @@
                     }
                 }, 
                 // Sorted supertrend points array
-                groupedPoitns = {
+                groupedPoints = {
                     top: [],
                     bottom: [],
                     intersect: [] // Change trend line points
@@ -169,7 +169,7 @@
                 prevMainPoint, prevPrevMainPoint, 
                 // Used when particular point color is set
                 pointColor, 
-                // Temporary points that fill groupedPoitns array
+                // Temporary points that fill groupedPoints array
                 newPoint, newNextPoint, indicPointsLen = indicPoints.length;
                 // Loop which sort supertrend points
                 while (indicPointsLen--) {
@@ -240,19 +240,19 @@
                             nextPoint.y >= nextMainPoint.close) {
                             point.color = (pointColor || indicOptions.fallingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.top.push(newPoint);
+                            groupedPoints.top.push(newPoint);
                         }
                         else if (point.y < mainPoint.close &&
                             nextPoint.y < nextMainPoint.close) {
                             point.color = (pointColor || indicOptions.risingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.bottom.push(newPoint);
+                            groupedPoints.bottom.push(newPoint);
                         }
                         else {
-                            groupedPoitns.intersect.push(newPoint);
-                            groupedPoitns.intersect.push(newNextPoint);
+                            groupedPoints.intersect.push(newPoint);
+                            groupedPoints.intersect.push(newNextPoint);
                             // Additional null point to make a gap in line
-                            groupedPoitns.intersect.push(merge(newNextPoint, {
+                            groupedPoints.intersect.push(merge(newNextPoint, {
                                 isNull: true
                             }));
                             if (point.y >= mainPoint.close &&
@@ -261,8 +261,8 @@
                                     indicOptions.color);
                                 nextPoint.color = (pointColor || indicOptions.risingTrendColor ||
                                     indicOptions.color);
-                                groupedPoitns.top.push(newPoint);
-                                groupedPoitns.top.push(merge(newNextPoint, {
+                                groupedPoints.top.push(newPoint);
+                                groupedPoints.top.push(merge(newNextPoint, {
                                     isNull: true
                                 }));
                             }
@@ -272,8 +272,8 @@
                                     indicOptions.color);
                                 nextPoint.color = (pointColor || indicOptions.fallingTrendColor ||
                                     indicOptions.color);
-                                groupedPoitns.bottom.push(newPoint);
-                                groupedPoitns.bottom.push(merge(newNextPoint, {
+                                groupedPoints.bottom.push(newPoint);
+                                groupedPoints.bottom.push(merge(newNextPoint, {
                                     isNull: true
                                 }));
                             }
@@ -283,17 +283,17 @@
                         if (point.y >= mainPoint.close) {
                             point.color = (pointColor || indicOptions.fallingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.top.push(newPoint);
+                            groupedPoints.top.push(newPoint);
                         }
                         else {
                             point.color = (pointColor || indicOptions.risingTrendColor ||
                                 indicOptions.color);
-                            groupedPoitns.bottom.push(newPoint);
+                            groupedPoints.bottom.push(newPoint);
                         }
                     }
                 }
                 // Generate lines:
-                objectEach(groupedPoitns, function (values, lineName) {
+                objectEach(groupedPoints, function (values, lineName) {
                     indicator.points = values;
                     indicator.options = merge(supertrendLineOptions[lineName].styles, gappedExtend);
                     indicator.graph = indicator['graph' + lineName + 'Line'];
@@ -420,7 +420,7 @@
              */
             SupertrendIndicator.defaultOptions = merge(SMAIndicator.defaultOptions, {
                 /**
-                 * Paramters used in calculation of Supertrend indicator series points.
+                 * Parameters used in calculation of Supertrend indicator series points.
                  *
                  * @excluding index
                  */
@@ -526,8 +526,9 @@
 
         return SupertrendIndicator;
     });
-    _registerModule(_modules, 'masters/indicators/supertrend.src.js', [], function () {
+    _registerModule(_modules, 'masters/indicators/supertrend.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

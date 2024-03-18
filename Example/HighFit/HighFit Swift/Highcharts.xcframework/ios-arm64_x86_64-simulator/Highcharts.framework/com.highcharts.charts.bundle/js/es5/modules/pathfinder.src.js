@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v11.3.0 (2024-01-10)
+ * @license Highcharts Gantt JS v11.4.0 (2024-03-04)
  *
  * Pathfinder
  *
@@ -1482,7 +1482,7 @@
 
         return connectorsDefaults;
     });
-    _registerModule(_modules, 'Gantt/PathfinderComposition.js', [_modules['Gantt/ConnectorsDefaults.js'], _modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (ConnectorsDefaults, D, H, U) {
+    _registerModule(_modules, 'Gantt/PathfinderComposition.js', [_modules['Gantt/ConnectorsDefaults.js'], _modules['Core/Defaults.js'], _modules['Core/Utilities.js']], function (ConnectorsDefaults, D, U) {
         /* *
          *
          *  (c) 2016 Highsoft AS
@@ -1494,8 +1494,7 @@
          *
          * */
         var setOptions = D.setOptions;
-        var composed = H.composed;
-        var defined = U.defined, error = U.error, merge = U.merge, pushUnique = U.pushUnique;
+        var defined = U.defined, error = U.error, merge = U.merge;
         /* *
          *
          *  Functions
@@ -1567,8 +1566,8 @@
              * */
             /** @private */
             function compose(ChartClass, PathfinderClass, PointClass) {
-                if (pushUnique(composed, compose)) {
-                    var pointProto = PointClass.prototype;
+                var pointProto = PointClass.prototype;
+                if (!pointProto.getPathfinderAnchorPoint) {
                     // Initialize Pathfinder for charts
                     ChartClass.prototype.callbacks.push(function (chart) {
                         var options = chart.options;
@@ -1833,7 +1832,7 @@
                     }
                 }
             }
-            // Ensure we always have at least one value, even in very spaceous charts
+            // Ensure we always have at least one value, even in very spacious charts
             distances.push(80);
             return max(Math.floor(distances.sort(function (a, b) {
                 return (a - b);
@@ -2023,7 +2022,7 @@
              * @function Highcharts.Pathfinder#getChartObstacles
              *
              * @param {Object} options
-             *        Options for the calculation. Currenlty only
+             *        Options for the calculation. Currently only
              *        options.algorithmMargin.
              *
              * @return {Array<object>}
@@ -2163,7 +2162,7 @@
 
         return Pathfinder;
     });
-    _registerModule(_modules, 'Extensions/ArrowSymbols.js', [_modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (H, U) {
+    _registerModule(_modules, 'Extensions/ArrowSymbols.js', [], function () {
         /* *
          *
          *  (c) 2017 Highsoft AS
@@ -2174,8 +2173,6 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var composed = H.composed;
-        var pushUnique = U.pushUnique;
         /* *
          *
          *  Functions
@@ -2254,15 +2251,13 @@
          * @private
          */
         function compose(SVGRendererClass) {
-            if (pushUnique(composed, compose)) {
-                var symbols = SVGRendererClass.prototype.symbols;
-                symbols.arrow = arrow;
-                symbols['arrow-filled'] = triangleLeft;
-                symbols['arrow-filled-half'] = triangleLeftHalf;
-                symbols['arrow-half'] = arrowHalf;
-                symbols['triangle-left'] = triangleLeft;
-                symbols['triangle-left-half'] = triangleLeftHalf;
-            }
+            var symbols = SVGRendererClass.prototype.symbols;
+            symbols.arrow = arrow;
+            symbols['arrow-filled'] = triangleLeft;
+            symbols['arrow-filled-half'] = triangleLeftHalf;
+            symbols['arrow-half'] = arrowHalf;
+            symbols['triangle-left'] = triangleLeft;
+            symbols['triangle-left-half'] = triangleLeftHalf;
         }
         /**
          * Creates a left-oriented triangle.
@@ -2345,9 +2340,10 @@
     _registerModule(_modules, 'masters/modules/pathfinder.src.js', [_modules['Core/Globals.js'], _modules['Gantt/Pathfinder.js'], _modules['Extensions/ArrowSymbols.js']], function (Highcharts, Pathfinder, ArrowSymbols) {
 
         var G = Highcharts;
-        G.Pathfinder = Pathfinder;
+        G.Pathfinder = G.Pathfinder || Pathfinder;
         ArrowSymbols.compose(G.SVGRenderer);
-        Pathfinder.compose(G.Chart, G.Point);
+        G.Pathfinder.compose(G.Chart, G.Point);
 
+        return Highcharts;
     });
 }));

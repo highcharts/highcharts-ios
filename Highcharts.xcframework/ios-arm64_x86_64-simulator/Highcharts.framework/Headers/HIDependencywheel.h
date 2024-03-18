@@ -90,17 +90,11 @@ The minimal width for a line of a sankey. By default, 0 values are not shown.
 */
 @property(nonatomic, readwrite) NSNumber *minLinkWidth;
 /**
-The padding between nodes in a sankey diagram or dependency wheel, in pixels. If the number of nodes is so great that it is possible to lay them out within the plot area with the given `nodePadding`, they will be rendered with a smaller padding as a strategy to avoid overflow.
+The padding between nodes in a sankey diagram or dependency wheel, in pixels. For sankey charts, this applies to the nodes of the same column, so vertical distance by default, or horizontal distance in an inverted (vertical) sankey. If the number of nodes is so great that it is impossible to lay them out within the plot area with the given `nodePadding`, they will be rendered with a smaller padding as a strategy to avoid overflow.
 
 **Defaults to** `10`.
 */
 @property(nonatomic, readwrite) NSNumber *nodePadding;
-/**
-The pixel width of each node in a sankey diagram or dependency wheel, or the height in case the chart is inverted.
-
-**Defaults to** `20`.
-*/
-@property(nonatomic, readwrite) NSNumber *nodeWidth;
 /**
 Set options on specific levels. Takes precedence over series options, but not node and link options.
 
@@ -117,6 +111,17 @@ The width of the border surrounding each column or bar. Defaults to `1` when the
 * [2px black border](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-borderwidth/)
 */
 @property(nonatomic, readwrite) NSNumber *borderWidth;
+/**
+The pixel width of each node in a sankey diagram or dependency wheel, or the height in case the chart is inverted. Can be a number or a percentage string. Sankey series also support setting it to `auto`. With this setting, the nodes are sized to fill up the plot area in the longitudinal direction, regardless of the number of levels.
+
+**Defaults to** `20`.
+
+**Try it**
+
+* [Sankey with auto node width combined with node distance](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-sankey/node-distance)
+* [Organization chart with node distance of 50%](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-organization/node-distance)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ nodeWidth;
 /**
 Opacity for the links between nodes in the sankey diagram.
 

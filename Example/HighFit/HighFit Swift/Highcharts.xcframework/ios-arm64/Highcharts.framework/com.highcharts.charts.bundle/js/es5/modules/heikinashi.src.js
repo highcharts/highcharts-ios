@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * HeikinAshi series type for Highcharts Stock
  *
@@ -60,7 +60,9 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
-        var _a = SeriesRegistry.seriesTypes, CandlestickPoint = _a.candlestick.prototype.pointClass, HLCPoint = _a.hlc.prototype.pointClass;
+        var _a = SeriesRegistry.seriesTypes, CandlestickPoint = _a.candlestick.prototype.pointClass, 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        HLCPoint = _a.hlc.prototype.pointClass;
         /* *
          *
          *  Class
@@ -176,7 +178,7 @@
          * @product   highstock
          * @apioption series.heikinashi.data
          */
-        ''; // adds doclets above to transpilat
+        ''; // adds doclets above to transpiled
         /* *
          *
          *  Default Export
@@ -240,7 +242,7 @@
          */
         function onHeikinAshiSeriesAfterTranslate() {
             var series = this, points = series.points, heikiashiData = series.heikiashiData, cropStart = series.cropStart || 0;
-            // Reset the proccesed data.
+            // Reset the processed data.
             series.processedYData.length = 0;
             // Modify points.
             for (var i = 0; i < points.length; i++) {
@@ -293,12 +295,8 @@
              *
              * */
             HeikinAshiSeries.compose = function (SeriesClass, AxisClass) {
-                var _args = [];
-                for (var _i = 2; _i < arguments.length; _i++) {
-                    _args[_i - 2] = arguments[_i];
-                }
                 CandlestickSeries.compose(SeriesClass);
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'HeikinAshi')) {
                     addEvent(AxisClass, 'postProcessData', onAxisPostProcessData);
                     addEvent(HeikinAshiSeries, 'afterTranslate', onHeikinAshiSeriesAfterTranslate);
                     addEvent(HeikinAshiSeries, 'updatedData', onHeikinAshiSeriesUpdatedData);
@@ -388,5 +386,6 @@
         var G = Highcharts;
         HeikinAshiSeries.compose(G.Series, G.Axis);
 
+        return Highcharts;
     });
 }));

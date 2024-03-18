@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Exporting module
  *
@@ -1092,11 +1092,6 @@
          * Used in StockTools too.
          * Based on default solutions in browsers.
          */
-        /* *
-         *
-         *  Imports
-         *
-         * */
         var composed = H.composed;
         var addEvent = U.addEvent, fireEvent = U.fireEvent, pushUnique = U.pushUnique;
         /* *
@@ -1197,7 +1192,7 @@
              * The chart class to decorate with fullscreen support.
              */
             Fullscreen.compose = function (ChartClass) {
-                if (pushUnique(composed, this.compose)) {
+                if (pushUnique(composed, 'Fullscreen')) {
                     // Initialize fullscreen
                     addEvent(ChartClass, 'beforeRender', onChartBeforeRender);
                 }
@@ -1367,10 +1362,10 @@
          * @callback Highcharts.FullScreenfullscreenCloseCallbackFunction
          *
          * @param {Highcharts.Chart} chart
-         *        The chart on which the event occured.
+         *        The chart on which the event occurred.
          *
          * @param {global.Event} event
-         *        The event that occured.
+         *        The event that occurred.
          */
         /**
          * Gets fired when opening the fullscreen
@@ -1378,10 +1373,10 @@
          * @callback Highcharts.FullScreenfullscreenOpenCallbackFunction
          *
          * @param {Highcharts.Chart} chart
-         *        The chart on which the event occured.
+         *        The chart on which the event occurred.
          *
          * @param {global.Event} event
-         *        The event that occured.
+         *        The event that occurred.
          */
         (''); // keeps doclets above separated from following code
         /* *
@@ -1441,8 +1436,8 @@
             };
             return __assign.apply(this, arguments);
         };
-        var doc = G.doc, win = G.win;
-        var createElement = U.createElement, discardElement = U.discardElement, merge = U.merge, objectEach = U.objectEach;
+        var win = G.win;
+        var discardElement = U.discardElement, objectEach = U.objectEach;
         /* *
          *
          *  Functions
@@ -1457,7 +1452,7 @@
          *        The Ajax settings to use.
          *
          * @return {false|undefined}
-         *         Returns false, if error occured.
+         *         Returns false, if error occurred.
          */
         function ajax(settings) {
             var headers = {
@@ -1472,7 +1467,7 @@
              * @param {XMLHttpRequest} xhr
              * Internal request object.
              * @param {string|Error} err
-             * Occured error.
+             * Occurred error.
              */
             function handleError(xhr, err) {
                 if (settings.error) {
@@ -1654,9 +1649,9 @@
             };
             return __assign.apply(this, arguments);
         };
-        var defaultOptions = D.defaultOptions, setOptions = D.setOptions;
-        var composed = G.composed, doc = G.doc, SVG_NS = G.SVG_NS, win = G.win;
-        var addEvent = U.addEvent, css = U.css, createElement = U.createElement, discardElement = U.discardElement, extend = U.extend, find = U.find, fireEvent = U.fireEvent, isObject = U.isObject, merge = U.merge, objectEach = U.objectEach, pick = U.pick, pushUnique = U.pushUnique, removeEvent = U.removeEvent, uniqueKey = U.uniqueKey;
+        var defaultOptions = D.defaultOptions;
+        var doc = G.doc, SVG_NS = G.SVG_NS, win = G.win;
+        var addEvent = U.addEvent, css = U.css, createElement = U.createElement, discardElement = U.discardElement, extend = U.extend, find = U.find, fireEvent = U.fireEvent, isObject = U.isObject, merge = U.merge, objectEach = U.objectEach, pick = U.pick, removeEvent = U.removeEvent, uniqueKey = U.uniqueKey;
         /* *
          *
          *  Composition
@@ -1817,7 +1812,7 @@
                 chart.exportSVGElements.push(button, symbol);
             }
             /**
-             * Clena up after printing a chart.
+             * Clean up after printing a chart.
              *
              * @function Highcharts#afterPrint
              *
@@ -1862,13 +1857,14 @@
              * @emits Highcharts.Chart#event:beforePrint
              */
             function beforePrint() {
+                var _a;
                 var chart = this, body = doc.body, printMaxWidth = chart.options.exporting.printMaxWidth, printReverseInfo = {
                     childNodes: body.childNodes,
                     origDisplay: [],
                     resetParams: void 0
                 };
                 chart.isPrinting = true;
-                chart.pointer.reset(null, 0);
+                (_a = chart.pointer) === null || _a === void 0 ? void 0 : _a.reset(void 0, 0);
                 fireEvent(chart, 'beforePrint');
                 // Handle printMaxWidth
                 var handleMaxWidth = printMaxWidth &&
@@ -1943,8 +1939,8 @@
             function compose(ChartClass, SVGRendererClass) {
                 ExportingSymbols.compose(SVGRendererClass);
                 Fullscreen.compose(ChartClass);
-                if (pushUnique(composed, compose)) {
-                    var chartProto = ChartClass.prototype;
+                var chartProto = ChartClass.prototype;
+                if (!chartProto.exportChart) {
                     chartProto.afterPrint = afterPrint;
                     chartProto.exportChart = exportChart;
                     chartProto.inlineStyles = inlineStyles;
@@ -2004,6 +2000,7 @@
              * @requires modules/exporting
              */
             function contextMenu(className, items, x, y, width, height, button) {
+                var _a;
                 var chart = this, navOptions = chart.options.navigation, chartWidth = chart.chartWidth, chartHeight = chart.chartHeight, cacheName = 'cache-' + className, 
                 // For mouse leave detection
                 menuPadding = Math.max(width, height);
@@ -2014,7 +2011,7 @@
                     chart.exportContextMenu = chart[cacheName] = menu =
                         createElement('div', {
                             className: className
-                        }, __assign({ position: 'absolute', zIndex: 1000, padding: menuPadding + 'px', pointerEvents: 'auto' }, chart.renderer.style), chart.fixedDiv || chart.container);
+                        }, __assign({ position: 'absolute', zIndex: 1000, padding: menuPadding + 'px', pointerEvents: 'auto' }, chart.renderer.style), ((_a = chart.scrollablePlotArea) === null || _a === void 0 ? void 0 : _a.fixedDiv) || chart.container);
                     innerMenu = createElement('ul', { className: 'highcharts-menu' }, chart.styledMode ? {} : {
                         listStyle: 'none',
                         margin: 0,
@@ -2050,7 +2047,8 @@
                     // Hide it on clicking or touching outside the menu (#2258,
                     // #2335, #2407)
                     addEvent(doc, 'mouseup', function (e) {
-                        if (!chart.pointer.inClass(e.target, className)) {
+                        var _a;
+                        if (!((_a = chart.pointer) === null || _a === void 0 ? void 0 : _a.inClass(e.target, className))) {
                             menu.hideMenu();
                         }
                     }), addEvent(menu, 'click', function () {
@@ -2479,7 +2477,7 @@
                     var styles, parentStyles, dummy, denylisted, allowlisted, i;
                     /**
                      * Check computed styles and whether they are in the allow/denylist
-                     * for styles or atttributes.
+                     * for styles or attributes.
                      * @private
                      * @param {string} val
                      *        Style value
@@ -2613,10 +2611,15 @@
              *        Move target
              */
             function moveContainers(moveTo) {
-                var chart = this;
-                (chart.fixedDiv ? // When scrollablePlotArea is active (#9533)
-                    [chart.fixedDiv, chart.scrollingContainer] :
-                    [chart.container]).forEach(function (div) {
+                var scrollablePlotArea = this.scrollablePlotArea;
+                (
+                // When scrollablePlotArea is active (#9533)
+                scrollablePlotArea ?
+                    [
+                        scrollablePlotArea.fixedDiv,
+                        scrollablePlotArea.scrollingContainer
+                    ] :
+                    [this.container]).forEach(function (div) {
                     moveTo.appendChild(div);
                 });
             }
@@ -2724,7 +2727,7 @@
             }
             /**
              * Exporting module only. A collection of fixes on the produced SVG to
-             * account for expando properties, browser bugs.
+             * account for expand properties, browser bugs.
              * Returns a cleaned SVG.
              *
              * @private
@@ -2764,7 +2767,7 @@
                     .replace(/url\([^#]+#/g, 'url(#')
                     .replace(/<svg /, '<svg xmlns:xlink="http://www.w3.org/1999/xlink" ')
                     .replace(/ (|NS[0-9]+\:)href=/g, ' xlink:href=') // #3567
-                    .replace(/\n/, ' ')
+                    .replace(/\n+/g, ' ')
                     // Batik doesn't support rgba fills and strokes (#3095)
                     .replace(/(fill|stroke)="rgba\(([ 0-9]+,[ 0-9]+,[ 0-9]+),([ 0-9\.]+)\)"/g, // eslint-disable-line max-len
                 '$1="rgb($2)" $1-opacity="$3"')
@@ -2791,10 +2794,10 @@
          * @callback Highcharts.ExportingAfterPrintCallbackFunction
          *
          * @param {Highcharts.Chart} this
-         *        The chart on which the event occured.
+         *        The chart on which the event occurred.
          *
          * @param {global.Event} event
-         *        The event that occured.
+         *        The event that occurred.
          */
         /**
          * Gets fired before a chart is printed through the context menu item or the
@@ -2803,10 +2806,10 @@
          * @callback Highcharts.ExportingBeforePrintCallbackFunction
          *
          * @param {Highcharts.Chart} this
-         *        The chart on which the event occured.
+         *        The chart on which the event occurred.
          *
          * @param {global.Event} event
-         *        The event that occured.
+         *        The event that occurred.
          */
         /**
          * Function to call if the offline-exporting module fails to export a chart on
@@ -2889,11 +2892,12 @@
     _registerModule(_modules, 'masters/modules/exporting.src.js', [_modules['Core/Globals.js'], _modules['Extensions/Exporting/Exporting.js'], _modules['Core/HttpUtilities.js']], function (Highcharts, Exporting, HttpUtilities) {
 
         var G = Highcharts;
-        G.HttpUtilities = HttpUtilities;
-        G.ajax = HttpUtilities.ajax;
-        G.getJSON = HttpUtilities.getJSON;
-        G.post = HttpUtilities.post;
+        G.HttpUtilities = G.HttpUtilities || HttpUtilities;
+        G.ajax = G.HttpUtilities.ajax;
+        G.getJSON = G.HttpUtilities.getJSON;
+        G.post = G.HttpUtilities.post;
         Exporting.compose(G.Chart, G.Renderer);
 
+        return Highcharts;
     });
 }));

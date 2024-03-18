@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.3.0 (2024-01-10)
+ * @license Highstock JS v11.4.0 (2024-03-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -251,8 +251,9 @@
 
         return AOIndicator;
     });
-    _registerModule(_modules, 'masters/indicators/ao.src.js', [], function () {
+    _registerModule(_modules, 'masters/indicators/ao.src.js', [_modules['Core/Globals.js']], function (Highcharts) {
 
 
+        return Highcharts;
     });
 }));

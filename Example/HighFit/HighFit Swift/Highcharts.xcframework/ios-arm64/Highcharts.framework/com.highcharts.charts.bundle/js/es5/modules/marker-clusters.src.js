@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.3.0 (2024-01-10)
+ * @license Highcharts JS v11.4.0 (2024-03-04)
  *
  * Marker clusters module for Highcharts
  *
@@ -374,7 +374,7 @@
 
         return MarkerClusterDefaults;
     });
-    _registerModule(_modules, 'Extensions/MarkerClusters/MarkerClusterScatter.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Core/Globals.js'], _modules['Extensions/MarkerClusters/MarkerClusterDefaults.js'], _modules['Core/Utilities.js']], function (A, H, MarkerClusterDefaults, U) {
+    _registerModule(_modules, 'Extensions/MarkerClusters/MarkerClusterScatter.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Extensions/MarkerClusters/MarkerClusterDefaults.js'], _modules['Core/Utilities.js']], function (A, MarkerClusterDefaults, U) {
         /* *
          *
          *  Marker clusters module.
@@ -389,9 +389,8 @@
          *
          * */
         var animObject = A.animObject;
-        var composed = H.composed;
         var clusterDefaults = MarkerClusterDefaults.cluster;
-        var addEvent = U.addEvent, defined = U.defined, error = U.error, isArray = U.isArray, isFunction = U.isFunction, isObject = U.isObject, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach, pushUnique = U.pushUnique, relativeLength = U.relativeLength, syncTimeout = U.syncTimeout;
+        var addEvent = U.addEvent, defined = U.defined, error = U.error, isArray = U.isArray, isFunction = U.isFunction, isObject = U.isObject, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach, relativeLength = U.relativeLength, syncTimeout = U.syncTimeout;
         /* *
          *
          *  Constants
@@ -612,8 +611,8 @@
          * */
         /** @private */
         function compose(highchartsDefaultOptions, ScatterSeriesClass) {
-            if (pushUnique(composed, compose)) {
-                var scatterProto = ScatterSeriesClass.prototype;
+            var scatterProto = ScatterSeriesClass.prototype;
+            if (!scatterProto.markerClusterAlgorithms) {
                 baseGeneratePoints = scatterProto.generatePoints;
                 scatterProto.markerClusterAlgorithms = markerClusterAlgorithms;
                 scatterProto.animateClusterPoint = seriesAnimateClusterPoint;
@@ -753,7 +752,8 @@
         function onPointDrillToCluster(event) {
             var point = event.point || event.target;
             point.firePointEvent('drillToCluster', event, function (e) {
-                var point = e.point || e.target, series = point.series, xAxis = point.series.xAxis, yAxis = point.series.yAxis, chart = point.series.chart, mapView = chart.mapView, clusterOptions = series.options.cluster, drillToCluster = (clusterOptions || {}).drillToCluster;
+                var _a, _b, _c;
+                var point = e.point || e.target, series = point.series, xAxis = point.series.xAxis, yAxis = point.series.yAxis, chart = point.series.chart, inverted = chart.inverted, mapView = chart.mapView, pointer = chart.pointer, clusterOptions = series.options.cluster, drillToCluster = (clusterOptions || {}).drillToCluster;
                 if (drillToCluster && point.clusteredData) {
                     var sortedDataX = point.clusteredData
                         .map(function (data) { return data.x; })
@@ -764,20 +764,27 @@
                         mapView.fitToBounds({ x1: x1, x2: x2, y1: y1, y2: y2 });
                     }
                     else if (xAxis && yAxis) {
-                        chart.pointer.zoomX = true;
-                        chart.pointer.zoomY = true;
-                        chart.zoom({
-                            originalEvent: e,
-                            xAxis: [{
-                                    axis: xAxis,
-                                    min: x1,
-                                    max: x2
-                                }],
-                            yAxis: [{
-                                    axis: yAxis,
-                                    min: y1,
-                                    max: y2
-                                }]
+                        var x1Px = xAxis.toPixels(x1), x2Px = xAxis.toPixels(x2), y1Px = yAxis.toPixels(y1), y2Px = yAxis.toPixels(y2);
+                        if (inverted) {
+                            _a = [y1Px, y2Px, x1Px, x2Px], x1Px = _a[0], x2Px = _a[1], y1Px = _a[2], y2Px = _a[3];
+                        }
+                        if (x1Px > x2Px) {
+                            _b = [x2Px, x1Px], x1Px = _b[0], x2Px = _b[1];
+                        }
+                        if (y1Px > y2Px) {
+                            _c = [y2Px, y1Px], y1Px = _c[0], y2Px = _c[1];
+                        }
+                        if (pointer) {
+                            pointer.zoomX = true;
+                            pointer.zoomY = true;
+                        }
+                        chart.transform({
+                            from: {
+                                x: x1Px,
+                                y: y1Px,
+                                width: x2Px - x1Px,
+                                height: y2Px - y1Px
+                            }
                         });
                     }
                 }
@@ -810,7 +817,7 @@
                 if (newPointObj.parentsId.length === 1) {
                     parentId = (newState || {})[clusterObj.stateId].parentsId[0];
                     oldPointObj = oldState[parentId];
-                    // If old and new poistions are the same do not animate.
+                    // If old and new positions are the same do not animate.
                     if (newPointObj.point &&
                         newPointObj.point.graphic &&
                         oldPointObj &&
@@ -1552,7 +1559,7 @@
          * */
         /** @private */
         function compose(AxisClass, ChartClass, highchartsDefaultOptions, SeriesClass) {
-            if (pushUnique(composed, compose)) {
+            if (pushUnique(composed, 'MarkerClusters')) {
                 var PointClass = SeriesClass.prototype.pointClass, ScatterSeries = SeriesClass.types.scatter;
                 addEvent(AxisClass, 'setExtremes', onAxisSetExtremes);
                 addEvent(ChartClass, 'render', onChartRender);
@@ -1590,23 +1597,24 @@
          * @private
          */
         function onChartRender() {
+            var _a;
             var chart = this;
-            for (var _i = 0, _a = (chart.series || []); _i < _a.length; _i++) {
-                var series = _a[_i];
+            for (var _i = 0, _b = (chart.series || []); _i < _b.length; _i++) {
+                var series = _b[_i];
                 if (series.markerClusterInfo) {
                     var options = series.options.cluster, pointsState = (series.markerClusterInfo || {}).pointsState, oldState = (pointsState || {}).oldState;
                     if ((options || {}).animation &&
                         series.markerClusterInfo &&
-                        series.chart.pointer.pinchDown.length === 0 &&
+                        (((_a = series.chart.pointer) === null || _a === void 0 ? void 0 : _a.pinchDown) || []).length === 0 &&
                         ((series.xAxis || {}).eventArgs || {}).trigger !== 'pan' &&
                         oldState &&
                         Object.keys(oldState).length) {
-                        for (var _b = 0, _c = series.markerClusterInfo.clusters; _b < _c.length; _b++) {
-                            var cluster = _c[_b];
+                        for (var _c = 0, _d = series.markerClusterInfo.clusters; _c < _d.length; _c++) {
+                            var cluster = _d[_c];
                             series.animateClusterPoint(cluster);
                         }
-                        for (var _d = 0, _e = series.markerClusterInfo.noise; _d < _e.length; _d++) {
-                            var noise = _e[_d];
+                        for (var _e = 0, _f = series.markerClusterInfo.noise; _e < _f.length; _e++) {
+                            var noise = _f[_e];
                             series.animateClusterPoint(noise);
                         }
                     }
@@ -1684,7 +1692,7 @@
          * @callback Highcharts.MarkerClusterDrillCallbackFunction
          *
          * @param {Highcharts.Point} this
-         *        The point where the event occured.
+         *        The point where the event occurred.
          *
          * @param {Highcharts.PointClickEventObject} event
          *        Event arguments.
@@ -1693,7 +1701,7 @@
 
         return MarkerClusters;
     });
-    _registerModule(_modules, 'Extensions/MarkerClusters/MarkerClusterSymbols.js', [_modules['Core/Utilities.js']], function (U) {
+    _registerModule(_modules, 'Extensions/MarkerClusters/MarkerClusterSymbols.js', [], function () {
         /* *
          *
          *  Marker clusters module.
@@ -1707,13 +1715,6 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var pushUnique = U.pushUnique;
-        /* *
-         *
-         *  Constants
-         *
-         * */
-        var modifiedMembers = [];
         /* *
          *
          *  Variables
@@ -1751,10 +1752,8 @@
          * @private
          */
         function compose(SVGRendererClass) {
-            if (pushUnique(modifiedMembers, compose)) {
-                symbols = SVGRendererClass.prototype.symbols;
-                symbols.cluster = cluster;
-            }
+            symbols = SVGRendererClass.prototype.symbols;
+            symbols.cluster = cluster;
         }
         /* *
          *
@@ -1773,5 +1772,6 @@
         MarkerClusters.compose(G.Axis, G.Chart, G.defaultOptions, G.Series);
         MarkerClusterSymbols.compose(G.SVGRenderer);
 
+        return Highcharts;
     });
 }));
