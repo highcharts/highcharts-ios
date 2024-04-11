@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Bullet graph series type for Highcharts
  *
@@ -274,7 +274,7 @@
          * @excluding halo, lineWidth, lineWidthPlus, marker
          * @apioption series.bullet.states.select
          */
-        ''; // keeps doclets above separate
+        ''; // Keeps doclets above separate
         /* *
          *
          *  Default Export

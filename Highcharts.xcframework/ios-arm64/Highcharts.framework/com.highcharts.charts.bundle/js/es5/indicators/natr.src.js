@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -148,7 +148,7 @@
          * @requires  stock/indicators/natr
          * @apioption series.natr
          */
-        ''; // to include the above in the js output'
+        ''; // To include the above in the js output'
 
         return NATRIndicator;
     });

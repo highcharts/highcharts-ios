@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -66,6 +66,9 @@
          *
          * */
         // Utils:
+        /**
+         *
+         */
         function toFixed(a, n) {
             return parseFloat(a.toFixed(n));
         }
@@ -106,7 +109,7 @@
                     values = yVal;
                 }
                 else {
-                    // in case of the situation, where the series type has data length
+                    // In case of the situation, where the series type has data length
                     // longer then 4 (HLC, range), this ensures that we are not trying
                     // to reach the index out of bounds
                     index = Math.min(index, yVal[0].length - 1);
@@ -214,7 +217,7 @@
          * @requires  stock/indicators/rsi
          * @apioption series.rsi
          */
-        ''; // to include the above in the js output
+        ''; // To include the above in the js output
 
         return RSIIndicator;
     });

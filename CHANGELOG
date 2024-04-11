@@ -1,3 +1,19 @@
+# Version 11.4.1
+
+## iOS:
+
+1. Fixed Privacy Manifest File, #434
+
+## Framework bug fixes:
+
+1. Fixed #20784, a regression in v11.4.0 causing wrong min and max extremes for the selection event in column charts.
+2. Fixed #20710, bubble legend with color-axis moved after redraw.
+3. Fixed #20792, plot lines' HTML labels rendered incorrectly.
+4. Fixed #18980, the `highcharts.d.ts` type definition file was too large and caused issues in editors. Moved majority of series options into separate definition files.
+5. Fixed #20871, a regression with resetting zoom across synchronized charts.
+6. Fixed #20586, plot line CSS classes were not concatenated with spaces, causing the `className` option to fail.
+7. Fixed #20548, chart not resizing after closing fullscreen.
+
 # Version 11.4.0
 
 ## iOS:

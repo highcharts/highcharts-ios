@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * HeikinAshi series type for Highcharts Stock
  *
@@ -178,7 +178,7 @@
          * @product   highstock
          * @apioption series.heikinashi.data
          */
-        ''; // adds doclets above to transpiled
+        ''; // Adds doclets above to transpiled
         /* *
          *
          *  Default Export

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Timeline series
  *
@@ -447,7 +447,7 @@
          * @product   highcharts
          * @apioption series.timeline.data.description
          */
-        ''; // adds doclets above to transpiled file
+        ''; // Adds doclets above to transpiled file
         /* *
          *
          *  Default Export
@@ -774,7 +774,7 @@
         * @name Highcharts.TimelineDataLabelsFormatterContextObject#series
         * @type {Highcharts.Series}
         */
-        ''; // dettach doclets above
+        ''; // Dettach doclets above
 
         return TimelineSeries;
     });

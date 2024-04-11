@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -117,7 +117,7 @@
                     yVal[0].length !== 4) {
                     return;
                 }
-                // accumulate first N-points
+                // Accumulate first N-points
                 while (range < period) {
                     p = yVal[range - 1];
                     TP.push((p[1] + p[2] + p[3]) / 3);
@@ -165,7 +165,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0 // unused index, do not inherit (#15362)
+                    index: void 0 // Unused index, do not inherit (#15362)
                 }
             });
             return CCIIndicator;
@@ -193,7 +193,7 @@
          * @requires  stock/indicators/cci
          * @apioption series.cci
          */
-        ''; // to include the above in the js output
+        ''; // To include the above in the js output
 
         return CCIIndicator;
     });

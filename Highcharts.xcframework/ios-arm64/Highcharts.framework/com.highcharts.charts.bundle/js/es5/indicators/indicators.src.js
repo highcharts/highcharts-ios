@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -216,7 +216,7 @@
                 // for example when using Axis.setDataGrouping(). See #16670
                 var processedData = indicator.linkedParent.options &&
                     indicator.linkedParent.yData && // #18176, #18177 indicators should
-                    indicator.linkedParent.yData.length ? // work with empty dataset
+                    indicator.linkedParent.yData.length ? // Work with empty dataset
                     (indicator.getValues(indicator.linkedParent, indicator.options.params) || emptySet) : emptySet;
                 // We need to update points to reflect changes in all,
                 // x and y's, values. However, do it only for non-grouped
@@ -405,7 +405,7 @@
          * @requires  stock/indicators/indicators
          * @apioption series.sma
          */
-        (''); // adds doclet above to the transpiled file
+        (''); // Adds doclet above to the transpiled file
 
         return SMAIndicator;
     });
@@ -488,7 +488,7 @@
                 }
                 // Accumulate first N-points
                 sum = this.accumulatePeriodPoints(period, index, yVal);
-                // first point
+                // First point
                 SMA = sum / period;
                 // Calculate value one-by-one for each period in visible data
                 for (i = period; i < yValLen + 1; i++) {
@@ -562,7 +562,7 @@
          * @requires  stock/indicators/indicators
          * @apioption series.ema
          */
-        ''; // adds doclet above to the transpiled file
+        ''; // Adds doclet above to the transpiled file
 
         return EMAIndicator;
     });
@@ -705,12 +705,12 @@
                         gapSize: mainLineOptions.gapSize
                     }
                 }, 
-                // additional lines point place holders:
+                // Additional lines point place holders:
                 secondaryLines = [], secondaryLinesNames = getTranslatedLinesNames(indicator, pointValKey);
                 var pointsLength = mainLinePoints.length, point;
                 // Generate points for additional lines:
                 secondaryLinesNames.forEach(function (plotLine, index) {
-                    // create additional lines point place holders
+                    // Create additional lines point place holders
                     secondaryLines[index] = [];
                     while (pointsLength--) {
                         point = mainLinePoints[pointsLength];

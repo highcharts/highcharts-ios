@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v11.4.0 (2024-03-04)
+ * @license Highmaps JS v11.4.1 (2024-04-04)
  *
  * Tilemap module
  *
@@ -314,7 +314,7 @@
          * @product   highcharts highmaps
          * @apioption series.tilemap.data.y
          */
-        ''; // keeps doclets above detached
+        ''; // Keeps doclets above detached
         /* *
          *
          *  Default Export
@@ -387,16 +387,18 @@
                     ];
                 },
                 translate: function () {
+                    var _a;
                     var series = this, options = series.options, xAxis = series.xAxis, yAxis = series.yAxis, seriesPointPadding = options.pointPadding || 0, xPad = (options.colsize || 1) / 3, yPad = (options.rowsize || 1) / 2;
                     var yShift;
                     series.generatePoints();
-                    for (var _i = 0, _a = series.points; _i < _a.length; _i++) {
-                        var point = _a[_i];
+                    for (var _i = 0, _b = series.points; _i < _b.length; _i++) {
+                        var point = _b[_i];
                         var x1 = clamp(Math.floor(xAxis.len -
                             xAxis.translate(point.x - xPad * 2, 0, 1, 0, 1)), -xAxis.len, 2 * xAxis.len), x2 = clamp(Math.floor(xAxis.len -
                             xAxis.translate(point.x - xPad, 0, 1, 0, 1)), -xAxis.len, 2 * xAxis.len), x3 = clamp(Math.floor(xAxis.len -
                             xAxis.translate(point.x + xPad, 0, 1, 0, 1)), -xAxis.len, 2 * xAxis.len), x4 = clamp(Math.floor(xAxis.len -
-                            xAxis.translate(point.x + xPad * 2, 0, 1, 0, 1)), -xAxis.len, 2 * xAxis.len), y1 = clamp(Math.floor(yAxis.translate(point.y - yPad, 0, 1, 0, 1)), -yAxis.len, 2 * yAxis.len), y2 = clamp(Math.floor(yAxis.translate(point.y, 0, 1, 0, 1)), -yAxis.len, 2 * yAxis.len), y3 = clamp(Math.floor(yAxis.translate(point.y + yPad, 0, 1, 0, 1)), -yAxis.len, 2 * yAxis.len), pointPadding = pick(point.pointPadding, seriesPointPadding), 
+                            xAxis.translate(point.x + xPad * 2, 0, 1, 0, 1)), -xAxis.len, 2 * xAxis.len), y1 = clamp(Math.floor(yAxis.translate(point.y - yPad, 0, 1, 0, 1)), -yAxis.len, 2 * yAxis.len), y2 = clamp(Math.floor(yAxis.translate(point.y, 0, 1, 0, 1)), -yAxis.len, 2 * yAxis.len), y3 = clamp(Math.floor(yAxis.translate(point.y + yPad, 0, 1, 0, 1)), -yAxis.len, 2 * yAxis.len);
+                        var pointPadding = (_a = point.pointPadding) !== null && _a !== void 0 ? _a : seriesPointPadding, 
                         // We calculate the point padding of the midpoints to
                         // preserve the angles of the shape.
                         midPointPadding = pointPadding *
@@ -532,7 +534,8 @@
                     for (var _i = 0, _a = series.points; _i < _a.length; _i++) {
                         var point = _a[_i];
                         var x = clamp(Math.round(xAxis.len -
-                            xAxis.translate(point.x, 0, 1, 0, 0)), -xAxis.len, 2 * xAxis.len), y = clamp(Math.round(yAxis.translate(point.y, 0, 1, 0, 0)), -yAxis.len, 2 * yAxis.len), pointPadding = seriesPointPadding, hasPerPointPadding = false;
+                            xAxis.translate(point.x, 0, 1, 0, 0)), -xAxis.len, 2 * xAxis.len);
+                        var pointPadding = seriesPointPadding, hasPerPointPadding = false, y = clamp(Math.round(yAxis.translate(point.y, 0, 1, 0, 0)), -yAxis.len, 2 * yAxis.len);
                         // If there is point padding defined on a single point, add it
                         if (typeof point.pointPadding !== 'undefined') {
                             pointPadding = point.pointPadding;
@@ -752,7 +755,7 @@
                     padding.yPad, 0, 1, 0, 1));
                 var coord2 = Math.round(axis.translate(isX ? padding.xPad : 0, 0, 1, 0, 1));
                 return {
-                    padding: (axis.single ? // if there is only one tick adjust padding #18647
+                    padding: (axis.single ? // If there is only one tick adjust padding #18647
                         Math.abs(coord1 - coord2) / 2 :
                         Math.abs(coord1 - coord2)) || 0,
                     // Offset the yAxis length to compensate for shift. Setting the
@@ -814,7 +817,7 @@
         /**
          * @typedef {"circle"|"diamond"|"hexagon"|"square"} Highcharts.TilemapShapeValue
          */
-        ''; // keeps doclets above in JS file
+        ''; // Keeps doclets above in JS file
 
         return TilemapSeries;
     });

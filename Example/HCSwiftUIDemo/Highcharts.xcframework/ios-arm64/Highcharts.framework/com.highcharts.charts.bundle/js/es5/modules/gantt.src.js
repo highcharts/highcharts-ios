@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v11.4.0 (2024-03-04)
+ * @license Highcharts Gantt JS v11.4.1 (2024-04-04)
  *
  * Gantt series
  *
@@ -1005,7 +1005,7 @@
                                 0) -
                             (this.titleOffset ? this.titleOffset[2] : 0);
                 }
-                if (xAxis && yAxis) { // false if navigator is disabled (#904)
+                if (xAxis && yAxis) { // False if navigator is disabled (#904)
                     if (this.inverted) {
                         xAxis.options.left = yAxis.options.left = navigator.left;
                     }
@@ -1211,27 +1211,14 @@
              * @function Highcharts.Axis#toFixedRange
              */
             NavigatorAxisAdditions.prototype.toFixedRange = function (pxMin, pxMax, fixedMin, fixedMax) {
-                var _a;
-                var axis = this.axis, chart = axis.chart, overscroll = pick((_a = axis.ordinal) === null || _a === void 0 ? void 0 : _a.convertOverscroll(axis.options.overscroll), 0);
+                var axis = this.axis, halfPointRange = (axis.pointRange || 0) / 2;
                 var newMin = pick(fixedMin, axis.translate(pxMin, true, !axis.horiz)), newMax = pick(fixedMax, axis.translate(pxMax, true, !axis.horiz));
-                var fixedRange = chart && chart.fixedRange, halfPointRange = (axis.pointRange || 0) / 2;
                 // Add/remove half point range to/from the extremes (#1172)
                 if (!defined(fixedMin)) {
                     newMin = correctFloat(newMin + halfPointRange);
                 }
                 if (!defined(fixedMax)) {
                     newMax = correctFloat(newMax - halfPointRange);
-                }
-                // Make sure panning to the edges does not decrease the zoomed range
-                if (fixedRange && axis.dataMin && axis.dataMax) {
-                    var maxWithOverscroll = axis.dataMax + overscroll;
-                    if (newMax >= maxWithOverscroll) {
-                        newMin = correctFloat(maxWithOverscroll - fixedRange);
-                        newMax = correctFloat(maxWithOverscroll);
-                    }
-                    if (newMin <= axis.dataMin) {
-                        newMax = correctFloat(axis.dataMin + fixedRange);
-                    }
                 }
                 if (!isNumber(newMin) || !isNumber(newMax)) { // #1195, #7411
                     newMin = newMax = void 0;
@@ -1763,7 +1750,7 @@
          * @product   highstock gantt
          * @apioption xAxis.maxRange
          */
-        (''); // keeps doclets above in JS file
+        (''); // Keeps doclets above in JS file
 
         return NavigatorDefaults;
     });
@@ -2517,7 +2504,7 @@
             Scrollbar.prototype.cursorToScrollbarPosition = function (normalizedEvent) {
                 var scroller = this, options = scroller.options, minWidthDifference = options.minWidth > scroller.calculatedWidth ?
                     options.minWidth :
-                    0; // minWidth distorts translation
+                    0; // `minWidth` distorts translation
                 return {
                     chartX: (normalizedEvent.chartX - scroller.x -
                         scroller.xOffset) /
@@ -2628,7 +2615,7 @@
                 scroller.options = merge(ScrollbarDefaults, defaultOptions.scrollbar, options);
                 scroller.options.margin = pick(scroller.options.margin, 10);
                 scroller.chart = chart;
-                // backward compatibility
+                // Backward compatibility
                 scroller.size = pick(scroller.options.size, scroller.options.height);
                 // Init
                 if (options.enabled) {
@@ -2717,7 +2704,7 @@
                 scroller.group.show();
                 scroller.x = x;
                 scroller.y = y + this.trackBorderWidth;
-                scroller.width = width; // width with buttons
+                scroller.width = width; // Width with buttons
                 scroller.height = height;
                 scroller.xOffset = xOffset;
                 scroller.yOffset = yOffset;
@@ -2726,14 +2713,14 @@
                     scroller.width = scroller.yOffset = width = yOffset = scroller.size;
                     scroller.xOffset = xOffset = 0;
                     scroller.yOffset = yOffset = buttonsEnabled ? scroller.size : 0;
-                    // width without buttons
+                    // Width without buttons
                     scroller.barWidth = height - (buttonsEnabled ? width * 2 : 0);
                     scroller.x = x = x + margin;
                 }
                 else {
                     scroller.height = height = scroller.size;
                     scroller.xOffset = xOffset = buttonsEnabled ? scroller.size : 0;
-                    // width without buttons
+                    // Width without buttons
                     scroller.barWidth = width - (buttonsEnabled ? height * 2 : 0);
                     scroller.y = scroller.y + margin;
                 }
@@ -2776,7 +2763,7 @@
                     .attr({
                     zIndex: options.zIndex
                 })
-                    .hide() // initially hide the scrollbar #15863
+                    .hide() // Initially hide the scrollbar #15863
                     .add();
                 // Draw the scrollbar group
                 scroller.group = group;
@@ -3136,7 +3123,7 @@
                             left + height,
                             navigatorTop - scrollButtonSize - outlineCorrection
                         ],
-                        // top right of zoomed range
+                        // Top right of zoomed range
                         ['L', left + height, verticalMin],
                         ['L', left, verticalMin],
                         ['M', left, zoomedMax],
@@ -3149,9 +3136,9 @@
                     ];
                     if (maskInside) {
                         path.push(
-                        // upper left of zoomed range
+                        // Upper left of zoomed range
                         ['M', left + height, verticalMin - halfOutline], 
-                        // upper right of z.r.
+                        // Upper right of z.r.
                         [
                             'L',
                             left + height,
@@ -3164,17 +3151,17 @@
                     zoomedMin += left + scrollButtonSize - outlineCorrection;
                     zoomedMax += left + scrollButtonSize - outlineCorrection;
                     path = [
-                        // left
+                        // Left
                         ['M', left, lineTop],
-                        // upper left of zoomed range
+                        // Upper left of zoomed range
                         ['L', zoomedMin, lineTop],
-                        // lower left of z.r.
+                        // Lower left of z.r.
                         ['L', zoomedMin, lineBtm],
-                        // lower right of z.r.
+                        // Lower right of z.r.
                         ['M', zoomedMax, lineBtm],
-                        // upper right of z.r.
+                        // Upper right of z.r.
                         ['L', zoomedMax, lineTop],
-                        // right
+                        // Right
                         [
                             'L',
                             left + navigatorSize + scrollButtonSize * 2,
@@ -3183,9 +3170,9 @@
                     ];
                     if (maskInside) {
                         path.push(
-                        // upper left of zoomed range
+                        // Upper left of zoomed range
                         ['M', zoomedMin - halfOutline, lineTop], 
-                        // upper right of z.r.
+                        // Upper right of z.r.
                         ['L', zoomedMax + halfOutline, lineTop]);
                     }
                 }
@@ -3315,8 +3302,8 @@
                                 rotationOriginY: (height_1 + width_1) / 2
                             });
                         }
-                        // zIndex = 6 for right handle, 7 for left.
-                        // Can't be 10, because of the tooltip in inverted chart #2908
+                        // Z index is 6 for right handle, 7 for left. Can't be 10,
+                        // because of the tooltip in inverted chart (#2908).
                         navigator.handles[index].attr({ zIndex: 7 - index })
                             .addClass('highcharts-navigator-handle ' +
                             'highcharts-navigator-handle-' +
@@ -3391,7 +3378,7 @@
                     }
                 }
                 navigator.left = pick(xAxis.left, 
-                // in case of scrollbar only, without navigator
+                // In case of scrollbar only, without navigator
                 chart.plotLeft + scrollButtonSize +
                     (inverted ? chart.plotWidth : 0));
                 var zoomedMax = navigator.size = navigatorSize = pick(xAxis.len, (inverted ? chart.plotHeight : chart.plotWidth) -
@@ -3589,7 +3576,7 @@
                             fixedMax = navigator.getUnionExtremes().dataMax;
                         }
                     }
-                    if (left !== zoomedMin) { // it has actually moved
+                    if (left !== zoomedMin) { // It has actually moved
                         navigator.fixedWidth = range; // #1370
                         ext = xAxis.navigatorAxis.toFixedRange(left, left + range, fixedMin, fixedMax);
                         if (defined(ext.min)) { // #7411
@@ -3674,9 +3661,9 @@
                     }
                     else if (navigator.grabbedCenter) {
                         navigator.hasDragged = true;
-                        if (chartX < dragOffset) { // outside left
+                        if (chartX < dragOffset) { // Outside left
                             chartX = dragOffset;
-                            // outside right
+                            // Outside right
                         }
                         else if (chartX >
                             navigatorSize + dragOffset - range) {
@@ -3837,9 +3824,9 @@
                     chart.xAxis[0] || { options: {} };
                 chart.isDirtyBox = true;
                 if (navigator.navigatorEnabled) {
-                    // an x axis is required for scrollbar also
+                    // An x axis is required for scrollbar also
                     navigator.xAxis = new Axis(chart, merge({
-                        // inherit base xAxis' break, ordinal options and overscroll
+                        // Inherit base xAxis' break, ordinal options and overscroll
                         breaks: baseXaxis.options.breaks,
                         ordinal: baseXaxis.options.ordinal,
                         overscroll: baseXaxis.options.overscroll
@@ -3887,7 +3874,7 @@
                             // We've got one, now add it as base
                             if (chart.series.length > 0 && !navigator.series) {
                                 navigator.setBaseSeries();
-                                navigator.unbindRedraw(); // reset
+                                navigator.unbindRedraw(); // Reset
                             }
                         });
                     }
@@ -3896,7 +3883,7 @@
                     navigator.renderElements();
                     // Add mouse events
                     navigator.addMouseEvents();
-                    // in case of scrollbar only, fake an x axis to get translation
+                    // In case of scrollbar only, fake an x axis to get translation
                 }
                 else {
                     navigator.xAxis = {
@@ -3907,9 +3894,9 @@
                         translate: function (value, reverse) {
                             var axis = chart.xAxis[0], ext = axis.getExtremes(), scrollTrackWidth = axis.len - 2 * scrollButtonSize, min = numExt('min', axis.options.min, ext.dataMin), valueRange = numExt('max', axis.options.max, ext.dataMax) - min;
                             return reverse ?
-                                // from pixel to value
+                                // From pixel to value
                                 (value * valueRange / scrollTrackWidth) + min :
-                                // from value to pixel
+                                // From value to pixel
                                 scrollTrackWidth * (value - min) / valueRange;
                         },
                         toPixels: function (value) {
@@ -4248,7 +4235,7 @@
                         newMax = baseDataMax + overscroll;
                         // If stickToMin is true, the new min value is set above
                         if (!stickToMin) {
-                            newMin = Math.max(baseDataMin, // don't go below data extremes (#13184)
+                            newMin = Math.max(baseDataMin, // Don't go below data extremes (#13184)
                             newMax - range, navigator.getBaseSeriesMin(navigatorSeries && navigatorSeries.xData ?
                                 navigatorSeries.xData[0] :
                                 -Number.MAX_VALUE));
@@ -4339,7 +4326,8 @@
                 }), 
                 // Make room for the navigator, can be placed around the chart:
                 addEvent(this.chart, 'getMargins', function () {
-                    var chart = this, navigator = chart.navigator, marginName = navigator.opposite ?
+                    var chart = this, navigator = chart.navigator;
+                    var marginName = navigator.opposite ?
                         'plotTop' : 'marginBottom';
                     if (chart.inverted) {
                         marginName = navigator.opposite ?
@@ -5111,17 +5099,17 @@
                 var events = find(chartDestroyEvents, function (e) { return e[0] === chart; });
                 if (!events) {
                     chartDestroyEvents.push([chart, [
-                            // redraw the scroller on setExtremes
+                            // Redraw the scroller on setExtremes
                             addEvent(chart.xAxis[0], 'afterSetExtremes', function (e) {
                                 if (rangeSelector) {
                                     rangeSelector.render(e.min, e.max);
                                 }
                             }),
-                            // redraw the scroller chart resize
+                            // Redraw the scroller chart resize
                             addEvent(chart, 'redraw', redraw)
                         ]]);
                 }
-                // do it now
+                // Do it now
                 redraw();
             }
         }
@@ -5139,6 +5127,9 @@
                 }
             }
         }
+        /**
+         *
+         */
         function onChartGetMargins() {
             var rangeSelector = this.rangeSelector;
             if (rangeSelector) {
@@ -5309,7 +5300,7 @@
                 var rangeSelector = this, chart = rangeSelector.chart, rangeOptions = rangeSelector.buttonOptions[i], baseAxis = chart.xAxis[0], unionExtremes = (chart.scroller && chart.scroller.getUnionExtremes()) || baseAxis || {}, type = rangeOptions.type, dataGrouping = rangeOptions.dataGrouping;
                 var dataMin = unionExtremes.dataMin, dataMax = unionExtremes.dataMax, newMin, newMax = baseAxis && Math.round(Math.min(baseAxis.max, pick(dataMax, baseAxis.max))), // #1568
                 baseXAxisOptions, range = rangeOptions._range, rangeMin, minSetting, rangeSetting, ctx, ytdExtremes, addOffsetMin = true;
-                // chart has no data, base series is removed
+                // Chart has no data, base series is removed
                 if (dataMin === null || dataMax === null) {
                     return;
                 }
@@ -5364,7 +5355,7 @@
                             dataMin = Number.MAX_VALUE;
                             dataMax = Number.MIN_VALUE;
                             chart.series.forEach(function (series) {
-                                // reassign it to the last item
+                                // Reassign it to the last item
                                 var xData = series.xData;
                                 if (xData) {
                                     dataMin = Math.min(xData[0], dataMin);
@@ -5420,7 +5411,7 @@
                 }
                 else {
                     // Existing axis object. Set extremes after render time.
-                    baseAxis.setExtremes(newMin, newMax, pick(redraw, true), void 0, // auto animation
+                    baseAxis.setExtremes(newMin, newMax, pick(redraw, true), void 0, // Auto animation
                     {
                         trigger: 'rangeSelectorButton',
                         rangeSelectorButton: rangeOptions
@@ -5601,7 +5592,7 @@
              */
             RangeSelector.prototype.computeButtonRange = function (rangeOptions) {
                 var type = rangeOptions.type, count = rangeOptions.count || 1, 
-                // these time intervals have a fixed number of milliseconds, as
+                // These time intervals have a fixed number of milliseconds, as
                 // opposed to month, ytd and year
                 fixedTimes = {
                     millisecond: 1,
@@ -5888,7 +5879,7 @@
                 };
                 // Hide away the input box
                 input.onblur = function () {
-                    // update extremes only when inputs are active
+                    // Update extremes only when inputs are active
                     if (input === H.doc.activeElement) { // Only when focused
                         // Update also when no `change` event is triggered, like when
                         // clicking inside the SVG (#4710)
@@ -5900,7 +5891,7 @@
                     input.blur(); // #4606
                 };
                 var keyDown = false;
-                // handle changes in the input boxes
+                // Handle changes in the input boxes
                 input.onchange = function () {
                     // Update extremes and blur input when clicking date input calendar
                     if (!keyDown) {
@@ -5937,7 +5928,7 @@
             RangeSelector.prototype.getPosition = function () {
                 var chart = this.chart, options = chart.options.rangeSelector, top = options.verticalAlign === 'top' ?
                     chart.plotTop - chart.axisOffset[0] :
-                    0; // set offset only for verticalAlign top
+                    0; // Set offset only for verticalAlign top
                 return {
                     buttonTop: top + options.buttonPosition.y,
                     inputTop: top + options.inputPosition.y - 10
@@ -5982,7 +5973,7 @@
                 if (options.enabled === false) {
                     return;
                 }
-                // create the elements
+                // Create the elements
                 if (!rendered) {
                     this.group = renderer.g('range-selector-group')
                         .attr({
@@ -6120,7 +6111,7 @@
                     }, void 0, dropdown);
                     buttons[i] = renderer
                         .button(rangeOptions.text, 0, 0, function (e) {
-                        // extract events from button object and call
+                        // Extract events from button object and call
                         var buttonEvents = (rangeOptions.events && rangeOptions.events.click);
                         var callDefaultEvent;
                         if (buttonEvents) {
@@ -6213,7 +6204,7 @@
                             y: inputPosition.y,
                             width: inputGroup.getBBox().width,
                             align: inputPosition.align,
-                            // fix wrong getBBox() value on right align
+                            // Fix wrong getBBox() value on right align
                             x: inputPosition.x + translateX - 2
                         }, true, chart.spacingBox);
                         // Skip animation
@@ -6369,7 +6360,7 @@
                         var inputGroupX = (inputGroup.alignAttr.translateX +
                             inputGroup.alignOptions.x -
                             xOffsetForExportButton +
-                            // getBBox for detecing left margin
+                            // `getBBox` for detecing left margin
                             inputGroup.getBBox().x +
                             // 2px padding to not overlap input and label
                             2);
@@ -6744,7 +6735,7 @@
          * @return {number}
          *         Parsed JavaScript time value.
          */
-        (''); // keeps doclets above in JS file
+        (''); // Keeps doclets above in JS file
 
         return RangeSelector;
     });
@@ -6763,6 +6754,9 @@
             straight: getStraightPath,
             curved: getCurvedPath
         };
+        /**
+         *
+         */
         function getDefaultPath(pathParams) {
             var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, radius = pathParams.radius, parentVisible = pathParams.parentVisible;
             var path = [
@@ -6782,6 +6776,9 @@
                 ], radius) :
                 path;
         }
+        /**
+         *
+         */
         function getStraightPath(pathParams) {
             var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, parentVisible = pathParams.parentVisible;
             return parentVisible ? [
@@ -6794,6 +6791,9 @@
                 ['L', x1, y2]
             ];
         }
+        /**
+         *
+         */
         function getCurvedPath(pathParams) {
             var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.offset, offset = _a === void 0 ? 0 : _a, _b = pathParams.width, width = _b === void 0 ? 0 : _b, _c = pathParams.inverted, inverted = _c === void 0 ? false : _c, parentVisible = pathParams.parentVisible;
             return parentVisible ?
@@ -6826,13 +6826,13 @@
                 var x = path[i][1];
                 var y = path[i][2];
                 if (typeof x === 'number' && typeof y === 'number') {
-                    // moveTo
+                    // MoveTo
                     if (i === 0) {
                         d.push(['M', x, y]);
                     }
                     else if (i === path.length - 1) {
                         d.push(['L', x, y]);
-                        // curveTo
+                        // CurveTo
                     }
                     else if (r) {
                         var prevSeg = path[i - 1];
@@ -6862,7 +6862,7 @@
                                 ]);
                             }
                         }
-                        // lineTo
+                        // LineTo
                     }
                     else {
                         d.push(['L', x, y]);
@@ -8383,9 +8383,12 @@
              *
              * @param {Object} options
              *        Options for the calculation. Currently only
-             *        options.algorithmMargin.
+             *        `options.algorithmMargin`.
              *
-             * @return {Array<object>}
+             * @param {number} options.algorithmMargin
+             *        The algorithm margin to use for the obstacles.
+
+            * @return {Array<object>}
              *         An array of calculated obstacles. Each obstacle is defined as an
              *         object with xMin, xMax, yMin and yMax properties.
              */
@@ -8636,7 +8639,7 @@
          * @product   gantt
          * @apioption yAxis.staticScale
          */
-        ''; // keeps doclets above in JS file
+        ''; // Keeps doclets above in JS file
 
         return StaticScale;
     });
@@ -8724,7 +8727,7 @@
             colorByPoint: true,
             dataLabels: {
                 formatter: function () {
-                    var point = this.point, amount = point.partialFill;
+                    var amount = this.point.partialFill;
                     if (isObject(amount)) {
                         amount = amount.amount;
                     }
@@ -8858,7 +8861,7 @@
          * @product   highcharts highstock gantt
          * @apioption series.xrange.data.partialFill.fill
          */
-        (''); // adds doclets above to transpiled file
+        (''); // Adds doclets above to transpiled file
 
         return XRangeSeriesDefaults;
     });
@@ -9029,7 +9032,7 @@
         * @type {number|undefined}
         * @requires modules/xrange
         */
-        (''); // keeps doclets above in JS file
+        (''); // Keeps doclets above in JS file
 
         return XRangePoint;
     });
@@ -9351,7 +9354,7 @@
                 var graphic = point.graphic, pfOptions = point.partialFill;
                 if (!point.isNull && point.visible !== false) {
                     // Original graphic
-                    if (graphic) { // update
+                    if (graphic) { // Update
                         graphic.rect[verb](shapeArgs);
                     }
                     else {
@@ -9611,7 +9614,7 @@
          * @optionparent plotOptions.gantt
          */
         var GanttSeriesDefaults = {
-            // options - default options merged with parent
+            // Options - default options merged with parent
             grouping: false,
             dataLabels: {
                 enabled: true
@@ -9796,7 +9799,7 @@
          * @excluding afterAnimate
          * @apioption series.gantt.events
          */
-        ''; // detachs doclets above
+        ''; // Detachs doclets above
         /* *
          *
          *  Default Export
@@ -10073,7 +10076,7 @@
                         groupingSize >= this.basePointRange) {
                         gapSize = groupingSize;
                     }
-                    // extension for ordinal breaks
+                    // Extension for ordinal breaks
                     var current = void 0, next = void 0;
                     while (i--) {
                         // Reassign next if it is not visible
@@ -10087,7 +10090,7 @@
                         }
                         if (next.x - current.x > gapSize) {
                             var xRange = (current.x + next.x) / 2;
-                            points.splice(// insert after this one
+                            points.splice(// Insert after this one
                             i + 1, 0, {
                                 isNull: true,
                                 x: xRange
@@ -10609,7 +10612,7 @@
             var options = axis.options;
             var gridOptions = options.grid || {};
             if (gridOptions.enabled === true) {
-                // compute anchor points for each of the title align options
+                // Compute anchor points for each of the title align options
                 var axisTitle = axis.axisTitle, axisHeight = axis.height, horiz = axis.horiz, axisLeft = axis.left, offset = axis.offset, opposite = axis.opposite, options_1 = axis.options, axisTop = axis.top, axisWidth = axis.width;
                 var tickSize = axis.tickSize();
                 var titleWidth = axisTitle && axisTitle.getBBox().width;
@@ -10621,8 +10624,8 @@
                 // TODO account for alignment
                 // the position in the perpendicular direction of the axis
                 var offAxis = ((horiz ? axisTop + axisHeight : axisLeft) +
-                    (horiz ? 1 : -1) * // horizontal axis reverses the margin
-                        (opposite ? -1 : 1) * // so does opposite axes
+                    (horiz ? 1 : -1) * // Horizontal axis reverses the margin
+                        (opposite ? -1 : 1) * // So does opposite axes
                         crispCorr +
                     (axis.side === GridAxisSide.bottom ? titleFontSize : 0));
                 e.titlePosition.x = horiz ?
@@ -10794,7 +10797,7 @@
                                 d: linePath
                             });
                         }
-                        // show or hide the line depending on options.showEmpty
+                        // Show or hide the line depending on options.showEmpty
                         axis.axisLine[axis.showAxis ? 'show' : 'hide']();
                     }
                 }
@@ -10869,7 +10872,7 @@
                         !defined(userLabels.align) &&
                         (options.dateTimeLabelFormats[tickInfo.unitName]
                             .range === false ||
-                            tickInfo.count > 1 // years
+                            tickInfo.count > 1 // Years
                         )) {
                         options.labels.align = 'left';
                         if (!defined(userLabels.x)) {
@@ -11008,7 +11011,7 @@
                                     // secondary axis show ten times the years (#11427)
                                 }
                                 else if (parentInfo.unitName === 'year') {
-                                    // unitName is 'year'
+                                    // `unitName` is 'year'
                                     count = parentInfo.count * 10;
                                 }
                                 var unitRange = timeUnits[unitName];
@@ -11123,8 +11126,8 @@
          */
         function onTickAfterGetLabelPosition(e) {
             var tick = this, label = tick.label, axis = tick.axis, reversed = axis.reversed, chart = axis.chart, options = axis.options, gridOptions = options.grid || {}, labelOpts = axis.options.labels, align = labelOpts.align, 
-            // verticalAlign is currently not supported for axis.labels.
-            verticalAlign = 'middle', // labelOpts.verticalAlign,
+            // `verticalAlign` is currently not supported for axis.labels.
+            verticalAlign = 'middle', // LabelOpts.verticalAlign,
             side = GridAxisSide[axis.side], tickmarkOffset = e.tickmarkOffset, tickPositions = axis.tickPositions, tickPos = tick.pos - tickmarkOffset, nextTickPos = (isNumber(tickPositions[e.index + 1]) ?
                 tickPositions[e.index + 1] - tickmarkOffset :
                 (axis.max || 0) + tickmarkOffset), tickSize = axis.tickSize('tick'), tickWidth = tickSize ? tickSize[0] : 0, crispCorr = tickSize ? tickSize[1] / 2 : 0;
@@ -11165,13 +11168,13 @@
                     left :
                     align === 'right' ?
                         right :
-                        left + ((right - left) / 2) // default to center
+                        left + ((right - left) / 2) // Default to center
                 );
                 e.pos.y = (verticalAlign === 'top' ?
                     top_1 :
                     verticalAlign === 'bottom' ?
                         bottom :
-                        top_1 + ((bottom - top_1) / 2) // default to middle
+                        top_1 + ((bottom - top_1) / 2) // Default to middle
                 );
                 if (label) {
                     var lblMetrics = chart.renderer.fontMetrics(label), labelHeight = label.getBBox().height;
@@ -11484,7 +11487,7 @@
          * @type      {number}
          * @apioption xAxis.grid.cellHeight
          */
-        ''; // keeps doclets above in JS file
+        ''; // Keeps doclets above in JS file
 
         return GridAxis;
     });
@@ -11530,9 +11533,6 @@
          *
          * @param {Array<*>} data
          *        List of points set in options. `Array.parent` is parent id of point.
-         *
-         * @param {Array<string>} ids
-         *        List of all point ids.
          *
          * @return {Highcharts.Dictionary<Array<*>>}
          * Map from parent id to children index in data
@@ -11834,7 +11834,7 @@
                     addEvent(TickClass, 'init', onTickInit);
                     wrap(tickProto, 'getLabelPosition', wrapGetLabelPosition);
                     wrap(tickProto, 'renderLabel', wrapRenderLabel);
-                    // backwards compatibility
+                    // Backwards compatibility
                     tickProto.collapse = function (redraw) {
                         this.treeGrid.collapse(redraw);
                     };
@@ -12009,7 +12009,8 @@
          * Returns a map from level number to its given options.
          */
         function getLevelOptions(params) {
-            var result = {}, defaults, converted, i, from, to, levels;
+            var result = {};
+            var defaults, converted, i, from, to, levels;
             if (isObject(params)) {
                 from = isNumber(params.from) ? params.from : 1;
                 levels = params.levels;
@@ -12394,7 +12395,7 @@
                             });
                         }
                     }
-                    // setScale is fired after all the series is initialized,
+                    // `setScale` is fired after all the series is initialized,
                     // which is an ideal time to update the axis.categories.
                     treeGrid = getTreeGridFromData(data, uniqueNames || false, (uniqueNames === true) ? numberOfSeries : 1);
                     // Assign values to the axis.
@@ -12473,7 +12474,7 @@
                         });
                 }
                 else {
-                    // update labels depending on tick interval
+                    // Update labels depending on tick interval
                     tick.parameters.category = gridNode.name;
                     tick.options = options;
                     tick.addLabel();
@@ -12512,7 +12513,7 @@
                             var breaks = axis.treeGrid.collapse(node);
                             if (axis.brokenAxis) {
                                 axis.brokenAxis.setBreaks(breaks, false);
-                                // remove the node from the axis collapsedNodes
+                                // Remove the node from the axis collapsedNodes
                                 if (axis.treeGrid.collapsedNodes) {
                                     axis.treeGrid.collapsedNodes = axis.treeGrid
                                         .collapsedNodes

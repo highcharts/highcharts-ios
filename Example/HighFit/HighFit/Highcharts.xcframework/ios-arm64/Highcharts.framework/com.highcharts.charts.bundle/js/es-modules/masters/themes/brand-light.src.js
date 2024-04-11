@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v@product.version@ (@product.date@)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  * @module highcharts/themes/brand-light
  * @requires highcharts
  *

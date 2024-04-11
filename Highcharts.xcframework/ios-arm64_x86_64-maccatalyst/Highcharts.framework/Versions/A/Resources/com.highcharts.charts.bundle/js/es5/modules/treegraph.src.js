@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  * Treegraph chart series type
  *
  *  (c) 2010-2024 Pawel Lysy Grzegorz Blachlinski
@@ -49,6 +49,9 @@
             straight: getStraightPath,
             curved: getCurvedPath
         };
+        /**
+         *
+         */
         function getDefaultPath(pathParams) {
             var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, radius = pathParams.radius, parentVisible = pathParams.parentVisible;
             var path = [
@@ -68,6 +71,9 @@
                 ], radius) :
                 path;
         }
+        /**
+         *
+         */
         function getStraightPath(pathParams) {
             var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.width, width = _a === void 0 ? 0 : _a, _b = pathParams.inverted, inverted = _b === void 0 ? false : _b, parentVisible = pathParams.parentVisible;
             return parentVisible ? [
@@ -80,6 +86,9 @@
                 ['L', x1, y2]
             ];
         }
+        /**
+         *
+         */
         function getCurvedPath(pathParams) {
             var x1 = pathParams.x1, y1 = pathParams.y1, x2 = pathParams.x2, y2 = pathParams.y2, _a = pathParams.offset, offset = _a === void 0 ? 0 : _a, _b = pathParams.width, width = _b === void 0 ? 0 : _b, _c = pathParams.inverted, inverted = _c === void 0 ? false : _c, parentVisible = pathParams.parentVisible;
             return parentVisible ?
@@ -112,13 +121,13 @@
                 var x = path[i][1];
                 var y = path[i][2];
                 if (typeof x === 'number' && typeof y === 'number') {
-                    // moveTo
+                    // MoveTo
                     if (i === 0) {
                         d.push(['M', x, y]);
                     }
                     else if (i === path.length - 1) {
                         d.push(['L', x, y]);
-                        // curveTo
+                        // CurveTo
                     }
                     else if (r) {
                         var prevSeg = path[i - 1];
@@ -148,7 +157,7 @@
                                 ]);
                             }
                         }
-                        // lineTo
+                        // LineTo
                     }
                     else {
                         d.push(['L', x, y]);
@@ -428,7 +437,7 @@
              * */
             TreegraphPoint.prototype.draw = function () {
                 _super.prototype.draw.apply(this, arguments);
-                // run animation of hiding/showing of the point.
+                // Run animation of hiding/showing of the point.
                 var graphic = this.graphic;
                 if (graphic) {
                     graphic.animate({
@@ -749,7 +758,7 @@
                             // For further columns treat the nodes as a
                             // single parent-child pairs till the column is achieved.
                             var gapSize = child.level - node.level - 1;
-                            // parent -> dummyNode -> child
+                            // Parent -> dummyNode -> child
                             while (gapSize > 0) {
                                 child = TreegraphLayout.createDummyNode(node, child, gapSize);
                                 gapSize--;
@@ -1813,7 +1822,7 @@
          * @type {boolean}
          * @apioption series.treegraph.data.collapsed
          */
-        ''; // gets doclets above into transpiled version
+        ''; // Gets doclets above into transpiled version
 
         return TreegraphSeries;
     });

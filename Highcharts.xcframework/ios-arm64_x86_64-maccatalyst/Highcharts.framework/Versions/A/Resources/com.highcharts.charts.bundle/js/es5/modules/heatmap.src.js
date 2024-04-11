@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v11.4.0 (2024-03-04)
+ * @license Highmaps JS v11.4.1 (2024-04-04)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -221,7 +221,7 @@
                         point[key][method]();
                     }
                 });
-                this.series.buildKDTree(); // rebuild kdtree #13195
+                this.series.buildKDTree(); // Rebuild kdtree #13195
             }
             ColorAxisComposition.pointSetVisible = pointSetVisible;
             /**
@@ -1011,7 +1011,7 @@
                 axis.reversed = userOptions.reversed || !horiz;
                 axis.opposite = !horiz;
                 _super.prototype.init.call(this, chart, userOptions, 'colorAxis');
-                // Super.init saves the extended user options, now replace it with the
+                // `super.init` saves the extended user options, now replace it with the
                 // originals
                 this.userOptions = userOptions;
                 if (isArray(chart.userOptions.colorAxis)) {
@@ -1109,6 +1109,12 @@
                     });
                     legend_1.render();
                     this.chart.getMargins(true);
+                    // If not drilling down/up
+                    if (!this.chart.series.some(function (series) {
+                        return series.isDrilling;
+                    })) {
+                        axis.isDirty = true; // Flag to fire drawChartBox
+                    }
                     // First time only
                     if (!axis.added) {
                         axis.added = true;
@@ -1197,7 +1203,7 @@
                 var colorValArray, colorKey, colorValIndex, pointArrayMap, calculatedExtremes, cSeries, i = series.length, yData, j;
                 this.dataMin = Infinity;
                 this.dataMax = -Infinity;
-                while (i--) { // x, y, value, other
+                while (i--) { // X, y, value, other
                     cSeries = series[i];
                     colorKey = cSeries.colorKey = pick(cSeries.options.colorKey, cSeries.colorKey, cSeries.pointValKey, cSeries.zoneAxis, 'y');
                     pointArrayMap = cSeries.pointArrayMap;
@@ -1506,7 +1512,7 @@
          *
          * @typedef {"linear"|"logarithmic"} Highcharts.ColorAxisTypeValue
          */
-        ''; // detach doclet above
+        ''; // Detach doclet above
 
         return ColorAxis;
     });
@@ -1591,7 +1597,7 @@
                 return (this.value !== null &&
                     this.value !== Infinity &&
                     this.value !== -Infinity &&
-                    // undefined is allowed, but NaN is not (#17279)
+                    // Undefined is allowed, but NaN is not (#17279)
                     (this.value === void 0 || !isNaN(this.value)));
             }
             /**
@@ -1733,7 +1739,7 @@
              * @private
              */
             HeatmapPoint.prototype.isValid = function () {
-                // undefined is allowed
+                // Undefined is allowed
                 return (this.value !== Infinity &&
                     this.value !== -Infinity);
             };
@@ -2383,7 +2389,7 @@
          * @product   highcharts highstock
          * @apioption series.heatmap.data.marker.states.select.heightPlus
          */
-        ''; // keeps doclets above separate
+        ''; // Keeps doclets above separate
         /* *
          *
          *  Default Export
@@ -2635,7 +2641,7 @@
                 var options = this.options;
                 // #3758, prevent resetting in setData
                 options.pointRange = pick(options.pointRange, options.colsize || 1);
-                // general point range
+                // General point range
                 this.yAxis.axisPointRange = options.rowsize || 1;
                 // Bind new symbol names
                 symbols.ellipse = symbols.circle;
@@ -2815,7 +2821,7 @@
         * @name Highcharts.PointOptionsObject#value
         * @type {number|null|undefined}
         */
-        ''; // detach doclets above
+        ''; // Detach doclets above
 
         return HeatmapSeries;
     });

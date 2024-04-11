@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Drag-panes module
  *
@@ -394,7 +394,7 @@
                     [chart.yAxis.indexOf(resizer.axis) + 1] : axes.next, 
                 // Main axis is included in the prev array by default
                 prevAxes = [resizer.axis].concat(axes.prev), 
-                // prev and next configs
+                // Prev and next configs
                 axesConfigs = [], plotTop = chart.plotTop, plotHeight = chart.plotHeight, plotBottom = plotTop + plotHeight, calculatePercent = function (value) { return (value * 100 / plotHeight + '%'); }, normalize = function (val, min, max) { return (Math.round(clamp(val, min, max))); };
                 // Normalize chartY to plot area limits
                 chartY = clamp(chartY, plotTop, plotBottom);
@@ -416,9 +416,9 @@
                             (
                             // If it's first elem. in first group
                             isFirst ?
-                                // then it's an Axis object
+                                // Then it's an Axis object
                                 axisInfo :
-                                // else it should be an id
+                                // Else it should be an id
                                 chart.get(axisInfo)), axisOptions = axis && axis.options, optionsToUpdate = {};
                         var height = void 0, top_1 = void 0;
                         // Skip if axis is not found

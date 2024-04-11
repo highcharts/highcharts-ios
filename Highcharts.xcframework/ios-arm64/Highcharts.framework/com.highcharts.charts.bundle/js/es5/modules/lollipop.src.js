@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * (c) 2009-2024 Sebastian Bochan, Rafal Sebestjanski
  *
@@ -140,9 +140,6 @@
              * @private
              *
              * @function Highcharts.Series#drawPoints
-             *
-             * @param {Highcharts.Series} this The series of points.
-             *
              */
             LollipopSeries.prototype.drawPoints = function () {
                 var series = this, pointLength = series.points.length;
@@ -160,8 +157,6 @@
              * @private
              *
              * @function Highcharts.Series#translate
-             *
-             * @param {Highcharts.Series} this The series of points.
              *
              */
             LollipopSeries.prototype.translate = function () {
@@ -342,7 +337,7 @@
          * @product   highcharts highstock
          * @apioption series.line.data.y
          */
-        (''); // adds doclets above to transpiled file
+        (''); // Adds doclets above to transpiled file
 
         return LollipopSeries;
     });

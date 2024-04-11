@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -862,7 +862,7 @@
                     }
                     else {
                         pointProps[key + 'Offset'] =
-                            // e.g. yAxis.toPixels(point.high), xAxis.toPixels
+                            // E.g. yAxis.toPixels(point.high), xAxis.toPixels
                             // (point.end)
                             axis.toPixels(point[key]) -
                                 (axis.horiz ? e.chartX : e.chartY);
@@ -1180,7 +1180,7 @@
          */
         function resizeGuideBox(point, dX, dY) {
             var series = point.series, chart = series.chart, dragDropData = chart.dragDropData, resizeProp = series.dragDropProps[dragDropData.updateProp], 
-            // dragDropProp.resizeSide holds info on which side to resize.
+            // `dragDropProp.resizeSide` holds info on which side to resize.
             newPoint = dragDropData.newPoints[point.id].newValues, resizeSide = typeof resizeProp.resizeSide === 'function' ?
                 resizeProp.resizeSide(newPoint, point) : resizeProp.resizeSide;
             // Call resize hook if it is defined
@@ -2204,20 +2204,20 @@
                         return res;
                     }
                     if (key === 'lat') {
-                        // if map is bigger than possible projection range
+                        // If map is bigger than possible projection range
                         if (isNaN(min) || min > mapView.projection.maxLatitude) {
                             min = mapView.projection.maxLatitude;
                         }
                         if (isNaN(max) || max < -1 * mapView.projection.maxLatitude) {
                             max = -1 * mapView.projection.maxLatitude;
                         }
-                        // swap for latitude
+                        // Swap for latitude
                         var temp = max;
                         max = min;
                         min = temp;
                     }
                     if (!mapView.projection.hasCoordinates) {
-                        // establish y value
+                        // Establish y value
                         var lonLatRes = mapView.pixelsToLonLat({
                             x: newPos.chartX - chart.plotLeft,
                             y: chart.plotHeight - newPos.chartY + chart.plotTop
@@ -2554,7 +2554,7 @@
         * @name Highcharts.PointDropEventObject#type
         * @type {"drop"}
         */
-        ''; // detaches doclets above
+        ''; // Detaches doclets above
 
         return DraggablePoints;
     });

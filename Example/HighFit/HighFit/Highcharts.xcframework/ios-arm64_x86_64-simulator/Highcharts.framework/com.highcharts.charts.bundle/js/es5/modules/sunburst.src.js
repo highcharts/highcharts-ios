@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * (c) 2016-2024 Highsoft AS
  * Authors: Jon Arild Nygard
@@ -1085,7 +1085,7 @@
                 return (this.value !== null &&
                     this.value !== Infinity &&
                     this.value !== -Infinity &&
-                    // undefined is allowed, but NaN is not (#17279)
+                    // Undefined is allowed, but NaN is not (#17279)
                     (this.value === void 0 || !isNaN(this.value)));
             }
             /**
@@ -1329,7 +1329,7 @@
                         onComplete();
                     }
                 };
-                // animate only runs complete callback if something was animated.
+                // Animate only runs complete callback if something was animated.
                 if (Object.keys(animatableAttribs).length) {
                     graphic.animate(animatableAttribs, void 0, function () { return destroy_1(); });
                 }
@@ -1997,7 +1997,7 @@
          * @product   highcharts
          * @apioption series.treemap.data.parent
          */
-        ''; // keeps doclets above detached
+        ''; // Keeps doclets above detached
         /* *
          *
          *  Default Export
@@ -2040,8 +2040,7 @@
              * @todo Similar to reduce, this function is likely redundant
              */
             function recursive(item, func, context) {
-                var next;
-                next = func.call(context || this, item);
+                var next = func.call(context || this, item);
                 if (next !== false) {
                     recursive(next, func, context);
                 }
@@ -2133,7 +2132,8 @@
          * Returns a map from level number to its given options.
          */
         function getLevelOptions(params) {
-            var result = {}, defaults, converted, i, from, to, levels;
+            var result = {};
+            var defaults, converted, i, from, to, levels;
             if (isObject(params)) {
                 from = isNumber(params.from) ? params.from : 1;
                 levels = params.levels;
@@ -2329,10 +2329,8 @@
                         gridLineWidth: 0,
                         lineWidth: 0,
                         min: 0,
-                        // dataMin: 0,
                         minPadding: 0,
                         max: axisMax,
-                        // dataMax: TreemapUtilities.AXIS_MAX,
                         maxPadding: 0,
                         startOnTick: false,
                         title: void 0,
@@ -2515,13 +2513,13 @@
                     dataLabel.getBBox().width > (dataLabel.text.textWidth || 0)) {
                     dataLabel.css({
                         textOverflow: 'ellipsis',
-                        // unit (px) is required when useHTML is true
+                        // Unit (px) is required when useHTML is true
                         width: style.width += 'px'
                     });
                 }
                 ColumnSeries.prototype.alignDataLabel.apply(this, arguments);
                 if (point.dataLabel) {
-                    // point.node.zIndex could be undefined (#6956)
+                    // `point.node.zIndex` could be undefined (#6956)
                     point.dataLabel.attr({ zIndex: (point.node.zIndex || 0) + 1 });
                 }
             };
@@ -3319,7 +3317,7 @@
                 var _a;
                 var renderer = this.series.chart.renderer, shapeArgs = this.shapeExisting, r = shapeArgs.r + pInt(((_a = label.options) === null || _a === void 0 ? void 0 : _a.distance) || 0);
                 var start = shapeArgs.start, end = shapeArgs.end;
-                var angle = start + (end - start) / 2; // arc middle value
+                var angle = start + (end - start) / 2; // Arc middle value
                 var upperHalf = angle < 0 &&
                     angle > -Math.PI ||
                     angle > Math.PI, moreThanHalf;
@@ -3899,7 +3897,7 @@
           * @product   highcharts
           * @apioption series.sunburst.data.sliced
           */
-        ''; // detach doclets above
+        ''; // Detach doclets above
         /* *
          *
          *  Default Export
@@ -4337,7 +4335,7 @@
                         plotY: shape.plotY,
                         value: node.val,
                         isInside: visible,
-                        isNull: !visible // used for dataLabels & point.draw
+                        isNull: !visible // Used for dataLabels & point.draw
                     });
                     point.dlOptions = getDlOptions({
                         point: point,
@@ -4465,7 +4463,7 @@
                 rootId = updateRootId(series);
                 var mapIdToNode = series.nodeMap, mapOptionsToLevel, nodeRoot = mapIdToNode && mapIdToNode[rootId], nodeIds = {};
                 series.shapeRoot = nodeRoot && nodeRoot.shapeArgs;
-                if (!series.processedXData) { // hidden series
+                if (!series.processedXData) { // Hidden series
                     series.processData();
                 }
                 series.generatePoints();
@@ -4523,10 +4521,10 @@
                     if (nodeIds[point.id]) {
                         error(31, false, series.chart);
                     }
-                    // map
+                    // Map
                     nodeIds[point.id] = true;
                 }
-                // reset object
+                // Reset object
                 nodeIds = {};
             };
             /* *

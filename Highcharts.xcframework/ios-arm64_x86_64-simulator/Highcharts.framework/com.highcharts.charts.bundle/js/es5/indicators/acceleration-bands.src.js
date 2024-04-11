@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -174,12 +174,12 @@
                         gapSize: mainLineOptions.gapSize
                     }
                 }, 
-                // additional lines point place holders:
+                // Additional lines point place holders:
                 secondaryLines = [], secondaryLinesNames = getTranslatedLinesNames(indicator, pointValKey);
                 var pointsLength = mainLinePoints.length, point;
                 // Generate points for additional lines:
                 secondaryLinesNames.forEach(function (plotLine, index) {
-                    // create additional lines point place holders
+                    // Create additional lines point place holders
                     secondaryLines[index] = [];
                     while (pointsLength--) {
                         point = mainLinePoints[pointsLength];
@@ -397,7 +397,7 @@
                 // ABANDS array structure:
                 // 0-date, 1-top line, 2-middle line, 3-bottom line
                 ABANDS = [], low = 2, high = 1, xData = [], yData = [];
-                // middle line, top line and bottom line
+                // Middle line, top line and bottom line
                 var ML, TL, BL, date, bandBase, pointSMA, ubSMA, lbSMA, slicedX, slicedY, i;
                 if (yValLen < period) {
                     return;
@@ -554,7 +554,7 @@
          * @requires  stock/indicators/acceleration-bands
          * @apioption series.abands
          */
-        ''; // to include the above in jsdoc
+        ''; // To include the above in jsdoc
 
         return ABandsIndicator;
     });

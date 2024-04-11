@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * 3D features for Highcharts JS
  *
@@ -1617,7 +1617,7 @@
                             visible: isVisible
                         };
                     };
-                    // docs @TODO: Add all frame options (left, right, top, bottom,
+                    // Docs @TODO: Add all frame options (left, right, top, bottom,
                     // front, back) to apioptions JSDoc once the new system is up.
                     var ret = {
                         axes: {},
@@ -1965,7 +1965,7 @@
          * @product   highcharts
          * @apioption chart.options3d.frame.side.size
          */
-        ''; // keeps doclets above in JS file
+        ''; // Keeps doclets above in JS file
 
         return Chart3D;
     });
@@ -1988,11 +1988,17 @@
          *  Functions
          *
          * */
+        /**
+         *
+         */
         function compose(AreaSeriesClass) {
             if (pushUnique(composed, 'Area3DSeries')) {
                 wrap(AreaSeriesClass.prototype, 'getGraphPath', wrapAreaSeriesGetGraphPath);
             }
         }
+        /**
+         *
+         */
         function wrapAreaSeriesGetGraphPath(proceed) {
             var series = this, svgPath = proceed.apply(series, [].slice.call(arguments, 1));
             // Do not do this if the chart is not 3D
@@ -2336,7 +2342,7 @@
                         toStartSeg[0] === 'M' &&
                         toEndSeg[0] === 'L') {
                         path.push(fromStartSeg, fromEndSeg, toEndSeg, 
-                        // lineTo instead of moveTo
+                        // `lineTo` instead of `moveTo`
                         ['L', toStartSeg[1], toStartSeg[2]], ['Z']);
                     }
                 }
@@ -2670,7 +2676,7 @@
                         };
                     }
                 }
-                else { // positionMode  == 'offset'
+                else { // Position mode  == 'offset'
                     // Labels will be skewd to maintain vertical / horizontal offsets
                     // from axis
                     if (!axis.horiz) { // Y Axis
@@ -2929,7 +2935,7 @@
              */
             SVGElement3D.prototype.initArgs = function (args) {
                 var elem3d = this, renderer = elem3d.renderer, paths = renderer[elem3d.pathType + 'Path'](args), zIndexes = paths.zIndexes;
-                // build parts
+                // Build parts
                 for (var _i = 0, _a = elem3d.parts; _i < _a.length; _i++) {
                     var part = _a[_i];
                     var attribs = {
@@ -2977,7 +2983,7 @@
                         var part = _a[_i];
                         newAttr[part] = {};
                         newAttr[part][prop] = values[part];
-                        // include zIndexes if provided
+                        // Include zIndexes if provided
                         if (hasZIndexes) {
                             newAttr[part].zIndex = values.zIndexes[part] || 0;
                         }
@@ -2994,11 +3000,11 @@
                 var elem3d = this;
                 for (var _i = 0, _a = elem3d.parts; _i < _a.length; _i++) {
                     var part = _a[_i];
-                    // if different props for different parts
+                    // If different props for different parts
                     if (partsProps) {
                         props = pick(partsProps[part], false);
                     }
-                    // only if something to set, but allow undefined
+                    // Only if something to set, but allow undefined
                     if (props !== false) {
                         elem3d[part][verb](props, duration, complete);
                     }
@@ -3055,7 +3061,7 @@
                     top: color(fill).brighten(elem3d.forcedSides.indexOf('top') >= 0 ? 0 : 0.1).get(),
                     side: color(fill).brighten(elem3d.forcedSides.indexOf('side') >= 0 ? 0 : -0.1).get()
                 });
-                // fill for animation getter (#6776)
+                // Fill for animation getter (#6776)
                 elem3d.color = elem3d.fill = fill;
                 return elem3d;
             };
@@ -3268,7 +3274,7 @@
                     });
                 }
                 result.faces = [];
-                // destroy all children
+                // Destroy all children
                 result.destroy = function () {
                     for (var i = 0; i < result.faces.length; i++) {
                         result.faces[i].destroy();
@@ -3311,7 +3317,7 @@
                 return result.attr(args);
             }
             /**
-             * return result, generalization
+             * Return result, generalization
              * @private
              * @requires highcharts-3d
              */
@@ -3321,7 +3327,7 @@
                 return elem3d;
             }
             /**
-             * generalized, so now use simply
+             * Generalized, so now use simply
              * @private
              */
             function cuboid(shapeArgs) {
@@ -3340,7 +3346,7 @@
                 // Priority for x axis is the biggest,
                 // because of x direction has biggest influence on zIndex
                 incrementX = 1000000, 
-                // y axis has the smallest priority in case of our charts
+                // Y axis has the smallest priority in case of our charts
                 // (needs to be set because of stacking)
                 incrementY = 10, incrementZ = 100, forcedSides = [];
                 var shape, zIndex = 0, 
@@ -3378,10 +3384,10 @@
                         y: y,
                         z: z + d
                     }];
-                // apply perspective
+                // Apply perspective
                 pArr = perspective(pArr, chart, shapeArgs.insidePlotArea);
                 /**
-                 * helper method to decide which side is visible
+                 * Helper method to decide which side is visible
                  * @private
                  */
                 var mapSidePath = function (i) {
@@ -3391,7 +3397,7 @@
                     if (h === 0 && i > 1 && i < 6) { // [2, 3, 4, 5]
                         return {
                             x: pArr[i].x,
-                            // when height is 0 instead of cuboid we render plane
+                            // When height is 0 instead of cuboid we render plane
                             // so it is needed to add fake 10 height to imitate
                             // cuboid for side calculation
                             y: pArr[i].y + 10,
@@ -3405,7 +3411,7 @@
                     if (pArr[0].x === pArr[7].x && i >= 4) { // [4, 5, 6, 7]
                         return {
                             x: pArr[i].x + 10,
-                            // when height is 0 instead of cuboid we render plane
+                            // When height is 0 instead of cuboid we render plane
                             // so it is needed to add fake 10 height to imitate
                             // cuboid for side calculation
                             y: pArr[i].y,
@@ -3416,7 +3422,7 @@
                     if (d === 0 && i < 2 || i > 5) { // [0, 1, 6, 7]
                         return {
                             x: pArr[i].x,
-                            // when height is 0 instead of cuboid we render plane
+                            // When height is 0 instead of cuboid we render plane
                             // so it is needed to add fake 10 height to imitate
                             // cuboid for side calculation
                             y: pArr[i].y,
@@ -3426,7 +3432,7 @@
                     return pArr[i];
                 }, 
                 /**
-                 * method creating the final side
+                 * Method creating the final side
                  * @private
                  */
                 mapPath = function (i) { return (pArr[i]); }, 
@@ -3442,7 +3448,7 @@
                 pickShape = function (verticesIndex1, verticesIndex2, side) {
                     var // An array of vertices for cuboid face
                     face1 = verticesIndex1.map(mapPath), face2 = verticesIndex2.map(mapPath), 
-                    // dummy face is calculated the same way as standard face,
+                    // Dummy face is calculated the same way as standard face,
                     // but if cuboid height is 0 additional height is added so
                     // it is possible to use this vertices array for visible
                     // face calculation
@@ -3463,20 +3469,20 @@
                             ret = [face2, 1];
                         }
                         else {
-                            ret = [face1, 0]; // force side calculation.
+                            ret = [face1, 0]; // Force side calculation.
                         }
                     }
                     return ret;
                 };
-                // front or back
+                // Front or back
                 var front = [3, 2, 1, 0], back = [7, 6, 5, 4];
                 shape = pickShape(front, back, 'front');
                 var path1 = shape[0], isFront = shape[1];
-                // top or bottom
+                // Top or bottom
                 var top = [1, 6, 7, 0], bottom = [4, 5, 2, 3];
                 shape = pickShape(top, bottom, 'top');
                 var path2 = shape[0], isTop = shape[1];
-                // side
+                // Side
                 var right = [1, 2, 5, 6], left = [0, 7, 4, 3];
                 shape = pickShape(right, left, 'side');
                 var path3 = shape[0], isRight = shape[1];
@@ -3514,7 +3520,7 @@
                         group: Math.round(zIndex)
                     },
                     forcedSides: forcedSides,
-                    // additional info about zIndexes
+                    // Additional info about zIndexes
                     isFront: isFront,
                     isTop: isTop
                 }; // #4774
@@ -3591,7 +3597,7 @@
                     wrapper.out.attr({ d: paths.out, zIndex: paths.zOut });
                     wrapper.side1.attr({ d: paths.side1, zIndex: paths.zSide1 });
                     wrapper.side2.attr({ d: paths.side2, zIndex: paths.zSide2 });
-                    // show all children
+                    // Show all children
                     wrapper.zIndex = zIndex;
                     wrapper.attr({ zIndex: zIndex });
                     // Set the radial gradient center the first time
@@ -3663,7 +3669,7 @@
                         params[randomProp] = 1;
                         wrapper[randomProp + 'Setter'] = H.noop;
                         if (paramArr) {
-                            to = paramArr[0]; // custom attr
+                            to = paramArr[0]; // Custom attr
                             anim.step = function (a, fx) {
                                 var interpolate = function (key) { return (from[key] + (pick(to[key], from[key]) -
                                     from[key]) * fx.pos); };
@@ -3684,7 +3690,7 @@
                     }
                     return elementProto.animate.call(this, params, animation, complete);
                 };
-                // destroy all children
+                // Destroy all children
                 wrapper.destroy = function () {
                     this.top.destroy();
                     this.out.destroy();
@@ -3693,7 +3699,7 @@
                     this.side2.destroy();
                     return elementProto.destroy.call(this);
                 };
-                // hide all children
+                // Hide all children
                 wrapper.hide = function () {
                     this.top.hide();
                     this.out.hide();
@@ -3716,26 +3722,26 @@
              * @private
              */
             function arc3dPath(shapeArgs) {
-                var cx = shapeArgs.x || 0, // x coordinate of the center
-                cy = shapeArgs.y || 0, // y coordinate of the center
-                start = shapeArgs.start || 0, // start angle
-                end = (shapeArgs.end || 0) - 0.00001, // end angle
-                r = shapeArgs.r || 0, // radius
-                ir = shapeArgs.innerR || 0, // inner radius
-                d = shapeArgs.depth || 0, // depth
-                alpha = shapeArgs.alpha || 0, // alpha rotation of the chart
-                beta = shapeArgs.beta || 0; // beta rotation of the chart
+                var cx = shapeArgs.x || 0, // X coordinate of the center
+                cy = shapeArgs.y || 0, // Y coordinate of the center
+                start = shapeArgs.start || 0, // Start angle
+                end = (shapeArgs.end || 0) - 0.00001, // End angle
+                r = shapeArgs.r || 0, // Radius
+                ir = shapeArgs.innerR || 0, // Inner radius
+                d = shapeArgs.depth || 0, // Depth
+                alpha = shapeArgs.alpha || 0, // Alpha rotation of the chart
+                beta = shapeArgs.beta || 0; // Beta rotation of the chart
                 // Derived Variables
-                var cs = Math.cos(start), // cosinus of the start angle
-                ss = Math.sin(start), // sinus of the start angle
-                ce = Math.cos(end), // cosinus of the end angle
-                se = Math.sin(end), // sinus of the end angle
-                rx = r * Math.cos(beta), // x-radius
-                ry = r * Math.cos(alpha), // y-radius
-                irx = ir * Math.cos(beta), // x-radius (inner)
-                iry = ir * Math.cos(alpha), // y-radius (inner)
-                dx = d * Math.sin(beta), // distance between top and bottom in x
-                dy = d * Math.sin(alpha); // distance between top and bottom in y
+                var cs = Math.cos(start), // Cosinus of the start angle
+                ss = Math.sin(start), // Sinus of the start angle
+                ce = Math.cos(end), // Cosinus of the end angle
+                se = Math.sin(end), // Sinus of the end angle
+                rx = r * Math.cos(beta), // X-radius
+                ry = r * Math.cos(alpha), // Y-radius
+                irx = ir * Math.cos(beta), // X-radius (inner)
+                iry = ir * Math.cos(alpha), // Y-radius (inner)
+                dx = d * Math.sin(beta), // Distance between top and bottom in x
+                dy = d * Math.sin(alpha); // Distance between top and bottom in y
                 // TOP
                 var top = [
                     ['M', cx + (rx * cs), cy + (ry * ss)]
@@ -3854,12 +3860,12 @@
                     ['L', cx + (irx * ce), cy + (iry * se)],
                     ['Z']
                 ];
-                // correction for changed position of vanishing point caused by alpha
+                // Correction for changed position of vanishing point caused by alpha
                 // and beta rotations
                 var angleCorr = Math.atan2(dy, -dx);
                 var angleEnd = Math.abs(end + angleCorr), angleStart = Math.abs(start + angleCorr), angleMid = Math.abs((start + end) / 2 + angleCorr);
                 /**
-                 * set to 0-PI range
+                 * Set to 0-PI range
                  * @private
                  */
                 function toZeroPIRange(angle) {
@@ -3876,14 +3882,14 @@
                 var incPrecision = 1e5, a1 = angleMid * incPrecision, a2 = angleStart * incPrecision, a3 = angleEnd * incPrecision;
                 return {
                     top: top,
-                    // max angle is PI, so this is always higher
+                    // Max angle is PI, so this is always higher
                     zTop: Math.PI * incPrecision + 1,
                     out: out,
                     zOut: Math.max(a1, a2, a3),
                     inn: inn,
                     zInn: Math.max(a1, a2, a3),
                     side1: side1,
-                    // to keep below zOut and zInn in case of same values
+                    // To keep below zOut and zInn in case of same values
                     zSide1: a3 * 0.99,
                     side2: side2,
                     zSide2: a2 * 0.99
@@ -3958,6 +3964,7 @@
          * */
         /**
          * 3D axis for z coordinates.
+         * @private
          */
         var ZAxis = /** @class */ (function (_super) {
             __extends(ZAxis, _super);
@@ -4007,7 +4014,7 @@
                 if (this.stacking) {
                     this.stacking.buildStacks();
                 }
-                // loop through this axis' series
+                // Loop through this axis' series
                 this.series.forEach(function (series) {
                     if (series.reserveSpace()) {
                         var threshold = series.options.threshold;
@@ -4159,7 +4166,7 @@
                     }
                 }
             }
-            // store for later use #4067
+            // Store for later use #4067
             series.z = z;
         }
         /** @private */
@@ -4223,8 +4230,8 @@
                 // @todo grouping === true ?
                 if (!(typeof grouping !== 'undefined' && !grouping)) {
                     var stacks = retrieveStacks(this.chart, stacking), stack = seriesOptions.stack || 0;
-                    var i = // position within the stack
-                     void 0; // position within the stack
+                    var i = // Position within the stack
+                     void 0; // Position within the stack
                     for (i = 0; i < stacks[stack].series.length; i++) {
                         if (stacks[stack].series[i] === this) {
                             break;
@@ -4302,7 +4309,7 @@
                             }
                         }
                     }
-                    // redraw datalabels to the correct position
+                    // Redraw datalabels to the correct position
                     this.drawDataLabels();
                 }
             }
@@ -4423,7 +4430,7 @@
                         dLPosition.y += point.shapeArgs.width;
                     }
                 }
-                // dLPosition is recalculated for 3D graphs
+                // `dLPosition` is recalculated for 3D graphs
                 dLPosition = perspective([dLPosition], chart, true, false)[0];
                 alignTo.x = dLPosition.x - xOffset;
                 // #7103 If point is outside of plotArea, hide data label.
@@ -4532,7 +4539,7 @@
          * @requires  highcharts-3d
          * @apioption plotOptions.column.groupZPadding
          */
-        ''; // keeps doclets above in transpiled file
+        ''; // Keeps doclets above in transpiled file
 
         return Column3DComposition;
     });
@@ -4658,7 +4665,7 @@
             Pie3DSeries.prototype.addPoint = function () {
                 _super.prototype.addPoint.apply(this, arguments);
                 if (this.chart.is3d()) {
-                    // destroy (and rebuild) everything!!!
+                    // Destroy (and rebuild) everything!!!
                     this.update(this.userOptions, true); // #3845 pass the old options
                 }
             };
@@ -4825,7 +4832,7 @@
          * @requires  highcharts-3d
          * @apioption plotOptions.pie.depth
          */
-        ''; // keeps doclets above after transpiledion
+        ''; // Keeps doclets above after transpiledion
 
         return Pie3DSeries;
     });
@@ -5000,7 +5007,7 @@
          * @product   highcharts
          * @apioption series.scatter3d.data.z
          */
-        ''; // detachs doclets above
+        ''; // Detachs doclets above
         /* *
          *
          *  Default Export

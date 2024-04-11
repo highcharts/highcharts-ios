@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -181,8 +181,8 @@
              * */
             VBPIndicator.prototype.init = function (chart, options) {
                 var indicator = this;
-                // series.update() sends data that is not necessary
-                // as everything is calculated in getValues(), #17007
+                // Series.update() sends data that is not necessary as everything is
+                // calculated in getValues(), #17007
                 delete options.data;
                 _super.prototype.init.apply(indicator, arguments);
                 // Only after series are linked add some additional logic/properties.
@@ -690,7 +690,7 @@
          * @requires  stock/indicators/volume-by-price
          * @apioption series.vbp
          */
-        ''; // to include the above in the js output
+        ''; // To include the above in the js output
 
         return VBPIndicator;
     });

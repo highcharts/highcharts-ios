@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v11.4.0 (2024-03-04)
+ * @license Highcharts Gantt JS v11.4.1 (2024-04-04)
  *
  * StaticScale
  *
@@ -140,7 +140,7 @@
          * @product   gantt
          * @apioption yAxis.staticScale
          */
-        ''; // keeps doclets above in JS file
+        ''; // Keeps doclets above in JS file
 
         return StaticScale;
     });

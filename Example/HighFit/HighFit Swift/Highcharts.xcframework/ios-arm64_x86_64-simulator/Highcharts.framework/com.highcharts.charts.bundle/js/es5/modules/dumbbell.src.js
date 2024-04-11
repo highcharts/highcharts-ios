@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * (c) 2009-2024 Sebastian Bochan, Rafal Sebestjanski
  *
@@ -206,8 +206,6 @@
              * (between low and high value).
              *
              * @private
-             * @param {Highcharts.Point} this The point to inspect.
-             *
              */
             DumbbellPoint.prototype.setState = function () {
                 var _a;
@@ -455,7 +453,7 @@
          * @product     highcharts highstock
          * @apioption   series.dumbbell.data.lowColor
          */
-        ''; // keeps doclets above separate
+        ''; // Keeps doclets above separate
         /* *
          *
          *  Default Export

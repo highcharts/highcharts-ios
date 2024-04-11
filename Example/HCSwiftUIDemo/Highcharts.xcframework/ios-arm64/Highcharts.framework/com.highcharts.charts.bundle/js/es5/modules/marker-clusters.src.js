@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Marker clusters module for Highcharts
  *
@@ -400,7 +400,6 @@
             grid: function (dataX, dataY, dataIndexes, options) {
                 var series = this, grid = {}, gridOffset = this.getGridOffset();
                 var x, y, gridX, gridY, key, i;
-                // drawGridLines(series, options);
                 var scaledGridSize = series.getScaledGridSize(options);
                 for (i = 0; i < dataX.length; i++) {
                     var p = valuesToPixels(series, { x: dataX[i], y: dataY[i] });
@@ -1697,7 +1696,7 @@
          * @param {Highcharts.PointClickEventObject} event
          *        Event arguments.
          */
-        ''; // keeps doclets above in JS file
+        ''; // Keeps doclets above in JS file
 
         return MarkerClusters;
     });

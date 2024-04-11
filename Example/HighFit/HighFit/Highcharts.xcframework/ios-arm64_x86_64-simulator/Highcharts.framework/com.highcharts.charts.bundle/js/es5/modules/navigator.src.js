@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Standalone navigator module
  *
@@ -135,7 +135,7 @@
                                 0) -
                             (this.titleOffset ? this.titleOffset[2] : 0);
                 }
-                if (xAxis && yAxis) { // false if navigator is disabled (#904)
+                if (xAxis && yAxis) { // False if navigator is disabled (#904)
                     if (this.inverted) {
                         xAxis.options.left = yAxis.options.left = navigator.left;
                     }
@@ -341,27 +341,14 @@
              * @function Highcharts.Axis#toFixedRange
              */
             NavigatorAxisAdditions.prototype.toFixedRange = function (pxMin, pxMax, fixedMin, fixedMax) {
-                var _a;
-                var axis = this.axis, chart = axis.chart, overscroll = pick((_a = axis.ordinal) === null || _a === void 0 ? void 0 : _a.convertOverscroll(axis.options.overscroll), 0);
+                var axis = this.axis, halfPointRange = (axis.pointRange || 0) / 2;
                 var newMin = pick(fixedMin, axis.translate(pxMin, true, !axis.horiz)), newMax = pick(fixedMax, axis.translate(pxMax, true, !axis.horiz));
-                var fixedRange = chart && chart.fixedRange, halfPointRange = (axis.pointRange || 0) / 2;
                 // Add/remove half point range to/from the extremes (#1172)
                 if (!defined(fixedMin)) {
                     newMin = correctFloat(newMin + halfPointRange);
                 }
                 if (!defined(fixedMax)) {
                     newMax = correctFloat(newMax - halfPointRange);
-                }
-                // Make sure panning to the edges does not decrease the zoomed range
-                if (fixedRange && axis.dataMin && axis.dataMax) {
-                    var maxWithOverscroll = axis.dataMax + overscroll;
-                    if (newMax >= maxWithOverscroll) {
-                        newMin = correctFloat(maxWithOverscroll - fixedRange);
-                        newMax = correctFloat(maxWithOverscroll);
-                    }
-                    if (newMin <= axis.dataMin) {
-                        newMax = correctFloat(axis.dataMin + fixedRange);
-                    }
                 }
                 if (!isNumber(newMin) || !isNumber(newMax)) { // #1195, #7411
                     newMin = newMax = void 0;
@@ -893,7 +880,7 @@
          * @product   highstock gantt
          * @apioption xAxis.maxRange
          */
-        (''); // keeps doclets above in JS file
+        (''); // Keeps doclets above in JS file
 
         return NavigatorDefaults;
     });
@@ -1647,7 +1634,7 @@
             Scrollbar.prototype.cursorToScrollbarPosition = function (normalizedEvent) {
                 var scroller = this, options = scroller.options, minWidthDifference = options.minWidth > scroller.calculatedWidth ?
                     options.minWidth :
-                    0; // minWidth distorts translation
+                    0; // `minWidth` distorts translation
                 return {
                     chartX: (normalizedEvent.chartX - scroller.x -
                         scroller.xOffset) /
@@ -1758,7 +1745,7 @@
                 scroller.options = merge(ScrollbarDefaults, defaultOptions.scrollbar, options);
                 scroller.options.margin = pick(scroller.options.margin, 10);
                 scroller.chart = chart;
-                // backward compatibility
+                // Backward compatibility
                 scroller.size = pick(scroller.options.size, scroller.options.height);
                 // Init
                 if (options.enabled) {
@@ -1847,7 +1834,7 @@
                 scroller.group.show();
                 scroller.x = x;
                 scroller.y = y + this.trackBorderWidth;
-                scroller.width = width; // width with buttons
+                scroller.width = width; // Width with buttons
                 scroller.height = height;
                 scroller.xOffset = xOffset;
                 scroller.yOffset = yOffset;
@@ -1856,14 +1843,14 @@
                     scroller.width = scroller.yOffset = width = yOffset = scroller.size;
                     scroller.xOffset = xOffset = 0;
                     scroller.yOffset = yOffset = buttonsEnabled ? scroller.size : 0;
-                    // width without buttons
+                    // Width without buttons
                     scroller.barWidth = height - (buttonsEnabled ? width * 2 : 0);
                     scroller.x = x = x + margin;
                 }
                 else {
                     scroller.height = height = scroller.size;
                     scroller.xOffset = xOffset = buttonsEnabled ? scroller.size : 0;
-                    // width without buttons
+                    // Width without buttons
                     scroller.barWidth = width - (buttonsEnabled ? height * 2 : 0);
                     scroller.y = scroller.y + margin;
                 }
@@ -1906,7 +1893,7 @@
                     .attr({
                     zIndex: options.zIndex
                 })
-                    .hide() // initially hide the scrollbar #15863
+                    .hide() // Initially hide the scrollbar #15863
                     .add();
                 // Draw the scrollbar group
                 scroller.group = group;
@@ -2266,7 +2253,7 @@
                             left + height,
                             navigatorTop - scrollButtonSize - outlineCorrection
                         ],
-                        // top right of zoomed range
+                        // Top right of zoomed range
                         ['L', left + height, verticalMin],
                         ['L', left, verticalMin],
                         ['M', left, zoomedMax],
@@ -2279,9 +2266,9 @@
                     ];
                     if (maskInside) {
                         path.push(
-                        // upper left of zoomed range
+                        // Upper left of zoomed range
                         ['M', left + height, verticalMin - halfOutline], 
-                        // upper right of z.r.
+                        // Upper right of z.r.
                         [
                             'L',
                             left + height,
@@ -2294,17 +2281,17 @@
                     zoomedMin += left + scrollButtonSize - outlineCorrection;
                     zoomedMax += left + scrollButtonSize - outlineCorrection;
                     path = [
-                        // left
+                        // Left
                         ['M', left, lineTop],
-                        // upper left of zoomed range
+                        // Upper left of zoomed range
                         ['L', zoomedMin, lineTop],
-                        // lower left of z.r.
+                        // Lower left of z.r.
                         ['L', zoomedMin, lineBtm],
-                        // lower right of z.r.
+                        // Lower right of z.r.
                         ['M', zoomedMax, lineBtm],
-                        // upper right of z.r.
+                        // Upper right of z.r.
                         ['L', zoomedMax, lineTop],
-                        // right
+                        // Right
                         [
                             'L',
                             left + navigatorSize + scrollButtonSize * 2,
@@ -2313,9 +2300,9 @@
                     ];
                     if (maskInside) {
                         path.push(
-                        // upper left of zoomed range
+                        // Upper left of zoomed range
                         ['M', zoomedMin - halfOutline, lineTop], 
-                        // upper right of z.r.
+                        // Upper right of z.r.
                         ['L', zoomedMax + halfOutline, lineTop]);
                     }
                 }
@@ -2445,8 +2432,8 @@
                                 rotationOriginY: (height_1 + width_1) / 2
                             });
                         }
-                        // zIndex = 6 for right handle, 7 for left.
-                        // Can't be 10, because of the tooltip in inverted chart #2908
+                        // Z index is 6 for right handle, 7 for left. Can't be 10,
+                        // because of the tooltip in inverted chart (#2908).
                         navigator.handles[index].attr({ zIndex: 7 - index })
                             .addClass('highcharts-navigator-handle ' +
                             'highcharts-navigator-handle-' +
@@ -2521,7 +2508,7 @@
                     }
                 }
                 navigator.left = pick(xAxis.left, 
-                // in case of scrollbar only, without navigator
+                // In case of scrollbar only, without navigator
                 chart.plotLeft + scrollButtonSize +
                     (inverted ? chart.plotWidth : 0));
                 var zoomedMax = navigator.size = navigatorSize = pick(xAxis.len, (inverted ? chart.plotHeight : chart.plotWidth) -
@@ -2719,7 +2706,7 @@
                             fixedMax = navigator.getUnionExtremes().dataMax;
                         }
                     }
-                    if (left !== zoomedMin) { // it has actually moved
+                    if (left !== zoomedMin) { // It has actually moved
                         navigator.fixedWidth = range; // #1370
                         ext = xAxis.navigatorAxis.toFixedRange(left, left + range, fixedMin, fixedMax);
                         if (defined(ext.min)) { // #7411
@@ -2804,9 +2791,9 @@
                     }
                     else if (navigator.grabbedCenter) {
                         navigator.hasDragged = true;
-                        if (chartX < dragOffset) { // outside left
+                        if (chartX < dragOffset) { // Outside left
                             chartX = dragOffset;
-                            // outside right
+                            // Outside right
                         }
                         else if (chartX >
                             navigatorSize + dragOffset - range) {
@@ -2967,9 +2954,9 @@
                     chart.xAxis[0] || { options: {} };
                 chart.isDirtyBox = true;
                 if (navigator.navigatorEnabled) {
-                    // an x axis is required for scrollbar also
+                    // An x axis is required for scrollbar also
                     navigator.xAxis = new Axis(chart, merge({
-                        // inherit base xAxis' break, ordinal options and overscroll
+                        // Inherit base xAxis' break, ordinal options and overscroll
                         breaks: baseXaxis.options.breaks,
                         ordinal: baseXaxis.options.ordinal,
                         overscroll: baseXaxis.options.overscroll
@@ -3017,7 +3004,7 @@
                             // We've got one, now add it as base
                             if (chart.series.length > 0 && !navigator.series) {
                                 navigator.setBaseSeries();
-                                navigator.unbindRedraw(); // reset
+                                navigator.unbindRedraw(); // Reset
                             }
                         });
                     }
@@ -3026,7 +3013,7 @@
                     navigator.renderElements();
                     // Add mouse events
                     navigator.addMouseEvents();
-                    // in case of scrollbar only, fake an x axis to get translation
+                    // In case of scrollbar only, fake an x axis to get translation
                 }
                 else {
                     navigator.xAxis = {
@@ -3037,9 +3024,9 @@
                         translate: function (value, reverse) {
                             var axis = chart.xAxis[0], ext = axis.getExtremes(), scrollTrackWidth = axis.len - 2 * scrollButtonSize, min = numExt('min', axis.options.min, ext.dataMin), valueRange = numExt('max', axis.options.max, ext.dataMax) - min;
                             return reverse ?
-                                // from pixel to value
+                                // From pixel to value
                                 (value * valueRange / scrollTrackWidth) + min :
-                                // from value to pixel
+                                // From value to pixel
                                 scrollTrackWidth * (value - min) / valueRange;
                         },
                         toPixels: function (value) {
@@ -3378,7 +3365,7 @@
                         newMax = baseDataMax + overscroll;
                         // If stickToMin is true, the new min value is set above
                         if (!stickToMin) {
-                            newMin = Math.max(baseDataMin, // don't go below data extremes (#13184)
+                            newMin = Math.max(baseDataMin, // Don't go below data extremes (#13184)
                             newMax - range, navigator.getBaseSeriesMin(navigatorSeries && navigatorSeries.xData ?
                                 navigatorSeries.xData[0] :
                                 -Number.MAX_VALUE));
@@ -3469,7 +3456,8 @@
                 }), 
                 // Make room for the navigator, can be placed around the chart:
                 addEvent(this.chart, 'getMargins', function () {
-                    var chart = this, navigator = chart.navigator, marginName = navigator.opposite ?
+                    var chart = this, navigator = chart.navigator;
+                    var marginName = navigator.opposite ?
                         'plotTop' : 'marginBottom';
                     if (chart.inverted) {
                         marginName = navigator.opposite ?
@@ -3931,7 +3919,7 @@
          * @interface Highcharts.StandaloneNavigatorOptions
          */ /**
         */
-        ''; // detach doclets above
+        ''; // Detach doclets above
 
         return StandaloneNavigator;
     });
@@ -3939,8 +3927,9 @@
 
         var G = Highcharts;
         G.StandaloneNavigator = G.StandaloneNavigator || StandaloneNavigator;
+        G.navigator = G.StandaloneNavigator.navigator;
         NavigatorComposition.compose(G.Chart, G.Axis, G.Series);
-        G.navigator = StandaloneNavigator.navigator;
 
+        return Highcharts;
     });
 }));

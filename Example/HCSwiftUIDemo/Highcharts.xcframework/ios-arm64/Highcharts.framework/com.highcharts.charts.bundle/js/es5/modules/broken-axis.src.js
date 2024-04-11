@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -301,7 +301,7 @@
                         groupingSize >= this.basePointRange) {
                         gapSize = groupingSize;
                     }
-                    // extension for ordinal breaks
+                    // Extension for ordinal breaks
                     var current = void 0, next = void 0;
                     while (i--) {
                         // Reassign next if it is not visible
@@ -315,7 +315,7 @@
                         }
                         if (next.x - current.x > gapSize) {
                             var xRange = (current.x + next.x) / 2;
-                            points.splice(// insert after this one
+                            points.splice(// Insert after this one
                             i + 1, 0, {
                                 isNull: true,
                                 x: xRange

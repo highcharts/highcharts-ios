@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -174,12 +174,12 @@
                         gapSize: mainLineOptions.gapSize
                     }
                 }, 
-                // additional lines point place holders:
+                // Additional lines point place holders:
                 secondaryLines = [], secondaryLinesNames = getTranslatedLinesNames(indicator, pointValKey);
                 var pointsLength = mainLinePoints.length, point;
                 // Generate points for additional lines:
                 secondaryLinesNames.forEach(function (plotLine, index) {
-                    // create additional lines point place holders
+                    // Create additional lines point place holders
                     secondaryLines[index] = [];
                     while (pointsLength--) {
                         point = mainLinePoints[pointsLength];
@@ -455,7 +455,7 @@
                     pointFormat: '<span style="color:{point.color}">\u25CF</span><b> {series.name}</b><br/>Aroon Up: {point.y}<br/>Aroon Down: {point.aroonDown}<br/>'
                 },
                 /**
-                 * aroonDown line options.
+                 * AroonDown line options.
                  */
                 aroonDown: {
                     /**
@@ -514,7 +514,7 @@
          * @requires  stock/indicators/aroon
          * @apioption series.aroon
          */
-        ''; // to avoid removal of the above jsdoc
+        ''; // To avoid removal of the above jsdoc
 
         return AroonIndicator;
     });

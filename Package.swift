@@ -5,7 +5,7 @@
 import PackageDescription
 
 let package = Package(name: "Highcharts",
-                      platforms: [.iOS(.v11)],
+                      platforms: [.iOS(.v12)],
                       products: [.library(name: "Highcharts",
                                           targets: ["Highcharts"])],
                       targets: [.binaryTarget(name: "Highcharts",

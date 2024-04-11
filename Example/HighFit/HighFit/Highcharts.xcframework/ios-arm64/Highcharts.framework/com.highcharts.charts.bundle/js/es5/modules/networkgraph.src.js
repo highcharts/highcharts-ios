@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Force directed graph module
  *
@@ -119,11 +119,10 @@
          *
          * @private
          *
-         * @param {global.Event} event
-         *        Browser event, before normalization.
          * @param {Highcharts.Point} point
          *        The point that event occurred.
-         *
+         * @param {global.Event} event
+         *        Browser event, before normalization.
          */
         function onMouseMove(point, event) {
             var _a;
@@ -243,7 +242,7 @@
         function onChartAfterPrint() {
             if (this.graphLayoutsLookup) {
                 this.graphLayoutsLookup.forEach(function (layout) {
-                    // return to default simulation
+                    // Return to default simulation
                     layout.updateSimulation();
                 });
                 this.redraw();
@@ -426,7 +425,7 @@
                     node = newNode_1;
                 }
                 node.formatPrefix = 'node';
-                // for use in formats
+                // For use in formats
                 node.name = node.name || node.options.id || '';
                 // Mass is used in networkgraph:
                 node.mass = pick(
@@ -493,7 +492,7 @@
                         nodeLookup[point.to].linksTo.push(point);
                         point.toNode = nodeLookup[point.to];
                     }
-                    point.name = point.name || point.id; // for use in formats
+                    point.name = point.name || point.id; // For use in formats
                 }, this);
                 // Store lookup table for later use
                 this.nodeLookup = nodeLookup;
@@ -549,7 +548,7 @@
                 pointProto.update.call(this, options, this.isNode ? false : redraw, // Hold the redraw for nodes
                 animation, runEvent);
                 if (this.isNode) {
-                    // this.index refers to `series.nodes`, not `options.nodes` array
+                    // `this.index` refers to `series.nodes`, not `options.nodes` array
                     var nodeIndex = (nodes || [])
                         .reduce(// Array.findIndex needs a polyfill
                     function (prevIndex, n, index) {
@@ -753,7 +752,8 @@
              * @private
              */
             NetworkgraphPoint.prototype.redrawLink = function () {
-                var path = this.getLinkPath(), attribs;
+                var path = this.getLinkPath();
+                var attribs;
                 if (this.graphic) {
                     this.shapeArgs = {
                         d: path
@@ -794,7 +794,8 @@
              *        configuration.
              */
             NetworkgraphPoint.prototype.remove = function (redraw, animation) {
-                var point = this, series = point.series, nodesOptions = series.options.nodes || [], index, i = nodesOptions.length;
+                var point = this, series = point.series, nodesOptions = series.options.nodes || [];
+                var index, i = nodesOptions.length;
                 // For nodes, remove all connected links:
                 if (point.isNode) {
                     // Temporary disable series.points array, because
@@ -1444,7 +1445,7 @@
          *
          * @apioption series.networkgraph.nodes.dataLabels
          */
-        ''; // adds doclets above to transpiled file
+        ''; // Adds doclets above to transpiled file
 
         return NetworkgraphSeriesDefaults;
     });
@@ -1576,12 +1577,11 @@
          *        Node that should be translated
          */
         function integrate(layout, node) {
-            var distanceR;
             node.dispX +=
                 node.dispX * layout.options.friction;
             node.dispY +=
                 node.dispY * layout.options.friction;
-            distanceR = node.temperature = layout.vectorLength({
+            var distanceR = node.temperature = layout.vectorLength({
                 x: node.dispX,
                 y: node.dispY
             });
@@ -2097,7 +2097,7 @@
          *        Link that connects two nodes
          * @param {number} force
          *        Force calculated in `repulsiveForceFunction`
-         * @param {Highcharts.PositionObject} distance
+         * @param {Highcharts.PositionObject} distanceXY
          *        Distance between two nodes e.g. `{x, y}`
          */
         function attractive(link, force, distanceXY) {
@@ -2138,12 +2138,9 @@
          * @private
          */
         function barycenter() {
-            var gravitationalConstant = this.options.gravitationalConstant, xFactor = this.barycenter.xFactor, yFactor = this.barycenter.yFactor;
-            // To consider:
-            xFactor = (xFactor - (this.box.left + this.box.width) / 2) *
-                gravitationalConstant;
-            yFactor = (yFactor - (this.box.top + this.box.height) / 2) *
-                gravitationalConstant;
+            var gravitationalConstant = this.options.gravitationalConstant || 0, xFactor = (this.barycenter.xFactor -
+                (this.box.left + this.box.width) / 2) * gravitationalConstant, yFactor = (this.barycenter.yFactor -
+                (this.box.top + this.box.height) / 2) * gravitationalConstant;
             this.nodes.forEach(function (node) {
                 if (!node.fixedPosition) {
                     node.plotX -=
@@ -2195,13 +2192,12 @@
         function integrate(layout, node) {
             var friction = -layout.options.friction, maxSpeed = layout.options.maxSpeed, prevX = node.prevX, prevY = node.prevY, 
             // Apply friction:
-            diffX = ((node.plotX + node.dispX -
-                prevX) * friction), diffY = ((node.plotY + node.dispY -
-                prevY) * friction), abs = Math.abs, signX = abs(diffX) / (diffX || 1), // need to deal with 0
-            signY = abs(diffY) / (diffY || 1);
+            frictionX = ((node.plotX + node.dispX -
+                prevX) * friction), frictionY = ((node.plotY + node.dispY -
+                prevY) * friction), abs = Math.abs, signX = abs(frictionX) / (frictionX || 1), // Need to deal with 0
+            signY = abs(frictionY) / (frictionY || 1), 
             // Apply max speed:
-            diffX = signX * Math.min(maxSpeed, Math.abs(diffX));
-            diffY = signY * Math.min(maxSpeed, Math.abs(diffY));
+            diffX = signX * Math.min(maxSpeed, Math.abs(frictionX)), diffY = signY * Math.min(maxSpeed, Math.abs(frictionY));
             // Store for the next iteration:
             node.prevX = node.plotX + node.dispX;
             node.prevY = node.plotY + node.dispY;
@@ -2224,7 +2220,7 @@
          *        Node that should be translated by force.
          * @param {number} force
          *        Force calculated in `repulsiveForceFunction`
-         * @param {Highcharts.PositionObject} distance
+         * @param {Highcharts.PositionObject} distanceXY
          *        Distance between two nodes e.g. `{x, y}`
          */
         function repulsive(node, force, distanceXY) {
@@ -2940,7 +2936,8 @@
              * @private
              */
             NetworkgraphSeries.prototype.deferLayout = function () {
-                var layoutOptions = this.options.layoutAlgorithm, graphLayoutsStorage = this.chart.graphLayoutsStorage, graphLayoutsLookup = this.chart.graphLayoutsLookup, chartOptions = this.chart.options.chart, layout;
+                var layoutOptions = this.options.layoutAlgorithm, chartOptions = this.chart.options.chart;
+                var layout, graphLayoutsStorage = this.chart.graphLayoutsStorage, graphLayoutsLookup = this.chart.graphLayoutsLookup;
                 if (!this.visible) {
                     return;
                 }
@@ -3093,7 +3090,7 @@
              */
             NetworkgraphSeries.prototype.markerAttribs = function (point, state) {
                 var attribs = Series.prototype.markerAttribs.call(this, point, state);
-                // series.render() is called before initial positions are set:
+                // Series.render() is called before initial positions are set:
                 if (!defined(point.plotY)) {
                     attribs.y = 0;
                 }
@@ -3106,7 +3103,8 @@
              */
             NetworkgraphSeries.prototype.pointAttribs = function (point, state) {
                 // By default, only `selected` state is passed on
-                var pointState = state || point && point.state || 'normal', attribs = Series.prototype.pointAttribs.call(this, point, pointState), stateOptions = this.options.states[pointState];
+                var pointState = state || point && point.state || 'normal', stateOptions = this.options.states[pointState];
+                var attribs = Series.prototype.pointAttribs.call(this, point, pointState);
                 if (point && !point.isNode) {
                     attribs = point.getLinkAttributes();
                     // For link, get prefixed names:
@@ -3274,7 +3272,7 @@
          * @param {global.Event} event
          *        The event that occurred.
          */
-        ''; // detach doclets above
+        ''; // Detach doclets above
 
         return NetworkgraphSeries;
     });

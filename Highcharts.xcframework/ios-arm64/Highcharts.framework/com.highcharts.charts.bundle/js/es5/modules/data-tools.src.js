@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Highcharts
  *
@@ -817,7 +817,7 @@
                         for (var i = 0, cellValue = void 0; i < columnLength; ++i) {
                             cellValue = column[i];
                             if (typeof cellValue === 'number') {
-                                // assume unmixed data for performance reasons
+                                // Assume unmixed data for performance reasons
                                 return column.slice();
                             }
                             if (cellValue !== null &&
@@ -1799,7 +1799,7 @@
                                 Date.UTC(+match[4], match[3] - 1, +match[1]) :
                                 NaN);
                         },
-                        alternative: 'mm/dd/YYYY' // different format with the same regex
+                        alternative: 'mm/dd/YYYY' // Different format with the same regex
                     },
                     'mm/dd/YYYY': {
                         regex: /^([0-9]{1,2})([\-\.\/])([0-9]{1,2})\2([0-9]{4})$/,
@@ -1825,7 +1825,7 @@
                             }
                             return Date.UTC(year, match[3] - 1, +match[1]);
                         },
-                        alternative: 'mm/dd/YY' // different format with the same regex
+                        alternative: 'mm/dd/YY' // Different format with the same regex
                     },
                     'mm/dd/YY': {
                         regex: /^([0-9]{1,2})([\-\.\/])([0-9]{1,2})\2([0-9]{2})$/,
@@ -1980,7 +1980,7 @@
             DataConverter.prototype.deduceDateFormat = function (data, limit, save) {
                 var parser = this, stable = [], max = [];
                 var format = 'YYYY/mm/dd', thing, guessedFormat = [], i = 0, madeDeduction = false, 
-                // candidates = {},
+                /// candidates = {},
                 elem, j;
                 if (!limit || limit > data.length) {
                     limit = data.length;
@@ -2017,7 +2017,7 @@
                                         else {
                                             guessedFormat[j] = 'YYYY';
                                         }
-                                        // madeDeduction = true;
+                                        /// madeDeduction = true;
                                     }
                                     else if (elem > 12 &&
                                         elem <= 31) {
@@ -2124,17 +2124,17 @@
                     }
                     var floatValue = parseFloat(innerTrimedValue);
                     if (+innerTrimedValue === floatValue) {
-                        // string is numeric
+                        // String is numeric
                         value = floatValue;
                     }
                     else {
-                        // determine if a date string
+                        // Determine if a date string
                         var dateValue = converter.parseDate(value);
                         result = isNumber(dateValue) ? 'Date' : 'string';
                     }
                 }
                 if (typeof value === 'number') {
-                    // greater than milliseconds in a year assumed timestamp
+                    // Greater than milliseconds in a year assumed timestamp
                     result = value > 365 * 24 * 3600 * 1000 ? 'Date' : 'number';
                 }
                 return result;
@@ -2195,9 +2195,9 @@
                             format = converter.dateFormats[key];
                             match = value.match(format.regex);
                             if (match) {
-                                // converter.options.dateFormat = dateFormat = key;
+                                // `converter.options.dateFormat` = dateFormat = key;
                                 dateFormat = key;
-                                // converter.options.alternativeFormat =
+                                // `converter.options.alternativeFormat` =
                                 // format.alternative || '';
                                 result = format.parser(match);
                                 break;
@@ -2231,7 +2231,7 @@
                         }
                         else if (isNumber(match)) {
                             result = match - (new Date(match)).getTimezoneOffset() * 60000;
-                            if ( // reset dates without year in Chrome
+                            if ( // Reset dates without year in Chrome
                             value.indexOf('2001') === -1 &&
                                 (new Date(result)).getFullYear() === 2001) {
                                 result = NaN;
@@ -2468,7 +2468,7 @@
                     }
                     var emittingRegister = this.emittingRegister, emittingTag = this.buildEmittingTag(e);
                     if (emittingRegister.indexOf(emittingTag) >= 0) {
-                        // break call stack loops
+                        // Break call stack loops
                         return this;
                     }
                     try {
@@ -2800,12 +2800,12 @@
             DataPool.prototype.getConnector = function (connectorId) {
                 var _this = this;
                 var connector = this.connectors[connectorId];
-                // already loaded
+                // Already loaded
                 if (connector) {
                     return Promise.resolve(connector);
                 }
                 var waitingList = this.waiting[connectorId];
-                // start loading
+                // Start loading
                 if (!waitingList) {
                     waitingList = this.waiting[connectorId] = [];
                     var connectorOptions = this.getConnectorOptions(connectorId);
@@ -2827,7 +2827,7 @@
                         }
                     });
                 }
-                // add request to waiting list
+                // Add request to waiting list
                 return new Promise(function (resolve, reject) {
                     waitingList.push([resolve, reject]);
                 });
@@ -3134,7 +3134,7 @@
                         start = i;
                     }
                     else {
-                        return text.substring(start + 1, i); // i is excluding
+                        return text.substring(start + 1, i); // `ì` is excluding
                     }
                 }
             }
@@ -3269,7 +3269,7 @@
                     !term) {
                     var string = extractString(text.substring(i));
                     args.push(string);
-                    i += string.length + 1; // only +1 to cover ++i in for-loop
+                    i += string.length + 1; // Only +1 to cover ++i in for-loop
                     // Skip space and check paranthesis nesting
                 }
                 else if (char !== ' ') {
@@ -3282,7 +3282,7 @@
                     }
                 }
             }
-            // look for left-overs from last argument
+            // Look for left-overs from last argument
             if (!parantheseLevel && term) {
                 args.push(parseArgument(term, alternativeSeparators));
             }
@@ -3756,7 +3756,7 @@
                 default:
                     return NaN;
             }
-            // limit decimal to 9 digits
+            // Limit decimal to 9 digits
             return (result % 1 ?
                 Math.round(result * 1000000000) / 1000000000 :
                 result);
@@ -3910,7 +3910,7 @@
                 }
                 else if (isFunction(item)) {
                     result = processFunction(item, table);
-                    y = (isValue(result) ? result : NaN); // arrays are not allowed here
+                    y = (isValue(result) ? result : NaN); // Arrays are not allowed here
                     // Next item is a reference and needs to get resolved
                 }
                 else if (isReference(item)) {
@@ -4740,10 +4740,10 @@
             if (!count) {
                 return NaN;
             }
-            var half = Math.floor(count / 2); // floor because index starts at 0
+            var half = Math.floor(count / 2); // Floor because index starts at 0
             return (count % 2 ?
-                median[half] : // odd
-                (median[half - 1] + median[half]) / 2 // even
+                median[half] : // Odd
+                (median[half - 1] + median[half]) / 2 // Even
             );
         }
         /* *
@@ -5648,7 +5648,7 @@
                     }
                     if (dataTypes.length &&
                         dataTypes[0].length &&
-                        dataTypes[0][1] === 'date' && // format is a string date
+                        dataTypes[0][1] === 'date' && // Format is a string date
                         !converter.options.dateFormat) {
                         converter.deduceDateFormat(converter.columns[0], null, true);
                     }
@@ -7857,7 +7857,7 @@
                 var modifier = this;
                 modifier.emit({ type: 'modify', detail: eventDetail, table: table });
                 var modified = table.modified;
-                if (table.hasColumns(['columnNames'])) { // inverted table
+                if (table.hasColumns(['columnNames'])) { // Inverted table
                     var columnNames = ((table.deleteColumns(['columnNames']) || {})
                         .columnNames || []).map(function (column) { return "".concat(column); }), columns = {};
                     for (var i = 0, iEnd = table.getRowCount(), row = void 0; i < iEnd; ++i) {
@@ -7869,7 +7869,7 @@
                     modified.deleteColumns();
                     modified.setColumns(columns);
                 }
-                else { // regular table
+                else { // Regular table
                     var columns = {};
                     for (var i = 0, iEnd = table.getRowCount(), row = void 0; i < iEnd; ++i) {
                         row = table.getRow(i);
@@ -8021,11 +8021,11 @@
                     if (typeof cell === 'string' &&
                         cell[0] === '=') {
                         try {
-                            // use cache while formula string is repetitive
+                            // Use cache while formula string is repetitive
                             cacheFormula = (cacheString === cell ?
                                 cacheFormula :
                                 FormulaParser.parseFormula(cell.substring(1), alternativeSeparators));
-                            // process parsed formula string
+                            // Process parsed formula string
                             column[i] =
                                 FormulaProcessor.processFormula(cacheFormula, table);
                         }

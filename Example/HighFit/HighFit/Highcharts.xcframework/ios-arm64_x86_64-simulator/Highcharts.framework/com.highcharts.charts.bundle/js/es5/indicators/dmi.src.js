@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -174,12 +174,12 @@
                         gapSize: mainLineOptions.gapSize
                     }
                 }, 
-                // additional lines point place holders:
+                // Additional lines point place holders:
                 secondaryLines = [], secondaryLinesNames = getTranslatedLinesNames(indicator, pointValKey);
                 var pointsLength = mainLinePoints.length, point;
                 // Generate points for additional lines:
                 secondaryLinesNames.forEach(function (plotLine, index) {
-                    // create additional lines point place holders
+                    // Create additional lines point place holders
                     secondaryLines[index] = [];
                     while (pointsLength--) {
                         point = mainLinePoints[pointsLength];
@@ -371,11 +371,11 @@
                 var currentHigh = yVal[i][1], currentLow = yVal[i][2], previousHigh = yVal[i - 1][1], previousLow = yVal[i - 1][2];
                 var DM;
                 if (currentHigh - previousHigh > previousLow - currentLow) {
-                    // for +DM
+                    // For +DM
                     DM = isPositiveDM ? Math.max(currentHigh - previousHigh, 0) : 0;
                 }
                 else {
-                    // for -DM
+                    // For -DM
                     DM = !isPositiveDM ? Math.max(previousLow - currentLow, 0) : 0;
                 }
                 return correctFloat(DM);
@@ -391,11 +391,11 @@
             };
             DMIIndicator.prototype.getTR = function (currentPoint, prevPoint) {
                 return correctFloat(Math.max(
-                // currentHigh - currentLow
+                // `currentHigh - currentLow`
                 currentPoint[1] - currentPoint[2], 
-                // currentHigh - previousClose
+                // `currentHigh - previousClose`
                 !prevPoint ? 0 : Math.abs(currentPoint[1] - prevPoint[3]), 
-                // currentLow - previousClose
+                // `currentLow - previousClose`
                 !prevPoint ? 0 : Math.abs(currentPoint[2] - prevPoint[3])));
             };
             DMIIndicator.prototype.getValues = function (series, params) {
@@ -493,7 +493,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0 // unused index, do not inherit (#15362)
+                    index: void 0 // Unused index, do not inherit (#15362)
                 },
                 marker: {
                     enabled: false
@@ -526,7 +526,7 @@
                          *
                          * @type {Highcharts.ColorString}
                          */
-                        lineColor: "#06b535" /* Palette.positiveColor */ // green-ish
+                        lineColor: "#06b535" /* Palette.positiveColor */ // Green-ish
                     }
                 },
                 /**
@@ -546,7 +546,7 @@
                          *
                          * @type {Highcharts.ColorString}
                          */
-                        lineColor: "#f21313" /* Palette.negativeColor */ // red-ish
+                        lineColor: "#f21313" /* Palette.negativeColor */ // Red-ish
                     }
                 },
                 dataGrouping: {
@@ -590,7 +590,7 @@
          * @requires  stock/indicators/dmi
          * @apioption series.dmi
          */
-        ''; // to include the above in the js output
+        ''; // To include the above in the js output
 
         return DMIIndicator;
     });

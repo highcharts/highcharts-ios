@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -83,7 +83,7 @@
             // If there are 5 days, the triangular numbers are 5, 4, 3, 2, and 1.
             // The sum is 5 + 4 + 3 + 2 + 1 = 15.
             var denominator = (pLen + 1) / 2 * pLen;
-            // reduce VS loop => reduce
+            // Reduce VS loop => reduce
             return array.reduce(function (prev, cur, i) {
                 return [null, prev[1] + cur[1] * (i + 1)];
             })[1] / denominator;
@@ -93,7 +93,7 @@
          */
         function populateAverage(points, xVal, yVal, i) {
             var pLen = points.length, wmaY = weightedSumArray(points, pLen), wmaX = xVal[i - 1];
-            points.shift(); // remove point until range < period
+            points.shift(); // Remove point until range < period
             return [wmaX, wmaY];
         }
         /* *
@@ -206,7 +206,7 @@
          * @requires  stock/indicators/wma
          * @apioption series.wma
          */
-        ''; // adds doclet above to the transpiled file
+        ''; // Adds doclet above to the transpiled file
 
         return WMAIndicator;
     });

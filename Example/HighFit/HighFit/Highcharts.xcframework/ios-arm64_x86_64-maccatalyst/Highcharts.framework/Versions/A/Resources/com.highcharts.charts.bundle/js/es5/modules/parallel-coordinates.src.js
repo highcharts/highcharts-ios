@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Support for parallel coordinates in Highcharts
  *
@@ -166,7 +166,7 @@
          * @requires  modules/parallel-coordinates
          * @apioption yAxis.tooltipValueFormat
          */
-        ''; // keeps doclets above separate in JS file
+        ''; // Keeps doclets above separate in JS file
         /* *
          *
          *  Default Options
@@ -653,7 +653,7 @@
                         }
                     });
                     options.yAxis = defaultYAxis.concat(newYAxes);
-                    options.xAxis = merge(ParallelCoordinatesDefaults.xAxis, // docs
+                    options.xAxis = merge(ParallelCoordinatesDefaults.xAxis, // Docs
                     splat(options.xAxis || {})[0]);
                 }
             }

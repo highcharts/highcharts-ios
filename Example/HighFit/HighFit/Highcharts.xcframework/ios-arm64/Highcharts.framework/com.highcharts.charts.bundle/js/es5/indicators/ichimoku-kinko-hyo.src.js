@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -285,7 +285,7 @@
                 // getGraphPath()
                 nextPoints = [
                     [],
-                    [] // NextPoints negative color
+                    [] // Next points negative color
                 ];
                 var pointsLength = mainLinePoints.length, lineIndex = 0, position, point, i, startIntersect, endIntersect, sectionPoints, sectionNextPoints, pointsPlotYSum, nextPointsPlotYSum, senkouSpanTempColor, concatArrIndex, j, k;
                 indicator.ikhMap = ikhMap;
@@ -742,7 +742,7 @@
          * @requires  stock/indicators/ichimoku-kinko-hyo
          * @apioption series.ikh
          */
-        (''); // add doclet above to transpiled file
+        (''); // Add doclet above to transpiled file
 
         return IKHIndicator;
     });

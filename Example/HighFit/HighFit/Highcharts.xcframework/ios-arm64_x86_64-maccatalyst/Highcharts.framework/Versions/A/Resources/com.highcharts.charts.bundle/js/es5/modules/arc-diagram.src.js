@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Arc diagram module
  *
@@ -168,7 +168,7 @@
             ArcDiagramSeries.prototype.createNodeColumns = function () {
                 var _this = this;
                 var series = this, chart = series.chart, 
-                // column needs casting, to much methods required at the same time
+                // Column needs casting, to much methods required at the same time
                 column = SankeyColumnComposition.compose([], series);
                 column.sankeyColumn.maxLength = chart.inverted ?
                     chart.plotHeight : chart.plotWidth;
@@ -220,9 +220,9 @@
                     return factor;
                 };
                 column.sankeyColumn.offset = function (node, factor) {
-                    var equalNodes = node.series.options.equalNodes;
-                    var offset = column.sankeyColumn.additionalSpace || 0, totalNodeOffset, nodePadding = series.nodePadding, maxRadius = Math.min(chart.plotWidth, chart.plotHeight, (column.sankeyColumn.maxLength || 0) /
+                    var equalNodes = node.series.options.equalNodes, nodePadding = series.nodePadding, maxRadius = Math.min(chart.plotWidth, chart.plotHeight, (column.sankeyColumn.maxLength || 0) /
                         series.nodes.length - nodePadding);
+                    var offset = column.sankeyColumn.additionalSpace || 0, totalNodeOffset;
                     for (var i = 0; i < column.length; i++) {
                         var sum = column[i].getSum() *
                             (column.sankeyColumn.scale || 0);
@@ -673,7 +673,7 @@
          * @excluding outgoing, dataLabels
          * @apioption series.arcdiagram.data
          */
-        ''; // adds doclets above to the transpiled file
+        ''; // Adds doclets above to the transpiled file
 
         return ArcDiagramSeries;
     });

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Highcharts funnel module
  *
@@ -107,10 +107,10 @@
             // override opacity and color setters to control opacity
             SVGElement3DFunnel.prototype.opacitySetter = function (value) {
                 var funnel3d = this, opacity = parseFloat(value), parts = funnel3d.parts, chart = charts[funnel3d.renderer.chartIndex], filterId = 'group-opacity-' + opacity + '-' + chart.index;
-                // use default for top and bottom
+                // Use default for top and bottom
                 funnel3d.parts = funnel3d.mainParts;
                 funnel3d.singleSetterForParts('opacity', opacity);
-                // restore
+                // Restore
                 funnel3d.parts = parts;
                 if (!chart.renderer.filterId) {
                     chart.renderer.definition({
@@ -135,7 +135,7 @@
                             filter: 'url(#' + filterId + ')'
                         });
                     }
-                    // styled mode
+                    // Styled mode
                     if (funnel3d.renderer.styledMode) {
                         chart.renderer.definition({
                             tagName: 'style',
@@ -152,25 +152,25 @@
             };
             SVGElement3DFunnel.prototype.fillSetter = function (fill) {
                 var fillColor = color(fill);
-                // extract alpha channel to use the opacitySetter
+                // Extract alpha channel to use the opacitySetter
                 var funnel3d = this, alpha = fillColor.rgba[3], partsWithColor = {
-                    // standard color for top and bottom
+                    // Standard color for top and bottom
                     top: color(fill).brighten(0.1).get(),
                     bottom: color(fill).brighten(-0.2).get()
                 };
                 if (alpha < 1) {
                     fillColor.rgba[3] = 1;
                     fillColor = fillColor.get('rgb');
-                    // set opacity through the opacitySetter
+                    // Set opacity through the opacitySetter
                     funnel3d.attr({
                         opacity: alpha
                     });
                 }
                 else {
-                    // use default for full opacity
+                    // Use default for full opacity
                     fillColor = fill;
                 }
-                // add gradient for sides
+                // Add gradient for sides
                 if (!fillColor.linearGradient &&
                     !fillColor.radialGradient &&
                     funnel3d.gradientForSides) {
@@ -183,9 +183,9 @@
                         ]
                     };
                 }
-                // gradient support
+                // Gradient support
                 if (fillColor.linearGradient) {
-                    // color in steps, as each gradient will generate a key
+                    // Color in steps, as each gradient will generate a key
                     for (var _i = 0, _a = funnel3d.sideGroups; _i < _a.length; _i++) {
                         var sideGroupName = _a[_i];
                         var box = funnel3d[sideGroupName].gradientBox, gradient = fillColor.linearGradient, alteredGradient = merge(fillColor, {
@@ -225,9 +225,9 @@
                     }
                 }
                 funnel3d.singleSetterForParts('fill', null, partsWithColor);
-                // fill for animation getter (#6776)
+                // Fill for animation getter (#6776)
                 funnel3d.color = funnel3d.fill = fill;
-                // change gradientUnits to userSpaceOnUse for linearGradient
+                // Change gradientUnits to userSpaceOnUse for linearGradient
                 if (fillColor.linearGradient) {
                     for (var _h = 0, _j = [funnel3d.frontLower, funnel3d.frontUpper]; _h < _j.length; _h++) {
                         var part = _j[_h];
@@ -248,7 +248,7 @@
                 var bbox;
                 for (var _i = 0, _a = funnel3d.sideGroups; _i < _a.length; _i++) {
                     var sideGroupName = _a[_i];
-                    // use common extremes for groups for matching gradients
+                    // Use common extremes for groups for matching gradients
                     var topLeftEdge = {
                         x: Number.MAX_VALUE,
                         y: Number.MAX_VALUE
@@ -256,7 +256,7 @@
                         x: -Number.MAX_VALUE,
                         y: -Number.MAX_VALUE
                     };
-                    // get extremes
+                    // Get extremes
                     for (var _b = 0, _c = funnel3d.sideParts[sideGroupName]; _b < _c.length; _b++) {
                         var partName = _c[_b];
                         var part = funnel3d[partName];
@@ -270,7 +270,7 @@
                             y: Math.max(bottomRightEdge.y, bbox.y + bbox.height)
                         };
                     }
-                    // store for color fillSetter
+                    // Store for color fillSetter
                     funnel3d[sideGroupName].gradientBox = {
                         x: topLeftEdge.x,
                         width: bottomRightEdge.x - topLeftEdge.x,
@@ -280,12 +280,12 @@
                 }
             };
             SVGElement3DFunnel.prototype.zIndexSetter = function () {
-                // this.added won't work, because zIndex is set after the prop
-                // is set, but before the graphic is really added
+                // `this.added` won't work, because zIndex is set after the prop is set,
+                // but before the graphic is really added
                 if (this.finishedOnAdd) {
                     this.adjustForGradient();
                 }
-                // run default
+                // Run default
                 return this.renderer.Element.prototype.zIndexSetter.apply(this, arguments);
             };
             SVGElement3DFunnel.prototype.onAdd = function () {
@@ -337,12 +337,12 @@
         /** @private */
         function rendererFunnel3d(shapeArgs) {
             var renderer = this, funnel3d = renderer.element3d('funnel3d', shapeArgs), styledMode = renderer.styledMode, 
-            // hide stroke for Firefox
+            // Hide stroke for Firefox
             strokeAttrs = {
                 'stroke-width': 1,
                 stroke: 'none'
             };
-            // create groups for sides for opacity setter
+            // Create groups for sides for opacity setter
             funnel3d.upperGroup = renderer.g('funnel3d-upper-group').attr({
                 zIndex: funnel3d.frontUpper.zIndex
             }).add(funnel3d);
@@ -377,11 +377,11 @@
                 error('A required Highcharts module is missing: cylinder.js', true, charts[this.chartIndex]);
             }
             var renderer = this, chart = charts[renderer.chartIndex], 
-            // adjust angles for visible edges
+            // Adjust angles for visible edges
             // based on alpha, selected through visual tests
             alphaCorrection = shapeArgs.alphaCorrection = 90 - Math.abs((chart.options.chart.options3d.alpha % 180) -
                 90), 
-            // set zIndexes of parts based on cuboid logic, for
+            // Set zIndexes of parts based on cuboid logic, for
             // consistency
             cuboidData = this.cuboidPath.call(renderer, merge(shapeArgs, {
                 depth: shapeArgs.width,
@@ -399,7 +399,7 @@
                 alphaCorrection: alphaCorrection
             }), bottom = renderer.getCylinderEnd(chart, bottomArgs, true);
             var middleWidth = bottomWidth, middleTopArgs = bottomArgs, middleTop = bottom, middleBottom = bottom, 
-            // masking for cylinders or a missing part of a side shape
+            // Masking for cylinders or a missing part of a side shape
             useAlphaCorrection;
             if (hasMiddle) {
                 middleWidth = shapeArgs.middle.width;
@@ -641,7 +641,7 @@
          * @product   highcharts
          * @apioption series.funnel3d.data.gradientForSides
          */
-        ''; // detachs doclets above
+        ''; // Detachs doclets above
         /* *
          *
          *  Default Export
@@ -785,7 +785,7 @@
                     dlBox.x -= dlBox.width / 2;
                 }
                 else {
-                    // swap for inside
+                    // Swap for inside
                     if (options.align === 'left') {
                         options.align = 'right';
                         dlBox.x -= dlBox.width * 1.5;
@@ -827,7 +827,7 @@
             Funnel3DSeries.prototype.translate = function () {
                 Series.prototype.translate.apply(this, arguments);
                 var series = this, chart = series.chart, options = series.options, reversed = options.reversed, ignoreHiddenPoint = options.ignoreHiddenPoint, plotWidth = chart.plotWidth, plotHeight = chart.plotHeight, center = options.center, centerX = relativeLength(center[0], plotWidth), centerY = relativeLength(center[1], plotHeight), width = relativeLength(options.width, plotWidth), height = relativeLength(options.height, plotHeight), neckWidth = relativeLength(options.neckWidth, plotWidth), neckHeight = relativeLength(options.neckHeight, plotHeight), neckY = (centerY - height / 2) + height - neckHeight, points = series.points;
-                var sum = 0, cumulative = 0, // start at top
+                var sum = 0, cumulative = 0, // Start at top
                 tempWidth, getWidthAt, fraction, tooltipPos, 
                 //
                 y1, y3, y5, 
@@ -871,7 +871,7 @@
                 }
                 for (var _a = 0, points_2 = points; _a < points_2.length; _a++) {
                     var point = points_2[_a];
-                    // set start and end positions
+                    // Set start and end positions
                     y5 = null;
                     fraction = sum ? point.y / sum : 0;
                     y1 = centerY - height / 2 + cumulative * height;
@@ -879,7 +879,7 @@
                     tempWidth = getWidthAt(y1);
                     h = y3 - y1;
                     shapeArgs = {
-                        // for fill setter
+                        // For fill setter
                         gradientForSides: pick(point.options.gradientForSides, options.gradientForSides),
                         x: centerX,
                         y: y1,
@@ -895,12 +895,12 @@
                         fraction: fraction,
                         width: tempWidth
                     };
-                    // the entire point is within the neck
+                    // The entire point is within the neck
                     if (y1 >= neckY) {
                         shapeArgs.isCylinder = true;
                     }
                     else if (y3 > neckY) {
-                        // the base of the neck
+                        // The base of the neck
                         y5 = y3;
                         tempWidth = getWidthAt(neckY);
                         y3 = neckY;
@@ -922,7 +922,7 @@
                         shapeArgs.bottom.width = tempWidth;
                     }
                     point.shapeArgs = extend(point.shapeArgs, shapeArgs);
-                    // for tooltips and data labels context
+                    // For tooltips and data labels context
                     point.percentage = fraction * 100;
                     point.plotX = centerX;
                     if (reversed) {
@@ -941,7 +941,7 @@
                                 -(getWidthAt(point.plotY)) / 2
                         }], chart, true)[0];
                     point.tooltipPos = [tooltipPos.x, tooltipPos.y];
-                    // base to be used when alignment options are known
+                    // Base to be used when alignment options are known
                     point.dlBoxRaw = {
                         x: centerX,
                         width: getWidthAt(point.plotY),

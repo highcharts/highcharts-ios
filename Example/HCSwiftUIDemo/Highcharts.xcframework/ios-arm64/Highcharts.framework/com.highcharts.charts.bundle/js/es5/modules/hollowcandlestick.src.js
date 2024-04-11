@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.0 (2024-03-04)
+ * @license Highstock JS v11.4.1 (2024-04-04)
  *
  * Hollow Candlestick series type for Highcharts Stock
  *
@@ -280,7 +280,8 @@
              * Current point state.
              */
             HollowCandlestickSeries.prototype.pointAttribs = function (point, state) {
-                var attribs = _super.prototype.pointAttribs.call(this, point, state), stateOptions;
+                var attribs = _super.prototype.pointAttribs.call(this, point, state);
+                var stateOptions;
                 var index = point.index, hollowcandleInfo = this.hollowCandlestickData[index];
                 attribs.fill = this.getPointFill(hollowcandleInfo) || attribs.fill;
                 attribs.stroke = this.getLineColor(hollowcandleInfo.trendDirection) ||
@@ -463,7 +464,7 @@
          * @product   highstock
          * @apioption series.hollowcandlestick.data
          */
-        ''; // adds doclets above to transpiled
+        ''; // Adds doclets above to transpiled
 
         return HollowCandlestickSeries;
     });

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.0 (2024-03-04)
+ * @license Highcharts JS v11.4.1 (2024-04-04)
  *
  * Pictorial graph series type for Highcharts
  *
@@ -771,6 +771,9 @@
          *
          * */
         var defined = U.defined;
+        /**
+         *
+         */
         function rescalePatternFill(element, stackHeight, width, height, borderWidth) {
             if (borderWidth === void 0) { borderWidth = 1; }
             var fill = element && element.attr('fill'), match = fill && fill.match(/url\(([^)]+)\)/);
@@ -799,6 +802,9 @@
                 }
             }
         }
+        /**
+         *
+         */
         function getStackMetrics(yAxis, shape) {
             var height = yAxis.len, y = 0;
             if (shape && defined(shape.max)) {
@@ -810,6 +816,9 @@
                 y: y
             };
         }
+        /**
+         *
+         */
         function invertShadowGroup(shadowGroup, yAxis) {
             var inverted = yAxis.chart.inverted;
             if (inverted) {
@@ -1091,6 +1100,9 @@
                 }
             });
         });
+        /**
+         *
+         */
         function renderStackShadow(stack) {
             // Get first pictorial series
             var stackKeys = Object
@@ -1187,6 +1199,9 @@
                 stack.shadowGroup = void 0;
             }
         }
+        /**
+         *
+         */
         function forEachStack(chart, callback) {
             if (chart.axes) {
                 chart.axes.forEach(function (axis) {
@@ -1216,6 +1231,9 @@
                 this.shadow.animate({ width: width });
             }
         });
+        /**
+         *
+         */
         function destroyAllStackShadows(chart) {
             forEachStack(chart, function (stack) {
                 if (stack.shadow && stack.shadowGroup) {
@@ -1406,7 +1424,7 @@
          * @requires  modules/pictorial
          * @apioption yAxis.stackShadow.enabled
          */
-        ''; // adds doclets above to transpiled file
+        ''; // Adds doclets above to transpiled file
 
         return PictorialSeries;
     });
