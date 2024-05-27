@@ -116,6 +116,7 @@ How much to brighten the point on interaction. Requires the main color to be def
 **Defaults to** `0.2`.
 */
 @property(nonatomic, readwrite) NSNumber *brightness;
+@property(nonatomic, readwrite) NSString *fill;
 /**
 Opacity for the links between nodes in the sankey diagram in hover mode.
 
@@ -130,6 +131,12 @@ The shadow option for hovered state.
 A specific color for the hovered point.
 */
 @property(nonatomic, readwrite) HIColor *color;
+/**
+The additional connector line width for a hovered point.
+
+**Defaults to** `1`.
+*/
+@property(nonatomic, readwrite) NSNumber *connectorWidthPlus;
 
 -(NSDictionary *)getParams;
 

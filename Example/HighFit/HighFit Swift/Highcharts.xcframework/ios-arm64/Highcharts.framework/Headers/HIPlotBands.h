@@ -68,6 +68,27 @@ The start position of the plot band in axis units.
 */
 @property(nonatomic, readwrite) NSNumber *from;
 /**
+The end position of the plot band in axis units.
+
+**Try it**
+
+* [Datetime axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-color/)
+* [Categorized axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-from/)
+*/
+@property(nonatomic, readwrite) NSNumber *to;
+/**
+Border radius for the plot band. Applies only to gauges. Can be a pixel value or a percentage, for example `50%`.
+
+**Try it**
+
+* [Angular gauge with rounded plot bands](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-gauge-borderradius)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ borderRadius;
+/**
+A custom class name, in addition to the default `highcharts-plot-band`, to apply to each individual band.
+*/
+@property(nonatomic, readwrite) NSString *className;
+/**
 The color of the plot band.
 
 **Defaults to** `#e6e9ff`.
@@ -77,19 +98,6 @@ The color of the plot band.
 * [Color band](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-color/)
 */
 @property(nonatomic, readwrite) HIColor *color;
-/**
-A custom class name, in addition to the default `highcharts-plot-band`, to apply to each individual band.
-*/
-@property(nonatomic, readwrite) NSString *className;
-/**
-The end position of the plot band in axis units.
-
-**Try it**
-
-* [Datetime axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-color/)
-* [Categorized axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-from/)
-*/
-@property(nonatomic, readwrite) NSNumber *to;
 /**
 Border width for the plot band. Also requires `borderColor` to be set.
 

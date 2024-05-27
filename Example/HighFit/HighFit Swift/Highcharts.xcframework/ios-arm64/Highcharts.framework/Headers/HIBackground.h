@@ -32,6 +32,14 @@ The outer radius of the circular pane background. Can be either numeric (pixels)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ outerRadius;
 /**
+The border radius of the pane background when the shape is `arc`. Can be a number (pixels) or a percentage string.
+
+**Try it**
+
+* [Circular gauge and pane with equal border radius](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-solidgauge/pane-borderradius)
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ borderRadius;
+/**
 The inner radius of the pane background. Can be either numeric (pixels) or a percentage string.
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ innerRadius;

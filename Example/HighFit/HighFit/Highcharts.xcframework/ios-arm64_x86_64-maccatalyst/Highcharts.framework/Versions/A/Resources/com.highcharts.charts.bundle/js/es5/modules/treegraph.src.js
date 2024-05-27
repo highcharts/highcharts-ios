@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  * Treegraph chart series type
  *
  *  (c) 2010-2024 Pawel Lysy Grzegorz Blachlinski
@@ -609,20 +609,20 @@
             __extends(LinkPoint, _super);
             /* *
              *
-             *  Functions
+             *  Constructor
              *
              * */
             function LinkPoint(series, options, x, point) {
                 var _this = _super.call(this, series, options, x) || this;
                 /* *
-                *
-                *  Class properties
-                *
-                * */
+                 *
+                 *  Properties
+                 *
+                 * */
+                _this.dataLabelOnNull = true;
+                _this.formatPrefix = 'link';
                 _this.isLink = true;
                 _this.node = {};
-                _this.formatPrefix = 'link';
-                _this.dataLabelOnNull = true;
                 _this.formatPrefix = 'link';
                 _this.dataLabelOnNull = true;
                 if (point) {
@@ -633,6 +633,11 @@
                 }
                 return _this;
             }
+            /* *
+             *
+             *  Functions
+             *
+             * */
             LinkPoint.prototype.update = function (options, redraw, animation, runEvent) {
                 var oldOptions = {
                     id: this.id,
@@ -1306,7 +1311,7 @@
         var seriesProto = SeriesRegistry.series.prototype, _a = SeriesRegistry.seriesTypes, TreemapSeries = _a.treemap, ColumnSeries = _a.column;
         var symbols = SVGRenderer.prototype.symbols;
         var getLevelOptions = TU.getLevelOptions, getNodeWidth = TU.getNodeWidth;
-        var arrayMax = U.arrayMax, extend = U.extend, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength, splat = U.splat;
+        var arrayMax = U.arrayMax, crisp = U.crisp, extend = U.extend, merge = U.merge, pick = U.pick, relativeLength = U.relativeLength, splat = U.splat;
         /* *
          *
          *  Class
@@ -1500,13 +1505,13 @@
                 }
             };
             TreegraphSeries.prototype.translateLink = function (link) {
-                var fromNode = link.fromNode, toNode = link.toNode, linkWidth = this.options.link.lineWidth, crisp = (Math.round(linkWidth) % 2) / 2, factor = pick(this.options.link.curveFactor, 0.5), type = pick(link.options.link && link.options.link.type, this.options.link.type);
+                var _a, _b, _c, _d, _e;
+                var fromNode = link.fromNode, toNode = link.toNode, linkWidth = ((_a = this.options.link) === null || _a === void 0 ? void 0 : _a.lineWidth) || 0, factor = pick((_b = this.options.link) === null || _b === void 0 ? void 0 : _b.curveFactor, 0.5), type = pick((_c = link.options.link) === null || _c === void 0 ? void 0 : _c.type, (_d = this.options.link) === null || _d === void 0 ? void 0 : _d.type, 'default');
                 if (fromNode.shapeArgs && toNode.shapeArgs) {
-                    var fromNodeWidth = (fromNode.shapeArgs.width || 0), inverted = this.chart.inverted, y1 = Math.floor((fromNode.shapeArgs.y || 0) +
-                        (fromNode.shapeArgs.height || 0) / 2) + crisp, y2 = Math.floor((toNode.shapeArgs.y || 0) +
-                        (toNode.shapeArgs.height || 0) / 2) + crisp;
-                    var x1 = Math.floor((fromNode.shapeArgs.x || 0) + fromNodeWidth) +
-                        crisp, x2 = Math.floor(toNode.shapeArgs.x || 0) + crisp;
+                    var fromNodeWidth = (fromNode.shapeArgs.width || 0), inverted = this.chart.inverted, y1 = crisp((fromNode.shapeArgs.y || 0) +
+                        (fromNode.shapeArgs.height || 0) / 2, linkWidth), y2 = crisp((toNode.shapeArgs.y || 0) +
+                        (toNode.shapeArgs.height || 0) / 2, linkWidth);
+                    var x1 = crisp((fromNode.shapeArgs.x || 0) + fromNodeWidth, linkWidth), x2 = crisp(toNode.shapeArgs.x || 0, linkWidth);
                     if (inverted) {
                         x1 -= fromNodeWidth;
                         x2 += (toNode.shapeArgs.width || 0);
@@ -1514,7 +1519,7 @@
                     var diff = toNode.node.xPosition - fromNode.node.xPosition;
                     link.shapeType = 'path';
                     var fullWidth = Math.abs(x2 - x1) + fromNodeWidth, width = (fullWidth / diff) - fromNodeWidth, offset = width * factor * (inverted ? -1 : 1);
-                    var xMiddle = Math.floor((x2 + x1) / 2) + crisp;
+                    var xMiddle = crisp((x2 + x1) / 2, linkWidth);
                     link.plotX = xMiddle;
                     link.plotY = y2;
                     link.shapeArgs = {
@@ -1527,7 +1532,7 @@
                             offset: offset,
                             inverted: inverted,
                             parentVisible: toNode.visible,
-                            radius: this.options.link.radius
+                            radius: (_e = this.options.link) === null || _e === void 0 ? void 0 : _e.radius
                         })
                     };
                     link.dlBox = {

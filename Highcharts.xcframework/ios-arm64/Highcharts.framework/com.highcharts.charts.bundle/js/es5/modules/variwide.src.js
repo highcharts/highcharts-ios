@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * Highcharts variwide module
  *
@@ -367,7 +367,7 @@
             };
         })();
         var ColumnSeries = SeriesRegistry.seriesTypes.column;
-        var addEvent = U.addEvent, extend = U.extend, merge = U.merge, pick = U.pick;
+        var addEvent = U.addEvent, crisp = U.crisp, extend = U.extend, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Class
@@ -487,7 +487,7 @@
         // Extend translation by distorting X position based on Z.
         addEvent(VariwideSeries, 'afterColumnTranslate', function () {
             // Temporarily disable crisping when computing original shapeArgs
-            var xAxis = this.xAxis, inverted = this.chart.inverted, crisp = this.borderWidth % 2 / 2;
+            var xAxis = this.xAxis, inverted = this.chart.inverted;
             var i = -1;
             // Distort the points to reflect z dimension
             for (var _i = 0, _a = this.points; _i < _a.length; _i++) {
@@ -506,8 +506,8 @@
                     right = xAxis.translate(point.x + z, false, false, false, true);
                 }
                 if (this.crispOption) {
-                    left = Math.round(left) - crisp;
-                    right = Math.round(right) - crisp;
+                    left = crisp(left, this.borderWidth);
+                    right = crisp(right, this.borderWidth);
                 }
                 shapeArgs.x = left;
                 shapeArgs.width = Math.max(right - left, 1);

@@ -58,13 +58,21 @@ Color of the line that connects the dumbbell point's values. By default it is th
 */
 @property(nonatomic, readwrite) NSString *connectorColor;
 /**
+Pixel width of the line that connects the dumbbell point's values.
+
+**Defaults to** `1`.
+*/
+@property(nonatomic, readwrite) NSNumber *connectorWidth;
+@property(nonatomic, readwrite) NSNumber *pointPadding;
+/**
 Options for the lower markers of the dumbbell-like series. When `lowMarker` is not defined, options inherit form the marker.
 
 **Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) HILowMarker *lowMarker;
+@property(nonatomic, readwrite) NSNumber *groupPadding;
 /**
-A separate color for the negative part of the area. In styled mode, a negative color is set with the `.highcharts-negative` class name.
+A separate color for the negative part of the area. Note that `zones` takes precedence over the negative fill color. In styled mode, a negative color is set with the `.highcharts-negative` class name.
 
 **Try it**
 

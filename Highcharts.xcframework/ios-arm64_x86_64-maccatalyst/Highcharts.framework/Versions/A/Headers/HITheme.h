@@ -32,6 +32,12 @@ Default stroke for the buttons.
 */
 @property(nonatomic, readwrite) HIColor *stroke;
 /**
+Default stroke linecap for the buttons.
+
+**Defaults to** `round`.
+*/
+@property(nonatomic, readwrite) NSString *strokeLinecap;
+/**
 The default fill exists only to capture hover events.
 
 **Defaults to** `#ffffff`.

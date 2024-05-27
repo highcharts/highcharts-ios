@@ -65,8 +65,9 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 
 **Try it**
 
-* [500px height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/height/)
+* [Forced 200px height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/height/)
 * [Highcharts with percentage height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/height-percent/)
+* [Chart with inherited height](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/height-inherited/)
 */
 @property(nonatomic, readwrite) id /* NSNumber, NSString */ height;
 /**

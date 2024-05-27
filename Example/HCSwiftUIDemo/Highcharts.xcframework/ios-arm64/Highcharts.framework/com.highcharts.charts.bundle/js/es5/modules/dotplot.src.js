@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * Dot plot series type for Highcharts
  *
@@ -53,14 +53,15 @@
          *
          * */
         var DotPlotSeriesDefaults = {
-            itemPadding: 0.2,
+            itemPadding: 0.1,
             marker: {
                 symbol: 'circle',
                 states: {
                     hover: {},
                     select: {}
                 }
-            }
+            },
+            slotsPerBar: void 0
         };
         /* *
          *
@@ -105,7 +106,7 @@
             };
         })();
         var ColumnSeries = SeriesRegistry.seriesTypes.column;
-        var extend = U.extend, merge = U.merge, pick = U.pick;
+        var extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
         /* *
          *
          *  Class
@@ -129,13 +130,28 @@
              *
              * */
             DotPlotSeries.prototype.drawPoints = function () {
-                var series = this, options = series.options, renderer = series.chart.renderer, seriesMarkerOptions = options.marker, itemPaddingTranslated = series.yAxis.transA *
-                    options.itemPadding, borderWidth = series.borderWidth, crisp = borderWidth % 2 ? 0.5 : 1;
-                for (var _i = 0, _a = series.points; _i < _a.length; _i++) {
-                    var point = _a[_i];
+                var _a, _b, _c;
+                var series = this, options = series.options, renderer = series.chart.renderer, seriesMarkerOptions = options.marker, total = this.points.reduce(function (acc, point) { return acc + Math.abs(point.y || 0); }, 0), totalHeight = this.points.reduce(function (acc, point) { var _a; return acc + (((_a = point.shapeArgs) === null || _a === void 0 ? void 0 : _a.height) || 0); }, 0), itemPadding = options.itemPadding || 0, columnWidth = ((_b = (_a = this.points[0]) === null || _a === void 0 ? void 0 : _a.shapeArgs) === null || _b === void 0 ? void 0 : _b.width) || 0;
+                var slotsPerBar = options.slotsPerBar, slotWidth = columnWidth;
+                // Find the suitable number of slots per column
+                if (!isNumber(slotsPerBar)) {
+                    slotsPerBar = 1;
+                    while (slotsPerBar < total) {
+                        if (total / slotsPerBar <
+                            (totalHeight / slotWidth) * 1.2) {
+                            break;
+                        }
+                        slotsPerBar++;
+                        slotWidth = columnWidth / slotsPerBar;
+                    }
+                }
+                var height = (totalHeight * slotsPerBar) / total;
+                for (var _i = 0, _d = series.points; _i < _d.length; _i++) {
+                    var point = _d[_i];
                     var pointMarkerOptions = point.marker || {}, symbol = (pointMarkerOptions.symbol ||
-                        seriesMarkerOptions.symbol), radius = pick(pointMarkerOptions.radius, seriesMarkerOptions.radius), isSquare = symbol !== 'rect';
-                    var yPos = void 0, attr = void 0, graphics = void 0, size = void 0, yTop = void 0, x = void 0, y = void 0;
+                        seriesMarkerOptions.symbol), radius = pick(pointMarkerOptions.radius, seriesMarkerOptions.radius), isSquare = symbol !== 'rect', width = isSquare ? height : slotWidth, shapeArgs = point.shapeArgs || {}, startX = (shapeArgs.x || 0) + ((shapeArgs.width || 0) -
+                        slotsPerBar * width) / 2, positiveYValue = Math.abs((_c = point.y) !== null && _c !== void 0 ? _c : 0), shapeY = (shapeArgs.y || 0), shapeHeight = (shapeArgs.height || 0);
+                    var graphics = void 0, x = startX, y = point.negative ? shapeY : shapeY + shapeHeight - height, slotColumn = 0;
                     point.graphics = graphics = point.graphics || [];
                     var pointAttr = point.pointAttr ?
                         (point.pointAttr[point.selected ? 'selected' : ''] ||
@@ -146,46 +162,42 @@
                         delete pointAttr.stroke;
                         delete pointAttr['stroke-width'];
                     }
-                    if (point.y !== null) {
+                    if (typeof point.y === 'number') {
                         if (!point.graphic) {
                             point.graphic = renderer.g('point').add(series.group);
                         }
-                        yTop = pick(point.stackY, point.y);
-                        size = Math.min(point.pointWidth, series.yAxis.transA - itemPaddingTranslated);
-                        var i_1 = Math.floor(yTop);
-                        for (yPos = yTop; yPos > yTop - point.y; yPos--, i_1--) {
-                            x = point.barX + (isSquare ?
-                                point.pointWidth / 2 - size / 2 :
-                                0);
-                            y = series.yAxis.toPixels(yPos, true) +
-                                itemPaddingTranslated / 2;
-                            if (series.options.crisp) {
-                                x = Math.round(x) - crisp;
-                                y = Math.round(y) + crisp;
-                            }
-                            attr = {
-                                x: x,
-                                y: y,
-                                width: Math.round(isSquare ? size : point.pointWidth),
-                                height: Math.round(size),
+                        for (var val = 0; val < positiveYValue; val++) {
+                            var attr = {
+                                x: x + width * itemPadding,
+                                y: y + height * itemPadding,
+                                width: width * (1 - 2 * itemPadding),
+                                height: height * (1 - 2 * itemPadding),
                                 r: radius
                             };
-                            var graphic = graphics[i_1];
+                            var graphic = graphics[val];
                             if (graphic) {
                                 graphic.animate(attr);
                             }
                             else {
-                                graphic = renderer.symbol(symbol)
+                                graphic = renderer
+                                    .symbol(symbol)
                                     .attr(extend(attr, pointAttr))
                                     .add(point.graphic);
                             }
                             graphic.isActive = true;
-                            graphics[i_1] = graphic;
+                            graphics[val] = graphic;
+                            x += width;
+                            slotColumn++;
+                            if (slotColumn >= slotsPerBar) {
+                                slotColumn = 0;
+                                x = startX;
+                                y = point.negative ? y + height : y - height;
+                            }
                         }
                     }
                     var i = -1;
-                    for (var _b = 0, graphics_1 = graphics; _b < graphics_1.length; _b++) {
-                        var graphic = graphics_1[_b];
+                    for (var _e = 0, graphics_1 = graphics; _e < graphics_1.length; _e++) {
+                        var graphic = graphics_1[_e];
                         ++i;
                         if (graphic) {
                             if (!graphic.isActive) {

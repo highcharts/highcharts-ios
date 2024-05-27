@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -1297,6 +1297,17 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
+        var __assign = (this && this.__assign) || function () {
+            __assign = Object.assign || function(t) {
+                for (var s, i = 1, n = arguments.length; i < n; i++) {
+                    s = arguments[i];
+                    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+                }
+                return t;
+            };
+            return __assign.apply(this, arguments);
+        };
         var flipResizeSide = DraggableChart.flipResizeSide;
         var isNumber = U.isNumber, merge = U.merge, pick = U.pick;
         /* *
@@ -1487,6 +1498,16 @@
                 propValidate: function (val, point) { return (val >= point.q3); }
             }
         };
+        // Errorbar series - move x, resize or move low/high
+        var errorbar = {
+            x: column.x,
+            low: __assign(__assign({}, boxplot.low), { propValidate: function (val, point) { return (val <= point.high); } }),
+            high: __assign(__assign({}, boxplot.high), { propValidate: function (val, point) { return (val >= point.low); } })
+        };
+        /**
+         * @exclude      draggableQ1, draggableQ3
+         * @optionparent plotOptions.errorbar.dragDrop
+         */
         // Bullet graph, x/y same as column, but also allow target to be dragged.
         var bullet = {
             x: column.x,
@@ -1868,6 +1889,7 @@
             bullet: bullet,
             column: column,
             columnrange: columnrange,
+            errorbar: errorbar,
             flags: flags,
             gantt: gantt,
             line: line,
@@ -1960,6 +1982,7 @@
                     'bullet',
                     'column',
                     'columnrange',
+                    'errorbar',
                     'flags',
                     'gantt',
                     'ohlc',

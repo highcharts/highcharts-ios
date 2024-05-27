@@ -77,7 +77,7 @@ Fill opacity for the area. When you set an explicit `fillColor`, the `fillOpacit
 */
 @property(nonatomic, readwrite) NSNumber *fillOpacity;
 /**
-A separate color for the negative part of the area. In styled mode, a negative color is set with the `.highcharts-negative` class name.
+A separate color for the negative part of the area. Note that `zones` takes precedence over the negative fill color. In styled mode, a negative color is set with the `.highcharts-negative` class name.
 
 **Try it**
 

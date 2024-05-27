@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * X-range series
  *
@@ -451,7 +451,7 @@
         var composed = H.composed, noop = H.noop;
         var color = Color.parse;
         var ColumnSeries = SeriesRegistry.seriesTypes.column;
-        var addEvent = U.addEvent, clamp = U.clamp, defined = U.defined, extend = U.extend, find = U.find, isNumber = U.isNumber, isObject = U.isObject, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique, relativeLength = U.relativeLength;
+        var addEvent = U.addEvent, clamp = U.clamp, crisp = U.crisp, defined = U.defined, extend = U.extend, find = U.find, isNumber = U.isNumber, isObject = U.isObject, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique, relativeLength = U.relativeLength;
         /* *
          *
          *  Functions
@@ -607,7 +607,7 @@
             XRangeSeries.prototype.translatePoint = function (point) {
                 var xAxis = this.xAxis, yAxis = this.yAxis, metrics = this.columnMetrics, options = this.options, minPointLength = options.minPointLength || 0, oldColWidth = (point.shapeArgs && point.shapeArgs.width || 0) / 2, seriesXOffset = this.pointXOffset = metrics.offset, posX = pick(point.x2, point.x + (point.len || 0)), borderRadius = options.borderRadius, plotTop = this.chart.plotTop, plotLeft = this.chart.plotLeft;
                 var plotX = point.plotX, plotX2 = xAxis.translate(posX, 0, 0, 0, 1);
-                var length = Math.abs(plotX2 - plotX), inverted = this.chart.inverted, borderWidth = pick(options.borderWidth, 1), crisper = borderWidth % 2 / 2;
+                var length = Math.abs(plotX2 - plotX), inverted = this.chart.inverted, borderWidth = pick(options.borderWidth, 1);
                 var widthDifference, partialFill, yOffset = metrics.offset, pointHeight = Math.round(metrics.width), dlLeft, dlRight, dlWidth, clipRectWidth;
                 if (minPointLength) {
                     widthDifference = minPointLength - length;
@@ -630,13 +630,13 @@
                     yAxis.categories) {
                     point.plotY = yAxis.translate(point.y, 0, 1, 0, 1, options.pointPlacement);
                 }
-                var x = Math.floor(Math.min(plotX, plotX2)) + crisper, x2 = Math.floor(Math.max(plotX, plotX2)) + crisper, width = x2 - x;
+                var x = crisp(Math.min(plotX, plotX2), borderWidth), x2 = crisp(Math.max(plotX, plotX2), borderWidth), width = x2 - x;
                 var r = Math.min(relativeLength((typeof borderRadius === 'object' ?
                     borderRadius.radius :
                     borderRadius || 0), pointHeight), Math.min(width, pointHeight) / 2);
                 var shapeArgs = {
                     x: x,
-                    y: Math.floor(point.plotY + yOffset) + crisper,
+                    y: crisp((point.plotY || 0) + yOffset, borderWidth),
                     width: width,
                     height: pointHeight,
                     r: r

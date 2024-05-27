@@ -8,8 +8,8 @@
 
 #import "HIMapping.h"
 #import "HIPointGrouping.h"
-#import "HIActiveWhen.h"
 #import "HISynthPatchOptionsObject.h"
+#import "HIFunction.h"
 
 
 /**
@@ -100,7 +100,7 @@ Define a condition for when a track should be active and not. Can either be a fu
 
 * [Mapping zones](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/sonification/mapping-zones)
 */
-@property(nonatomic, readwrite) HIActiveWhen *activeWhen;
+@property(nonatomic, readwrite) HIFunction *activeWhen;
 /**
 Name to use for a track when exporting to MIDI. By default it uses the series name if the track is related to a series.
 */

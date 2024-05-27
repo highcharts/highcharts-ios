@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * Exporting module
  *
@@ -115,6 +115,9 @@
                 return;
             }
             dataURL = '' + dataURL;
+            if (nav.userAgent.length > 1000 /* RegexLimits.shortLimit */) {
+                throw new Error('Input too long');
+            }
             var // Some browsers have limitations for data URL lengths. Try to convert
             // to Blob or fall back. Edge always needs that blob.
             isOldEdgeBrowser = /Edge\/\d+/.test(nav.userAgent), 

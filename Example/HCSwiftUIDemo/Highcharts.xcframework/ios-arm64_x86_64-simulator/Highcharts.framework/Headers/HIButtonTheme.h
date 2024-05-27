@@ -7,6 +7,7 @@
 */
 
 #import "HIStyle.h"
+#import "HIStates.h"
 
 
 /**
@@ -19,6 +20,40 @@ A collection of attributes for the buttons. The object takes SVG attributes like
 @interface HIButtonTheme: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) HIStyle *style;
+/**
+State overrides for the buttons
+*/
+@property(nonatomic, readwrite) HIStates *states;
+/**
+The padding of buttons
+
+**Defaults to** `8`.
+*/
+@property(nonatomic, readwrite) NSNumber *padding;
+/**
+The stroke color for buttons
+
+**Defaults to** `#cccccc`.
+*/
+@property(nonatomic, readwrite) NSString *stroke;
+/**
+The border radius for buttons
+
+**Defaults to** `2`.
+*/
+@property(nonatomic, readwrite) NSNumber *r;
+/**
+The stroke width for buttons
+
+**Defaults to** `1`.
+*/
+@property(nonatomic, readwrite) NSNumber *strokeWidth;
+/**
+The fill color for buttons
+
+**Defaults to** `#f7f7f7`.
+*/
+@property(nonatomic, readwrite) NSString *fill;
 
 -(NSDictionary *)getParams;
 

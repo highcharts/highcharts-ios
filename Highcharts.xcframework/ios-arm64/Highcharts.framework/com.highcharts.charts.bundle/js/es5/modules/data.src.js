@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * Data module
  *
@@ -1993,10 +1993,10 @@
          * @sample {highmaps} highcharts/data/column-types-map/
          *         Map chart created with fips from CSV
          *
-         * @type      {Array<'string'|'number'|'float'|'date'>}
-         * @since     @next
+         * @type       {Array<'string'|'number'|'float'|'date'>}
+         * @since      11.3.0
          * @validvalue ["string", "number", "float", "date"]
-         * @apioption data.columnTypes
+         * @apioption  data.columnTypes
          */
         /**
          * The callback that is evaluated when the data is finished loading,

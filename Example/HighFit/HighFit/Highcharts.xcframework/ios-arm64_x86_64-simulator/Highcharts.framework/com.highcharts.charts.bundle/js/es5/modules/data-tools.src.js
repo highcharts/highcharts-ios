@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * Highcharts
  *
@@ -2432,20 +2432,42 @@
                         e.cursor.type
                     ]).join('\0');
             };
-            // Implementation
-            DataCursor.prototype.emitCursor = function (table, groupOrCursor, cursorOrEvent, eventOrLasting, lasting) {
-                var cursor = (typeof groupOrCursor === 'object' ?
-                    groupOrCursor :
-                    cursorOrEvent), event = (typeof eventOrLasting === 'object' ?
-                    eventOrLasting :
-                    cursorOrEvent), group = (typeof groupOrCursor === 'string' ?
-                    groupOrCursor :
-                    void 0), tableId = table.id, state = cursor.state, listeners = (this.listenerMap[tableId] &&
+            /**
+             * This function emits a state cursor related to a table. It will provide
+             * lasting state cursors of the table to listeners.
+             *
+             * @example
+             * ```ts
+             * dataCursor.emit(myTable, {
+             *     type: 'position',
+             *     column: 'city',
+             *     row: 4,
+             *     state: 'hover',
+             * });
+             * ```
+             *
+             * @param {Data.DataTable} table
+             * The related table of the cursor.
+             *
+             * @param {Data.DataCursor.Type} cursor
+             * The state cursor to emit.
+             *
+             * @param {Event} [event]
+             * Optional event information from a related source.
+             *
+             * @param {boolean} [lasting]
+             * Whether this state cursor should be kept until it is cleared with
+             * {@link DataCursor#remitCursor}.
+             *
+             * @return {Data.DataCursor}
+             * Returns the DataCursor instance for a call chain.
+             */
+            DataCursor.prototype.emitCursor = function (table, cursor, event, lasting) {
+                var _a;
+                var tableId = table.id, state = cursor.state, listeners = (this.listenerMap[tableId] &&
                     this.listenerMap[tableId][state]);
-                lasting = (lasting || eventOrLasting === true);
                 if (listeners) {
-                    var stateMap = this.stateMap[tableId] = (this.stateMap[tableId] ||
-                        {});
+                    var stateMap = this.stateMap[tableId] = ((_a = this.stateMap[tableId]) !== null && _a !== void 0 ? _a : {});
                     var cursors = stateMap[cursor.state] || [];
                     if (lasting) {
                         if (!cursors.length) {
@@ -2462,9 +2484,6 @@
                     };
                     if (event) {
                         e.event = event;
-                    }
-                    if (group) {
-                        e.group = group;
                     }
                     var emittingRegister = this.emittingRegister, emittingTag = this.buildEmittingTag(e);
                     if (emittingRegister.indexOf(emittingTag) >= 0) {
@@ -2533,7 +2552,7 @@
                     this.listenerMap[tableId][state]);
                 if (listeners) {
                     var index = listeners.indexOf(listener);
-                    if (index) {
+                    if (index >= 0) {
                         listeners.splice(index, 1);
                     }
                 }
@@ -2810,7 +2829,7 @@
                     waitingList = this.waiting[connectorId] = [];
                     var connectorOptions = this.getConnectorOptions(connectorId);
                     if (!connectorOptions) {
-                        throw new Error("Connector not found. (".concat(connectorId, ")"));
+                        throw new Error("Connector '".concat(connectorId, "' not found."));
                     }
                     // eslint-disable-next-line @typescript-eslint/no-floating-promises
                     this
@@ -5748,7 +5767,7 @@
                     read(i);
                     if (c === '#') {
                         // If there are hexvalues remaining (#13283)
-                        if (!/^#[0-F]{3,3}|[0-F]{6,6}/i.test(columnStr.substring(i))) {
+                        if (!/^#[0-9a-f]{3,3}|[0-9a-f]{6,6}/i.test(columnStr.substring(i))) {
                             // The rest of the row is a comment
                             push();
                             return;

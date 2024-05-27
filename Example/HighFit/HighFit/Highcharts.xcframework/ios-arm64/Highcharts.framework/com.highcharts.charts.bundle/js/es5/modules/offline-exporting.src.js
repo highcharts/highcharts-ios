@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * Client side exporting module
  *
@@ -115,6 +115,9 @@
                 return;
             }
             dataURL = '' + dataURL;
+            if (nav.userAgent.length > 1000 /* RegexLimits.shortLimit */) {
+                throw new Error('Input too long');
+            }
             var // Some browsers have limitations for data URL lengths. Try to convert
             // to Blob or fall back. Edge always needs that blob.
             isOldEdgeBrowser = /Edge\/\d+/.test(nav.userAgent), 
@@ -177,7 +180,7 @@
          *
          * */
         var OfflineExportingDefaults = {
-            libURL: 'https://code.highcharts.com/11.4.1/lib/',
+            libURL: 'https://code.highcharts.com/11.4.3/lib/',
             // When offline-exporting is loaded, redefine the menu item definitions
             // related to download.
             menuItemDefinitions: {
@@ -522,41 +525,49 @@
                             failCallback(e);
                         }
                     }, function () {
+                        if (svg.length > 100000000 /* RegexLimits.svgLimit */) {
+                            throw new Error('Input too long');
+                        }
                         // Failed due to tainted canvas
                         // Create new and untainted canvas
-                        var canvas = doc.createElement('canvas'), ctx = canvas.getContext('2d'), imageWidth = svg.match(/^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/)[1] * scale, imageHeight = svg.match(/^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/)[1] * scale, downloadWithCanVG = function () {
-                            var v = win.canvg.Canvg.fromString(ctx, svg);
-                            v.start();
-                            try {
-                                downloadURL(win.navigator.msSaveOrOpenBlob ?
-                                    canvas.msToBlob() :
-                                    canvas.toDataURL(imageType), filename);
-                                if (successCallback) {
-                                    successCallback();
+                        var canvas = doc.createElement('canvas'), ctx = canvas.getContext('2d'), matchedImageWidth = svg.match(
+                        // eslint-disable-next-line max-len
+                        /^<svg[^>]*\s{,1000}width\s{,1000}=\s{,1000}\"?(\d+)\"?[^>]*>/), matchedImageHeight = svg.match(
+                        // eslint-disable-next-line max-len
+                        /^<svg[^>]*\s{0,1000}height\s{,1000}=\s{,1000}\"?(\d+)\"?[^>]*>/);
+                        if (ctx && matchedImageWidth && matchedImageHeight) {
+                            var imageWidth = +matchedImageWidth[1] * scale, imageHeight = +matchedImageHeight[1] * scale, downloadWithCanVG = function () {
+                                var v = win.canvg.Canvg.fromString(ctx, svg);
+                                v.start();
+                                try {
+                                    downloadURL(win.navigator.msSaveOrOpenBlob ?
+                                        canvas.msToBlob() :
+                                        canvas.toDataURL(imageType), filename);
+                                    if (successCallback) {
+                                        successCallback();
+                                    }
                                 }
-                            }
-                            catch (e) {
-                                failCallback(e);
-                            }
-                            finally {
-                                finallyHandler();
-                            }
-                        };
-                        canvas.width = imageWidth;
-                        canvas.height = imageHeight;
-                        if (win.canvg) {
-                            // Use preloaded canvg
-                            downloadWithCanVG();
-                        }
-                        else {
-                            // Must load canVG first. // Don't destroy the object
-                            // URL yet since we are doing things asynchronously. A
-                            // cleaner solution would be nice, but this will do for
-                            // now.
-                            objectURLRevoke = true;
-                            getScript(libURL + 'canvg.js', function () {
+                                catch (e) {
+                                    failCallback(e);
+                                }
+                                finally {
+                                    finallyHandler();
+                                }
+                            };
+                            canvas.width = imageWidth;
+                            canvas.height = imageHeight;
+                            if (win.canvg) {
+                                // Use preloaded canvg
                                 downloadWithCanVG();
-                            });
+                            }
+                            else {
+                                // Must load canVG first.
+                                // Don't destroy the object URL yet since we are
+                                // doing things asynchronously. A cleaner solution
+                                // would be nice, but this will do for now.
+                                objectURLRevoke = true;
+                                getScript(libURL + 'canvg.js', downloadWithCanVG);
+                            }
                         }
                     }, 
                     // No canvas support

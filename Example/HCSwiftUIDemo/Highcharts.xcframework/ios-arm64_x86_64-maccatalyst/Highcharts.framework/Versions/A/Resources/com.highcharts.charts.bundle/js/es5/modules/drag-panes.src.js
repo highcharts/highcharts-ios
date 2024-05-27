@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.1 (2024-04-04)
+ * @license Highstock JS v11.4.3 (2024-05-22)
  *
  * Drag-panes module
  *
@@ -423,8 +423,7 @@
                         var height = void 0, top_1 = void 0;
                         // Skip if axis is not found
                         // or it is navigator's yAxis (#7732)
-                        if (!axisOptions ||
-                            axisOptions.id === 'navigator-y-axis') {
+                        if (!axisOptions || axisOptions.isInternal) {
                             isFirst = false;
                             continue;
                         }

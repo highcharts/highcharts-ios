@@ -12,7 +12,7 @@
 
 
 /**
-Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. ```js Highcharts.setOptions({   lang: {     months: [       'Janvier', 'FÃ©vrier', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'AoÃ»t',       'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } }); ```
+Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. ```js Highcharts.setOptions({   lang: {     months: [       'Janvier', 'Février', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'Août',       'Septembre', 'Octobre', 'Novembre', 'Décembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } }); ```
 */
 @interface HILang: HIChartsJSONSerializable
 

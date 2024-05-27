@@ -7,6 +7,7 @@
 */
 
 #import "HIAnimation.h"
+#import "HIStyle.h"
 #import "HIHalo.h"
 #import "HIColor.h"
 
@@ -120,6 +121,8 @@ A specific color for the selected point.
 Animation setting for hovering the graph in line-type series.
 */
 @property(nonatomic, readwrite) HIAnimation *animation;
+@property(nonatomic, readwrite) HIStyle *style;
+@property(nonatomic, readwrite) NSString *fill;
 /**
 The additional line width for the graph of a hovered series.
 

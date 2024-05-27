@@ -54,7 +54,7 @@ Whether the annotation is visible.
 /**
 Sets an ID for an annotation. Can be user later when removing an annotation in `Chart#removeAnnotation(id)` method.
 */
-@property(nonatomic, readwrite) NSString *id;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ id;
 /**
 Options for annotation's control points. Each control point inherits options from controlPointOptions object. Options from the controlPointOptions can be overwritten by options in a specific control point.
 */

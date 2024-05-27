@@ -201,7 +201,7 @@ A [format string](https://www.highcharts.com/docs/chart-concepts/labels-and-stri
 /**
 CSS styles for each legend item. Only a subset of CSS is supported, notably those options related to text. The default `textOverflow` property makes long texts truncate. Set it to `undefined` to wrap text instead. A `width` property can be added to control the text width.
 
-**Defaults to** `{"color": "#333333", "cursor": "pointer", "fontSize": "0.75em", "fontWeight": "bold", "textOverflow": "ellipsis"}`.
+**Defaults to** `{"color": "#333333", "cursor": "pointer", "fontSize": "0.8em", "fontWeight": "bold", "textOverflow": "ellipsis"}`.
 
 **Try it**
 

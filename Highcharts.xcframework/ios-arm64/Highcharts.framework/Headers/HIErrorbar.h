@@ -41,6 +41,14 @@
 @interface HIErrorbar: HISeries
 
 /**
+Whether to group non-stacked columns or to let them render independent of each other. Non-grouped columns will be laid out individually and overlap each other.
+
+**Try it**
+
+* [Grouping disabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-grouping-false/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *grouping;
+/**
 The line width of the whiskers, the horizontal lines marking low and high values. When `null`, the general `lineWidth` applies.
 
 **Defaults to** `2`.
@@ -50,14 +58,6 @@ The line width of the whiskers, the horizontal lines marking low and high values
 * [Error bar styling](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/error-bar-styling/)
 */
 @property(nonatomic, readwrite) NSNumber *whiskerWidth;
-/**
-Whether to group non-stacked columns or to let them render independent of each other. Non-grouped columns will be laid out individually and overlap each other.
-
-**Try it**
-
-* [Grouping disabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/column-grouping-false/)
-*/
-@property(nonatomic, readwrite) NSNumber /* Bool */ *grouping;
 /**
 The color of the stem, the vertical line extending from the box to the whiskers. If `undefined`, the series color is used. In styled mode, the stem stroke can be set with the `.highcharts-boxplot-stem` class.
 

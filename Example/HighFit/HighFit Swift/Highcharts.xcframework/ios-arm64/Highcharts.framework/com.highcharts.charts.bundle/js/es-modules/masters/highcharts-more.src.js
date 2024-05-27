@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  * @module highcharts/highcharts-more
  * @requires highcharts
  *
@@ -22,8 +22,10 @@ import '../Series/Gauge/GaugeSeries.js';
 import PackedBubbleSeries from '../Series/PackedBubble/PackedBubbleSeries.js';
 import '../Series/Polygon/PolygonSeries.js';
 import PolarAdditions from '../Series/PolarComposition.js';
+import RadialAxis from '../Core/Axis/RadialAxis.js';
 import WaterfallSeries from '../Series/Waterfall/WaterfallSeries.js';
 const G = Highcharts;
+G.RadialAxis = RadialAxis;
 BubbleSeries.compose(G.Axis, G.Chart, G.Legend, G.Series);
 PackedBubbleSeries.compose(G.Axis, G.Chart, G.Legend, G.Series);
 Pane.compose(G.Chart, G.Pointer);

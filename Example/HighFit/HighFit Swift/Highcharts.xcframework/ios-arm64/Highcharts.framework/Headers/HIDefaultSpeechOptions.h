@@ -8,7 +8,7 @@
 
 #import "HIPointGrouping.h"
 #import "HIMapping.h"
-#import "HIActiveWhen.h"
+#import "HIFunction.h"
 
 
 /**
@@ -68,7 +68,7 @@ Define a condition for when a track should be active and not. Can either be a fu
 
 * [Mapping zones](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/sonification/mapping-zones)
 */
-@property(nonatomic, readwrite) HIActiveWhen *activeWhen;
+@property(nonatomic, readwrite) HIFunction *activeWhen;
 
 -(NSDictionary *)getParams;
 

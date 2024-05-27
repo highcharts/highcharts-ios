@@ -171,13 +171,13 @@ User supplied description text. This is added in the point comment description b
 */
 @property(nonatomic, readwrite) NSString *definition;
 /**
-xAxis description for series if there are multiple xAxes in the chart.
+X-axis description for series if there are multiple xAxes in the chart.
 
 **Defaults to** `X axis, {name}`.
 */
 @property(nonatomic, readwrite) NSString *xAxisDescription;
 /**
-yAxis description for series if there are multiple yAxes in the chart.
+Y-axis description for series if there are multiple yAxes in the chart.
 
 **Defaults to** `Y axis, {name}`.
 */

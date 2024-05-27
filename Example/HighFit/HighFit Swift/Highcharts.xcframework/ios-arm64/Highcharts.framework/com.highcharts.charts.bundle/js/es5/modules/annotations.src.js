@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.1 (2024-04-04)
+ * @license Highcharts JS v11.4.3 (2024-05-22)
  *
  * Annotations module
  *
@@ -1165,11 +1165,13 @@
                         annotation.cancelClick = emitter.hasDragged;
                     }
                     emitter.cancelClick = emitter.hasDragged;
-                    emitter.hasDragged = false;
                     emitter.chart.hasDraggedAnnotation = false;
-                    // ControlPoints vs Annotation:
-                    fireEvent(pick(annotation, // #15952
-                    emitter), 'afterUpdate');
+                    if (emitter.hasDragged) {
+                        // ControlPoints vs Annotation:
+                        fireEvent(pick(annotation, // #15952
+                        emitter), 'afterUpdate');
+                    }
+                    emitter.hasDragged = false;
                     emitter.onMouseUp();
                 }, isTouchDevice || firesTouchEvents ? { passive: false } : void 0);
             };
@@ -1177,9 +1179,7 @@
              * Mouse up handler.
              */
             EventEmitter.prototype.onMouseUp = function () {
-                var chart = this.chart, annotation = this.target || this, annotationsOptions = chart.options.annotations, index = chart.annotations.indexOf(annotation);
                 this.removeDocEvents();
-                annotationsOptions[index] = annotation.options;
             };
             /**
              * Remove emitter document events.
@@ -2246,6 +2246,9 @@
             Controllable.prototype.render = function (
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             _parentGroup) {
+                if (this.options.className && this.graphic) {
+                    this.graphic.addClass(this.options.className);
+                }
                 this.renderControlPoints();
             };
             /**
@@ -2674,9 +2677,6 @@
                     .path([['M', 0, 0]])
                     .attr(attrs)
                     .add(parent);
-                if (options.className) {
-                    this.graphic.addClass(options.className);
-                }
                 this.tracker = this.annotation.chart.renderer
                     .path([['M', 0, 0]])
                     .addClass('highcharts-tracker-line')
@@ -3513,9 +3513,6 @@
                     this.graphic
                         .css(options.style)
                         .shadow(options.shadow);
-                }
-                if (options.className) {
-                    this.graphic.addClass(options.className);
                 }
                 this.graphic.labelrank = options.labelrank;
                 _super.prototype.render.call(this);
@@ -5115,7 +5112,7 @@
                 this.popup = new Popup(this.chart.container, (this.chart.options.navigation.iconsURL ||
                     (this.chart.options.stockTools &&
                         this.chart.options.stockTools.gui.iconsURL) ||
-                    'https://code.highcharts.com/11.4.1/gfx/stock-icons/'), this.chart);
+                    'https://code.highcharts.com/11.4.3/gfx/stock-icons/'), this.chart);
             }
             this.popup.showForm(config.formType, this.chart, config.options, config.onSubmit);
         }
@@ -6305,7 +6302,7 @@
              * from a different server.
              *
              * @type      {string}
-             * @default   https://code.highcharts.com/11.4.1/gfx/stock-icons/
+             * @default   https://code.highcharts.com/11.4.3/gfx/stock-icons/
              * @since     7.1.3
              * @apioption navigation.iconsURL
              */

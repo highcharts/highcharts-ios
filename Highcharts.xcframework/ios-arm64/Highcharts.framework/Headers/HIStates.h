@@ -10,6 +10,7 @@
 #import "HIInactive.h"
 #import "HISelect.h"
 #import "HINormal.h"
+#import "HIDisabled.h"
 
 
 /**
@@ -27,6 +28,10 @@ The opposite state of a hover for a single point node/link.
 The normal state of a series, or for point items in column, pie and similar series. Currently only used for setting animation when returning to normal state from hover.
 */
 @property(nonatomic, readwrite) HINormal *normal;
+/**
+Disabled state overrides for the buttons are applied in addition to the normal state options
+*/
+@property(nonatomic, readwrite) HIDisabled *disabled;
 
 -(NSDictionary *)getParams;
 

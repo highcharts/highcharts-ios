@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.1 (2024-04-04)
+ * @license Highstock JS v11.4.3 (2024-05-22)
  *
  * Highcharts Stock as a plugin for Highcharts
  *
@@ -460,8 +460,15 @@
                             }
                             // Record for tooltip etc.
                             var point = this.series.points[index];
+                            var cumulativeStart = point.series.options.cumulativeStart, withinRange = point.x <= this.series.xAxis.max &&
+                                point.x >= this.series.xAxis.min;
                             if (point) {
-                                point.cumulativeSum = value;
+                                if (!cumulativeStart || withinRange) {
+                                    point.cumulativeSum = value;
+                                }
+                                else {
+                                    point.cumulativeSum = void 0;
+                                }
                             }
                             return value;
                         }
@@ -507,7 +514,7 @@
          */
         /**
          * Defines if comparison should start from the first point within the visible
-         * range or should start from the first point **before** the range.
+         * range or should start from the last point **before** the range.
          *
          * In other words, this flag determines if first point within the visible range
          * will have 0% (`compareStart=true`) or should have been already calculated
@@ -556,6 +563,23 @@
          * @since 9.3.0
          * @product   highstock
          * @apioption plotOptions.series.cumulative
+         */
+        /**
+         * Defines if cumulation should start from the first point within the visible
+         * range or should start from the last point **before** the range.
+         *
+         * In other words, this flag determines if first point within the visible range
+         * will start at 0 (`cumulativeStart=true`) or should have been already calculated
+         * according to the previous point (`cumulativeStart=false`).
+         *
+         * @sample {highstock} stock/plotoptions/series-cumulativestart/
+         *         Cumulative Start
+         *
+         * @type      {boolean}
+         * @default   false
+         * @since 11.4.2
+         * @product   highstock
+         * @apioption plotOptions.series.cumulativeStart
          */
         ''; // Keeps doclets above in transpiled file
 
@@ -1009,6 +1033,15 @@
                  */
                 width: 7,
                 /**
+                 * Border radius of the handles.
+                 *
+                 * @sample {highstock} stock/navigator/handles-border-radius/
+                 *      Border radius on the navigator handles.
+                 *
+                 * @since 11.4.2
+                 */
+                borderRadius: 0,
+                /**
                  * Height for handles.
                  *
                  * @sample {highstock} stock/navigator/styled-handles/
@@ -1319,6 +1352,7 @@
                 tickLength: 0,
                 lineWidth: 0,
                 gridLineColor: "#e6e6e6" /* Palette.neutralColor10 */,
+                id: 'navigator-x-axis',
                 gridLineWidth: 1,
                 tickPixelInterval: 200,
                 labels: {
@@ -1372,6 +1406,7 @@
                 startOnTick: false,
                 endOnTick: false,
                 minPadding: 0.1,
+                id: 'navigator-y-axis',
                 maxPadding: 0.1,
                 labels: {
                     enabled: false
@@ -1410,7 +1445,7 @@
 
         return NavigatorDefaults;
     });
-    _registerModule(_modules, 'Stock/Navigator/NavigatorSymbols.js', [], function () {
+    _registerModule(_modules, 'Stock/Navigator/NavigatorSymbols.js', [_modules['Core/Renderer/SVG/Symbols.js'], _modules['Core/Utilities.js']], function (rect, U) {
         /* *
          *
          *  (c) 2010-2024 Torstein Honsi
@@ -1420,6 +1455,16 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
+        var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+            if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+            return to.concat(ar || Array.prototype.slice.call(from));
+        };
+        var relativeLength = U.relativeLength;
         /* *
          *
          *  Constants
@@ -1431,19 +1476,14 @@
          */
         function navigatorHandle(_x, _y, width, height, options) {
             if (options === void 0) { options = {}; }
-            var halfWidth = options.width ? options.width / 2 : width, markerPosition = Math.round(halfWidth / 3) + 0.5;
+            var halfWidth = options.width ? options.width / 2 : width, markerPosition = 1.5, r = relativeLength(options.borderRadius || 0, Math.min(halfWidth * 2, height));
             height = options.height || height;
-            return [
-                ['M', -halfWidth - 1, 0.5],
-                ['L', halfWidth, 0.5],
-                ['L', halfWidth, height + 0.5],
-                ['L', -halfWidth - 1, height + 0.5],
-                ['L', -halfWidth - 1, 0.5],
-                ['M', -markerPosition, 4],
-                ['L', -markerPosition, height - 3],
-                ['M', markerPosition - 1, 4],
-                ['L', markerPosition - 1, height - 3]
-            ];
+            return __spreadArray([
+                ['M', -markerPosition, height / 2 - 3.5],
+                ['L', -markerPosition, height / 2 + 4.5],
+                ['M', markerPosition - 1, height / 2 - 3.5],
+                ['L', markerPosition - 1, height / 2 + 4.5]
+            ], rect.rect(-halfWidth - 1, 0.5, halfWidth * 2 + 1, height, { r: r }), true);
         }
         /* *
          *
@@ -1995,7 +2035,7 @@
          *
          * */
         var defaultOptions = D.defaultOptions;
-        var addEvent = U.addEvent, correctFloat = U.correctFloat, defined = U.defined, destroyObjectProperties = U.destroyObjectProperties, fireEvent = U.fireEvent, merge = U.merge, pick = U.pick, removeEvent = U.removeEvent;
+        var addEvent = U.addEvent, correctFloat = U.correctFloat, crisp = U.crisp, defined = U.defined, destroyObjectProperties = U.destroyObjectProperties, fireEvent = U.fireEvent, merge = U.merge, pick = U.pick, removeEvent = U.removeEvent;
         /* *
          *
          *  Constants
@@ -2227,9 +2267,8 @@
                     rect.attr(rect.crisp({
                         x: -0.5,
                         y: -0.5,
-                        // +1 to compensate for crispifying in rect method
-                        width: size + 1,
-                        height: size + 1,
+                        width: size,
+                        height: size,
                         r: options.buttonBorderRadius
                     }, rect.strokeWidth()));
                     // Button arrow
@@ -2441,8 +2480,8 @@
                 var trackBorderWidth = scroller.trackBorderWidth =
                     scroller.track.strokeWidth();
                 scroller.track.attr({
-                    x: -trackBorderWidth % 2 / 2,
-                    y: -trackBorderWidth % 2 / 2
+                    x: -crisp(0, trackBorderWidth),
+                    y: -crisp(0, trackBorderWidth)
                 });
                 // Draw the scrollbar itself
                 scroller.scrollbarGroup = renderer.g().add(group);
@@ -2476,7 +2515,7 @@
                     });
                 }
                 scroller.scrollbarStrokeWidth = scroller.scrollbar.strokeWidth();
-                scroller.scrollbarGroup.translate(-scroller.scrollbarStrokeWidth % 2 / 2, -scroller.scrollbarStrokeWidth % 2 / 2);
+                scroller.scrollbarGroup.translate(-crisp(0, scroller.scrollbarStrokeWidth), -crisp(0, scroller.scrollbarStrokeWidth));
                 // Draw the buttons:
                 scroller.drawScrollbarButton(0);
                 scroller.drawScrollbarButton(1);
@@ -3487,8 +3526,6 @@
                         ordinal: baseXaxis.options.ordinal,
                         overscroll: baseXaxis.options.overscroll
                     }, navigatorOptions.xAxis, {
-                        id: 'navigator-x-axis',
-                        yAxis: 'navigator-y-axis',
                         type: 'datetime',
                         index: xAxisIndex,
                         isInternal: true,
@@ -3507,7 +3544,6 @@
                         height: height
                     }), 'xAxis');
                     navigator.yAxis = new Axis(chart, merge(navigatorOptions.yAxis, {
-                        id: 'navigator-y-axis',
                         alignTicks: false,
                         offset: 0,
                         index: yAxisIndex,
@@ -3653,14 +3689,15 @@
              * @function Highcharts.Navigator.updateNavigatorSeries
              */
             Navigator.prototype.updateNavigatorSeries = function (addEvents, redraw) {
+                var _a, _b;
                 var navigator = this, chart = navigator.chart, baseSeries = navigator.baseSeries, navSeriesMixin = {
                     enableMouseTracking: false,
                     index: null,
                     linkedTo: null,
                     group: 'nav',
                     padXAxis: false,
-                    xAxis: 'navigator-x-axis',
-                    yAxis: 'navigator-y-axis',
+                    xAxis: (_a = this.navigatorOptions.xAxis) === null || _a === void 0 ? void 0 : _a.id,
+                    yAxis: (_b = this.navigatorOptions.yAxis) === null || _b === void 0 ? void 0 : _b.id,
                     showInLegend: false,
                     stacking: void 0,
                     isInternal: true,
@@ -4221,7 +4258,7 @@
                         }
                         translatedArr[i] = lastTranslated = translated;
                     }
-                    distances.sort();
+                    distances.sort(function (a, b) { return a - b; });
                     medianDistance = distances[Math.floor(distances.length / 2)];
                     if (medianDistance < tickPixelIntervalOption * 0.6) {
                         medianDistance = null;
@@ -5638,7 +5675,7 @@
          * */
         var defaultOptions = D.defaultOptions;
         var composed = H.composed;
-        var addEvent = U.addEvent, defined = U.defined, extend = U.extend, find = U.find, isNumber = U.isNumber, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique;
+        var addEvent = U.addEvent, defined = U.defined, extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick, pushUnique = U.pushUnique;
         /* *
          *
          *  Constants
@@ -5722,13 +5759,13 @@
             if (pushUnique(composed, 'RangeSelector')) {
                 var chartProto = ChartClass.prototype;
                 AxisClass.prototype.minFromRange = axisMinFromRange;
-                addEvent(ChartClass, 'afterGetContainer', onChartAfterGetContainer);
+                addEvent(ChartClass, 'afterGetContainer', createRangeSelector);
                 addEvent(ChartClass, 'beforeRender', onChartBeforeRender);
                 addEvent(ChartClass, 'destroy', onChartDestroy);
                 addEvent(ChartClass, 'getMargins', onChartGetMargins);
-                addEvent(ChartClass, 'render', onChartRender);
+                addEvent(ChartClass, 'redraw', redrawRangeSelector);
                 addEvent(ChartClass, 'update', onChartUpdate);
-                chartProto.callbacks.push(onChartCallback);
+                chartProto.callbacks.push(redrawRangeSelector);
                 extend(defaultOptions, { rangeSelector: RangeSelectorDefaults.rangeSelector });
                 extend(defaultOptions.lang, RangeSelectorDefaults.lang);
             }
@@ -5737,7 +5774,7 @@
          * Initialize rangeselector for stock charts
          * @private
          */
-        function onChartAfterGetContainer() {
+        function createRangeSelector() {
             if (this.options.rangeSelector &&
                 this.options.rangeSelector.enabled) {
                 this.rangeSelector = new RangeSelectorConstructor(this);
@@ -5747,18 +5784,12 @@
          * @private
          */
         function onChartBeforeRender() {
-            var chart = this, axes = chart.axes, rangeSelector = chart.rangeSelector;
+            var chart = this, rangeSelector = chart.rangeSelector;
             if (rangeSelector) {
                 if (isNumber(rangeSelector.deferredYTDClick)) {
                     rangeSelector.clickButton(rangeSelector.deferredYTDClick);
                     delete rangeSelector.deferredYTDClick;
                 }
-                axes.forEach(function (axis) {
-                    axis.updateNames();
-                    axis.setScale();
-                });
-                chart.getAxisMargins();
-                rangeSelector.render();
                 var verticalAlign = rangeSelector.options.verticalAlign;
                 if (!rangeSelector.options.floating) {
                     if (verticalAlign === 'bottom') {
@@ -5770,53 +5801,34 @@
                 }
             }
         }
-        /**
-         * @private
-         */
-        function onChartCallback(chart) {
-            var extremes, legend, alignTo, verticalAlign;
-            var rangeSelector = chart.rangeSelector, redraw = function () {
-                if (rangeSelector) {
-                    extremes = chart.xAxis[0].getExtremes();
-                    legend = chart.legend;
-                    verticalAlign = (rangeSelector &&
-                        rangeSelector.options.verticalAlign);
-                    if (isNumber(extremes.min)) {
-                        rangeSelector.render(extremes.min, extremes.max);
-                    }
-                    // Re-align the legend so that it's below the rangeselector
-                    if (legend.display &&
-                        verticalAlign === 'top' &&
-                        verticalAlign === legend.options.verticalAlign) {
-                        // Create a new alignment box for the legend.
-                        alignTo = merge(chart.spacingBox);
-                        if (legend.options.layout === 'vertical') {
-                            alignTo.y = chart.plotTop;
-                        }
-                        else {
-                            alignTo.y += rangeSelector.getHeight();
-                        }
-                        legend.group.placed = false; // Don't animate the alignment.
-                        legend.align(alignTo);
-                    }
+        function redrawRangeSelector() {
+            var chart = this;
+            var rangeSelector = this.rangeSelector;
+            if (!rangeSelector) {
+                return;
+            }
+            var alignTo;
+            var extremes = chart.xAxis[0].getExtremes();
+            var legend = chart.legend;
+            var verticalAlign = (rangeSelector &&
+                rangeSelector.options.verticalAlign);
+            if (isNumber(extremes.min)) {
+                rangeSelector.render(extremes.min, extremes.max);
+            }
+            // Re-align the legend so that it's below the rangeselector
+            if (legend.display &&
+                verticalAlign === 'top' &&
+                verticalAlign === legend.options.verticalAlign) {
+                // Create a new alignment box for the legend.
+                alignTo = merge(chart.spacingBox);
+                if (legend.options.layout === 'vertical') {
+                    alignTo.y = chart.plotTop;
                 }
-            };
-            if (rangeSelector) {
-                var events = find(chartDestroyEvents, function (e) { return e[0] === chart; });
-                if (!events) {
-                    chartDestroyEvents.push([chart, [
-                            // Redraw the scroller on setExtremes
-                            addEvent(chart.xAxis[0], 'afterSetExtremes', function (e) {
-                                if (rangeSelector) {
-                                    rangeSelector.render(e.min, e.max);
-                                }
-                            }),
-                            // Redraw the scroller chart resize
-                            addEvent(chart, 'redraw', redraw)
-                        ]]);
+                else {
+                    alignTo.y += rangeSelector.getHeight();
                 }
-                // Do it now
-                redraw();
+                legend.group.placed = false; // Don't animate the alignment.
+                legend.align(alignTo);
             }
         }
         /**
@@ -5851,22 +5863,6 @@
         /**
          * @private
          */
-        function onChartRender() {
-            var chart = this, rangeSelector = chart.rangeSelector;
-            if (rangeSelector && !rangeSelector.options.floating) {
-                rangeSelector.render();
-                var verticalAlign = rangeSelector.options.verticalAlign;
-                if (verticalAlign === 'bottom') {
-                    this.extraBottomMargin = true;
-                }
-                else if (verticalAlign !== 'middle') {
-                    this.extraTopMargin = true;
-                }
-            }
-        }
-        /**
-         * @private
-         */
         function onChartUpdate(e) {
             var chart = this, options = e.options, optionsRangeSelector = options.rangeSelector, extraBottomMarginWas = this.extraBottomMargin, extraTopMarginWas = this.extraTopMargin;
             var rangeSelector = chart.rangeSelector;
@@ -5880,7 +5876,6 @@
             this.extraBottomMargin = false;
             this.extraTopMargin = false;
             if (rangeSelector) {
-                onChartCallback(this);
                 var verticalAlign = (optionsRangeSelector &&
                     optionsRangeSelector.verticalAlign) || (rangeSelector.options && rangeSelector.options.verticalAlign);
                 if (!rangeSelector.options.floating) {
@@ -5908,7 +5903,7 @@
 
         return RangeSelectorComposition;
     });
-    _registerModule(_modules, 'Stock/RangeSelector/RangeSelector.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Stock/RangeSelector/RangeSelectorComposition.js'], _modules['Core/Renderer/SVG/SVGElement.js'], _modules['Core/Utilities.js']], function (Axis, D, H, RangeSelectorComposition, SVGElement, U) {
+    _registerModule(_modules, 'Stock/RangeSelector/RangeSelector.js', [_modules['Core/Axis/Axis.js'], _modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Stock/RangeSelector/RangeSelectorComposition.js'], _modules['Core/Renderer/SVG/SVGElement.js'], _modules['Core/Utilities.js'], _modules['Core/Axis/OrdinalAxis.js']], function (Axis, D, H, RangeSelectorComposition, SVGElement, U, OrdinalAxis) {
         /* *
          *
          *  (c) 2010-2024 Torstein Honsi
@@ -5973,7 +5968,6 @@
             function RangeSelector(chart) {
                 this.buttonOptions = RangeSelector.prototype.defaultButtons;
                 this.initialButtonGroupWidth = 0;
-                this.chart = chart;
                 this.init(chart);
             }
             /* *
@@ -6005,7 +5999,7 @@
             RangeSelector.prototype.clickButton = function (i, redraw) {
                 var rangeSelector = this, chart = rangeSelector.chart, rangeOptions = rangeSelector.buttonOptions[i], baseAxis = chart.xAxis[0], unionExtremes = (chart.scroller && chart.scroller.getUnionExtremes()) || baseAxis || {}, type = rangeOptions.type, dataGrouping = rangeOptions.dataGrouping;
                 var dataMin = unionExtremes.dataMin, dataMax = unionExtremes.dataMax, newMin, newMax = baseAxis && Math.round(Math.min(baseAxis.max, pick(dataMax, baseAxis.max))), // #1568
-                baseXAxisOptions, range = rangeOptions._range, rangeMin, minSetting, rangeSetting, ctx, ytdExtremes, addOffsetMin = true;
+                baseXAxisOptions, range = rangeOptions._range, rangeMin, ctx, ytdExtremes, addOffsetMin = true;
                 // Chart has no data, base series is removed
                 if (dataMin === null || dataMax === null) {
                     return;
@@ -6103,16 +6097,20 @@
                 // Update the chart
                 if (!baseAxis) {
                     // Axis not yet instantiated. Temporarily set min and range
-                    // options and remove them on chart load (#4317).
+                    // options and axes once defined and remove them on
+                    // chart load (#4317 & #20529).
                     baseXAxisOptions = splat(chart.options.xAxis)[0];
-                    rangeSetting = baseXAxisOptions.range;
-                    baseXAxisOptions.range = range;
-                    minSetting = baseXAxisOptions.min;
-                    baseXAxisOptions.min = rangeMin;
+                    var axisRangeUpdateEvent_1 = addEvent(chart, 'afterGetAxes', function () {
+                        var xAxis = chart.xAxis[0];
+                        xAxis.range = xAxis.options.range = range;
+                        xAxis.min = xAxis.options.min = rangeMin;
+                    });
                     addEvent(chart, 'load', function resetMinAndRange() {
+                        var xAxis = chart.xAxis[0];
                         chart.setFixedRange(rangeOptions._range);
-                        baseXAxisOptions.range = rangeSetting;
-                        baseXAxisOptions.min = minSetting;
+                        xAxis.options.range = baseXAxisOptions.range;
+                        xAxis.options.min = baseXAxisOptions.min;
+                        axisRangeUpdateEvent_1(); // Remove event
                     });
                 }
                 else {
@@ -6186,6 +6184,7 @@
                         });
                     }
                 }));
+                this.createElements();
             };
             /**
              * Dynamically update the range selector buttons after a new range has been
@@ -6195,26 +6194,26 @@
              * @function Highcharts.RangeSelector#updateButtonStates
              */
             RangeSelector.prototype.updateButtonStates = function () {
-                var rangeSelector = this, chart = this.chart, dropdown = this.dropdown, baseAxis = chart.xAxis[0], actualRange = Math.round(baseAxis.max - baseAxis.min), hasNoData = !baseAxis.hasVisibleSeries, day = 24 * 36e5, // A single day in milliseconds
+                var rangeSelector = this, chart = this.chart, dropdown = this.dropdown, dropdownLabel = this.dropdownLabel, baseAxis = chart.xAxis[0], actualRange = Math.round(baseAxis.max - baseAxis.min), hasNoData = !baseAxis.hasVisibleSeries, day = 24 * 36e5, // A single day in milliseconds
                 unionExtremes = (chart.scroller &&
-                    chart.scroller.getUnionExtremes()) || baseAxis, dataMin = unionExtremes.dataMin, dataMax = unionExtremes.dataMax, ytdExtremes = rangeSelector.getYTDExtremes(dataMax, dataMin, chart.time.useUTC), ytdMin = ytdExtremes.min, ytdMax = ytdExtremes.max, selected = rangeSelector.selected, allButtonsEnabled = rangeSelector.options.allButtonsEnabled, buttons = rangeSelector.buttons;
-                var selectedExists = isNumber(selected), isSelectedTooGreat = false;
+                    chart.scroller.getUnionExtremes()) || baseAxis, dataMin = unionExtremes.dataMin, dataMax = unionExtremes.dataMax, ytdExtremes = rangeSelector.getYTDExtremes(dataMax, dataMin, chart.time.useUTC), ytdMin = ytdExtremes.min, ytdMax = ytdExtremes.max, selected = rangeSelector.selected, allButtonsEnabled = rangeSelector.options.allButtonsEnabled, buttonStates = new Array(rangeSelector.buttonOptions.length)
+                    .fill(0), selectedExists = isNumber(selected), buttons = rangeSelector.buttons;
+                var isSelectedTooGreat = false, selectedIndex = null;
                 rangeSelector.buttonOptions.forEach(function (rangeOptions, i) {
                     var _a;
-                    var range = rangeOptions._range, type = rangeOptions.type, count = rangeOptions.count || 1, button = buttons[i], offsetRange = rangeOptions._offsetMax -
+                    var range = rangeOptions._range, type = rangeOptions.type, count = rangeOptions.count || 1, offsetRange = rangeOptions._offsetMax -
                         rangeOptions._offsetMin, isSelected = i === selected, 
-                    // Disable buttons where the range exceeds what is allowed in
+                    // Disable buttons where the range exceeds what is allowed i;
                     // the current view
                     isTooGreatRange = range >
                         dataMax - dataMin, 
                     // Disable buttons where the range is smaller than the minimum
                     // range
                     isTooSmallRange = range < baseAxis.minRange;
-                    var state = 0, 
                     // Do not select the YTD button if not explicitly told so
-                    isYTDButNotSelected = false, 
+                    var isYTDButNotSelected = false, 
                     // Disable the All button if we're already showing all
-                    isAllButAlreadyShowingAll = false, isSameRange = range === actualRange;
+                    isSameRange = range === actualRange;
                     if (isSelected && isTooGreatRange) {
                         isSelectedTooGreat = true;
                     }
@@ -6223,8 +6222,9 @@
                         range &&
                         actualRange < range) {
                         // Handle ordinal ranges
-                        var positions = baseAxis.ordinal.positions;
-                        if (positions[positions.length - 1] - positions[0] > range) {
+                        var positions = baseAxis.ordinal.positions, prevOrdinalPosition = OrdinalAxis.Additions.findIndexOf(positions, baseAxis.min, true), nextOrdinalPosition = Math.min(OrdinalAxis.Additions.findIndexOf(positions, baseAxis.max, true) + 1, positions.length - 1);
+                        if (positions[nextOrdinalPosition] -
+                            positions[prevOrdinalPosition] > range) {
                             isSameRange = true;
                         }
                     }
@@ -6244,9 +6244,6 @@
                     else if (type === 'all') {
                         isSameRange = (baseAxis.max - baseAxis.min >=
                             dataMax - dataMin);
-                        isAllButAlreadyShowingAll = (!isSelected &&
-                            selectedExists &&
-                            isSameRange);
                     }
                     // The new zoom area happens to match the range for a button - mark
                     // it selected. This happens when scrolling across an ordinal gap.
@@ -6256,38 +6253,56 @@
                         !(isSelectedTooGreat && type === 'all') &&
                         (isTooGreatRange ||
                             isTooSmallRange ||
-                            isAllButAlreadyShowingAll ||
                             hasNoData));
                     var select = ((isSelectedTooGreat && type === 'all') ||
-                        (isSelected && isSameRange) ||
-                        (isSameRange && !selectedExists && !isYTDButNotSelected) ||
+                        (isYTDButNotSelected ? false : isSameRange) ||
                         (isSelected && rangeSelector.frozenStates));
                     if (disable) {
-                        state = 3;
+                        buttonStates[i] = 3;
                     }
                     else if (select) {
-                        selectedExists = true; // Only one button can be selected
-                        state = 2;
-                    }
-                    // If state has changed, update the button
-                    if (button.state !== state) {
-                        button.setState(state);
-                        if (dropdown) {
-                            dropdown.options[i + 1].disabled = disable;
-                            if (state === 2) {
-                                dropdown.selectedIndex = i + 1;
-                            }
-                        }
-                        // Reset (#9209)
-                        if (state === 0 && selected === i) {
-                            rangeSelector.setSelected();
-                        }
-                        else if ((state === 2 && !defined(selected)) ||
-                            isSelectedTooGreat) {
-                            rangeSelector.setSelected(i);
+                        if (!selectedExists || i === selected) {
+                            selectedIndex = i;
                         }
                     }
                 });
+                if (selectedIndex !== null) {
+                    buttonStates[selectedIndex] = 2;
+                    rangeSelector.setSelected(selectedIndex);
+                }
+                else {
+                    rangeSelector.setSelected();
+                    if (dropdownLabel) {
+                        dropdownLabel.setState(0);
+                        dropdownLabel.attr({
+                            text: (defaultOptions.lang.rangeSelectorZoom || '') + ' ▾'
+                        });
+                    }
+                }
+                for (var i = 0; i < buttonStates.length; i++) {
+                    var state = buttonStates[i];
+                    var button = buttons[i];
+                    if (button.state !== state) {
+                        button.setState(state);
+                        if (dropdown) {
+                            dropdown.options[i + 1].disabled = (state === 3);
+                            if (state === 2) {
+                                if (dropdownLabel) {
+                                    dropdownLabel.setState(2);
+                                    dropdownLabel.attr({
+                                        text: rangeSelector.buttonOptions[i].text + ' ▾'
+                                    });
+                                }
+                                dropdown.selectedIndex = i + 1;
+                            }
+                            var bbox = dropdownLabel.getBBox();
+                            css(dropdown, {
+                                width: "".concat(bbox.width, "px"),
+                                height: "".concat(bbox.height, "px")
+                            });
+                        }
+                    }
+                }
             };
             /**
              * Compute and cache the range for an individual button
@@ -6487,12 +6502,11 @@
                 /**
                  * @private
                  */
-                function updateExtremes() {
-                    var maxInput = rangeSelector.maxInput, minInput = rangeSelector.minInput, chartAxis = chart.xAxis[0], unionExtremes = (chart.scroller && chart.scroller.getUnionExtremes()) || chartAxis, dataMin = unionExtremes.dataMin, dataMax = unionExtremes.dataMax;
+                function updateExtremes(name) {
+                    var _a;
+                    var maxInput = rangeSelector.maxInput, minInput = rangeSelector.minInput, chartAxis = chart.xAxis[0], unionExtremes = ((_a = chart.scroller) === null || _a === void 0 ? void 0 : _a.getUnionExtremes()) || chartAxis, dataMin = unionExtremes.dataMin, dataMax = unionExtremes.dataMax, currentExtreme = chart.xAxis[0].getExtremes()[name];
                     var value = rangeSelector.getInputValue(name);
-                    if (value !== Number(input.getAttribute('data-hc-time-previous')) &&
-                        isNumber(value)) {
-                        input.setAttribute('data-hc-time-previous', value);
+                    if (isNumber(value) && value !== currentExtreme) {
                         // Validate the extremes. If it goes beyond the data min or
                         // max, use the actual data extreme (#2438).
                         if (isMin && maxInput && isNumber(dataMin)) {
@@ -6589,7 +6603,7 @@
                     if (input === H.doc.activeElement) { // Only when focused
                         // Update also when no `change` event is triggered, like when
                         // clicking inside the SVG (#4710)
-                        updateExtremes();
+                        updateExtremes(name);
                     }
                     // #10404 - move hide and blur outside focus
                     rangeSelector.hideInput(name);
@@ -6601,7 +6615,7 @@
                 input.onchange = function () {
                     // Update extremes and blur input when clicking date input calendar
                     if (!keyDown) {
-                        updateExtremes();
+                        updateExtremes(name);
                         rangeSelector.hideInput(name);
                         input.blur();
                     }
@@ -6609,14 +6623,16 @@
                 input.onkeypress = function (event) {
                     // IE does not fire onchange on enter
                     if (event.keyCode === 13) {
-                        updateExtremes();
+                        updateExtremes(name);
                     }
                 };
                 input.onkeydown = function (event) {
                     keyDown = true;
                     // Arrow keys
-                    if (event.keyCode === 38 || event.keyCode === 40) {
-                        updateExtremes();
+                    if (event.key === 'ArrowUp' ||
+                        event.key === 'ArrowDown' ||
+                        event.key === 'Tab') {
+                        updateExtremes(name);
                     }
                 };
                 input.onkeyup = function () {
@@ -6659,6 +6675,43 @@
                     min: min
                 };
             };
+            RangeSelector.prototype.createElements = function () {
+                var _a;
+                var chart = this.chart, renderer = chart.renderer, container = chart.container, chartOptions = chart.options, options = chartOptions.rangeSelector, inputEnabled = options.inputEnabled, inputsZIndex = pick((_a = chartOptions.chart.style) === null || _a === void 0 ? void 0 : _a.zIndex, 0) + 1;
+                if (options.enabled === false) {
+                    return;
+                }
+                this.group = renderer.g('range-selector-group')
+                    .attr({
+                    zIndex: 7
+                })
+                    .add();
+                this.div = createElement('div', void 0, {
+                    position: 'relative',
+                    height: 0,
+                    zIndex: inputsZIndex
+                });
+                if (this.buttonOptions.length) {
+                    this.renderButtons();
+                }
+                // First create a wrapper outside the container in order to make
+                // the inputs work and make export correct
+                if (container.parentNode) {
+                    container.parentNode.insertBefore(this.div, container);
+                }
+                if (inputEnabled) {
+                    // Create the group to keep the inputs
+                    this.inputGroup = renderer.g('input-group').add(this.group);
+                    var minElems = this.drawInput('min');
+                    this.minDateBox = minElems.dateBox;
+                    this.minLabel = minElems.label;
+                    this.minInput = minElems.input;
+                    var maxElems = this.drawInput('max');
+                    this.maxDateBox = maxElems.dateBox;
+                    this.maxLabel = maxElems.label;
+                    this.maxInput = maxElems.input;
+                }
+            };
             /**
              * Render the range selector including the buttons and the inputs. The first
              * time render is called, the elements are created and positioned. On
@@ -6672,45 +6725,11 @@
              *        X axis maximum
              */
             RangeSelector.prototype.render = function (min, max) {
-                var chart = this.chart, renderer = chart.renderer, container = chart.container, chartOptions = chart.options, options = chartOptions.rangeSelector, 
+                var chart = this.chart, chartOptions = chart.options, options = chartOptions.rangeSelector, 
                 // Place inputs above the container
-                inputsZIndex = pick(chartOptions.chart.style &&
-                    chartOptions.chart.style.zIndex, 0) + 1, inputEnabled = options.inputEnabled, rendered = this.rendered;
+                inputEnabled = options.inputEnabled;
                 if (options.enabled === false) {
                     return;
-                }
-                // Create the elements
-                if (!rendered) {
-                    this.group = renderer.g('range-selector-group')
-                        .attr({
-                        zIndex: 7
-                    })
-                        .add();
-                    this.div = createElement('div', void 0, {
-                        position: 'relative',
-                        height: 0,
-                        zIndex: inputsZIndex
-                    });
-                    if (this.buttonOptions.length) {
-                        this.renderButtons();
-                    }
-                    // First create a wrapper outside the container in order to make
-                    // the inputs work and make export correct
-                    if (container.parentNode) {
-                        container.parentNode.insertBefore(this.div, container);
-                    }
-                    if (inputEnabled) {
-                        // Create the group to keep the inputs
-                        this.inputGroup = renderer.g('input-group').add(this.group);
-                        var minElems = this.drawInput('min');
-                        this.minDateBox = minElems.dateBox;
-                        this.minLabel = minElems.label;
-                        this.minInput = minElems.input;
-                        var maxElems = this.drawInput('max');
-                        this.maxDateBox = maxElems.dateBox;
-                        this.maxLabel = maxElems.label;
-                        this.maxInput = maxElems.input;
-                    }
                 }
                 if (inputEnabled) {
                     // Set or reset the input values
@@ -6743,7 +6762,7 @@
                     }
                 }
                 this.alignElements();
-                this.rendered = true;
+                this.updateButtonStates();
             };
             /**
              * Render the range buttons. This only runs the first time, later the
@@ -6754,7 +6773,8 @@
              */
             RangeSelector.prototype.renderButtons = function () {
                 var _this = this;
-                var _a = this, buttons = _a.buttons, chart = _a.chart, options = _a.options;
+                var _a;
+                var _b = this, buttons = _b.buttons, chart = _b.chart, options = _b.options;
                 var lang = defaultOptions.lang;
                 var renderer = chart.renderer;
                 var buttonTheme = merge(options.buttonTheme);
@@ -6768,34 +6788,39 @@
                 this.buttonGroup = renderer.g('range-selector-buttons').add(this.group);
                 var dropdown = this.dropdown = createElement('select', void 0, {
                     position: 'absolute',
-                    width: '1px',
-                    height: '1px',
                     padding: 0,
                     border: 0,
-                    top: '-9999em',
                     cursor: 'pointer',
                     opacity: 0.0001
                 }, this.div);
+                // Create a label for dropdown select element
+                var userButtonTheme = (_a = chart.userOptions.rangeSelector) === null || _a === void 0 ? void 0 : _a.buttonTheme;
+                this.dropdownLabel = renderer.button('', 0, 0, function () { }, merge(buttonTheme, {
+                    'stroke-width': pick(buttonTheme['stroke-width'], 0),
+                    width: 'auto',
+                    paddingLeft: pick(options.buttonTheme.paddingLeft, userButtonTheme === null || userButtonTheme === void 0 ? void 0 : userButtonTheme.padding, 8),
+                    paddingRight: pick(options.buttonTheme.paddingRight, userButtonTheme === null || userButtonTheme === void 0 ? void 0 : userButtonTheme.padding, 8)
+                }), states && states.hover, states && states.select, states && states.disabled)
+                    .hide()
+                    .add(this.group);
                 // Prevent page zoom on iPhone
                 addEvent(dropdown, 'touchstart', function () {
                     dropdown.style.fontSize = '16px';
                 });
                 // Forward events from select to button
-                [
-                    [H.isMS ? 'mouseover' : 'mouseenter'],
-                    [H.isMS ? 'mouseout' : 'mouseleave'],
-                    ['change', 'click']
-                ].forEach(function (_a) {
-                    var from = _a[0], to = _a[1];
-                    addEvent(dropdown, from, function () {
-                        var button = buttons[_this.currentButtonIndex()];
-                        if (button) {
-                            fireEvent(button.element, to || from);
-                        }
-                    });
+                var mouseOver = H.isMS ? 'mouseover' : 'mouseenter', mouseOut = H.isMS ? 'mouseout' : 'mouseleave';
+                addEvent(dropdown, mouseOver, function () {
+                    fireEvent(_this.dropdownLabel.element, mouseOver);
+                });
+                addEvent(dropdown, mouseOut, function () {
+                    fireEvent(_this.dropdownLabel.element, mouseOut);
+                });
+                addEvent(dropdown, 'change', function () {
+                    var button = _this.buttons[dropdown.selectedIndex - 1];
+                    fireEvent(button.element, 'click');
                 });
                 this.zoomText = renderer
-                    .label((lang && lang.rangeSelectorZoom) || '', 0)
+                    .label(lang.rangeSelectorZoom || '', 0)
                     .attr({
                     padding: options.buttonTheme.padding,
                     height: options.buttonTheme.height,
@@ -6847,7 +6872,8 @@
              */
             RangeSelector.prototype.alignElements = function () {
                 var _this = this;
-                var _a = this, buttonGroup = _a.buttonGroup, buttons = _a.buttons, chart = _a.chart, group = _a.group, inputGroup = _a.inputGroup, options = _a.options, zoomText = _a.zoomText;
+                var _a;
+                var _b = this, buttonGroup = _b.buttonGroup, buttons = _b.buttons, chart = _b.chart, group = _b.group, inputGroup = _b.inputGroup, options = _b.options, zoomText = _b.zoomText;
                 var chartOptions = chart.options;
                 var navButtonOptions = (chartOptions.exporting &&
                     chartOptions.exporting.enabled !== false &&
@@ -6888,10 +6914,13 @@
                             this.initialButtonGroupWidth = width_1;
                         }
                         plotLeft -= chart.spacing[3];
-                        this.updateButtonStates();
                         // Detect collision between button group and exporting
                         var xOffsetForExportButton_1 = getXOffsetForExportButton(buttonGroup, buttonPosition);
                         this.alignButtonGroup(xOffsetForExportButton_1);
+                        if ((_a = this.buttonGroup) === null || _a === void 0 ? void 0 : _a.translateY) {
+                            this.dropdownLabel
+                                .attr({ y: this.buttonGroup.translateY });
+                        }
                         // Skip animation
                         group.placed = buttonGroup.placed = chart.hasLoaded;
                     }
@@ -6968,7 +6997,7 @@
                     }
                     group.translate(options.x, options.y + Math.floor(translateY));
                     // Translate HTML inputs
-                    var _b = this, minInput = _b.minInput, maxInput = _b.maxInput, dropdown = _b.dropdown;
+                    var _c = this, minInput = _c.minInput, maxInput = _c.maxInput, dropdown = _c.dropdown;
                     if (options.inputEnabled && minInput && maxInput) {
                         minInput.style.marginTop = group.translateY + 'px';
                         maxInput.style.marginTop = group.translateY + 'px';
@@ -7062,7 +7091,7 @@
                     return buttonWidth;
                 };
                 var groupsOverlap = function (buttonGroupWidth) {
-                    if (inputGroup && buttonGroup) {
+                    if ((inputGroup === null || inputGroup === void 0 ? void 0 : inputGroup.alignOptions) && buttonGroup) {
                         var inputGroupX = (inputGroup.alignAttr.translateX +
                             inputGroup.alignOptions.x -
                             xOffsetForExportButton +
@@ -7070,7 +7099,7 @@
                             inputGroup.getBBox().x +
                             // 2px padding to not overlap input and label
                             2);
-                        var inputGroupWidth = inputGroup.alignOptions.width;
+                        var inputGroupWidth = inputGroup.alignOptions.width || 0;
                         var buttonGroupX = buttonGroup.alignAttr.translateX +
                             buttonGroup.getBBox().x;
                         return (buttonGroupX + buttonGroupWidth > inputGroupX) &&
@@ -7094,7 +7123,7 @@
                 };
                 if (buttonGroup) {
                     if (dropdown === 'always') {
-                        this.collapseButtons(xOffsetForExportButton);
+                        this.collapseButtons();
                         if (groupsOverlap(maxButtonWidth())) {
                             // Move the inputs down if there is still a collision
                             // after collapsing the buttons
@@ -7112,7 +7141,7 @@
                         // 20 is minimal spacing between elements
                         groupsOverlap(this.initialButtonGroupWidth + 20)) {
                         if (dropdown === 'responsive') {
-                            this.collapseButtons(xOffsetForExportButton);
+                            this.collapseButtons();
                             if (groupsOverlap(maxButtonWidth())) {
                                 moveInputsDown();
                             }
@@ -7127,7 +7156,7 @@
                 }
                 else if (buttonGroup && dropdown === 'responsive') {
                     if (this.initialButtonGroupWidth > chart.plotWidth) {
-                        this.collapseButtons(xOffsetForExportButton);
+                        this.collapseButtons();
                     }
                     else {
                         this.expandButtons();
@@ -7135,54 +7164,20 @@
                 }
             };
             /**
-             * Collapse the buttons and put the select element on top.
+             * Collapse the buttons and show the select element.
              *
              * @private
              * @function Highcharts.RangeSelector#collapseButtons
              * @param {number} xOffsetForExportButton
              */
-            RangeSelector.prototype.collapseButtons = function (xOffsetForExportButton) {
-                var _a = this, buttons = _a.buttons, buttonOptions = _a.buttonOptions, chart = _a.chart, dropdown = _a.dropdown, options = _a.options, zoomText = _a.zoomText;
-                // If the buttons are already collapsed do nothing.
+            RangeSelector.prototype.collapseButtons = function () {
+                var _a = this, buttons = _a.buttons, zoomText = _a.zoomText;
                 if (this.isCollapsed === true) {
                     return;
                 }
                 this.isCollapsed = true;
-                var userButtonTheme = (chart.userOptions.rangeSelector &&
-                    chart.userOptions.rangeSelector.buttonTheme) || {};
-                var getAttribs = function (text) { return ({
-                    text: text ? "".concat(text, " \u25BE") : '▾',
-                    width: 'auto',
-                    paddingLeft: pick(options.buttonTheme.paddingLeft, userButtonTheme.padding, 8),
-                    paddingRight: pick(options.buttonTheme.paddingRight, userButtonTheme.padding, 8)
-                }); };
-                if (zoomText) {
-                    zoomText.hide();
-                }
-                var hasActiveButton = false;
-                buttonOptions.forEach(function (rangeOptions, i) {
-                    var button = buttons[i];
-                    if (button.state !== 2) {
-                        button.hide();
-                    }
-                    else {
-                        button.show();
-                        button.attr(getAttribs(rangeOptions.text));
-                        hasActiveButton = true;
-                    }
-                });
-                if (!hasActiveButton) {
-                    if (dropdown) {
-                        dropdown.selectedIndex = 0;
-                    }
-                    buttons[0].show();
-                    buttons[0].attr(getAttribs(this.zoomText && this.zoomText.textStr));
-                }
-                var align = options.buttonPosition.align;
-                this.positionButtons();
-                if (align === 'right' || align === 'center') {
-                    this.alignButtonGroup(xOffsetForExportButton, buttons[this.currentButtonIndex()].getBBox().width);
-                }
+                zoomText.hide();
+                buttons.forEach(function (button) { return void button.hide(); });
                 this.showDropdown();
             };
             /**
@@ -7192,43 +7187,15 @@
              * @function Highcharts.RangeSelector#expandButtons
              */
             RangeSelector.prototype.expandButtons = function () {
-                var _a = this, buttons = _a.buttons, buttonOptions = _a.buttonOptions, options = _a.options, zoomText = _a.zoomText;
-                this.hideDropdown();
-                // If buttons are already not collapsed, do nothing.
+                var _a = this, buttons = _a.buttons, zoomText = _a.zoomText;
                 if (this.isCollapsed === false) {
                     return;
                 }
                 this.isCollapsed = false;
-                if (zoomText) {
-                    zoomText.show();
-                }
-                buttonOptions.forEach(function (rangeOptions, i) {
-                    var button = buttons[i];
-                    button.show();
-                    button.attr({
-                        text: rangeOptions.text,
-                        width: options.buttonTheme.width || 28,
-                        paddingLeft: pick(options.buttonTheme.paddingLeft, 'unset'),
-                        paddingRight: pick(options.buttonTheme.paddingRight, 'unset')
-                    });
-                    if (button.state < 2) {
-                        button.setState(0);
-                    }
-                });
+                this.hideDropdown();
+                zoomText.show();
+                buttons.forEach(function (button) { return void button.show(); });
                 this.positionButtons();
-            };
-            /**
-             * Get the index of the visible button when the buttons are collapsed.
-             *
-             * @private
-             * @function Highcharts.RangeSelector#currentButtonIndex
-             */
-            RangeSelector.prototype.currentButtonIndex = function () {
-                var dropdown = this.dropdown;
-                if (dropdown && dropdown.selectedIndex > 0) {
-                    return dropdown.selectedIndex - 1;
-                }
-                return 0;
             };
             /**
              * Position the select element on top of the button.
@@ -7237,14 +7204,16 @@
              * @function Highcharts.RangeSelector#showDropdown
              */
             RangeSelector.prototype.showDropdown = function () {
-                var _a = this, buttonGroup = _a.buttonGroup, buttons = _a.buttons, chart = _a.chart, dropdown = _a.dropdown;
+                var _a = this, buttonGroup = _a.buttonGroup, chart = _a.chart, dropdownLabel = _a.dropdownLabel, dropdown = _a.dropdown;
                 if (buttonGroup && dropdown) {
-                    var _b = buttonGroup.translateX, translateX = _b === void 0 ? 0 : _b, _c = buttonGroup.translateY, translateY = _c === void 0 ? 0 : _c, bBox = buttons[this.currentButtonIndex()].getBBox();
+                    var _b = buttonGroup.translateX, translateX = _b === void 0 ? 0 : _b, _c = buttonGroup.translateY, translateY = _c === void 0 ? 0 : _c, left = chart.plotLeft + translateX, top_1 = translateY;
+                    dropdownLabel
+                        .attr({ x: left, y: top_1 })
+                        .show();
                     css(dropdown, {
-                        left: (chart.plotLeft + translateX) + 'px',
-                        top: (translateY + 0.5) + 'px',
-                        width: bBox.width + 'px',
-                        height: bBox.height + 'px'
+                        left: left + 'px',
+                        top: top_1 + 'px',
+                        visibility: 'inherit'
                     });
                     this.hasVisibleDropdown = true;
                 }
@@ -7256,8 +7225,9 @@
             RangeSelector.prototype.hideDropdown = function () {
                 var dropdown = this.dropdown;
                 if (dropdown) {
+                    this.dropdownLabel.hide();
                     css(dropdown, {
-                        top: '-9999em',
+                        visibility: 'hidden',
                         width: '1px',
                         height: '1px'
                     });
@@ -7312,12 +7282,15 @@
              * @function Highcharts.RangeSelector#update
              * @param {Highcharts.RangeSelectorOptions} options
              */
-            RangeSelector.prototype.update = function (options) {
+            RangeSelector.prototype.update = function (options, redraw) {
+                if (redraw === void 0) { redraw = true; }
                 var chart = this.chart;
                 merge(true, chart.options.rangeSelector, options);
                 this.destroy();
                 this.init(chart);
-                this.render();
+                if (redraw) {
+                    this.render();
+                }
             };
             /**
              * Destroys allocated elements.
@@ -7473,7 +7446,7 @@
         var format = F.format;
         var getOptions = D.getOptions;
         var setFixedRange = StockUtilities.setFixedRange;
-        var addEvent = U.addEvent, clamp = U.clamp, defined = U.defined, extend = U.extend, find = U.find, isNumber = U.isNumber, isString = U.isString, merge = U.merge, pick = U.pick, splat = U.splat;
+        var addEvent = U.addEvent, clamp = U.clamp, crisp = U.crisp, defined = U.defined, extend = U.extend, find = U.find, isNumber = U.isNumber, isString = U.isString, merge = U.merge, pick = U.pick, splat = U.splat;
         /* *
          *
          *  Functions
@@ -8105,15 +8078,11 @@
                 // normalize to a crisp line
                 for (var i = 0; i < points.length; i = i + 2) {
                     var start = points[i], end = points[i + 1];
-                    if (start[1] === end[1]) {
-                        // Subtract due to #1129. Now bottom and left axis gridlines
-                        // behave the same.
-                        start[1] = end[1] =
-                            Math.round(start[1]) - (width % 2 / 2);
+                    if (defined(start[1]) && start[1] === end[1]) {
+                        start[1] = end[1] = crisp(start[1], width);
                     }
-                    if (start[2] === end[2]) {
-                        start[2] = end[2] =
-                            Math.round(start[2]) + (width % 2 / 2);
+                    if (defined(start[2]) && start[2] === end[2]) {
+                        start[2] = end[2] = crisp(start[2], width);
                     }
                 }
                 return points;
@@ -8386,7 +8355,7 @@
             };
         })();
         var ColumnSeries = SeriesRegistry.seriesTypes.column;
-        var extend = U.extend, merge = U.merge;
+        var crisp = U.crisp, extend = U.extend, merge = U.merge;
         /* *
          *
          *  Class
@@ -8437,10 +8406,9 @@
              */
             HLCSeries.prototype.getPointPath = function (point, graphic) {
                 // Crisp vector coordinates
-                var strokeWidth = graphic.strokeWidth(), series = point.series, crispCorr = (strokeWidth % 2) / 2, 
+                var strokeWidth = graphic.strokeWidth(), series = point.series, 
                 // #2596:
-                crispX = Math.round(point.plotX) - crispCorr, halfWidth = Math.round(point.shapeArgs.width / 2);
-                var plotClose = point.plotClose;
+                crispX = crisp(point.plotX || 0, strokeWidth), halfWidth = Math.round(point.shapeArgs.width / 2);
                 // The vertical stem
                 var path = [
                     ['M', crispX, Math.round(point.yBottom)],
@@ -8448,7 +8416,7 @@
                 ];
                 // Close
                 if (point.close !== null) {
-                    plotClose = Math.round(point.plotClose) + crispCorr;
+                    var plotClose = crisp(point.plotClose, strokeWidth);
                     path.push(['M', crispX, plotClose], ['L', crispX + halfWidth, plotClose]);
                     series.extendStem(path, strokeWidth / 2, plotClose);
                 }
@@ -8853,7 +8821,7 @@
         })();
         var composed = H.composed;
         var HLCSeries = SeriesRegistry.seriesTypes.hlc;
-        var addEvent = U.addEvent, extend = U.extend, merge = U.merge, pushUnique = U.pushUnique;
+        var addEvent = U.addEvent, crisp = U.crisp, extend = U.extend, merge = U.merge, pushUnique = U.pushUnique;
         /* *
          *
          *  Functions
@@ -8927,11 +8895,9 @@
              *
              * */
             OHLCSeries.prototype.getPointPath = function (point, graphic) {
-                var path = _super.prototype.getPointPath.call(this, point, graphic), strokeWidth = graphic.strokeWidth(), crispCorr = (strokeWidth % 2) / 2, crispX = Math.round(point.plotX) - crispCorr, halfWidth = Math.round(point.shapeArgs.width / 2);
-                var plotOpen = point.plotOpen;
-                // Crisp vector coordinates
+                var path = _super.prototype.getPointPath.call(this, point, graphic), strokeWidth = graphic.strokeWidth(), crispX = crisp(point.plotX || 0, strokeWidth), halfWidth = Math.round(point.shapeArgs.width / 2);
                 if (point.open !== null) {
-                    plotOpen = Math.round(point.plotOpen) + crispCorr;
+                    var plotOpen = crisp(point.plotOpen, strokeWidth);
                     path.push(['M', crispX, plotOpen], ['L', crispX - halfWidth, plotOpen]);
                     _super.prototype.extendStem.call(this, path, strokeWidth / 2, plotOpen);
                 }
@@ -9153,7 +9119,7 @@
 
         return CandlestickSeriesDefaults;
     });
-    _registerModule(_modules, 'Series/Candlestick/CandlestickSeries.js', [_modules['Series/Candlestick/CandlestickSeriesDefaults.js'], _modules['Core/Defaults.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (CandlestickSeriesDefaults, D, SeriesRegistry, U) {
+    _registerModule(_modules, 'Series/Candlestick/CandlestickSeries.js', [_modules['Series/Candlestick/CandlestickSeriesDefaults.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (CandlestickSeriesDefaults, SeriesRegistry, U) {
         /* *
          *
          *  (c) 2010-2024 Torstein Honsi
@@ -9178,9 +9144,8 @@
                 d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
             };
         })();
-        var defaultOptions = D.defaultOptions;
         var _a = SeriesRegistry.seriesTypes, ColumnSeries = _a.column, OHLCSeries = _a.ohlc;
-        var merge = U.merge;
+        var crisp = U.crisp, merge = U.merge;
         /* *
          *
          *  Class
@@ -9238,7 +9203,7 @@
                 var series = this, points = series.points, chart = series.chart, reversedYAxis = series.yAxis.reversed;
                 for (var _i = 0, points_1 = points; _i < points_1.length; _i++) {
                     var point = points_1[_i];
-                    var graphic = point.graphic, plotOpen = void 0, plotClose = void 0, topBox = void 0, bottomBox = void 0, hasTopWhisker = void 0, hasBottomWhisker = void 0, crispCorr = void 0, crispX = void 0, path = void 0, halfWidth = void 0;
+                    var graphic = point.graphic, plotOpen = void 0, plotClose = void 0, topBox = void 0, bottomBox = void 0, hasTopWhisker = void 0, hasBottomWhisker = void 0, crispX = void 0, path = void 0, halfWidth = void 0;
                     var isNew = !graphic;
                     if (typeof point.plotY !== 'undefined') {
                         if (!graphic) {
@@ -9251,9 +9216,9 @@
                                 .shadow(series.options.shadow);
                         }
                         // Crisp vector coordinates
-                        crispCorr = (graphic.strokeWidth() % 2) / 2;
+                        var strokeWidth = graphic.strokeWidth();
                         // #2596:
-                        crispX = Math.round(point.plotX) - crispCorr;
+                        crispX = crisp(point.plotX || 0, strokeWidth);
                         plotOpen = point.plotOpen;
                         plotClose = point.plotClose;
                         topBox = Math.min(plotOpen, plotClose);
@@ -9262,13 +9227,13 @@
                         hasTopWhisker = reversedYAxis ?
                             bottomBox !== point.yBottom :
                             Math.round(topBox) !==
-                                Math.round(point.plotHigh);
+                                Math.round(point.plotHigh || 0);
                         hasBottomWhisker = reversedYAxis ?
                             Math.round(topBox) !==
-                                Math.round(point.plotHigh) :
+                                Math.round(point.plotHigh || 0) :
                             bottomBox !== point.yBottom;
-                        topBox = Math.round(topBox) + crispCorr;
-                        bottomBox = Math.round(bottomBox) + crispCorr;
+                        topBox = crisp(topBox, strokeWidth);
+                        bottomBox = crisp(bottomBox, strokeWidth);
                         // Create the path. Due to a bug in Chrome 49, the path is
                         // first instantiated with no values, then the values
                         // pushed. For unknown reasons, instantiating the path array
@@ -9305,7 +9270,7 @@
              *  Static Properties
              *
              * */
-            CandlestickSeries.defaultOptions = merge(OHLCSeries.defaultOptions, defaultOptions.plotOptions, { tooltip: OHLCSeries.defaultOptions.tooltip }, CandlestickSeriesDefaults);
+            CandlestickSeries.defaultOptions = merge(OHLCSeries.defaultOptions, { tooltip: OHLCSeries.defaultOptions.tooltip }, CandlestickSeriesDefaults);
             return CandlestickSeries;
         }(OHLCSeries));
         SeriesRegistry.registerSeriesType('candlestick', CandlestickSeries);
@@ -10089,6 +10054,7 @@
              * @private
              */
             FlagsSeries.prototype.drawPoints = function () {
+                var _a, _b;
                 var series = this, points = series.points, chart = series.chart, renderer = chart.renderer, inverted = chart.inverted, options = series.options, optionsY = options.y, yAxis = series.yAxis, boxesMap = {}, boxes = [], borderRadius = isNumber(options.borderRadius) ?
                     options.borderRadius : 0;
                 var plotX, plotY, shape, i, point, graphic, stackIndex, anchorY, attribs, outsideRight, centered;
@@ -10158,7 +10124,8 @@
                             attribs.anchorX = point.anchorX;
                         }
                         graphic.attr({
-                            text: point.options.title || options.title || 'A'
+                            // Allow empty string as a flag title (#20549)
+                            text: (_b = (_a = point.options.title) !== null && _a !== void 0 ? _a : options.title) !== null && _b !== void 0 ? _b : 'A'
                         })[graphic.isNew ? 'attr' : 'animate'](attribs);
                         // Rig for the distribute function
                         if (!options.allowOverlapX) {
@@ -11688,6 +11655,7 @@
             }
             else {
                 series.groupMap = null;
+                series.currentDataGrouping = void 0;
             }
             series.hasGroupedData = hasGroupedData;
             series.preventGraphAnimation =

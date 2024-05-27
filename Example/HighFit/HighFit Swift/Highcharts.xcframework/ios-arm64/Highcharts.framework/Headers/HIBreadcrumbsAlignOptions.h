@@ -17,11 +17,11 @@ Options for aligning breadcrumbs group.
 /**
 Align of a Breadcrumb group.
 */
-@property(nonatomic, readwrite) NSString *align;
+@property(nonatomic, readwrite) id align;
 /**
 Vertical align of a Breadcrumb group.
 */
-@property(nonatomic, readwrite) NSString *verticalAlign;
+@property(nonatomic, readwrite) id verticalAlign;
 /**
 X offset of a Breadcrumbs group.
 */
