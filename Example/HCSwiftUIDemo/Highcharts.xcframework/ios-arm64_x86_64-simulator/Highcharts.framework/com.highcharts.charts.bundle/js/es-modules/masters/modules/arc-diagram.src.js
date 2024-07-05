@@ -1,7 +1,6 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
- * @module highcharts/modules/arc-diagram
- * @requires highcharts
+ * @license Highcharts JS v11.4.5 (2024-07-04)
+ * @module modules/arc-diagram
  * @requires highcharts/modules/sankey
  *
  * Arc diagram module

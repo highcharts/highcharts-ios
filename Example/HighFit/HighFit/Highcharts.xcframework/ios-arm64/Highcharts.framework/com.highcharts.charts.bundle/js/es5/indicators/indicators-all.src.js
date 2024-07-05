@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.3 (2024-05-22)
+ * @license Highstock JS v11.4.5 (2024-07-04)
  *
  * All technical indicators for Highcharts Stock
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -380,7 +380,7 @@
             },
             hasDerivedData: true,
             nameComponents: ['period'],
-            nameSuffixes: [],
+            nameSuffixes: [], // E.g. Zig Zag uses extra '%'' in the legend name
             useCommonDataGrouping: true
         });
         SeriesRegistry.registerSeriesType('sma', SMAIndicator);
@@ -683,7 +683,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unused index, do not inherit (#15362)
                     /**
                      * The id of volume series which is mandatory.
                      * For example using OHLC data, volumeSeriesID='volume' means
@@ -1353,7 +1353,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     period: 25
                 },
                 marker: {
@@ -2360,7 +2360,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unused index, do not inherit (#15362)
                     /**
                      * The id of another series to use its data as volume data for the
                      * indicator calculation.
@@ -2969,7 +2969,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unused index, do not inherit (#15362)
                     /**
                      * The id of volume series which is mandatory.
                      * For example using OHLC data, volumeSeriesID='volume' means
@@ -3800,7 +3800,7 @@
                  * @excluding period
                  */
                 params: {
-                    period: void 0,
+                    period: void 0, // Unchangeable period, do not inherit (#15362)
                     /**
                      * Periods for Absolute Price Oscillator calculations.
                      *
@@ -4089,13 +4089,13 @@
                     senkouSpanOptions.styles.fill, negativeColor = senkouSpanOptions.negativeColor, 
                 // Points to create color and negativeColor senkouSpan
                 points = [
-                    [],
+                    [], // Points color
                     [] // Points negative color
                 ], 
                 // For span, we need an access to the next points, used in
                 // getGraphPath()
                 nextPoints = [
-                    [],
+                    [], // Next points color
                     [] // Next points negative color
                 ];
                 var pointsLength = mainLinePoints.length, lineIndex = 0, position, point, i, startIntersect, endIntersect, sectionPoints, sectionNextPoints, pointsPlotYSum, nextPointsPlotYSum, senkouSpanTempColor, concatArrIndex, j, k;
@@ -4360,7 +4360,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unused index, do not inherit (#15362)
                     period: 26,
                     /**
                      * The base period for Tenkan calculations.
@@ -5624,7 +5624,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     /**
                      * The id of volume series which is mandatory.
                      * For example using OHLC data, volumeSeriesID='volume' means
@@ -6424,7 +6424,7 @@
              * @since        6.0.0
              * @product      highstock
              * @requires     stock/indicators/indicators
-             * @requires     stock/indicators/pivotpoints
+             * @requires     stock/indicators/pivot-points
              * @optionparent plotOptions.pivotpoints
              */
             PivotPointsIndicator.defaultOptions = merge(SMAIndicator.defaultOptions, {
@@ -6432,7 +6432,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     period: 28,
                     /**
                      * Algorithm used to calculate resistance and support lines based
@@ -6486,7 +6486,7 @@
          * @product   highstock
          * @excluding dataParser, dataURL
          * @requires  stock/indicators/indicators
-         * @requires  stock/indicators/pivotpoints
+         * @requires  stock/indicators/pivot-points
          * @apioption series.pivotpoints
          */
         ''; // To include the above in the js output'
@@ -6614,7 +6614,7 @@
                  * @excluding period
                  */
                 params: {
-                    period: void 0,
+                    period: void 0, // Unchangeable period, do not inherit (#15362)
                     /**
                      * Periods for Percentage Price Oscillator calculations.
                      *
@@ -6822,7 +6822,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     period: 20
                 },
                 lineWidth: 1,
@@ -7364,7 +7364,7 @@
                  * @excluding period
                  */
                 params: {
-                    period: void 0,
+                    period: void 0, // Unchangeable period, do not inherit (#15362)
                     /**
                      * The initial value for acceleration factor.
                      * Acceleration factor is starting with this value
@@ -8142,7 +8142,7 @@
              * @product      highstock
              * @requires     stock/indicators/indicators
              * @requires     stock/indicators/stochastic
-             * @requires     stock/indicators/slowstochastic
+             * @requires     stock/indicators/slow-stochastic
              * @optionparent plotOptions.slowstochastic
              */
             SlowStochasticIndicator.defaultOptions = merge(StochasticIndicator.defaultOptions, {
@@ -8181,7 +8181,7 @@
          * @product   highstock
          * @requires  stock/indicators/indicators
          * @requires  stock/indicators/stochastic
-         * @requires  stock/indicators/slowstochastic
+         * @requires  stock/indicators/slow-stochastic
          * @apioption series.slowstochastic
          */
         ''; // To include the above in the js output
@@ -8287,8 +8287,8 @@
                 }, 
                 // Sorted supertrend points array
                 groupedPoints = {
-                    top: [],
-                    bottom: [],
+                    top: [], // Rising trend line points
+                    bottom: [], // Falling trend line points
                     intersect: [] // Change trend line points
                 }, 
                 // Options for trend lines
@@ -8578,7 +8578,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     /**
                      * Multiplier for Supertrend Indicator.
                      */
@@ -9496,7 +9496,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     period: 30,
                     /**
                      * The id of volume series which is mandatory. For example using
@@ -9648,7 +9648,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     /**
                      * Period for Williams %R oscillator
                      */
@@ -10246,7 +10246,7 @@
                 var xData = baseSeries.xData, yData = baseSeries.yData, period = regressionSeriesParams.period, 
                 // Format required to be returned
                 indicatorData = {
-                    xData: [],
+                    xData: [], // By getValues() method
                     yData: [],
                     values: []
                 }, xAxisUnit = this.options.params.xAxisUnit ||
@@ -11069,7 +11069,7 @@
                  * @excluding period
                  */
                 params: {
-                    period: void 0,
+                    period: void 0, // Unchangeable period, do not inherit (#15362)
                     /**
                      * The point index which indicator calculations will base. For
                      * example using OHLC data, index=2 means the indicator will be

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  *
  * (c) 2016-2024 Highsoft AS
  * Authors: Jon Arild Nygard
@@ -27,7 +27,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -447,8 +447,6 @@
             /**
              * Update Breadcrumbs properties, like level and list.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#updateProperties
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -462,8 +460,6 @@
              * Set breadcrumbs list.
              * @function Highcharts.Breadcrumbs#setList
              *
-             * @requires  modules/breadcrumbs
-             *
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
              * @param {Highcharts.BreadcrumbsOptions} list
@@ -475,8 +471,6 @@
             /**
              * Calculate level on which chart currently is.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#setLevel
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -487,8 +481,6 @@
             /**
              * Get Breadcrumbs level
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#getLevel
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -498,8 +490,6 @@
             };
             /**
              * Default button text formatter.
-             *
-             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#getButtonText
              * @param {Highcharts.Breadcrumbs} this
@@ -528,8 +518,6 @@
             /**
              * Redraw.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#redraw
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -545,8 +533,6 @@
             };
             /**
              * Create a group, then draw breadcrumbs together with the separators.
-             *
-             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#render
              * @param {Highcharts.Breadcrumbs} this
@@ -576,8 +562,6 @@
             /**
              * Draw breadcrumbs together with the separators.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#renderFullPathButtons
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -592,8 +576,6 @@
             /**
              * Render Single button - when showFullPath is not used. The button is
              * similar to the old drillUpButton
-             *
-             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#renderSingleButton
              * @param {Highcharts.Breadcrumbs} this Breadcrumbs class.
@@ -624,8 +606,6 @@
             /**
              * Update group position based on align and it's width.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#renderSingleButton
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -655,8 +635,6 @@
             };
             /**
              * Render a button.
-             *
-             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#renderButton
              * @param {Highcharts.Breadcrumbs} this
@@ -704,8 +682,6 @@
             /**
              * Render a separator.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#renderSeparator
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -731,8 +707,6 @@
              * Update.
              * @function Highcharts.Breadcrumbs#update
              *
-             * @requires  modules/breadcrumbs
-             *
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
              * @param {Highcharts.BreadcrumbsOptions} options
@@ -749,8 +723,6 @@
              * Update button text when the showFullPath set to false.
              * @function Highcharts.Breadcrumbs#updateSingleButton
              *
-             * @requires  modules/breadcrumbs
-             *
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
              */
@@ -764,8 +736,6 @@
             };
             /**
              * Destroy the chosen breadcrumbs group
-             *
-             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#destroy
              * @param {Highcharts.Breadcrumbs} this
@@ -784,8 +754,6 @@
             };
             /**
              * Destroy the elements' buttons and separators.
-             *
-             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#destroyListElements
              * @param {Highcharts.Breadcrumbs} this
@@ -811,8 +779,6 @@
             /**
              * Destroy the single button if exists.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#destroySingleButton
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -826,8 +792,6 @@
             /**
              * Reset state for all buttons in elementList.
              *
-             * @requires  modules/breadcrumbs
-             *
              * @function Highcharts.Breadcrumbs#resetElementListState
              * @param {Highcharts.Breadcrumbs} this
              *        Breadcrumbs class.
@@ -839,8 +803,6 @@
             };
             /**
              * Update rendered elements inside the elementList.
-             *
-             * @requires  modules/breadcrumbs
              *
              * @function Highcharts.Breadcrumbs#updateListElements
              *
@@ -1430,7 +1392,8 @@
                 var series = this.series, options = series.options;
                 var className = _super.prototype.getClassName.call(this);
                 // Above the current level
-                if (this.node.level <= series.nodeMap[series.rootNode].level) {
+                if (this.node.level <= series.nodeMap[series.rootNode].level &&
+                    this.node.children.length) {
                     className += ' highcharts-above-level';
                 }
                 else if (!this.node.isLeaf &&
@@ -1936,7 +1899,21 @@
                     shadow: false
                 }
             },
-            legendSymbol: 'rectangle'
+            legendSymbol: 'rectangle',
+            /**
+             * This option enables automatic traversing to the last child level upon
+             * node interaction. This feature simplifies navigation by immediately
+             * focusing on the deepest layer of the data structure without intermediate
+             * steps.
+             *
+             * @sample {highcharts} highcharts/plotoptions/treemap-traverse-to-leaf/
+             *         Traverse to leaf enabled
+             *
+             * @since   @next
+             *
+             * @product highcharts
+             */
+            traverseToLeaf: false
         };
         /**
          * A `treemap` series. If the [type](#series.treemap.type) option is
@@ -2756,14 +2733,22 @@
              * @private
              */
             TreemapSeries.prototype.drillToByLeaf = function (point) {
+                var traverseToLeaf = point.series.options.traverseToLeaf;
                 var drillId = false, nodeParent;
                 if ((point.node.parent !== this.rootNode) &&
                     point.node.isLeaf) {
-                    nodeParent = point.node;
-                    while (!drillId) {
-                        nodeParent = this.nodeMap[nodeParent.parent];
-                        if (nodeParent.parent === this.rootNode) {
-                            drillId = nodeParent.id;
+                    if (traverseToLeaf) {
+                        drillId = point.id;
+                    }
+                    else {
+                        nodeParent = point.node;
+                        while (!drillId) {
+                            if (typeof nodeParent.parent !== 'undefined') {
+                                nodeParent = this.nodeMap[nodeParent.parent];
+                            }
+                            if (nodeParent.parent === this.rootNode) {
+                                drillId = nodeParent.id;
+                            }
                         }
                     }
                 }
@@ -3190,7 +3175,7 @@
                 var tree = series.tree = series.getTree();
                 rootNode = series.nodeMap[rootId];
                 if (rootId !== '' &&
-                    (!rootNode || !rootNode.children.length)) {
+                    (!rootNode)) {
                     series.setRootNode('', false);
                     rootId = series.rootNode;
                     rootNode = series.nodeMap[rootId];
@@ -3268,7 +3253,7 @@
         extend(TreemapSeries.prototype, {
             buildKDTree: noop,
             colorAttribs: ColorMapComposition.seriesMembers.colorAttribs,
-            colorKey: 'colorValue',
+            colorKey: 'colorValue', // Point color option key
             directTouch: true,
             getExtremesFromAll: true,
             getSymbol: noop,
@@ -3605,7 +3590,7 @@
          *               ignoreHiddenPoint, innerSize, joinBy, legendType, linecap,
          *               minSize, navigatorOptions, pointRange
          * @product      highcharts
-         * @requires     modules/sunburst.js
+         * @requires     modules/sunburst
          * @optionparent plotOptions.sunburst
          *
          * @private
@@ -3873,7 +3858,7 @@
          * @excluding dataParser, dataURL, stack, dataSorting, boostThreshold,
          *            boostBlending
          * @product   highcharts
-         * @requires  modules/sunburst.js
+         * @requires  modules/sunburst
          * @apioption series.sunburst
          */
         /**
@@ -3929,7 +3914,237 @@
 
         return SunburstSeriesDefaults;
     });
-    _registerModule(_modules, 'Series/Sunburst/SunburstSeries.js', [_modules['Series/CenteredUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/Sunburst/SunburstPoint.js'], _modules['Series/Sunburst/SunburstUtilities.js'], _modules['Series/TreeUtilities.js'], _modules['Core/Utilities.js'], _modules['Series/Sunburst/SunburstNode.js'], _modules['Series/Sunburst/SunburstSeriesDefaults.js']], function (CU, H, SeriesRegistry, SunburstPoint, SunburstUtilities, TU, U, SunburstNode, SunburstSeriesDefaults) {
+    _registerModule(_modules, 'Extensions/TextPath.js', [_modules['Core/Globals.js'], _modules['Core/Utilities.js']], function (H, U) {
+        /* *
+         *
+         *  Highcharts module with textPath functionality.
+         *
+         *  (c) 2009-2024 Torstein Honsi
+         *
+         *  License: www.highcharts.com/license
+         *
+         *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
+         *
+         * */
+        var deg2rad = H.deg2rad;
+        var addEvent = U.addEvent, merge = U.merge, uniqueKey = U.uniqueKey, defined = U.defined, extend = U.extend;
+        /**
+         * Set a text path for a `text` or `label` element, allowing the text to
+         * flow along a path.
+         *
+         * In order to unset the path for an existing element, call `setTextPath`
+         * with `{ enabled: false }` as the second argument.
+         *
+         * Text path support is not bundled into `highcharts.js`, and requires the
+         * `modules/textpath.js` file. However, it is included in the script files of
+         * those series types that use it by default
+         *
+         * @sample highcharts/members/renderer-textpath/ Text path demonstrated
+         *
+         * @function Highcharts.SVGElement#setTextPath
+         *
+         * @param {Highcharts.SVGElement|undefined} path
+         *        Path to follow. If undefined, it allows changing options for the
+         *        existing path.
+         *
+         * @param {Highcharts.DataLabelsTextPathOptionsObject} textPathOptions
+         *        Options.
+         *
+         * @return {Highcharts.SVGElement} Returns the SVGElement for chaining.
+         */
+        function setTextPath(path, textPathOptions) {
+            var _this = this;
+            // Defaults
+            textPathOptions = merge(true, {
+                enabled: true,
+                attributes: {
+                    dy: -5,
+                    startOffset: '50%',
+                    textAnchor: 'middle'
+                }
+            }, textPathOptions);
+            var url = this.renderer.url, textWrapper = this.text || this, textPath = textWrapper.textPath, attributes = textPathOptions.attributes, enabled = textPathOptions.enabled;
+            path = path || (textPath && textPath.path);
+            // Remove previously added event
+            if (textPath) {
+                textPath.undo();
+            }
+            if (path && enabled) {
+                var undo = addEvent(textWrapper, 'afterModifyTree', function (e) {
+                    if (path && enabled) {
+                        // Set ID for the path
+                        var textPathId = path.attr('id');
+                        if (!textPathId) {
+                            path.attr('id', textPathId = uniqueKey());
+                        }
+                        // Set attributes for the <text>
+                        var textAttribs = {
+                            // `dx`/`dy` options must by set on <text> (parent), the
+                            // rest should be set on <textPath>
+                            x: 0,
+                            y: 0
+                        };
+                        if (defined(attributes.dx)) {
+                            textAttribs.dx = attributes.dx;
+                            delete attributes.dx;
+                        }
+                        if (defined(attributes.dy)) {
+                            textAttribs.dy = attributes.dy;
+                            delete attributes.dy;
+                        }
+                        textWrapper.attr(textAttribs);
+                        // Handle label properties
+                        _this.attr({ transform: '' });
+                        if (_this.box) {
+                            _this.box = _this.box.destroy();
+                        }
+                        // Wrap the nodes in a textPath
+                        var children = e.nodes.slice(0);
+                        e.nodes.length = 0;
+                        e.nodes[0] = {
+                            tagName: 'textPath',
+                            attributes: extend(attributes, {
+                                'text-anchor': attributes.textAnchor,
+                                href: "".concat(url, "#").concat(textPathId)
+                            }),
+                            children: children
+                        };
+                    }
+                });
+                // Set the reference
+                textWrapper.textPath = { path: path, undo: undo };
+            }
+            else {
+                textWrapper.attr({ dx: 0, dy: 0 });
+                delete textWrapper.textPath;
+            }
+            if (this.added) {
+                // Rebuild text after added
+                textWrapper.textCache = '';
+                this.renderer.buildText(textWrapper);
+            }
+            return this;
+        }
+        /**
+         * Attach a polygon to a bounding box if the element contains a textPath.
+         *
+         * @function Highcharts.SVGElement#setPolygon
+         *
+         * @param {any} event
+         *        An event containing a bounding box object
+         *
+         * @return {Highcharts.BBoxObject} Returns the bounding box object.
+         */
+        function setPolygon(event) {
+            var _a;
+            var bBox = event.bBox, tp = (_a = this.element) === null || _a === void 0 ? void 0 : _a.querySelector('textPath');
+            if (tp) {
+                var polygon = [], _b = this.renderer.fontMetrics(this.element), b_1 = _b.b, h = _b.h, descender_1 = h - b_1, lineCleanerRegex = new RegExp('(<tspan>|' +
+                    '<tspan(?!\\sclass="highcharts-br")[^>]*>|' +
+                    '<\\/tspan>)', 'g'), lines = tp
+                    .innerHTML
+                    .replace(lineCleanerRegex, '')
+                    .split(/<tspan class="highcharts-br"[^>]*>/), numOfLines = lines.length;
+                // Calculate top and bottom coordinates for
+                // either the start or the end of a single
+                // character, and append it to the polygon.
+                var appendTopAndBottom = function (charIndex, positionOfChar) {
+                    var x = positionOfChar.x, y = positionOfChar.y, rotation = (tp.getRotationOfChar(charIndex) - 90) * deg2rad, cosRot = Math.cos(rotation), sinRot = Math.sin(rotation);
+                    return [
+                        [
+                            x - descender_1 * cosRot,
+                            y - descender_1 * sinRot
+                        ],
+                        [
+                            x + b_1 * cosRot,
+                            y + b_1 * sinRot
+                        ]
+                    ];
+                };
+                for (var i = 0, lineIndex = 0; lineIndex < numOfLines; lineIndex++) {
+                    var line = lines[lineIndex], lineLen = line.length;
+                    for (var lineCharIndex = 0; lineCharIndex < lineLen; lineCharIndex += 5) {
+                        try {
+                            var srcCharIndex = (i +
+                                lineCharIndex +
+                                lineIndex), _c = appendTopAndBottom(srcCharIndex, tp.getStartPositionOfChar(srcCharIndex)), lower = _c[0], upper = _c[1];
+                            if (lineCharIndex === 0) {
+                                polygon.push(upper);
+                                polygon.push(lower);
+                            }
+                            else {
+                                if (lineIndex === 0) {
+                                    polygon.unshift(upper);
+                                }
+                                if (lineIndex === numOfLines - 1) {
+                                    polygon.push(lower);
+                                }
+                            }
+                        }
+                        catch (e) {
+                            // Safari fails on getStartPositionOfChar even if the
+                            // character is within the `textContent.length`
+                            break;
+                        }
+                    }
+                    i += lineLen - 1;
+                    try {
+                        var srcCharIndex = i + lineIndex, charPos = tp.getEndPositionOfChar(srcCharIndex), _d = appendTopAndBottom(srcCharIndex, charPos), lower = _d[0], upper = _d[1];
+                        polygon.unshift(upper);
+                        polygon.unshift(lower);
+                    }
+                    catch (e) {
+                        // Safari fails on getStartPositionOfChar even if the character
+                        // is within the `textContent.length`
+                        break;
+                    }
+                }
+                // Close it
+                if (polygon.length) {
+                    polygon.push(polygon[0].slice());
+                }
+                bBox.polygon = polygon;
+            }
+            return bBox;
+        }
+        /**
+         * Draw text along a textPath for a dataLabel.
+         *
+         * @function Highcharts.SVGElement#setTextPath
+         *
+         * @param {any} event
+         *        An event containing label options
+         *
+         * @return {void}
+         */
+        function drawTextPath(event) {
+            var _a;
+            var labelOptions = event.labelOptions, point = event.point, textPathOptions = (labelOptions[point.formatPrefix + 'TextPath'] ||
+                labelOptions.textPath);
+            if (textPathOptions && !labelOptions.useHTML) {
+                this.setTextPath(((_a = point.getDataLabelPath) === null || _a === void 0 ? void 0 : _a.call(point, this)) || point.graphic, textPathOptions);
+                if (point.dataLabelPath &&
+                    !textPathOptions.enabled) {
+                    // Clean the DOM
+                    point.dataLabelPath = (point.dataLabelPath.destroy());
+                }
+            }
+        }
+        function compose(SVGElementClass) {
+            addEvent(SVGElementClass, 'afterGetBBox', setPolygon);
+            addEvent(SVGElementClass, 'beforeAddingDataLabel', drawTextPath);
+            var svgElementProto = SVGElementClass.prototype;
+            if (!svgElementProto.setTextPath) {
+                svgElementProto.setTextPath = setTextPath;
+            }
+        }
+        var TextPath = {
+            compose: compose
+        };
+
+        return TextPath;
+    });
+    _registerModule(_modules, 'Series/Sunburst/SunburstSeries.js', [_modules['Series/CenteredUtilities.js'], _modules['Core/Globals.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/Sunburst/SunburstPoint.js'], _modules['Series/Sunburst/SunburstUtilities.js'], _modules['Series/TreeUtilities.js'], _modules['Core/Utilities.js'], _modules['Series/Sunburst/SunburstNode.js'], _modules['Series/Sunburst/SunburstSeriesDefaults.js'], _modules['Core/Renderer/SVG/SVGElement.js'], _modules['Extensions/TextPath.js']], function (CU, H, SeriesRegistry, SunburstPoint, SunburstUtilities, TU, U, SunburstNode, SunburstSeriesDefaults, SVGElement, TextPath) {
         /* *
          *
          *  This module implements sunburst charts in Highcharts.
@@ -3963,6 +4178,7 @@
         var _a = SeriesRegistry.seriesTypes, ColumnSeries = _a.column, TreemapSeries = _a.treemap;
         var getColor = TU.getColor, getLevelOptions = TU.getLevelOptions, setTreeValues = TU.setTreeValues, updateRootId = TU.updateRootId;
         var defined = U.defined, error = U.error, extend = U.extend, fireEvent = U.fireEvent, isNumber = U.isNumber, isObject = U.isObject, isString = U.isString, merge = U.merge, splat = U.splat;
+        TextPath.compose(SVGElement);
         /* *
          *
          *  Constants
@@ -4274,7 +4490,7 @@
                     attribs = {
                         translateX: center[0] + plotLeft,
                         translateY: center[1] + plotTop,
-                        scaleX: 0.001,
+                        scaleX: 0.001, // #1499
                         scaleY: 0.001,
                         rotation: 10,
                         opacity: 0.01
@@ -4350,12 +4566,12 @@
                         };
                     }
                     extend(point, {
-                        shapeExisting: shape,
+                        shapeExisting: shape, // Store for use in animation
                         tooltipPos: [shape.plotX, shape.plotY],
                         drillId: getDrillId(point, idRoot, nodeMap),
                         name: '' + (point.name || point.id || point.index),
-                        plotX: shape.plotX,
-                        plotY: shape.plotY,
+                        plotX: shape.plotX, // Used for data label position
+                        plotY: shape.plotY, // Used for data label position
                         value: node.val,
                         isInside: visible,
                         isNull: !visible // Used for dataLabels & point.draw
@@ -4560,7 +4776,7 @@
         }(TreemapSeries));
         extend(SunburstSeries.prototype, {
             axisTypes: [],
-            drawDataLabels: noop,
+            drawDataLabels: noop, // `drawDataLabels` is called in `drawPoints`
             getCenter: getCenter,
             isCartesian: false,
             // Mark that the sunburst is supported by the series on point feature.

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  *
  * Dependency wheel module
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -312,7 +312,7 @@
 
         return DependencyWheelSeriesDefaults;
     });
-    _registerModule(_modules, 'Series/DependencyWheel/DependencyWheelSeries.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Series/DependencyWheel/DependencyWheelPoint.js'], _modules['Series/DependencyWheel/DependencyWheelSeriesDefaults.js'], _modules['Core/Globals.js'], _modules['Series/Sankey/SankeyColumnComposition.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js']], function (A, DependencyWheelPoint, DependencyWheelSeriesDefaults, H, SankeyColumnComposition, SeriesRegistry, U) {
+    _registerModule(_modules, 'Series/DependencyWheel/DependencyWheelSeries.js', [_modules['Core/Animation/AnimationUtilities.js'], _modules['Series/DependencyWheel/DependencyWheelPoint.js'], _modules['Series/DependencyWheel/DependencyWheelSeriesDefaults.js'], _modules['Core/Globals.js'], _modules['Series/Sankey/SankeyColumnComposition.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Core/Utilities.js'], _modules['Core/Renderer/SVG/SVGElement.js'], _modules['Extensions/TextPath.js']], function (A, DependencyWheelPoint, DependencyWheelSeriesDefaults, H, SankeyColumnComposition, SeriesRegistry, U, SVGElement, TextPath) {
         /* *
          *
          *  Dependency wheel module
@@ -343,6 +343,7 @@
         var deg2rad = H.deg2rad;
         var _a = SeriesRegistry.seriesTypes, PieSeries = _a.pie, SankeySeries = _a.sankey;
         var extend = U.extend, merge = U.merge, relativeLength = U.relativeLength;
+        TextPath.compose(SVGElement);
         /* *
          *
          *  Class
@@ -524,8 +525,8 @@
                                             'A',
                                             innerR_1, innerR_1,
                                             0,
-                                            0,
-                                            1,
+                                            0, // Long arc
+                                            1, // Clockwise
                                             corners[1].x, corners[1].y
                                         ], [
                                             'C',

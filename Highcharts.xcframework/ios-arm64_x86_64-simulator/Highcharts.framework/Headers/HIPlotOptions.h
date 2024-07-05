@@ -121,7 +121,7 @@ A bar series is a special type of column series where the columns are horizontal
 
 **Try it**
 
-* [Bar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bar-basic/)
+* [Bar chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bar-chart/)
 */
 @property(nonatomic, readwrite) HIBar *bar;
 /**
@@ -345,7 +345,7 @@ The area series type. In TypeScript the `type` option must always be set. Config
 
 **Try it**
 
-* [Area chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/area-basic/)
+* [Area chart](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/area-chart/)
 */
 @property(nonatomic, readwrite) HIArea *area;
 /**

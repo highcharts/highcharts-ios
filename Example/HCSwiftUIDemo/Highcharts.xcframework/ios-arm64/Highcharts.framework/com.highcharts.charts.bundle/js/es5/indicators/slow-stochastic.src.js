@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.3 (2024-05-22)
+ * @license Highstock JS v11.4.5 (2024-07-04)
  *
  * Slow Stochastic series type for Highcharts Stock
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -138,7 +138,7 @@
              * @product      highstock
              * @requires     stock/indicators/indicators
              * @requires     stock/indicators/stochastic
-             * @requires     stock/indicators/slowstochastic
+             * @requires     stock/indicators/slow-stochastic
              * @optionparent plotOptions.slowstochastic
              */
             SlowStochasticIndicator.defaultOptions = merge(StochasticIndicator.defaultOptions, {
@@ -177,7 +177,7 @@
          * @product   highstock
          * @requires  stock/indicators/indicators
          * @requires  stock/indicators/stochastic
-         * @requires  stock/indicators/slowstochastic
+         * @requires  stock/indicators/slow-stochastic
          * @apioption series.slowstochastic
          */
         ''; // To include the above in the js output

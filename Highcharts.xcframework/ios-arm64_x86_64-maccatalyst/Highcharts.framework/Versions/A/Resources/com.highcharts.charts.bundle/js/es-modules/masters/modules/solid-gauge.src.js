@@ -1,8 +1,8 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  * @module highcharts/modules/solid-gauge
  * @requires highcharts
- * @requires highcharts/highcharts-more
+ * @requires highcharts-more
  *
  * Solid angular gauge module
  *

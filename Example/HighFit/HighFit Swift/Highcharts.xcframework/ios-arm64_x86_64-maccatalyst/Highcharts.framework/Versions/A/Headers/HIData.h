@@ -192,7 +192,7 @@ A callback function to modify the CSV before parsing it. Return the modified str
 
 **Try it**
 
-* [Modify CSV before parse](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-ajax/)
+* [Modify CSV before parse](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-csv/)
 */
 @property(nonatomic, readwrite) HIFunction *beforeParse;
 /**

@@ -8,6 +8,7 @@
 
 #import "HIAccessibility.h"
 #import "HITitle.h"
+#import "HIEvents.h"
 #import "HIBubbleLegend.h"
 #import "HINavigation.h"
 #import "HIColor.h"
@@ -178,6 +179,10 @@ The background color of the legend.
 * [Yellowish background](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/backgroundcolor/)
 */
 @property(nonatomic, readwrite) HIColor *backgroundColor;
+/**
+General event handlers for the legend. These event hooks can also be attached to the legend at run time using the `Highcharts.addEvent` function.
+*/
+@property(nonatomic, readwrite) HIEvents *events;
 /**
 The pixel top margin for each legend item.
 

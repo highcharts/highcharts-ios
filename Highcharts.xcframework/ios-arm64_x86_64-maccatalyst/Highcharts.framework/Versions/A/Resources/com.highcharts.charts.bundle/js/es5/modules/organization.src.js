@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  * Organization chart series type
  *
  * (c) 2019-2024 Torstein Honsi
@@ -27,7 +27,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -778,7 +778,7 @@
 
         return PathUtilities;
     });
-    _registerModule(_modules, 'Series/Organization/OrganizationSeries.js', [_modules['Series/Organization/OrganizationPoint.js'], _modules['Series/Organization/OrganizationSeriesDefaults.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/PathUtilities.js'], _modules['Core/Utilities.js']], function (OrganizationPoint, OrganizationSeriesDefaults, SeriesRegistry, PathUtilities, U) {
+    _registerModule(_modules, 'Series/Organization/OrganizationSeries.js', [_modules['Series/Organization/OrganizationPoint.js'], _modules['Series/Organization/OrganizationSeriesDefaults.js'], _modules['Core/Series/SeriesRegistry.js'], _modules['Series/PathUtilities.js'], _modules['Core/Utilities.js'], _modules['Core/Renderer/SVG/SVGElement.js'], _modules['Extensions/TextPath.js']], function (OrganizationPoint, OrganizationSeriesDefaults, SeriesRegistry, PathUtilities, U, SVGElement, TextPath) {
         /* *
          *
          *  Organization chart module
@@ -807,6 +807,7 @@
         })();
         var SankeySeries = SeriesRegistry.seriesTypes.sankey;
         var css = U.css, crisp = U.crisp, extend = U.extend, isNumber = U.isNumber, merge = U.merge, pick = U.pick;
+        TextPath.compose(SVGElement);
         /* *
          *
          *  Class

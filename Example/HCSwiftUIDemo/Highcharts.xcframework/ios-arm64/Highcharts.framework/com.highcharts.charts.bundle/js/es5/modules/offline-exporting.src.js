@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  *
  * Client side exporting module
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -76,7 +76,7 @@
         function dataURLtoBlob(dataURL) {
             var parts = dataURL
                 .replace(/filename=.*;/, '')
-                .match(/data:([^;]*)(;base64)?,([0-9A-Za-z+/]+)/);
+                .match(/data:([^;]*)(;base64)?,([A-Z+\d\/]+)/i);
             if (parts &&
                 parts.length > 3 &&
                 (win.atob) &&
@@ -180,7 +180,7 @@
          *
          * */
         var OfflineExportingDefaults = {
-            libURL: 'https://code.highcharts.com/11.4.3/lib/',
+            libURL: 'https://code.highcharts.com/11.4.5/lib/',
             // When offline-exporting is loaded, redefine the menu item definitions
             // related to download.
             menuItemDefinitions: {

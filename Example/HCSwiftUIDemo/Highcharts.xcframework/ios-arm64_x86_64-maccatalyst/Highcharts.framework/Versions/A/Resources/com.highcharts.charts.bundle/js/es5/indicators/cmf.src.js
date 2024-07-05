@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.3 (2024-05-22)
+ * @license Highstock JS v11.4.5 (2024-07-04)
  *
  * (c) 2010-2024 Highsoft AS
  * Author: Sebastian Domas
@@ -27,7 +27,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -252,7 +252,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unused index, do not inherit (#15362)
                     /**
                      * The id of another series to use its data as volume data for the
                      * indicator calculation.

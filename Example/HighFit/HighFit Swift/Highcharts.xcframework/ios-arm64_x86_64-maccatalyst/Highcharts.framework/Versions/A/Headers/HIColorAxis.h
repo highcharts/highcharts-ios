@@ -9,7 +9,6 @@
 #import "HIDataClasses.h"
 #import "HILabels.h"
 #import "HIMarker.h"
-#import "HIEvents.h"
 #import "HIAccessibility.h"
 #import "HIColor.h"
 #import "HIFunction.h"
@@ -125,7 +124,7 @@ The type of interpolation to use for the color axis. Can be `linear` or `logarit
 /**
 Event handlers for the axis.
 */
-@property(nonatomic, readwrite) HIEvents *events;
+@property(nonatomic, readwrite) id events;
 /**
 If `tickInterval` is `null` this option sets the approximate pixel interval of the tick marks.
 

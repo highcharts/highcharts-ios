@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v11.4.3 (2024-05-22)
+ * @license Highmaps JS v11.4.5 (2024-07-04)
  *
  * Tilemap module
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -141,7 +141,7 @@
          * @excluding    jitter, joinBy, shadow, allAreas, mapData, marker, data,
          *               dataSorting, boostThreshold, boostBlending
          * @product      highcharts highmaps
-         * @requires     modules/tilemap.js
+         * @requires     modules/tilemap
          * @optionparent plotOptions.tilemap
          */
         var TilemapSeriesDefaults = {
@@ -217,7 +217,7 @@
          *            pointRange, shadow, stack, dataSorting, boostThreshold,
          *            boostBlending
          * @product   highcharts highmaps
-         * @requires  modules/tilemap.js
+         * @requires  modules/tilemap
          * @apioption series.tilemap
          */
         /**

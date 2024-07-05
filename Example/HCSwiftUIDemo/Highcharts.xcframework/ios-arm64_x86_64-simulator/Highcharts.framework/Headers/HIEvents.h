@@ -167,6 +167,15 @@ Fires after a chart is printed through the context menu item or the `Chart.print
 */
 @property(nonatomic, readwrite) HIFunction *afterPrint;
 /**
+Fires when the legend item belonging to the series is clicked. One parameter, `event`, is passed to the function. The default action is to toggle the visibility of the series, point or data class. This can be prevented by returning `false` or calling `event.preventDefault()`.
+
+**Try it**
+
+* [Confirm hiding and showing](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/series-legend-itemclick/)
+* [Confirm toggle visibility of pie slices](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/pie-legend-itemclick/)
+*/
+@property(nonatomic, readwrite) HIFunction *itemClick;
+/**
 Fires when the point is unselected either programmatically or following a click on the point. One parameter, `event`, is passed to the function. Returning `false` cancels the operation.
 
 **Try it**
@@ -320,10 +329,6 @@ Called on the beginning of playing a series. A context object is passed to the f
 Called when play is completed. A context object is passed to the function, with properties `chart`, `timeline` and `pointsPlayed`. `pointsPlayed` is an array of `Point` objects, referencing data points that were related to the audio events played.
 */
 @property(nonatomic, readwrite) HIFunction *onEnd;
-/**
-Fires when the legend item belonging to the colorAxis is clicked. One parameter, `event`, is passed to the function.
-*/
-@property(nonatomic, readwrite) HIFunction *legendItemClick;
 /**
 Fires when the series is hidden after chart generation time, either by clicking the legend item or by calling `.hide()`.
 

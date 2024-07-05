@@ -1,8 +1,8 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  * @module highcharts/modules/funnel3d
  * @requires highcharts
- * @requires highcharts/highcharts-3d
+ * @requires highcharts-3d
  * @requires highcharts/modules/cylinder
  *
  * Highcharts funnel module

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.3 (2024-05-22)
+ * @license Highstock JS v11.4.5 (2024-07-04)
  * @module highcharts/modules/price-indicator
  * @requires highcharts
  * @requires highcharts/modules/stock

@@ -53,6 +53,14 @@ The border radius for each treemap item.
 */
 @property(nonatomic, readwrite) NSNumber *borderRadius;
 /**
+This option enables automatic traversing to the last child level upon node interaction. This feature simplifies navigation by immediately focusing on the deepest layer of the data structure without intermediate steps.
+
+**Try it**
+
+* [Traverse to leaf enabled](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/treemap-traverse-to-leaf/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *traverseToLeaf;
+/**
 A series specific or series type specific color set to apply instead of the global `colors` when `colorByPoint` is true.
 */
 @property(nonatomic, readwrite) NSArray<HIColor *> *colors;

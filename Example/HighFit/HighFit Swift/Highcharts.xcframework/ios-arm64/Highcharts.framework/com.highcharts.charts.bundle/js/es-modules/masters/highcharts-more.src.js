@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  * @module highcharts/highcharts-more
  * @requires highcharts
  *
@@ -26,8 +26,8 @@ import RadialAxis from '../Core/Axis/RadialAxis.js';
 import WaterfallSeries from '../Series/Waterfall/WaterfallSeries.js';
 const G = Highcharts;
 G.RadialAxis = RadialAxis;
-BubbleSeries.compose(G.Axis, G.Chart, G.Legend, G.Series);
-PackedBubbleSeries.compose(G.Axis, G.Chart, G.Legend, G.Series);
+BubbleSeries.compose(G.Axis, G.Chart, G.Legend);
+PackedBubbleSeries.compose(G.Axis, G.Chart, G.Legend);
 Pane.compose(G.Chart, G.Pointer);
 PolarAdditions.compose(G.Axis, G.Chart, G.Pointer, G.Series, G.Tick, G.Point, SeriesRegistry.seriesTypes.areasplinerange, SeriesRegistry.seriesTypes.column, SeriesRegistry.seriesTypes.line, SeriesRegistry.seriesTypes.spline);
 WaterfallSeries.compose(G.Axis, G.Chart);

@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.3 (2024-05-22)
+ * @license Highstock JS v11.4.5 (2024-07-04)
  *
  * Indicator series type for Highcharts Stock
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -134,8 +134,8 @@
                 }, 
                 // Sorted supertrend points array
                 groupedPoints = {
-                    top: [],
-                    bottom: [],
+                    top: [], // Rising trend line points
+                    bottom: [], // Falling trend line points
                     intersect: [] // Change trend line points
                 }, 
                 // Options for trend lines
@@ -425,7 +425,7 @@
                  * @excluding index
                  */
                 params: {
-                    index: void 0,
+                    index: void 0, // Unchangeable index, do not inherit (#15362)
                     /**
                      * Multiplier for Supertrend Indicator.
                      */

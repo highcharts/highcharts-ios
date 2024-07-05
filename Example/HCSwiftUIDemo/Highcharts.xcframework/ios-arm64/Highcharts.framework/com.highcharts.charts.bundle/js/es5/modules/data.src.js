@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  *
  * Data module
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -311,7 +311,7 @@
         /**
          * The Data class
          *
-         * @requires module:modules/data
+         * @requires modules/data
          *
          * @class
          * @name Highcharts.Data
@@ -340,7 +340,7 @@
                  */
                 this.dateFormats = {
                     'YYYY/mm/dd': {
-                        regex: /^([0-9]{4})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{1,2})$/,
+                        regex: /^(\d{4})[\-\/\.](\d{1,2})[\-\/\.](\d{1,2})$/,
                         parser: function (match) {
                             return (match ?
                                 Date.UTC(+match[1], match[2] - 1, +match[3]) :
@@ -348,7 +348,7 @@
                         }
                     },
                     'dd/mm/YYYY': {
-                        regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{4})$/,
+                        regex: /^(\d{1,2})[\-\/\.](\d{1,2})[\-\/\.](\d{4})$/,
                         parser: function (match) {
                             return (match ?
                                 Date.UTC(+match[3], match[2] - 1, +match[1]) :
@@ -357,7 +357,7 @@
                         alternative: 'mm/dd/YYYY' // Different format with the same regex
                     },
                     'mm/dd/YYYY': {
-                        regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{4})$/,
+                        regex: /^(\d{1,2})[\-\/\.](\d{1,2})[\-\/\.](\d{4})$/,
                         parser: function (match) {
                             return (match ?
                                 Date.UTC(+match[3], match[1] - 1, +match[2]) :
@@ -365,7 +365,7 @@
                         }
                     },
                     'dd/mm/YY': {
-                        regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{2})$/,
+                        regex: /^(\d{1,2})[\-\/\.](\d{1,2})[\-\/\.](\d{2})$/,
                         parser: function (match) {
                             if (!match) {
                                 return NaN;
@@ -383,7 +383,7 @@
                         alternative: 'mm/dd/YY' // Different format with the same regex
                     },
                     'mm/dd/YY': {
-                        regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{2})$/,
+                        regex: /^(\d{1,2})[\-\/\.](\d{1,2})[\-\/\.](\d{2})$/,
                         parser: function (match) {
                             return (match ?
                                 Date.UTC(+match[3] + 2000, match[1] - 1, +match[2]) :
@@ -1269,7 +1269,7 @@
                 if (typeof str === 'string') {
                     str = str.replace(/^\s+|\s+$/g, '');
                     // Clear white space inside the string, like thousands separators
-                    if (inside && /^-?[0-9\s]+$/.test(str)) {
+                    if (inside && /[\d\s]+/.test(str)) {
                         str = str.replace(/\s/g, '');
                     }
                     if (this.decimalRegex) {
@@ -1441,10 +1441,10 @@
                     }
                     // Fall back to Date.parse
                     if (!match) {
-                        if (val.match(/:.+(GMT|UTC|[Z+-])/)) {
+                        if (val.match(/:.+(GMT|UTC|[Z+\-])/)) {
                             val = val
-                                .replace(/\s*(?:GMT|UTC)?([+-])(\d\d)(\d\d)$/, '$1$2:$3')
-                                .replace(/(?:\s+|GMT|UTC)([+-])/, '$1')
+                                .replace(/\s*(?:GMT|UTC)?([+\-])(\d\d)(\d\d)$/, '$1$2:$3')
+                                .replace(/(?:\s+|GMT|UTC)([+\-])/, '$1')
                                 .replace(/(\d)\s*(?:GMT|UTC|Z)$/, '$1+00:00');
                         }
                         match = Date.parse(val);
@@ -1959,7 +1959,7 @@
          * A callback function to modify the CSV before parsing it. Return the modified
          * string.
          *
-         * @sample {highcharts} highcharts/demo/line-ajax/
+         * @sample {highcharts} highcharts/demo/line-csv/
          *         Modify CSV before parse
          *
          * @type      {Highcharts.DataBeforeParseCallbackFunction}

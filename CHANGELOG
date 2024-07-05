@@ -1,14 +1,23 @@
+# Version 11.4.5
+
+## iOS:
+
+1. Fixed HITooltip block comment warning, #439
+2. Fixed typo in changelog
+3. Made WebView inspectable
+4. Fixed Sankey plugin issue, #442
+5. Add JSON object validation before serialization, #248
+
+## Framework bug fixes:
+
+1. Fixed #21446, a regression causing broken imports of modules due to bad relative paths.
+2. Fixed #21445, generated TypeScript declarations for deprecated option series.events.legendItemClick.
+
 # Version 11.4.3
 
 ## iOS:
 
 1. Remove graphics folder from the framework, #438
-
-## Framework:
-
-1. No changes, just covering a bad npm upload for v11.4.2.
-
-# Version 11.4.2
 
 ## Framework:
 
@@ -48,7 +57,7 @@
 
 ## iOS:
 
-1. Udpate Privacy Manifest File
+1. Update Privacy Manifest File
 
 # Version 11.4.1
 

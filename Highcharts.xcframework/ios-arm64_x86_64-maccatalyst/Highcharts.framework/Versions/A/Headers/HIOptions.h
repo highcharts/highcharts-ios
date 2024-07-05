@@ -78,7 +78,7 @@ An array containing the default colors for the chart's series. When all colors a
 /**
 The pane serves as a container for axes and backgrounds for circular gauges and polar charts.
 */
-@property(nonatomic, readwrite) HIPane *pane;
+@property(nonatomic, readwrite) NSArray<HIPane *> *pane;
 
 /**
 Allows setting a set of rules to apply for different screen or chart sizes. Each rule specifies additional chart options.

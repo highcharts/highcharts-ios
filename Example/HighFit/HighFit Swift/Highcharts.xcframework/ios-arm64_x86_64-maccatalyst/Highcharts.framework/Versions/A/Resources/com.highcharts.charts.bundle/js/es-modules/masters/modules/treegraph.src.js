@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  * Treegraph chart series type
  * @module highcharts/modules/treegraph
  * @requires highcharts

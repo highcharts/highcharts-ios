@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.3 (2024-05-22)
+ * @license Highstock JS v11.4.5 (2024-07-04)
  *
  * Highcharts Stock as a plugin for Highcharts
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -1266,7 +1266,7 @@
                  *
                  * @type {Highcharts.ColorString|null}
                  */
-                lineColor: null,
+                lineColor: null, // #4602
                 marker: {
                     enabled: false
                 },
@@ -1991,7 +1991,7 @@
              *
              * @type {Highcharts.ColorString|Highcharts.GradientColorObject|Highcharts.PatternObject}
              */
-            trackBackgroundColor: 'rgba(255, 255, 255, 0.001)',
+            trackBackgroundColor: 'rgba(255, 255, 255, 0.001)', // #18922
             /**
              * The color of the border of the scrollbar track.
              *
@@ -2685,7 +2685,7 @@
 
         return Scrollbar;
     });
-    _registerModule(_modules, 'Stock/Navigator/Navigator.js', [_modules['Core/Axis/Axis.js'], _modules['Stock/Navigator/ChartNavigatorComposition.js'], _modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Core/Axis/NavigatorAxisComposition.js'], _modules['Stock/Navigator/NavigatorComposition.js'], _modules['Stock/Scrollbar/Scrollbar.js'], _modules['Core/Utilities.js']], function (Axis, ChartNavigatorComposition, D, H, NavigatorAxisAdditions, NavigatorComposition, Scrollbar, U) {
+    _registerModule(_modules, 'Stock/Navigator/Navigator.js', [_modules['Core/Axis/Axis.js'], _modules['Stock/Navigator/ChartNavigatorComposition.js'], _modules['Core/Defaults.js'], _modules['Core/Globals.js'], _modules['Core/Axis/NavigatorAxisComposition.js'], _modules['Stock/Navigator/NavigatorComposition.js'], _modules['Stock/Scrollbar/Scrollbar.js'], _modules['Core/Renderer/SVG/SVGRenderer.js'], _modules['Core/Utilities.js']], function (Axis, ChartNavigatorComposition, D, H, NavigatorAxisAdditions, NavigatorComposition, Scrollbar, SVGRenderer, U) {
         /* *
          *
          *  (c) 2010-2024 Torstein Honsi
@@ -2695,8 +2695,20 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
+        var __assign = (this && this.__assign) || function () {
+            __assign = Object.assign || function(t) {
+                for (var s, i = 1, n = arguments.length; i < n; i++) {
+                    s = arguments[i];
+                    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+                }
+                return t;
+            };
+            return __assign.apply(this, arguments);
+        };
         var defaultOptions = D.defaultOptions;
         var isTouchDevice = H.isTouchDevice;
+        var symbols = SVGRenderer.prototype.symbols;
         var addEvent = U.addEvent, clamp = U.clamp, correctFloat = U.correctFloat, defined = U.defined, destroyObjectProperties = U.destroyObjectProperties, erase = U.erase, extend = U.extend, find = U.find, fireEvent = U.fireEvent, isArray = U.isArray, isNumber = U.isNumber, merge = U.merge, pick = U.pick, removeEvent = U.removeEvent, splat = U.splat;
         /* *
          *
@@ -2741,6 +2753,7 @@
              *
              * */
             function Navigator(chart) {
+                this.isDirty = false;
                 this.scrollbarHeight = 0;
                 this.init(chart);
             }
@@ -2820,9 +2833,9 @@
                         ],
                         // Top right of zoomed range
                         ['L', left + height, verticalMin],
-                        ['L', left, verticalMin],
-                        ['M', left, zoomedMax],
-                        ['L', left + height, zoomedMax],
+                        ['L', left, verticalMin], // Top left of z.r.
+                        ['M', left, zoomedMax], // Bottom left of z.r.
+                        ['L', left + height, zoomedMax], // Bottom right of z.r.
                         [
                             'L',
                             left + height,
@@ -2860,7 +2873,7 @@
                         [
                             'L',
                             left + navigatorSize + scrollButtonSize * 2,
-                            navigatorTop + halfOutline
+                            lineTop
                         ]
                     ];
                     if (maskInside) {
@@ -2928,7 +2941,7 @@
                 });
             };
             /**
-             * Generate DOM elements for a navigator:
+             * Generate and update DOM elements for a navigator:
              *
              * - main navigator group
              *
@@ -2942,43 +2955,44 @@
              * @function Highcharts.Navigator#renderElements
              */
             Navigator.prototype.renderElements = function () {
+                var _a, _b;
                 var navigator = this, navigatorOptions = navigator.navigatorOptions, maskInside = navigatorOptions.maskInside, chart = navigator.chart, inverted = chart.inverted, renderer = chart.renderer, mouseCursor = {
                     cursor: inverted ? 'ns-resize' : 'ew-resize'
                 }, 
                 // Create the main navigator group
-                navigatorGroup = navigator.navigatorGroup = renderer
+                navigatorGroup = (_a = navigator.navigatorGroup) !== null && _a !== void 0 ? _a : (navigator.navigatorGroup = renderer
                     .g('navigator')
                     .attr({
                     zIndex: 8,
                     visibility: 'hidden'
                 })
-                    .add();
+                    .add());
                 // Create masks, each mask will get events and fill:
                 [
                     !maskInside,
                     maskInside,
                     !maskInside
                 ].forEach(function (hasMask, index) {
-                    var shade = renderer.rect()
+                    var _a;
+                    var shade = (_a = navigator.shades[index]) !== null && _a !== void 0 ? _a : (navigator.shades[index] = renderer.rect()
                         .addClass('highcharts-navigator-mask' +
                         (index === 1 ? '-inside' : '-outside'))
-                        .add(navigatorGroup);
+                        .add(navigatorGroup));
                     if (!chart.styledMode) {
                         shade.attr({
-                            fill: hasMask ?
-                                navigatorOptions.maskFill :
-                                'rgba(0,0,0,0)'
+                            fill: hasMask ? navigatorOptions.maskFill : 'rgba(0,0,0,0)'
                         });
                         if (index === 1) {
                             shade.css(mouseCursor);
                         }
                     }
-                    navigator.shades[index] = shade;
                 });
                 // Create the outline:
-                navigator.outline = renderer.path()
-                    .addClass('highcharts-navigator-outline')
-                    .add(navigatorGroup);
+                if (!navigator.outline) {
+                    navigator.outline = renderer.path()
+                        .addClass('highcharts-navigator-outline')
+                        .add(navigatorGroup);
+                }
                 if (!chart.styledMode) {
                     navigator.outline.attr({
                         'stroke-width': navigatorOptions.outlineWidth,
@@ -2986,10 +3000,27 @@
                     });
                 }
                 // Create the handlers:
-                if (navigatorOptions.handles && navigatorOptions.handles.enabled) {
+                if ((_b = navigatorOptions.handles) === null || _b === void 0 ? void 0 : _b.enabled) {
                     var handlesOptions_1 = navigatorOptions.handles, height_1 = handlesOptions_1.height, width_1 = handlesOptions_1.width;
                     [0, 1].forEach(function (index) {
-                        navigator.handles[index] = renderer.symbol(handlesOptions_1.symbols[index], -width_1 / 2 - 1, 0, width_1, height_1, handlesOptions_1);
+                        var symbolName = handlesOptions_1.symbols[index];
+                        if (!navigator.handles[index]) {
+                            navigator.handles[index] = renderer.symbol(symbolName, -width_1 / 2 - 1, 0, width_1, height_1, handlesOptions_1);
+                            // Z index is 6 for right handle, 7 for left. Can't be 10,
+                            // because of the tooltip in inverted chart (#2908).
+                            navigator.handles[index].attr({ zIndex: 7 - index })
+                                .addClass('highcharts-navigator-handle ' +
+                                'highcharts-navigator-handle-' +
+                                ['left', 'right'][index]).add(navigatorGroup);
+                            // If the navigator symbol changed, update its path and name
+                        }
+                        else if (symbolName !== navigator.handles[index].symbolName) {
+                            var symbolFn = symbols[symbolName], path = symbolFn.call(symbols, -width_1 / 2 - 1, 0, width_1, height_1);
+                            navigator.handles[index].attr({
+                                d: path
+                            });
+                            navigator.handles[index].symbolName = symbolName;
+                        }
                         if (chart.inverted) {
                             navigator.handles[index].attr({
                                 rotation: 90,
@@ -2997,18 +3028,16 @@
                                 rotationOriginY: (height_1 + width_1) / 2
                             });
                         }
-                        // Z index is 6 for right handle, 7 for left. Can't be 10,
-                        // because of the tooltip in inverted chart (#2908).
-                        navigator.handles[index].attr({ zIndex: 7 - index })
-                            .addClass('highcharts-navigator-handle ' +
-                            'highcharts-navigator-handle-' +
-                            ['left', 'right'][index]).add(navigatorGroup);
                         if (!chart.styledMode) {
                             navigator.handles[index]
                                 .attr({
                                 fill: handlesOptions_1.backgroundColor,
                                 stroke: handlesOptions_1.borderColor,
-                                'stroke-width': handlesOptions_1.lineWidth
+                                'stroke-width': handlesOptions_1.lineWidth,
+                                width: handlesOptions_1.width,
+                                height: handlesOptions_1.height,
+                                x: -width_1 / 2 - 1,
+                                y: 0
                             })
                                 .css(mouseCursor);
                         }
@@ -3024,18 +3053,49 @@
              * @param {Highcharts.NavigatorOptions} options
              *        Options to merge in when updating navigator
              */
-            Navigator.prototype.update = function (options) {
-                // Remove references to old navigator series in base series
-                (this.series || []).forEach(function (series) {
-                    if (series.baseSeries) {
-                        delete series.baseSeries.navigatorSeries;
+            Navigator.prototype.update = function (options, redraw) {
+                var _a, _b;
+                var _this = this;
+                var _c, _d;
+                if (redraw === void 0) { redraw = false; }
+                var chart = this.chart, invertedUpdate = chart.options.chart.inverted !==
+                    ((_c = chart.scrollbar) === null || _c === void 0 ? void 0 : _c.options.vertical);
+                merge(true, chart.options.navigator, options);
+                this.navigatorOptions = chart.options.navigator || {};
+                this.setOpposite();
+                // Revert to destroy/init for navigator/scrollbar enabled toggle
+                if (defined(options.enabled) || invertedUpdate) {
+                    this.destroy();
+                    this.navigatorEnabled = options.enabled || this.navigatorEnabled;
+                    return this.init(chart);
+                }
+                if (this.navigatorEnabled) {
+                    this.isDirty = true;
+                    if (options.adaptToUpdatedData === false) {
+                        this.baseSeries.forEach(function (series) {
+                            removeEvent(series, 'updatedData', _this.updatedDataHandler);
+                        }, this);
                     }
-                });
-                // Destroy and rebuild navigator
-                this.destroy();
-                var chartOptions = this.chart.options;
-                merge(true, chartOptions.navigator, options);
-                this.init(this.chart);
+                    if (options.adaptToUpdatedData) {
+                        this.baseSeries.forEach(function (series) {
+                            series.eventsToUnbind.push(addEvent(series, 'updatedData', _this.updatedDataHandler));
+                        }, this);
+                    }
+                    // Update navigator series
+                    if (options.series || options.baseSeries) {
+                        this.setBaseSeries(void 0, false);
+                    }
+                    // Update navigator axis
+                    if (options.height || options.xAxis || options.yAxis) {
+                        this.height = (_d = options.height) !== null && _d !== void 0 ? _d : this.height;
+                        var offsets = this.getXAxisOffsets();
+                        this.xAxis.update(__assign(__assign({}, options.xAxis), (_a = { offsets: offsets }, _a[chart.inverted ? 'width' : 'height'] = this.height, _a[chart.inverted ? 'height' : 'width'] = void 0, _a)), false);
+                        this.yAxis.update(__assign(__assign({}, options.yAxis), (_b = {}, _b[chart.inverted ? 'width' : 'height'] = this.height, _b)), false);
+                    }
+                }
+                if (redraw) {
+                    chart.redraw();
+                }
             };
             /**
              * Render the navigator
@@ -3057,6 +3117,10 @@
                 // Don't redraw while moving the handles (#4703).
                 if (this.hasDragged && !defined(pxMin)) {
                     return;
+                }
+                if (this.isDirty) {
+                    // Update DOM navigator elements
+                    this.renderElements();
                 }
                 min = correctFloat(min - pointRange / 2);
                 max = correctFloat(max + pointRange / 2);
@@ -3158,6 +3222,7 @@
                     navigator.zoomedMin / (navigatorSize || 1), navigator.zoomedMax / (navigatorSize || 1));
                 }
                 navigator.rendered = true;
+                this.isDirty = false;
                 fireEvent(this, 'afterRender');
             };
             /**
@@ -3496,6 +3561,16 @@
                 }
             };
             /**
+             * Calculate the navigator xAxis offsets
+             *
+             * @private
+             */
+            Navigator.prototype.getXAxisOffsets = function () {
+                return (this.chart.inverted ?
+                    [this.scrollButtonSize, 0, -this.scrollButtonSize, 0] :
+                    [0, -this.scrollButtonSize, 0, this.scrollButtonSize]);
+            };
+            /**
              * Initialize the Navigator object
              *
              * @private
@@ -3514,11 +3589,12 @@
                 this.navigatorEnabled = navigatorEnabled;
                 this.navigatorOptions = navigatorOptions;
                 this.scrollbarOptions = scrollbarOptions;
-                this.opposite = pick(navigatorOptions.opposite, Boolean(!navigatorEnabled && chart.inverted)); // #6262
+                this.setOpposite();
                 var navigator = this, baseSeries = navigator.baseSeries, xAxisIndex = chart.xAxis.length, yAxisIndex = chart.yAxis.length, baseXaxis = baseSeries && baseSeries[0] && baseSeries[0].xAxis ||
                     chart.xAxis[0] || { options: {} };
                 chart.isDirtyBox = true;
                 if (navigator.navigatorEnabled) {
+                    var offsets = this.getXAxisOffsets();
                     // An x axis is required for scrollbar also
                     navigator.xAxis = new Axis(chart, merge({
                         // Inherit base xAxis' break, ordinal options and overscroll
@@ -3530,17 +3606,20 @@
                         index: xAxisIndex,
                         isInternal: true,
                         offset: 0,
-                        keepOrdinalPadding: true,
+                        keepOrdinalPadding: true, // #2436
                         startOnTick: false,
                         endOnTick: false,
-                        minPadding: 0,
-                        maxPadding: 0,
+                        // Inherit base xAxis' padding when ordinal is false (#16915).
+                        minPadding: baseXaxis.options.ordinal ? 0 :
+                            baseXaxis.options.minPadding,
+                        maxPadding: baseXaxis.options.ordinal ? 0 :
+                            baseXaxis.options.maxPadding,
                         zoomEnabled: false
                     }, chart.inverted ? {
-                        offsets: [scrollButtonSize, 0, -scrollButtonSize, 0],
+                        offsets: offsets,
                         width: height
                     } : {
-                        offsets: [0, -scrollButtonSize, 0, scrollButtonSize],
+                        offsets: offsets,
                         height: height
                     }), 'xAxis');
                     navigator.yAxis = new Axis(chart, merge(navigatorOptions.yAxis, {
@@ -3549,7 +3628,7 @@
                         index: yAxisIndex,
                         isInternal: true,
                         reversed: pick((navigatorOptions.yAxis &&
-                            navigatorOptions.yAxis.reversed), (chart.yAxis[0] && chart.yAxis[0].reversed), false),
+                            navigatorOptions.yAxis.reversed), (chart.yAxis[0] && chart.yAxis[0].reversed), false), // #14060
                         zoomEnabled: false
                     }, chart.inverted ? {
                         width: height
@@ -3625,6 +3704,15 @@
                 navigator.addChartEvents();
             };
             /**
+             * Set the opposite property on navigator
+             *
+             * @private
+             */
+            Navigator.prototype.setOpposite = function () {
+                var navigatorOptions = this.navigatorOptions, navigatorEnabled = this.navigatorEnabled, chart = this.chart;
+                this.opposite = pick(navigatorOptions.opposite, Boolean(!navigatorEnabled && chart.inverted)); // #6262
+            };
+            /**
              * Get the union data extremes of the chart - the outer data extremes of the
              * base X axis and the navigator axis.
              *
@@ -3692,14 +3780,14 @@
                 var _a, _b;
                 var navigator = this, chart = navigator.chart, baseSeries = navigator.baseSeries, navSeriesMixin = {
                     enableMouseTracking: false,
-                    index: null,
-                    linkedTo: null,
-                    group: 'nav',
+                    index: null, // #6162
+                    linkedTo: null, // #6734
+                    group: 'nav', // For columns
                     padXAxis: false,
                     xAxis: (_a = this.navigatorOptions.xAxis) === null || _a === void 0 ? void 0 : _a.id,
                     yAxis: (_b = this.navigatorOptions.yAxis) === null || _b === void 0 ? void 0 : _b.id,
                     showInLegend: false,
-                    stacking: void 0,
+                    stacking: void 0, // #4823
                     isInternal: true,
                     states: {
                         inactive: {
@@ -3855,6 +3943,9 @@
                     }
                     // Handle series removal
                     base.eventsToUnbind.push(addEvent(base, 'remove', function () {
+                        if (baseSeries) {
+                            erase(baseSeries, base); // #21043
+                        }
                         if (this.navigatorSeries) {
                             erase(navigator.series, this.navigatorSeries);
                             if (defined(this.navigatorSeries.options)) {
@@ -4073,6 +4164,7 @@
                 [this.handles].forEach(function (coll) {
                     destroyObjectProperties(coll);
                 });
+                this.navigatorEnabled = false;
             };
             return Navigator;
         }());
@@ -4144,6 +4236,7 @@
                     addEvent(AxisClass, 'afterSetScale', onAxisAfterSetScale);
                     addEvent(AxisClass, 'initialAxisTranslation', onAxisInitialAxisTranslation);
                     addEvent(ChartClass, 'pan', onChartPan);
+                    addEvent(ChartClass, 'touchpan', onChartPan);
                     addEvent(SeriesClass, 'updatedData', onSeriesUpdatedData);
                 }
                 return AxisClass;
@@ -4455,7 +4548,9 @@
                 if (panning &&
                     panning.type !== 'y' &&
                     xAxis.options.ordinal &&
-                    xAxis.series.length) {
+                    xAxis.series.length &&
+                    // On touch devices, let default function handle the pinching
+                    (!e.touches || e.touches.length <= 1)) {
                     var mouseDownX = chart.mouseDownX, extremes = xAxis.getExtremes(), dataMin = extremes.dataMin, dataMax = extremes.dataMax, min = extremes.min, max = extremes.max, hoverPoints = chart.hoverPoints, closestPointRange = (xAxis.closestPointRange ||
                         (xAxis.ordinal && xAxis.ordinal.overscrollPointsRange)), pointPixelWidth = (xAxis.translationSlope *
                         (xAxis.ordinal.slope || closestPointRange)), 
@@ -4879,7 +4974,7 @@
                             ordinal: {
                                 getGroupIntervalFactor: this.getGroupIntervalFactor
                             },
-                            ordinal2lin: axisProto.ordinal2lin,
+                            ordinal2lin: axisProto.ordinal2lin, // #6276
                             getIndexOfPoint: axisProto.getIndexOfPoint,
                             val2lin: axisProto.val2lin // #2590
                         };
@@ -5462,7 +5557,7 @@
              * @type  {number|undefined}
              * @since 2.1.9
              */
-            height: void 0,
+            height: void 0, // Reserved space for buttons and input
             /**
              * The border color of the date input boxes.
              *
@@ -6584,7 +6679,7 @@
                         position: 'absolute',
                         border: 0,
                         boxShadow: '0 0 15px rgba(0,0,0,0.3)',
-                        width: '1px',
+                        width: '1px', // Chrome needs a pixel to see it
                         height: '1px',
                         padding: 0,
                         textAlign: 'center',
@@ -7634,7 +7729,7 @@
             // case (#6615)
             if ('scrollbar' in options && chart.navigator) {
                 merge(true, chart.options.scrollbar, options.scrollbar);
-                chart.navigator.update({});
+                chart.navigator.update({ enabled: !!chart.navigator.navigatorEnabled });
                 delete options.scrollbar;
             }
         });
@@ -8513,7 +8608,7 @@
         }(ColumnSeries));
         extend(HLCSeries.prototype, {
             pointClass: HLCPoint,
-            animate: null,
+            animate: null, // Disable animation
             directTouch: false,
             pointArrayMap: ['high', 'low', 'close'],
             pointAttrToOptions: {
@@ -9419,7 +9514,7 @@
              * @product   highstock
              * @apioption plotOptions.flags.onSeries
              */
-            pointRange: 0,
+            pointRange: 0, // #673
             /**
              * Whether the flags are allowed to overlap sideways. If `false`, the
              * flags are moved sideways using an algorithm that seeks to place every
@@ -10283,11 +10378,11 @@
         extend(FlagsSeries.prototype, {
             allowDG: false,
             forceCrop: true,
-            invertible: false,
+            invertible: false, // Flags series group should not be invertible (#14063).
             noSharedTooltip: true,
             pointClass: FlagsPoint,
             sorted: false,
-            takeOrdinalPosition: false,
+            takeOrdinalPosition: false, // #1074
             trackerGroups: ['markerGroup'],
             buildKDTree: noop,
             /**
@@ -11234,7 +11329,7 @@
          */
         var units = [
             [
-                'millisecond',
+                'millisecond', // Unit name
                 [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // Allowed multiples
             ], [
                 'second',
@@ -12109,8 +12204,7 @@
          *
          * @declare   Highcharts.DataGroupingOptionsObject
          * @product   highstock
-         * @requires  product:highstock
-         * @requires  module:modules/datagrouping
+         * @requires  modules/stock
          * @apioption plotOptions.series.dataGrouping
          */
         /**

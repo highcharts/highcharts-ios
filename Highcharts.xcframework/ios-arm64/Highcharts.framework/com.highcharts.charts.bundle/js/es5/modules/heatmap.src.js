@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v11.4.3 (2024-05-22)
+ * @license Highmaps JS v11.4.5 (2024-07-04)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -26,7 +26,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -231,7 +231,8 @@
              * @function Highcharts.colorSeriesMixin.translateColors
              */
             function seriesTranslateColors() {
-                var series = this, points = this.data.length ? this.data : this.points, nullColor = this.options.nullColor, colorAxis = this.colorAxis, colorKey = this.colorKey;
+                var series = this, points = this.getPointsCollection(), // #17945
+                nullColor = this.options.nullColor, colorAxis = this.colorAxis, colorKey = this.colorKey;
                 points.forEach(function (point) {
                     var value = point.getNestedProperty(colorKey), color = point.options.color || (point.isNull || point.value === null ?
                         nullColor :
@@ -715,9 +716,13 @@
              * Fires when the legend item belonging to the colorAxis is clicked.
              * One parameter, `event`, is passed to the function.
              *
-             * @type      {Function}
-             * @product   highcharts highstock highmaps
-             * @apioption colorAxis.events.legendItemClick
+             * **Note:** This option is deprecated in favor of
+             * [legend.events.itemClick](#legend.events.itemClick).
+             *
+             * @deprecated 11.4.4
+             * @type       {Function}
+             * @product    highcharts highstock highmaps
+             * @apioption  colorAxis.events.legendItemClick
              */
             /**
              * The width of the color axis. If it's a number, it is interpreted as
@@ -2064,14 +2069,14 @@
             },
             clip: true,
             /** @ignore-option */
-            pointRange: null,
+            pointRange: null, // Dynamically set to colsize by default
             tooltip: {
                 pointFormat: '{point.x}, {point.y}: {point.value}<br/>'
             },
             states: {
                 hover: {
                     /** @ignore-option */
-                    halo: false,
+                    halo: false, // #3406, halo is disabled on heatmaps by default
                     /**
                      * How much to brighten the point on interaction. Requires the
                      * main color to be defined in hex or rgb(a) format.

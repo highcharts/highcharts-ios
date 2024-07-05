@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.3 (2024-05-22)
+ * @license Highcharts JS v11.4.5 (2024-07-04)
  *
  * Highcharts variwide module
  *
@@ -28,7 +28,7 @@
             obj[path] = fn.apply(null, args);
 
             if (typeof CustomEvent === 'function') {
-                window.dispatchEvent(new CustomEvent(
+                Highcharts.win.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }
                 ));
@@ -82,7 +82,7 @@
          */
         function onAxisAfterRender() {
             var axis = this;
-            if (!this.horiz && this.variwide) {
+            if (this.variwide) {
                 this.chart.labelCollectors.push(function () {
                     return axis.tickPositions
                         .filter(function (pos) { return !!axis.ticks[pos].label; })
