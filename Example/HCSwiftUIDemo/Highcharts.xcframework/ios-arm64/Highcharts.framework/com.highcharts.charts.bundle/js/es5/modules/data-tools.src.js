@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.5 (2024-07-04)
+ * @license Highcharts JS v11.4.6 (2024-07-08)
  *
  * Highcharts
  *
@@ -58,7 +58,6 @@
         /**
          * Abstract class to provide an interface for modifying a table.
          *
-         * @private
          */
         var DataModifier = /** @class */ (function () {
             function DataModifier() {
@@ -267,7 +266,6 @@
          * */
         /**
          * Additionally provided types for modifier events and options.
-         * @private
          */
         (function (DataModifier) {
             /* *
@@ -1349,7 +1347,6 @@
             };
             /**
              * Sets or unsets the modifier for the table.
-             * @private
              *
              * @param {Highcharts.DataModifier} [modifier]
              * Modifier to set, or `undefined` to unset.
@@ -7459,7 +7456,6 @@
         /**
          * Modifies a table with the help of modifiers in an ordered chain.
          *
-         * @private
          */
         var ChainModifier = /** @class */ (function (_super) {
             __extends(ChainModifier, _super);
@@ -8080,7 +8076,6 @@
         /**
          * Replaces formula strings in a table with calculated values.
          *
-         * @private
          * @class
          * @name Highcharts.DataModifier.types.MathModifier
          * @augments Highcharts.DataModifier
@@ -8264,7 +8259,6 @@
         /**
          * Filters out table rows with a specific value range.
          *
-         * @private
          */
         var RangeModifier = /** @class */ (function (_super) {
             __extends(RangeModifier, _super);
@@ -8412,7 +8406,6 @@
         /**
          * Sort table rows according to values of a column.
          *
-         * @private
          */
         var SortModifier = /** @class */ (function (_super) {
             __extends(SortModifier, _super);

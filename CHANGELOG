@@ -1,3 +1,9 @@
+# Version 11.4.6
+
+## Framework bug fixes:
+
+1. Fixed #21470, bad require tagging causing bad module references.
+
 # Version 11.4.5
 
 ## iOS:
