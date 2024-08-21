@@ -1,5 +1,5 @@
 /**
- * @license Highmaps JS v11.4.6 (2024-07-08)
+ * @license Highmaps JS v11.4.7 (2024-08-14)
  *
  * Highmaps as a plugin for Highcharts or Highcharts Stock.
  *
@@ -8974,9 +8974,17 @@
              * @private
              */
             BubblePoint.prototype.haloPath = function (size) {
+                var computedSize = (size && this.marker ?
+                    this.marker.radius ||
+                        0 :
+                    0) + size;
+                if (this.series.chart.inverted) {
+                    var pos = this.pos() || [0, 0], _a = this.series, xAxis = _a.xAxis, yAxis = _a.yAxis, chart = _a.chart;
+                    return chart.renderer.symbols.circle(xAxis.len - pos[1] - computedSize, yAxis.len - pos[0] - computedSize, computedSize * 2, computedSize * 2);
+                }
                 return Point.prototype.haloPath.call(this, 
                 // #6067
-                size === 0 ? 0 : (this.marker ? this.marker.radius || 0 : 0) + size);
+                computedSize);
             };
             return BubblePoint;
         }(ScatterPoint));
@@ -11100,7 +11108,7 @@
              * @private
              */
             HeatmapSeries.prototype.hasData = function () {
-                return !!this.processedXData.length; // != 0
+                return !!this.xData; // != 0
             };
             /**
              * Override the init method to add point ranges on both axes.
@@ -11204,9 +11212,14 @@
              */
             HeatmapSeries.prototype.translate = function () {
                 var series = this, options = series.options, borderRadius = options.borderRadius, marker = options.marker, symbol = marker && marker.symbol || 'rect', shape = symbols[symbol] ? symbol : 'rect', hasRegularShape = ['circle', 'square'].indexOf(shape) !== -1;
+                if (!series.processedXData) {
+                    var _a = series.getProcessedData(), xData = _a.xData, yData = _a.yData;
+                    series.processedXData = xData;
+                    series.processedYData = yData;
+                }
                 series.generatePoints();
-                for (var _i = 0, _a = series.points; _i < _a.length; _i++) {
-                    var point = _a[_i];
+                for (var _i = 0, _b = series.points; _i < _b.length; _i++) {
+                    var point = _b[_i];
                     var cellAttr = point.getCellAttributes();
                     var x = Math.min(cellAttr.x1, cellAttr.x2), y = Math.min(cellAttr.y1, cellAttr.y2), width = Math.max(Math.abs(cellAttr.x2 - cellAttr.x1), 0), height = Math.max(Math.abs(cellAttr.y2 - cellAttr.y1), 0);
                     point.hasImage = (point.marker && point.marker.symbol || symbol || '').indexOf('url') === 0;

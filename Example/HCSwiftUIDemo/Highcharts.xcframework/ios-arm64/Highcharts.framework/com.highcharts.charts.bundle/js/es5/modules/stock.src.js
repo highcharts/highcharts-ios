@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v11.4.6 (2024-07-08)
+ * @license Highstock JS v11.4.7 (2024-08-14)
  *
  * Highcharts Stock as a plugin for Highcharts
  *
@@ -3577,6 +3577,7 @@
              * @function Highcharts.Navigator#init
              */
             Navigator.prototype.init = function (chart) {
+                var _a;
                 var chartOptions = chart.options, navigatorOptions = chartOptions.navigator || {}, navigatorEnabled = navigatorOptions.enabled, scrollbarOptions = chartOptions.scrollbar || {}, scrollbarEnabled = scrollbarOptions.enabled, height = navigatorEnabled && navigatorOptions.height || 0, scrollbarHeight = scrollbarEnabled && scrollbarOptions.height || 0, scrollButtonSize = scrollbarOptions.buttonsEnabled && scrollbarHeight || 0;
                 this.handles = [];
                 this.shades = [];
@@ -3603,6 +3604,7 @@
                         overscroll: baseXaxis.options.overscroll
                     }, navigatorOptions.xAxis, {
                         type: 'datetime',
+                        yAxis: (_a = navigatorOptions.yAxis) === null || _a === void 0 ? void 0 : _a.id,
                         index: xAxisIndex,
                         isInternal: true,
                         offset: 0,
@@ -8001,13 +8003,11 @@
                     axes2 = (axis.isXAxis ? chart.yAxis : chart.xAxis);
                     for (var _i = 0, axes2_1 = axes2; _i < axes2_1.length; _i++) {
                         var A = axes2_1[_i];
-                        if (defined(A.options.id) ?
-                            A.options.id.indexOf('navigator') === -1 :
-                            true) {
-                            var a = (A.isXAxis ? 'yAxis' : 'xAxis'), rax = (defined(A.options[a]) ?
+                        if (!A.options.isInternal) {
+                            var a = (A.isXAxis ? 'yAxis' : 'xAxis'), relatedAxis = (defined(A.options[a]) ?
                                 chart[a][A.options[a]] :
                                 chart[a][0]);
-                            if (axis === rax) {
+                            if (axis === relatedAxis) {
                                 axes.push(A);
                             }
                         }

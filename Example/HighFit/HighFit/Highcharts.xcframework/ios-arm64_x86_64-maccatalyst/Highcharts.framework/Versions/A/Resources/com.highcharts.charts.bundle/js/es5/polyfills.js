@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.6 (2024-07-08)
+ * @license Highcharts JS v11.4.7 (2024-08-14)
  *
  * (c) 2009-2024 Torstein Honsi
  *
@@ -28,7 +28,7 @@
         if (!obj.hasOwnProperty(path)) {
             obj[path] = fn.apply(null, args);
 
-            if (typeof CustomEvent === 'function') {
+            if (window && typeof CustomEvent === 'function') {
                 window.dispatchEvent(new CustomEvent(
                     'HighchartsModuleLoaded',
                     { detail: { path: path, module: obj[path] } }

@@ -1,3 +1,17 @@
+# Version 11.4.7
+
+## Framework bug fixes:
+
+1. Fixed #21554, tab navigation was trapped in a loop after printing the chart.
+2. Fixed #20456, boosted heatmaps were not rendering in some cases.
+3. Fixed #21501, #21547 and #21569, various tooltip and interaction issues caused by a temporary pointerEvents fix for older Chromium.
+4. Fixed #21277, version and other metadata was not being replaced after building esm-modules.
+5. Fixed #21429, the rounded solid gauge series was misaligned when close to 100%.
+6. Fixed #21281, hovering line with split tooltip, then scatter, caused tooltip animation to start in top-left.
+7. Fixed #17854 , fillOpacity was too strong in boosted series.
+8. Fixed #9748, the mouseup event was not respected after setting the event.
+9. Fixed #21315 inverted bubble point halos were not positioned correctly.
+
 # Version 11.4.6
 
 ## Framework bug fixes:

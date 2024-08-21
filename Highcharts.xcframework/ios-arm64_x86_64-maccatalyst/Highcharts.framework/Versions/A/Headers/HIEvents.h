@@ -171,7 +171,7 @@ Fires when the legend item belonging to the series is clicked. One parameter, `e
 
 **Try it**
 
-* [Confirm hiding and showing](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/series-legend-itemclick/)
+* [Confirm hiding and showing](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/itemclick/)
 * [Confirm toggle visibility of pie slices](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/legend/pie-legend-itemclick/)
 */
 @property(nonatomic, readwrite) HIFunction *itemClick;
