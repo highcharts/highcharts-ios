@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.7 (2024-08-14)
+ * @license Highcharts JS v11.4.8 (2024-08-29)
  *
  * Boost module
  *
@@ -2701,12 +2701,13 @@
          * @function Highcharts.Series#exitBoost
          */
         function exitBoost(series) {
+            var _a;
             var boost = series.boost, chart = series.chart, chartBoost = chart.boost;
             if (chartBoost === null || chartBoost === void 0 ? void 0 : chartBoost.markerGroup) {
                 chartBoost.markerGroup.destroy();
                 chartBoost.markerGroup = void 0;
-                for (var _i = 0, _a = chart.series; _i < _a.length; _i++) {
-                    var s = _a[_i];
+                for (var _i = 0, _b = chart.series; _i < _b.length; _i++) {
+                    var s = _b[_i];
                     s.markerGroup = void 0;
                     s.markerGroup = s.plotGroup('markerGroup', 'markers', 'visible', 1, chart.seriesGroup).addClass('highcharts-tracker');
                 }
@@ -2728,6 +2729,8 @@
                     boost.clear();
                 }
             }
+            // #21106, clean up boost clipping on the series groups.
+            (_a = (chart.seriesGroup || series.group)) === null || _a === void 0 ? void 0 : _a.clip();
         }
         /**
          * @private

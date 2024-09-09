@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v11.4.7 (2024-08-14)
+ * @license Highcharts Gantt JS v11.4.8 (2024-08-29)
  *
  * Gantt series
  *
@@ -2089,12 +2089,22 @@
                         isNaN(scrollMax) ||
                         !defined(axis.min) ||
                         !defined(axis.max) ||
-                        axis.min === axis.max // #10733
+                        axis.dataMin === axis.dataMax // #10733
                     ) {
-                        // Default action: when extremes are the same or there is
+                        // Default action: when data extremes are the same or there is
                         // not extremes on the axis, but scrollbar exists, make it
                         // full size
                         scrollbar.setRange(0, 1);
+                    }
+                    else if (axis.min === axis.max) { // #20359
+                        // When the extremes are the same, set the scrollbar to a point
+                        // within the extremes range. Utilize pointRange to perform the
+                        // calculations. (#20359)
+                        var interval = axis.pointRange / (axis.dataMax +
+                            1);
+                        from = interval * axis.min;
+                        to = interval * (axis.max + 1);
+                        scrollbar.setRange(from, to);
                     }
                     else {
                         from = ((axis.min - scrollMin) /
@@ -3323,8 +3333,12 @@
                 if ((_b = navigatorOptions.handles) === null || _b === void 0 ? void 0 : _b.enabled) {
                     var handlesOptions_1 = navigatorOptions.handles, height_1 = handlesOptions_1.height, width_1 = handlesOptions_1.width;
                     [0, 1].forEach(function (index) {
+                        var _a;
                         var symbolName = handlesOptions_1.symbols[index];
-                        if (!navigator.handles[index]) {
+                        if (!navigator.handles[index] ||
+                            navigator.handles[index].symbolUrl !== symbolName) {
+                            // Generate symbol from scratch if we're dealing with an URL
+                            (_a = navigator.handles[index]) === null || _a === void 0 ? void 0 : _a.destroy();
                             navigator.handles[index] = renderer.symbol(symbolName, -width_1 / 2 - 1, 0, width_1, height_1, handlesOptions_1);
                             // Z index is 6 for right handle, 7 for left. Can't be 10,
                             // because of the tooltip in inverted chart (#2908).
@@ -3332,9 +3346,11 @@
                                 .addClass('highcharts-navigator-handle ' +
                                 'highcharts-navigator-handle-' +
                                 ['left', 'right'][index]).add(navigatorGroup);
+                            navigator.addMouseEvents();
                             // If the navigator symbol changed, update its path and name
                         }
-                        else if (symbolName !== navigator.handles[index].symbolName) {
+                        else if (!navigator.handles[index].isImg &&
+                            navigator.handles[index].symbolName !== symbolName) {
                             var symbolFn = symbols[symbolName], path = symbolFn.call(symbols, -width_1 / 2 - 1, 0, width_1, height_1);
                             navigator.handles[index].attr({
                                 d: path
@@ -11665,7 +11681,7 @@
                 }
             });
             // For tree grid, add indentation
-            if (this.options.type === 'treegrid' &&
+            if (this.type === 'treegrid' &&
                 this.treeGrid &&
                 this.treeGrid.mapOfPosToGridNode) {
                 var treeDepth = this.treeGrid.mapOfPosToGridNode[-1].height || 0;
@@ -11979,7 +11995,7 @@
                 else {
                     // Don't trim ticks which not in min/max range but
                     // they are still in the min/max plus tickInterval.
-                    if (this.options.type !== 'treegrid' &&
+                    if (this.type !== 'treegrid' &&
                         axis.grid &&
                         axis.grid.columns) {
                         this.minPointOffset = this.tickInterval;
@@ -12811,7 +12827,7 @@
          * @private
          */
         function wrapGetLabelPosition(proceed, x, y, label, horiz, labelOptions, tickmarkOffset, index, step) {
-            var tick = this, lbOptions = pick(tick.options && tick.options.labels, labelOptions), pos = tick.pos, axis = tick.axis, options = axis.options, isTreeGrid = options.type === 'treegrid', result = proceed.apply(tick, [x, y, label, horiz, lbOptions, tickmarkOffset, index, step]);
+            var tick = this, lbOptions = pick(tick.options && tick.options.labels, labelOptions), pos = tick.pos, axis = tick.axis, isTreeGrid = axis.type === 'treegrid', result = proceed.apply(tick, [x, y, label, horiz, lbOptions, tickmarkOffset, index, step]);
             var mapOfPosToGridNode, node, level;
             if (isTreeGrid) {
                 var _a = (lbOptions && isObject(lbOptions.symbol, true) ?
@@ -12836,7 +12852,7 @@
         function wrapRenderLabel(proceed) {
             var tick = this, pos = tick.pos, axis = tick.axis, label = tick.label, tickGrid = tick.treeGrid, tickOptions = tick.options, icon = tickGrid === null || tickGrid === void 0 ? void 0 : tickGrid.labelIcon, labelElement = label === null || label === void 0 ? void 0 : label.element, axisGrid = axis.treeGrid, axisOptions = axis.options, chart = axis.chart, tickPositions = axis.tickPositions, mapOfPosToGridNode = axisGrid.mapOfPosToGridNode, labelOptions = pick(tickOptions === null || tickOptions === void 0 ? void 0 : tickOptions.labels, axisOptions === null || axisOptions === void 0 ? void 0 : axisOptions.labels), symbolOptions = (labelOptions && isObject(labelOptions.symbol, true) ?
                 labelOptions.symbol :
-                {}), node = mapOfPosToGridNode && mapOfPosToGridNode[pos], _a = node || {}, descendants = _a.descendants, depth = _a.depth, hasDescendants = node && descendants && descendants > 0, level = depth, isTreeGridElement = (axisOptions.type === 'treegrid') && labelElement, shouldRender = tickPositions.indexOf(pos) > -1, prefixClassName = 'highcharts-treegrid-node-', prefixLevelClass = prefixClassName + 'level-', styledMode = chart.styledMode;
+                {}), node = mapOfPosToGridNode && mapOfPosToGridNode[pos], _a = node || {}, descendants = _a.descendants, depth = _a.depth, hasDescendants = node && descendants && descendants > 0, level = depth, isTreeGridElement = (axis.type === 'treegrid') && labelElement, shouldRender = tickPositions.indexOf(pos) > -1, prefixClassName = 'highcharts-treegrid-node-', prefixLevelClass = prefixClassName + 'level-', styledMode = chart.styledMode;
             var collapsed, addClassName, removeClassName;
             if (isTreeGridElement && node) {
                 // Add class name for hierarchical styling.
@@ -13312,8 +13328,7 @@
          * @todo Add unit-tests.
          */
         function getTreeGridFromData(data, uniqueNames, numberOfSeries) {
-            var categories = [], collapsedNodes = [], mapOfIdToNode = {}, uniqueNamesEnabled = typeof uniqueNames === 'boolean' ?
-                uniqueNames : false;
+            var categories = [], collapsedNodes = [], mapOfIdToNode = {}, uniqueNamesEnabled = uniqueNames || false;
             var mapOfPosToGridNode = {}, posIterator = -1;
             // Build the tree from the series data.
             var treeParams = {
@@ -13438,10 +13453,8 @@
          */
         function onBeforeRender(e) {
             var chart = e.target, axes = chart.axes;
-            axes.filter(function (axis) {
-                return axis.options.type === 'treegrid';
-            }).forEach(function (axis) {
-                var options = axis.options || {}, labelOptions = options.labels, uniqueNames = options.uniqueNames, max = options.max, 
+            axes.filter(function (axis) { return axis.type === 'treegrid'; }).forEach(function (axis) {
+                var options = axis.options || {}, labelOptions = options.labels, uniqueNames = axis.uniqueNames, max = options.max, 
                 // Check whether any of series is rendering for the first
                 // time, visibility has changed, or its data is dirty, and
                 // only then update. #10570, #10580. Also check if
@@ -13549,7 +13562,7 @@
          * The tick position in axis values.
          */
         function wrapGenerateTick(proceed, pos) {
-            var axis = this, mapOptionsToLevel = axis.treeGrid.mapOptionsToLevel || {}, isTreeGrid = axis.options.type === 'treegrid', ticks = axis.ticks;
+            var axis = this, mapOptionsToLevel = axis.treeGrid.mapOptionsToLevel || {}, isTreeGrid = axis.type === 'treegrid', ticks = axis.ticks;
             var tick = ticks[pos], levelOptions, options, gridNode;
             if (isTreeGrid &&
                 axis.treeGrid.mapOfPosToGridNode) {
@@ -13730,7 +13743,7 @@
             var _a;
             var axis = this, options = axis.options, linkedParent = typeof options.linkedTo === 'number' ?
                 (_a = this.chart[axis.coll]) === null || _a === void 0 ? void 0 : _a[options.linkedTo] :
-                void 0, isTreeGrid = options.type === 'treegrid';
+                void 0, isTreeGrid = axis.type === 'treegrid';
             if (isTreeGrid) {
                 axis.min = pick(axis.userMin, options.min, axis.dataMin);
                 axis.max = pick(axis.userMax, options.max, axis.dataMax);
@@ -13765,7 +13778,7 @@
          * The original setTickInterval function.
          */
         function wrapRedraw(proceed) {
-            var axis = this, options = axis.options, isTreeGrid = options.type === 'treegrid';
+            var axis = this, isTreeGrid = this.type === 'treegrid';
             if (isTreeGrid && axis.visible) {
                 axis.tickPositions.forEach(function (pos) {
                     var tick = axis.ticks[pos];

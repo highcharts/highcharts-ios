@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v11.4.7 (2024-08-14)
+ * @license Highcharts JS v11.4.8 (2024-08-29)
  *
  * Arc diagram module
  *
@@ -463,8 +463,8 @@
              * The legend object.
              */
             function lineMarker(legend, item, hasArea) {
-                var _a;
-                var legendItem = this.legendItem = this.legendItem || {}, _b = this, chart = _b.chart, options = _b.options, _c = legend.baseline, baseline = _c === void 0 ? 0 : _c, symbolWidth = legend.symbolWidth, symbolHeight = legend.symbolHeight, symbol = this.symbol || 'circle', generalRadius = symbolHeight / 2, renderer = chart.renderer, legendItemGroup = legendItem.group, verticalCenter = baseline - Math.round(symbolHeight *
+                var _a, _b;
+                var legendItem = this.legendItem = this.legendItem || {}, _c = this, chart = _c.chart, options = _c.options, _d = legend.baseline, baseline = _d === void 0 ? 0 : _d, symbolWidth = legend.symbolWidth, symbolHeight = legend.symbolHeight, symbol = this.symbol || 'circle', generalRadius = symbolHeight / 2, renderer = chart.renderer, legendItemGroup = legendItem.group, verticalCenter = baseline - Math.round((((_a = legend.fontMetrics) === null || _a === void 0 ? void 0 : _a.b) || symbolHeight) *
                     // Render line and marker slightly higher to make room for the
                     // area
                     (hasArea ? 0.4 : 0.3)), attr = {};
@@ -499,7 +499,7 @@
                         ['L', symbolWidth - lineSizer, verticalCenter]
                     ];
                     legendItem.line.attr({ d: d });
-                    (_a = legendItem.area) === null || _a === void 0 ? void 0 : _a.attr({
+                    (_b = legendItem.area) === null || _b === void 0 ? void 0 : _b.attr({
                         d: __spreadArray(__spreadArray([], d, true), [
                             ['L', symbolWidth - lineSizer, baseline],
                             ['L', lineSizer, baseline]
@@ -4365,7 +4365,7 @@
                  * @private
                  */
                 function limitedRange(val) {
-                    return clamp(val, -1e5, 1e5);
+                    return clamp(val, -1e9, 1e9);
                 }
                 // Translate each point
                 for (i = 0; i < dataLength; i++) {
@@ -8078,7 +8078,7 @@
                 this.url = this.getReferenceURL();
                 // Add description
                 var desc = this.createElement('desc').add();
-                desc.element.appendChild(doc.createTextNode('Created with Highcharts 11.4.7'));
+                desc.element.appendChild(doc.createTextNode('Created with Highcharts 11.4.8'));
                 this.defs = this.createElement('defs').add();
                 this.allowHTML = allowHTML;
                 this.forExport = forExport;
@@ -9046,6 +9046,7 @@
                         });
                     }
                     img_1.isImg = true;
+                    img_1.symbolUrl = symbol;
                     if (defined(img_1.imgwidth) && defined(img_1.imgheight)) {
                         centerImage(img_1);
                     }

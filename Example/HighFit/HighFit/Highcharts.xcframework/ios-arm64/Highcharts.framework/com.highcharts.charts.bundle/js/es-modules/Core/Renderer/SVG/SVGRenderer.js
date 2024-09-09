@@ -169,7 +169,7 @@ class SVGRenderer {
         this.url = this.getReferenceURL();
         // Add description
         const desc = this.createElement('desc').add();
-        desc.element.appendChild(doc.createTextNode('Created with Highcharts 11.4.7'));
+        desc.element.appendChild(doc.createTextNode('Created with Highcharts 11.4.8'));
         this.defs = this.createElement('defs').add();
         this.allowHTML = allowHTML;
         this.forExport = forExport;
@@ -1134,6 +1134,7 @@ class SVGRenderer {
                 });
             }
             img.isImg = true;
+            img.symbolUrl = symbol;
             if (defined(img.imgwidth) && defined(img.imgheight)) {
                 centerImage(img);
             }

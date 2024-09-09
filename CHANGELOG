@@ -1,3 +1,19 @@
+# Version 11.4.8
+
+## Framework bug fixes:
+
+1. Fixed #21165, series didn't render properly when the chart height was very large.
+2. Fixed #21106, series clipped on boost disabled and increased the chart size.
+3. Fixed #21734, minor ticks were wrongly distributed with multiple axes or when tickAmount was set.
+4. Fixed #21521, plot band labels and plot line labels would overlap if positioned too close. Added inside and allowOverlap options to the Axis.plotBands.label options.
+5. Fixed #20499, data labels failed to apply width in styled mode.
+6. Fixed #21205, offline PDF exporting was broken by attempted erroneous child node removal when the chart contained text paths.
+7. Fixed #21241, accessibility could not be dynamically enabled or disabled.
+8. Fixed #21188 and #21510, hidden divs with special CSS styles increased chart height by firing ResizeObserver.
+9. Fixed #21650, the data module was not successfully updating the x-axis in some cases.
+10. Fixed #21255, tooltip with outside rendered outside viewport, making document.documentElement expand.
+11. Fixed #21605, legend text was not vertically aligned with the symbol.
+
 # Version 11.4.7
 
 ## Framework bug fixes:

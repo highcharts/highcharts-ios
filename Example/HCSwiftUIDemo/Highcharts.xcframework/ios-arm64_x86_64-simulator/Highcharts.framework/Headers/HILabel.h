@@ -130,6 +130,26 @@ The text alignment for the label. While `align` determines where the texts ancho
 * [Text label in bottom position](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-label-textalign/)
 */
 @property(nonatomic, readwrite) NSString *textAlign;
+/**
+Whether or not the label can be hidden if it overlaps with another label.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [A Plotband label overlapping another](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-label-allowoverlap/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *allowOverlap;
+/**
+Wether or not the text of the label can exceed the width of the label.
+
+**Defaults to** `true`.
+
+**Try it**
+
+* [Displaying text with text-wrapping/ellipsis, or the full text.](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-label-textwidth/)
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *inside;
 
 -(NSDictionary *)getParams;
 
