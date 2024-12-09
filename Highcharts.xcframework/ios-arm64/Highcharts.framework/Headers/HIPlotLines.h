@@ -58,13 +58,13 @@ Text labels for the plot bands
 */
 @property(nonatomic, readwrite) HILabel *label;
 /**
-The position of the line in axis units.
+The position of the line in axis units. On datetime axes, the value can be given as a timestamp or a date string.
 
 **Try it**
 
 * [Between two categories on X axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotlines-color/)
 */
-@property(nonatomic, readwrite) NSNumber *value;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ value;
 /**
 An object defining mouse events for the plot line. Supported properties are `click`, `mouseover`, `mouseout`, `mousemove`.
 

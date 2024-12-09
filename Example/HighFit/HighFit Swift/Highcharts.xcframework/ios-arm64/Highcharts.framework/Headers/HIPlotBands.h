@@ -59,23 +59,23 @@ The z index of the plot band within the chart, relative to other elements. Using
 */
 @property(nonatomic, readwrite) NSNumber *zIndex;
 /**
-The start position of the plot band in axis units.
+The start position of the plot band in axis units. On datetime axes, the value can be given as a timestamp or a date string.
 
 **Try it**
 
 * [Datetime axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-color/)
 * [Categorized axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-from/)
 */
-@property(nonatomic, readwrite) NSNumber *from;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ from;
 /**
-The end position of the plot band in axis units.
+The end position of the plot band in axis units. On datetime axes, the value can be given as a timestamp or a date string.
 
 **Try it**
 
 * [Datetime axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-color/)
 * [Categorized axis](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/xaxis/plotbands-from/)
 */
-@property(nonatomic, readwrite) NSNumber *to;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ to;
 /**
 Border radius for the plot band. Applies only to gauges. Can be a pixel value or a percentage, for example `50%`.
 

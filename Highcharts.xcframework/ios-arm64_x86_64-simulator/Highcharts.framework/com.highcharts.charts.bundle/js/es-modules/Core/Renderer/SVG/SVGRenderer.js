@@ -169,7 +169,7 @@ class SVGRenderer {
         this.url = this.getReferenceURL();
         // Add description
         const desc = this.createElement('desc').add();
-        desc.element.appendChild(doc.createTextNode('Created with Highcharts 11.4.8'));
+        desc.element.appendChild(doc.createTextNode('Created with @product.name@ @product.version@'));
         this.defs = this.createElement('defs').add();
         this.allowHTML = allowHTML;
         this.forExport = forExport;
@@ -328,7 +328,9 @@ class SVGRenderer {
      */
     getStyle(style) {
         this.style = extend({
-            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", ' +
+                'Roboto, Helvetica, Arial, "Apple Color Emoji", ' +
+                '"Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
             fontSize: '1rem'
         }, style);
         return this.style;

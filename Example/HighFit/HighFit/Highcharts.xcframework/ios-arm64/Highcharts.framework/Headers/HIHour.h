@@ -6,7 +6,7 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIDateTimeFormatOptions.h"
 
 
 /**
@@ -14,8 +14,8 @@
 @interface HIHour: HIChartsJSONSerializable
 
 @property(nonatomic, readwrite) NSNumber /* Bool */ *range;
-@property(nonatomic, readwrite) NSString *main;
-@property(nonatomic, readwrite) NSArray<NSString *> *list;
+@property(nonatomic, readwrite) HIDateTimeFormatOptions *main;
+@property(nonatomic, readwrite) NSArray *list;
 
 -(NSDictionary *)getParams;
 

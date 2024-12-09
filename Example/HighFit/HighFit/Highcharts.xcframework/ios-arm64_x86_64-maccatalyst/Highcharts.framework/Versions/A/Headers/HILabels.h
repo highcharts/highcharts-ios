@@ -97,7 +97,7 @@ Rotation of the labels in degrees. When `undefined`, the `autoRotation` option t
 */
 @property(nonatomic, readwrite) NSNumber *rotation;
 /**
-CSS styles for the label. Use `whiteSpace: 'nowrap'` to prevent wrapping of category labels. Use `textOverflow: 'none'` to prevent ellipsis (dots). In styled mode, the labels are styled with the `.highcharts-axis-labels` class.
+CSS styles for the label. Use `lineClamp` to control wrapping of category labels. Use `textOverflow: 'none'` to prevent ellipsis (dots). In styled mode, the labels are styled with the `.highcharts-axis-labels` class.
 
 **Try it**
 

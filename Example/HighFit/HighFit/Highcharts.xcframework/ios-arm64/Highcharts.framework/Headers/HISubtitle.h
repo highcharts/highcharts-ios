@@ -11,6 +11,10 @@
 
 /**
 The chart's subtitle. This can be used both to display a subtitle below the main title, and to display random text anywhere in the chart. The subtitle can be updated after chart initialization through the `Chart.setTitle` method.
+
+**Try it**
+
+* [Default title alignment](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/align-auto/)
 */
 @interface HISubtitle: HIChartsJSONSerializable
 
@@ -43,16 +47,6 @@ The subtitle of the chart.
 */
 @property(nonatomic, readwrite) NSString *text;
 /**
-The horizontal alignment of the subtitle. Can be one of "left", "center" and "right".
-
-**Defaults to** `center`.
-
-**Try it**
-
-* [Footnote at right of plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/subtitle/align/)
-*/
-@property(nonatomic, readwrite) NSString *align;
-/**
 The y position of the subtitle relative to the alignment within `chart.spacingTop` and `chart.spacingBottom`. By default the subtitle is laid out below the title unless the title is floating.
 
 **Try it**
@@ -80,16 +74,6 @@ When the subtitle is floating, the plot area will not move to make space for it.
 * [Floating title and subtitle](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/subtitle/floating/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
-/**
-Adjustment made to the subtitle width, normally to reserve space for the exporting burger menu.
-
-**Defaults to** `-44`.
-
-**Try it**
-
-* [Wider menu, greater padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust/)
-*/
-@property(nonatomic, readwrite) NSNumber *widthAdjust;
 /**
 Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the text.
 

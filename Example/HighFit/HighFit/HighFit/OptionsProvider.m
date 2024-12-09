@@ -88,7 +88,7 @@
         if ([subtitle.text length] > 0) {
             subtitle.text = [subtitle.text stringByAppendingString:@" total"];
         }
-        subtitle.align = @"left";
+       
         subtitle.style = [[HICSSObject alloc] init];
         subtitle.style.fontFamily = @"Arial";
         subtitle.style.fontSize = @"10px";
@@ -187,7 +187,7 @@
         if ([subtitle.text length] > 0) {
             subtitle.text = [subtitle.text stringByAppendingString:@" total"];
         }
-        subtitle.align = @"left";
+  
         subtitle.style = [[HICSSObject alloc] init];
         subtitle.style.fontFamily = @"Arial";
         subtitle.style.fontSize = @"10px";
@@ -282,7 +282,7 @@
         if ([subtitle.text length] > 0) {
             subtitle.text = [subtitle.text stringByAppendingString:@" total"];
         }
-        subtitle.align = @"left";
+        
         subtitle.style = [[HICSSObject alloc] init];
         subtitle.style.fontFamily = @"Arial";
         subtitle.style.fontSize = @"10px";

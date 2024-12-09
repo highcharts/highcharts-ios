@@ -73,7 +73,7 @@ An explicit height for the chart. If a _number_, the height is given in pixels. 
 /**
 Additional CSS styles to apply inline to the container `div` and the root SVG. According to the CSS syntax documentation, it is recommended to quote font family names that contain white space, digits, or punctuation characters other than hyphens. In such cases, wrap the fontFamily name as follows: `fontFamily: '"Font name"'`. Since v11, the root font size is 1rem by default, and all child element are given a relative `em` font size by default. This allows implementers to control all the chart's font sizes by only setting the root level.
 
-**Defaults to** `{"fontFamily": Helvetica, Arial, sans-serif","fontSize":"1rem"}`.
+**Defaults to** `{"fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif", "fontSize":"1rem"}`.
 
 **Try it**
 

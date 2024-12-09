@@ -11,21 +11,15 @@
 
 /**
 The chart's main title.
+
+**Try it**
+
+* [Default title alignment](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/align-auto/)
 */
 @interface HITitle: HIChartsJSONSerializable
 
 /**
-Adjustment made to the title width, normally to reserve space for the exporting burger menu.
-
-**Defaults to** `-44`.
-
-**Try it**
-
-* [Wider menu, greater padding](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust/)
-*/
-@property(nonatomic, readwrite) NSNumber *widthAdjust;
-/**
-CSS styles for the title. Use this for font styling, but use `align`, `x` and `y` for text alignment. In styled mode, the title style is given in the `.highcharts-title` class.
+CSS styles for the title. Use this for font styling, but use `align`, `x` and `y` for text alignment. Note that the default `title.minScale` option also affects the rendered font size. In order to keep the font size fixed regardless of title length, set `minScale` to 1. In styled mode, the title style is given in the `.highcharts-title` class.
 
 **Defaults to** `{ "color": "#333333", "fontSize": "18px" }`.
 
@@ -54,15 +48,22 @@ The title of the chart. To disable the title, set the `text` to `undefined`.
 */
 @property(nonatomic, readwrite) NSString *text;
 /**
-The horizontal alignment of the title. Can be one of "left", "center" and "right".
+The horizontal alignment of the title. Can be one of "left", "center" and "right". Since v12 it defaults to `undefined`, meaning the alignment is computed for best fit. If the text fits in one line, it aligned to the center, but if it is wrapped into multiple lines, it is aligned to the left.
 
-**Defaults to** `center`.
+**Defaults to** `undefined`.
 
 **Try it**
 
+* [Default alignment, dynamic](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/align-auto/)
 * [Aligned to the plot area (x = 70px = margin left - spacing left)](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/align/)
 */
 @property(nonatomic, readwrite) NSString *align;
+/**
+Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the text.
+
+**Defaults to** `false`.
+*/
+@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
 /**
 The y position of the title relative to the alignment within `chart.spacingTop` and `chart.spacingBottom`. By default it depends on the font size.
 
@@ -82,16 +83,15 @@ The x position of the title relative to the alignment within `chart.spacingLeft`
 */
 @property(nonatomic, readwrite) NSNumber *x;
 /**
-When the title is floating, the plot area will not move to make space for it.
+When the title is too wide to fit in the chart, the default behavior is to scale it down to fit, or apply word wrap if it is scaled down to `minScale` and still doesn't fit. The default value reflects the scale, when using default font sizes, when the title font size matches that of the subtitle. The title still stands out as it is bold by default. Set `minScale` to 1 to avoid downscaling.
 
-**Defaults to** `false`.
+**Defaults to** `0.67`.
 
 **Try it**
 
-* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoomtype-none/)
-* [True - title on top of the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/floating/)
+* [Downscaling demonstrated](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/align-auto/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
+@property(nonatomic, readwrite) NSNumber *minScale;
 /**
 The margin between the title and the plot area, or if a subtitle is present, the margin between the subtitle and the plot area.
 
@@ -104,11 +104,16 @@ The margin between the title and the plot area, or if a subtitle is present, the
 */
 @property(nonatomic, readwrite) NSNumber *margin;
 /**
-Whether to [use HTML](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#html) to render the text.
+When the title is floating, the plot area will not move to make space for it.
 
 **Defaults to** `false`.
+
+**Try it**
+
+* [False by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/chart/zoomtype-none/)
+* [True - title on top of the plot area](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/floating/)
 */
-@property(nonatomic, readwrite) NSNumber /* Bool */ *useHTML;
+@property(nonatomic, readwrite) NSNumber /* Bool */ *floating;
 /**
 Whether to reserve space for the title when laying out the axis.
 

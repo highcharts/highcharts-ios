@@ -12,7 +12,7 @@
 
 
 /**
-Language object. The language object is global and it can't be set on each chart initialization. Instead, use `Highcharts.setOptions` to set it before any chart is initialized. ```js Highcharts.setOptions({   lang: {     months: [       'Janvier', 'Février', 'Mars', 'Avril',       'Mai', 'Juin', 'Juillet', 'Août',       'Septembre', 'Octobre', 'Novembre', 'Décembre'     ],     weekdays: [       'Dimanche', 'Lundi', 'Mardi', 'Mercredi',       'Jeudi', 'Vendredi', 'Samedi'     ]   } }); ```
+An object containing language-related strings and settings. A typical setup uses `Highcharts.setOptions` to make the options apply to all charts in the same page. ```js Highcharts.setOptions({   lang: {     locale: 'fr'   } }); ```
 */
 @interface HILang: HIChartsJSONSerializable
 
@@ -37,6 +37,18 @@ Text to show when export is in progress.
 */
 @property(nonatomic, readwrite) NSString *exportInProgress;
 /**
+The browser locale to use for date and number formatting. The actual locale used for each chart is determined in three steps: 1. If this `lang.locale` option is specified, it is used. 2. Else, look for the closest ancestor HTML element with a `lang`  attribute, typically the `<html>` element. 3. If no 'lang' attribute is found, use the default browser locale. Use `en-GB`, British English, for approximate consistency with Highcharts v < 12.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [Set the locale using the `lang.locale` option](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/lang/locale/)
+* [Pick up the locale from the HTML `lang` attribute](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/lang/locale-attribute/)
+* [Arabic locale with digits and dates *](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/members/highcharts-numberformat)
+*/
+@property(nonatomic, readwrite) NSArray<NSString *> *locale;
+/**
 Configure the accessibility strings in the chart. Requires the [accessibility module](https://code.highcharts.com/modules/accessibility.js) to be loaded. For a description of the module and information on its features, see [Highcharts Accessibility](https://www.highcharts.com/docs/chart-concepts/accessibility). The lang options use [Format Strings](https://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting#format-strings) with variables that are replaced at run time. These variables should be used when available, to avoid duplicating text that is defined elsewhere. For more dynamic control over the accessibility functionality, see `accessibility.point.descriptionFormatter`, `accessibility.series.descriptionFormatter`, and `accessibility.screenReaderSection.beforeChartFormatter`.
 */
 @property(nonatomic, readwrite) HIAccessibility *accessibility;
@@ -47,7 +59,7 @@ The text for the menu item.
 */
 @property(nonatomic, readwrite) NSString *hideData;
 /**
-Short week days, starting Sunday. If not specified, Highcharts uses the first three letters of the `lang.weekdays` option.
+Short week days, starting Sunday. Defaults to 'undefined', meaning the default short weekday names are used according to the `lang.locale` setting.
 
 **Try it**
 
@@ -114,10 +126,9 @@ The magnitude of `numericSymbols` replacements. Use 10000 for Japanese, Korean a
 */
 @property(nonatomic, readwrite) NSNumber *numericSymbolMagnitude;
 /**
-An array containing the weekday names.
+An array containing the weekday names. Defaults to 'undefined', meaning the default weekday names are used according to the `lang.locale` setting.
 
-**Defaults to** `["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-         "Friday", "Saturday"]`.
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *weekdays;
 /**
@@ -179,18 +190,15 @@ The tooltip title for the label appearing when a chart is zoomed.
 */
 @property(nonatomic, readwrite) NSString *resetZoomTitle;
 /**
-An array containing the months names. Corresponds to the `%B` format in `Highcharts.dateFormat()`.
+An array containing the months names. Corresponds to the `%B` format in `Highcharts.dateFormat()`. Defaults to 'undefined', meaning the default month names are used according to the `lang.locale` setting.
 
-**Defaults to** `["January", "February", "March", "April", "May", "June",
-         "July", "August", "September", "October", "November",
-         "December"]`.
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *months;
 /**
-An array containing the months names in abbreviated form. Corresponds to the `%b` format in `Highcharts.dateFormat()`.
+An array containing the months names in abbreviated form. Corresponds to the `%b` format in `Highcharts.dateFormat()`. Defaults to 'undefined', meaning the default short month names are used according to the `lang.locale` setting.
 
-**Defaults to** `["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]`.
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *shortMonths;
 /**
@@ -200,15 +208,15 @@ Exporting module only. The text for the JPEG download menu item.
 */
 @property(nonatomic, readwrite) NSString *downloadJPEG;
 /**
-The default decimal point used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments.
+The default decimal point used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments. Defaults to the locale decimal point as determined by `lang.locale`.
 
-**Defaults to** `.`.
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *decimalPoint;
 /**
-The default thousands separator used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments. Defaults to a single space character, which is recommended in [ISO 31-0](https://en.wikipedia.org/wiki/ISO_31-0#Numbers) and works across Anglo-American and continental European languages.
+The default thousands separator used in the `Highcharts.numberFormat` method unless otherwise specified in the function arguments. Defaults to the locale thousands separator as determined by `lang.locale`.
 
-**Defaults to** `\u0020`.
+**Defaults to** `undefined`.
 */
 @property(nonatomic, readwrite) NSString *thousandsSep;
 /**

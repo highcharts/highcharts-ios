@@ -144,6 +144,7 @@ When `true`, the columns will center in the category, ignoring null or missing p
 **Try it**
 
 * [Center in category](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-column/centerincategory/)
+* [Center in category, stacked and grouped](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series/stack-centerincategory/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *centerInCategory;
 /**

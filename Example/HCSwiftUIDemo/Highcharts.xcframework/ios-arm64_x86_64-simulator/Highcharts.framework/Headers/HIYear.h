@@ -6,15 +6,15 @@
 * In case of questions, please contact sales@highsoft.com
 */
 
-#import "HIChartsJSONSerializable.h"
+#import "HIDateTimeFormatOptions.h"
 
 
 /**
  */
 @interface HIYear: HIChartsJSONSerializable
 
-@property(nonatomic, readwrite) NSString *main;
-@property(nonatomic, readwrite) NSArray<NSString *> *list;
+@property(nonatomic, readwrite) HIDateTimeFormatOptions *main;
+@property(nonatomic, readwrite) NSArray *list;
 
 -(NSDictionary *)getParams;
 

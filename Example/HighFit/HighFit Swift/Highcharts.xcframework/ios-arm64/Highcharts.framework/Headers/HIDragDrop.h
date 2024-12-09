@@ -80,7 +80,7 @@ Set the maximum X value the points can be moved to.
 
 * [Limit dragging](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
 */
-@property(nonatomic, readwrite) NSNumber *dragMaxX;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ dragMaxX;
 /**
 Set the maximum Y value the points can be moved to.
 
@@ -108,7 +108,7 @@ Set the minimum X value the points can be moved to.
 
 * [Limit dragging](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/dragdrop/drag-xrange)
 */
-@property(nonatomic, readwrite) NSNumber *dragMinX;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ dragMinX;
 /**
 Set the minimum Y value the points can be moved to.
 

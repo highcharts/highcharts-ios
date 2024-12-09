@@ -1,3 +1,71 @@
+# Version 12.0.2
+
+#Framework: 
+
+1. Refactored the Series class to organize its data in a DataTable instead of parallel arrays. Removed the internal Series properties xData, yData, processedXData and processedYData, as well as some additional series-specific data arrays, in favor of Series.dataTable.
+2. Added support for data.x values as date strings. These can now be defined for example as '2024-10-03' as a more human readable alternative to timestamps. Also allowed date string in other options referring to x values, like xAxis.min, xAxis.max, series.pointStart, plotLines.value, Gantt series start and end, Axis.setExtremes() etc.
+3. Refactored all internal time zone handling with functions powered by Intl.DateTimeFormat.
+4. Added new option, lang.locale, to determine in what language dates are rendered.
+5. Added support for locale-aware date formatting through the Intl.DateTimeFormat browser API. Changed all default datetime format strings to locale-aware formats.
+6. Added ucfirst template helper function to allow upper case first in strings.
+7. Added support for string parameters in template helper functions.
+8. Added support for textOverflow: 'ellipsis' with texts and labels spanning multiple lines, as well as the lineClamp CSS property. This allows better control over the layout of axis labels and data labels.
+9. Changed the default chart font-family to better match system fonts and improve legibility.
+10. Changed the default build system to webpack, allowing for tree shaking in the build process and smaller builds.
+11. Improved default alignment of title, subtitle and the context menu button. Added new option, title.minScale.
+12. Added option legendColor to set legend symbol color as distinct from series color, see #21776.
+13. Added tweening support for 4 and 8 digit hex colors.
+14. Use Point instances as context for tooltip and data label formatters and formats.
+15. Added support for individual whisker length for box plots and error bars. See #21648.
+16. Fixed #22243, compiled files were not available on npm.
+
+#Framework upgrade notes:
+
+1. When importing Highcharts as a node module, additional modules no longer require initialization. Previously modules would be first imported, then initialized.
+2. Since v12, the module will not return a factory function, so above code will cause an error. Instead, import it.
+3. All date and time strings are now by default rendered in the web page's default language as set in the html.lang attribute, or falls back to the browser default. Setting lang.locale to en-GB will restore the labels approximately as they were prior to v12. For exact backwards compatibility, set all the time format options (xAxis.dateTimeLabelFormats, tooltip.dateTimeLabelFormats etc) back to their v11 defaults in addition.
+4. The time.getTimezoneOffset function callback no longer works. Instead, use the timezone option.
+5. All time-related options in the global group were removed. Use the time options instead.
+6. The data handling of the Series class has been rewritten to use the DataTable class directly. As a consequence, the parallel arrays storing the series data are removed, and replaced by Series.getColumn().
+Series.xData is replaced by Series.getColumn('x')
+Series.yData is replaced by Series.getColumn('y')
+Series.processedXData is replaced by Series.getColumn('x', true)
+Series.processedYData is replaced by Series.getColumn('y', true)
+7. The "Download PDF" menu item was removed from the default exporting menu, in preparation for a future update where exporting is done on the client side by default. The future update will require PDF download to either run via the export server like before, or to load a third party script. To re-enable the PDF download in the menu, add downloadPDF in the contextButton.menuItems.
+8. The HighchartModuleLoaded window event is no longer supported as we moved to webpack builds with tree shaking capabilites. Instead, extensions must rely on events and wrapped methods.
+9. The title.widthAdjust option is removed. Instead, use contextButton.buttonSpacing to make space for non-default context button.
+10. Titles and subtitles now have adaptive alignment. To revert to the pre-v12 defaults, set title.align and subtitle.align to center, and title.minScale to 1.
+11. The Point instances are now used as context for tooltip and data label formatters and format strings, instead of an abstract context object. In most cases this will cause no changes as the properties of the context object are now moved to the Point itself, but some changes may occur. Specifically the {point.x} key for points on a category axes will no longer return the category name. Instead, use {category}.
+
+#Framework bug fixes: 
+1. Fixed #21793, templating did not correctly parse sub expressions inside nested if conditions.
+2. Fixed #22188, graphs were clipped at the left side when zooming on a series containing zones, and the x-axis was of type category.
+3. Fixed #20550, centerInCategory did not work with multiple stacks.
+4. Changed default exporting.url to a more stable server, dedicated to SVG export only.
+5. Fixed #22187, word wrap failed for SVG when a word with markup fell at the breaking point.
+6. Fixed #22100, pie data label was cut off in some cases when rendered at the bottom of the pie. Altered positioning logic by letting labels gravitate towards the sides when there is space available, which also leaves room for the pie to render larger in limited space.
+7. Fixed #19335, accessibility focus border was incorrectly positioned in some edge cases.
+8. Fixed #21863, a regression causing the Boost module to fail with treemap series.
+9. Fixed #21890, scrollablePlotArea was not supporting parallelCoordinates.
+10. Fixed #21684, tooltip with outside did not receive css themes assigned to container.
+11. Fixed #21924, custom sizes in marker states did not work.
+12. Fixed #21098, corrections for ie11 compatibility fix.
+13. Fixed #21136, pointer events were called on points outside of plot area with scrollablePlotArea enabled.
+14. Fixed #21267, a regression causing elements to disappear when zooming on an X-range chart.
+15. Fixed #21804, columns were crisped to full pixel width even when the crisp option was explicitly false.
+16. Fixed #16931, errors in Chrome when modifying chart before printing the page.
+17. Fixed #21745, click event was fired on drag for multiple charts.
+18. Fixed #21530, tick values were padded onto user-defined category axes.
+19. Fixed #18461, changes to options3d alpha and beta were not applied to pie body.
+20. Fixed #21534, mouseover point event broke drilldown.
+21. Fixed #20470, allow values from nested properties in exported data.
+22. Fixed #22124, numeric font-size for labels didn't work as announced.
+23. Fixed #22258, v12 modules didn't work with highstock, highmaps and highcharts-gantt NPM bundles.
+24. Fixed #22052, drilldown breadcrumb showed the wrong label when scrollbar was enabled.
+25. Fixed #22088, tooltip could spill over at certain widths.
+26. Fixed #21897, missing points in scatter series with boost.
+27. Fixed #22169, only the first zone got shadow when shadow was true.
+
 # Version 11.4.8
 
 ## Framework bug fixes:

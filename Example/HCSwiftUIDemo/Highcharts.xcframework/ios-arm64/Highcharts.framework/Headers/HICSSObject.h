@@ -55,6 +55,10 @@ Height of the element.
 */
 @property(nonatomic, readwrite) NSNumber *height;
 /**
+The maximum number of lines. If lines are cropped away, an ellipsis will be added.
+*/
+@property(nonatomic, readwrite) NSNumber *lineClamp;
+/**
 Width of the element border.
 */
 @property(nonatomic, readwrite) NSNumber *lineWidth;

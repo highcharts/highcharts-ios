@@ -10,6 +10,7 @@
 #import "HINodes.h"
 #import "HILevels.h"
 #import "HIColor.h"
+#import "HIBorderRadiusOptionsObject.h"
 
 
 /**
@@ -47,16 +48,6 @@ A collection of options for the individual nodes. The nodes in a dependency diag
 */
 @property(nonatomic, readwrite) NSArray <HINodes *> *nodes;
 /**
-Size of the wheel in pixel or percent relative to the canvas space.
-
-**Defaults to** `100%`.
-*/
-@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
-/**
-The start angle of the dependency wheel, in degrees where 0 is up.
-*/
-@property(nonatomic, readwrite) NSNumber *startAngle;
-/**
 The center of the wheel relative to the plot area. Can be percentages or pixel values. The default behaviour is to center the wheel inside the plot area.
 
 **Defaults to** `[null, null]`.
@@ -68,6 +59,22 @@ Higher numbers makes the links in a sankey diagram or dependency wheelrender mor
 **Defaults to** `0.6`.
 */
 @property(nonatomic, readwrite) NSNumber *curveFactor;
+/**
+The corner radius of the border surrounding each node. A number signifies pixels. A percentage string, like for example `50%`, signifies a relative size. For nodes this is relative to the node width.
+
+**Defaults to** `3`.
+*/
+@property(nonatomic, readwrite) HIBorderRadiusOptionsObject *borderRadius;
+/**
+The start angle of the dependency wheel, in degrees where 0 is up.
+*/
+@property(nonatomic, readwrite) NSNumber *startAngle;
+/**
+Size of the wheel in pixel or percent relative to the canvas space.
+
+**Defaults to** `100%`.
+*/
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ size;
 /**
 When using automatic point colors pulled from the global `colors` or series-specific `plotOptions.column.colors` collections, this option determines whether the chart should receive one color per series or one color per point. In styled mode, the `colors` or `series.colors` arrays are not supported, and instead this option gives the points individual color class names on the form `highcharts-color-{n}`.
 
@@ -159,6 +166,7 @@ When `true`, the columns will center in the category, ignoring null or missing p
 **Try it**
 
 * [Center in category](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series-column/centerincategory/)
+* [Center in category, stacked and grouped](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series/stack-centerincategory/)
 */
 @property(nonatomic, readwrite) NSNumber /* Bool */ *centerInCategory;
 

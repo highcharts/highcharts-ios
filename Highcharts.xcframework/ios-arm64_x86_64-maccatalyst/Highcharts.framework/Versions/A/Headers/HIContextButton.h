@@ -29,7 +29,7 @@ See `navigation.buttonOptions.symbolFill`.
 /**
 A collection of strings pointing to config options for the menu items. The config options are defined in the `menuItemDefinitions` option. By default, there is the "View in full screen" and "Print" menu items, plus one menu item for each of the available export types.
 
-**Defaults to** `["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"]`.
+**Defaults to** `["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadSVG"]`.
 
 **Try it**
 
@@ -56,6 +56,16 @@ The key to a `lang` option setting that is used for the button's title tooltip. 
 **Defaults to** `contextButtonTitle`.
 */
 @property(nonatomic, readwrite) NSString *titleKey;
+/**
+The vertical offset of the button's position relative to its `verticalAlign`.
+
+**Defaults to** `-5`.
+
+**Try it**
+
+* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
+*/
+@property(nonatomic, readwrite) NSNumber *y;
 /**
 The horizontal position of the button relative to the `align` option.
 
@@ -150,9 +160,13 @@ The pixel width of the button.
 */
 @property(nonatomic, readwrite) NSNumber *width;
 /**
-The pixel spacing between buttons.
+The pixel spacing between buttons, and between the context button and the title.
 
-**Defaults to** `3`.
+**Defaults to** `5`.
+
+**Try it**
+
+* [Adjust the spacing when using text button](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust)
 */
 @property(nonatomic, readwrite) NSNumber *buttonSpacing;
 /**
@@ -165,16 +179,6 @@ The pixel size of the symbol on the button.
 * [Bigger buttons](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-height/)
 */
 @property(nonatomic, readwrite) NSNumber *symbolSize;
-/**
-The vertical offset of the button's position relative to its `verticalAlign`.
-
-**Defaults to** `0`.
-
-**Try it**
-
-* [Buttons at lower right](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/navigation/buttonoptions-verticalalign/)
-*/
-@property(nonatomic, readwrite) NSNumber *y;
 /**
 The vertical alignment of the buttons. Can be one of `"top"`, `"middle"` or `"bottom"`.
 

@@ -67,6 +67,15 @@ Color of the start markers in a dumbbell graph. This option takes priority over 
 */
 @property(nonatomic, readwrite) HIColor *lowColor;
 /**
+Fill color or gradient for the area. When `undefined`, the series' `color` is used with the series' `fillOpacity`. In styled mode, the fill color can be set with the `.highcharts-area` class name.
+
+**Try it**
+
+* [Undefined by default](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillcolor-default/)
+* [Gradient](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/area-fillcolor-gradient/)
+*/
+@property(nonatomic, readwrite) HIColor *fillColor;
+/**
 A separate color for the negative part of the area. Note that `zones` takes precedence over the negative fill color. In styled mode, a negative color is set with the `.highcharts-negative` class name.
 
 **Try it**

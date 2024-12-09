@@ -96,9 +96,13 @@ The pixel width of the button.
 */
 @property(nonatomic, readwrite) NSNumber *width;
 /**
-The pixel spacing between buttons.
+The pixel spacing between buttons, and between the context button and the title.
 
-**Defaults to** `3`.
+**Defaults to** `5`.
+
+**Try it**
+
+* [Adjust the spacing when using text button](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/widthadjust)
 */
 @property(nonatomic, readwrite) NSNumber *buttonSpacing;
 /**

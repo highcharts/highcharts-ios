@@ -402,9 +402,9 @@ An id for the point. This can be used after render time to get a pointer to the 
 */
 @property(nonatomic, readwrite) NSString *id;
 /**
-The x value of the point. For datetime axes, the X value is the timestamp in milliseconds since 1970.
+The x value of the point. For datetime axes, a number value is the timestamp in milliseconds since 1970, while a date string is parsed according to the [current time zone] (https://api.highcharts.com/highcharts/time.timezone) of the chart. Date strings are supported since v12.
 */
-@property(nonatomic, readwrite) NSNumber *x;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ x;
 /**
 The `id` of a series in the `drilldown.series` array to use for a drilldown for this point.
 

@@ -1,9 +1,14 @@
 !/**
- * Highcharts JS v11.4.8 (2024-08-29)
+ * Highcharts JS v12.0.2 (2024-12-04)
+ * @module highcharts/modules/pyramid3d
+ * @requires highcharts
+ * @requires highcharts/highcharts-3d
+ * @requires highcharts/modules/cylinder
+ * @requires highcharts/modules/funnel3d
  *
  * Highcharts 3D funnel module
  *
  * (c) 2010-2024 Kacper Madej
  *
  * License: www.highcharts.com/license
- */function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/modules/pyramid3d",["highcharts","highcharts/highcharts-3d","highcharts/modules/cylinder","highcharts/modules/funnel3d"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function i(t,i,s,r){t.hasOwnProperty(i)||(t[i]=r.apply(null,s),"function"==typeof CustomEvent&&e.win.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:i,module:t[i]}})))}i(t,"Series/Pyramid3D/Pyramid3DSeriesDefaults.js",[],function(){return{reversed:!0,neckHeight:0,neckWidth:0,dataLabels:{verticalAlign:"top"}}}),i(t,"Series/Pyramid3D/Pyramid3DSeries.js",[t["Series/Pyramid3D/Pyramid3DSeriesDefaults.js"],t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t,i){let{funnel3d:s}=t.seriesTypes,{merge:r}=i;class n extends s{}return n.defaultOptions=r(s.defaultOptions,e),t.registerSeriesType("pyramid3d",n),n}),i(t,"masters/modules/pyramid3d.src.js",[t["Core/Globals.js"]],function(e){return e})});
+ */function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t(e._Highcharts,e._Highcharts.SeriesRegistry):"function"==typeof define&&define.amd?define("highcharts/modules/pyramid3d",["highcharts/highcharts"],function(e){return t(e,e.SeriesRegistry)}):"object"==typeof exports?exports["highcharts/modules/pyramid3d"]=t(e._Highcharts,e._Highcharts.SeriesRegistry):e.Highcharts=t(e.Highcharts,e.Highcharts.SeriesRegistry)}("undefined"==typeof window?this:window,(e,t)=>(()=>{"use strict";var r={512:e=>{e.exports=t},944:t=>{t.exports=e}},s={};function i(e){var t=s[e];if(void 0!==t)return t.exports;var o=s[e]={exports:{}};return r[e](o,o.exports,i),o.exports}i.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return i.d(t,{a:t}),t},i.d=(e,t)=>{for(var r in t)i.o(t,r)&&!i.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var o={};i.d(o,{default:()=>f});var a=i(944),n=/*#__PURE__*/i.n(a),d=i(512),h=/*#__PURE__*/i.n(d);let{funnel3d:p}=h().seriesTypes,{merge:c}=n();class u extends p{}u.defaultOptions=c(p.defaultOptions,{reversed:!0,neckHeight:0,neckWidth:0,dataLabels:{verticalAlign:"top"}}),h().registerSeriesType("pyramid3d",u);let f=n();return o.default})());

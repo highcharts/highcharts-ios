@@ -34,6 +34,10 @@
 
 /**
 The chart's subtitle. This can be used both to display a subtitle below the main title, and to display random text anywhere in the chart. The subtitle can be updated after chart initialization through the `Chart.setTitle` method.
+
+**Try it**
+
+* [Default title alignment](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/align-auto/)
 */
 @property(nonatomic, readwrite) HISubtitle *subtitle;
 
@@ -108,6 +112,10 @@ The loading options control the appearance of the loading screen that covers the
 
 /**
 The chart's main title.
+
+**Try it**
+
+* [Default title alignment](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/title/align-auto/)
 */
 @property(nonatomic, readwrite) HITitle *title;
 
@@ -134,7 +142,7 @@ The plotOptions is a wrapper object for config objects for each series type. The
 @property(nonatomic, readwrite) HIPlotOptions *plotOptions;
 
 /**
-Options for the exporting module. For an overview on the matter, see [the docs](https://www.highcharts.com/docs/export-module/export-module-overview).
+Options for the exporting module. For an overview on the matter, see [the docs](https://www.highcharts.com/docs/export-module/export-module-overview) and read our [Fair Usage Policy](https://www.highcharts.com/docs/export-module/privacy-disclaimer-export).
 */
 @property(nonatomic, readwrite) HIExporting *exporting;
 
@@ -247,7 +255,7 @@ The chart's caption, which will render below the chart and will be part of expor
 @property(nonatomic, readwrite) HICaption *caption;
 
 /**
-Time options that can apply globally or to individual charts. These settings affect how `datetime` axes are laid out, how tooltips are formatted, how series `pointIntervalUnit` works and how the Highcharts Stock range selector handles time. The common use case is that all charts in the same Highcharts object share the same time settings, in which case the global settings are set using `setOptions`. ```js // Apply time settings globally Highcharts.setOptions({   time: {     timezone: 'Europe/London'   } }); // Apply time settings by instance let chart = Highcharts.chart('container', {   time: {     timezone: 'America/New_York'   },   series: [{     data: [1, 4, 3, 5]   }] }); // Use the Time object console.log(    'Current time in New York',    chart.time.dateFormat('%Y-%m-%d %H:%M:%S', Date.now()) ); ``` Since v6.0.5, the time options were moved from the `global` object to the `time` object, and time options can be set on each individual chart.
+Time options that can apply globally or to individual charts. These settings affect how `datetime` axes are laid out, how tooltips are formatted, how series `pointIntervalUnit` works and how the Highcharts Stock range selector handles time. The common use case is that all charts in the same Highcharts object share the same time settings, in which case the global settings are set using `setOptions`. ```js // Apply time settings globally Highcharts.setOptions({   time: {     timezone: 'Europe/London'   } }); // Apply time settings by instance const chart = Highcharts.chart('container', {   time: {     timezone: 'America/New_York'   },   series: [{     data: [1, 4, 3, 5]   }] }); // Use the Time object console.log(    'Current time in New York',    chart.time.dateFormat('%Y-%m-%d %H:%M:%S', Date.now()) ); ``` Since v6.0.5, the time options were moved from the `global` object to the `time` object, and time options can be set on each individual chart.
 
 **Try it**
 

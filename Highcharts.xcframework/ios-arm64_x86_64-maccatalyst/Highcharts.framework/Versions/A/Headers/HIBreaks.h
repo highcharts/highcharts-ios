@@ -20,9 +20,9 @@ An array defining breaks in the axis, the sections defined will be left out and 
 @interface HIBreaks: HIChartsJSONSerializable
 
 /**
-The point where the break ends.
+The axis value where the break ends. On datetime axes, this may be a date string.
 */
-@property(nonatomic, readwrite) NSNumber *to;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ to;
 /**
 A number indicating how much space should be left between the start and the end of the break. The break size is given in axis units, so for instance on a `datetime` axis, a break size of 3600000 would indicate the equivalent of an hour.
 
@@ -30,9 +30,9 @@ A number indicating how much space should be left between the start and the end 
 */
 @property(nonatomic, readwrite) NSNumber *breakSize;
 /**
-The point where the break starts.
+The axis value where the break starts. On datetime axes, this may be a date string.
 */
-@property(nonatomic, readwrite) NSNumber *from;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ from;
 /**
 Defines an interval after which the break appears again. By default the breaks do not repeat.
 

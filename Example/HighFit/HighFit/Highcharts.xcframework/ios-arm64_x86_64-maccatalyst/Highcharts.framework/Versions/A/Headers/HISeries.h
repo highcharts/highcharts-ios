@@ -518,6 +518,16 @@ An array specifying which option maps to which key in the data point array. This
 */
 @property(nonatomic, readwrite) NSArray<NSString *> *keys;
 /**
+Defines the color of the legend symbol for this series. Defaults to undefined, in which case the series color is used. Does not work with styled mode.
+
+**Defaults to** `undefined`.
+
+**Try it**
+
+* [Change the legend symbol color](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/series/legend-symbol-color/)
+*/
+@property(nonatomic, readwrite) HIColor *legendSymbolColor;
+/**
 Whether to select the series initially. If `showCheckbox` is true, the checkbox next to the series name in the legend will be checked for a selected series.
 
 **Defaults to** `false`.
@@ -681,7 +691,7 @@ An additional class name to apply to the series' graphical elements. This option
 */
 @property(nonatomic, readwrite) NSString *className;
 /**
-If no x values are given for the points in a series, pointStart defines on what value to start. For example, if a series contains one yearly value starting from 1945, set pointStart to 1945. If combined with `relativeXValue`, an x value can be set on each point. The x value from the point options is multiplied by `pointInterval` and added to `pointStart` to produce a modified x value.
+If no x values are given for the points in a series, `pointStart` defines on what value to start. For example, if a series contains one yearly value starting from 1945, set `pointStart` to 1945. The `pointStart` setting can be a number, or a datetime string that is parsed according to the `time.timezone` setting. If combined with `relativeXValue`, an x value can be set on each point. The x value from the point options is multiplied by `pointInterval` and added to `pointStart` to produce a modified x value.
 
 **Defaults to** `0`.
 
@@ -691,7 +701,7 @@ If no x values are given for the points in a series, pointStart defines on what 
 * [Datetime](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-pointstart-datetime/)
 * [Relative x value](https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-relativexvalue/)
 */
-@property(nonatomic, readwrite) NSNumber *pointStart;
+@property(nonatomic, readwrite) id /* NSNumber, NSString */ pointStart;
 /**
 The line cap used for line ends and line joins on the graph.
 

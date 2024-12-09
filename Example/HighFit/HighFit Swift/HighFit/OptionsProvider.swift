@@ -77,7 +77,7 @@ class OptionsProvider {
             if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
-            subtitle.align = "left"
+        
             subtitle.style = HICSSObject()
             subtitle.style.fontFamily = "Arial"
             subtitle.style.fontSize = "10px"
@@ -173,7 +173,7 @@ class OptionsProvider {
             if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
-            subtitle.align = "left"
+         
             subtitle.style = HICSSObject()
             subtitle.style.fontFamily = "Arial"
             subtitle.style.fontSize = "10px"
@@ -264,7 +264,7 @@ class OptionsProvider {
             if !subtitle.text.isEmpty {
                 subtitle.text = subtitle.text + " total"
             }
-            subtitle.align = "left"
+  
             subtitle.style = HICSSObject()
             subtitle.style.fontFamily = "Arial"
             subtitle.style.fontSize = "10px"

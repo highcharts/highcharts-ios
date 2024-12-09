@@ -90,10 +90,8 @@ class LineSeries extends Series {
                         attribs['stroke-linejoin'] = 'round';
                 }
                 graph[verb](attribs)
-                    // Add shadow to normal series (0) or to first
-                    // zone (1) #3932
-                    .shadow((i < 2) &&
-                    options.shadow &&
+                    // Add shadow to normal series as well as zones
+                    .shadow(options.shadow &&
                     // If shadow is defined, call function with
                     // `filterUnits: 'userSpaceOnUse'` to avoid known
                     // SVG filter bug (#19093)
@@ -463,10 +461,14 @@ export default LineSeries;
  * @apioption series.line.data.selected
  */
 /**
- * The x value of the point. For datetime axes, the X value is the timestamp
- * in milliseconds since 1970.
+ * The x value of the point.
  *
- * @type      {number}
+ * For datetime axes, a number value is the timestamp in milliseconds since
+ * 1970, while a date string is parsed according to the [current time zone]
+ * (https://api.highcharts.com/highcharts/time.timezone) of the
+ * chart. Date strings are supported since v12.
+ *
+ * @type      {number|string}
  * @product   highcharts highstock
  * @apioption series.line.data.x
  */
