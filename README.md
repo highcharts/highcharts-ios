@@ -268,6 +268,27 @@ Full `SwiftUI` demo project you can find here: [HCSwiftUIDemo](https://github.co
 #### For more complex solutions see demo app [HighFit](https://github.com/highcharts/highcharts-ios/tree/master/Example/HighFit) provided by Highcharts or read the following [documentation](http://api.highcharts.com/highcharts-ios/)!
 
 # Additional info
+#### WKWebView resource loading on iOS 26.4
+
+If charts do not render on iOS 26.4 (white screen), check how web resources are
+loaded in `WKWebView`.
+
+This was reported when:
+- HTML is loaded with `loadHTMLString:baseURL:`
+- `baseURL` points to the framework bundle
+- HTML uses relative script paths (for example `js/highcharts.js`)
+
+In this setup, JavaScript resources may fail to load on iOS 26.4.
+
+Recommended setup:
+- Put Highcharts JavaScript resources in the main app bundle
+- Use `Bundle.main.bundleURL` (Swift) or `[[NSBundle mainBundle] bundleURL]`
+  (Objective-C) as `baseURL`
+- Keep relative script paths in HTML
+
+Related issue and discussion:
+- https://github.com/highcharts/highcharts-ios/issues/465
+
 #### Additional modules
 
 In case of enabling additional module, add it to `plugins` of `HIChartView` object before assign your chart options, e.g.
