@@ -273,6 +273,9 @@ Full `SwiftUI` demo project you can find here: [HCSwiftUIDemo](https://github.co
 If charts do not render on iOS 26.4 (white screen), check how web resources are
 loaded in `WKWebView`.
 
+Current findings indicate this is a wrapper integration issue, not a confirmed
+Highcharts Core v26.4 regression.
+
 This was reported when:
 - HTML is loaded with `loadHTMLString:baseURL:`
 - `baseURL` points to the framework bundle
@@ -288,6 +291,25 @@ Recommended setup:
 
 Related issue and discussion:
 - https://github.com/highcharts/highcharts-ios/issues/465
+
+#### Migration paths for apps using HIChartView
+
+If your app is affected, use one of these migration paths:
+- Keep `HIChartView`, move Highcharts JavaScript resources to the main app
+  bundle, and use `Bundle.main.bundleURL` as `baseURL`.
+- If you currently load scripts from the framework bundle, migrate that setup to
+  the main app bundle while keeping relative script paths.
+- If you use a custom embedding layer, validate resource loading there first and
+  keep `HIChartView` as the stable fallback path.
+
+#### Best practices for custom WKWebView embedding
+
+- Use `loadHTMLString:baseURL:` with `baseURL` pointing to the main app bundle.
+- Keep script URLs relative in HTML (for example `js/highcharts.js`).
+- Ensure the expected JS files exist in the app bundle in Release builds and
+  test on iOS 26.4 devices/simulators before rollout.
+- Keep the Highcharts iOS wrapper and JS assets in sync by using files from the
+  same release version.
 
 #### Additional modules
 
