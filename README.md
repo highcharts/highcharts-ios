@@ -268,6 +268,49 @@ Full `SwiftUI` demo project you can find here: [HCSwiftUIDemo](https://github.co
 #### For more complex solutions see demo app [HighFit](https://github.com/highcharts/highcharts-ios/tree/master/Example/HighFit) provided by Highcharts or read the following [documentation](http://api.highcharts.com/highcharts-ios/)!
 
 # Additional info
+#### WKWebView resource loading on iOS 26.4
+
+If charts do not render on iOS 26.4 (white screen), check how web resources are
+loaded in `WKWebView`.
+
+Current findings indicate this is a wrapper integration issue, not a confirmed
+Highcharts Core v26.4 regression.
+
+This was reported when:
+- HTML is loaded with `loadHTMLString:baseURL:`
+- `baseURL` points to the framework bundle
+- HTML uses relative script paths (for example `js/highcharts.js`)
+
+In this setup, JavaScript resources may fail to load on iOS 26.4.
+
+Recommended setup:
+- Put Highcharts JavaScript resources in the main app bundle
+- Use `Bundle.main.bundleURL` (Swift) or `[[NSBundle mainBundle] bundleURL]`
+  (Objective-C) as `baseURL`
+- Keep relative script paths in HTML
+
+Related issue and discussion:
+- https://github.com/highcharts/highcharts-ios/issues/465
+
+#### Migration paths for apps using HIChartView
+
+If your app is affected, use one of these migration paths:
+- Keep `HIChartView`, move Highcharts JavaScript resources to the main app
+  bundle, and use `Bundle.main.bundleURL` as `baseURL`.
+- If you currently load scripts from the framework bundle, migrate that setup to
+  the main app bundle while keeping relative script paths.
+- If you use a custom embedding layer, validate resource loading there first and
+  keep `HIChartView` as the stable fallback path.
+
+#### Best practices for custom WKWebView embedding
+
+- Use `loadHTMLString:baseURL:` with `baseURL` pointing to the main app bundle.
+- Keep script URLs relative in HTML (for example `js/highcharts.js`).
+- Ensure the expected JS files exist in the app bundle in Release builds and
+  test on iOS 26.4 devices/simulators before rollout.
+- Keep the Highcharts iOS wrapper and JS assets in sync by using files from the
+  same release version.
+
 #### Additional modules
 
 In case of enabling additional module, add it to `plugins` of `HIChartView` object before assign your chart options, e.g.
